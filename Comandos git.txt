@@ -1,4 +1,4 @@
-git checkout master //nos vamos a nuestra rama para realizar los cambios
+git checkout [tuRama] //nos vamos a nuestra rama para realizar los cambios
 
 git status	//para ver las modificaciones hechas
 
