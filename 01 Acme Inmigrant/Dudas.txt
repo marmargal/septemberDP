@@ -1,0 +1,1 @@
+Creo que statistic sería una clase que incluye la media y la desviación típica. Y no un parámetro de Application.
