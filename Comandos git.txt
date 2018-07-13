@@ -1,23 +1,27 @@
-git checkout [tuRama] //nos vamos a nuestra rama para realizar los cambios
+1- git checkout [tuRama] //nos vamos a nuestra rama para realizar los cambios
 
-git status	//para ver las modificaciones hechas
+2- git merge master	//nos traemos los cambios de master a nuestra rama (si sale conflicto se resuelven y se hacen los puntos 7, 8 y 9, este punto solo se hace si nuestra rama no está actualizada con todos los cambios de la rama master. Si ya tienes cambios en tu rama y te sale un mensaje de que se van a perder tus cambios realizar los puntos 4, 5 y volver a este punto)
 
-git add [ruta del workspace]   //se pone la ruta por si sale algu metadato que se pueda añadir al pom, si no sale ningún metadato-> git add .
+//Hacemos nuestra implementación
 
-git commit -m "titulo"
+3- git status	//para ver las modificaciones hechas
 
-git merge master	//nos traemos los cambios que hay en master a nuestra rama
+4- git add [ruta del workspace]   //se pone la ruta por si sale algu metadato que se pueda añadir al pom, si no sale ningún metadato-> git add .
+
+5- git commit -m "titulo"
+
+6- git merge master	//nos traemos los cambios que hay en master a nuestra rama
 //si hay conflictos se solucionan
 
-git status
+7- git status
 
-git add [ruta del workspace] //ó git add . para añadirlo todo
+8- git add [ruta del workspace] //ó git add . para añadirlo todo
 
-git commit -m "titulo"
+9- git commit -m "titulo"
 
-git push	//lo subimos a nuestra rama
+10- git push	//lo subimos a nuestra rama
 
-git checkout master	//cambiamos a rama master
+11- git checkout master	//cambiamos a rama master
 
-git merge [tuRama] 
+12- git merge [tuRama] 
 
