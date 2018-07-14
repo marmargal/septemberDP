@@ -1,4 +1,4 @@
-1 git pull	//Nos vajamos los cambios de la rama master (estamos en la rama master)
+1 git pull	//Nos bajamos los cambios de la rama master (estamos en la rama master)
 
 1.2- Si estas en la rama master y tienes cambios en local no se podrá cambiar de rama hasta que se haga commit de los cambios hechos realizar los puntos 4 y 5 
 
