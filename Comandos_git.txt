@@ -23,4 +23,9 @@
 
 11- git checkout master	//cambiamos a rama master
 
+12- git pull	//Nos descargamos los últimos cambios de master (si hay cambios realizar a continuación los puntos 8 y 9)
+
 12- git merge [tuRama] 
+
+13-
+
