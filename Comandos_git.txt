@@ -1,5 +1,7 @@
 1- git checkout [tuRama] //nos vamos a nuestra rama para realizar los cambios
 
+1.1- Si estas en la rama master y tienes cambios en local no se podrá cambiar de rama hasta que se haga commit de los cambios hechos realizar los puntos 4 y 5 
+
 2- git merge master	//nos traemos los cambios de master a nuestra rama (si sale conflicto se resuelven y se hacen los puntos 7, 8 y 9, este punto solo se hace si nuestra rama no está actualizada con todos los cambios de la rama master. Si ya tienes cambios en tu rama y te sale un mensaje de que se van a perder tus cambios realizar los puntos 4, 5 y volver a este punto)
 
 //Hacemos nuestra implementación
