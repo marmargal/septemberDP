@@ -21,7 +21,6 @@ public class Immigrant extends Actor{
 	// Relationships
 	private Collection<Application> applications;
 	private Collection<Answer> answers;
-	private Collection<Report> reports;
 	
 	
 	@Valid
@@ -43,16 +42,5 @@ public class Immigrant extends Actor{
 	public void setAnswers(Collection<Answer> answers){
 		this.answers = answers;
 	}
-	
-	@Valid
-	@OneToMany(mappedBy = "immigrant")
-	public Collection<Report> getReports(){
-		return reports;
-	}
-	
-	public void setReports(Collection<Report> reports){
-		this.reports = reports;
-	}
-	
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ReportRepository;
+import domain.Immigrant;
 import domain.Investigator;
 import domain.Report;
 
@@ -26,6 +27,9 @@ public class ReportService {
 	@Autowired
 	private InvestigatorService investigatorService;
 	
+	@Autowired
+	private ImmigrantService immigrantService;
+	
 	// Constructors
 
 	public ReportService() {
@@ -34,8 +38,13 @@ public class ReportService {
 
 	// Simple CRUD methods
 	
-	public Report create() {
+	public Report create(Integer immigrantId) {
 		Report res = new Report();
+		Immigrant immigrant = new Immigrant();
+		
+		immigrant = this.immigrantService.findOne(immigrantId);
+		
+		res.setImmigrant(immigrant);
 		
 		return res;
 	}
@@ -57,6 +66,8 @@ public class ReportService {
 
 	public Report save(Report report) {
 		Assert.notNull(report);
+		investigatorService.checkAuthority();
+		
 		Report res;
 		Collection<Report> reports = new ArrayList<Report>();
 		
@@ -66,6 +77,7 @@ public class ReportService {
 		reports.add(res);
 		investigator.setReports(reports);
 		
+		Assert.notNull(res);
 		return res;
 	}
 
@@ -78,6 +90,12 @@ public class ReportService {
 
 	// Other business methods
 
+	public Collection<Report> findReportsByImmigrant(int immigrantId) {
+		Collection<Report> res = new ArrayList<Report>();
 
+		res.addAll(reportRepository.findReportByImmigrantId(immigrantId));
+		Assert.notNull(res);
+		return res;
+	}
 
 }
