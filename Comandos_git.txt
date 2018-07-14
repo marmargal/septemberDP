@@ -4,7 +4,7 @@
 
 1.3- git checkout [tuRama] //nos vamos a nuestra rama para realizar los cambios
 
-2- git merge master	//nos traemos los cambios de master a nuestra rama (si sale conflicto se resuelven y se hacen los puntos 7, 8 y 9, este punto solo se hace si nuestra rama no está actualizada con todos los cambios de la rama master. Si ya tienes cambios en tu rama y te sale un mensaje de que se van a perder tus cambios realizar los puntos 4, 5 y volver a este punto)
+2- git merge origin/master	//nos traemos los cambios de master a nuestra rama (si sale conflicto se resuelven y se hacen los puntos 7, 8 y 9, este punto solo se hace si nuestra rama no está actualizada con todos los cambios de la rama master. Si ya tienes cambios en tu rama y te sale un mensaje de que se van a perder tus cambios realizar los puntos 4, 5 y volver a este punto)
 
 //Hacemos nuestra implementación
 
@@ -14,7 +14,7 @@
 
 5- git commit -m "titulo"
 
-6- git merge master	//nos traemos los cambios que hay en master a nuestra rama
+6- git merge origin/master			//nos traemos los cambios que hay en master (remoto) a nuestra rama
 //si hay conflictos se solucionan
 
 7- git status
@@ -30,6 +30,3 @@
 12- git pull	//Nos descargamos los últimos cambios de master (si hay cambios realizar a continuación los puntos 8 y 9)
 
 12- git merge [tuRama] 
-
-13-
-
