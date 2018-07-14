@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -57,15 +59,15 @@ public class Country extends DomainEntity {
 	
 	// Relationships
 	
-	private Law law;
+	private List<Law> law;
 
 	@Valid
 	@OneToMany
-	public Law getLaw() {
+	public List<Law> getLaw() {
 		return law;
 	}
 
-	public void setLaw(Law law) {
+	public void setLaw(List<Law> law) {
 		this.law = law;
 	}
 	
