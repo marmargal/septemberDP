@@ -95,3 +95,5 @@ Workspace/Servers/
 01-Acme_Inmigrant/workspace/Acme-Inmigrant/target/m2e-wtp/web-resources/META-INF/maven/Acme-Inmigrant/Acme-Inmigrant/pom.properties
 01-Acme_Inmigrant/Workspace/Servers/
 01-Acme_Inmigrant/Workspace/Acme-Inmigrant/.classpath
+pom.properties
+
