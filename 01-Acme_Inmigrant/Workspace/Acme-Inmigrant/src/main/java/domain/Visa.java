@@ -3,6 +3,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -44,6 +46,29 @@ public class Visa extends DomainEntity{
 	}
 	
 	// Relationships
+	
+	private Country country;
+	private Category category;
+
+	@Valid
+	@OneToOne(optional = false)
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	@Valid
+	@OneToOne(optional = false)
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 	
 	
 }

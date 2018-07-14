@@ -3,6 +3,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -52,5 +54,21 @@ public class Country extends DomainEntity {
 	public void setLink(String link) {
 		this.link = link;
 	}
+	
+	// Relationships
+	
+	private Law law;
+
+	@Valid
+	@OneToMany
+	public Law getLaw() {
+		return law;
+	}
+
+	public void setLaw(Law law) {
+		this.law = law;
+	}
+	
+	
 
 }

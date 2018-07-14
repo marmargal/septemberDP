@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -58,5 +60,17 @@ public class Law extends DomainEntity {
 	
 	// Relationships
 	
+	private Requirement requirement;
 
+	@Valid
+	@OneToMany
+	public Requirement getRequirement() {
+		return requirement;
+	}
+
+	public void setRequirement(Requirement requirement) {
+		this.requirement = requirement;
+	}
+	
+	
 }

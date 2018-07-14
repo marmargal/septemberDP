@@ -41,5 +41,5 @@ public class Requirement extends DomainEntity {
 	public void setAbrogated(Boolean abrogated) {
 		this.abrogated = abrogated;
 	}
-
+	
 }
