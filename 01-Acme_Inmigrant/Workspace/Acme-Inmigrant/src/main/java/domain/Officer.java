@@ -22,7 +22,7 @@ public class Officer extends Actor{
 		super();
 	}
 	
-//	// Relationships
+	// Relationships
 	private Collection<Application> applications;
 	private Decision decision;
 	private Collection<Question> questions;

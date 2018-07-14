@@ -18,41 +18,41 @@ public class Immigrant extends Actor{
 		super();
 	}
 	
-//	// Relationships
-//	private Collection<Application> applications;
-//	private Collection<Answer> answers;
-//	private Collection<Report> reports;
-//	
-//	
-//	@Valid
-//	@OneToMany(mappedBy = "immigrant")
-//	public Collection<Application> getApplications(){
-//		return applications;
-//	}
-//	
-//	public void setApplications(Collection<Application> applications){
-//		this.applications = applications;
-//	}
-//	
-//	@Valid
-//	@OneToMany(mappedBy = "immigrant")
-//	public Collection<Answer> getAnswers(){
-//		return answers;
-//	}
-//	
-//	public void setAnswers(Collection<Answer> answers){
-//		this.answers = answers;
-//	}
-//	
-//	@Valid
-//	@OneToMany(mappedBy = "immigrant")
-//	public Collection<Report> getReports(){
-//		return reports;
-//	}
-//	
-//	public void setReports(Collection<Report> reports){
-//		this.reports = reports;
-//	}
+	// Relationships
+	private Collection<Application> applications;
+	private Collection<Answer> answers;
+	private Collection<Report> reports;
+	
+	
+	@Valid
+	@OneToMany(mappedBy = "immigrant")
+	public Collection<Application> getApplications(){
+		return applications;
+	}
+	
+	public void setApplications(Collection<Application> applications){
+		this.applications = applications;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "immigrant")
+	public Collection<Answer> getAnswers(){
+		return answers;
+	}
+	
+	public void setAnswers(Collection<Answer> answers){
+		this.answers = answers;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "immigrant")
+	public Collection<Report> getReports(){
+		return reports;
+	}
+	
+	public void setReports(Collection<Report> reports){
+		this.reports = reports;
+	}
 	
 	
 }
