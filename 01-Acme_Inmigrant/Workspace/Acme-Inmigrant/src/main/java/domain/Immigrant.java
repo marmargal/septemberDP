@@ -19,19 +19,19 @@
 //	}
 //	
 //	// Relationships
-//	private Collection<Visa> visas;
+//	private Collection<Application> applications;
 //	private Collection<Answer> answers;
 //	private Collection<Report> reports;
 //	
 //	
 //	@Valid
 //	@OneToMany(mappedBy = immigrant)
-//	public Collection<Visa> getVisas(){
-//		return visas;
+//	public Collection<Application> getApplications(){
+//		return applications;
 //	}
 //	
-//	public void setVisas(Collection<Visa> visas){
-//		this.visas = visas;
+//	public void setApplications(Collection<Application> applications){
+//		this.applications = applications;
 //	}
 //	
 //	@Valid
