@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -60,15 +61,15 @@ public class Law extends DomainEntity {
 	
 	// Relationships
 	
-	private Requirement requirement;
+	private List<Requirement> requirement;
 
 	@Valid
 	@OneToMany
-	public Requirement getRequirement() {
+	public List<Requirement> getRequirement() {
 		return requirement;
 	}
 
-	public void setRequirement(Requirement requirement) {
+	public void setRequirement(List<Requirement> requirement) {
 		this.requirement = requirement;
 	}
 	
