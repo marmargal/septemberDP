@@ -54,7 +54,7 @@ public class Category extends DomainEntity {
 		return categoryParent;
 	}
 
-	public void setCategoryChildren(Category categoryParent) {
+	public void setCategoryParent(Category categoryParent) {
 		this.categoryParent = categoryParent;
 	}
 
