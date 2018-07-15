@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Application {
+public class Application extends DomainEntity{
 
 	
 	//Constructors
