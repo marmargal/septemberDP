@@ -3,7 +3,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
@@ -47,6 +48,7 @@ public class CreditCard {
 	}
 
 	@CreditCardNumber
+	@Pattern(regexp = "^\\d{4}\\s?\\d{4}\\s?\\d{4}\\s?\\d{4}$")
 	public String getNumber() {
 		return number;
 	}
@@ -56,6 +58,7 @@ public class CreditCard {
 	}
 	
 	@Range(min = 1, max = 12)
+	@NotNull
 	public Integer getExpirationMonth() {
 		return expirationMonth;
 	}
@@ -64,7 +67,8 @@ public class CreditCard {
 		this.expirationMonth = expirationMonth;
 	}
 
-	@Min(0)
+	@Range(min = 18, max = 99)
+	@NotNull
 	public Integer getExpirationYear() {
 		return expirationYear;
 	}
@@ -74,6 +78,7 @@ public class CreditCard {
 	}
 
 	@Range(min = 100, max = 999)
+	@NotNull
 	public Integer getCVV() {
 		return CVV;
 	}
