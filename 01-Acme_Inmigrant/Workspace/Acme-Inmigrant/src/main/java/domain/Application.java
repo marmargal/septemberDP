@@ -18,6 +18,13 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Application {
 
+	
+	//Constructors
+	
+	public Application(){
+		super();
+	}
+	
 	// Attributes
 
 	private String ticker;

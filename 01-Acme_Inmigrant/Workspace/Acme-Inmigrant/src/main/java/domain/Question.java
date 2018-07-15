@@ -13,6 +13,12 @@ import javax.validation.constraints.Past;
 @Access(AccessType.PROPERTY)
 public class Question extends DomainEntity {
 
+	// Constructors
+	
+	public Question(){
+		super();
+	}
+	
 	// Attributes
 
 	private Boolean statement;

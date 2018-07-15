@@ -14,6 +14,12 @@ import org.hibernate.validator.constraints.URL;
 @Access(AccessType.PROPERTY)
 public class Report extends DomainEntity {
 
+	// Constructors
+	
+	public Report(){
+		super();
+	}
+	
 	// Attributes
 
 	private String text;

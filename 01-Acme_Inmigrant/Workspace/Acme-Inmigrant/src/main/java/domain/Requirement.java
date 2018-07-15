@@ -10,6 +10,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Requirement extends DomainEntity {
 
+	// Constructors
+	
+	public Requirement(){
+		super();
+	}
+	
 	// Attributes
 
 	private String title;

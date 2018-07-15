@@ -15,6 +15,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Category extends DomainEntity {
 
+	// Constructors
+	
+	public Category(){
+		super();
+	}
+	
 	// Attributes
 
 	private String name;

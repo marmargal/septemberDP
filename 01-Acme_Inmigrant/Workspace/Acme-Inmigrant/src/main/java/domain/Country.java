@@ -14,6 +14,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Country extends DomainEntity {
 
+	// Constructors
+	
+	public Country(){
+		super();
+	}
+	
 	// Attributes
 
 	private String name;

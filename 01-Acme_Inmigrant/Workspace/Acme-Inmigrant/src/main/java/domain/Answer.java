@@ -15,6 +15,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Answer extends DomainEntity {
 
+	// Constructors
+	
+	public Answer(){
+		super();
+	}
+	
 	// Attributes
 
 	private String reply;
@@ -42,17 +48,17 @@ public class Answer extends DomainEntity {
 	
 	// Relationships
 	
-//	private Inmigrant inmigrant;
-//
-//	@Valid
-//	@ManyToOne
-//	public Inmigrant getInmigrant() {
-//		return inmigrant;
-//	}
-//
-//	public void setInmigrant(Inmigrant inmigrant) {
-//		this.inmigrant = inmigrant;
-//	}
+	private Immigrant immigrant;
+
+	@Valid
+	@ManyToOne
+	public Immigrant getImmigrant() {
+		return immigrant;
+	}
+
+	public void setImmigrant(Immigrant immigrant) {
+		this.immigrant = immigrant;
+	}
 	
 	
 

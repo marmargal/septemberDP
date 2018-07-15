@@ -12,6 +12,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Visa extends DomainEntity{
 
+	// Constructors
+	
+	public Visa(){
+		super();
+	}
+	
 	// Attributes
 	
 	private String classes;

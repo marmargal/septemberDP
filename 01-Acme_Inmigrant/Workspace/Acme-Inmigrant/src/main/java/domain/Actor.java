@@ -17,6 +17,12 @@ import security.UserAccount;
 @Access(AccessType.PROPERTY)
 public class Actor extends DomainEntity {
 
+	// Constructors
+	
+	public Actor(){
+		super();
+	}
+	
 	// Attributes
 
 	private String name;

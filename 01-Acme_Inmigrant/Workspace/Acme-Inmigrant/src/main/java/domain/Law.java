@@ -16,6 +16,12 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Law extends DomainEntity {
 
+	// Constructors
+	
+	public Law(){
+		super();
+	}
+	
 	// Attributes
 
 	private String title;

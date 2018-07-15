@@ -13,6 +13,12 @@ import org.hibernate.validator.constraints.Range;
 @Access(AccessType.PROPERTY)
 public class CreditCard {
 
+	// Constructors
+	
+	public CreditCard(){
+		super();
+	}
+	
 	// Attributes
 
 	private String holderName;
