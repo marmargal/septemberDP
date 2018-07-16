@@ -17,8 +17,11 @@
 
 		<bean class="converters.VisaToStringConverter" />
 		<bean class="converters.StringToVisaConverter" />
-		
-		
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+
 	</util:list>
 
 </beans>
