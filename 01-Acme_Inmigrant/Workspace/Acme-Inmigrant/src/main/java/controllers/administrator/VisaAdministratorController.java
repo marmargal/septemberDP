@@ -79,7 +79,7 @@ public class VisaAdministratorController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/abrogate", params = "save", method = RequestMethod.POST)
+	@RequestMapping(value = "/invalidate", params = "save", method = RequestMethod.POST)
 	public ModelAndView invalidate(@Valid final Visa visa,
 			final BindingResult bindingResult) {
 		ModelAndView result;
