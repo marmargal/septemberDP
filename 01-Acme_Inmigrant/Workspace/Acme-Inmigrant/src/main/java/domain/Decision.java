@@ -25,7 +25,7 @@ public class Decision extends DomainEntity {
 	
 	// Attributes
 	private Boolean accept;
-	private Date momment;
+	private Date moment;
 	private String comment;
 	
 	@NotBlank
@@ -40,12 +40,12 @@ public class Decision extends DomainEntity {
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	public Date getMomment() {
-		return momment;
+	public Date getMoment() {
+		return moment;
 	}
 
-	public void setMomment(Date momment) {
-		this.momment = momment;
+	public void setMoment(Date momment) {
+		this.moment = momment;
 	}
 
 	public String getComment() {

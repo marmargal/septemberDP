@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 
 @Entity
 @Access(AccessType.PROPERTY)
