@@ -11,7 +11,7 @@ import domain.Administrator;
 
 @Component
 @Transactional
-public class StringToAdminConverter implements Converter<String, Administrator> {
+public class StringToAdministratorConverter implements Converter<String, Administrator> {
 
 	@Autowired
 	AdministratorRepository administratorRepository;
