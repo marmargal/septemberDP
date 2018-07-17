@@ -20,30 +20,30 @@
 
 <form:form action="officer/register.do" modelAttribute="officerForm">
 	
-	<acme:textbox code="user.name" path="name"/>
+	<acme:textbox code="officer.name" path="name"/>
 	<br/>
-	<acme:textbox code="user.surname" path="surname"/>
+	<acme:textbox code="officer.surname" path="surname"/>
 	<br/>
-	<acme:textbox code="user.email" path="email"/>
+	<acme:textbox code="officer.email" path="email"/>
 	<br/>
-	<acme:textbox code="user.phone" path="phoneNumber"/>
+	<acme:textbox code="officer.phone" path="phoneNumber"/>
 	<br/>
-	<acme:textbox code="user.address" path="address"/>
+	<acme:textbox code="officer.address" path="address"/>
 	<br/>
-	<acme:textbox code="user.userName" path="username"/>
+	<acme:textbox code="officer.officerName" path="username"/>
 	<br/>
-	<acme:password code="user.password" path="password"/>
+	<acme:password code="officer.password" path="password"/>
 	<br/>
-	<acme:password code="user.repeatPassword" path="repeatPassword"/>
+	<acme:password code="officer.repeatPassword" path="repeatPassword"/>
 	<br/>
 	
-	<acme:checkbox code="user.acceptTerms" path="termsAndConditions"/>
+	<acme:checkbox code="officer.acceptTerms" path="termsAndConditions"/>
 	
-	<a href="terms/list.do"><spring:message code="user.acceptTermsLink"/></a>
+	<a href="terms/list.do"><spring:message code="officer.acceptTermsLink"/></a>
 	<br />
 	
-	<acme:submit name="save" code="user.save"/>
-	<acme:submit name="cancel" code="user.cancel"/>
+	<acme:submit name="save" code="officer.save"/>
+	<acme:submit name="cancel" code="officer.cancel"/>
 	
 </form:form>
 	

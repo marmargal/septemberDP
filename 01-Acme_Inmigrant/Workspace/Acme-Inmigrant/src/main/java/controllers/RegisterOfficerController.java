@@ -1,9 +1,10 @@
 package controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,39 +30,42 @@ public class RegisterOfficerController extends AbstractController {
 
 	// Registering ----------------------------------------------------------
 
-	@RequestMapping(value = "/register_Officer", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
 		
-		Officer officer = officerService.create();
-
+		Officer officer = new Officer();
 		OfficerForm officerForm = new OfficerForm();
+		
+		officer = this.officerService.create();
+		
 		officerForm = officerService.construct(officer);
 
-//		res = new ModelAndView("officer/register_Officer");
-//		res.addObject("officerForm", officerForm);
-		
 		res = this.createEditModelAndView(officerForm);
 
 		return res;
 	}
 
-	@RequestMapping(value = "/register_Officer", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("officerForm") OfficerForm officerForm,
-			final BindingResult binding) {
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final OfficerForm officerForm, final BindingResult binding) {
 		ModelAndView res;
-		
-		if(binding.hasErrors()){
+		Officer officer;
+
+		if (binding.hasErrors())
 			res = this.createEditModelAndView(officerForm, "officer.params.error");
-		}else
-			try{
-				Officer officer = this.officerService.reconstruct(officerForm, binding);
+		else if (!officerForm.getRepeatPassword().equals(officerForm.getPassword()))
+			res = this.createEditModelAndView(officerForm, "officer.commit.errorPassword");
+		else if (officerForm.getTermsAndConditions() == false) {
+			res = this.createEditModelAndView(officerForm, "officer.params.errorTerms");
+		} else
+			try {
+				officer = officerService.reconstruct(officerForm, binding);
 				this.officerService.save(officer);
-				res = new ModelAndView("redirect:/");
-			}catch (final Throwable oops) {
+				res = new ModelAndView("redirect:../");
+			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(officerForm, "officer.commit.error");
 			}
-		
+
 		return res;
 	}
 
