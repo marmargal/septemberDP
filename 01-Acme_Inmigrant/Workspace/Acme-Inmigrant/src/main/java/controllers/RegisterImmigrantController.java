@@ -29,7 +29,7 @@ public class RegisterImmigrantController extends AbstractController {
 
 	// Registering ----------------------------------------------------------
 
-	@RequestMapping(value = "/register_Immigrant", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
 		
@@ -46,7 +46,7 @@ public class RegisterImmigrantController extends AbstractController {
 		return res;
 	}
 
-	@RequestMapping(value = "/register_Immigrant", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("immigrantForm") ImmigrantForm immigrantForm,
 			final BindingResult binding) {
 ModelAndView res;
@@ -79,7 +79,7 @@ ModelAndView res;
 			final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("user/register_Immigrant");
+		result = new ModelAndView("immigrant/register");
 		result.addObject("immigrantForm", immigrantForm);
 		result.addObject("message", message);
 
