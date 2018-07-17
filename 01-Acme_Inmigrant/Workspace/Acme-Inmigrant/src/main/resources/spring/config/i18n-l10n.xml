@@ -29,6 +29,8 @@
 		<value>/views/visa/messages</value>
 		<value>/views/report/messages</value>
 		<value>/views/visa/messages</value>
+		<value>/views/officer/messages</value>
+		<value>/views/terms/messages</value>
 
 	</util:list>
 

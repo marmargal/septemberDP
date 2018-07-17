@@ -28,7 +28,8 @@
 		<value>/views/profile/tiles.xml</value>
 		<value>/views/visa/tiles.xml</value>
 		<value>/views/report/tiles.xml</value>
-		
+		<value>/views/officer/tiles.xml</value>
+		<value>/views/terms/tiles.xml</value>
 		
 	</util:list>
 
