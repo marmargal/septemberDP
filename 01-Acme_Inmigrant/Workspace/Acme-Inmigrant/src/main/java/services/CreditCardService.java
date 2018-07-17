@@ -56,9 +56,9 @@ public class CreditCardService {
 		Assert.notNull(creditCard);
 		CreditCard saved;
 		if (this.creditCardRepository.findSameCreditcard(
-				creditCard.getNumber(), creditCard.getCVV()) != null)
+				creditCard.getNumber(), creditCard.getCvv()) != null)
 			saved = this.creditCardRepository.findSameCreditcard(
-					creditCard.getNumber(), creditCard.getCVV());
+					creditCard.getNumber(), creditCard.getCvv());
 		else
 			saved = this.creditCardRepository.save(creditCard);
 		return saved;

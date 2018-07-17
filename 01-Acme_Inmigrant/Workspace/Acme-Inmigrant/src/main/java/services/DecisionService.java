@@ -36,12 +36,12 @@ public class DecisionService {
 		Decision res = new Decision();
 
 		Boolean accept = false;
-		Date momment = new Date(System.currentTimeMillis() - 1000);
+		Date moment = new Date(System.currentTimeMillis() - 1000);
 
 		Application application = new Application();
 
 		res.setAccept(accept);
-		res.setMomment(momment);
+		res.setMoment(moment);
 		res.setApplication(application);
 
 		return res;

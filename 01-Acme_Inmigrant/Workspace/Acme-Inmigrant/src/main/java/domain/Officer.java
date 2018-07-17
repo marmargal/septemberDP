@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -29,7 +28,7 @@ public class Officer extends Actor{
 	
 	@Valid
 	@OneToMany(mappedBy = "officer")
-	public Collection<Application> getApplication(){
+	public Collection<Application> getApplications(){
 		return applications;
 	}
 	

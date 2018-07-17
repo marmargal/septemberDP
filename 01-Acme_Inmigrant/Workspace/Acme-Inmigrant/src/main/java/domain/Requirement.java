@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -40,6 +41,7 @@ public class Requirement extends DomainEntity {
 		this.description = description;
 	}
 
+	@NotNull
 	public Boolean getAbrogated() {
 		return abrogated;
 	}
