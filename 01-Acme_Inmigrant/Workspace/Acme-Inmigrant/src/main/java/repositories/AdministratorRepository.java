@@ -51,8 +51,26 @@ public interface AdministratorRepository extends
 	@Query("select avg(d.moment-d.application.closedMoment),min(d.moment-d.application.closedMoment),max(d.moment-d.application.closedMoment),"
 			+ "stddev(d.moment-d.application.closedMoment) from Decision d")
 	Collection<Date> dataTimeToMakeDecision();
-	
-	/*The minimum, the maximum, the average, and the standard deviation of the number of visas per category.*/
+
+	/*
+	 * The minimum, the maximum, the average, and the standard deviation of the
+	 * number of visas per category.
+	 */
 	@Query("select  avg(distinct(v.category)),min(distinct(v.category)), max(distinct(v.category)), stddev(distinct(v.category)) from Visa v")
-	Collection<Double> dataNumberVisasPerCategory();
+	Collection<Double> dataVisasPerCategory();
+
+	/*
+	 * The minimum, the maximum, the average, and the standard deviation of the
+	 * number of laws per country.
+	 */
+	@Query("select avg(c.laws.size),min(c.laws.size), max(c.laws.size), stddev(c.laws.size) from Country c")
+	Collection<Double> dataLawsPerCountry();
+
+	/*
+	 * The minimum, the maximum, the average, and the standard deviation of the
+	 * number of requirements per visa.
+	 */
+	@Query("select  avg(l.requirement.size),min(l.requirement.size), max(l.requirement.size), "
+			+ "stddev(l.requirement.size) from Country c join c.laws l")
+	Collection<Double> dataRequirementsPerVisa();
 }
