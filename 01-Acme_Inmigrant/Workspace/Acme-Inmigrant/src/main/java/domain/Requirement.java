@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -20,7 +21,7 @@ public class Requirement extends DomainEntity {
 
 	private String title;
 	private String description;
-	private boolean abrogated;
+	private Boolean abrogated;
 
 	@NotBlank
 	public String getTitle() {
@@ -40,11 +41,12 @@ public class Requirement extends DomainEntity {
 		this.description = description;
 	}
 
-	public boolean getAbrogated() {
+	@NotNull
+	public Boolean getAbrogated() {
 		return abrogated;
 	}
 
-	public void setAbrogated(boolean abrogated) {
+	public void setAbrogated(Boolean abrogated) {
 		this.abrogated = abrogated;
 	}
 	

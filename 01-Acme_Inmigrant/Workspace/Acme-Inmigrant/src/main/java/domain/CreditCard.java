@@ -27,7 +27,7 @@ public class CreditCard {
 	private String number;
 	private Integer expirationMonth;
 	private Integer expirationYear;
-	private Integer CVV;
+	private Integer cvv;
 
 	@NotBlank
 	public String getHolderName() {
@@ -77,15 +77,18 @@ public class CreditCard {
 		this.expirationYear = expirationYear;
 	}
 
+	
+
 	@Range(min = 100, max = 999)
 	@NotNull
-	public Integer getCVV() {
-		return CVV;
+	public Integer getCvv() {
+		return cvv;
 	}
 
-	public void setCVV(Integer cVV) {
-		CVV = cVV;
+	public void setCvv(Integer cvv) {
+		this.cvv = cvv;
 	}
+	
 
 	
 

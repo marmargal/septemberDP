@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -24,7 +25,7 @@ public class Category extends DomainEntity {
 	// Attributes
 
 	private String name;
-	private boolean rootCategory;
+	private Boolean rootCategory;
 
 	@NotBlank
 	public String getName() {
@@ -35,11 +36,12 @@ public class Category extends DomainEntity {
 		this.name = name;
 	}
 
-	public boolean getRootCategory() {
+	@NotNull
+	public Boolean getRootCategory() {
 		return rootCategory;
 	}
 
-	public void setRootCategory(boolean rootCategory) {
+	public void setRootCategory(Boolean rootCategory) {
 		this.rootCategory = rootCategory;
 	}
 	
