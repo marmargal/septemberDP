@@ -1,6 +1,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,6 +34,7 @@ public interface AdministratorRepository extends
 	 */
 	@Query("select avg(v.price),min(v.price), max(v.price), stddev(v.price) from Visa v")
 	Collection<Double> dataPricePerVisa();
+
 	/*
 	 * The average, the minimum, the maximum, and the standard deviation of the
 	 * number immigrants that are investigated per investigator.
@@ -40,4 +42,17 @@ public interface AdministratorRepository extends
 	@Query("select avg(r.immigrant),min(i.immigrant), max(i.immigrant), stddev(i.immigrant) from Investigator i join i.reports r")
 	Collection<Double> dataImmigrantsInvestigated();
 
+	/*
+	 * A chart with the average, the minimum, the maximum, and the standard
+	 * de-viation of the time that elapses since an application is closed till
+	 * an officer makes a decision on it.
+	 */
+
+	@Query("select avg(d.moment-d.application.closedMoment),min(d.moment-d.application.closedMoment),max(d.moment-d.application.closedMoment),"
+			+ "stddev(d.moment-d.application.closedMoment) from Decision d")
+	Collection<Date> dataTimeToMakeDecision();
+	
+	/*The minimum, the maximum, the average, and the standard deviation of the number of visas per category.*/
+	@Query("select  avg(distinct(v.category)),min(distinct(v.category)), max(distinct(v.category)), stddev(distinct(v.category)) from Visa v")
+	Collection<Double> dataNumberVisasPerCategory();
 }
