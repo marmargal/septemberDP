@@ -228,6 +228,7 @@
 		<property name="userAccount" ref="userAccount6"/>
 		<property name="applications">
 			<list>
+				<ref bean="application3"/>
 			</list>
 		</property>
 		<property name="answers">
@@ -326,7 +327,7 @@
 		<property name="accept" value="true"/>
 		<property name="moment" value="19/06/2010"/>
 		<property name="comment" value="Decision 1 accept"/>
-		<property name="applicacion" ref="application1"/>
+		<property name="application" ref="application1"/>
 	</bean>
 	
 	<!-- Decision 2 -->
@@ -334,7 +335,7 @@
 		<property name="accept" value="true"/>
 		<property name="moment" value="20/03/2010"/>
 		<property name="comment" value="Decision 2 accept"/>
-		<property name="applicacion" ref="application2"/>
+		<property name="application" ref="application2"/>
 	</bean>
 	
 	<!-- Visa -->
@@ -400,7 +401,7 @@
 	<bean id="application1" class="domain.Application">
 		<property name="ticker" value="101201-ASDF00"/>
 		<property name="openedMoment" value="01/12/2010"/>
-		<property name="openedMoment" value="03/12/2010"/>
+		<property name="closedMoment" value="03/12/2010"/>
 		<property name="creditCard" ref="creditCard1"/>
 		<property name="statistics" value="2.0"/>
 		<property name="officer" ref="officer1"/>
@@ -432,7 +433,7 @@
 	<bean id="application2" class="domain.Application">
 		<property name="ticker" value="111201-ASDF02"/>
 		<property name="openedMoment" value="01/11/2010"/>
-		<property name="openedMoment" value="03/11/2010"/>
+		<property name="closedMoment" value="03/11/2010"/>
 		<property name="creditCard" ref="creditCard2"/>
 		<property name="statistics" value="6.0"/>
 		<property name="officer" ref="officer2"/>
@@ -464,7 +465,7 @@
 	<bean id="application3" class="domain.Application">
 		<property name="ticker" value="111201-ASFF02"/>
 		<property name="openedMoment" value="01/11/2010"/>
-		<property name="openedMoment" value="07/11/2010"/>
+		<property name="closedMoment" value="07/11/2010"/>
 		<property name="creditCard" ref="creditCard2"/>
 		<property name="statistics" value="6.0"/>
 		<property name="officer" ref="officer2"/>
@@ -543,7 +544,7 @@
 	</bean>
 	
 	<!-- CreditCard 2 -->
-	<bean id="creditCard1" class="domain.CreditCard">
+	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holderName" value="Name creditCard1"/>
 		<property name="brandName" value="VISA"/>
 		<property name="number" value="4539009662278447"/>

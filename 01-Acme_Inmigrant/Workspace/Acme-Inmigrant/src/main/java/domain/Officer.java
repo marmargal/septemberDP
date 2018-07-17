@@ -28,7 +28,7 @@ public class Officer extends Actor{
 	
 	@Valid
 	@OneToMany(mappedBy = "officer")
-	public Collection<Application> getApplication(){
+	public Collection<Application> getApplications(){
 		return applications;
 	}
 	

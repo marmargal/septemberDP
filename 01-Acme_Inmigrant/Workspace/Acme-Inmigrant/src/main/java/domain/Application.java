@@ -100,7 +100,7 @@ public class Application extends DomainEntity{
 	private List<Question> question;
 
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional=false)
 	public Officer getOfficer() {
 		return officer;
 	}
@@ -111,7 +111,7 @@ public class Application extends DomainEntity{
 	
 	
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional=false)
 	public Immigrant getImmigrant() {
 		return immigrant;
 	}
