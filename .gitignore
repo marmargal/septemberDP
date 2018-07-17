@@ -96,4 +96,6 @@ Workspace/Servers/
 01-Acme_Inmigrant/Workspace/Servers/
 01-Acme_Inmigrant/Workspace/Acme-Inmigrant/.classpath
 pom.properties
+*.map
+01-Acme_Inmigrant/Workspace/Acme-Inmigrant/target/classes/Entities.map
 

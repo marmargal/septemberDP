@@ -3,34 +3,39 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-
-import domain.Application;
-import domain.Immigrant;
-import domain.Report;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ImmigrantRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Answer;
+import domain.Application;
+import domain.Immigrant;
+import forms.ImmigrantForm;
 
 @Service
 @Transactional
 public class ImmigrantService {
-	
+
 	// Managed repository
 
 	@Autowired
 	private ImmigrantRepository immigrantRepository;
 
 	// Supporting services
-	
-	
+
+	//
+
+	@Autowired
+	private Validator validator;
+
 	// Constructors
 
 	public ImmigrantService() {
@@ -38,26 +43,24 @@ public class ImmigrantService {
 	}
 
 	// Simple CRUD methods
-	
+
 	public Immigrant create() {
 		Immigrant res = new Immigrant();
-		
+
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
-		
+
 		Collection<Application> applications = new ArrayList<Application>();
-		Collection<Report> reports = new ArrayList<Report>();
-		Collection<Question> questions = new ArrayList<Question>();
-		
+		Collection<Answer> anwsers = new ArrayList<Answer>();
+
 		authority.setAuthority(Authority.IMMIGRANT);
 		userAccount.addAuthority(authority);
 
 		res.setUserAccount(userAccount);
-		//TODO: Descomentar
-//		res.setApplication(applications);
-//		res.setReport(reports);
-//		res.setQuestion(questions);
-		
+
+		res.setApplications(applications);
+		res.setAnswers(anwsers);
+
 		return res;
 	}
 
@@ -78,14 +81,14 @@ public class ImmigrantService {
 
 	public Immigrant save(Immigrant immigrant) {
 		Immigrant res;
-		
+
 		if (immigrant.getId() == 0) {
 			String pass = immigrant.getUserAccount().getPassword();
-			
+
 			final Md5PasswordEncoder code = new Md5PasswordEncoder();
-			
+
 			pass = code.encodePassword(pass, null);
-			
+
 			immigrant.getUserAccount().setPassword(pass);
 		}
 		res = this.immigrantRepository.save(immigrant);
@@ -103,22 +106,54 @@ public class ImmigrantService {
 
 	public Immigrant findByPrincipal() {
 		Immigrant res;
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		res = this.immigrantRepository.findImmigrantByUserAccountId(userAccount.getId());
+		UserAccount immigrantAccount;
+		immigrantAccount = LoginService.getPrincipal();
+		res = this.immigrantRepository
+				.findImmigrantByUserAccountId(immigrantAccount.getId());
 		Assert.notNull(res);
 		return res;
 	}
 
 	public void checkAuthority() {
-		UserAccount userAccount;
-		userAccount = LoginService.getPrincipal();
-		Assert.notNull(userAccount);
-		Collection<Authority> authority = userAccount.getAuthorities();
+		UserAccount immigrantAccount;
+		immigrantAccount = LoginService.getPrincipal();
+		Assert.notNull(immigrantAccount);
+		Collection<Authority> authority = immigrantAccount.getAuthorities();
 		Assert.notNull(authority);
 		Authority res = new Authority();
 		res.setAuthority("IMMIGRANT");
 		Assert.isTrue(authority.contains(res));
+	}
+
+	public ImmigrantForm construct(Immigrant immigrant) {
+		ImmigrantForm res = new ImmigrantForm();
+		
+		res.setId(immigrant.getId());
+		res.setName(immigrant.getName());
+		res.setSurname(immigrant.getSurname());
+		res.setPhoneNumber(immigrant.getPhoneNumber());
+		res.setEmail(immigrant.getEmail());
+		res.setAddress(immigrant.getAddress());
+		
+		return res;
+	}
+
+	public Immigrant reconstruct(final ImmigrantForm immigrantForm,
+			final BindingResult binding) {
+		Assert.notNull(immigrantForm);
+		Immigrant res = new Immigrant();
+		
+		res.setId(immigrantForm.getId());
+		res.setName(immigrantForm.getName());
+		res.setSurname(immigrantForm.getSurname());
+		res.setPhoneNumber(immigrantForm.getPhoneNumber());
+		res.setEmail(immigrantForm.getEmail());
+		res.setAddress(immigrantForm.getAddress());
+		
+		if(binding!=null)
+			validator.validate(res, binding);
+		
+		return res;
 	}
 
 }

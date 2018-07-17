@@ -25,7 +25,7 @@
 		<bean class="converters.StringToReportConverter" />
 		<bean class="converters.StringToOfficerConverter" />
 		<bean class="converters.OfficerToStringConverter" />
-		
+
 	</util:list>
 
 </beans>

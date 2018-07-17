@@ -3,7 +3,6 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,8 @@ import domain.Application;
 import domain.Decision;
 import domain.Officer;
 import forms.OfficerForm;
+import domain.Question;
+
 
 @Service
 @Transactional

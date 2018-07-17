@@ -11,7 +11,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -25,10 +24,10 @@ public class Decision extends DomainEntity {
 	
 	// Attributes
 	private Boolean accept;
-	private Date momment;
+	private Date moment;
 	private String comment;
 	
-	@NotBlank
+	@NotNull
 	public Boolean getAccept() {
 		return accept;
 	}
@@ -40,12 +39,12 @@ public class Decision extends DomainEntity {
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	public Date getMomment() {
-		return momment;
+	public Date getMoment() {
+		return moment;
 	}
 
-	public void setMomment(Date momment) {
-		this.momment = momment;
+	public void setMoment(Date momment) {
+		this.moment = momment;
 	}
 
 	public String getComment() {
