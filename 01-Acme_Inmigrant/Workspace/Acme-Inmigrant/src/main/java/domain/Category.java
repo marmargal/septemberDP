@@ -24,7 +24,7 @@ public class Category extends DomainEntity {
 	// Attributes
 
 	private String name;
-	private Boolean rootCategory;
+	private boolean rootCategory;
 
 	@NotBlank
 	public String getName() {
@@ -35,11 +35,11 @@ public class Category extends DomainEntity {
 		this.name = name;
 	}
 
-	public Boolean getRootCategory() {
+	public boolean getRootCategory() {
 		return rootCategory;
 	}
 
-	public void setRootCategory(Boolean rootCategory) {
+	public void setRootCategory(boolean rootCategory) {
 		this.rootCategory = rootCategory;
 	}
 	

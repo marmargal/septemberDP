@@ -24,15 +24,15 @@ public class Decision extends DomainEntity {
 	}
 	
 	// Attributes
-	private Boolean accept;
+	private boolean accept;
 	private Date moment;
 	private String comment;
 	
 	@NotBlank
-	public Boolean getAccept() {
+	public boolean getAccept() {
 		return accept;
 	}
-	public void setAccept(Boolean accept) {
+	public void setAccept(boolean accept) {
 		this.accept = accept;
 	}
 

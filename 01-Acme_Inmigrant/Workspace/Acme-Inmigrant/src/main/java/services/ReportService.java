@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ReportRepository;
 import domain.Immigrant;
 import domain.Investigator;
 import domain.Report;
+import forms.ReportForm;
 
 @Service
 @Transactional
@@ -29,6 +32,9 @@ public class ReportService {
 	
 	@Autowired
 	private ImmigrantService immigrantService;
+	
+	@Autowired
+	private Validator validator;
 	
 	// Constructors
 
@@ -95,6 +101,32 @@ public class ReportService {
 
 		res.addAll(reportRepository.findReportByImmigrantId(immigrantId));
 		Assert.notNull(res);
+		return res;
+	}
+	
+	public ReportForm construct(Report report){
+		ReportForm res = new ReportForm();
+		
+		res.setId(report.getId());
+		res.setText(report.getText());
+		res.setPicture(report.getPicture());
+		res.setImmigrant(report.getImmigrant());
+		
+		return res;
+	}
+	
+	public Report reconstruct(ReportForm reportForm, BindingResult binding){
+		Assert.notNull(reportForm);
+		Report res = new Report();
+		
+		res.setId(reportForm.getId());
+		res.setText(reportForm.getText());
+		res.setPicture(reportForm.getPicture());
+		res.setImmigrant(reportForm.getImmigrant());
+		
+		if(binding!=null)
+			validator.validate(res, binding);
+		
 		return res;
 	}
 

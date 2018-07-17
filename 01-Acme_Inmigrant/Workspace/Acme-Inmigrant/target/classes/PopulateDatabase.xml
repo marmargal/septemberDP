@@ -179,6 +179,66 @@
 		<property name="userAccount" ref="userAccount1"/>
 	</bean>	
 	
+	<!-- CreditCard -->
+	<!-- CreditCard 1 -->
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="BBVA"/>
+		<property name="brandName" value="MasterCard"/>
+		<property name="number" value="4099537775843795"/>
+		<property name="expirationMonth" value="05"/>
+		<property name="expirationYear" value="2019"/>
+		<property name="CVV" value="123"/>
+	</bean>
+	
+	<!-- CreditCard 2 -->
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Name creditCard1"/>
+		<property name="brandName" value="VISA"/>
+		<property name="number" value="4539009662278447"/>
+		<property name="expirationMonth" value="03"/>
+		<property name="expirationYear" value="2022"/>
+		<property name="CVV" value="612"/>
+	</bean>
+	
+	
+	<!-- PersonalSection -->
+	<!-- PersonalSection 1 -->
+	<bean id="personalSection1" class="domain.PersonalSection">
+		<property name="names">
+			<list>
+				<value>Maya Sanz</value>
+			</list>
+		</property>
+		<property name="birthPlace" value="Norway"/>
+		<property name="birthDate" value="12/05/1990"/>
+		<property name="picture" value="https://google.com"/>
+	</bean>
+	
+	<!-- PersonalSection 2 -->
+	<bean id="personalSection2" class="domain.PersonalSection">
+		<property name="names">
+			<list>
+				<value>Lucas Osuna</value>
+			</list>
+		</property>
+		<property name="birthPlace" value="France"/>
+		<property name="birthDate" value="12/09/1990"/>
+		<property name="picture" value="https://google.com"/>
+	</bean>
+	
+	<!-- PersonalSection 3 -->
+	<bean id="personalSection3" class="domain.PersonalSection">
+		<property name="names">
+			<list>
+				<value>Marcos Fernandez</value>
+			</list>
+		</property>
+		<property name="birthPlace" value="France"/>
+		<property name="birthDate" value="12/09/1980"/>
+		<property name="picture" value="https://google.com"/>
+	</bean>
+	
+	
 	<!-- Immigrant -->
 	<!-- Immigrant 1 -->
 	<bean id="immigrant1" class="domain.Immigrant">
@@ -405,7 +465,7 @@
 		<property name="creditCard" ref="creditCard1"/>
 		<property name="statistics" value="2.0"/>
 		<property name="officer" ref="officer1"/>
-		<property name="immigrant" value="immigrant1"/>
+		<property name="immigrant" ref="immigrant1"/>
 		<property name="personalSection" ref="personalSection1"/>
 		<property name="contacSection">
 			<list>
@@ -437,7 +497,7 @@
 		<property name="creditCard" ref="creditCard2"/>
 		<property name="statistics" value="6.0"/>
 		<property name="officer" ref="officer2"/>
-		<property name="immigrant" value="immigrant2"/>
+		<property name="immigrant" ref="immigrant2"/>
 		<property name="personalSection" ref="personalSection2"/>
 		<property name="contacSection">
 			<list>
@@ -469,7 +529,7 @@
 		<property name="creditCard" ref="creditCard2"/>
 		<property name="statistics" value="6.0"/>
 		<property name="officer" ref="officer2"/>
-		<property name="immigrant" value="immigrant3"/>
+		<property name="immigrant" ref="immigrant3"/>
 		<property name="personalSection" ref="personalSection3"/>
 		<property name="contacSection">
 			<list>
@@ -494,63 +554,9 @@
 	</bean>
 	
 	
-	<!-- PersonalSection -->
-	<!-- PersonalSection 1 -->
-	<bean id="personalSection1" class="domain.PersonalSection">
-		<property name="names">
-			<list>
-				<value>Maya Sanz</value>
-			</list>
-		</property>
-		<property name="birthPlace" value="Norway"/>
-		<property name="birthDate" value="12/05/1990"/>
-		<property name="picture" value="https://google.com"/>
-	</bean>
-	
-	<!-- PersonalSection 2 -->
-	<bean id="personalSection2" class="domain.PersonalSection">
-		<property name="names">
-			<list>
-				<value>Lucas Osuna</value>
-			</list>
-		</property>
-		<property name="birthPlace" value="France"/>
-		<property name="birthDate" value="12/09/1990"/>
-		<property name="picture" value="https://google.com"/>
-	</bean>
-	
-	<!-- PersonalSection 3 -->
-	<bean id="personalSection3" class="domain.PersonalSection">
-		<property name="names">
-			<list>
-				<value>Marcos Fernandez</value>
-			</list>
-		</property>
-		<property name="birthPlace" value="France"/>
-		<property name="birthDate" value="12/09/1980"/>
-		<property name="picture" value="https://google.com"/>
-	</bean>
 	
 	
-	<!-- CreditCard -->
-	<!-- CreditCard 1 -->
-	<bean id="creditCard1" class="domain.CreditCard">
-		<property name="holderName" value="Name creditCard1"/>
-		<property name="brandName" value="VISA"/>
-		<property name="number" value="4539009782278447"/>
-		<property name="expirationMonth" value="5"/>
-		<property name="expirationYear" value="2022"/>
-		<property name="CVV" value="612"/>
-	</bean>
 	
-	<!-- CreditCard 2 -->
-	<bean id="creditCard2" class="domain.CreditCard">
-		<property name="holderName" value="Name creditCard1"/>
-		<property name="brandName" value="VISA"/>
-		<property name="number" value="4539009662278447"/>
-		<property name="expirationMonth" value="3"/>
-		<property name="expirationYear" value="2022"/>
-		<property name="CVV" value="612"/>
-	</bean>
+	
 	
 </beans>

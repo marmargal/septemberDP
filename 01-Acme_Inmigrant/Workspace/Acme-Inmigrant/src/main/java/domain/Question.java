@@ -22,14 +22,14 @@ public class Question extends DomainEntity {
 	
 	// Attributes
 
-	private Boolean statement;
+	private boolean statement;
 	private Date moment;
 
-	public Boolean getStatement() {
+	public boolean getStatement() {
 		return statement;
 	}
 
-	public void setStatement(Boolean statement) {
+	public void setStatement(boolean statement) {
 		this.statement = statement;
 	}
 
@@ -46,6 +46,7 @@ public class Question extends DomainEntity {
 	
 	private Answer answer;
 	private Officer officer;
+	private Application application;
 
 	@Valid
 	@OneToOne(optional = false)
@@ -58,7 +59,7 @@ public class Question extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional=true)
 	public Officer getOfficer() {
 		return officer;
 	}
@@ -66,6 +67,17 @@ public class Question extends DomainEntity {
 	public void setOfficer(Officer officer) {
 		this.officer = officer;
 	}
+
+	@Valid
+	@ManyToOne(optional=true)
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+
 	
 	
 

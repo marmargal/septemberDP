@@ -173,7 +173,7 @@ public class Application extends DomainEntity{
 	}
 
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy="application")
 	public List<Question> getQuestion() {
 		return question;
 	}

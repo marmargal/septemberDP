@@ -20,7 +20,7 @@ public class Requirement extends DomainEntity {
 
 	private String title;
 	private String description;
-	private Boolean abrogated;
+	private boolean abrogated;
 
 	@NotBlank
 	public String getTitle() {
@@ -40,11 +40,11 @@ public class Requirement extends DomainEntity {
 		this.description = description;
 	}
 
-	public Boolean getAbrogated() {
+	public boolean getAbrogated() {
 		return abrogated;
 	}
 
-	public void setAbrogated(Boolean abrogated) {
+	public void setAbrogated(boolean abrogated) {
 		this.abrogated = abrogated;
 	}
 	
