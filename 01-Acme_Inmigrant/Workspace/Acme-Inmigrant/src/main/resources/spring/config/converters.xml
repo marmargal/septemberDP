@@ -25,6 +25,22 @@
 		<bean class="converters.StringToReportConverter" />
 		<bean class="converters.StringToOfficerConverter" />
 		<bean class="converters.OfficerToStringConverter" />
+		<bean class="converters.PersonalSectionToStringConverter" />
+		<bean class="converters.StringToPersonalSectionConverter" />
+		<bean class="converters.ContactSectionToStringConverter" />
+		<bean class="converters.StringToContactSectionConverter" />
+		<bean class="converters.WorkSectionToStringConverter" />
+		<bean class="converters.StringToWorkSectionConverter" />
+		<bean class="converters.SocialSectionToStringConverter" />
+		<bean class="converters.StringToSocialSectionConverter" />
+		<bean class="converters.EducationSectionToStringConverter" />
+		<bean class="converters.StringToEducationSectionConverter" />
+		<bean class="converters.CreditCardToStringConverter" />
+		<bean class="converters.StringToCreditCardConverter" />
+		<bean class="converters.AuthorityToStringConverter" />
+		<bean class="converters.StringToAuthorityConverter" />
+		<bean class="converters.UserAccountToStringConverter" />
+		<bean class="converters.StringToUserAccountConverter" />
 
 	</util:list>
 
