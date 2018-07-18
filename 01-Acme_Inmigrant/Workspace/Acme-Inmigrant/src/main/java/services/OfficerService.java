@@ -18,7 +18,7 @@ import security.UserAccount;
 import domain.Application;
 import domain.Decision;
 import domain.Officer;
-import forms.OfficerForm;
+import forms.ActorForm;
 import domain.Question;
 
 
@@ -126,25 +126,20 @@ public class OfficerService {
 		Assert.isTrue(authority.contains(res));
 	}	
 	
-	public OfficerForm construct(Officer officer){
-		Assert.notNull(officer);
-		OfficerForm res = new OfficerForm();
+	public ActorForm construct(Officer officer){
+		ActorForm res = new ActorForm();
 		
 		res.setId(officer.getId());
 		res.setName(officer.getName());
 		res.setSurname(officer.getSurname());
 		res.setEmail(officer.getEmail());
-		res.setPhonenumber(officer.getPhoneNumber());
+		res.setPhoneNumber(officer.getPhoneNumber());
 		res.setAddress(officer.getAddress());
-		res.setUsername(officer.getUserAccount().getUsername());
-		res.setPassword(officer.getUserAccount().getPassword());
-		res.setRepeatPassword(officer.getUserAccount().getPassword());
-		res.setTermsAndConditions(true);
 		
 		return res;
 	}
 	
-	public Officer reconstruct(OfficerForm officerForm, BindingResult binding){
+	public Officer reconstruct(ActorForm officerForm, BindingResult binding){
 		Assert.notNull(officerForm);
 		
 		Officer res = new Officer();

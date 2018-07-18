@@ -19,34 +19,34 @@ public class DashboardAdministratorController {
 		super();
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView dashboard() {
-		ModelAndView result;
-		result = new ModelAndView("dashboard/list");
-		result.addObject("dataApplicationPerImmigrant",
-				administratorService.dataApplicationPerImmigrant());
-
-		result.addObject("dataApplicationsPerOfficer",
-				administratorService.dataApplicationsPerOfficer());
-
-		result.addObject("dataPricePerVisa",
-				administratorService.dataPricePerVisa());
-
-		result.addObject("dataImmigrantsInvestigated",
-				administratorService.dataImmigrantsInvestigated());
-
-		result.addObject("dataTimeToMakeDecision",
-				administratorService.dataTimeToMakeDecision());
-
-		result.addObject("dataVisasPerCategory",
-				administratorService.dataVisasPerCategory());
-
-		result.addObject("dataLawsPerCountry",
-				administratorService.dataLawsPerCountry());
-
-		result.addObject("dataRequirementsPerVisa",
-				administratorService.dataRequirementsPerVisa());
-
-		return result;
-	}
+//	@RequestMapping(value = "/list", method = RequestMethod.GET)
+//	public ModelAndView dashboard() {
+//		ModelAndView result;
+//		result = new ModelAndView("dashboard/list");
+//		result.addObject("dataApplicationPerImmigrant",
+//				administratorService.dataApplicationPerImmigrant());
+//
+//		result.addObject("dataApplicationsPerOfficer",
+//				administratorService.dataApplicationsPerOfficer());
+//
+//		result.addObject("dataPricePerVisa",
+//				administratorService.dataPricePerVisa());
+//
+//		result.addObject("dataImmigrantsInvestigated",
+//				administratorService.dataImmigrantsInvestigated());
+//
+//		result.addObject("dataTimeToMakeDecision",
+//				administratorService.dataTimeToMakeDecision());
+//
+//		result.addObject("dataVisasPerCategory",
+//				administratorService.dataVisasPerCategory());
+//
+//		result.addObject("dataLawsPerCountry",
+//				administratorService.dataLawsPerCountry());
+//
+//		result.addObject("dataRequirementsPerVisa",
+//				administratorService.dataRequirementsPerVisa());
+//
+//		return result;
+//	}
 }

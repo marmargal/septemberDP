@@ -40,8 +40,24 @@
 			</li>
 		</security:authorize>
 		
+		
+		<security:authorize access="hasRole('isAnonymous()')">
+			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
+				<ul>
+					<li class="arrow"></li>
+				</ul>
+			</li>
+		</security:authorize>
+		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="immigrant/register.do"><spring:message code="master.page.registerImmigrant" /></a></li>
+					<li><a href="officer/register.do"><spring:message code="master.page.registerOfficer" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

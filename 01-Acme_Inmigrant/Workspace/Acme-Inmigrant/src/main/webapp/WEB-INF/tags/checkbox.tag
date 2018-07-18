@@ -1,5 +1,5 @@
 <%--
- * textbox.tag
+ * checkbox.tag
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -25,20 +25,16 @@
 <%@ attribute name="path" required="true" %>
 <%@ attribute name="code" required="true" %>
 
-<%@ attribute name="readonly" required="false" %>
+<%@ attribute name="disabled" required="false" %>
 
-<jstl:if test="${readonly == null}">
-	<jstl:set var="readonly" value="false" />
-</jstl:if>
-
-<jstl:if test="${placeholder == null}">
-	<jstl:set var="placeholder" value="" />
+<jstl:if test="${disabled == null}">
+	<jstl:set var="disabled" value="false"/>
 </jstl:if>
 
 <%-- Definition --%>
 
 <div>
 	<b><form:label path="${path}"><spring:message code="${code}" />:&nbsp;</form:label></b>
-	<form:input path="${path}" readonly="${readonly}" placeholder="${placeholder}"/>	
-	<form:errors path="${path}" cssClass="error" />
-</div>	
+	<form:checkbox path="${path}"/>
+	<form:errors path="${path}" cssClass="error"/>
+</div>
