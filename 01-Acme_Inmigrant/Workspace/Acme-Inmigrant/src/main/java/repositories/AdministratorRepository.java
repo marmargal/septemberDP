@@ -53,7 +53,7 @@ public interface AdministratorRepository extends
 	 * The minimum, the maximum, the average, and the standard deviation of the
 	 * number of laws per country.
 	 */
-	@Query("select avg(c.laws.size),min(c.laws.size), max(c.laws.size), stddev(c.laws.size) from Country c")
+	@Query("select avg(c.law.size),min(c.law.size), max(c.law.size), stddev(c.law.size) from Country c")
 	Collection<Double> dataLawsPerCountry();
 
 	/*
