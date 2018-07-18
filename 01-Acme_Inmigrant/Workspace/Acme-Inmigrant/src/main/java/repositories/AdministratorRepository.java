@@ -39,14 +39,15 @@ public interface AdministratorRepository extends
 	 * The average, the minimum, the maximum, and the standard deviation of the
 	 * number immigrants that are investigated per investigator.
 	 */
-	@Query("select avg(r.immigrant),min(i.immigrant), max(i.immigrant), stddev(i.immigrant) from Investigator i join i.reports r")
+	@Query("select avg(i.reports.size),min(i.reports.size), max(i.reports.size), stddev(i.reports.size) from Investigator i ")
 	Collection<Double> dataImmigrantsInvestigated();
 
 	/*
 	 * The minimum, the maximum, the average, and the standard deviation of the
 	 * number of visas per category.
 	 */
-	@Query("select  avg(distinct(v.category)),min(distinct(v.category)), max(distinct(v.category)), stddev(distinct(v.category)) from Visa v")
+	//@Query("select  avg(distinct(v.category)),min(distinct(v.category)), max(distinct(v.category)), stddev(distinct(v.category)) from Visa v")
+	@Query("select count(*) from Visa v")
 	Collection<Double> dataVisasPerCategory();
 
 	/*
@@ -61,7 +62,7 @@ public interface AdministratorRepository extends
 	 * number of requirements per visa.
 	 */
 	@Query("select  avg(l.requirement.size),min(l.requirement.size), max(l.requirement.size), "
-			+ "stddev(l.requirement.size) from Country c join c.laws l")
+			+ "stddev(l.requirement.size) from Country c join c.law l")
 	Collection<Double> dataRequirementsPerVisa();
 
 	/*
@@ -78,6 +79,7 @@ public interface AdministratorRepository extends
 	 * The minimum, the maximum, the average, and the standard deviation of the
 	 * number of visas per category.
 	 */
-	@Query("select  avg(distinct(v.category)),min(distinct(v.category)), max(distinct(v.category)), stddev(distinct(v.category)) from Visa v")
+	//@Query("select  avg(distinct(v.category)),min(distinct(v.category)), max(distinct(v.category)), stddev(distinct(v.category)) from Visa v")
+	@Query("select count(*) from Visa v")
 	Collection<Double> dataNumberVisasPerCategory();
 }
