@@ -53,7 +53,7 @@
 
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="immigrant1" />
-		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
+		<property name="password" value="f43ad14eab021bed8ffce0550db13b54" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -65,7 +65,7 @@
 
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="immigrant2" />
-		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="password" value="e644b86d7a7a4d287813e4c48264b435" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -77,7 +77,7 @@
 
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="immigrant3" />
-		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="password" value="21520165de8d3f7641d82675ea15c14d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -89,7 +89,7 @@
 
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="officer1" />
-		<property name="password" value="3f02ebe3d7929b091e3d8ccfde2f3bc6" />
+		<property name="password" value="7c3d0453108aefa46c07e91c8bc031d3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -101,7 +101,7 @@
 
 	<bean id="userAccount8" class="security.UserAccount">
 		<property name="username" value="officer2" />
-		<property name="password" value="0a791842f52a0acfbb3a783378c066b8" />
+		<property name="password" value="5cea39c4f5c604f237baebc9e440ae5f" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -113,11 +113,11 @@
 
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="supervisor1" />
-		<property name="password" value="affec3b64cf90492377a8114c86fc093" />
+		<property name="password" value="d947df684dd40733bef0cd787f8ae4e1" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="INVESTIGATOR" />
+					<property name="authority" value="SUPERVISOR" />
 				</bean>
 			</list>
 		</property>
@@ -125,11 +125,11 @@
 
 	<bean id="userAccount10" class="security.UserAccount">
 		<property name="username" value="supervisor2" />
-		<property name="password" value="3e0469fb134991f8f75a2760e409c6ed" />
+		<property name="password" value="2a03aa2f503b2db79e38d483f2f612cc" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="INVESTIGATOR" />
+					<property name="authority" value="SUPERVISOR" />
 				</bean>
 			</list>
 		</property>
