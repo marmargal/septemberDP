@@ -56,10 +56,14 @@
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 		
-								<!-- 		REPORT -->
+								<!-- 		REPORT		-->
 		<security:intercept-url pattern="/report/officer/**" access="hasRole('OFFICER')" /> 
 		<security:intercept-url pattern="/report/investigator/**" access="hasRole('INVESTIGATOR')" />
 		<security:intercept-url pattern="/report/display.do" access="hasAnyRole('OFFICER', 'INVESTIGATOR')" />
+		
+								<!-- 		APPLICATION		-->
+		<security:intercept-url pattern="/application/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/application/immigrant/display.do" access="permitAll" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

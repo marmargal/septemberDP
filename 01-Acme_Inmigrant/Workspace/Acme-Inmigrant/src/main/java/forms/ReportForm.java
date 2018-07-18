@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import domain.Immigrant;
 
@@ -30,7 +31,7 @@ public class ReportForm {
 	}
 
 	@NotBlank
-	@SafeHtml
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getText() {
 		return text;
 	}
@@ -39,7 +40,7 @@ public class ReportForm {
 		this.text = text;
 	}
 
-	@SafeHtml
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPicture() {
 		return picture;
 	}
@@ -50,7 +51,7 @@ public class ReportForm {
 	
 	@Valid
 	@NotNull
-	@SafeHtml
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public Immigrant getImmigrant() {
 		return immigrant;
 	}

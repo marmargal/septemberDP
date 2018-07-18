@@ -3,12 +3,13 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.OfficerRepository;
 import security.Authority;
@@ -17,6 +18,9 @@ import security.UserAccount;
 import domain.Application;
 import domain.Decision;
 import domain.Officer;
+import forms.OfficerForm;
+import domain.Question;
+
 
 @Service
 @Transactional
@@ -26,6 +30,9 @@ public class OfficerService {
 
 	@Autowired
 	private OfficerRepository officerRepository;
+	
+	@Autowired
+	private Validator		validator;
 
 	// Supporting services
 	
@@ -118,4 +125,46 @@ public class OfficerService {
 		res.setAuthority("OFFICER");
 		Assert.isTrue(authority.contains(res));
 	}	
+	
+	public OfficerForm construct(Officer officer){
+		Assert.notNull(officer);
+		OfficerForm res = new OfficerForm();
+		
+		res.setId(officer.getId());
+		res.setName(officer.getName());
+		res.setSurname(officer.getSurname());
+		res.setEmail(officer.getEmail());
+		res.setPhonenumber(officer.getPhoneNumber());
+		res.setAddress(officer.getAddress());
+		res.setUsername(officer.getUserAccount().getUsername());
+		res.setPassword(officer.getUserAccount().getPassword());
+		res.setRepeatPassword(officer.getUserAccount().getPassword());
+		res.setTermsAndConditions(true);
+		
+		return res;
+	}
+	
+	public Officer reconstruct(OfficerForm officerForm, BindingResult binding){
+		Assert.notNull(officerForm);
+		
+		Officer res = new Officer();
+
+		if (officerForm.getId() != 0)
+			res = this.findOne(officerForm.getId());
+		else
+			res = this.create();
+		
+		res.setName(officerForm.getName());
+		res.setSurname(officerForm.getSurname());
+		res.setEmail(officerForm.getEmail());
+		res.setPhoneNumber(officerForm.getPhoneNumber());
+		res.setAddress(officerForm.getAddress());
+		res.getUserAccount().setUsername(officerForm.getUsername());
+		res.getUserAccount().setPassword(officerForm.getPassword());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+
 }

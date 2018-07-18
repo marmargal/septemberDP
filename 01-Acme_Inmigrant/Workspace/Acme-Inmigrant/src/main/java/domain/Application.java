@@ -6,13 +6,20 @@ import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -33,7 +40,8 @@ public class Application extends DomainEntity{
 	private CreditCard creditCard;
 	private Double statistics;
 
-	// TODO: Mirar pattern Ticker
+	@Column(unique = true)
+	@Pattern(regexp = "[0-9]{6}-[A-Z]{4}[0-9]{2}")
 	@NotBlank
 	public String getTicker() {
 		return ticker;
@@ -44,6 +52,9 @@ public class Application extends DomainEntity{
 	}
 
 	@Past
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getOpenedMoment() {
 		return openedMoment;
 	}
@@ -53,6 +64,9 @@ public class Application extends DomainEntity{
 	}
 
 	@Past
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getClosedMoment() {
 		return closedMoment;
 	}
@@ -79,6 +93,8 @@ public class Application extends DomainEntity{
 	
 	// Relationships
 	
+	private Officer officer;
+	private Immigrant immigrant;
 	private PersonalSection personalSection;
 	private List<ContactSection> contacSection;
 	private List<WorkSection> workSection;
@@ -86,6 +102,29 @@ public class Application extends DomainEntity{
 	private List<EducationSection> educationSection;
 	private List<Question> question;
 
+	@Valid
+	@ManyToOne(optional=false)
+	public Officer getOfficer() {
+		return officer;
+	}
+
+	public void setOfficer(Officer officer) {
+		this.officer = officer;
+	}
+	
+	
+	@Valid
+	@ManyToOne(optional=false)
+	public Immigrant getImmigrant() {
+		return immigrant;
+	}
+
+	public void setImmigrant(Immigrant immigrant) {
+		this.immigrant = immigrant;
+	}
+	
+	
+	
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	public PersonalSection getPersonalSection() {
@@ -137,7 +176,7 @@ public class Application extends DomainEntity{
 	}
 
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy="application")
 	public List<Question> getQuestion() {
 		return question;
 	}
@@ -145,6 +184,9 @@ public class Application extends DomainEntity{
 	public void setQuestion(List<Question> question) {
 		this.question = question;
 	}
+
+	
+
 	
 	
 	

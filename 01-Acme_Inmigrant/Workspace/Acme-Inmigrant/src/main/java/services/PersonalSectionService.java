@@ -39,7 +39,7 @@ public class PersonalSectionService {
 		Assert.notNull(immigrant);
 		PersonalSection res = new PersonalSection();
 		final Collection<String> names = new ArrayList<String>();
-		res.setName(names);
+		res.setNames(names);
 
 		return res;
 	}

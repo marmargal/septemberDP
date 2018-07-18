@@ -1,24 +1,25 @@
 package converters;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
-import repositories.AdministratorRepository;
-import domain.Administrator;
+import repositories.ContactSectionRepository;
+
+import domain.ContactSection;
 
 @Component
 @Transactional
-public class StringToAdminConverter implements Converter<String, Administrator> {
+public class StringToContactSectionConverter implements Converter<String, ContactSection> {
 
 	@Autowired
-	AdministratorRepository administratorRepository;
+	ContactSectionRepository contactSectionRepository;
 
 	@Override
-	public Administrator convert(final String text) {
-		Administrator result;
+	public ContactSection convert(final String text) {
+		ContactSection result;
 		int id;
 
 		try {
@@ -26,7 +27,7 @@ public class StringToAdminConverter implements Converter<String, Administrator> 
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = this.administratorRepository.findOne(id);
+				result = this.contactSectionRepository.findOne(id);
 			}
 		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);

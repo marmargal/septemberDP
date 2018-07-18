@@ -35,10 +35,10 @@ public class PersonalSection extends DomainEntity {
 	
 	@NotEmpty
 	@ElementCollection
-	public Collection<String> getName() {
+	public Collection<String> getNames() {
 		return names;
 	}
-	public void setName(Collection<String> names) {
+	public void setNames(Collection<String> names) {
 		this.names = names;
 	}
 	
