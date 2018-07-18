@@ -32,6 +32,7 @@
 		<value>/views/officer/messages</value>
 		<value>/views/terms/messages</value>
 		<value>/views/application/messages</value>
+		<value>/views/law/messages</value>
 
 	</util:list>
 </beans>
