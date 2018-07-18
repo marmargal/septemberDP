@@ -98,36 +98,36 @@ public class AdministratorService {
 	}
 
 	// methods for dashboard
-	public Collection<Double> dataApplicationPerImmigrant() {
-		return administratorRepository.dataApplicationPerImmigrant();
-
-	}
-
-	public Collection<Double> dataApplicationsPerOfficer() {
-		return administratorRepository.dataApplicationsPerOfficer();
-	}
-
-	public Collection<Double> dataPricePerVisa() {
-		return administratorRepository.dataPricePerVisa();
-	}
-
-	public Collection<Double> dataImmigrantsInvestigated() {
-		return administratorRepository.dataImmigrantsInvestigated();
-	}
-
-	public Collection<Date> dataTimeToMakeDecision() {
-		return administratorRepository.dataTimeToMakeDecision();
-	}
-
-	public Collection<Double> dataVisasPerCategory() {
-		return administratorRepository.dataVisasPerCategory();
-	}
-
-	public Collection<Double> dataLawsPerCountry() {
-		return administratorRepository.dataLawsPerCountry();
-	}
-
-	public Collection<Double> dataRequirementsPerVisa() {
-		return administratorRepository.dataRequirementsPerVisa();
-	}
+//	public Collection<Double> dataApplicationPerImmigrant() {
+//		return administratorRepository.dataApplicationPerImmigrant();
+//
+//	}
+//
+//	public Collection<Double> dataApplicationsPerOfficer() {
+//		return administratorRepository.dataApplicationsPerOfficer();
+//	}
+//
+//	public Collection<Double> dataPricePerVisa() {
+//		return administratorRepository.dataPricePerVisa();
+//	}
+//
+//	public Collection<Double> dataImmigrantsInvestigated() {
+//		return administratorRepository.dataImmigrantsInvestigated();
+//	}
+//
+//	public Collection<Date> dataTimeToMakeDecision() {
+//		return administratorRepository.dataTimeToMakeDecision();
+//	}
+//
+//	public Collection<Double> dataVisasPerCategory() {
+//		return administratorRepository.dataVisasPerCategory();
+//	}
+//
+//	public Collection<Double> dataLawsPerCountry() {
+//		return administratorRepository.dataLawsPerCountry();
+//	}
+//
+//	public Collection<Double> dataRequirementsPerVisa() {
+//		return administratorRepository.dataRequirementsPerVisa();
+//	}
 }
