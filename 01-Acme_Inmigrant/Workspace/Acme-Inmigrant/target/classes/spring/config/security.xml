@@ -66,6 +66,10 @@
 								<!-- 		APPLICATION		-->
 		<security:intercept-url pattern="/application/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
 		<security:intercept-url pattern="/application/immigrant/display.do" access="permitAll" /> 
+		
+								<!-- 		APPLICATION		-->
+		<security:intercept-url pattern="/law/administrator/list.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/law/administrator/edit.do" access="hasRole('ADMIN')"  /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
