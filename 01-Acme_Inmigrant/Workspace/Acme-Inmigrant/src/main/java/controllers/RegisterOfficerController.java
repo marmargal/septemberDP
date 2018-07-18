@@ -34,13 +34,8 @@ public class RegisterOfficerController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView res;
 		
-		Officer officer = new Officer();
 		ActorForm officerForm = new ActorForm();
 		
-		officer = this.officerService.create();
-		
-		officerForm = officerService.construct(officer);
-
 		res = this.createEditModelAndView(officerForm);
 
 		return res;
@@ -63,6 +58,7 @@ public class RegisterOfficerController extends AbstractController {
 				this.officerService.save(officer);
 				res = new ModelAndView("redirect:../");
 			} catch (final Throwable oops) {
+				System.out.println(oops);
 				res = this.createEditModelAndView(officerForm, "actor.commit.error");
 			}
 

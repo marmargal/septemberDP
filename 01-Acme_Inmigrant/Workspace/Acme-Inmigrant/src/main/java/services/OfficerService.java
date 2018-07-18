@@ -16,10 +16,9 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Application;
-import domain.Decision;
 import domain.Officer;
-import forms.ActorForm;
 import domain.Question;
+import forms.ActorForm;
 
 
 @Service
@@ -52,7 +51,6 @@ public class OfficerService {
 		Authority authority = new Authority();
 		
 		Collection<Application> applications = new ArrayList<Application>();
-		Decision decisions = new Decision();
 		Collection<Question> questions = new ArrayList<Question>();
 		
 		authority.setAuthority(Authority.OFFICER);
@@ -60,7 +58,6 @@ public class OfficerService {
 
 		res.setUserAccount(userAccount);
 		res.setApplications(applications);
-		res.setDecision(decisions);
 		res.setQuestions(questions);
 		
 		return res;

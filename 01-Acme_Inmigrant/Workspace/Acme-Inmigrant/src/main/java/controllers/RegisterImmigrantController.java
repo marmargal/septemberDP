@@ -33,10 +33,10 @@ public class RegisterImmigrantController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView res;
 		
-		Immigrant immigrant = immigrantService.create();
+//		Immigrant immigrant = immigrantService.create();
 
 		ActorForm actorForm = new ActorForm();
-		actorForm = immigrantService.construct(immigrant);
+//		actorForm = immigrantService.construct(immigrant);
 
 //		res = new ModelAndView("immigrant/register_Immigrant");
 //		res.addObject("actorForm", actorForm);
@@ -63,6 +63,7 @@ public class RegisterImmigrantController extends AbstractController {
 				this.immigrantService.save(immigrant);
 				res = new ModelAndView("redirect:/");
 			}catch (final Throwable oops) {
+				System.out.println(oops);
 				res = this.createEditModelAndView(actorForm, "actor.commit.error");
 			}
 		
