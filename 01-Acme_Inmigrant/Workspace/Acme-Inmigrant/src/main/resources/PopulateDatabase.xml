@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -56,10 +50,10 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="immigrant1" />
-		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
+		<property name="password" value="f43ad14eab021bed8ffce0550db13b54" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -68,10 +62,10 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="immigrant2" />
-		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="password" value="e644b86d7a7a4d287813e4c48264b435" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -80,10 +74,10 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="immigrant3" />
-		<property name="password" value="92877af70a45fd6a2ed7fe81e1236b78" />
+		<property name="password" value="21520165de8d3f7641d82675ea15c14d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -92,10 +86,10 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="officer1" />
-		<property name="password" value="3f02ebe3d7929b091e3d8ccfde2f3bc6" />
+		<property name="password" value="7c3d0453108aefa46c07e91c8bc031d3" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -104,10 +98,10 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount8" class="security.UserAccount">
 		<property name="username" value="officer2" />
-		<property name="password" value="0a791842f52a0acfbb3a783378c066b8" />
+		<property name="password" value="5cea39c4f5c604f237baebc9e440ae5f" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -116,91 +110,75 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount9" class="security.UserAccount">
-		<property name="username" value="supervisor1" />
-		<property name="password" value="affec3b64cf90492377a8114c86fc093" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="INVESTIGATOR" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-	
-	<bean id="userAccount10" class="security.UserAccount">
-		<property name="username" value="supervisor2" />
-		<property name="password" value="3e0469fb134991f8f75a2760e409c6ed" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="INVESTIGATOR" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-	
-	<!-- 
-	<bean id="userAccount11" class="security.UserAccount">
 		<property name="username" value="investigator1" />
-		<property name="password" value="7668f673d5669995175ef91b5d171945" />
+		<property name="password" value="038ffd9c1cfccd215fabf99238cf84e2" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="SUPERVISOR" />
+					<property name="authority" value="INVESTIGATOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
-	
-	<bean id="userAccount12" class="security.UserAccount">
+
+	<bean id="userAccount10" class="security.UserAccount">
 		<property name="username" value="investigator2" />
-		<property name="password" value="8808a13b854c2563da1a5f6cb2130868" />
+		<property name="password" value="bde3c61bc57bc2dc922f0ba43dbaa009" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="SUPERVISOR" />
+					<property name="authority" value="INVESTIGATOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
-	 -->
-	
+
+	<!-- <bean id="userAccount11" class="security.UserAccount"> <property name="username" 
+		value="investigator1" /> <property name="password" value="7668f673d5669995175ef91b5d171945" 
+		/> <property name="authorities"> <list> <bean class="security.Authority"> 
+		<property name="authority" value="SUPERVISOR" /> </bean> </list> </property> 
+		</bean> <bean id="userAccount12" class="security.UserAccount"> <property 
+		name="username" value="investigator2" /> <property name="password" value="8808a13b854c2563da1a5f6cb2130868" 
+		/> <property name="authorities"> <list> <bean class="security.Authority"> 
+		<property name="authority" value="SUPERVISOR" /> </bean> </list> </property> 
+		</bean> -->
+
 	<!-- Other domain beans come here -->
-	
+
 	<!-- Admin -->
 	<bean id="admin" class="domain.Administrator">
-		<property name="name" value="Administrator"/>
-		<property name="surname" value="Acme Immigrant"/>
-		<property name="email" value="admin@admin.com"/>
-		<property name="phoneNumber" value="654565656"/>
-		<property name="address" value="C/Admin"/>
-		<property name="userAccount" ref="userAccount1"/>
-	</bean>	
-	
+		<property name="name" value="Administrator" />
+		<property name="surname" value="Acme Immigrant" />
+		<property name="email" value="admin@admin.com" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="address" value="C/Admin" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+
 	<!-- CreditCard -->
 	<!-- CreditCard 1 -->
 	<bean id="creditCard1" class="domain.CreditCard">
-		<property name="holderName" value="BBVA"/>
-		<property name="brandName" value="MasterCard"/>
-		<property name="number" value="4099537775843795"/>
-		<property name="expirationMonth" value="5"/>
-		<property name="expirationYear" value="19"/>
-		<property name="cvv" value="123"/>
+		<property name="holderName" value="BBVA" />
+		<property name="brandName" value="MasterCard" />
+		<property name="number" value="4099537775843795" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="123" />
 	</bean>
-	
+
 	<!-- CreditCard 2 -->
 	<bean id="creditCard2" class="domain.CreditCard">
-		<property name="holderName" value="Name creditCard1"/>
-		<property name="brandName" value="VISA"/>
-		<property name="number" value="4539009662278447"/>
-		<property name="expirationMonth" value="3"/>
-		<property name="expirationYear" value="22"/>
-		<property name="cvv" value="612"/>
+		<property name="holderName" value="Name creditCard1" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4539009662278447" />
+		<property name="expirationMonth" value="3" />
+		<property name="expirationYear" value="22" />
+		<property name="cvv" value="612" />
 	</bean>
-	
-	
+
+
 	<!-- PersonalSection -->
 	<!-- PersonalSection 1 -->
 	<bean id="personalSection1" class="domain.PersonalSection">
@@ -209,11 +187,11 @@
 				<value>Maya Sanz</value>
 			</list>
 		</property>
-		<property name="birthPlace" value="Norway"/>
-		<property name="birthDate" value="12/05/1990"/>
-		<property name="picture" value="https://google.com"/>
+		<property name="birthPlace" value="Norway" />
+		<property name="birthDate" value="12/05/1990" />
+		<property name="picture" value="https://google.com" />
 	</bean>
-	
+
 	<!-- PersonalSection 2 -->
 	<bean id="personalSection2" class="domain.PersonalSection">
 		<property name="names">
@@ -221,11 +199,11 @@
 				<value>Lucas Osuna</value>
 			</list>
 		</property>
-		<property name="birthPlace" value="France"/>
-		<property name="birthDate" value="12/09/1990"/>
-		<property name="picture" value="https://google.com"/>
+		<property name="birthPlace" value="France" />
+		<property name="birthDate" value="12/09/1990" />
+		<property name="picture" value="https://google.com" />
 	</bean>
-	
+
 	<!-- PersonalSection 3 -->
 	<bean id="personalSection3" class="domain.PersonalSection">
 		<property name="names">
@@ -233,240 +211,247 @@
 				<value>Marcos Fernandez</value>
 			</list>
 		</property>
-		<property name="birthPlace" value="France"/>
-		<property name="birthDate" value="12/09/1980"/>
-		<property name="picture" value="https://google.com"/>
+		<property name="birthPlace" value="France" />
+		<property name="birthDate" value="12/09/1980" />
+		<property name="picture" value="https://google.com" />
 	</bean>
-	
-	
+
+
 	<!-- Immigrant -->
 	<!-- Immigrant 1 -->
 	<bean id="immigrant1" class="domain.Immigrant">
-		<property name="name" value="Maya"/>
-		<property name="surname" value="Sanz"/>
-		<property name="email" value="mayas@gmail.com"/>
-		<property name="phoneNumber" value="654565556"/>
-		<property name="address" value="C/Margarita nº4"/>
-		<property name="userAccount" ref="userAccount4"/>
+		<property name="name" value="Maya" />
+		<property name="surname" value="Sanz" />
+		<property name="email" value="mayas@gmail.com" />
+		<property name="phoneNumber" value="654565556" />
+		<property name="address" value="C/Margarita nº4" />
+		<property name="userAccount" ref="userAccount4" />
 		<property name="applications">
 			<list>
-				<ref bean="application1"/>
+				<ref bean="application1" />
 			</list>
 		</property>
 		<property name="answers">
 			<list>
 			</list>
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<!-- Immigrant 2 -->
 	<bean id="immigrant2" class="domain.Immigrant">
-		<property name="name" value="Lucas"/>
-		<property name="surname" value="Osuna"/>
-		<property name="email" value="lucasosuna@gmail.com"/>
-		<property name="phoneNumber" value="652365556"/>
-		<property name="address" value="C/Sol nº10"/>
-		<property name="userAccount" ref="userAccount5"/>
+		<property name="name" value="Lucas" />
+		<property name="surname" value="Osuna" />
+		<property name="email" value="lucasosuna@gmail.com" />
+		<property name="phoneNumber" value="652365556" />
+		<property name="address" value="C/Sol nº10" />
+		<property name="userAccount" ref="userAccount5" />
 		<property name="applications">
 			<list>
-				<ref bean="application2"/>
+				<ref bean="application2" />
 			</list>
 		</property>
 		<property name="answers">
 			<list>
 			</list>
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<!-- Immigrant 3 -->
 	<bean id="immigrant3" class="domain.Immigrant">
-		<property name="name" value="Marcos"/>
-		<property name="surname" value="Fernandez"/>
-		<property name="email" value="marcosfdz@gmail.com"/>
-		<property name="phoneNumber" value="652365456"/>
-		<property name="address" value="C/Sol nº10"/>
-		<property name="userAccount" ref="userAccount6"/>
+		<property name="name" value="Marcos" />
+		<property name="surname" value="Fernandez" />
+		<property name="email" value="marcosfdz@gmail.com" />
+		<property name="phoneNumber" value="652365456" />
+		<property name="address" value="C/Sol nº10" />
+		<property name="userAccount" ref="userAccount6" />
 		<property name="applications">
 			<list>
-				<ref bean="application3"/>
+				<ref bean="application3" />
 			</list>
 		</property>
 		<property name="answers">
 			<list>
 			</list>
 		</property>
-	</bean>	
-	
-	
-	
+	</bean>
+
+
+
 	<!-- Officer -->
 	<!-- Officer 1 -->
 	<bean id="officer1" class="domain.Officer">
-		<property name="name" value="Claudia"/>
-		<property name="surname" value="Martin"/>
-		<property name="email" value="claumar@gmail.com"/>
-		<property name="phoneNumber" value="654895556"/>
-		<property name="address" value="C/Verona nº4"/>
-		<property name="userAccount" ref="userAccount7"/>
+		<property name="name" value="Claudia" />
+		<property name="surname" value="Martin" />
+		<property name="email" value="claumar@gmail.com" />
+		<property name="phoneNumber" value="654895556" />
+		<property name="address" value="C/Verona nº4" />
+		<property name="userAccount" ref="userAccount7" />
 		<property name="applications">
 			<list>
-				<ref bean="application1"/>
+				<ref bean="application1" />
 			</list>
 		</property>
-		<property name="decision" ref="decision1"/>
+		<property name="decision" ref="decision1" />
 		<property name="questions">
 			<list>
 			</list>
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<!-- Officer 2 -->
 	<bean id="officer2" class="domain.Officer">
-		<property name="name" value="Claudia"/>
-		<property name="surname" value="Martin"/>
-		<property name="email" value="claumar@gmail.com"/>
-		<property name="phoneNumber" value="654895556"/>
-		<property name="address" value="C/Verona nº4"/>
-		<property name="userAccount" ref="userAccount8"/>
+		<property name="name" value="Claudia" />
+		<property name="surname" value="Martin" />
+		<property name="email" value="claumar@gmail.com" />
+		<property name="phoneNumber" value="654895556" />
+		<property name="address" value="C/Verona nº4" />
+		<property name="userAccount" ref="userAccount8" />
 		<property name="applications">
 			<list>
-				<ref bean="application2"/>
-				<ref bean="application3"/>
+				<ref bean="application2" />
+				<ref bean="application3" />
 			</list>
 		</property>
-		<property name="decision" ref="decision2"/>
+		<property name="decision" ref="decision2" />
 		<property name="questions">
 			<list>
 			</list>
 		</property>
-	</bean>	
-	
+	</bean>
+
 	<!-- Investigator -->
 	<!-- Investigator 1 -->
 	<bean id="investigator1" class="domain.Investigator">
-		<property name="name" value="Roberto"/>
-		<property name="surname" value="Perez"/>
-		<property name="email" value="rope22@gmail.com"/>
-		<property name="phoneNumber" value="652295556"/>
-		<property name="address" value="C/Asuncion nº8"/>
-		<property name="userAccount" ref="userAccount9"/>
+		<property name="name" value="Roberto" />
+		<property name="surname" value="Perez" />
+		<property name="email" value="rope22@gmail.com" />
+		<property name="phoneNumber" value="652295556" />
+		<property name="address" value="C/Asuncion nº8" />
+		<property name="userAccount" ref="userAccount9" />
 		<property name="reports">
 			<list>
-				<ref bean="report1"/>
+				<ref bean="report1" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Investigator 2 -->
 	<bean id="investigator2" class="domain.Investigator">
-		<property name="name" value="Patricia"/>
-		<property name="surname" value="Ruiz"/>
-		<property name="email" value="patruiz@gmail.com"/>
-		<property name="phoneNumber" value="652290956"/>
-		<property name="address" value="C/Girasol nº12"/>
-		<property name="userAccount" ref="userAccount10"/>
+		<property name="name" value="Patricia" />
+		<property name="surname" value="Ruiz" />
+		<property name="email" value="patruiz@gmail.com" />
+		<property name="phoneNumber" value="652290956" />
+		<property name="address" value="C/Girasol nº12" />
+		<property name="userAccount" ref="userAccount10" />
 		<property name="reports">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Report -->
 	<!-- Report 1 -->
 	<bean id="report1" class="domain.Report">
-		<property name="text" value="A text...."/>
-		<property name="picture" value=""/>
-		<property name="immigrant" ref="immigrant3"/>
-		<property name="writer" ref="investigator1"/>
+		<property name="text" value="A text...." />
+		<property name="picture" value="" />
+		<property name="immigrant" ref="immigrant3" />
+		<property name="writer" ref="investigator1" />
 	</bean>
-	
-	
+
+
 	<!-- Decision -->
 	<!-- Decision 1 -->
 	<bean id="decision1" class="domain.Decision">
-		<property name="accept" value="true"/>
-		<property name="moment" value="19/06/2010"/>
-		<property name="comment" value="Decision 1 accept"/>
-		<property name="application" ref="application1"/>
+		<property name="accept" value="true" />
+		<property name="moment" value="19/06/2010" />
+		<property name="comment" value="Decision 1 accept" />
+		<property name="application" ref="application1" />
 	</bean>
-	
+
 	<!-- Decision 2 -->
 	<bean id="decision2" class="domain.Decision">
-		<property name="accept" value="true"/>
-		<property name="moment" value="20/03/2010"/>
-		<property name="comment" value="Decision 2 accept"/>
-		<property name="application" ref="application2"/>
+		<property name="accept" value="true" />
+		<property name="moment" value="20/03/2010" />
+		<property name="comment" value="Decision 2 accept" />
+		<property name="application" ref="application2" />
 	</bean>
-	
+
 	<!-- Visa -->
 	<!-- Visa 1 -->
 	<bean id="visa1" class="domain.Visa">
-		<property name="classes" value="class1"/>
-		<property name="description" value="A description 1"/>
-		<property name="price" value="200 $"/>
-		<property name="country" ref="country1"/>
-		<property name="category" ref="category1"/>
+		<property name="classes" value="class1" />
+		<property name="description" value="A description 1" />
+		<property name="price" value="200 $" />
+		<property name="country" ref="country1" />
+		<property name="category" ref="category1" />
 	</bean>
-	
+
 	<!-- Category -->
 	<!-- Category 1 -->
 	<bean id="category1" class="domain.Category">
-		<property name="name" value="root"/>
-		<property name="rootCategory" value="true"/>
-		<property name="categoryParent"><null/></property>
+		<property name="name" value="root" />
+		<property name="rootCategory" value="true" />
+		<property name="categoryParent">
+			<null />
+		</property>
 		<property name="categories">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Country -->
 	<!-- Country 1 -->
 	<bean id="country1" class="domain.Country">
-		<property name="name" value="Spain"/>
-		<property name="isoCode" value="ESP"/>
-		<property name="flag" value="https://laendercode.net/img/flag-icon-css/flags/4x3/es.svg"/>
-		<property name="link" value="https://es.wikipedia.org/wiki/Espa%C3%B1a"/>
+		<property name="name" value="Spain" />
+		<property name="isoCode" value="ESP" />
+		<property name="flag"
+			value="https://laendercode.net/img/flag-icon-css/flags/4x3/es.svg" />
+		<property name="link" value="https://es.wikipedia.org/wiki/Espa%C3%B1a" />
 		<property name="law">
 			<list>
-				<ref bean="law1"/>
+				<ref bean="law1" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Law -->
 	<!-- Law 1 -->
 	<bean id="law1" class="domain.Law">
-		<property name="title" value="A law 1"/>
-		<property name="text" value="A text....."/>
-		<property name="enactmentDate" value="11/11/2010"/>
-		<property name="abrogationTime" value="11/12/2010"/>
+		<property name="title" value="A law 1" />
+		<property name="text" value="A text....." />
+		<property name="enactmentDate" value="11/11/2010" />
+		<property name="abrogationTime" value="11/12/2010" />
 		<property name="requirement">
-		<list>
-			<ref bean="requirement1"/>
-		</list>
-		</property> 
+			<list>
+				<ref bean="requirement1" />
+			</list>
+		</property>
+		<property name="law">
+			<list>
+			</list>
+		</property>
 	</bean>
-	
+
 	<!-- Requirement -->
 	<!-- Requirement 1 -->
 	<bean id="requirement1" class="domain.Requirement">
-		<property name="title" value="A title 1"/>
-		<property name="description" value="A description....."/>
-		<property name="abrogated" value="true"/>
+		<property name="title" value="A title 1" />
+		<property name="description" value="A description....." />
+		<property name="abrogated" value="true" />
 	</bean>
-	
+
 	<!-- Application -->
 	<!-- Application 1 -->
 	<bean id="application1" class="domain.Application">
-		<property name="ticker" value="101201-ASDF00"/>
-		<property name="openedMoment" value="01/12/2010"/>
-		<property name="closedMoment" value="03/12/2010"/>
-		<property name="creditCard" ref="creditCard1"/>
-		<property name="statistics" value="2.0"/>
-		<property name="officer" ref="officer1"/>
-		<property name="immigrant" ref="immigrant1"/>
-		<property name="personalSection" ref="personalSection1"/>
+		<property name="ticker" value="101201-ASDF00" />
+		<property name="openedMoment" value="01/12/2010" />
+		<property name="closedMoment" value="03/12/2010" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="statistics" value="2.0" />
+		<property name="officer" ref="officer1" />
+		<property name="immigrant" ref="immigrant1" />
+		<property name="personalSection" ref="personalSection1" />
 		<property name="contacSection">
 			<list>
 			</list>
@@ -488,17 +473,17 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Application 2 -->
 	<bean id="application2" class="domain.Application">
-		<property name="ticker" value="111201-ASDF02"/>
-		<property name="openedMoment" value="01/11/2010"/>
-		<property name="closedMoment" value="03/11/2010"/>
-		<property name="creditCard" ref="creditCard2"/>
-		<property name="statistics" value="6.0"/>
-		<property name="officer" ref="officer2"/>
-		<property name="immigrant" ref="immigrant2"/>
-		<property name="personalSection" ref="personalSection2"/>
+		<property name="ticker" value="111201-ASDF02" />
+		<property name="openedMoment" value="01/11/2010" />
+		<property name="closedMoment" value="03/11/2010" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="statistics" value="6.0" />
+		<property name="officer" ref="officer2" />
+		<property name="immigrant" ref="immigrant2" />
+		<property name="personalSection" ref="personalSection2" />
 		<property name="contacSection">
 			<list>
 			</list>
@@ -520,17 +505,17 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- Application 3 -->
 	<bean id="application3" class="domain.Application">
-		<property name="ticker" value="111201-ASFF02"/>
-		<property name="openedMoment" value="01/11/2010"/>
-		<property name="closedMoment" value="07/11/2010"/>
-		<property name="creditCard" ref="creditCard2"/>
-		<property name="statistics" value="6.0"/>
-		<property name="officer" ref="officer2"/>
-		<property name="immigrant" ref="immigrant3"/>
-		<property name="personalSection" ref="personalSection3"/>
+		<property name="ticker" value="111201-ASFF02" />
+		<property name="openedMoment" value="01/11/2010" />
+		<property name="closedMoment" value="07/11/2010" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="statistics" value="6.0" />
+		<property name="officer" ref="officer2" />
+		<property name="immigrant" ref="immigrant3" />
+		<property name="personalSection" ref="personalSection3" />
 		<property name="contacSection">
 			<list>
 			</list>
@@ -552,11 +537,11 @@
 			</list>
 		</property>
 	</bean>
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 </beans>

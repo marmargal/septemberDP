@@ -41,6 +41,8 @@
 		<bean class="converters.StringToAuthorityConverter" />
 		<bean class="converters.UserAccountToStringConverter" />
 		<bean class="converters.StringToUserAccountConverter" />
+		<bean class="converters.LawToStringConverter" />
+		<bean class="converters.StringToLawConverter" />
 
 	</util:list>
 

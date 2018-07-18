@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles.xml * * Copyright (C) 2017 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="law/administrator/list" extends="master.page">
+		<put-attribute name="title" value="Listado de laws" />
+		<put-attribute name="body" value="/views/law/list.jsp" />
+	</definition>
+	<definition name="law/administrator/display" extends="master.page">
+		<put-attribute name="title" value="Desplegable de laws" />
+		<put-attribute name="body" value="/views/law/display.jsp" />
+	</definition>
+
+	<definition name="law/administrator/create" extends="master.page">
+		<put-attribute name="title" value="Crear law" />
+		<put-attribute name="body" value="/views/law/edit.jsp" />
+	</definition>
+
+	<definition name="law/administrator/edit" extends="master.page">
+		<put-attribute name="title" value="Editar law" />
+		<put-attribute name="body" value="/views/law/edit.jsp" />
+	</definition>
+</tiles-definitions>

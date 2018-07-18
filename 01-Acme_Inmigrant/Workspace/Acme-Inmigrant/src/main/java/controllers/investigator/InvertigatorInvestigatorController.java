@@ -1,4 +1,4 @@
-package controllers.administrator;
+package controllers.investigator;
 
 import javax.validation.Valid;
 
@@ -10,52 +10,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AdministratorService;
+import services.InvestigatorService;
 import controllers.AbstractController;
-import domain.Administrator;
+import domain.Investigator;
 
 @Controller
-@RequestMapping("/administrator")
-public class AdministratorAdministratorController extends AbstractController {
+@RequestMapping("/investigator/investigator")
+public class InvertigatorInvestigatorController extends AbstractController {
 
 	@Autowired
-	private AdministratorService administratorService;
+	private InvestigatorService investigatorService;
 
-	// Constructor -------------------------------------------------------------
-
-	public AdministratorAdministratorController() {
+	public InvertigatorInvestigatorController() {
 		super();
 	}
-
-	// Edition ----------------------------------------------------------------
+	
+	//edition
+	
+	
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 
 		ModelAndView result;
 
-		final Administrator administrator = this.administratorService
+		final Investigator investigator = this.investigatorService
 				.findByPrincipal();
-		result = this.createEditModelAndView(administrator);
+		result = this.createEditModelAndView(investigator);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Administrator administrator,
+	public ModelAndView save(@Valid final Investigator investigator,
 			final BindingResult binding) {
 
 		ModelAndView result;
 
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(administrator);
+			result = this.createEditModelAndView(investigator);
 		else
 			try {
-				this.administratorService.save(administrator);
+				this.investigatorService.save(investigator);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(administrator,
-						"administrator.commit.error");
+				result = this.createEditModelAndView(investigator,
+						"investigator.commit.error");
 			}
 		return result;
 	}
@@ -64,27 +64,26 @@ public class AdministratorAdministratorController extends AbstractController {
 	// ------------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(
-			final Administrator administrator) {
+			final Investigator investigator) {
 
 		ModelAndView result;
 
-		result = this.createEditModelAndView(administrator, null);
+		result = this.createEditModelAndView(investigator, null);
 
 		return result;
 	}
 
 	protected ModelAndView createEditModelAndView(
-			final Administrator administrator, final String message) {
+			final Investigator investigator, final String message) {
 
-		Assert.notNull(administrator);
+		Assert.notNull(investigator);
 
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/edit");
-		result.addObject("administrator", administrator);
+		result = new ModelAndView("investigator/edit");
+		result.addObject("investigator", investigator);
 		result.addObject("message", message);
 
 		return result;
 	}
-
 }

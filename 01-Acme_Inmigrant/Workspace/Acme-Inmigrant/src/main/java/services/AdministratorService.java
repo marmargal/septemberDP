@@ -97,7 +97,7 @@ public class AdministratorService {
 		Assert.isTrue(authority.contains(res));
 	}
 
-//	// methods for dashboard
+	// methods for dashboard
 //	public Collection<Double> dataApplicationPerImmigrant() {
 //		return administratorRepository.dataApplicationPerImmigrant();
 //
