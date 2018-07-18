@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.CountryRepository;
 import domain.Country;
 import domain.Law;
+import domain.Report;
 
 @Service
 @Transactional
@@ -78,6 +79,16 @@ public class CountryService {
 		Assert.isTrue(country.getId() != 0);
 		Assert.isTrue(countryRepository.exists(country.getId()));
 		countryRepository.delete(country);
+	}
+
+	// Other business methods
+
+	public Collection<Country> findCountryByLawId(int lawId) {
+		Collection<Country> res = new ArrayList<Country>();
+
+		res.addAll(countryRepository.findCountryByLawId(lawId));
+		Assert.notNull(res);
+		return res;
 	}
 
 }
