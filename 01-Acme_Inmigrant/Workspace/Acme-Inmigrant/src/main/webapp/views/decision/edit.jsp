@@ -20,14 +20,15 @@
 
 <form:form action="decision/offices/edit.do" modelAttribute="decisionForm">
 	<security:authorize access="hasRole('OFFICER')">
+	
 		<form:hidden path="id" />
 		<form:hidden path="version" />
 
 		<form:hidden path="moment" />
 		
-		<acme:checkbox code="decision.isAccepted" path="isPrivate"/>
+		<acme:select items="${applications }" itemLabel="applications" code="decision.application" path="application"/>
 		<br/>
-		<acme:select items="${status }" itemLabel="status" path="status" code="decision.acepted" />
+		<acme:checkbox code="decision.isAccepted" path="isAccepted"/>
 		<br/>
 		<acme:textbox path="comment" code="decision.comment" />
 		<br/>
