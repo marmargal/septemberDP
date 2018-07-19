@@ -143,15 +143,20 @@ public class ImmigrantService {
 		Assert.notNull(immigrantForm);
 		Immigrant res = new Immigrant();
 		
-		res.setId(immigrantForm.getId());
+		if (immigrantForm.getId() != 0)
+			res = this.findOne(immigrantForm.getId());
+		else
+			res = this.create();
+		
 		res.setName(immigrantForm.getName());
 		res.setSurname(immigrantForm.getSurname());
-		res.setPhoneNumber(immigrantForm.getPhoneNumber());
 		res.setEmail(immigrantForm.getEmail());
+		res.setPhoneNumber(immigrantForm.getPhoneNumber());
 		res.setAddress(immigrantForm.getAddress());
+		res.getUserAccount().setUsername(immigrantForm.getUsername());
+		res.getUserAccount().setPassword(immigrantForm.getPassword());
 		
-		if(binding!=null)
-			validator.validate(res, binding);
+		this.validator.validate(res, binding);
 		
 		return res;
 	}

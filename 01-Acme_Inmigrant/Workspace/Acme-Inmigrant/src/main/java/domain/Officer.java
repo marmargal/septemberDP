@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -37,7 +36,6 @@ public class Officer extends Actor{
 	}
 	
 	@Valid
-	@NotNull
 	@OneToOne
 	public Decision getDecision(){
 		return decision;
