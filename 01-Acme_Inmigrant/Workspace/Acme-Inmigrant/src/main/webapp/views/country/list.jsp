@@ -11,23 +11,31 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <display:table pagesize="6" class="displaycomment" keepStatus="true"
-	name="countries" requestURI="${requestURI }" id="row">
+	name="country" requestURI="${requestURI }" id="row">
 	
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<a href="country/administrator/edit.do?countryId=${row.id }"><spring:message code="country.edit"/></a>
+		</display:column>
+	</security:authorize>
+	
+	<display:column>
+		<a href="country/display.do?countryId=${row.id}"><spring:message code="country.display"/></a>
+	</display:column>	
+
+	<spring:message code="country.name" var="nameHeader" />
+	<display:column property="name" title="${nameHeader}" sortable="true" />
+
+	<spring:message code="country.isoCode" var="isoCodeHeader" />
+	<display:column property="isoCode" title="${isoCodeHeader}" sortable="true" />
+
 	<display:column>
 			<a href="visa/list.do?countryId=${row.id}"><spring:message code="country.visas"/></a>
 	</display:column>
 
-	<acme:column property="name" code="cauntry.name"/>
-	<acme:column property="isoCode" code="cauntry.isoCode"/>
-
-	<display:column>
-			<a href="country/display.do?countryId=${row.id}"><spring:message code="country.display"/></a>
-	</display:column>
-
-	<security:authorize access="hasRole('ADMIN')">
-			<a href="country/administrator/edit.do"><spring:message code="category.create"/></a>
-			<br/>
-	</security:authorize>
-	
 </display:table>
 
+<security:authorize access="hasRole('ADMIN')">
+		<a href="country/administrator/create.do"><spring:message code="country.create"/></a>
+		<br/>
+</security:authorize>

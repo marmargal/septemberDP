@@ -26,8 +26,9 @@
 		<value>/views/report/tiles.xml</value>
 		<value>/views/terms/tiles.xml</value>
 		<value>/views/application/tiles.xml</value>
-		<value>/views/actor/tiles.xml</value>
 		<value>/views/law/tiles.xml</value>
+		<value>/views/actor/tiles.xml</value>
 		<value>/views/country/tiles.xml</value>
+
 	</util:list>
 </beans>

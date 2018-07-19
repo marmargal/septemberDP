@@ -32,7 +32,7 @@ public class CountryController extends AbstractController {
 	// Listing ---------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView list() {
 		ModelAndView res;
 		
 		Collection<Country> countries = new ArrayList<Country>();
@@ -40,7 +40,8 @@ public class CountryController extends AbstractController {
 		countries = this.countryService.findAll();
 		
 		res = new ModelAndView("country/list");
-		res.addObject("countries", countries);
+		res.addObject("country", countries);
+		res.addObject("requestURI", "country/list.do");
 
 		return res;
 	}
@@ -53,7 +54,7 @@ public class CountryController extends AbstractController {
 		Country country = this.countryService.findOne(countryId);
 
 		result = new ModelAndView("country/display");
-		result.addObject("country", country);
+		result.addObject("id", country.getId());
 		
 		return result;
 	}

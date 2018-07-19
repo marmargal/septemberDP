@@ -11,7 +11,9 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="country/admin/edit.do" modelAttribute="countryForm">
+<form:form action="country/administrator/edit.do" modelAttribute="countryForm">
+	
+	<form:hidden path="id"/>
 	
 	<acme:textbox code="country.name" path="name"/>
 	<br/>
@@ -25,7 +27,12 @@
 	<acme:textbox code="country.link" path="link"/>
 	<br/>
 	
-	<input type="submit" name="save" value="<spring:message code="country.save" />" />&nbsp;
-	<input type="button" name="cancel" value="<spring:message code="country.cancel" />" onclick="javascript: relativeRedir('/');" />
+	<acme:submit name="save" code="country.save"/>
+	<jstl:if test="${countryForm.id != 0}">
+			<input type="submit" name="delete"
+				value="<spring:message code="country.delete" />"
+				onclick="return confirm('<spring:message code="country.confirm.delete" />')" />&nbsp;
+	</jstl:if>
+	<acme:cancel url="country/list.do" code="country.cancel"/>
 	
 </form:form>

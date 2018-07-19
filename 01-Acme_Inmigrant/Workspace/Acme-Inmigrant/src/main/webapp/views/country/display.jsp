@@ -22,6 +22,3 @@
 
 <acme:links url="${country.link }" code="country.link"/>
 
-<security:authorize access="hasRole('ADMIN')">
-	<a href="country/administrator/edit.do"><spring:message code="country.edit"/></a>
-</security:authorize>

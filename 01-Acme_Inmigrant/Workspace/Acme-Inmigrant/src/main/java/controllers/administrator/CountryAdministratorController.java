@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CountryService;
@@ -32,14 +33,23 @@ public class CountryAdministratorController extends AbstractController{
 	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public ModelAndView create(){
 		ModelAndView res;
-		Country country;
-		CountryForm countryForm;
-		
-		country = this.countryService.create();
-		
-		countryForm = this.countryService.construct(country);
+		CountryForm countryForm = new CountryForm();
 		
 		res = this.createEditModelAndView(countryForm);
+		
+		return res;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int countryId){
+		
+		ModelAndView res;
+		
+		Country country = countryService.findOne(countryId);
+		CountryForm countryForm = countryService.construct(country);
+		
+		res = createEditModelAndView(countryForm);
+		res.addObject("countryForm", countryForm);
 		
 		return res;
 	}
@@ -53,6 +63,7 @@ public class CountryAdministratorController extends AbstractController{
 			res = this.createEditModelAndView(countryForm, "country.params.error");
 		}else
 			try{
+				
 				Country country = this.countryService.reconstruct(countryForm, binding);
 				this.countryService.save(country);
 
@@ -68,14 +79,20 @@ public class CountryAdministratorController extends AbstractController{
 	
 	
 	// Delete --------------
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(int countryId){
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(CountryForm countryForm, BindingResult binding){
 		
-		Country country = countryService.findOne(countryId);
+		ModelAndView res;
 		
-		countryService.delete(country);
+		try{
+			Country country = this.countryService.reconstruct(countryForm, binding);
+			countryService.delete(country);
+			res = new ModelAndView("redirect:/country/list.do");
+		}catch (Throwable oops) {
+			res = createEditModelAndView(countryForm, "country.commit.error");
+		}
 		
-		return new ModelAndView("redirect:list.do");
+		return res;
 	}
 	
 	

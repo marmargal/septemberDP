@@ -30,6 +30,9 @@ public class CountryService {
 
 	@Autowired
 	private Validator		validator;
+	
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Constructors
 
@@ -66,6 +69,7 @@ public class CountryService {
 	}
 
 	public Country save(Country country) {
+		this.administratorService.checkAuthority();
 		Country res;
 		res = countryRepository.save(country);
 		return res;
@@ -92,7 +96,8 @@ public class CountryService {
 		CountryForm res = new CountryForm();
 		
 		res.setId(country.getId());
-		res.setName(country.getIsoCode());
+		res.setName(country.getName());
+		res.setIsoCode(country.getIsoCode());
 		res.setFlag(country.getFlag());
 		res.setLink(country.getLink());
 		
