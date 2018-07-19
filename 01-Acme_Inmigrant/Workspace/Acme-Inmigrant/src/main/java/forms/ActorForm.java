@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
-public class OfficerForm {
+public class ActorForm {
 
 	private int		id;
 	private String	name;
@@ -18,7 +18,7 @@ public class OfficerForm {
 	private String  repeatPassword;
 	private boolean termsAndConditions;
 	
-	public OfficerForm(){
+	public ActorForm(){
 		super();
 	}
 	
@@ -57,7 +57,7 @@ public class OfficerForm {
 		return this.phoneNumber;
 	}
 
-	public void setPhonenumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

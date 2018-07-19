@@ -16,8 +16,13 @@
        
 <tiles-definitions>
 
-	<definition name="application/edit" extends="master.page">	
+	<definition name="application/immigrant/edit" extends="master.page">	
 		<put-attribute name="title" value="Edit application" />
+		<put-attribute name="body" value="/views/application/edit.jsp" />
+	</definition>
+	
+	<definition name="application/immigrant/create" extends="master.page">	
+		<put-attribute name="title" value="Create application" />
 		<put-attribute name="body" value="/views/application/edit.jsp" />
 	</definition>
 	
