@@ -14,7 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<img src="images/logo.png" alt="Acme-Inmigrant Co., Inc." />
+	<a href="/Acme-Inmigrant"><img src="images/logo.png" alt="Acme-Inmigrant Co., Inc." /></a>
 </div>
 
 <div>
@@ -30,12 +30,11 @@
 			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+		<security:authorize access="hasRole('IMMIGRANT')">
+			<li><a class="fNiv"><spring:message	code="master.page.immigrant" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+					<li><a href="application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
