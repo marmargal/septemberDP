@@ -13,7 +13,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
-<nav class="navbar fixed-top navbar-dark bg-primary">
+<nav class="navbar navbar-dark bg-primary">
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
@@ -25,7 +25,7 @@
 				</ul>
 			</li>
 			<li><a href="#"><spring:message code="master.page.hierarchyVisa" /></a></li>
-			<li><a href="#"><spring:message code="master.page.findVisa" /></a></li>
+			<li><a href="visa/search.do"><spring:message code="master.page.findVisa" /></a></li>
 			<li><a href="#"><spring:message code="master.page.requirements" /></a></li>
 		</security:authorize>
 		
@@ -78,6 +78,6 @@
 
 
 
-<div>
+<div id="language">
 	<a href="?language=en">en</a> | <a href="?language=es">es</a>
 </div>

@@ -54,6 +54,11 @@
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
 		
+								<!-- 		VISA		-->
+								
+		<security:intercept-url pattern="/visa/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/visa/search.do" access="permitAll" /> 
+		
 								<!-- 		REPORT		-->
 		<security:intercept-url pattern="/report/officer/**" access="hasRole('OFFICER')" /> 
 		<security:intercept-url pattern="/report/investigator/**" access="hasRole('INVESTIGATOR')" />

@@ -17,7 +17,12 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table pagesize="5" class="displaytag" keepStatus="true" name="visa" requestURI="${requestURI }">
+<display:table pagesize="5" class="listVisa" keepStatus="true" name="visa" requestURI="${requestURI }">
+
+	<form method=GET action="visa/search.do">
+	Search: <input type="text" name="criteria"> <input
+		type="submit">
+	</form>
 	
 	<security:authorize access="hasRole('ADMIN')">
 	
