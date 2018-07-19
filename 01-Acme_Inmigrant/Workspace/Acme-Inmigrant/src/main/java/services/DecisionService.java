@@ -8,10 +8,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.DecisionRepository;
 import domain.Application;
 import domain.Decision;
+import forms.DecisionForm;
 
 @Service
 @Transactional
@@ -23,6 +26,11 @@ public class DecisionService {
 	private DecisionRepository decisionRepository;
 
 	// Suporting services
+	@Autowired
+	private ApplicationService applicationService;
+	
+	@Autowired
+	private Validator validator;
 
 	// Constructors
 
@@ -32,13 +40,13 @@ public class DecisionService {
 
 	// Simple CRUD methods
 
-	public Decision create() {
+	public Decision create(int applicationId) {
 		Decision res = new Decision();
 
 		Boolean accept = false;
 		Date moment = new Date(System.currentTimeMillis() - 1000);
 
-		Application application = new Application();
+		Application application = this.applicationService.findOne(applicationId);
 
 		res.setAccept(accept);
 		res.setMoment(moment);
@@ -73,6 +81,39 @@ public class DecisionService {
 		Assert.isTrue(decision.getId() != 0);
 		Assert.isTrue(decisionRepository.exists(decision.getId()));
 		decisionRepository.delete(decision);
+	}
+
+	public DecisionForm construct(Decision decision) {
+		Assert.notNull(decision);
+		DecisionForm res = new DecisionForm();
+		
+		res.setId(decision.getId());
+		res.setAccepted(decision.getAccept());
+		res.setComment(decision.getComment());
+		res.setApplicationId(decision.getApplication().getId());
+		
+		return res;
+	}
+	
+	public Decision reconstruct(DecisionForm decisionForm,
+			BindingResult binding){
+		Assert.notNull(decisionForm);
+		Application application = this.applicationService.findOne(decisionForm.getApplicationId());
+		Decision res;
+		
+		if(decisionForm.getId()!=0)
+			res = this.findOne(decisionForm.getId());
+		else
+			res = this.create(application.getId());
+		
+		res.setAccept(decisionForm.isAccepted());
+		res.setComment(decisionForm.getComment());
+		res.setApplication(application);
+		
+		if(binding!=null)
+			this.validator.validate(res,binding);
+		
+		return res;
 	}
 
 }
