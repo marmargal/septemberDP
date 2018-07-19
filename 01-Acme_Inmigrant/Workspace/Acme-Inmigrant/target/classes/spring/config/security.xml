@@ -61,11 +61,22 @@
 		
 								<!-- 		APPLICATION		-->
 		<security:intercept-url pattern="/application/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/application/immigrant/create.do" access="hasRole('IMMIGRANT')" />
 		<security:intercept-url pattern="/application/immigrant/display.do" access="permitAll" /> 
 		
 								<!-- 		APPLICATION		-->
 		<security:intercept-url pattern="/law/administrator/list.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/law/administrator/edit.do" access="hasRole('ADMIN')"  /> 
+	
+								<!-- 		IMMIGRANT		-->
+		<security:intercept-url pattern="/immigrant/register.do" access="isAnonymous()" />
+		
+								<!-- 		OFFICER		-->
+		<security:intercept-url pattern="/officer/register.do" access="isAnonymous()" />
+	
+								<!-- 		OFFICER		-->
+		<security:intercept-url pattern="/terms/list.do" access="permitAll" />
+	
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

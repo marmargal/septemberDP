@@ -14,7 +14,7 @@
 		<put-attribute name="title" value="Listado de laws" />
 		<put-attribute name="body" value="/views/law/list.jsp" />
 	</definition>
-	<definition name="law//administrator/display" extends="master.page">
+	<definition name="law/administrator/display" extends="master.page">
 		<put-attribute name="title" value="Desplegable de laws" />
 		<put-attribute name="body" value="/views/law/display.jsp" />
 	</definition>
