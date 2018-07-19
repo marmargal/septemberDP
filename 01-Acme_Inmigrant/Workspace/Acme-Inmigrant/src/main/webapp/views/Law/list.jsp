@@ -1,40 +1,42 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%--
+ * list.jsp
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ --%>
 
-<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('ADMIN')">
 
 	<display:table pagesize="6" class="displayLaw" keepStatus="true"
 		name="law" requestURI="${requestURI }" id="row">
 
+		<acme:column property="title" code="law.title" />
 
-
-		<spring:message code="law.title" var="titleHeader" />
-		<display:column property="law.title" title="${lawHeader}"
-			sortable="false" />
-
-		<spring:message code="law.text" var="lawHeader" />
-		<display:column property="law.text" title="${textHeader}"
-			sortable="true" />
+		<acme:column property="text" code="law.text" />
 
 		<display:column>
-			<a href="law/administrator/display.do?lawId=${row.id}"><spring:message
-					code="law.display" /></a>
+			<acme:links url="law/administrator/display.do?lawId=${row.id}"
+				code="law.display" />
 		</display:column>
 
 		<display:column>
-			<a href="law/administrator/edit.do?lawId=${row.id}"> <spring:message
-					code="law.edit" />
-			</a>
+			<acme:links url="law/administrator/edit.do?lawId=${row.id}"
+				code="law.edit" />
 		</display:column>
+
+
 
 
 
