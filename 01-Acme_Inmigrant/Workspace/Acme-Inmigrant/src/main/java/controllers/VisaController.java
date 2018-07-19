@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,19 @@ public class VisaController extends AbstractController {
 		visas = this.visaService.searchVisa(criteria);
 
 		res = new ModelAndView("visa/list");
-		res.addObject("visa", visas);
+		res.addObject("visas", visas);
 		res.addObject("requestURI", "visa/list.do");
 		return res;
+	}
+	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Visa> visas = new ArrayList<>();
+		visas = visaService.findAll();
+		result = new ModelAndView("visa/list");
+		result.addObject("requestURI", "visa/list.do");
+		result.addObject("visas", visas);
+		return result;
 	}
 }
