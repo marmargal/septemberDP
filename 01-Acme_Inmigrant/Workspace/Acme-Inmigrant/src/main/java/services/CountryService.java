@@ -9,11 +9,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.CountryRepository;
 import domain.Country;
 import domain.Law;
-import domain.Report;
+import forms.CountryForm;
 
 @Service
 @Transactional
@@ -26,6 +28,9 @@ public class CountryService {
 
 	// Suporting services
 
+	@Autowired
+	private Validator		validator;
+
 	// Constructors
 
 	public CountryService() {
@@ -37,16 +42,8 @@ public class CountryService {
 	public Country create() {
 		Country res = new Country();
 
-		String name = "name";
-		String isoCode = "isoCode";
-		String flag = "flag";
-		String link = "link";
 		List<Law> law = new ArrayList<Law>();
 
-		res.setName(name);
-		res.setIsoCode(isoCode);
-		res.setFlag(flag);
-		res.setLink(link);
 		res.setLaw(law);
 
 		return res;
@@ -91,4 +88,36 @@ public class CountryService {
 		return res;
 	}
 
+	public CountryForm construct(Country country){
+		CountryForm res = new CountryForm();
+		
+		res.setId(country.getId());
+		res.setName(country.getIsoCode());
+		res.setFlag(country.getFlag());
+		res.setLink(country.getLink());
+		
+		return res;
+	}
+	
+	public Country reconstruct(CountryForm countryForm, BindingResult binding){
+		Assert.notNull(countryForm);
+		
+		Country res = new Country();
+
+		if (countryForm.getId() != 0)
+			res = this.findOne(countryForm.getId());
+		else
+			res = this.create();
+		
+		res.setName(countryForm.getName());
+		res.setIsoCode(countryForm.getIsoCode());
+		res.setFlag(countryForm.getFlag());
+		res.setLink(countryForm.getLink());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+	
+	
 }

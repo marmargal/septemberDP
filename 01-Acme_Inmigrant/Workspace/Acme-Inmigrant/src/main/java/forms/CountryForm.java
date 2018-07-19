@@ -1,42 +1,34 @@
-package domain;
-
-import java.util.List;
-
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.validation.Valid;
+package forms;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
-@Entity
-@Access(AccessType.PROPERTY)
-public class Country extends DomainEntity {
-
-	// Constructors
+public class CountryForm {
 	
-	public Country(){
+	public CountryForm(){
 		super();
 	}
-	
-	// Attributes
 
+	private int id;
 	private String name;
 	private String isoCode;
 	private String flag;
 	private String link;
 
+	
+	
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getIsoCode() {
 		return isoCode;
 	}
@@ -46,6 +38,7 @@ public class Country extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getFlag() {
 		return flag;
 	}
@@ -55,6 +48,7 @@ public class Country extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getLink() {
 		return link;
 	}
@@ -62,19 +56,11 @@ public class Country extends DomainEntity {
 	public void setLink(String link) {
 		this.link = link;
 	}
-	
-	// Relationships
-	
-	private List<Law> law;
-
-	@Valid
-	@OneToMany
-	public List<Law> getLaw() {
-		return law;
+	public int getId() {
+		return id;
 	}
-
-	public void setLaw(List<Law> law) {
-		this.law = law;
+	public void setId(int id) {
+		this.id = id;
 	}
-
+	
 }

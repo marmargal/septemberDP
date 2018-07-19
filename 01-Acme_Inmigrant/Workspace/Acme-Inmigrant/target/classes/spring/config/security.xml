@@ -81,7 +81,11 @@
 								<!-- 		OFFICER		-->
 		<security:intercept-url pattern="/terms/list.do" access="permitAll" />
 	
-	
+								<!-- 		COUNTRY		-->
+		<security:intercept-url pattern="/country/list.do" access="permitAll" />
+		<security:intercept-url pattern="/country/display.do" access="permitAll" />
+		<security:intercept-url pattern="/country/administrator/edit.do" access="hasRole('ADMIN')" />
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 
