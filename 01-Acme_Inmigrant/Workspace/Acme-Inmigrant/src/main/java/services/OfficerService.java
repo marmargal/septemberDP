@@ -16,10 +16,9 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Application;
-import domain.Decision;
 import domain.Officer;
-import forms.OfficerForm;
 import domain.Question;
+import forms.ActorForm;
 
 
 @Service
@@ -52,7 +51,6 @@ public class OfficerService {
 		Authority authority = new Authority();
 		
 		Collection<Application> applications = new ArrayList<Application>();
-		Decision decisions = new Decision();
 		Collection<Question> questions = new ArrayList<Question>();
 		
 		authority.setAuthority(Authority.OFFICER);
@@ -60,7 +58,6 @@ public class OfficerService {
 
 		res.setUserAccount(userAccount);
 		res.setApplications(applications);
-		res.setDecision(decisions);
 		res.setQuestions(questions);
 		
 		return res;
@@ -126,25 +123,20 @@ public class OfficerService {
 		Assert.isTrue(authority.contains(res));
 	}	
 	
-	public OfficerForm construct(Officer officer){
-		Assert.notNull(officer);
-		OfficerForm res = new OfficerForm();
+	public ActorForm construct(Officer officer){
+		ActorForm res = new ActorForm();
 		
 		res.setId(officer.getId());
 		res.setName(officer.getName());
 		res.setSurname(officer.getSurname());
 		res.setEmail(officer.getEmail());
-		res.setPhonenumber(officer.getPhoneNumber());
+		res.setPhoneNumber(officer.getPhoneNumber());
 		res.setAddress(officer.getAddress());
-		res.setUsername(officer.getUserAccount().getUsername());
-		res.setPassword(officer.getUserAccount().getPassword());
-		res.setRepeatPassword(officer.getUserAccount().getPassword());
-		res.setTermsAndConditions(true);
 		
 		return res;
 	}
 	
-	public Officer reconstruct(OfficerForm officerForm, BindingResult binding){
+	public Officer reconstruct(ActorForm officerForm, BindingResult binding){
 		Assert.notNull(officerForm);
 		
 		Officer res = new Officer();

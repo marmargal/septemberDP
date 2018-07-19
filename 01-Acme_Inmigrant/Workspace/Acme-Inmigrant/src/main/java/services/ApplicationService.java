@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -15,6 +17,7 @@ import repositories.ApplicationRepository;
 import domain.Application;
 import domain.ContactSection;
 import domain.EducationSection;
+import domain.Immigrant;
 import domain.PersonalSection;
 import domain.Question;
 import domain.SocialSection;
@@ -24,26 +27,30 @@ import domain.WorkSection;
 @Transactional
 public class ApplicationService {
 
-	// Managed repository
+	// Managed repository ------------------------------------------------------
+	
 	@Autowired
 	private ApplicationRepository applicationRepository;
 	
-	// Suporting services
+	// Suporting services ------------------------------------------------------
 	
-	// Constructors
+	@Autowired
+	private ImmigrantService immigrantService;
+	
+	// Constructors ------------------------------------------------------------
 	
 	public ApplicationService(){
 		super();
 	}
 	
-	// Simple CRUD methods
+	// Simple CRUD methods ------------------------------------------------------
 	
 	public Application create(){
+		final Immigrant immigrant = this.immigrantService.findByPrincipal();
+		Assert.notNull(immigrant);
 		Application res;
 		res = new Application();
 		
-		// TODO: Aquí meter futuro método de generar Ticker
-		String ticker = "ticker";
 		Date openedMoment = new Date(System.currentTimeMillis()-1000);
 		Date closedMoment = new Date(System.currentTimeMillis()-10);
 		
@@ -61,12 +68,12 @@ public class ApplicationService {
 		educationSection = new ArrayList<EducationSection>();
 		question = new ArrayList<Question>();
 		
-		res.setTicker(ticker);
+		res.setTicker(this.generatedTicker());
 		res.setOpenedMoment(openedMoment);
 		res.setClosedMoment(closedMoment);
 		
 		res.setPersonalSection(personalSection);
-		res.setContacSection(contactSection);
+		res.setContactSection(contactSection);
 		res.setWorkSection(workSection);
 		res.setSocialSection(socialSection);
 		res.setEducationSection(educationSection);
@@ -92,7 +99,13 @@ public class ApplicationService {
 	
 	public Application save(Application application){
 		Application res;
+		Immigrant immigrant;
+		immigrant = this.immigrantService.findByPrincipal();
+		application.setImmigrant(immigrant);
 		res = applicationRepository.save(application);
+		Collection<Application> immigrantApplications = new ArrayList<Application>();
+		immigrantApplications = immigrant.getApplications();
+		immigrantApplications.add(application);
 		return res;
 	}
 	
@@ -101,5 +114,38 @@ public class ApplicationService {
 		Assert.isTrue(application.getId() != 0);
 		Assert.isTrue(applicationRepository.exists(application.getId()));
 		applicationRepository.delete(application);
+	}
+	
+	// Other business methods ------------------------------------------------------
+	
+	public String generatedTicker() {
+		String ticker;
+		LocalDate date;
+		String letters;
+		String numbers;
+		Random r;
+		
+		letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		numbers = "0123456789";
+		r = new Random();
+		date = new LocalDate();
+		
+		ticker = String.valueOf(date.getYear() % 100 < 10 ? "0" + date.getYear() : date.getYear() % 100) + 
+					String.valueOf(date.getMonthOfYear() < 10 ? "0" + date.getMonthOfYear() : date.getMonthOfYear())
+					+ String.valueOf(date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : date.getDayOfMonth()) + "-";
+		for (int i = 0; i < 4; i++)
+			ticker = ticker + letters.charAt(r.nextInt(letters.length()));
+		for (int i = 0; i < 2; i++)
+			ticker = ticker + numbers.charAt(r.nextInt(numbers.length()));
+		
+		return ticker;
+	}
+	
+	public Collection<Application> getApplicationByImmigrant(int immigrantId){
+		Collection<Application> res;
+		
+		res = this.applicationRepository.findApplicationByImmigrant(immigrantId);
+		
+		return res;
 	}
 }

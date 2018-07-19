@@ -43,12 +43,11 @@ public class DecisionService {
 	public Decision create(int applicationId) {
 		Decision res = new Decision();
 
-		Boolean accept = false;
 		Date moment = new Date(System.currentTimeMillis() - 1000);
 
 		Application application = this.applicationService.findOne(applicationId);
 
-		res.setAccept(accept);
+		res.setAccept(false);
 		res.setMoment(moment);
 		res.setApplication(application);
 

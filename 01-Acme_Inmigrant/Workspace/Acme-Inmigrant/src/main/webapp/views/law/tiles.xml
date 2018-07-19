@@ -11,21 +11,21 @@
 <tiles-definitions>
 
 	<definition name="law/administrator/list" extends="master.page">
-		<put-attribute name="title" value="Listado de laws" />
+		<put-attribute name="title" value="List of laws" />
 		<put-attribute name="body" value="/views/law/list.jsp" />
 	</definition>
-	<definition name="law//administrator/display" extends="master.page">
-		<put-attribute name="title" value="Desplegable de laws" />
+	<definition name="law/administrator/display" extends="master.page">
+		<put-attribute name="title" value="Display of laws" />
 		<put-attribute name="body" value="/views/law/display.jsp" />
 	</definition>
 
 	<definition name="law/administrator/create" extends="master.page">
-		<put-attribute name="title" value="Crear law" />
-		<put-attribute name="body" value="/views/law/edit.jsp" />
+		<put-attribute name="title" value="Create law" />
+		<put-attribute name="body" value="/views/law/create.jsp" />
 	</definition>
 
 	<definition name="law/administrator/edit" extends="master.page">
-		<put-attribute name="title" value="Editar law" />
+		<put-attribute name="title" value="Edit law" />
 		<put-attribute name="body" value="/views/law/edit.jsp" />
 	</definition>
 </tiles-definitions>

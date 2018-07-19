@@ -112,24 +112,24 @@
 	</bean>
 
 	<bean id="userAccount9" class="security.UserAccount">
-		<property name="username" value="supervisor1" />
-		<property name="password" value="d947df684dd40733bef0cd787f8ae4e1" />
+		<property name="username" value="investigator1" />
+		<property name="password" value="038ffd9c1cfccd215fabf99238cf84e2" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="SUPERVISOR" />
+					<property name="authority" value="INVESTIGATOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount10" class="security.UserAccount">
-		<property name="username" value="supervisor2" />
-		<property name="password" value="2a03aa2f503b2db79e38d483f2f612cc" />
+		<property name="username" value="investigator2" />
+		<property name="password" value="bde3c61bc57bc2dc922f0ba43dbaa009" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="SUPERVISOR" />
+					<property name="authority" value="INVESTIGATOR" />
 				</bean>
 			</list>
 		</property>
@@ -452,7 +452,7 @@
 		<property name="officer" ref="officer1" />
 		<property name="immigrant" ref="immigrant1" />
 		<property name="personalSection" ref="personalSection1" />
-		<property name="contacSection">
+		<property name="contactSection">
 			<list>
 			</list>
 		</property>
@@ -484,7 +484,7 @@
 		<property name="officer" ref="officer2" />
 		<property name="immigrant" ref="immigrant2" />
 		<property name="personalSection" ref="personalSection2" />
-		<property name="contacSection">
+		<property name="contactSection">
 			<list>
 			</list>
 		</property>
@@ -516,7 +516,7 @@
 		<property name="officer" ref="officer2" />
 		<property name="immigrant" ref="immigrant3" />
 		<property name="personalSection" ref="personalSection3" />
-		<property name="contacSection">
+		<property name="contactSection">
 			<list>
 			</list>
 		</property>

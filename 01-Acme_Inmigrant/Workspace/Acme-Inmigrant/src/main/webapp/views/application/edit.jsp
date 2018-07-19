@@ -32,14 +32,14 @@
 		<form:hidden path="socialSection" />
 		<form:hidden path="educationSection" />
 		
-		<acme:textbox path="creditcard.holderName" code="application.creditCard.holderName" />
-		<acme:textbox path="creditcard.brandName" code="application.creditCard.brandName" />
-		<acme:textbox path="creditcard.number" code="application.creditCard.number" />
-		<acme:textbox path="creditcard.expirationMonth" code="application.creditCard.expirationMonth" />
-		<acme:textbox path="creditcard.expirationYear" code="application.creditCard.expirationYear" />
-		<acme:textbox path="creditcard.CVV" code="application.creditCard.Cvv" />
+		<acme:textbox path="creditCard.holderName" code="application.creditCard.holderName" />
+		<acme:textbox path="creditCard.brandName" code="application.creditCard.brandName" />
+		<acme:textbox path="creditCard.number" code="application.creditCard.number" />
+		<acme:textbox path="creditCard.expirationMonth" code="application.creditCard.expirationMonth" />
+		<acme:textbox path="creditCard.expirationYear" code="application.creditCard.expirationYear" />
+		<acme:textbox path="creditCard.Cvv" code="application.creditCard.Cvv" />
 
-		<acme:textbox path="personalSection.name" code="application.personalSection.name" />
+		<acme:textbox path="personalSection.names" code="application.personalSection.name" />
 		<acme:textbox path="personalSection.birthPlace" code="application.personalSection.birthPlace" />
 		<acme:date code="application.personalSection.birthDate" path="personalSection.birthDate" placeholder="dd/MM/yyyy"/>
 		<acme:textbox path="personalSection.picture" code="application.personalSection.picture" />

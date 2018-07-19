@@ -1,5 +1,5 @@
 <%--
- * password.tag
+ * checkbox.tag
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -22,14 +22,19 @@
 
 <%-- Attributes --%> 
  
-<%@ attribute name="path" required="true" rtexprvalue="true" %>
-<%@ attribute name="code" required="true" rtexprvalue="true" %>
+<%@ attribute name="path" required="true" %>
+<%@ attribute name="code" required="true" %>
+
+<%@ attribute name="disabled" required="false" %>
+
+<jstl:if test="${disabled == null}">
+	<jstl:set var="disabled" value="false"/>
+</jstl:if>
 
 <%-- Definition --%>
 
 <div>
 	<b><form:label path="${path}"><spring:message code="${code}" />:&nbsp;</form:label></b>
-	<form:password path="${path}"/>
-	<form:errors path="${path}" cssClass="error" />
+	<form:checkbox path="${path}"/>
+	<form:errors path="${path}" cssClass="error"/>
 </div>
-

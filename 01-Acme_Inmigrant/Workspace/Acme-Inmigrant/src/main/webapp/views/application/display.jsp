@@ -26,7 +26,7 @@
 	<display:column property="closedMoment" title="${closedMomentHeader}" sortable="true" />
 	
 	<spring:message code="application.creditCard" var="creditCardHeader" />
-	<display:column property="creditCard" title="${creditCardHeader}" sortable="true" />
+	<display:column property="creditCard.number" title="${creditCardHeader}" sortable="true" />
 
 	<security:authorize access="hasRole('IMMIGRANT')">
 		<spring:message code="application.edit" />
