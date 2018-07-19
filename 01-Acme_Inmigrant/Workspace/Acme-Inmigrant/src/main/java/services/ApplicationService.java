@@ -122,9 +122,11 @@ public class ApplicationService {
 		String ticker;
 		LocalDate date;
 		String letters;
+		String numbers;
 		Random r;
 		
 		letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		numbers = "0123456789";
 		r = new Random();
 		date = new LocalDate();
 		
@@ -133,9 +135,9 @@ public class ApplicationService {
 					+ String.valueOf(date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : date.getDayOfMonth()) + "-";
 		for (int i = 0; i < 4; i++)
 			ticker = ticker + letters.charAt(r.nextInt(letters.length()));
+		for (int i = 0; i < 2; i++)
+			ticker = ticker + numbers.charAt(r.nextInt(numbers.length()));
 		
-		ticker = ticker + "28";
-
 		return ticker;
 	}
 	
