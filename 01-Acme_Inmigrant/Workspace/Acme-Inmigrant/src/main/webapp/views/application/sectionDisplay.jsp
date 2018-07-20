@@ -84,3 +84,42 @@
 			</button>
 		</a>
 </security:authorize>
+
+<spring:message code="application.workSection" var="workSectionHeader" />
+<h1>
+	<jstl:out value="${workSectionHeader}"></jstl:out>
+</h1>
+
+<display:table name="workSection" class="displaytag" id="row">
+
+	<!-- Attributes -->
+	
+	<spring:message code="workSection.nameCompany" var="nameCompanyHeader" />
+	<display:column property="nameCompany" title="${nameCompanyHeader}" sortable="true" />
+
+	<spring:message code="workSection.position" var="position" />
+	<display:column property="position" title="${position}" sortable="true" />
+	
+	<spring:message code="workSection.startDate" var="startDate" />
+	<display:column property="startDate" title="${startDate}" sortable="true" />
+	
+	<spring:message code="workSection.endDate" var="endDate" />
+	<display:column property="endDate" title="${endDate}" sortable="true" />
+	
+	<security:authorize access="hasRole('IMMIGRANT')">
+		<spring:message code="application.edit" />
+		<display:column>
+				<a href="workSection/immigrant/edit.do?workSectionId=${row.id}"> <spring:message code="application.edit" /></a>
+		</display:column>
+	</security:authorize>
+
+</display:table>
+
+<security:authorize access="hasRole('IMMIGRANT')">
+		<a href="contactSection/immigrant/create.do">
+			<button>
+				<spring:message code="application.create.workSection" />
+			</button>
+		</a>
+</security:authorize>
+

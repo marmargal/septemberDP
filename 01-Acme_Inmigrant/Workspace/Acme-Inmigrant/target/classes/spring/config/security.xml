@@ -78,6 +78,10 @@
 		<security:intercept-url pattern="/contactSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
 		<security:intercept-url pattern="/contactSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
 		
+								<!-- 		WORKSECTION		-->
+		<security:intercept-url pattern="/workSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/workSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
+		
 								<!-- 		LAW		-->
 		<security:intercept-url pattern="/law/administrator/list.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/law/administrator/edit.do" access="hasRole('ADMIN')"  /> 
