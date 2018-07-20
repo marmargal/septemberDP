@@ -9,7 +9,7 @@ import domain.Officer;
 @Repository
 public interface OfficerRepository extends JpaRepository<Officer, Integer>{
 
-	@Query("select o from Officer o where o.userAccount.id=?1")
-	Officer findOfficerByUserAccountId(int uA);
+	@Query("select o from Officer o join o.userAccount ua where ua.id=?1")
+	Officer findOfficerByPrincipal(int uA);
 	
 }
