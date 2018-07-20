@@ -78,6 +78,40 @@ public class ApplicationImmigrantController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/sectionDisplay", method = RequestMethod.GET)
+	public ModelAndView sectionDisplay(@RequestParam final int applicationId) {
+		ModelAndView result;
+		Collection<Application> application = new ArrayList<Application>();
+		PersonalSection personalS = new PersonalSection();
+		Collection<ContactSection> contactS = new ArrayList<ContactSection>();
+		Collection<WorkSection> workS = new ArrayList<WorkSection>();
+		Collection<SocialSection> socialS = new ArrayList<SocialSection>();
+		Collection<EducationSection> educationS = new ArrayList<EducationSection>();
+
+		Application applicationS;
+		applicationS = applicationService.findOne(applicationId);
+
+		personalS = applicationS.getPersonalSection();
+		contactS = applicationS.getContactSection();
+		workS = applicationS.getWorkSection();
+		socialS = applicationS.getSocialSection();
+		educationS = applicationS.getEducationSection();
+
+		Immigrant currentImmigrant = immigrantService.findByPrincipal();
+		int currentImmigrantId = currentImmigrant.getId();
+
+		result = new ModelAndView("application/sectionDisplay");
+		result.addObject("currentImmigrantId", currentImmigrantId);
+		result.addObject("personalSection", personalS);
+//		result.addObject("personalSection", contactS);
+//		result.addObject("personalSection", workS);
+//		result.addObject("personalSection", socialS);
+//		result.addObject("personalSection", educationS);
+		result.addObject("requestURI", "application/immigrant/sectionDisplay.do");
+
+		return result;
+	}
 
 	// Editing --------------------------------------------------------------
 

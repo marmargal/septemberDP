@@ -60,6 +60,8 @@ public class PersonalSectionService {
 	}
 
 	public PersonalSection save(PersonalSection personalSection) {
+		final Immigrant immigrant = this.immigrantService.findByPrincipal();
+		Assert.notNull(immigrant);
 		PersonalSection res;
 		res = personalSectionRepository.save(personalSection);
 		return res;
