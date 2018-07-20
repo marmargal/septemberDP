@@ -49,3 +49,38 @@
 			</button>
 		</a>
 </security:authorize>
+
+<spring:message code="application.contactSection" var="contactSectionHeader" />
+<h1>
+	<jstl:out value="${contactSectionHeader}"></jstl:out>
+</h1>
+
+<display:table name="contactSection" class="displaytag" id="row">
+
+	<!-- Attributes -->
+	
+	<spring:message code="contactSection.email" var="emailHeader" />
+	<display:column property="email" title="${emailHeader}" sortable="true" />
+
+	<spring:message code="contactSection.phoneNumber" var="phoneNumberHeader" />
+	<display:column property="phoneNumber" title="${phoneNumberHeader}" sortable="true" />
+	
+	<spring:message code="contactSection.pageNumber" var="pageNumberHeader" />
+	<display:column property="pageNumber" title="${pageNumberHeader}" sortable="true" />
+	
+	<security:authorize access="hasRole('IMMIGRANT')">
+		<spring:message code="application.edit" />
+		<display:column>
+				<a href="contactSection/immigrant/edit.do?contactSectionId=${row.id}"> <spring:message code="application.edit" /></a>
+		</display:column>
+	</security:authorize>
+
+</display:table>
+
+<security:authorize access="hasRole('IMMIGRANT')">
+		<a href="contactSection/immigrant/create.do">
+			<button>
+				<spring:message code="application.create.contactSection" />
+			</button>
+		</a>
+</security:authorize>
