@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Past;
 
@@ -49,6 +50,7 @@ public class Answer extends DomainEntity {
 	// Relationships
 	
 	private Immigrant immigrant;
+	private Question question;
 
 	@Valid
 	@ManyToOne
@@ -58,6 +60,16 @@ public class Answer extends DomainEntity {
 
 	public void setImmigrant(Immigrant immigrant) {
 		this.immigrant = immigrant;
+	}
+
+	@Valid
+	@OneToOne(optional=false)
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 	
 	

@@ -294,6 +294,7 @@
 		<property name="decision" ref="decision1" />
 		<property name="questions">
 			<list>
+				<ref bean="question1" />
 			</list>
 		</property>
 	</bean>
@@ -470,6 +471,7 @@
 		</property>
 		<property name="question">
 			<list>
+				<ref bean="question1" />
 			</list>
 		</property>
 	</bean>
@@ -538,10 +540,14 @@
 		</property>
 	</bean>
 
-
-
-
-
-
+	<!-- Question -->
+	<!-- Question 1 -->
+	<bean id="question1" class="domain.Question">
+		<property name="text" value="¿De donde eres?" />
+		<property name="statement" value="false" />
+		<property name="moment" value="11/12/2010" />
+		<property name="application" ref="application1" />
+		<property name="officer" ref="officer1" />
+	</bean>
 
 </beans>

@@ -43,6 +43,8 @@
 		<bean class="converters.StringToUserAccountConverter" />
 		<bean class="converters.LawToStringConverter" />
 		<bean class="converters.StringToLawConverter" />
+		<bean class="converters.StringToQuestionConverter" />
+		<bean class="converters.QuestionToStringConverter" />
 
 	</util:list>
 

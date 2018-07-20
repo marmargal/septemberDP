@@ -87,6 +87,10 @@
 		<security:intercept-url pattern="/country/display.do" access="permitAll" />
 		<security:intercept-url pattern="/country/administrator/**" access="hasRole('ADMIN')" />
 		
+								<!-- 		QUESTION		-->
+		<security:intercept-url pattern="/question/officer/**" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/question/immigrant/**" access="hasRole('IMMIGRANT')" />
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

@@ -69,8 +69,6 @@ public class CountryAdministratorController extends AbstractController{
 
 				res = new ModelAndView("redirect:/country/list.do");
 			}catch (final Throwable oops) {
-				System.out.println(oops);
-				System.out.println(binding);
 				res = this.createEditModelAndView(countryForm, "country.commit.error");
 			}
 		
