@@ -16,18 +16,18 @@ public interface AdministratorRepository extends
 	@Query("select a from Administrator a where a.userAccount.id=?1")
 	Administrator findAdministratorByUserAccountId(int userAccountId);
 
-//	// The average, the minimum, the maximum, and the standard deviation of the
-//	// number of applications per user.
-//	@Query("select avg(i.applications.size),min(i.applications.size), max(i.applications.size), stddev(i.applications.size) from Immigrant i")
-//	Collection<Double> dataApplicationPerImmigrant();
-//
-//	/*
-//	 * The average, the minimum, the maximum, and the standard deviation of the
-//	 * number of applications per officer.
-//	 */
-//	@Query("select avg(o.applications.size),min(o.applications.size), max(o.applications.size), stddev(o.applications.size) from Immigrant o")
-//	Collection<Double> dataApplicationsPerOfficer();
-//
+	// The average, the minimum, the maximum, and the standard deviation of the
+	// number of applications per user.
+	@Query("select avg(i.applications.size),min(i.applications.size), max(i.applications.size), stddev(i.applications.size) from Immigrant i")
+	Collection<Double> dataApplicationPerImmigrant();
+
+	/*
+	 * The average, the minimum, the maximum, and the standard deviation of the
+	 * number of applications per officer.
+	 */
+	@Query("select avg(o.applications.size),min(o.applications.size), max(o.applications.size), stddev(o.applications.size) from Immigrant o")
+	Collection<Double> dataApplicationsPerOfficer();
+
 //	/*
 //	 * The average, the minimum, the maximum, and the standard deviation of the
 //	 * price of the visas
@@ -39,7 +39,8 @@ public interface AdministratorRepository extends
 //	 * The average, the minimum, the maximum, and the standard deviation of the
 //	 * number immigrants that are investigated per investigator.
 //	 */
-//	@Query("select avg(r.immigrant),min(i.immigrant), max(i.immigrant), stddev(i.immigrant) from Investigator i join i.reports r")
+	//select count(*) from (select DISTINCT(i.immigrant) from Investigator r join r.reports i);
+//	@Query("select avg(r.reports.size),min(r.reports.size), max(r.reports.size), stddev(r.reports.size) from Investigator r join r.reports i group by i.immigrant;")
 //	Collection<Double> dataImmigrantsInvestigated();
 //
 //	/*
@@ -53,17 +54,17 @@ public interface AdministratorRepository extends
 //	 * The minimum, the maximum, the average, and the standard deviation of the
 //	 * number of laws per country.
 //	 */
-//	@Query("select avg(c.laws.size),min(c.laws.size), max(c.laws.size), stddev(c.laws.size) from Country c")
-//	Collection<Double> dataLawsPerCountry();
-//
+	@Query("select avg(c.laws.size),min(c.laws.size), max(c.laws.size), stddev(c.laws.size) from Country c")
+	Collection<Double> dataLawsPerCountry();
+
 //	/*
 //	 * The minimum, the maximum, the average, and the standard deviation of the
 //	 * number of requirements per visa.
 //	 */
-//	@Query("select  avg(l.requirement.size),min(l.requirement.size), max(l.requirement.size), "
-//			+ "stddev(l.requirement.size) from Country c join c.laws l")
-//	Collection<Double> dataRequirementsPerVisa();
-//
+	@Query("select  avg(l.requirement.size),min(l.requirement.size), max(l.requirement.size), "
+			+ "stddev(l.requirement.size) from Country c join c.law l")
+	Collection<Double> dataRequirementsPerVisa();
+
 //	/*
 //	 * A chart with the average, the minimum, the maximum, and the standard
 //	 * de-viation of the time that elapses since an application is closed till
