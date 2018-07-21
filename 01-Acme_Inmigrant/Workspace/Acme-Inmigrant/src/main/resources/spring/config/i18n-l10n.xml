@@ -37,6 +37,7 @@
 		<value>/views/law/messages</value>
 		<value>/views/country/messages</value>
 		<value>/views/question/messages</value>
+		<value>/views/answer/messages</value>
 
 	</util:list>
 </beans>

@@ -91,6 +91,10 @@
 		<security:intercept-url pattern="/question/officer/**" access="hasRole('OFFICER')" />
 		<security:intercept-url pattern="/question/immigrant/**" access="hasRole('IMMIGRANT')" />
 		
+								<!-- 		QUESTION		-->
+		<security:intercept-url pattern="/answer/immigrant/**" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/answer/**" access="hasAnyRole('OFFICER', 'IMMIGRANT')" />
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

@@ -45,6 +45,8 @@
 		<bean class="converters.StringToLawConverter" />
 		<bean class="converters.StringToQuestionConverter" />
 		<bean class="converters.QuestionToStringConverter" />
+		<bean class="converters.StringToAnswerConverter" />
+		<bean class="converters.AnswerToStringConverter" />
 
 	</util:list>
 

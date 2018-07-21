@@ -14,9 +14,31 @@
 	name="question" requestURI="${requestURI }" id="row">
 	
 	<security:authorize access="hasRole('IMMIGRANT')">
-		<display:column>
-			<a href="question/immigrant/edit.do?questionId=${row.id }"><spring:message code="question.answer"/></a>
-		</display:column>
+		
+		<jstl:if test="${row.statement == false}">
+			<spring:message code="question.answer" var="answerHeader" />
+			<display:column title="${answerHeader}">
+				<p>-</p>
+			</display:column>
+		
+			<spring:message code="question.create" var="createHeader" />
+			<display:column title="${createHeader}">
+				<a href="answer/immigrant/edit.do?questionId=${row.id }"><spring:message code="answer.create"/></a>
+			</display:column>
+		</jstl:if>
+		
+		<jstl:if test="${row.statement == true}">
+			<spring:message code="question.answer" var="answerHeader" />
+			<display:column title="${answerHeader}">
+				<a href="answer/list.do?questionId=${row.id }"><spring:message code="question.answer"/></a>
+			</display:column>
+		
+			<spring:message code="question.create" var="createHeader" />
+			<display:column title="${createHeader}">
+				<p>-</p>
+			</display:column>
+		</jstl:if>
+
 	</security:authorize>
 	
 	<spring:message code="question.text" var="nameHeader" />

@@ -233,6 +233,7 @@
 		</property>
 		<property name="answers">
 			<list>
+				<ref bean="answer1" />
 			</list>
 		</property>
 	</bean>
@@ -544,10 +545,19 @@
 	<!-- Question 1 -->
 	<bean id="question1" class="domain.Question">
 		<property name="text" value="¿De donde eres?" />
-		<property name="statement" value="false" />
+		<property name="statement" value="true" />
 		<property name="moment" value="11/12/2010" />
 		<property name="application" ref="application1" />
 		<property name="officer" ref="officer1" />
+	</bean>
+	
+	<!-- Answer -->
+	<!-- Answer 1 -->
+	<bean id="answer1" class="domain.Answer">
+		<property name="reply" value="De ESPAÑA!!" />
+		<property name="moment" value="11/12/2010" />
+		<property name="immigrant" ref="immigrant1" />
+		<property name="question" ref="question1" />
 	</bean>
 
 </beans>
