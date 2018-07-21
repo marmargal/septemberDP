@@ -40,6 +40,7 @@
 		<value>/views/contactSection/messages</value>
 		<value>/views/workSection/messages</value>
 		<value>/views/socialSection/messages</value>
+		<value>/views/educationSection/messages</value>
 
 	</util:list>
 </beans>

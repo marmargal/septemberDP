@@ -86,6 +86,10 @@
 		<security:intercept-url pattern="/socialSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
 		<security:intercept-url pattern="/socialSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
 		
+								<!-- 		EDUCATIONSECTION		-->
+		<security:intercept-url pattern="/educationSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/educationSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
+		
 								<!-- 		LAW		-->
 		<security:intercept-url pattern="/law/administrator/list.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/law/administrator/edit.do" access="hasRole('ADMIN')"  /> 

@@ -106,7 +106,7 @@ public class ApplicationImmigrantController extends AbstractController {
 		result.addObject("contactSection", contactS);
 		result.addObject("workSection", workS);
 		result.addObject("socialSection", socialS);
-//		result.addObject("educationSection", educationS);
+		result.addObject("educationSection", educationS);
 		result.addObject("requestURI", "application/immigrant/sectionDisplay.do");
 
 		return result;

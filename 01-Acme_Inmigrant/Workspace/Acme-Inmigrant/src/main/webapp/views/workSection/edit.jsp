@@ -25,8 +25,8 @@
 
 		<acme:textbox path="nameCompany" code="workSection.nameCompany" />
 		<acme:textbox path="position" code="workSection.position" />
-		<acme:date code="workSection.startDate" path="workSection.startDate" placeholder="dd/MM/yyyy"/>
-		<acme:date code="workSection.endDate" path="workSection.endDate" placeholder="dd/MM/yyyy"/>
+		<acme:date code="workSection.startDate" path="startDate" placeholder="dd/MM/yyyy"/>
+		<acme:date code="workSection.endDate" path="endDate" placeholder="dd/MM/yyyy"/>
 		
 		<acme:submit name="save" code="workSection.submit" />
 		<acme:cancel url="application/display.do" code="workSection.cancel" />

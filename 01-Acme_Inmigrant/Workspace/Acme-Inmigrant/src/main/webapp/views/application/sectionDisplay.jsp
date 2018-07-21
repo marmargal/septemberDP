@@ -157,3 +157,41 @@
 			</button>
 		</a>
 </security:authorize>
+
+<spring:message code="application.educationSection" var="educationSection" />
+<h1>
+	<jstl:out value="${educationSection}"></jstl:out>
+</h1>
+
+<display:table name="educationSection" class="displaytag" id="row">
+
+	<!-- Attributes -->
+	
+	<spring:message code="educationSection.nameDegree" var="nameDegree" />
+	<display:column property="nameDegree" title="${nameDegree}" sortable="true" />
+
+	<spring:message code="educationSection.institution" var="institution" />
+	<display:column property="institution" title="${institution}" sortable="true" />
+	
+	<spring:message code="educationSection.dateAwarded" var="dateAwarded" />
+	<display:column property="dateAwarded" title="${dateAwarded}" sortable="true" />
+	
+	<spring:message code="educationSection.level" var="level" />
+	<display:column property="level" title="${level}" sortable="true" />
+	
+	<security:authorize access="hasRole('IMMIGRANT')">
+		<spring:message code="application.edit" />
+		<display:column>
+				<a href="educationSection/immigrant/edit.do?educationSectionId=${row.id}"> <spring:message code="application.edit" /></a>
+		</display:column>
+	</security:authorize>
+
+</display:table>
+
+<security:authorize access="hasRole('IMMIGRANT')">
+		<a href="educationSection/immigrant/create.do">
+			<button>
+				<spring:message code="application.create.educationSection" />
+			</button>
+		</a>
+</security:authorize>
