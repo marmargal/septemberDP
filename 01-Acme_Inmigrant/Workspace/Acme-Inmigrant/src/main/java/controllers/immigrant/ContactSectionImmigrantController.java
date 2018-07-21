@@ -58,9 +58,6 @@ public class ContactSectionImmigrantController extends AbstractController {
 			BindingResult binding) {
 		ModelAndView res;
 		
-		System.out.println(binding.getFieldError());
-		System.out.println(binding.getFieldErrors());
-		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(contactSection,
 					"contactSection.params.error");
