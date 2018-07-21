@@ -20,6 +20,9 @@
 
 <form:form action="${requestURI }" modelAttribute="reportForm">
 	
+	<form:hidden path="id"/>
+	<form:hidden path="immigrantId"/>
+	
 	<acme:textarea code="report.text" path="text"/>
 	<br/>
 	

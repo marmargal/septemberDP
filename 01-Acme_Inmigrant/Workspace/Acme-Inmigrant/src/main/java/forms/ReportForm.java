@@ -21,7 +21,7 @@ public class ReportForm {
 	private int id;
 	private String text;
 	private String picture;
-	private Immigrant immigrant;
+	private int immigrantId;
 	
 	public int getId() {
 		return id;
@@ -48,14 +48,10 @@ public class ReportForm {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	
-	@Valid
-	@NotNull
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public Immigrant getImmigrant() {
-		return immigrant;
+	public int getImmigrantId() {
+		return immigrantId;
 	}
-	public void setImmigrant(Immigrant immigrant) {
-		this.immigrant = immigrant;
+	public void setImmigrantId(int immigrantId) {
+		this.immigrantId = immigrantId;
 	}
 }
