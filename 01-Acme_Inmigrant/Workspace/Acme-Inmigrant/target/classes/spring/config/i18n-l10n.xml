@@ -38,6 +38,11 @@
 		<value>/views/country/messages</value>
 		<value>/views/question/messages</value>
 		<value>/views/answer/messages</value>
+		<value>/views/personalSection/messages</value>
+		<value>/views/contactSection/messages</value>
+		<value>/views/workSection/messages</value>
+		<value>/views/socialSection/messages</value>
+		<value>/views/educationSection/messages</value>
 
 	</util:list>
 </beans>

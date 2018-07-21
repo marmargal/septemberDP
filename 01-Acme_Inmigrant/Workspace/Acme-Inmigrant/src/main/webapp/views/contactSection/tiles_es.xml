@@ -13,19 +13,17 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+      
 <tiles-definitions>
 
-	<definition name="master.page" template="/views/master-page/layout.jsp">
-		<put-attribute name="title" value="" />
-		<put-attribute name="header" value="/views/master-page/header.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/views/master-page/footer.jsp" />
+	<definition name="contactSection/immigrant/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar contactos" />
+		<put-attribute name="body" value="/views/contactSection/edit.jsp" />
 	</definition>
 	
-	<definition name="immigrant/officer/list" extends="master.page">
-		<put-attribute name="title" value="Lista de inmigrantes" />
-		<put-attribute name="body" value="/views/immigrant/list.jsp" />
+	<definition name="contactSection/immigrant/create" extends="master.page">	
+		<put-attribute name="title" value="Crear ontactos" />
+		<put-attribute name="body" value="/views/contactSection/edit.jsp" />
 	</definition>
-
+	
 </tiles-definitions>

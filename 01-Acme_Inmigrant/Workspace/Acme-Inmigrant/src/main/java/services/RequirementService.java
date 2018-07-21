@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.RequirementRepository;
-import domain.Law;
 import domain.Requirement;
 
 @Service
