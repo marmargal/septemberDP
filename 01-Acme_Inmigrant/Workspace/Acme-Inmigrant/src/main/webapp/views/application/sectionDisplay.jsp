@@ -116,10 +116,44 @@
 </display:table>
 
 <security:authorize access="hasRole('IMMIGRANT')">
-		<a href="contactSection/immigrant/create.do">
+		<a href="workSection/immigrant/create.do">
 			<button>
 				<spring:message code="application.create.workSection" />
 			</button>
 		</a>
 </security:authorize>
 
+<spring:message code="application.socialSection" var="socialSection" />
+<h1>
+	<jstl:out value="${socialSection}"></jstl:out>
+</h1>
+
+<display:table name="socialSection" class="displaytag" id="row">
+
+	<!-- Attributes -->
+	
+	<spring:message code="socialSection.nickName" var="nickName" />
+	<display:column property="nickName" title="${nickName}" sortable="true" />
+
+	<spring:message code="socialSection.socialNetwork" var="socialNetwork" />
+	<display:column property="socialNetwork" title="${socialNetwork}" sortable="true" />
+	
+	<spring:message code="socialSection.profileLink" var="profileLink" />
+	<display:column property="profileLink" title="${profileLink}" sortable="true" />
+	
+	<security:authorize access="hasRole('IMMIGRANT')">
+		<spring:message code="application.edit" />
+		<display:column>
+				<a href="socialSection/immigrant/edit.do?socialSectionId=${row.id}"> <spring:message code="application.edit" /></a>
+		</display:column>
+	</security:authorize>
+
+</display:table>
+
+<security:authorize access="hasRole('IMMIGRANT')">
+		<a href="socialSection/immigrant/create.do">
+			<button>
+				<spring:message code="application.create.socialSection" />
+			</button>
+		</a>
+</security:authorize>

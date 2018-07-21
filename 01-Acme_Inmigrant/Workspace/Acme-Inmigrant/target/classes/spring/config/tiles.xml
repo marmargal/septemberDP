@@ -32,6 +32,7 @@
 		<value>/views/personalSection/tiles.xml</value>
 		<value>/views/contactSection/tiles.xml</value>
 		<value>/views/workSection/tiles.xml</value>
+		<value>/views/socialSection/tiles.xml</value>
 
 	</util:list>
 </beans>
