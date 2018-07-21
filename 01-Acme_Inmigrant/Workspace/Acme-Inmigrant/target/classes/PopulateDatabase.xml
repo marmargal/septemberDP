@@ -296,6 +296,7 @@
 		<property name="questions">
 			<list>
 				<ref bean="question1" />
+				<ref bean="question2" />
 			</list>
 		</property>
 	</bean>
@@ -473,6 +474,7 @@
 		<property name="question">
 			<list>
 				<ref bean="question1" />
+				<ref bean="question2" />
 			</list>
 		</property>
 	</bean>
@@ -544,18 +546,27 @@
 	<!-- Question -->
 	<!-- Question 1 -->
 	<bean id="question1" class="domain.Question">
-		<property name="text" value="¿De donde eres?" />
+		<property name="text" value="¿De dónde eres?" />
 		<property name="statement" value="true" />
-		<property name="moment" value="11/12/2010" />
+		<property name="moment" value="11/12/2010 09:18" />
 		<property name="application" ref="application1" />
 		<property name="officer" ref="officer1" />
+	</bean>
+	
+	<!-- Question 2 -->
+	<bean id="question2" class="domain.Question">
+		<property name="text" value="¿A dónde vas?" />
+		<property name="statement" value="false" />
+		<property name="moment" value="09/11/2013 10:15" />
+		<property name="application" ref="application1" />
+		<property name="officer" ref="officer2" />
 	</bean>
 	
 	<!-- Answer -->
 	<!-- Answer 1 -->
 	<bean id="answer1" class="domain.Answer">
 		<property name="reply" value="De ESPAÑA!!" />
-		<property name="moment" value="11/12/2010" />
+		<property name="moment" value="11/12/2010 19:45" />
 		<property name="immigrant" ref="immigrant1" />
 		<property name="question" ref="question1" />
 	</bean>

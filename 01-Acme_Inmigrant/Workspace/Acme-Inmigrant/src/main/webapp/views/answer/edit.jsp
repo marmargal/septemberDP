@@ -20,6 +20,6 @@
 	<br/>
 	
 	<acme:submit name="save" code="answer.save"/>
-	<acme:cancel url="answer/list.do?questionId=${questionId }" code="answer.cancel"/>
+	<acme:cancel url="" code="answer.cancel"/>
 	
 </form:form>

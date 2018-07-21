@@ -22,3 +22,7 @@
 
 </display:table>
 
+<security:authorize access="hasRole('OFFICER')">
+	<acme:cancel url="question/officer/list.do" code="question.cancel"/>
+</security:authorize>
+

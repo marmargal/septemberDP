@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
+import services.QuestionService;
 import controllers.AbstractController;
 import domain.Application;
 import domain.Question;
@@ -22,6 +23,9 @@ public class QuestionImmigrantController extends AbstractController {
 	
 	@Autowired
 	private ApplicationService applicatioService;
+	
+	@Autowired
+	private QuestionService questionService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -34,12 +38,18 @@ public class QuestionImmigrantController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam int applicationId) {
 		ModelAndView result;
-		Application application = this.applicatioService.findOne(applicationId);
-		Collection<Question> questions = application.getQuestion();
+		try{
+			this.questionService.checkAplicationNotApply(applicationId);
+			Application application = this.applicatioService.findOne(applicationId);
+			Collection<Question> questions = application.getQuestion();
+			
+			result = new ModelAndView("question/list");
+			result.addObject("question", questions);
+			result.addObject("requestURI", "question/immigrant/list.do");
+		}catch (Throwable oops) {
+			result = new ModelAndView("redirect:../../");
+		}
 		
-		result = new ModelAndView("question/list");
-		result.addObject("question", questions);
-		result.addObject("requestURI", "question/immigrant/list.do");
 		
 		return result;
 	}

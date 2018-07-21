@@ -76,6 +76,7 @@ public class AnswerService {
 
 	public Answer save(Answer answer) {
 		this.immmigrantService.checkAuthority();
+		this.questionService.checkAplicationNotApply(answer.getQuestion().getApplication().getId());
 		Answer res;
 		Question question = answer.getQuestion();
 		

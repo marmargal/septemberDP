@@ -55,6 +55,7 @@
 					<li><a href="immigrant/register.do"><spring:message code="master.page.register.assignApplication" /></a></li>
 				</ul>
 			</li>
+			<li><a href="question/officer/list.do"><spring:message code="master.page.questions" /></a></li>
 			<li><a href="/report/display.do"><spring:message code="master.page.reports" /></a></li>
 		</security:authorize>
 		

@@ -13,6 +13,7 @@ import org.springframework.validation.Validator;
 
 import repositories.QuestionRepository;
 import domain.Application;
+import domain.Immigrant;
 import domain.Officer;
 import domain.Question;
 import forms.QuestionForm;
@@ -33,6 +34,9 @@ public class QuestionService {
 	
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
+	private ImmigrantService immigrantService;
 	
 	@Autowired
 	private Validator		validator;
@@ -139,6 +143,13 @@ public class QuestionService {
 			res = false;
 		}
 		return res;
+	}
+
+	public void checkAplicationNotApply(int applicationId) {
+		Application application = this.applicationService.findOne(applicationId);
+		Immigrant immigrant = this.immigrantService.findByPrincipal();
+		Collection<Application> applications = immigrant.getApplications();
+		Assert.isTrue(applications.contains(application));
 	}
 
 }

@@ -13,33 +13,20 @@
 <display:table pagesize="6" class="displaycomment" keepStatus="true"
 	name="question" requestURI="${requestURI }" id="row">
 	
-	<security:authorize access="hasRole('IMMIGRANT')">
-		
+	<spring:message code="question.answer" var="answerHeader" />
+	<display:column title="${answerHeader}">	
 		<jstl:if test="${row.statement == false}">
-			<spring:message code="question.answer" var="answerHeader" />
-			<display:column title="${answerHeader}">
-				<p>-</p>
-			</display:column>
-		
-			<spring:message code="question.create" var="createHeader" />
-			<display:column title="${createHeader}">
+			<security:authorize access="hasRole('IMMIGRANT')">
 				<a href="answer/immigrant/edit.do?questionId=${row.id }"><spring:message code="answer.create"/></a>
-			</display:column>
+			</security:authorize>
 		</jstl:if>
-		
+	
 		<jstl:if test="${row.statement == true}">
-			<spring:message code="question.answer" var="answerHeader" />
-			<display:column title="${answerHeader}">
-				<a href="answer/list.do?questionId=${row.id }"><spring:message code="question.answer"/></a>
-			</display:column>
-		
-			<spring:message code="question.create" var="createHeader" />
-			<display:column title="${createHeader}">
-				<p>-</p>
-			</display:column>
+			<a href="answer/list.do?questionId=${row.id }"><spring:message code="question.answer"/></a>
 		</jstl:if>
 
-	</security:authorize>
+	</display:column>
+	
 	
 	<spring:message code="question.text" var="nameHeader" />
 	<display:column property="text" title="${nameHeader}" sortable="true" />
