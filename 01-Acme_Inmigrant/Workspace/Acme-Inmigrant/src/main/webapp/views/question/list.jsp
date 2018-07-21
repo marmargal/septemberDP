@@ -26,7 +26,8 @@
 	<display:column property="statement" title="${statementHeader}" sortable="true" />
 
 	<spring:message code="question.moment" var="momentHeader" />
-	<display:column property="moment" title="${momentHeader}" sortable="true" />
+	<spring:message var="formatDate" code="question.format.date"/>
+	<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
 
 </display:table>
 

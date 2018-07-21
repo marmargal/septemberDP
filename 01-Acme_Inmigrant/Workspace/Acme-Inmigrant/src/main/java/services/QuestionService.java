@@ -79,6 +79,7 @@ public class QuestionService {
 	}
 
 	public Question save(Question question) {
+		Assert.isTrue(checkCreateQuestion(question.getApplication().getId()));
 		Question res;
 		
 		res = questionRepository.save(question);
@@ -117,6 +118,26 @@ public class QuestionService {
 
 		this.validator.validate(res, binding);
 
+		return res;
+	}
+	
+	public Application findApplicationSelfAsign(){
+		Officer officer = this.officerService.findByPrincipal();
+		Application application = new Application();
+		
+		application = this.questionRepository.findApplicationSelfAsign(officer.getId());
+		
+		return application;
+	}
+	
+	
+	private boolean checkCreateQuestion(int applicationId ){
+		Boolean res = true;
+		Application application;
+		application = findApplicationSelfAsign();
+		if(applicationId != application.getId()){
+			res = false;
+		}
 		return res;
 	}
 

@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.OfficerService;
 import services.QuestionService;
 import controllers.AbstractController;
 import domain.Application;
-import domain.Decision;
-import domain.Officer;
 import domain.Question;
 import forms.QuestionForm;
 
@@ -30,8 +27,8 @@ public class QuestionOfficerController extends AbstractController{
 	
 	// Supporting services
 	
-	@Autowired
-	private OfficerService officerService;
+//	@Autowired
+//	private OfficerService officerService;
 
 	// Constructors
 	
@@ -43,16 +40,11 @@ public class QuestionOfficerController extends AbstractController{
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView list(){
 		ModelAndView res;
-		Officer officer = new Officer();
-		Decision decision = new Decision();
-		Application application = new Application();
+		
+		Application application;
 		Collection<Question> questions = new ArrayList<Question>();
 		
-		officer = this.officerService.findByPrincipal();
-		decision = officer.getDecision();
-		if(decision.getAccept() == true){
-			application = decision.getApplication();
-		}
+		application = this.questionService.findApplicationSelfAsign();
 		
 		questions = application.getQuestion();
 		
@@ -98,10 +90,6 @@ public class QuestionOfficerController extends AbstractController{
 		
 		return res;
 	}
-	
-	
-	
-	
 	
 	protected ModelAndView createEditModelAndView(final QuestionForm questionForm) {
 		ModelAndView res;
