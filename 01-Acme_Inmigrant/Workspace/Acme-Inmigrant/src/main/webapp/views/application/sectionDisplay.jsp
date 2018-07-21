@@ -78,7 +78,7 @@
 </display:table>
 
 <security:authorize access="hasRole('IMMIGRANT')">
-		<a href="contactSection/immigrant/create.do">
+		<a href="contactSection/immigrant/create.do?applicationId=${applicationId}">
 			<button>
 				<spring:message code="application.create.contactSection" />
 			</button>
