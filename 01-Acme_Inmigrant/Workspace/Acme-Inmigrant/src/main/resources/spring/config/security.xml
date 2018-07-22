@@ -82,6 +82,14 @@
 		<security:intercept-url pattern="/workSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
 		<security:intercept-url pattern="/workSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
 		
+								<!-- 		SOCIALSECTION		-->
+		<security:intercept-url pattern="/socialSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/socialSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
+		
+								<!-- 		EDUCATIONSECTION		-->
+		<security:intercept-url pattern="/educationSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/educationSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
+		
 								<!-- 		LAW		-->
 		<security:intercept-url pattern="/law/administrator/list.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/law/administrator/edit.do" access="hasRole('ADMIN')"  /> 
@@ -91,6 +99,7 @@
 		
 								<!-- 		OFFICER		-->
 		<security:intercept-url pattern="/officer/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/immigrant/officer/list.do" access="hasRole('OFFICER')" />
 	
 								<!-- 		OFFICER		-->
 		<security:intercept-url pattern="/terms/list.do" access="permitAll" />
@@ -99,6 +108,14 @@
 		<security:intercept-url pattern="/country/list.do" access="permitAll" />
 		<security:intercept-url pattern="/country/display.do" access="permitAll" />
 		<security:intercept-url pattern="/country/administrator/**" access="hasRole('ADMIN')" />
+		
+								<!-- 		QUESTION		-->
+		<security:intercept-url pattern="/question/officer/**" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/question/immigrant/**" access="hasRole('IMMIGRANT')" />
+		
+								<!-- 		QUESTION		-->
+		<security:intercept-url pattern="/answer/immigrant/**" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/answer/**" access="hasAnyRole('OFFICER', 'IMMIGRANT')" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

@@ -82,7 +82,6 @@ public class ApplicationImmigrantController extends AbstractController {
 	@RequestMapping(value = "/sectionDisplay", method = RequestMethod.GET)
 	public ModelAndView sectionDisplay(@RequestParam final int applicationId) {
 		ModelAndView result;
-		Collection<Application> application = new ArrayList<Application>();
 		PersonalSection personalS = new PersonalSection();
 		Collection<ContactSection> contactS = new ArrayList<ContactSection>();
 		Collection<WorkSection> workS = new ArrayList<WorkSection>();
@@ -106,8 +105,9 @@ public class ApplicationImmigrantController extends AbstractController {
 		result.addObject("personalSection", personalS);
 		result.addObject("contactSection", contactS);
 		result.addObject("workSection", workS);
-//		result.addObject("socialSection", socialS);
-//		result.addObject("educationSection", educationS);
+		result.addObject("socialSection", socialS);
+		result.addObject("educationSection", educationS);
+		result.addObject("applicationId", applicationId);
 		result.addObject("requestURI", "application/immigrant/sectionDisplay.do");
 
 		return result;

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.InvestigatorService;
 import services.ReportService;
 import controllers.AbstractController;
 import domain.Investigator;
@@ -23,6 +24,9 @@ public class ReportInvestigatorController extends AbstractController {
 	@Autowired
 	private ReportService reportService;
 	
+	@Autowired
+	private InvestigatorService investigatorService;
+	
 	// Constructors ------------------
 	public ReportInvestigatorController(){
 		super();
@@ -32,10 +36,9 @@ public class ReportInvestigatorController extends AbstractController {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView list(){
 		ModelAndView res;
-		Collection<Report> reports;
-		Investigator investigator = new Investigator();
+		Investigator investigator = this.investigatorService.findByPrincipal();
 		
-		reports = investigator.getReports();
+		Collection<Report> reports = investigator.getReports();
 		
 		res = new ModelAndView("report/list");
 		res.addObject("report",reports);
@@ -45,20 +48,18 @@ public class ReportInvestigatorController extends AbstractController {
 	}
 	
 	// Create
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView create(final int immigrantId) {
 		ModelAndView result;
-		Report report = new Report();
 		ReportForm reportForm = new ReportForm();
 		
-		report = this.reportService.create(immigrantId);
-		reportForm = this.reportService.construct(report);
+		reportForm.setImmigrantId(immigrantId);
 		result = this.createEditModelAndView(reportForm);
 		
 		return result;
 	}
 	
-	@RequestMapping(value="/create",method=RequestMethod.POST, params = "save")
+	@RequestMapping(value="/edit",method=RequestMethod.POST, params = "save")
 	public ModelAndView save( final ReportForm reportForm, final BindingResult binding){
 		
 		ModelAndView res;

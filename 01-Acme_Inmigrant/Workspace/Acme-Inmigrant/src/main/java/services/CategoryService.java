@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 import repositories.CategoryRepository;
 import domain.Category;
-import domain.Law;
 
 @Service
 @Transactional

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ApplicationService;
 import services.ContactSectionService;
 import controllers.AbstractController;
+import domain.Application;
 import domain.ContactSection;
 
 @Controller
@@ -23,6 +25,11 @@ public class ContactSectionImmigrantController extends AbstractController {
 
 	@Autowired
 	private ContactSectionService contactSectionService;
+	
+	// Supporting services --------------------------------------------------
+	
+	@Autowired
+	private ApplicationService applicationService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -50,9 +57,6 @@ public class ContactSectionImmigrantController extends AbstractController {
 	public ModelAndView save(@Valid ContactSection contactSection,
 			BindingResult binding) {
 		ModelAndView res;
-		
-		System.out.println(binding.getFieldError());
-		System.out.println(binding.getFieldErrors());
 		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(contactSection,
@@ -91,11 +95,13 @@ public class ContactSectionImmigrantController extends AbstractController {
 	// Creating ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam final int applicationId) {
 		ModelAndView result;
 		ContactSection a;
-
-		a = this.contactSectionService.create();
+		Application application;
+		
+		application = this.applicationService.findOne(applicationId);
+		a = this.contactSectionService.create(application);
 		result = this.createEditModelAndView(a);
 
 		return result;
