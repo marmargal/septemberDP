@@ -3,6 +3,7 @@ package controllers.officer;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,9 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ImmigrantService;
 import services.OfficerService;
 import controllers.AbstractController;
-import domain.Application;
 import domain.Immigrant;
-import domain.Officer;
 
 @Controller
 @RequestMapping("/immigrant/officer")
@@ -22,10 +21,12 @@ public class ImmigrantController extends AbstractController{
 
 	// Services
 	
+	@Autowired
 	private ImmigrantService immigrantService;
 	
 	// Supporting services
 
+	@Autowired
 	private OfficerService officerService;
 	
 	// Constructors
