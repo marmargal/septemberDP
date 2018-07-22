@@ -21,4 +21,14 @@
 		<put-attribute name="body" value="/views/immigrant/registerImmigrant.jsp" />
 	</definition>
 	
+		<definition name="immigrant/officer/list" extends="master.page">
+		<put-attribute name="title" value="Lista de inmigrantes" />
+		<put-attribute name="body" value="/views/immigrant/list.jsp" />
+	</definition>
+	
+	<definition name="immigrant/investigator/list" extends="master.page">
+		<put-attribute name="title" value="Lista de inmigrantes" />
+		<put-attribute name="body" value="/views/immigrant/listAll.jsp" />
+	</definition>
+	
 </tiles-definitions>

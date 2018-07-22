@@ -61,6 +61,7 @@
 		
 		<security:authorize access="hasRole('INVESTIGATOR')">
 			<li><a href="report/investigator/list.do"><spring:message code="master.page.reports" /></a></li>
+			<li><a href="immigrant/investigator/list.do"><spring:message code="master.page.immigrants" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('ADMIN')">

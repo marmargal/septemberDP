@@ -17,7 +17,7 @@ import domain.Immigrant;
 
 @Controller
 @RequestMapping("/immigrant/officer")
-public class ImmigrantController extends AbstractController{
+public class ImmigrantOfficerController extends AbstractController{
 
 	// Services
 	
@@ -31,7 +31,7 @@ public class ImmigrantController extends AbstractController{
 	
 	// Constructors
 	
-	public ImmigrantController(){
+	public ImmigrantOfficerController(){
 		super();
 	}
 	
@@ -45,11 +45,11 @@ public class ImmigrantController extends AbstractController{
 //		officer = officerService.findByPrincipal();
 		
 //		Collection<Application> applications = new ArrayList<Application>();
-		Collection<Immigrant> all = new ArrayList<Immigrant>();
+		Collection<Immigrant> immigrant = new ArrayList<Immigrant>();
 //		Collection<Immigrant> withApplications = new ArrayList<Immigrant>();
 //		
 //		applications = officer.getApplications();
-		all = immigrantService.findAll();
+		immigrant = immigrantService.findAll();
 
 //		for(Application a: applications){
 //			for(Immigrant i: all){
@@ -60,7 +60,7 @@ public class ImmigrantController extends AbstractController{
 //		}
 		
 		res = new ModelAndView("immigrant/officer/list");
-		res.addObject("immigrant", all);
+		res.addObject("immigrant", immigrant);
 		res.addObject("requestURI", "immigrant/officer/list.do");
 		
 		return res;
