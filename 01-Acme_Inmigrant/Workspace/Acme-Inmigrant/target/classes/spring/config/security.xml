@@ -97,6 +97,7 @@
 								<!-- 		IMMIGRANT		-->
 		<security:intercept-url pattern="/immigrant/register.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/immigrant/officer/list.do" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/immigrant/officer/edit.do" access="hasRole('OFFICER')" />
 		<security:intercept-url pattern="/immigrant/investigator/list.do" access="hasRole('INVESTIGATOR')" />
 		
 								<!-- 		OFFICER		-->

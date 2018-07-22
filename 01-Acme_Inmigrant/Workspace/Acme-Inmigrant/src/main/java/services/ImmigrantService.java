@@ -160,5 +160,9 @@ public class ImmigrantService {
 		
 		return res;
 	}
+	
+	public Collection<Immigrant> findInvestigatedImmigrants(){
+		return this.immigrantRepository.findInvestigatedImmigrants();
+	}
 
 }

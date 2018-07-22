@@ -226,6 +226,7 @@
 		<property name="phoneNumber" value="654565556" />
 		<property name="address" value="C/Margarita nº4" />
 		<property name="userAccount" ref="userAccount4" />
+		<property name="investigated" value="false" />
 		<property name="applications">
 			<list>
 				<ref bean="application1" />
@@ -246,6 +247,7 @@
 		<property name="phoneNumber" value="652365556" />
 		<property name="address" value="C/Sol nº10" />
 		<property name="userAccount" ref="userAccount5" />
+		<property name="investigated" value="false" />
 		<property name="applications">
 			<list>
 				<ref bean="application2" />
@@ -265,6 +267,7 @@
 		<property name="phoneNumber" value="652365456" />
 		<property name="address" value="C/Sol nº10" />
 		<property name="userAccount" ref="userAccount6" />
+		<property name="investigated" value="false" />
 		<property name="applications">
 			<list>
 				<ref bean="application3" />
