@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ImmigrantService;
+import services.InvestigatorService;
 import controllers.AbstractController;
 import domain.Immigrant;
+import domain.Investigator;
 
 @Controller
 @RequestMapping("/immigrant/investigator")
@@ -22,6 +23,9 @@ public class ImmigrantInvestigatorController extends AbstractController {
 
 	@Autowired
 	private ImmigrantService immigrantService;
+	
+	@Autowired
+	private InvestigatorService investigatorService;
 
 	// Constructors
 
@@ -35,12 +39,14 @@ public class ImmigrantInvestigatorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView res;
 
-		Collection<Immigrant> all = new ArrayList<Immigrant>();
+		Collection<Immigrant> immigrants = new ArrayList<Immigrant>();
+		
+		Investigator investigator = investigatorService.findByPrincipal();
 
-		all = immigrantService.findAll();
+		immigrants = immigrantService.findImmigrantsByInvestigator(investigator.getId());
 
 		res = new ModelAndView("immigrant/investigator/list");
-		res.addObject("immigrant", all);
+		res.addObject("immigrant", immigrants);
 		res.addObject("requestURI", "immigrant/investigator/list.do");
 
 		return res;

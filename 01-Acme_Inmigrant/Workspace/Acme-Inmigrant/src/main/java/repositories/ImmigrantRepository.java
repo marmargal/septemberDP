@@ -14,7 +14,7 @@ public interface ImmigrantRepository extends JpaRepository<Immigrant, Integer>{
 	@Query("select i from Immigrant i where i.userAccount.id=?1")
 	Immigrant findImmigrantByUserAccountId(int uA);
 	
-	@Query("select i from Immigrant i where i.investigated=true")
-	Collection<Immigrant> findInvestigatedImmigrants();
+	@Query("select i from Immigrant i join i.investigator iv where iv.id=?1")
+	Collection<Immigrant> findImmigrantsByInvestigator(int id);
 	
 }

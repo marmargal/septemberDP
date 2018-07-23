@@ -95,20 +95,15 @@ public class ImmigrantOfficerController extends AbstractController{
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Immigrant immigrant, final BindingResult binding) {
 		ModelAndView res;
-		System.out.println(immigrant);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(immigrant,
 					"immigrant.params.error");
 		else
 			try {
 				this.immigrantService.save(immigrant);
-				immigrant.setInvestigated(true);
 				res = new ModelAndView("redirect:../officer/list.do");
 				
 			} catch (final Throwable oops) {
-				System.out.println("============================================");
-				System.out.println(oops.getMessage());
-				System.out.println("============================================");
 				res = this.createEditModelAndView(immigrant,
 						"immigrant.commit.error");
 			}

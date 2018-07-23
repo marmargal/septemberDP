@@ -21,15 +21,6 @@ public class Immigrant extends Actor {
 
 	// Attributes
 
-	private Boolean investigated;
-
-	public Boolean getInvestigated() {
-		return investigated;
-	}
-
-	public void setInvestigated(Boolean investigated) {
-		this.investigated = investigated;
-	}
 
 	// Relationships
 	private Collection<Application> applications;

@@ -30,10 +30,7 @@
 	<form:hidden path="address" />
 	<form:hidden path="answers" />
 
-<%-- 	<form:select path="investigator">
-		<form:options items="${investigator}" itemLabel="name"/>
-	</form:select>
-	 --%>
+
 		<form:label path="investigator">
 		<spring:message code="immigrant.investigator" />
 	</form:label>	

@@ -28,6 +28,7 @@
 		<acme:column property="email" code="immigrant.email" />
 		<acme:column property="phoneNumber" code="immigrant.phoneNumber" />
 		<acme:column property="address" code="immigrant.address" />
+		<acme:column property="investigator.name" code="immigrant.investigator" />
 
 		<display:column>
 			<acme:links url="immigrant/officer/edit.do?immigrantId=${row.id }"
