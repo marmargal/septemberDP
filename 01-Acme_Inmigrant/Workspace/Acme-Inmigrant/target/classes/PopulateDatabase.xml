@@ -425,7 +425,7 @@
 		<property name="text" value="A text....." />
 		<property name="enactmentDate" value="11/11/2010" />
 		<property name="abrogationTime" value="11/12/2010" />
-		<property name="requirement">
+		<property name="requirements">
 			<list>
 				<ref bean="requirement1" />
 			</list>
@@ -442,6 +442,7 @@
 		<property name="title" value="A title 1" />
 		<property name="description" value="A description....." />
 		<property name="abrogated" value="true" />
+		<property name="law" ref="law1" />
 	</bean>
 
 	<!-- Application -->

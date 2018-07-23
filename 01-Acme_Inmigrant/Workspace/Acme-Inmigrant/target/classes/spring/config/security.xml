@@ -113,9 +113,14 @@
 		<security:intercept-url pattern="/question/officer/**" access="hasRole('OFFICER')" />
 		<security:intercept-url pattern="/question/immigrant/**" access="hasRole('IMMIGRANT')" />
 		
-								<!-- 		QUESTION		-->
+								<!-- 		ANSWER		-->
 		<security:intercept-url pattern="/answer/immigrant/**" access="hasRole('IMMIGRANT')" />
 		<security:intercept-url pattern="/answer/**" access="hasAnyRole('OFFICER', 'IMMIGRANT')" />
+		
+								<!-- 		REQUIREMENT		-->
+		<security:intercept-url pattern="/requirement/list.do" access="permitAll" />
+		<security:intercept-url pattern="/requirement/display.do" access="permitAll" />
+		<security:intercept-url pattern="/requirement/administrator/**" access="hasRole('ADMIN')" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

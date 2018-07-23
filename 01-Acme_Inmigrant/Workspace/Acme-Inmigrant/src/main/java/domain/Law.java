@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -77,18 +78,9 @@ public class Law extends DomainEntity {
 	
 	// Relationships
 	
-	private List<Requirement> requirement;
 	private List<Law> law;
+	private Collection<Requirement> requirements;
 
-	@Valid
-	@OneToMany
-	public List<Requirement> getRequirement() {
-		return requirement;
-	}
-
-	public void setRequirement(List<Requirement> requirement) {
-		this.requirement = requirement;
-	}
 	@Valid
 	@OneToMany
 	public List<Law> getLaw() {
@@ -97,6 +89,16 @@ public class Law extends DomainEntity {
 
 	public void setLaw(List<Law> law) {
 		this.law = law;
+	}
+
+	@Valid
+	@OneToMany(mappedBy="law")
+	public Collection<Requirement> getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(Collection<Requirement> requirements) {
+		this.requirements = requirements;
 	}
 	
 	

@@ -38,7 +38,7 @@
 			</li>
 			<li><a href="#"><spring:message code="master.page.hierarchyVisa" /></a></li>
 			<li><a href="visa/list.do"><spring:message code="master.page.findVisa" /></a></li>
-			<li><a href="#"><spring:message code="master.page.requirements" /></a></li>
+			<li><a href="requirement/administrator/list.do"><spring:message code="master.page.requirements" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('IMMIGRANT')">
