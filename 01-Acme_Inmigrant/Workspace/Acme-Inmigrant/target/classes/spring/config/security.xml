@@ -54,6 +54,11 @@
 		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
 		
+								<!-- 		VISA		-->
+								
+		<security:intercept-url pattern="/visa/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/visa/search.do" access="permitAll" /> 
+		
 								<!-- 		REPORT		-->
 		<security:intercept-url pattern="/report/officer/**" access="hasRole('OFFICER')" /> 
 		<security:intercept-url pattern="/report/investigator/**" access="hasRole('INVESTIGATOR')" />
@@ -63,16 +68,41 @@
 		<security:intercept-url pattern="/application/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
 		<security:intercept-url pattern="/application/immigrant/create.do" access="hasRole('IMMIGRANT')" />
 		<security:intercept-url pattern="/application/immigrant/display.do" access="permitAll" /> 
+		<security:intercept-url pattern="/application/immigrant/sectionDisplay.do" access="permitAll" /> 
 		
-								<!-- 		APPLICATION		-->
+								<!-- 		PERSONALSECTION		-->
+		<security:intercept-url pattern="/personalSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/personalSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
+		
+								<!-- 		PERSONALSECTION		-->
+		<security:intercept-url pattern="/contactSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/contactSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
+		
+								<!-- 		WORKSECTION		-->
+		<security:intercept-url pattern="/workSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/workSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
+		
+								<!-- 		SOCIALSECTION		-->
+		<security:intercept-url pattern="/socialSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/socialSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
+		
+								<!-- 		EDUCATIONSECTION		-->
+		<security:intercept-url pattern="/educationSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/educationSection/immigrant/create.do" access="hasRole('IMMIGRANT')" />
+		
+								<!-- 		LAW		-->
 		<security:intercept-url pattern="/law/administrator/list.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/law/administrator/edit.do" access="hasRole('ADMIN')"  /> 
 	
 								<!-- 		IMMIGRANT		-->
 		<security:intercept-url pattern="/immigrant/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/immigrant/officer/list.do" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/immigrant/officer/edit.do" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/immigrant/investigator/list.do" access="hasRole('INVESTIGATOR')" />
 		
 								<!-- 		OFFICER		-->
 		<security:intercept-url pattern="/officer/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/immigrant/officer/list.do" access="hasRole('OFFICER')" />
 	
 								<!-- 		OFFICER		-->
 		<security:intercept-url pattern="/terms/list.do" access="permitAll" />
@@ -80,7 +110,24 @@
 		<security:intercept-url pattern="/decision/officer/edit.do" access="hasRole('OFFICER')" />
 		<security:intercept-url pattern="/decision/officer/display.do" access="hasRole('OFFICER')" />
 	
-	
+								<!-- 		COUNTRY		-->
+		<security:intercept-url pattern="/country/list.do" access="permitAll" />
+		<security:intercept-url pattern="/country/display.do" access="permitAll" />
+		<security:intercept-url pattern="/country/administrator/**" access="hasRole('ADMIN')" />
+		
+								<!-- 		QUESTION		-->
+		<security:intercept-url pattern="/question/officer/**" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/question/immigrant/**" access="hasRole('IMMIGRANT')" />
+		
+								<!-- 		ANSWER		-->
+		<security:intercept-url pattern="/answer/immigrant/**" access="hasRole('IMMIGRANT')" />
+		<security:intercept-url pattern="/answer/**" access="hasAnyRole('OFFICER', 'IMMIGRANT')" />
+		
+								<!-- 		REQUIREMENT		-->
+		<security:intercept-url pattern="/requirement/list.do" access="permitAll" />
+		<security:intercept-url pattern="/requirement/display.do" access="permitAll" />
+		<security:intercept-url pattern="/requirement/administrator/**" access="hasRole('ADMIN')" />
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

@@ -7,10 +7,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.RequirementRepository;
-import domain.Law;
 import domain.Requirement;
+import forms.RequirementForm;
 
 @Service
 @Transactional
@@ -23,6 +25,16 @@ public class RequirementService {
 
 	// Suporting services
 
+	@Autowired
+	private AdministratorService administratorService;
+	
+	@Autowired
+	private LawService lawService;
+	
+	@Autowired
+	private Validator		validator;
+
+	
 	// Constructors
 
 	public RequirementService() {
@@ -32,13 +44,8 @@ public class RequirementService {
 	// Simple CRUD methods
 
 	public Requirement create() {
+		this.administratorService.checkAuthority();
 		Requirement res = new Requirement();
-
-		String title = "title";
-		String description = "description";
-
-		res.setTitle(title);
-		res.setDescription(description);
 
 		return res;
 	}
@@ -59,6 +66,7 @@ public class RequirementService {
 	}
 
 	public Requirement save(Requirement requirement) {
+		this.administratorService.checkAuthority();
 		Requirement res;
 		res = requirementRepository.save(requirement);
 		return res;
@@ -70,4 +78,43 @@ public class RequirementService {
 		Assert.isTrue(requirementRepository.exists(requirement.getId()));
 		requirementRepository.delete(requirement);
 	}
+
+	public Collection<Requirement> findRequirementByVisaId(int visaId) {
+		Collection<Requirement> requirements = this.requirementRepository.findRequirementByVisaId(visaId);
+		return requirements;
+	}
+	
+	public RequirementForm construct(Requirement requirement){
+		RequirementForm res = new RequirementForm();
+		
+		res.setId(requirement.getId());
+		res.setTitle(requirement.getTitle());
+		res.setDescription(requirement.getDescription());
+		res.setAbrogated(requirement.getAbrogated());
+		res.setLawId(requirement.getLaw().getId());
+		
+		return res;
+	}
+	
+	public Requirement reconstruct(RequirementForm requirementForm, BindingResult binding){
+		Assert.notNull(requirementForm);
+		
+		Requirement res = new Requirement();
+
+		if (requirementForm.getId() != 0)
+			res = this.findOne(requirementForm.getId());
+		else 
+			res = this.create();
+		
+		res.setTitle(requirementForm.getTitle());
+		res.setDescription(requirementForm.getDescription());
+		res.setAbrogated(requirementForm.getAbrogated());
+		res.setLaw(this.lawService.findOne(requirementForm.getLawId()));
+		
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+
+	
 }

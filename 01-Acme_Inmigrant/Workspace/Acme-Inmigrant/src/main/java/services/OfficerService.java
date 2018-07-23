@@ -107,8 +107,8 @@ public class OfficerService {
 		Officer res;
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
-		res = this.officerRepository.findOfficerByUserAccountId(userAccount.getId());
-		Assert.notNull(res);
+		Assert.notNull(userAccount);
+		res = this.officerRepository.findOfficerByPrincipal(userAccount.getId());
 		return res;
 	}
 

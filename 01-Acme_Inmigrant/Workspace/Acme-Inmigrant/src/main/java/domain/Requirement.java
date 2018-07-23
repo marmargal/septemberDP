@@ -3,6 +3,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -48,6 +50,20 @@ public class Requirement extends DomainEntity {
 
 	public void setAbrogated(Boolean abrogated) {
 		this.abrogated = abrogated;
+	}
+
+
+	// Relationships
+	private Law law;
+
+	@Valid
+	@ManyToOne(optional=false)
+	public Law getLaw() {
+		return law;
+	}
+
+	public void setLaw(Law law) {
+		this.law = law;
 	}
 	
 }

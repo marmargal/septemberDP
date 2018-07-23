@@ -11,6 +11,12 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<b><spring:message code="report.investigator"/>:&nbsp;</b><jstl:out value="${report.writer.name}"/>
+<br/>
+
+<b><spring:message code="report.immigrant"/>:&nbsp;</b><jstl:out value="${report.immigrant.name}"/>
+<br/>
+
 <b><spring:message code="report.text"/>:&nbsp;</b><jstl:out value="${report.text}"/>
 <br/>
 

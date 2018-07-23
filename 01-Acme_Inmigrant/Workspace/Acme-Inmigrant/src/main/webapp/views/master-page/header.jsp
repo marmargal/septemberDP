@@ -13,7 +13,7 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
-<nav class="navbar fixed-top navbar-dark bg-primary">
+<nav class="navbar navbar-dark bg-primary">
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
@@ -25,7 +25,7 @@
 				</ul>
 			</li>
 			<li><a href="#"><spring:message code="master.page.hierarchyVisa" /></a></li>
-			<li><a href="#"><spring:message code="master.page.findVisa" /></a></li>
+			<li><a href="visa/list.do"><spring:message code="master.page.findVisa" /></a></li>
 			<li><a href="#"><spring:message code="master.page.requirements" /></a></li>
 		</security:authorize>
 		
@@ -37,13 +37,14 @@
 				</ul>
 			</li>
 			<li><a href="#"><spring:message code="master.page.hierarchyVisa" /></a></li>
-			<li><a href="#"><spring:message code="master.page.findVisa" /></a></li>
-			<li><a href="#"><spring:message code="master.page.requirements" /></a></li>
+			<li><a href="visa/list.do"><spring:message code="master.page.findVisa" /></a></li>
+			<li><a href="requirement/administrator/list.do"><spring:message code="master.page.requirements" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('IMMIGRANT')">
 			<li><a href="#"><spring:message code="master.page.application" /></a></li>
 			<li><a href="#"><spring:message code="master.page.myApplication" /></a></li>
+			<li><a href="/application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('OFFICER')">
@@ -54,7 +55,14 @@
 					<li><a href="immigrant/register.do"><spring:message code="master.page.register.assignApplication" /></a></li>
 				</ul>
 			</li>
+			<li><a href="question/officer/list.do"><spring:message code="master.page.questions" /></a></li>
 			<li><a href="/report/display.do"><spring:message code="master.page.reports" /></a></li>
+			<li><a href="immigrant/officer/list.do"><spring:message code="master.page.immigrants" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('INVESTIGATOR')">
+			<li><a href="report/investigator/list.do"><spring:message code="master.page.reports" /></a></li>
+			<li><a href="immigrant/investigator/list.do"><spring:message code="master.page.immigrants" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('ADMIN')">
@@ -78,6 +86,6 @@
 
 
 
-<div>
+<div id="language">
 	<a href="?language=en">en</a> | <a href="?language=es">es</a>
 </div>

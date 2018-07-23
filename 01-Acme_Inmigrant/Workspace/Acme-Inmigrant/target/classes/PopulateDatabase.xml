@@ -233,8 +233,10 @@
 		</property>
 		<property name="answers">
 			<list>
+				<ref bean="answer1" />
 			</list>
 		</property>
+		<property name="investigator"><null/></property>
 	</bean>
 
 	<!-- Immigrant 2 -->
@@ -254,6 +256,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="investigator"><null/></property>
 	</bean>
 
 	<!-- Immigrant 3 -->
@@ -273,6 +276,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="investigator"><null/></property>
 	</bean>
 
 
@@ -294,6 +298,8 @@
 		<property name="decision" ref="decision1" />
 		<property name="questions">
 			<list>
+				<ref bean="question1" />
+				<ref bean="question2" />
 			</list>
 		</property>
 	</bean>
@@ -422,7 +428,7 @@
 		<property name="text" value="A text....." />
 		<property name="enactmentDate" value="11/11/2010" />
 		<property name="abrogationTime" value="11/12/2010" />
-		<property name="requirement">
+		<property name="requirements">
 			<list>
 				<ref bean="requirement1" />
 			</list>
@@ -439,6 +445,7 @@
 		<property name="title" value="A title 1" />
 		<property name="description" value="A description....." />
 		<property name="abrogated" value="true" />
+		<property name="law" ref="law1" />
 	</bean>
 
 	<!-- Application -->
@@ -470,6 +477,8 @@
 		</property>
 		<property name="question">
 			<list>
+				<ref bean="question1" />
+				<ref bean="question2" />
 			</list>
 		</property>
 	</bean>
@@ -538,10 +547,32 @@
 		</property>
 	</bean>
 
-
-
-
-
-
+	<!-- Question -->
+	<!-- Question 1 -->
+	<bean id="question1" class="domain.Question">
+		<property name="text" value="¿De dónde eres?" />
+		<property name="statement" value="true" />
+		<property name="moment" value="11/12/2010 09:18" />
+		<property name="application" ref="application1" />
+		<property name="officer" ref="officer1" />
+	</bean>
+	
+	<!-- Question 2 -->
+	<bean id="question2" class="domain.Question">
+		<property name="text" value="¿A dónde vas?" />
+		<property name="statement" value="false" />
+		<property name="moment" value="09/11/2013 10:15" />
+		<property name="application" ref="application1" />
+		<property name="officer" ref="officer2" />
+	</bean>
+	
+	<!-- Answer -->
+	<!-- Answer 1 -->
+	<bean id="answer1" class="domain.Answer">
+		<property name="reply" value="De ESPAÑA!!" />
+		<property name="moment" value="11/12/2010 19:45" />
+		<property name="immigrant" ref="immigrant1" />
+		<property name="question" ref="question1" />
+	</bean>
 
 </beans>

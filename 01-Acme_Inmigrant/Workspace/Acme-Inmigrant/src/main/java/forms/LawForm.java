@@ -1,5 +1,6 @@
 package forms;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class LawForm {
 	private Date enactmentDate;
 	private Date abrogationTime;
 
-	private List<Requirement> requirement;
+	private Collection<Requirement> requirement;
 	private List<Law> law;
 
 	@NotBlank
@@ -67,12 +68,12 @@ public class LawForm {
 
 	@Valid
 	@OneToMany
-	public List<Requirement> getRequirement() {
+	public Collection<Requirement> getRequirement() {
 		return requirement;
 	}
 
-	public void setRequirement(List<Requirement> requirement) {
-		this.requirement = requirement;
+	public void setRequirement(Collection<Requirement> collection) {
+		this.requirement = collection;
 	}
 
 	@Valid

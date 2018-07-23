@@ -15,7 +15,7 @@ import controllers.AbstractController;
 import domain.Report;
 
 @Controller
-@RequestMapping("/report/office")
+@RequestMapping("/report/officer")
 public class ReportOfficeController extends AbstractController {
 	
 	// Services ----------------------
@@ -29,11 +29,11 @@ public class ReportOfficeController extends AbstractController {
 	
 	// Listing ------------------------
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public ModelAndView list(@RequestParam final int immigrantId){
+	public ModelAndView list(@RequestParam final int investigatorId){
 		ModelAndView res;
 		Collection<Report> reports;
 	
-		reports = this.reportService.findReportsByImmigrant(immigrantId);
+		reports = this.reportService.findReportsByInvestigatorId(investigatorId);
 		
 		res = new ModelAndView("report/list");
 		res.addObject("report",reports);

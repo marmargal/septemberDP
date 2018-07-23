@@ -43,8 +43,14 @@
 		<bean class="converters.StringToUserAccountConverter" />
 		<bean class="converters.LawToStringConverter" />
 		<bean class="converters.StringToLawConverter" />
-		<bean class="converters.DecisionToStringConverter" />
-		<bean class="converters.StringToDecisionConverter" />
+		<bean class="converters.StringToQuestionConverter" />
+		<bean class="converters.QuestionToStringConverter" />
+		<bean class="converters.StringToAnswerConverter" />
+		<bean class="converters.AnswerToStringConverter" />
+		<bean class="converters.StringToRequirementConverter" />
+		<bean class="converters.RequirementToStringConverter" />
+		<bean class="converters.StringToInvestigatorConverter" />
+		<bean class="converters.InvestigatorToStringConverter" />
 
 	</util:list>
 

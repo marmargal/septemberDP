@@ -65,6 +65,7 @@
 	<div>
 		<tiles:insertAttribute name="header" />
 	</div>
+	<div id="content">
 	<div>
 		<h1>
 			<tiles:insertAttribute name="title" />
@@ -78,6 +79,6 @@
 	<div>
 		<tiles:insertAttribute name="footer" />
 	</div>
-
+</div>
 </body>
 </html>

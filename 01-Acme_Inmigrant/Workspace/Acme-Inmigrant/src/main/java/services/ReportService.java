@@ -48,9 +48,11 @@ public class ReportService {
 		Report res = new Report();
 		Immigrant immigrant = new Immigrant();
 		
+		Investigator investigator = this.investigatorService.findByPrincipal();
 		immigrant = this.immigrantService.findOne(immigrantId);
 		
 		res.setImmigrant(immigrant);
+		res.setWriter(investigator);
 		
 		return res;
 	}
@@ -73,15 +75,9 @@ public class ReportService {
 	public Report save(Report report) {
 		Assert.notNull(report);
 		investigatorService.checkAuthority();
-		
 		Report res;
-		Collection<Report> reports = new ArrayList<Report>();
 		
 		res = this.reportRepository.save(report);
-		
-		Investigator investigator = this.investigatorService.findByPrincipal();
-		reports.add(res);
-		investigator.setReports(reports);
 		
 		Assert.notNull(res);
 		return res;
@@ -96,10 +92,10 @@ public class ReportService {
 
 	// Other business methods
 
-	public Collection<Report> findReportsByImmigrant(int immigrantId) {
+	public Collection<Report> findReportsByInvestigatorId(int investigatorId) {
 		Collection<Report> res = new ArrayList<Report>();
 
-		res.addAll(reportRepository.findReportByImmigrantId(immigrantId));
+		res.addAll(reportRepository.findReportsByInvestigatorId(investigatorId));
 		Assert.notNull(res);
 		return res;
 	}
@@ -110,7 +106,7 @@ public class ReportService {
 		res.setId(report.getId());
 		res.setText(report.getText());
 		res.setPicture(report.getPicture());
-		res.setImmigrant(report.getImmigrant());
+		res.setImmigrantId(report.getImmigrant().getId());
 		
 		return res;
 	}
@@ -119,10 +115,14 @@ public class ReportService {
 		Assert.notNull(reportForm);
 		Report res = new Report();
 		
+		if (reportForm.getId() != 0)
+			res = this.findOne(reportForm.getId());
+		else
+			res = this.create(reportForm.getImmigrantId());
+		
 		res.setId(reportForm.getId());
 		res.setText(reportForm.getText());
 		res.setPicture(reportForm.getPicture());
-		res.setImmigrant(reportForm.getImmigrant());
 		
 		if(binding!=null)
 			validator.validate(res, binding);
