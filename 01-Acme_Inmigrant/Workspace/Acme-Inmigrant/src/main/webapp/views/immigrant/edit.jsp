@@ -20,8 +20,28 @@
 
 <form:form action="${requestURI }" modelAttribute="immigrant">
 	
-	<acme:selectBoolean code="immigrant.investigated" path="investigated" items="${investigated}" />
-	<br/>
+	<form:hidden path="id"/>
+	<form:hidden path="version"/>
+	<form:hidden path="userAccount"/>
+	<form:hidden path="name" />
+	<form:hidden path="surname" />
+	<form:hidden path="email" />
+	<form:hidden path="phoneNumber" />
+	<form:hidden path="address" />
+	<form:hidden path="answers" />
+
+<%-- 	<form:select path="investigator">
+		<form:options items="${investigator}" itemLabel="name"/>
+	</form:select>
+	 --%>
+		<form:label path="investigator">
+		<spring:message code="immigrant.investigator" />
+	</form:label>	
+	<form:select id="investigator" path="investigator">
+		<form:option value="0" label="----" />		
+		<form:options items="${investigator}" itemValue="id" itemLabel="name" />
+	</form:select>
+	<form:errors path="investigator" cssClass="error" />
 	
 	<input type="submit" name="save" value="<spring:message code="immigrant.submit" />" />&nbsp; 	
 	

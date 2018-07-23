@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ImmigrantService;
+import services.InvestigatorService;
 import services.OfficerService;
 import controllers.AbstractController;
 import domain.Application;
 import domain.Immigrant;
+import domain.Investigator;
 import domain.Officer;
 
 @Controller
@@ -33,6 +35,9 @@ public class ImmigrantOfficerController extends AbstractController{
 
 	@Autowired
 	private OfficerService officerService;
+	
+	@Autowired
+	private InvestigatorService investigatorService;
 	
 	// Constructors
 	
@@ -90,17 +95,20 @@ public class ImmigrantOfficerController extends AbstractController{
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Immigrant immigrant, final BindingResult binding) {
 		ModelAndView res;
-		System.out.println(binding.getFieldError());
+		System.out.println(immigrant);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(immigrant,
 					"immigrant.params.error");
 		else
 			try {
 				this.immigrantService.save(immigrant);
-				res = new ModelAndView("redirect:../list.do");
+				immigrant.setInvestigated(true);
+				res = new ModelAndView("redirect:../officer/list.do");
 				
 			} catch (final Throwable oops) {
+				System.out.println("============================================");
 				System.out.println(oops.getMessage());
+				System.out.println("============================================");
 				res = this.createEditModelAndView(immigrant,
 						"immigrant.commit.error");
 			}
@@ -121,13 +129,12 @@ public class ImmigrantOfficerController extends AbstractController{
 				final String message) {
 			ModelAndView result;
 			
-			Collection<Boolean> investigated = new ArrayList<Boolean>();
-			investigated.add(true);
-			investigated.add(false);
+			Collection<Investigator> investigator = new ArrayList<Investigator>();
+			investigator = investigatorService.findAll();
 
 			result = new ModelAndView("immigrant/officer/edit");
 			result.addObject("immigrant", immigrant);
-			result.addObject("investigated", investigated);
+			result.addObject("investigator", investigator);
 			result.addObject("message", message);
 			result.addObject("requestURI", "immigrant/officer/edit.do");
 

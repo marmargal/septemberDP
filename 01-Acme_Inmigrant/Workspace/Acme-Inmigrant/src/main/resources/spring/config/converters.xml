@@ -47,6 +47,8 @@
 		<bean class="converters.QuestionToStringConverter" />
 		<bean class="converters.StringToAnswerConverter" />
 		<bean class="converters.AnswerToStringConverter" />
+		<bean class="converters.StringToInvestigatorConverter" />
+		<bean class="converters.InvestigatorToStringConverter" />
 
 	</util:list>
 

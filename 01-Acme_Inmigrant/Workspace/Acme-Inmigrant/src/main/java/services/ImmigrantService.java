@@ -164,5 +164,4 @@ public class ImmigrantService {
 	public Collection<Immigrant> findInvestigatedImmigrants(){
 		return this.immigrantRepository.findInvestigatedImmigrants();
 	}
-
 }

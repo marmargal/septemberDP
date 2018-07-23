@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 @Entity
@@ -33,6 +34,7 @@ public class Immigrant extends Actor {
 	// Relationships
 	private Collection<Application> applications;
 	private Collection<Answer> answers;
+	private Investigator investigator;
 
 	@Valid
 	@OneToMany(mappedBy = "immigrant")
@@ -52,6 +54,16 @@ public class Immigrant extends Actor {
 
 	public void setAnswers(Collection<Answer> answers) {
 		this.answers = answers;
+	}
+	
+	@Valid
+	@OneToOne(optional = true)
+	public Investigator getInvestigator(){
+		return investigator;
+	}
+	
+	public void setInvestigator(Investigator investigator){
+		this.investigator = investigator;
 	}
 
 }
