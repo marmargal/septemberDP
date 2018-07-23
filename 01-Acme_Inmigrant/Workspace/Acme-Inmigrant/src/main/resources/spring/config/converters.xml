@@ -49,6 +49,8 @@
 		<bean class="converters.AnswerToStringConverter" />
 		<bean class="converters.StringToRequirementConverter" />
 		<bean class="converters.RequirementToStringConverter" />
+		<bean class="converters.StringToInvestigatorConverter" />
+		<bean class="converters.InvestigatorToStringConverter" />
 
 	</util:list>
 

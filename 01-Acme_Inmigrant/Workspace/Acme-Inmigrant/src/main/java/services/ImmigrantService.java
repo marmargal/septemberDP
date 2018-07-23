@@ -160,5 +160,8 @@ public class ImmigrantService {
 		
 		return res;
 	}
-
+	
+	public Collection<Immigrant> findImmigrantsByInvestigator(int investigatorId){
+		return this.immigrantRepository.findImmigrantsByInvestigator(investigatorId);
+	}
 }

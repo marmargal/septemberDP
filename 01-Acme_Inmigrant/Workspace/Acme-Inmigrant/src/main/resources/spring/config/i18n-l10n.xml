@@ -44,6 +44,7 @@
 		<value>/views/socialSection/messages</value>
 		<value>/views/educationSection/messages</value>
 		<value>/views/requirement/messages</value>
+		<value>/views/immigrant/messages</value>
 
 	</util:list>
 </beans>
