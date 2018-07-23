@@ -18,7 +18,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="decision/offices/edit.do" modelAttribute="decisionForm">
+<form:form action="${requestURI }" modelAttribute="decisionForm">
+	<!-- "decision/officer/edit.do" -->
 	<security:authorize access="hasRole('OFFICER')">
 	
 		<form:hidden path="id" />

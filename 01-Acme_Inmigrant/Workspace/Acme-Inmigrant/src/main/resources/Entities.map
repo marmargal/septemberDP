@@ -1,44 +1,5 @@
 #./src/main/resources/Entities.map
-<<<<<<< HEAD
-#Wed Jul 18 19:21:12 CEST 2018
-=======
-<<<<<<< HEAD
-#Wed Jul 18 20:26:11 CEST 2018
->>>>>>> a38349890c595fc178779211ebf35b2b582cbc91
-visa1=201
-law1=197
-investigator2=191
-investigator1=190
-application3=204
-application2=203
-application1=202
-decision2=194
-decision1=193
-userAccount10=182
-userAccount9=181
-admin=183
-userAccount8=180
-userAccount7=179
-userAccount6=178
-requirement1=198
-userAccount5=177
-country1=196
-userAccount4=176
-userAccount3=175
-personalSection3=186
-userAccount2=174
-personalSection2=185
-userAccount1=173
-personalSection1=184
-report1=192
-immigrant3=189
-category1=195
-immigrant2=188
-immigrant1=187
-officer2=200
-officer1=199
-=======
-#Thu Jul 19 12:42:38 CEST 2018
+#Sun Jul 22 21:44:01 CEST 2018
 visa1=89
 law1=84
 investigator2=78
@@ -71,4 +32,3 @@ immigrant2=73
 immigrant1=72
 officer2=76
 officer1=75
->>>>>>> master

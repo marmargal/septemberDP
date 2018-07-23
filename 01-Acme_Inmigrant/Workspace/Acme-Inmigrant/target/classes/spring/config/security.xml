@@ -76,6 +76,9 @@
 	
 								<!-- 		OFFICER		-->
 		<security:intercept-url pattern="/terms/list.do" access="permitAll" />
+		
+		<security:intercept-url pattern="/decision/officer/edit.do" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/decision/officer/display.do" access="hasRole('OFFICER')" />
 	
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

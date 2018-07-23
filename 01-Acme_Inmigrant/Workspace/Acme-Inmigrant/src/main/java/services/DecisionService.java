@@ -65,7 +65,7 @@ public class DecisionService {
 		Assert.isTrue(decisionId != 0);
 		Decision res;
 		res = decisionRepository.findOne(decisionId);
-		Assert.notNull(res);
+//		Assert.notNull(res);
 		return res;
 	}
 

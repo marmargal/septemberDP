@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+
 import domain.Application;
 import domain.Decision;
 import forms.DecisionForm;
@@ -19,8 +21,8 @@ import services.DecisionService;
 import services.OfficerService;
 
 @Controller
-@RequestMapping("/decision/office")
-public class DecisionOfficerController {
+@RequestMapping("/decision/officer")
+public class DecisionOfficerController extends AbstractController{
 
 	// Services -----------------------------------
 	@Autowired
@@ -37,10 +39,24 @@ public class DecisionOfficerController {
 		super();
 	}
 	
-	// Editing -------------------------------------
-	@RequestMapping(value="/edit", method=RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int applicationId){
-		this.officerService.checkAuthority();
+	// Display ------------------------------------
+	@RequestMapping(value="/display",method=RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int decisionId){
+		ModelAndView res;
+		Decision decision;
+		
+		decision = this.decisionService.findOne(decisionId);
+		
+		res = new ModelAndView("decision/display");
+		res.addObject("decision",decision);
+		
+		return res;
+	}
+	
+	
+	// Create --------------------------------------
+	@RequestMapping(value="/create", method=RequestMethod.GET)
+	public ModelAndView create(@RequestParam final int applicationId){
 		ModelAndView res;
 		Decision decision;
 		DecisionForm decisionForm;
@@ -49,6 +65,42 @@ public class DecisionOfficerController {
 		decisionForm = this.decisionService.construct(decision);
 		
 		res = this.createEditModelAndView(decisionForm);
+		
+		return res;
+	}
+	
+	// Editing -------------------------------------
+	@RequestMapping(value="/edit", method=RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int decisionId){
+		this.officerService.checkAuthority();
+		ModelAndView res;
+		Decision decision;
+		DecisionForm decisionForm;
+		
+		decision = this.decisionService.findOne(decisionId);
+		decisionForm = this.decisionService.construct(decision);
+		
+		res = this.createEditModelAndView(decisionForm);
+		return res;
+	}
+	
+	// Save ------------------------------------------
+	@RequestMapping(value="/edit", method=RequestMethod.POST, params ="save")
+	public ModelAndView save(final DecisionForm decisionForm, final BindingResult binding){
+		ModelAndView res;
+		
+		if(binding.hasErrors())
+			res = this.createEditModelAndView(decisionForm, "decision.params.error");
+		else{
+			try{
+				Decision decision = this.decisionService.reconstruct(decisionForm, binding);
+				this.decisionService.save(decision);
+				
+				res = new ModelAndView("redirect:/application/list.do?");
+			}catch (final Throwable oops) {
+				res = this.createEditModelAndView(decisionForm, "decision.commit.error");
+			}
+		}
 		return res;
 	}
 	
@@ -75,6 +127,7 @@ public class DecisionOfficerController {
 		res.addObject("applications",applications);
 //		res.addObject("status",status);
 		res.addObject("message",message);
+		res.addObject("requestURI","decision/officer/edit.do");
 		
 		return res;
 	}
