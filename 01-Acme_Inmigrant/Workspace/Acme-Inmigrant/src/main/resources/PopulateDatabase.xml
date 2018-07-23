@@ -237,6 +237,7 @@
 				<ref bean="answer1" />
 			</list>
 		</property>
+		<property name="investigator"><null/></property>
 	</bean>
 
 	<!-- Immigrant 2 -->
@@ -257,6 +258,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="investigator"><null/></property>
 	</bean>
 
 	<!-- Immigrant 3 -->
@@ -277,6 +279,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="investigator"><null/></property>
 	</bean>
 
 
