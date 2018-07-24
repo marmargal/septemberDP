@@ -50,6 +50,7 @@ public class DecisionOfficerController extends AbstractController{
 		
 		res = new ModelAndView("decision/display");
 		res.addObject("decision",decision);
+		res.addObject("requestURI", "decision/officer/display.do");
 		
 		return res;
 	}
@@ -97,7 +98,8 @@ public class DecisionOfficerController extends AbstractController{
 				Decision decision = this.decisionService.reconstruct(decisionForm, binding);
 				this.decisionService.save(decision);
 				
-				res = new ModelAndView("redirect:/application/list.do?");
+				res = new ModelAndView(
+						"redirect:/decision/officer/display.do?decisionId="+decisionForm.getId());
 			}catch (final Throwable oops) {
 				res = this.createEditModelAndView(decisionForm, "decision.commit.error");
 			}

@@ -65,7 +65,7 @@ public class DecisionService {
 		Assert.isTrue(decisionId != 0);
 		Decision res;
 		res = decisionRepository.findOne(decisionId);
-//		Assert.notNull(res);
+		Assert.notNull(res);
 		return res;
 	}
 
@@ -83,7 +83,7 @@ public class DecisionService {
 	}
 
 	public DecisionForm construct(Decision decision) {
-		Assert.notNull(decision);
+//		Assert.notNull(decision);
 		DecisionForm res = new DecisionForm();
 		
 		res.setId(decision.getId());
@@ -97,17 +97,18 @@ public class DecisionService {
 	public Decision reconstruct(DecisionForm decisionForm,
 			BindingResult binding){
 		Assert.notNull(decisionForm);
-		Application application = this.applicationService.findOne(decisionForm.getApplicationId());
 		Decision res;
+		Date moment = new Date(System.currentTimeMillis() - 1000);
 		
 		if(decisionForm.getId()!=0)
 			res = this.findOne(decisionForm.getId());
 		else
-			res = this.create(application.getId());
+			res = this.create(decisionForm.getApplicationId());
 		
 		res.setAccept(decisionForm.isAccepted());
 		res.setComment(decisionForm.getComment());
-		res.setApplication(application);
+		res.setMoment(moment);
+//		res.setApplication(application);
 		
 		if(binding!=null)
 			this.validator.validate(res,binding);

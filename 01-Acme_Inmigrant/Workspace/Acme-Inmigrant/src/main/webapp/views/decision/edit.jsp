@@ -18,24 +18,21 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${requestURI }" modelAttribute="decisionForm">
-	<!-- "decision/officer/edit.do" -->
+<form:form action= "decision/officer/edit.do" modelAttribute="decisionForm">
+	<!-- "${requestURI }"  -->
 	<security:authorize access="hasRole('OFFICER')">
 	
 		<form:hidden path="id" />
-		<form:hidden path="version" />
+		<form:hidden path="applicationId" />
 
-		<form:hidden path="moment" />
-		
-		<acme:select items="${applications }" itemLabel="applications" code="decision.application" path="application"/>
 		<br/>
-		<acme:checkbox code="decision.isAccepted" path="isAccepted"/>
+		<acme:checkbox code="decision.isAccepted" path="accepted"/>
 		<br/>
 		<acme:textbox path="comment" code="decision.comment" />
 		<br/>
 		
 		
 		<acme:submit name="save" code="decision.save" />
-		<acme:submit name="cancel" code="decision.cancel" />
+		<acme:cancel code="decision.cancel" url="decision/officer/display.do?decisionId=${id}"/>
 	</security:authorize>
 </form:form>

@@ -10,17 +10,12 @@
 
 <tiles-definitions>
 
-	<definition name="decision/officer/display" extends="master.page">
+	<definition name="decision/display" extends="master.page">
 		<put-attribute name="title" value="Desplegable de decisiones" />
 		<put-attribute name="body" value="/views/decision/display.jsp" />
 	</definition>
 
-	<definition name="decision/officer/create" extends="master.page">
-		<put-attribute name="title" value="Crear decisión" />
-		<put-attribute name="body" value="/views/decision/edit.jsp" />
-	</definition>
-
-	<definition name="decision/officer/edit" extends="master.page">
+	<definition name="decision/edit" extends="master.page">
 		<put-attribute name="title" value="Editar decisión" />
 		<put-attribute name="body" value="/views/decision/edit.jsp" />
 	</definition>

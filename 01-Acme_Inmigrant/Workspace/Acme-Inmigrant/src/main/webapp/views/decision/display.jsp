@@ -12,7 +12,13 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<b><spring:message code="decision.isAccept"/>:&nbsp;</b><jstl:out value="${decision.accept}"/>
+<b><spring:message code="decision.isAccepted"/>:&nbsp;</b>
+<jstl:if test="${decision.accept == true}">
+	<spring:message code="decision.true"/>
+</jstl:if>
+<jstl:if test="${decision.accept == false}">
+	<spring:message code="decision.false"/>
+</jstl:if>
 <br/>
 <b><spring:message code="decision.moment"/>:&nbsp;</b><jstl:out value="${decision.moment}"/>
 <br/>
