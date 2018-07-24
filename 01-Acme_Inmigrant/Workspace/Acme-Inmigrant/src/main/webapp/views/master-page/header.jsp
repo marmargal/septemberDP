@@ -68,7 +68,7 @@
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv" href=""><spring:message code="master.page.register" /></a>
 				<ul>
-					<li><a href="officer/register.do"><spring:message code="master.page.register.officer" /></a></li>
+					<li><a href="officer/administrator/register.do"><spring:message code="master.page.register.officer" /></a></li>
 					<li><a href="investigator/register.do"><spring:message code="master.page.register.investigator" /></a></li>
 				</ul>
 			</li>
