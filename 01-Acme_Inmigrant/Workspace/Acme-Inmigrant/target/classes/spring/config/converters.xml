@@ -51,6 +51,10 @@
 		<bean class="converters.RequirementToStringConverter" />
 		<bean class="converters.StringToInvestigatorConverter" />
 		<bean class="converters.InvestigatorToStringConverter" />
+		<bean class="converters.StringToApplicationConverter" />
+		<bean class="converters.ApplicationToStringConverter" />
+		<bean class="converters.StringToCategoryConverter" />
+		<bean class="converters.CategoryToStringConverter" />
 
 	</util:list>
 

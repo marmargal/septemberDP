@@ -1,5 +1,8 @@
 package controllers.immigrant;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ApplicationService;
+import services.ImmigrantService;
 import services.WorkSectionService;
 import controllers.AbstractController;
+import domain.Application;
+import domain.Immigrant;
 import domain.WorkSection;
 
 @Controller
@@ -23,6 +30,14 @@ public class WorkSectionImmigrantController extends AbstractController {
 
 	@Autowired
 	private WorkSectionService workSectionService;
+	
+	// Supporting services --------------------------------------------------
+	
+	@Autowired
+	private ApplicationService applicationService;
+	
+	@Autowired
+	private ImmigrantService immigrantService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -94,7 +109,7 @@ public class WorkSectionImmigrantController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		WorkSection a;
-
+		
 		a = this.workSectionService.create();
 		result = this.createEditModelAndView(a);
 
@@ -113,8 +128,12 @@ public class WorkSectionImmigrantController extends AbstractController {
 			final WorkSection workSection, final String message) {
 
 		ModelAndView result;
+		Immigrant immigrant = immigrantService.findByPrincipal();
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = applicationService.getApplicationByImmigrant(immigrant.getId());
 		result = new ModelAndView("workSection/immigrant/edit");
 		result.addObject("workSection", workSection);
+		result.addObject("application", applications);
 		result.addObject("message", message);
 		return result;
 	}

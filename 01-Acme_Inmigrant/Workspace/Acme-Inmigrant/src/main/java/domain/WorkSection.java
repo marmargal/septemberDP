@@ -5,8 +5,10 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -69,6 +71,18 @@ public class WorkSection extends DomainEntity {
 		this.endDate = endDate;
 	}
 	
-	
+	// Relationships
+
+	private Application application;
+
+	@Valid
+	@ManyToOne
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
 	
 }

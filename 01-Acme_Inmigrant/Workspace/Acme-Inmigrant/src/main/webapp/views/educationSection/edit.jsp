@@ -41,8 +41,12 @@
               <form:option value="DOCTORATE"/>
     	</form:select>
     	<br>
+    	<acme:select items="${application}" itemLabel="ticker" code="educationSection.application" path="application" />
 		
 		<acme:submit name="save" code="educationSection.submit" />
-		<acme:cancel url="application/display.do" code="educationSection.cancel" />
+		<jstl:if test="${educationSection.id != 0}">
+			<acme:delete confirmationCode="educationSection.confirm.delete" buttonCode="educationSection.delete" id="${educationSection.id}" />
+		</jstl:if>
+		<acme:cancel url="application/immigrant/display.do" code="educationSection.cancel" />
 	</security:authorize>
 </form:form>

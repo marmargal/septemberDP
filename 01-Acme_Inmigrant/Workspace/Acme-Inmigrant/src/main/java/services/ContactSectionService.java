@@ -36,16 +36,10 @@ public class ContactSectionService {
 
 	// Simple CRUD methods ----------------------------------------------------
 	
-	public ContactSection create(Application application) {
+	public ContactSection create() {
 		final Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Assert.notNull(immigrant);
-		String email = "email@gmail.com";
 		ContactSection res = new ContactSection();
-		res.setEmail(email);
-		List<ContactSection> contactSections = new ArrayList<ContactSection>();
-		contactSections = application.getContactSection();
-		contactSections.add(res);
-		application.setContactSection(contactSections);
 		return res;
 	}
 
@@ -66,6 +60,13 @@ public class ContactSectionService {
 
 	public ContactSection save(ContactSection contactSection) {
 		ContactSection res;
+		
+		Application a = contactSection.getApplication();
+		List<ContactSection> contactSections = new ArrayList<ContactSection>();
+		contactSections = a.getContactSection();
+		contactSections.add(contactSection);
+		a.setContactSection(contactSections);
+		
 		res = contactSectionRepository.save(contactSection);
 		return res;
 	}
@@ -74,9 +75,23 @@ public class ContactSectionService {
 		Assert.notNull(contactSection);
 		Assert.isTrue(contactSection.getId() != 0);
 		Assert.isTrue(contactSectionRepository.exists(contactSection.getId()));
+		
+		Application application = this.findApplicationbyContactSection(contactSection.getId());
+		List<ContactSection> cs = application.getContactSection();
+		cs.remove(contactSection);
+		application.setContactSection(cs);
+		
 		contactSectionRepository.delete(contactSection);
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public Application findApplicationbyContactSection(Integer id) {
+		Application res = new Application();
+		
+		res = contactSectionRepository.findApplicationbyContactSection(id);
+		
+		return res;
+	}
 
 }

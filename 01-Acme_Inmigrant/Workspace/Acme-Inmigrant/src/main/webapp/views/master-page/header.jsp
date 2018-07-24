@@ -24,7 +24,7 @@
 					<li><a href="immigrant/register.do"><spring:message code="master.page.register.immigrant" /></a></li>
 				</ul>
 			</li>
-			<li><a href="#"><spring:message code="master.page.hierarchyVisa" /></a></li>
+			<li><a href="category/list.do"><spring:message code="master.page.hierarchyVisa" /></a></li>
 			<li><a href="visa/list.do"><spring:message code="master.page.findVisa" /></a></li>
 			<li><a href="#"><spring:message code="master.page.requirements" /></a></li>
 		</security:authorize>
@@ -44,7 +44,7 @@
 		<security:authorize access="hasRole('IMMIGRANT')">
 			<li><a href="#"><spring:message code="master.page.application" /></a></li>
 			<li><a href="#"><spring:message code="master.page.myApplication" /></a></li>
-			<li><a href="/application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
+			<li><a href="application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('OFFICER')">
@@ -68,7 +68,7 @@
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv" href=""><spring:message code="master.page.register" /></a>
 				<ul>
-					<li><a href="officer/register.do"><spring:message code="master.page.register.officer" /></a></li>
+					<li><a href="officer/administrator/register.do"><spring:message code="master.page.register.officer" /></a></li>
 					<li><a href="investigator/register.do"><spring:message code="master.page.register.investigator" /></a></li>
 				</ul>
 			</li>
