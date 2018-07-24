@@ -21,4 +21,6 @@
 <br/>
 
 <acme:links url="${country.link }" code="country.link"/>
+<br/>
 
+<acme:cancel url="country/list.do" code="country.cancel"/>
