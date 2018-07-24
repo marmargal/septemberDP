@@ -3,6 +3,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -50,7 +52,19 @@ public class SocialSection extends DomainEntity {
 		this.profileLink = profileLink;
 	}
 	
-	
+	// Relationships
+
+	private Application application;
+
+	@Valid
+	@ManyToOne
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
 	
 	
 }

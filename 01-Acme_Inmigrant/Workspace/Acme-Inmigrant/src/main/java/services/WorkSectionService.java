@@ -2,7 +2,6 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +36,10 @@ public class WorkSectionService {
 
 	// Simple CRUD methods ----------------------------------------------------
 	
-	public WorkSection create(Application application) {
+	public WorkSection create() {
 		final Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Assert.notNull(immigrant);
-		String nameCompany = "Company name";
-		String position = "Position";
-		Date startDate = new Date(System.currentTimeMillis() - 1000);
 		WorkSection res = new WorkSection();
-		res.setNameCompany(nameCompany);
-		res.setPosition(position);
-		res.setStartDate(startDate);
-		List<WorkSection> workSections = new ArrayList<WorkSection>();
-		workSections = application.getWorkSection();
-		workSections.add(res);
-		application.setWorkSection(workSections);
 		return res;
 	}
 
@@ -71,6 +60,13 @@ public class WorkSectionService {
 
 	public WorkSection save(WorkSection workSection) {
 		WorkSection res;
+		
+		Application a = workSection.getApplication();
+		List<WorkSection> workSections = new ArrayList<WorkSection>();
+		workSections = a.getWorkSection();
+		workSections.add(workSection);
+		a.setWorkSection(workSections);
+		
 		res = workSectionRepository.save(workSection);
 		return res;
 	}
