@@ -29,6 +29,6 @@
 		<acme:textbox path="picture" code="personalSection.picture" />
 		
 		<acme:submit name="save" code="personalSection.submit" />
-		<acme:cancel url="application/display.do" code="personalSection.cancel" />
+		<acme:cancel url="application/immigrant/display.do" code="personalSection.cancel" />
 	</security:authorize>
 </form:form>

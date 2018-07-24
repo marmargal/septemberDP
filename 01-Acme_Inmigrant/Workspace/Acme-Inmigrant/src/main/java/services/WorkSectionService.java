@@ -79,9 +79,23 @@ public class WorkSectionService {
 		Assert.notNull(workSection);
 		Assert.isTrue(workSection.getId() != 0);
 		Assert.isTrue(workSectionRepository.exists(workSection.getId()));
+		
+		Application application = this.findApplicationbyWorkSection(workSection.getId());
+		List<WorkSection> ws = application.getWorkSection();
+		ws.remove(workSection);
+		application.setWorkSection(ws);
+		
 		workSectionRepository.delete(workSection);
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public Application findApplicationbyWorkSection(Integer id) {
+		Application res = new Application();
+		
+		res = workSectionRepository.findApplicationbyWorkSection(id);
+		
+		return res;
+	}
 
 }

@@ -29,6 +29,9 @@
 		<acme:date code="workSection.endDate" path="endDate" placeholder="dd/MM/yyyy"/>
 		
 		<acme:submit name="save" code="workSection.submit" />
+		<jstl:if test="${workSection.id != 0}">
+			<acme:delete confirmationCode="workSection.confirm.delete" buttonCode="workSection.delete" id="${workSection.id}" />
+		</jstl:if>
 		<acme:cancel url="application/display.do" code="workSection.cancel" />
 	</security:authorize>
 </form:form>
