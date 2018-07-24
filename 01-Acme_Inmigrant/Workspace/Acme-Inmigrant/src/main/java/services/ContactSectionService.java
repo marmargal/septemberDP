@@ -74,9 +74,23 @@ public class ContactSectionService {
 		Assert.notNull(contactSection);
 		Assert.isTrue(contactSection.getId() != 0);
 		Assert.isTrue(contactSectionRepository.exists(contactSection.getId()));
+		
+		Application application = this.findApplicationbyContactSection(contactSection.getId());
+		List<ContactSection> cs = application.getContactSection();
+		cs.remove(contactSection);
+		application.setContactSection(cs);
+		
 		contactSectionRepository.delete(contactSection);
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public Application findApplicationbyContactSection(Integer id) {
+		Application res = new Application();
+		
+		res = contactSectionRepository.findApplicationbyContactSection(id);
+		
+		return res;
+	}
 
 }

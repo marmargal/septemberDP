@@ -28,6 +28,9 @@
 		<acme:textbox path="pageNumber" code="contactSection.pageNumber" />
 		
 		<acme:submit name="save" code="contactSection.submit" />
+		<jstl:if test="${contactSection.id != 0}">
+			<acme:delete confirmationCode="contactSection.confirm.delete" buttonCode="contactSection.delete" id="${contactSection.id}" />
+		</jstl:if>
 		<acme:cancel url="application/display.do" code="contactSection.cancel" />
 	</security:authorize>
 </form:form>
