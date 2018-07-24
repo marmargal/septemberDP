@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ApplicationService;
 import services.WorkSectionService;
 import controllers.AbstractController;
+import domain.Application;
 import domain.WorkSection;
 
 @Controller
@@ -23,6 +25,11 @@ public class WorkSectionImmigrantController extends AbstractController {
 
 	@Autowired
 	private WorkSectionService workSectionService;
+	
+	// Supporting services --------------------------------------------------
+	
+	@Autowired
+	private ApplicationService applicationService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -91,11 +98,13 @@ public class WorkSectionImmigrantController extends AbstractController {
 	// Creating ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam final int applicationId) {
 		ModelAndView result;
 		WorkSection a;
-
-		a = this.workSectionService.create();
+		Application application;
+		
+		application = this.applicationService.findOne(applicationId);
+		a = this.workSectionService.create(application);
 		result = this.createEditModelAndView(a);
 
 		return result;

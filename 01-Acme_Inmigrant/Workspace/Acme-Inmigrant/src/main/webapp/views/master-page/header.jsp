@@ -44,7 +44,7 @@
 		<security:authorize access="hasRole('IMMIGRANT')">
 			<li><a href="#"><spring:message code="master.page.application" /></a></li>
 			<li><a href="#"><spring:message code="master.page.myApplication" /></a></li>
-			<li><a href="/application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
+			<li><a href="application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('OFFICER')">

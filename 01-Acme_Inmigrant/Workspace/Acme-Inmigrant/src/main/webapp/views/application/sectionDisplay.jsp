@@ -116,7 +116,7 @@
 </display:table>
 
 <security:authorize access="hasRole('IMMIGRANT')">
-		<a href="workSection/immigrant/create.do">
+		<a href="workSection/immigrant/create.do?applicationId=${applicationId}">
 			<button>
 				<spring:message code="application.create.workSection" />
 			</button>

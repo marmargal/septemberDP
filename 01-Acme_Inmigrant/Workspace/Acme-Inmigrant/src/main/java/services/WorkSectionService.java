@@ -1,6 +1,9 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,8 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.WorkSectionRepository;
-import domain.WorkSection;
+import domain.Application;
 import domain.Immigrant;
+import domain.WorkSection;
 
 @Service
 @Transactional
@@ -33,11 +37,20 @@ public class WorkSectionService {
 
 	// Simple CRUD methods ----------------------------------------------------
 	
-	public WorkSection create() {
+	public WorkSection create(Application application) {
 		final Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Assert.notNull(immigrant);
+		String nameCompany = "Company name";
+		String position = "Position";
+		Date startDate = new Date(System.currentTimeMillis() - 1000);
 		WorkSection res = new WorkSection();
-
+		res.setNameCompany(nameCompany);
+		res.setPosition(position);
+		res.setStartDate(startDate);
+		List<WorkSection> workSections = new ArrayList<WorkSection>();
+		workSections = application.getWorkSection();
+		workSections.add(res);
+		application.setWorkSection(workSections);
 		return res;
 	}
 
