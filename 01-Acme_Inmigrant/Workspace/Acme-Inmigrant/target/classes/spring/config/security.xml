@@ -125,6 +125,10 @@
 		<security:intercept-url pattern="/requirement/display.do" access="permitAll" />
 		<security:intercept-url pattern="/requirement/administrator/**" access="hasRole('ADMIN')" />
 		
+								<!-- 		CATEGORY		-->
+		<security:intercept-url pattern="/category/list.do" access="permitAll" />
+		<security:intercept-url pattern="/visa/category/list.do" access="permitAll" />
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 
