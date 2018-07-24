@@ -26,11 +26,12 @@
 		<acme:textbox path="email" code="contactSection.email" />
 		<acme:textbox path="phoneNumber" code="contactSection.phoneNumber" />
 		<acme:textbox path="pageNumber" code="contactSection.pageNumber" />
-		
+		<acme:select items="${application}" itemLabel="ticker" code="contactSection.application" path="application" />
+
 		<acme:submit name="save" code="contactSection.submit" />
 		<jstl:if test="${contactSection.id != 0}">
 			<acme:delete confirmationCode="contactSection.confirm.delete" buttonCode="contactSection.delete" id="${contactSection.id}" />
 		</jstl:if>
-		<acme:cancel url="application/display.do" code="contactSection.cancel" />
+		<acme:cancel url="application/immigrant/display.do" code="contactSection.cancel" />
 	</security:authorize>
 </form:form>

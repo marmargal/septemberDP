@@ -1,5 +1,8 @@
 package controllers.immigrant;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ApplicationService;
 import services.EducationSectionService;
+import services.ImmigrantService;
 import controllers.AbstractController;
+import domain.Application;
 import domain.EducationSection;
+import domain.Immigrant;
 
 @Controller
 @RequestMapping("/educationSection/immigrant")
@@ -23,6 +30,14 @@ public class EducationSectionImmigrantController extends AbstractController {
 
 	@Autowired
 	private EducationSectionService educationSectionService;
+	
+	// Supporting services --------------------------------------------------
+	
+	@Autowired
+	private ApplicationService applicationService;
+
+	@Autowired
+	private ImmigrantService immigrantService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -113,8 +128,13 @@ public class EducationSectionImmigrantController extends AbstractController {
 			final EducationSection educationSection, final String message) {
 
 		ModelAndView result;
+		Immigrant immigrant = immigrantService.findByPrincipal();
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = applicationService.getApplicationByImmigrant(immigrant.getId());
+		
 		result = new ModelAndView("educationSection/immigrant/edit");
 		result.addObject("educationSection", educationSection);
+		result.addObject("application", applications);
 		result.addObject("message", message);
 		return result;
 	}

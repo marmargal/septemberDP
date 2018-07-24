@@ -26,8 +26,12 @@
 		<acme:textbox path="nickName" code="socialSection.nickName" />
 		<acme:textbox path="socialNetwork" code="socialSection.socialNetwork" />
 		<acme:textbox path="profileLink" code="socialSection.profileLink" />
+		<acme:select items="${application}" itemLabel="ticker" code="socialSection.application" path="application" />
 		
 		<acme:submit name="save" code="socialSection.submit" />
-		<acme:cancel url="application/display.do" code="socialSection.cancel" />
+		<jstl:if test="${socialSection.id != 0}">
+			<acme:delete confirmationCode="socialSection.confirm.delete" buttonCode="socialSection.delete" id="${socialSection.id}" />
+		</jstl:if>
+		<acme:cancel url="application/immigrant/display.do" code="socialSection.cancel" />
 	</security:authorize>
 </form:form>
