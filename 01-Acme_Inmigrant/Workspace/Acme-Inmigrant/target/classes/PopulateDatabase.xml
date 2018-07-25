@@ -427,10 +427,28 @@
 				<ref bean="requirement1" />
 			</list>
 		</property>
-		<property name="law">
+		<property name="laws">
 			<list>
 			</list>
 		</property>
+		<property name="lawParent" ref="law2" />
+	</bean>
+	
+	<!-- Law 2 -->
+	<bean id="law2" class="domain.Law">
+		<property name="title" value="A law 2" />
+		<property name="text" value="A text....." />
+		<property name="enactmentDate" value="11/11/2010" />
+		<property name="abrogationTime" value="11/12/2010" />
+		<property name="requirement">
+			<list>
+			</list>
+		</property>
+		<property name="laws">
+			<list>
+			</list>
+		</property>
+		<property name="lawParent" ref="law1" />
 	</bean>
 
 	<!-- Requirement -->

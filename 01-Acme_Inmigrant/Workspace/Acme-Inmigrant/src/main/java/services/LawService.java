@@ -52,7 +52,7 @@ public class LawService {
 		laws = new ArrayList<Law>();
 
 		res.setRequirement(requirement);
-		res.setLaw(laws);
+		res.setLaws(laws);
 
 		return res;
 	}
@@ -107,7 +107,8 @@ public class LawService {
 		res.setText(law.getText());
 		res.setTitle(law.getTitle());
 
-		res.setLaw(law.getLaw());
+		res.setLaws(law.getLaws());
+		res.setLawParent(law.getLawParent());
 		res.setRequirement(law.getRequirement());
 
 		return res;
@@ -122,7 +123,8 @@ public class LawService {
 		res.setText(lawForm.getText());
 		res.setTitle(lawForm.getTitle());
 
-		res.setLaw(lawForm.getLaw());
+		res.setLaws(lawForm.getLaws());
+		res.setLawParent(lawForm.getLawParent());
 		res.setRequirement(lawForm.getRequirement());
 
 		if (binding != null)

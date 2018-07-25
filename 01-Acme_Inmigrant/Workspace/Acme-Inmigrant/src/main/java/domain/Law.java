@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -78,7 +79,8 @@ public class Law extends DomainEntity {
 	// Relationships
 	
 	private List<Requirement> requirement;
-	private List<Law> law;
+	private List<Law> laws;
+	private Law lawParent;
 
 	@Valid
 	@OneToMany
@@ -91,13 +93,24 @@ public class Law extends DomainEntity {
 	}
 	@Valid
 	@OneToMany
-	public List<Law> getLaw() {
-		return law;
+	public List<Law> getLaws() {
+		return laws;
 	}
 
-	public void setLaw(List<Law> law) {
-		this.law = law;
+	public void setLaws(List<Law> laws) {
+		this.laws = laws;
 	}
+
+	@Valid
+	@ManyToOne(optional = true)
+	public Law getLawParent() {
+		return lawParent;
+	}
+
+	public void setLawParent(Law lawParent) {
+		this.lawParent = lawParent;
+	}
+	
 	
 	
 }

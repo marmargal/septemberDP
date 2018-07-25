@@ -3,6 +3,7 @@ package forms;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Past;
@@ -21,13 +22,15 @@ public class LawForm {
 
 	// Attributes
 
+	private int id;
 	private String title;
 	private String text;
 	private Date enactmentDate;
 	private Date abrogationTime;
 
 	private List<Requirement> requirement;
-	private List<Law> law;
+	private List<Law> laws;
+	private Law lawParent;
 
 	@NotBlank
 	public String getTitle() {
@@ -77,11 +80,29 @@ public class LawForm {
 
 	@Valid
 	@OneToMany
-	public List<Law> getLaw() {
-		return law;
+	public List<Law> getLaws() {
+		return laws;
 	}
 
-	public void setLaw(List<Law> law) {
-		this.law = law;
+	public void setLaws(List<Law> laws) {
+		this.laws = laws;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	@Valid
+	@ManyToOne(optional = true)
+	public Law getLawParent() {
+		return lawParent;
+	}
+
+	public void setLawParent(Law lawParent) {
+		this.lawParent = lawParent;
+	}
+	
 }
