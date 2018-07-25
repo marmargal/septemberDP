@@ -18,7 +18,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="6" class="listImmigrant" keepStatus="true"
+<display:table pagesize="6" class="immigrant" keepStatus="true"
 	name="immigrant" requestURI="${requestURI }" id="row">
 
 	<security:authorize access="hasRole('OFFICER')">

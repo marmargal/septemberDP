@@ -28,9 +28,8 @@
 <%-- Definition --%>
 
 <div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>
+	<b><form:label path="${path}"><spring:message code="${code}" />:&nbsp;</form:label></b>
 	<form:password path="${path}"/>
 	<form:errors path="${path}" cssClass="error" />
 </div>
+

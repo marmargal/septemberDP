@@ -31,10 +31,14 @@
 		<value>/views/visa/messages</value>
 		<value>/views/report/messages</value>
 		<value>/views/visa/messages</value>
-		<value>/views/officer/messages</value>
 		<value>/views/terms/messages</value>
 		<value>/views/application/messages</value>
+		<value>/views/actor/messages</value>
 		<value>/views/law/messages</value>
+		<value>/views/country/messages</value>
+		<value>/views/personalSection/messages</value>
+		<value>/views/contactSection/messages</value>
+		<value>/views/workSection/messages</value>
 
 	</util:list>
 </beans>

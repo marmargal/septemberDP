@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
 import services.ImmigrantService;
+import services.OfficerService;
 import controllers.AbstractController;
 import domain.Application;
 import domain.Immigrant;
@@ -26,7 +26,7 @@ public class ImmigrantController extends AbstractController{
 	
 	// Supporting services
 
-	private ActorService actorService;
+	private OfficerService officerService;
 	
 	// Constructors
 	
@@ -40,25 +40,26 @@ public class ImmigrantController extends AbstractController{
 	public ModelAndView list(){
 		ModelAndView res;
 		
-		Officer officer = (Officer) actorService.findByPrincipal();
+//		Officer officer = new Officer();
+//		officer = officerService.findByPrincipal();
 		
-		Collection<Application> applications = new ArrayList<Application>();
+//		Collection<Application> applications = new ArrayList<Application>();
 		Collection<Immigrant> all = new ArrayList<Immigrant>();
-		Collection<Immigrant> withApplications = new ArrayList<Immigrant>();
-		
-		applications = officer.getApplications();
+//		Collection<Immigrant> withApplications = new ArrayList<Immigrant>();
+//		
+//		applications = officer.getApplications();
 		all = immigrantService.findAll();
 
-		for(Application a: applications){
-			for(Immigrant i: all){
-				if(a.getImmigrant() == i){
-					withApplications.add(i);
-				}
-			}
-		}
+//		for(Application a: applications){
+//			for(Immigrant i: all){
+//				if(a.getImmigrant() == i){
+//					withApplications.add(i);
+//				}
+//			}
+//		}
 		
 		res = new ModelAndView("immigrant/officer/list");
-		res.addObject("immigrant", withApplications);
+		res.addObject("immigrant", all);
 		res.addObject("requestURI", "immigrant/officer/list.do");
 		
 		return res;

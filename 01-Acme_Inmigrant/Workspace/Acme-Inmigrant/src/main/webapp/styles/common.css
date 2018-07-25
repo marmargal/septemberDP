@@ -8,6 +8,9 @@
  * 
  */
 
+body {
+}
+
 .error {
 	color: red;
 	font-weight: bolder;
@@ -16,4 +19,14 @@
 .message {
 	color: red;
 	font-weight: bolder;
+}
+
+#content {
+	margin-top: 20px;
+	margin-left: 40px;
+}
+
+#language {
+	margin-top: 10px;
+	margin-left: 40px;
 }

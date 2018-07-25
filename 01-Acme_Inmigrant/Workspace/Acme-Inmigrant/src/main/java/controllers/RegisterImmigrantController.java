@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ImmigrantService;
 import domain.Immigrant;
-import forms.ImmigrantForm;
+import forms.ActorForm;
 
 @Controller
 @RequestMapping("/immigrant")
@@ -33,33 +33,38 @@ public class RegisterImmigrantController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView res;
 		
-		Immigrant immigrant = immigrantService.create();
+//		Immigrant immigrant = immigrantService.create();
 
-		ImmigrantForm immigrantForm = new ImmigrantForm();
-		immigrantForm = immigrantService.construct(immigrant);
+		ActorForm actorForm = new ActorForm();
+//		actorForm = immigrantService.construct(immigrant);
 
 //		res = new ModelAndView("immigrant/register_Immigrant");
-//		res.addObject("immigrantForm", immigrantForm);
+//		res.addObject("actorForm", actorForm);
 		
-		res = this.createEditModelAndView(immigrantForm);
+		res = this.createEditModelAndView(actorForm);
 
 		return res;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("immigrantForm") ImmigrantForm immigrantForm,
+	public ModelAndView save(@ModelAttribute("actorForm") ActorForm actorForm,
 			final BindingResult binding) {
-ModelAndView res;
+		ModelAndView res;
 		
-		if(binding.hasErrors()){
-			res = this.createEditModelAndView(immigrantForm, "immigrant.params.error");
-		}else
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(actorForm, "actor.params.error");
+		else if (!actorForm.getRepeatPassword().equals(actorForm.getPassword()))
+			res = this.createEditModelAndView(actorForm, "actor.commit.errorPassword");
+		else if (actorForm.getTermsAndConditions() == false) {
+			res = this.createEditModelAndView(actorForm, "actor.params.errorTerms");
+		} else
 			try{
-				Immigrant immigrant = this.immigrantService.reconstruct(immigrantForm, binding);
+				Immigrant immigrant = this.immigrantService.reconstruct(actorForm, binding);
 				this.immigrantService.save(immigrant);
 				res = new ModelAndView("redirect:/");
 			}catch (final Throwable oops) {
-				res = this.createEditModelAndView(immigrantForm, "immigrant.commit.error");
+				System.out.println(oops);
+				res = this.createEditModelAndView(actorForm, "actor.commit.error");
 			}
 		
 		return res;
@@ -67,21 +72,22 @@ ModelAndView res;
 
 	// Ancillary methods --------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final ImmigrantForm immigrantForm) {
+	protected ModelAndView createEditModelAndView(final ActorForm actorForm) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(immigrantForm, null);
+		result = this.createEditModelAndView(actorForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final ImmigrantForm immigrantForm,
+	protected ModelAndView createEditModelAndView(final ActorForm actorForm,
 			final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("immigrant/register");
-		result.addObject("immigrantForm", immigrantForm);
+		result = new ModelAndView("actor/register");
+		result.addObject("actorForm", actorForm);
 		result.addObject("message", message);
+		result.addObject("requestURI","immigrant/register.do");
 
 		return result;
 	}

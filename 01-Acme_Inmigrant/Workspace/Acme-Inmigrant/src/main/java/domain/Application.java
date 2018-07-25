@@ -96,14 +96,14 @@ public class Application extends DomainEntity{
 	private Officer officer;
 	private Immigrant immigrant;
 	private PersonalSection personalSection;
-	private List<ContactSection> contacSection;
+	private List<ContactSection> contactSection;
 	private List<WorkSection> workSection;
 	private List<SocialSection> socialSection;
 	private List<EducationSection> educationSection;
 	private List<Question> question;
 
 	@Valid
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=true)
 	public Officer getOfficer() {
 		return officer;
 	}
@@ -137,12 +137,12 @@ public class Application extends DomainEntity{
 
 	@Valid
 	@OneToMany(cascade = CascadeType.ALL)
-	public List<ContactSection> getContacSection() {
-		return contacSection;
+	public List<ContactSection> getContactSection() {
+		return contactSection;
 	}
 
-	public void setContacSection(List<ContactSection> contacSection) {
-		this.contacSection = contacSection;
+	public void setContactSection(List<ContactSection> contactSection) {
+		this.contactSection = contactSection;
 	}
 
 	@Valid

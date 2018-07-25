@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -81,6 +82,12 @@ public class VisaService {
 		Assert.isTrue(visa.getId() != 0);
 		Assert.isTrue(visaRepository.exists(visa.getId()));
 		visaRepository.delete(visa);
+	}
+	
+	public Collection<Visa> searchVisa(String criteria){
+		Collection<Visa> res = new ArrayList<Visa>();
+		res.addAll(visaRepository.searchVisa(criteria));
+		return res;
 	}
 
 	private double conversionToEuro(String currency, double price) {

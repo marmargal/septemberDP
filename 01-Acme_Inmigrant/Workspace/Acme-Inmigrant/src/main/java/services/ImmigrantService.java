@@ -18,7 +18,7 @@ import security.UserAccount;
 import domain.Answer;
 import domain.Application;
 import domain.Immigrant;
-import forms.ImmigrantForm;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -125,8 +125,8 @@ public class ImmigrantService {
 		Assert.isTrue(authority.contains(res));
 	}
 
-	public ImmigrantForm construct(Immigrant immigrant) {
-		ImmigrantForm res = new ImmigrantForm();
+	public ActorForm construct(Immigrant immigrant) {
+		ActorForm res = new ActorForm();
 		
 		res.setId(immigrant.getId());
 		res.setName(immigrant.getName());
@@ -138,20 +138,25 @@ public class ImmigrantService {
 		return res;
 	}
 
-	public Immigrant reconstruct(final ImmigrantForm immigrantForm,
+	public Immigrant reconstruct(final ActorForm immigrantForm,
 			final BindingResult binding) {
 		Assert.notNull(immigrantForm);
 		Immigrant res = new Immigrant();
 		
-		res.setId(immigrantForm.getId());
+		if (immigrantForm.getId() != 0)
+			res = this.findOne(immigrantForm.getId());
+		else
+			res = this.create();
+		
 		res.setName(immigrantForm.getName());
 		res.setSurname(immigrantForm.getSurname());
-		res.setPhoneNumber(immigrantForm.getPhoneNumber());
 		res.setEmail(immigrantForm.getEmail());
+		res.setPhoneNumber(immigrantForm.getPhoneNumber());
 		res.setAddress(immigrantForm.getAddress());
+		res.getUserAccount().setUsername(immigrantForm.getUsername());
+		res.getUserAccount().setPassword(immigrantForm.getPassword());
 		
-		if(binding!=null)
-			validator.validate(res, binding);
+		this.validator.validate(res, binding);
 		
 		return res;
 	}

@@ -470,7 +470,7 @@
 		<property name="officer" ref="officer1" />
 		<property name="immigrant" ref="immigrant1" />
 		<property name="personalSection" ref="personalSection1" />
-		<property name="contacSection">
+		<property name="contactSection">
 			<list>
 			</list>
 		</property>
@@ -502,7 +502,7 @@
 		<property name="officer" ref="officer2" />
 		<property name="immigrant" ref="immigrant2" />
 		<property name="personalSection" ref="personalSection2" />
-		<property name="contacSection">
+		<property name="contactSection">
 			<list>
 			</list>
 		</property>
@@ -534,7 +534,7 @@
 		<property name="officer" ref="officer2" />
 		<property name="immigrant" ref="immigrant3" />
 		<property name="personalSection" ref="personalSection3" />
-		<property name="contacSection">
+		<property name="contactSection">
 			<list>
 			</list>
 		</property>

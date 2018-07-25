@@ -76,7 +76,5 @@ public class Country extends DomainEntity {
 	public void setLaw(List<Law> law) {
 		this.law = law;
 	}
-	
-	
 
 }

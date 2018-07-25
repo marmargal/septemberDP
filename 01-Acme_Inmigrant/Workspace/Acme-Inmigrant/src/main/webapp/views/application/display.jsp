@@ -26,7 +26,13 @@
 	<display:column property="closedMoment" title="${closedMomentHeader}" sortable="true" />
 	
 	<spring:message code="application.creditCard" var="creditCardHeader" />
-	<display:column property="creditCard" title="${creditCardHeader}" sortable="true" />
+	<display:column property="creditCard.number" title="${creditCardHeader}" sortable="true" />
+	
+	<spring:message code="application.sections"/>
+	<display:column>
+		<a href= "application/immigrant/sectionDisplay.do?applicationId=${row.id}">
+		<spring:message code="application.sections"/></a>
+	</display:column>
 
 	<security:authorize access="hasRole('IMMIGRANT')">
 		<spring:message code="application.edit" />
@@ -40,8 +46,10 @@
 
 </display:table>
 
-<!-- Action links -->
-
 <security:authorize access="hasRole('IMMIGRANT')">
-	<acme:links url="application/immigrant/create.do" code="application.create" />
+	<a href="application/immigrant/create.do">
+		<button>
+			<spring:message code="application.create" />
+		</button>
+	</a>
 </security:authorize>
