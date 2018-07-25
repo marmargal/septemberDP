@@ -8,26 +8,27 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@ tag language="java" body-content="empty" %>
+<%@ tag language="java" body-content="empty"%>
 
 <%-- Taglibs --%>
 
-<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<%-- Attributes --%> 
+<%-- Attributes --%>
 
-<%@ attribute name="path" required="true" %>
-<%@ attribute name="code" required="true" %>
-<%@ attribute name="items" required="true" type="java.util.Collection" %>
+<%@ attribute name="path" required="true"%>
+<%@ attribute name="code" required="true"%>
+<%@ attribute name="items" required="true" type="java.util.Collection"%>
 
-<%@ attribute name="id" required="false" %>
-<%@ attribute name="onchange" required="false" %>
+<%@ attribute name="id" required="false"%>
+<%@ attribute name="onchange" required="false"%>
 
 <jstl:if test="${id == null}">
 	<jstl:set var="id" value="${UUID.randomUUID().toString()}" />
@@ -40,12 +41,13 @@
 <%-- Definition --%>
 
 <div>
+	<b></b>
 	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>	
+		<spring:message code="${code}" />:&nbsp;</form:label>
+	</b>
 	<form:select id="${id}" path="${path}" onchange="${onchange}">
-		<form:option value="0" label="----" />		
-		<form:options items="${items}"/>
+		<form:option value="0" label="----" />
+		<form:options items="${items}" />
 	</form:select>
 	<form:errors path="${path}" cssClass="error" />
 </div>

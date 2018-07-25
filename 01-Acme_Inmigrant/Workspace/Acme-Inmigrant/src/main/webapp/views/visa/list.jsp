@@ -22,7 +22,7 @@
 		type="submit">
 	</form>
 
-<display:table pagesize="5" class="visas" keepStatus="true" name="visas" requestURI="${requestURI }">
+<display:table pagesize="5" class="visas" keepStatus="true" name="visas" requestURI="${requestURI }" id="row">
 
 	
 	
