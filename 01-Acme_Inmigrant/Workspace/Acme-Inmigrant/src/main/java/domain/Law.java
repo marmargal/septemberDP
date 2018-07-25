@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -95,6 +96,7 @@ public class Law extends DomainEntity {
 	@OneToMany
 	public List<Law> getLaws() {
 		return laws;
+
 	}
 
 	public void setLaws(List<Law> laws) {
@@ -110,7 +112,7 @@ public class Law extends DomainEntity {
 	public void setLawParent(Law lawParent) {
 		this.lawParent = lawParent;
 	}
-	
+
 	
 	
 }

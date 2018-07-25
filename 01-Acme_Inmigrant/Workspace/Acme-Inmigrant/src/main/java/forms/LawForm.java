@@ -1,5 +1,6 @@
 package forms;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class LawForm {
 	private List<Requirement> requirement;
 	private List<Law> laws;
 	private Law lawParent;
+
 
 	@NotBlank
 	public String getTitle() {
@@ -74,8 +76,8 @@ public class LawForm {
 		return requirement;
 	}
 
-	public void setRequirement(List<Requirement> requirement) {
-		this.requirement = requirement;
+	public void setRequirement(List<Requirement> collection) {
+		this.requirement = collection;
 	}
 
 	@Valid

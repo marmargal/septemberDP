@@ -15,6 +15,9 @@
 		<!-- Add your own converters using entries of the following form: <bean 
 			class="converters.Class1ToClass2" /> -->
 
+		<bean class="converters.CountryToStringConverter" />
+		<bean class="converters.StringToCountryConverter" />
+
 		<bean class="converters.VisaToStringConverter" />
 		<bean class="converters.StringToVisaConverter" />
 		<bean class="converters.ActorToStringConverter" />
@@ -43,6 +46,20 @@
 		<bean class="converters.StringToUserAccountConverter" />
 		<bean class="converters.LawToStringConverter" />
 		<bean class="converters.StringToLawConverter" />
+		<bean class="converters.StringToQuestionConverter" />
+		<bean class="converters.QuestionToStringConverter" />
+		<bean class="converters.StringToAnswerConverter" />
+		<bean class="converters.AnswerToStringConverter" />
+		<bean class="converters.StringToRequirementConverter" />
+		<bean class="converters.RequirementToStringConverter" />
+		<bean class="converters.StringToInvestigatorConverter" />
+		<bean class="converters.InvestigatorToStringConverter" />
+		<bean class="converters.StringToApplicationConverter" />
+		<bean class="converters.ApplicationToStringConverter" />
+		<bean class="converters.StringToCategoryConverter" />
+		<bean class="converters.CategoryToStringConverter" />
+		<bean class="converters.StringToDecisionConverter" />
+		<bean class="converters.DecisionToStringConverter" />
 
 	</util:list>
 

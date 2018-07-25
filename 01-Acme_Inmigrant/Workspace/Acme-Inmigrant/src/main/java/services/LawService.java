@@ -54,6 +54,7 @@ public class LawService {
 		res.setRequirement(requirement);
 		res.setLaws(laws);
 
+
 		return res;
 	}
 
@@ -111,6 +112,7 @@ public class LawService {
 		res.setLawParent(law.getLawParent());
 		res.setRequirement(law.getRequirement());
 
+
 		return res;
 	}
 
@@ -126,6 +128,7 @@ public class LawService {
 		res.setLaws(lawForm.getLaws());
 		res.setLawParent(lawForm.getLawParent());
 		res.setRequirement(lawForm.getRequirement());
+
 
 		if (binding != null)
 			validator.validate(res, binding);

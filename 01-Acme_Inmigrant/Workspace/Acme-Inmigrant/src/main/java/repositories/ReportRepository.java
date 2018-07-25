@@ -11,6 +11,6 @@ import domain.Report;
 @Repository
 public interface ReportRepository extends JpaRepository<Report, Integer>{
 
-	@Query("select r from Report r join r.immigrant i where i.id = ?1")
-	Collection<Report> findReportByImmigrantId(int immigrantId);
+	@Query("select r from Report r join r.writer w where w.id = ?1")
+	Collection<Report> findReportsByInvestigatorId(int investigatorId);
 }

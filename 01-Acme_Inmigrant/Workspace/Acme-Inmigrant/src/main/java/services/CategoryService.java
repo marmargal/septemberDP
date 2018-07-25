@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 import repositories.CategoryRepository;
 import domain.Category;
-import domain.Law;
 
 @Service
 @Transactional
@@ -75,6 +74,18 @@ public class CategoryService {
 		Assert.isTrue(category.getId() != 0);
 		Assert.isTrue(categoryRepository.exists(category.getId()));
 		categoryRepository.delete(category);
+	}
+	
+	// Other business methods
+	
+	public Collection<Category> getCategoryChildren() {
+		Collection<Category> categories;
+		Category c;
+		c = this.categoryRepository.findCategories();
+		Assert.notNull(c);
+		categories = c.getCategories();
+		Assert.notNull(categories);
+		return categories;
 	}
 
 }

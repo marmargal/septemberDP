@@ -51,4 +51,15 @@ public class VisaController extends AbstractController {
 		result.addObject("visas", visas);
 		return result;
 	}
+	
+	@RequestMapping(value = "/category/list", method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam int categoryId) {
+		ModelAndView result;
+		Collection<Visa> visas = new ArrayList<>();
+		visas = visaService.findVisasByCategory(categoryId);
+		result = new ModelAndView("visa/list");
+		result.addObject("requestURI", "visa/category/list.do");
+		result.addObject("visas", visas);
+		return result;
+	}
 }

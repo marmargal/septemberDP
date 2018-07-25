@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -70,5 +71,18 @@ public class EducationSection extends DomainEntity {
 		this.level = level;
 	}
 	
+	// Relationships
+	
+	private Application application;
+
+	@Valid
+	@ManyToOne
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
 	
 }

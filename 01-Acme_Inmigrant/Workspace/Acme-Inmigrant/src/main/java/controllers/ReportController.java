@@ -25,7 +25,7 @@ public class ReportController extends AbstractController {
 
 
 	// Display
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@RequestMapping(value="/display", method=RequestMethod.GET)
 	public ModelAndView display(@RequestParam final int reportId){
 		ModelAndView res;
 		Report report;

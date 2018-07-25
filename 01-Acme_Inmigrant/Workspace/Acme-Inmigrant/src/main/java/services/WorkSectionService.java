@@ -1,6 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.WorkSectionRepository;
-import domain.WorkSection;
+import domain.Application;
 import domain.Immigrant;
+import domain.WorkSection;
 
 @Service
 @Transactional
@@ -37,7 +40,6 @@ public class WorkSectionService {
 		final Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Assert.notNull(immigrant);
 		WorkSection res = new WorkSection();
-
 		return res;
 	}
 
@@ -58,6 +60,13 @@ public class WorkSectionService {
 
 	public WorkSection save(WorkSection workSection) {
 		WorkSection res;
+		
+		Application a = workSection.getApplication();
+		List<WorkSection> workSections = new ArrayList<WorkSection>();
+		workSections = a.getWorkSection();
+		workSections.add(workSection);
+		a.setWorkSection(workSections);
+		
 		res = workSectionRepository.save(workSection);
 		return res;
 	}
@@ -66,9 +75,23 @@ public class WorkSectionService {
 		Assert.notNull(workSection);
 		Assert.isTrue(workSection.getId() != 0);
 		Assert.isTrue(workSectionRepository.exists(workSection.getId()));
+		
+		Application application = this.findApplicationbyWorkSection(workSection.getId());
+		List<WorkSection> ws = application.getWorkSection();
+		ws.remove(workSection);
+		application.setWorkSection(ws);
+		
 		workSectionRepository.delete(workSection);
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public Application findApplicationbyWorkSection(Integer id) {
+		Application res = new Application();
+		
+		res = workSectionRepository.findApplicationbyWorkSection(id);
+		
+		return res;
+	}
 
 }

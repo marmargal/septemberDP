@@ -17,11 +17,11 @@
 			<a href="report/display.do?reportId=${row.id}"><spring:message code="report.display"/></a>
 	</display:column>
 
+	<spring:message code="report.immigrant" var="immigrantHeader" />
+	<display:column property="immigrant.name" title="${immigrantHeader}" sortable="true" />
+
 	<spring:message code="report.text" var="textHeader" />
-	<display:column property="report.text" title="${textHeader}" sortable="true" />
-	
-	<spring:message code="report.picture" var="pictuteHeader" />
-	<display:column property="report.picture" title="${pictuteHeader}" sortable="false" />
+	<display:column property="text" title="${textHeader}" sortable="true" />
 	
 </display:table>
 

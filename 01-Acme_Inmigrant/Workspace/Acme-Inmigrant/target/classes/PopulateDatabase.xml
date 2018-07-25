@@ -233,7 +233,11 @@
 		</property>
 		<property name="answers">
 			<list>
+				<ref bean="answer1" />
 			</list>
+		</property>
+		<property name="investigator">
+			<null />
 		</property>
 	</bean>
 
@@ -254,6 +258,9 @@
 			<list>
 			</list>
 		</property>
+		<property name="investigator">
+			<null />
+		</property>
 	</bean>
 
 	<!-- Immigrant 3 -->
@@ -272,6 +279,9 @@
 		<property name="answers">
 			<list>
 			</list>
+		</property>
+		<property name="investigator">
+			<null />
 		</property>
 	</bean>
 
@@ -294,6 +304,8 @@
 		<property name="decision" ref="decision1" />
 		<property name="questions">
 			<list>
+				<ref bean="question1" />
+				<ref bean="question2" />
 			</list>
 		</property>
 	</bean>
@@ -381,9 +393,17 @@
 	<bean id="visa1" class="domain.Visa">
 		<property name="classes" value="class1" />
 		<property name="description" value="A description 1" />
-		<property name="price" value="200 $" />
+		<property name="price" value= "200" />
 		<property name="country" ref="country1" />
-		<property name="category" ref="category1" />
+		<property name="category" ref="category2" />
+	</bean>
+	
+	<bean id="visa2" class="domain.Visa">
+		<property name="classes" value="class2" />
+		<property name="description" value="A description 2" />
+		<property name="price" value="0" />
+		<property name="country" ref="country2" />
+		<property name="category" ref="category3" />
 	</bean>
 
 	<!-- Category -->
@@ -394,6 +414,50 @@
 		<property name="categoryParent">
 			<null />
 		</property>
+		<property name="categories">
+			<list>
+				<ref bean="category2" />
+				<ref bean="category3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="category2" class="domain.Category">
+		<property name="name" value="Gratuitas" />
+		<property name="rootCategory" value="false" />
+		<property name="categoryParent" ref="category1" />
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="category3" class="domain.Category">
+		<property name="name" value="De pago" />
+		<property name="rootCategory" value="false" />
+		<property name="categoryParent" ref="category1" />
+		<property name="categories">
+			<list>
+				<ref bean="category4" />
+				<ref bean="category5" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="category4" class="domain.Category">
+		<property name="name" value="Un solo pago" />
+		<property name="rootCategory" value="false" />
+		<property name="categoryParent" ref="category3" />
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="category5" class="domain.Category">
+		<property name="name" value="Pago fraccionado" />
+		<property name="rootCategory" value="false" />
+		<property name="categoryParent" ref="category3" />
 		<property name="categories">
 			<list>
 			</list>
@@ -414,6 +478,19 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="country2" class="domain.Country">
+		<property name="name" value="England" />
+		<property name="isoCode" value="UK" />
+		<property name="flag"
+			value="http://flags.fmcdn.net/data/flags/w580/gb.png" />
+		<property name="link" value="https://en.wikipedia.org/wiki/United_Kingdom" />
+		<property name="law">
+			<list>
+				<ref bean="law2" />
+			</list>
+		</property>
+	</bean>
 
 	<!-- Law -->
 	<!-- Law 1 -->
@@ -422,7 +499,7 @@
 		<property name="text" value="A text....." />
 		<property name="enactmentDate" value="11/11/2010" />
 		<property name="abrogationTime" value="11/12/2010" />
-		<property name="requirement">
+		<property name="requirements">
 			<list>
 				<ref bean="requirement1" />
 			</list>
@@ -450,6 +527,23 @@
 		</property>
 		<property name="lawParent" ref="law1" />
 	</bean>
+	
+	<!-- Law 2 -->
+	<bean id="law2" class="domain.Law">
+		<property name="title" value="A law 2" />
+		<property name="text" value="A text....." />
+		<property name="enactmentDate" value="11/11/2010" />
+		<property name="abrogationTime" value="11/12/2010" />
+		<property name="requirements">
+			<list>
+				<ref bean="requirement2" />
+			</list>
+		</property>
+		<property name="law">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Requirement -->
 	<!-- Requirement 1 -->
@@ -457,6 +551,15 @@
 		<property name="title" value="A title 1" />
 		<property name="description" value="A description....." />
 		<property name="abrogated" value="true" />
+		<property name="law" ref="law1" />
+	</bean>
+	
+	<!-- Requirement 2 -->
+	<bean id="requirement2" class="domain.Requirement">
+		<property name="title" value="A title 2" />
+		<property name="description" value="A description....." />
+		<property name="abrogated" value="true" />
+		<property name="law" ref="law2" />
 	</bean>
 
 	<!-- Application -->
@@ -488,6 +591,8 @@
 		</property>
 		<property name="question">
 			<list>
+				<ref bean="question1" />
+				<ref bean="question2" />
 			</list>
 		</property>
 	</bean>
@@ -556,10 +661,32 @@
 		</property>
 	</bean>
 
+	<!-- Question -->
+	<!-- Question 1 -->
+	<bean id="question1" class="domain.Question">
+		<property name="text" value="¿De dónde eres?" />
+		<property name="statement" value="true" />
+		<property name="moment" value="11/12/2010 09:18" />
+		<property name="application" ref="application1" />
+		<property name="officer" ref="officer1" />
+	</bean>
 
+	<!-- Question 2 -->
+	<bean id="question2" class="domain.Question">
+		<property name="text" value="¿A dónde vas?" />
+		<property name="statement" value="false" />
+		<property name="moment" value="09/11/2013 10:15" />
+		<property name="application" ref="application1" />
+		<property name="officer" ref="officer2" />
+	</bean>
 
-
-
-
+	<!-- Answer -->
+	<!-- Answer 1 -->
+	<bean id="answer1" class="domain.Answer">
+		<property name="reply" value="De ESPAÑA!!" />
+		<property name="moment" value="11/12/2010 19:45" />
+		<property name="immigrant" ref="immigrant1" />
+		<property name="question" ref="question1" />
+	</bean>
 
 </beans>

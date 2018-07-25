@@ -6,9 +6,14 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -22,6 +27,7 @@ public class Question extends DomainEntity {
 	
 	// Attributes
 
+	private String text;
 	private boolean statement;
 	private Date moment;
 
@@ -34,6 +40,9 @@ public class Question extends DomainEntity {
 	}
 
 	@Past
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return moment;
 	}
@@ -44,19 +53,8 @@ public class Question extends DomainEntity {
 	
 	// Relationships
 	
-	private Answer answer;
 	private Officer officer;
 	private Application application;
-
-	@Valid
-	@OneToOne(optional = false)
-	public Answer getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(Answer answer) {
-		this.answer = answer;
-	}
 
 	@Valid
 	@ManyToOne(optional=true)
@@ -76,6 +74,15 @@ public class Question extends DomainEntity {
 
 	public void setApplication(Application application) {
 		this.application = application;
+	}
+
+	@NotBlank
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	

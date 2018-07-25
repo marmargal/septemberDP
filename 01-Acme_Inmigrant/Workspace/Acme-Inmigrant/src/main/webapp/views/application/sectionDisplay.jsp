@@ -42,14 +42,6 @@
 
 </display:table>
 
-<security:authorize access="hasRole('IMMIGRANT')">
-		<a href="personalSection/immigrant/create.do">
-			<button>
-				<spring:message code="application.create.personalSection" />
-			</button>
-		</a>
-</security:authorize>
-
 <spring:message code="application.contactSection" var="contactSectionHeader" />
 <h1>
 	<jstl:out value="${contactSectionHeader}"></jstl:out>
@@ -116,10 +108,82 @@
 </display:table>
 
 <security:authorize access="hasRole('IMMIGRANT')">
-		<a href="contactSection/immigrant/create.do">
+		<a href="workSection/immigrant/create.do?applicationId=${applicationId}">
 			<button>
 				<spring:message code="application.create.workSection" />
 			</button>
 		</a>
 </security:authorize>
 
+<spring:message code="application.socialSection" var="socialSection" />
+<h1>
+	<jstl:out value="${socialSection}"></jstl:out>
+</h1>
+
+<display:table name="socialSection" class="displaytag" id="row">
+
+	<!-- Attributes -->
+	
+	<spring:message code="socialSection.nickName" var="nickName" />
+	<display:column property="nickName" title="${nickName}" sortable="true" />
+
+	<spring:message code="socialSection.socialNetwork" var="socialNetwork" />
+	<display:column property="socialNetwork" title="${socialNetwork}" sortable="true" />
+	
+	<spring:message code="socialSection.profileLink" var="profileLink" />
+	<display:column property="profileLink" title="${profileLink}" sortable="true" />
+	
+	<security:authorize access="hasRole('IMMIGRANT')">
+		<spring:message code="application.edit" />
+		<display:column>
+				<a href="socialSection/immigrant/edit.do?socialSectionId=${row.id}"> <spring:message code="application.edit" /></a>
+		</display:column>
+	</security:authorize>
+
+</display:table>
+
+<security:authorize access="hasRole('IMMIGRANT')">
+		<a href="socialSection/immigrant/create.do">
+			<button>
+				<spring:message code="application.create.socialSection" />
+			</button>
+		</a>
+</security:authorize>
+
+<spring:message code="application.educationSection" var="educationSection" />
+<h1>
+	<jstl:out value="${educationSection}"></jstl:out>
+</h1>
+
+<display:table name="educationSection" class="displaytag" id="row">
+
+	<!-- Attributes -->
+	
+	<spring:message code="educationSection.nameDegree" var="nameDegree" />
+	<display:column property="nameDegree" title="${nameDegree}" sortable="true" />
+
+	<spring:message code="educationSection.institution" var="institution" />
+	<display:column property="institution" title="${institution}" sortable="true" />
+	
+	<spring:message code="educationSection.dateAwarded" var="dateAwarded" />
+	<display:column property="dateAwarded" title="${dateAwarded}" sortable="true" />
+	
+	<spring:message code="educationSection.level" var="level" />
+	<display:column property="level" title="${level}" sortable="true" />
+	
+	<security:authorize access="hasRole('IMMIGRANT')">
+		<spring:message code="application.edit" />
+		<display:column>
+				<a href="educationSection/immigrant/edit.do?educationSectionId=${row.id}"> <spring:message code="application.edit" /></a>
+		</display:column>
+	</security:authorize>
+
+</display:table>
+
+<security:authorize access="hasRole('IMMIGRANT')">
+		<a href="educationSection/immigrant/create.do">
+			<button>
+				<spring:message code="application.create.educationSection" />
+			</button>
+		</a>
+</security:authorize>

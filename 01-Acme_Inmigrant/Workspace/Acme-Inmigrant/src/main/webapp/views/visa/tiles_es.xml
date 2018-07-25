@@ -29,4 +29,8 @@
 		<put-attribute name="body" value="/views/visa/list.jsp" />
 	</definition>
 
+<definition name="visa/administrator/invalidate" extends="master.page">
+	<put-attribute name="title" value="invalidar categoria" />
+	<put-attribute name="body" value="/views/visa/invalidate.jsp" />
+</definition>
 </tiles-definitions>
