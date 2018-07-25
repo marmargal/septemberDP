@@ -393,7 +393,7 @@
 	<bean id="visa1" class="domain.Visa">
 		<property name="classes" value="class1" />
 		<property name="description" value="A description 1" />
-		<property name="price" value="200 $" />
+		<property name="price" value= "200" />
 		<property name="country" ref="country1" />
 		<property name="category" ref="category2" />
 	</bean>
@@ -401,7 +401,7 @@
 	<bean id="visa2" class="domain.Visa">
 		<property name="classes" value="class2" />
 		<property name="description" value="A description 2" />
-		<property name="price" value="0 $" />
+		<property name="price" value="0" />
 		<property name="country" ref="country2" />
 		<property name="category" ref="category3" />
 	</bean>

@@ -27,8 +27,6 @@
 <display:table pagesize="5" class="visas" keepStatus="true" name="visas"
 	requestURI="${requestURI }" id="row">
 
-
-
 	<security:authorize access="hasRole('ADMIN')">
 
 		<display:column>
