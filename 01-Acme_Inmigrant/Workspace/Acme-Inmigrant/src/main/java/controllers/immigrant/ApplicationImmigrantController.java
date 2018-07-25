@@ -45,10 +45,10 @@ public class ApplicationImmigrantController extends AbstractController {
 	// Listing --------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam final int applicationId) {
 		ModelAndView result;
-		Collection<Application> application = new ArrayList<>();
-		application = applicationService.findAll();
+		Application application = new Application();
+		application = applicationService.findOne(applicationId);
 		result = new ModelAndView("application/list");
 		result.addObject("requestURI", "application/immigrant/list.do");
 		result.addObject("application", application);

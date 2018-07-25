@@ -28,7 +28,7 @@
 	</display:column>
 	
 	<display:column>
-	<a href="application/immigrant/display.do?applicationId=${row.application.id }"><spring:message code="question.application"/></a>
+	<a href="application/immigrant/list.do?applicationId=${row.application.id }"><spring:message code="question.application"/></a>
 	</display:column>
 	
 		
