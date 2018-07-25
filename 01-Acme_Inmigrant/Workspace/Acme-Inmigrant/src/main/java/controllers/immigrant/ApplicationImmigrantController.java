@@ -119,11 +119,15 @@ public class ApplicationImmigrantController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int applicationId) {
 		ModelAndView result;
 		Application application;
+		Immigrant immigrant;
 
+		immigrant = this.immigrantService.findByPrincipal();
 		application = applicationService.findOne(applicationId);
-		Assert.notNull(application);
-		result = this.createEditModelAndView(application);
-
+		if (immigrant.getApplications().contains(application)) {
+			result = this.createEditModelAndView(application);
+		} else {
+			result = new ModelAndView("redirect:../../");
+		}
 		return result;
 	}
 
