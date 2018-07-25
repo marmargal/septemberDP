@@ -69,6 +69,9 @@
 		<security:intercept-url pattern="/application/immigrant/create.do" access="hasRole('IMMIGRANT')" />
 		<security:intercept-url pattern="/application/immigrant/display.do" access="permitAll" /> 
 		<security:intercept-url pattern="/application/immigrant/sectionDisplay.do" access="permitAll" /> 
+		<security:intercept-url pattern="/application/officer/listAccepted.do" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/application/officer/listRejected.do" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/application/officer/listNoDecision.do" access="hasRole('OFFICER')" />
 		
 								<!-- 		PERSONALSECTION		-->
 		<security:intercept-url pattern="/personalSection/immigrant/edit.do" access="hasRole('IMMIGRANT')" />

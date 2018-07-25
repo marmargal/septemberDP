@@ -23,6 +23,7 @@ import domain.ContactSection;
 import domain.CreditCard;
 import domain.EducationSection;
 import domain.Immigrant;
+import domain.Officer;
 import domain.PersonalSection;
 import domain.Question;
 import domain.SocialSection;
@@ -41,6 +42,9 @@ public class ApplicationService {
 	
 	@Autowired
 	private ImmigrantService immigrantService;
+
+	@Autowired
+	private OfficerService officerService;
 	
 	@Autowired
 	private Validator validator;
@@ -209,6 +213,13 @@ public class ApplicationService {
 	
 	public void flush() {
 		this.applicationRepository.flush();
+	}
+	
+	public Application findApplicationRejected(){
+		Application res = new Application();
+		Officer officer = this.officerService.findByPrincipal();
+		res = this.applicationRepository.findApplicationRejected(officer.getId());
+		return res;
 	}
 	
 }
