@@ -17,15 +17,16 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<security:authorize access="hasRole('ADMIN')">
 
 	<display:table pagesize="6" class="displayLaw" keepStatus="true"
 		name="law" requestURI="${requestURI }" id="row">
+		
+<spring:message code="law.title" var="lawHeader" />
+	<display:column property="title" title="${lawHeader}" sortable="true" />
 
-		<acme:column property="title" code="law.title" />
-
-		<acme:column property="text" code="law.text" />
-
+	<spring:message code="law.text" var="textHeader" />
+	<display:column property="text" title="${textHeader}" sortable="true" />
+	
 		<display:column>
 			<acme:links url="law/administrator/display.do?lawId=${row.id}"
 				code="law.display" />
@@ -39,4 +40,7 @@
 
 
 	</display:table>
+	<security:authorize access="hasRole('ADMIN')">
+		<a href="law/administrator/create.do"><spring:message code="law.create"/></a>
+		<br/>
 </security:authorize>
