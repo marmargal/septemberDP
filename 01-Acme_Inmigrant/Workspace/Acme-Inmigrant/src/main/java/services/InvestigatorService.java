@@ -15,6 +15,8 @@ import repositories.InvestigatorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Application;
+import domain.Immigrant;
 import domain.Investigator;
 import domain.Report;
 import forms.ActorForm;
@@ -152,6 +154,18 @@ public class InvestigatorService {
 		this.validator.validate(res, binding);
 
 		return res;
+	}
+	
+	public Collection<Application> findApplicationByOfficer(int officerId){
+		return this.investigatorRepository.findApplicationByOfficer(officerId);
+	}
+	
+	public Immigrant findImmigrantByApplication(int applicationId){
+		return this.investigatorRepository.findImmigrantByApplication(applicationId);
+	}
+	
+	public Investigator findInvestigatorByImmigrant(int immigrantId){
+		return this.investigatorRepository.findInvestigatorByImmigrant(immigrantId);
 	}
 
 }

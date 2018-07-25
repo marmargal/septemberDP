@@ -21,4 +21,9 @@
 		<put-attribute name="title" value="Edition of an investigator" />
 		<put-attribute name="body" value="/views/investigator/edit.jsp" />
 	</definition>
+	
+	<definition name="investigator/officer/list" extends="master.page">
+		<put-attribute name="title" value="List of investigators" />
+		<put-attribute name="body" value="/views/investigator/list.jsp" />
+	</definition>
 </tiles-definitions>
