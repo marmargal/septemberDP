@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -138,8 +137,7 @@ public class ApplicationImmigrantController extends AbstractController {
 			BindingResult binding) {
 		ModelAndView res;
 		
-		System.out.println(binding.getFieldError());
-		System.out.println(binding.getFieldErrors());
+		application = this.applicationService.reconstruct(application, binding);
 		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(application,

@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,9 +51,17 @@ public class EducationSectionImmigrantController extends AbstractController {
 		ModelAndView result;
 		EducationSection educationSection;
 
+		Immigrant immigrant;
+		Application application;
+
+		immigrant = this.immigrantService.findByPrincipal();
 		educationSection = educationSectionService.findOne(educationSectionId);
-		Assert.notNull(educationSection);
-		result = this.createEditModelAndView(educationSection);
+		application = this.educationSectionService.findApplicationbyEducationSection(educationSectionId);
+		if (application.getEducationSection().contains(educationSection) && immigrant.getApplications().contains(application)) {
+			result = this.createEditModelAndView(educationSection);
+		} else {
+			result = new ModelAndView("redirect:../../");
+		}
 
 		return result;
 	}

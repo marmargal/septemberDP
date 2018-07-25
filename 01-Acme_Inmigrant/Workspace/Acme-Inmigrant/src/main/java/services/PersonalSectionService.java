@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.PersonalSectionRepository;
+import domain.Application;
 import domain.Immigrant;
 import domain.PersonalSection;
 
@@ -75,5 +76,13 @@ public class PersonalSectionService {
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public Application findApplicationbyPersonalSection(Integer id) {
+		Application res = new Application();
+		
+		res = personalSectionRepository.findApplicationbyPersonalSection(id);
+		
+		return res;
+	}
 
 }
