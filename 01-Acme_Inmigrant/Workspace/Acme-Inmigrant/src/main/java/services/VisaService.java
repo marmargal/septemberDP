@@ -115,4 +115,13 @@ public class VisaService {
 
 		return res;
 	}
+	
+	public Collection<Visa> findVisasByCategory(int categoryId) {
+		Collection<Visa> res;
+		res = new ArrayList<Visa>();
+		Assert.isTrue(categoryId != 0);
+		res.addAll(visaRepository.findVisasByCategories(categoryId));
+
+		return res;
+	}
 }

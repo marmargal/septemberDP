@@ -42,14 +42,6 @@
 
 </display:table>
 
-<security:authorize access="hasRole('IMMIGRANT')">
-		<a href="personalSection/immigrant/create.do">
-			<button>
-				<spring:message code="application.create.personalSection" />
-			</button>
-		</a>
-</security:authorize>
-
 <spring:message code="application.contactSection" var="contactSectionHeader" />
 <h1>
 	<jstl:out value="${contactSectionHeader}"></jstl:out>
@@ -78,7 +70,7 @@
 </display:table>
 
 <security:authorize access="hasRole('IMMIGRANT')">
-		<a href="contactSection/immigrant/create.do?applicationId=${applicationId}">
+		<a href="contactSection/immigrant/create.do">
 			<button>
 				<spring:message code="application.create.contactSection" />
 			</button>
@@ -116,7 +108,7 @@
 </display:table>
 
 <security:authorize access="hasRole('IMMIGRANT')">
-		<a href="workSection/immigrant/create.do">
+		<a href="workSection/immigrant/create.do?applicationId=${applicationId}">
 			<button>
 				<spring:message code="application.create.workSection" />
 			</button>

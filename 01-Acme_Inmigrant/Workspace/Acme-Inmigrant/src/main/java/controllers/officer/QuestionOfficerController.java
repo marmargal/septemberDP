@@ -40,19 +40,27 @@ public class QuestionOfficerController extends AbstractController{
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView list(){
 		ModelAndView res;
-		
 		Application application;
 		Collection<Question> questions = new ArrayList<Question>();
 		
 		application = this.questionService.findApplicationSelfAsign();
 		
-		questions = application.getQuestion();
+		if(application != null){
+			questions = application.getQuestion();
 		
-		res = new ModelAndView("question/list");
-		res.addObject("question", questions);
-		res.addObject("requestURI", "question/officer/list.do");
-		res.addObject("applicationId", application.getId());
+			res = new ModelAndView("question/list");
+			res.addObject("question", questions);
+			res.addObject("requestURI", "question/officer/list.do");
+			res.addObject("application", application);
+			res.addObject("applicationId", application.getId());
+			
+		}else{
+			res = new ModelAndView("question/list");
+			res.addObject("question", questions);
+			res.addObject("application", null);
+		}
 		
+			
 		return res;
 	}
 	
@@ -84,7 +92,6 @@ public class QuestionOfficerController extends AbstractController{
 
 				res = new ModelAndView("redirect:/question/officer/list.do");
 			}catch (final Throwable oops) {
-				System.out.println(oops);
 				res = this.createEditModelAndView(questionForm, "question.commit.error");
 			}
 		

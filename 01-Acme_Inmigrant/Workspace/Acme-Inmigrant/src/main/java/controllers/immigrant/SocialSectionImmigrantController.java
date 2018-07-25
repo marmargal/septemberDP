@@ -1,18 +1,24 @@
 package controllers.immigrant;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ApplicationService;
+import services.ImmigrantService;
 import services.SocialSectionService;
 import controllers.AbstractController;
+import domain.Application;
+import domain.Immigrant;
 import domain.SocialSection;
 
 @Controller
@@ -23,6 +29,14 @@ public class SocialSectionImmigrantController extends AbstractController {
 
 	@Autowired
 	private SocialSectionService socialSectionService;
+	
+	// Supporting services --------------------------------------------------
+	
+	@Autowired
+	private ApplicationService applicationService;
+
+	@Autowired
+	private ImmigrantService immigrantService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -37,9 +51,17 @@ public class SocialSectionImmigrantController extends AbstractController {
 		ModelAndView result;
 		SocialSection socialSection;
 
+		Immigrant immigrant;
+		Application application;
+
+		immigrant = this.immigrantService.findByPrincipal();
 		socialSection = socialSectionService.findOne(socialSectionId);
-		Assert.notNull(socialSection);
-		result = this.createEditModelAndView(socialSection);
+		application = this.socialSectionService.findApplicationbySocialSection(socialSectionId);
+		if (application.getSocialSection().contains(socialSection) && immigrant.getApplications().contains(application)) {
+			result = this.createEditModelAndView(socialSection);
+		} else {
+			result = new ModelAndView("redirect:../../");
+		}
 
 		return result;
 	}
@@ -113,8 +135,13 @@ public class SocialSectionImmigrantController extends AbstractController {
 			final SocialSection socialSection, final String message) {
 
 		ModelAndView result;
+		Immigrant immigrant = immigrantService.findByPrincipal();
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = applicationService.getApplicationByImmigrant(immigrant.getId());
+		
 		result = new ModelAndView("socialSection/immigrant/edit");
 		result.addObject("socialSection", socialSection);
+		result.addObject("application", applications);
 		result.addObject("message", message);
 		return result;
 	}

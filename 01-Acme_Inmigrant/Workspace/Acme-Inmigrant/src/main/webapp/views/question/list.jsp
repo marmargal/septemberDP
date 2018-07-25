@@ -40,7 +40,9 @@
 
 </display:table>
 
-<security:authorize access="hasRole('OFFICER')">
-	<a href="question/officer/edit.do?applicationId=${applicationId}"><spring:message code="question.create"/></a>
-	<br/>
-</security:authorize>
+<jstl:if test="${application != null }">
+	<security:authorize access="hasRole('OFFICER')">
+		<a href="question/officer/edit.do?applicationId=${applicationId}"><spring:message code="question.create"/></a>
+		<br/>
+	</security:authorize>
+</jstl:if>

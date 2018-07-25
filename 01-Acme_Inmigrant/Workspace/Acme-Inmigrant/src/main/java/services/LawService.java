@@ -51,7 +51,7 @@ public class LawService {
 		requirement = new ArrayList<Requirement>();
 		laws = new ArrayList<Law>();
 
-		res.setRequirement(requirement);
+		res.setRequirements(requirement);
 		res.setLaw(laws);
 
 		return res;
@@ -108,7 +108,7 @@ public class LawService {
 		res.setTitle(law.getTitle());
 
 		res.setLaw(law.getLaw());
-		res.setRequirement(law.getRequirement());
+		res.setRequirement(law.getRequirements());
 
 		return res;
 	}
@@ -123,7 +123,7 @@ public class LawService {
 		res.setTitle(lawForm.getTitle());
 
 		res.setLaw(lawForm.getLaw());
-		res.setRequirement(lawForm.getRequirement());
+		res.setRequirements(lawForm.getRequirement());
 
 		if (binding != null)
 			validator.validate(res, binding);

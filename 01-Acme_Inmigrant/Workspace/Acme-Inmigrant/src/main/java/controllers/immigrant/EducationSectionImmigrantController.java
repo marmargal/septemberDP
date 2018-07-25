@@ -1,19 +1,25 @@
 package controllers.immigrant;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ApplicationService;
 import services.EducationSectionService;
+import services.ImmigrantService;
 import controllers.AbstractController;
+import domain.Application;
 import domain.EducationSection;
+import domain.Immigrant;
 
 @Controller
 @RequestMapping("/educationSection/immigrant")
@@ -23,6 +29,14 @@ public class EducationSectionImmigrantController extends AbstractController {
 
 	@Autowired
 	private EducationSectionService educationSectionService;
+	
+	// Supporting services --------------------------------------------------
+	
+	@Autowired
+	private ApplicationService applicationService;
+
+	@Autowired
+	private ImmigrantService immigrantService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -37,9 +51,17 @@ public class EducationSectionImmigrantController extends AbstractController {
 		ModelAndView result;
 		EducationSection educationSection;
 
+		Immigrant immigrant;
+		Application application;
+
+		immigrant = this.immigrantService.findByPrincipal();
 		educationSection = educationSectionService.findOne(educationSectionId);
-		Assert.notNull(educationSection);
-		result = this.createEditModelAndView(educationSection);
+		application = this.educationSectionService.findApplicationbyEducationSection(educationSectionId);
+		if (application.getEducationSection().contains(educationSection) && immigrant.getApplications().contains(application)) {
+			result = this.createEditModelAndView(educationSection);
+		} else {
+			result = new ModelAndView("redirect:../../");
+		}
 
 		return result;
 	}
@@ -113,8 +135,13 @@ public class EducationSectionImmigrantController extends AbstractController {
 			final EducationSection educationSection, final String message) {
 
 		ModelAndView result;
+		Immigrant immigrant = immigrantService.findByPrincipal();
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = applicationService.getApplicationByImmigrant(immigrant.getId());
+		
 		result = new ModelAndView("educationSection/immigrant/edit");
 		result.addObject("educationSection", educationSection);
+		result.addObject("application", applications);
 		result.addObject("message", message);
 		return result;
 	}

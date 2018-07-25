@@ -1,10 +1,12 @@
 package controllers.immigrant;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,9 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
 import services.ContactSectionService;
+import services.ImmigrantService;
 import controllers.AbstractController;
 import domain.Application;
 import domain.ContactSection;
+import domain.Immigrant;
 
 @Controller
 @RequestMapping("/contactSection/immigrant")
@@ -30,6 +34,9 @@ public class ContactSectionImmigrantController extends AbstractController {
 	
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
+	private ImmigrantService immigrantService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -43,10 +50,17 @@ public class ContactSectionImmigrantController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int contactSectionId) {
 		ModelAndView result;
 		ContactSection contactSection;
+		Immigrant immigrant;
+		Application application;
 
+		immigrant = this.immigrantService.findByPrincipal();
 		contactSection = contactSectionService.findOne(contactSectionId);
-		Assert.notNull(contactSection);
-		result = this.createEditModelAndView(contactSection);
+		application = this.contactSectionService.findApplicationbyContactSection(contactSectionId);
+		if (application.getContactSection().contains(contactSection) && immigrant.getApplications().contains(application)) {
+			result = this.createEditModelAndView(contactSection);
+		} else {
+			result = new ModelAndView("redirect:../../");
+		}
 
 		return result;
 	}
@@ -95,13 +109,11 @@ public class ContactSectionImmigrantController extends AbstractController {
 	// Creating ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam final int applicationId) {
+	public ModelAndView create() {
 		ModelAndView result;
 		ContactSection a;
-		Application application;
 		
-		application = this.applicationService.findOne(applicationId);
-		a = this.contactSectionService.create(application);
+		a = this.contactSectionService.create();
 		result = this.createEditModelAndView(a);
 
 		return result;
@@ -119,8 +131,13 @@ public class ContactSectionImmigrantController extends AbstractController {
 			final ContactSection contactSection, final String message) {
 
 		ModelAndView result;
+		Immigrant immigrant = immigrantService.findByPrincipal();
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = applicationService.getApplicationByImmigrant(immigrant.getId());
+		
 		result = new ModelAndView("contactSection/immigrant/edit");
 		result.addObject("contactSection", contactSection);
+		result.addObject("application", applications);
 		result.addObject("message", message);
 		return result;
 	}

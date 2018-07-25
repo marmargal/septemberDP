@@ -47,6 +47,16 @@
 		<bean class="converters.QuestionToStringConverter" />
 		<bean class="converters.StringToAnswerConverter" />
 		<bean class="converters.AnswerToStringConverter" />
+		<bean class="converters.StringToRequirementConverter" />
+		<bean class="converters.RequirementToStringConverter" />
+		<bean class="converters.StringToInvestigatorConverter" />
+		<bean class="converters.InvestigatorToStringConverter" />
+		<bean class="converters.StringToApplicationConverter" />
+		<bean class="converters.ApplicationToStringConverter" />
+		<bean class="converters.StringToCategoryConverter" />
+		<bean class="converters.CategoryToStringConverter" />
+		<bean class="converters.StringToDecisionConverter" />
+		<bean class="converters.DecisionToStringConverter" />
 
 	</util:list>
 

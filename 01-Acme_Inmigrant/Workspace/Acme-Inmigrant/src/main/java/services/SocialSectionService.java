@@ -1,6 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SocialSectionRepository;
-import domain.SocialSection;
+import domain.Application;
 import domain.Immigrant;
+import domain.SocialSection;
 
 @Service
 @Transactional
@@ -58,6 +61,13 @@ public class SocialSectionService {
 
 	public SocialSection save(SocialSection socialSection) {
 		SocialSection res;
+		
+		Application a = socialSection.getApplication();
+		List<SocialSection> socialSections = new ArrayList<SocialSection>();
+		socialSections = a.getSocialSection();
+		socialSections.add(socialSection);
+		a.setSocialSection(socialSections);
+		
 		res = socialSectionRepository.save(socialSection);
 		return res;
 	}
@@ -66,9 +76,23 @@ public class SocialSectionService {
 		Assert.notNull(socialSection);
 		Assert.isTrue(socialSection.getId() != 0);
 		Assert.isTrue(socialSectionRepository.exists(socialSection.getId()));
+		
+		Application application = this.findApplicationbySocialSection(socialSection.getId());
+		List<SocialSection> ss = application.getSocialSection();
+		ss.remove(socialSection);
+		application.setSocialSection(ss);
+		
 		socialSectionRepository.delete(socialSection);
 	}
 	
 	// Other business methods -------------------------------------------------
+	
+	public Application findApplicationbySocialSection(Integer id) {
+		Application res = new Application();
+		
+		res = socialSectionRepository.findApplicationbySocialSection(id);
+		
+		return res;
+	}
 
 }

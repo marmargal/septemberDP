@@ -33,15 +33,18 @@
 					code="visa.edit" />
 			</a>
 		</display:column>
+	
+	</security:authorize>	
 		
 		<acme:column property="classes" code="visa.classes"/>
 		<acme:column property="description" code="visa.description"/>
 		<acme:column property="price" code="visa.price"/>
 		<acme:column property="invalidate" code="visa.invalidate"/>
+		<acme:column property="category.name" code="visa.category"/>
 		
 		<display:column><acme:links url="" code="visa.country"/></display:column>
-		<display:column><acme:links url="" code="visa.category"/></display:column>
-	</security:authorize>
+
+	
 
 </display:table>
 

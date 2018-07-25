@@ -4,15 +4,17 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ImmigrantService;
 import services.PersonalSectionService;
 import controllers.AbstractController;
+import domain.Application;
+import domain.Immigrant;
 import domain.PersonalSection;
 
 @Controller
@@ -23,6 +25,9 @@ public class PersonalSectionImmigrantController extends AbstractController {
 
 	@Autowired
 	private PersonalSectionService personalSectionService;
+	
+	@Autowired
+	private ImmigrantService immigrantService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -36,10 +41,17 @@ public class PersonalSectionImmigrantController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int personalSectionId) {
 		ModelAndView result;
 		PersonalSection personalSection;
+		Immigrant immigrant;
+		Application application;
 
+		immigrant = this.immigrantService.findByPrincipal();
 		personalSection = personalSectionService.findOne(personalSectionId);
-		Assert.notNull(personalSection);
-		result = this.createEditModelAndView(personalSection);
+		application = this.personalSectionService.findApplicationbyPersonalSection(personalSectionId);
+		if (application.getPersonalSection() == personalSection && immigrant.getApplications().contains(application)) {
+			result = this.createEditModelAndView(personalSection);
+		} else {
+			result = new ModelAndView("redirect:../../");
+		}
 
 		return result;
 	}
@@ -50,9 +62,6 @@ public class PersonalSectionImmigrantController extends AbstractController {
 	public ModelAndView save(@Valid PersonalSection personalSection,
 			BindingResult binding) {
 		ModelAndView res;
-		
-		System.out.println(binding.getFieldError());
-		System.out.println(binding.getFieldErrors());
 		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(personalSection,

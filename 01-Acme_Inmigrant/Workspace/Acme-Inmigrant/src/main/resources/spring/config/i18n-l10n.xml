@@ -43,6 +43,10 @@
 		<value>/views/workSection/messages</value>
 		<value>/views/socialSection/messages</value>
 		<value>/views/educationSection/messages</value>
+		<value>/views/requirement/messages</value>
+		<value>/views/immigrant/messages</value>
+		<value>/views/category/messages</value>
+		<value>/views/decision/messages</value>
 
 	</util:list>
 </beans>
