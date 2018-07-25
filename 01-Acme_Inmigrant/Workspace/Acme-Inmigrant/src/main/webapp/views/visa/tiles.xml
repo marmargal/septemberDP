@@ -29,8 +29,15 @@
 		<put-attribute name="title" value="List visa" />
 		<put-attribute name="body" value="/views/visa/list.jsp" />
 	</definition>
+
+	<definition name="visa/display" extends="master.page">
+		<put-attribute name="title" value="Display visa" />
+		<put-attribute name="body" value="/views/visa/display.jsp" />
+	</definition>
+
 	<definition name="visa/administrator/invalidate" extends="master.page">
 		<put-attribute name="title" value="invalidate category" />
 		<put-attribute name="body" value="/views/visa/invalidate.jsp" />
 	</definition>
+
 </tiles-definitions>

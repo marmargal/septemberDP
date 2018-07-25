@@ -30,7 +30,7 @@
 	<display:column property="isoCode" title="${isoCodeHeader}" sortable="true" />
 
 	<display:column>
-			<a href="visa/list.do?countryId=${row.id}"><spring:message code="country.visas"/></a>
+			<a href="visa/country/list.do?countryId=${row.id}"><spring:message code="country.visas"/></a>
 	</display:column>
 
 </display:table>

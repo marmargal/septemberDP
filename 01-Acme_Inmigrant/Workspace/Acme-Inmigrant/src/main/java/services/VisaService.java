@@ -128,5 +128,14 @@ public class VisaService {
 
 		return res;
 	}
+	
+	public Collection<Visa> findVisasByCountry(int countryId) {
+		Collection<Visa> res;
+		res = new ArrayList<Visa>();
+		Assert.isTrue(countryId != 0);
+		res.addAll(visaRepository.findVisasByCountry(countryId));
+
+		return res;
+	}
 
 }

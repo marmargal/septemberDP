@@ -30,3 +30,7 @@ body {
 	margin-top: 10px;
 	margin-left: 40px;
 }
+
+#flag {
+	max-width: 200px;
+}
