@@ -72,7 +72,7 @@
 					<li><a href="investigator/register.do"><spring:message code="master.page.register.investigator" /></a></li>
 				</ul>
 			</li>
-			<li><a href="#"><spring:message code="master.page.visas" /></a></li>
+			<li><a href="visa/administrator/list.do"><spring:message code="master.page.visas" /></a></li>
 			<li><a href="#"><spring:message code="master.page.dashboard" /></a></li>
 			<li><a href="#"><spring:message code="master.page.countries" /></a></li>
 			<li><a href="#"><spring:message code="master.page.laws" /></a></li>

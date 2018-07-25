@@ -1,6 +1,5 @@
 package controllers.administrator;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CategoryService;
+import services.CountryService;
 import services.VisaService;
 import controllers.AbstractController;
+import domain.Category;
+import domain.Country;
 import domain.Visa;
 
 @Controller
@@ -24,6 +27,12 @@ public class VisaAdministratorController extends AbstractController {
 
 	@Autowired
 	private VisaService visaService;
+
+	@Autowired
+	private CountryService countryService;
+
+	@Autowired
+	private CategoryService categoryService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -63,12 +72,13 @@ public class VisaAdministratorController extends AbstractController {
 	public ModelAndView edit(@Valid final Visa visa,
 			final BindingResult bindingResult) {
 		ModelAndView result;
-		if (bindingResult.hasErrors())
+		if (bindingResult.hasErrors()) {
 			result = this.createEditModelAndView(visa);
-		else {
+		} else {
 			try {
 				visaService.save(visa);
-				result = new ModelAndView("redirect:visa/administrator/list.do");
+
+				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable ooops) {
 
 				result = this.createEditModelAndView(visa, "visa.commit.error");
@@ -89,10 +99,18 @@ public class VisaAdministratorController extends AbstractController {
 			try {
 				visa.setInvalidate(true);
 				visaService.save(visa);
-				result = new ModelAndView("redirect:visa/administrator/list.do");
+				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable ooops) {
 
-				result = this.createEditModelAndView(visa, "visa.commit.error");
+				if (visa.getPrice() == null) {
+					result = this.createEditModelAndView(visa,
+							"visa.commit.error.price");
+
+				} else {
+					result = this.createEditModelAndView(visa,
+							"visa.commit.error");
+
+				}
 
 			}
 		}
@@ -110,9 +128,16 @@ public class VisaAdministratorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Visa visa,
 			final String message) {
 		final ModelAndView result;
-
+		Collection<Country> countries = countryService.findAll();
+		Collection<Category> categories = categoryService.findAll();
 		result = new ModelAndView("visa/administrator/edit");
+		Collection<Boolean> invalidate = new ArrayList<>();
+		invalidate.add(false);
+		invalidate.add(true);
 		result.addObject("visa", visa);
+		result.addObject("countries", countries);
+		result.addObject("categories", categories);
+		result.addObject("invalidate", invalidate);
 		result.addObject("message", message);
 		result.addObject("requestUri", "visa/administrator/edit.do");
 		return result;
