@@ -15,6 +15,9 @@
 		<!-- Add your own converters using entries of the following form: <bean 
 			class="converters.Class1ToClass2" /> -->
 
+		<bean class="converters.CountryToStringConverter" />
+		<bean class="converters.StringToCountryConverter" />
+
 		<bean class="converters.VisaToStringConverter" />
 		<bean class="converters.StringToVisaConverter" />
 		<bean class="converters.ActorToStringConverter" />

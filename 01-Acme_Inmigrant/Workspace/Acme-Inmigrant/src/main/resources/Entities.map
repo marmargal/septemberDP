@@ -1,5 +1,9 @@
 #./src/main/resources/Entities.map
-#Wed Jul 25 13:52:47 CEST 2018
+<<<<<<< HEAD
+#Wed Jul 25 18:07:24 CEST 2018
+=======
+#Wed Jul 25 18:37:58 CEST 2018
+>>>>>>> master
 question1=132
 application3=131
 application2=130

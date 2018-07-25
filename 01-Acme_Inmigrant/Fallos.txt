@@ -27,8 +27,6 @@
 
 13.6 -> Funciona perfecto, pero hay que enlazarlo desde algún sitio
 
-14.1 -> Falta el registro de investigator
-
 14.2 -> Fallos tontos en las vistas del tipo que no se ha metido la URL en el edit y que faltan cosas en messages.properties
 
 14.3 -> La vista del Dashboard está hecha?
@@ -37,9 +35,8 @@
 -------------------------------------------------------  B  ----------------------------------------------------------
 
 
-25.1 -> Hacer un display de visa y enlazar country con su respectivo country
 
-25.2 -> El display de country no muestra nada y la lista de sus respectivas visas, muestra todas las visas de la base de datos
+25.2 -> la lista de country, sus respectivas visas, muestran todas las visas de la base de datos
 
 25.3 -> El botón de law dentro de requirements, el enlace parece que no está metido dentro del security.xml
 
