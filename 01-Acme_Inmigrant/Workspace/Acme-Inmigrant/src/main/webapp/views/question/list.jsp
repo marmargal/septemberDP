@@ -27,7 +27,11 @@
 
 	</display:column>
 	
+	<display:column>
+	<a href="application/immigrant/display.do?applicationId=${row.application.id }"><spring:message code="question.application"/></a>
+	</display:column>
 	
+		
 	<spring:message code="question.text" var="nameHeader" />
 	<display:column property="text" title="${nameHeader}" sortable="true" />
 
