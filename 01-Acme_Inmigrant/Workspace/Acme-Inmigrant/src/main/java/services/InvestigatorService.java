@@ -8,13 +8,18 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.InvestigatorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Application;
+import domain.Immigrant;
 import domain.Investigator;
 import domain.Report;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -23,6 +28,9 @@ public class InvestigatorService {
 
 	@Autowired
 	private InvestigatorRepository investigatorRepository;
+	
+	@Autowired
+	private Validator		validator;
 
 	// Supporting services
 	
@@ -110,6 +118,54 @@ public class InvestigatorService {
 		Authority res = new Authority();
 		res.setAuthority("INVESTIGATOR");
 		Assert.isTrue(authority.contains(res));
+	}
+	
+	public ActorForm construct(Investigator investigator){
+		ActorForm res = new ActorForm();
+		
+		res.setId(investigator.getId());
+		res.setName(investigator.getName());
+		res.setSurname(investigator.getSurname());
+		res.setEmail(investigator.getEmail());
+		res.setPhoneNumber(investigator.getPhoneNumber());
+		res.setAddress(investigator.getAddress());
+		
+		return res;
+	}
+	
+	public Investigator reconstruct(ActorForm investigatorForm, BindingResult binding){
+		Assert.notNull(investigatorForm);
+		
+		Investigator res = new Investigator();
+
+		if (investigatorForm.getId() != 0)
+			res = this.findOne(investigatorForm.getId());
+		else
+			res = this.create();
+		
+		res.setName(investigatorForm.getName());
+		res.setSurname(investigatorForm.getSurname());
+		res.setEmail(investigatorForm.getEmail());
+		res.setPhoneNumber(investigatorForm.getPhoneNumber());
+		res.setAddress(investigatorForm.getAddress());
+		res.getUserAccount().setUsername(investigatorForm.getUsername());
+		res.getUserAccount().setPassword(investigatorForm.getPassword());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+	
+	public Collection<Application> findApplicationByOfficer(int officerId){
+		return this.investigatorRepository.findApplicationByOfficer(officerId);
+	}
+	
+	public Immigrant findImmigrantByApplication(int applicationId){
+		return this.investigatorRepository.findImmigrantByApplication(applicationId);
+	}
+	
+	public Investigator findInvestigatorByImmigrant(int immigrantId){
+		return this.investigatorRepository.findInvestigatorByImmigrant(immigrantId);
 	}
 
 }

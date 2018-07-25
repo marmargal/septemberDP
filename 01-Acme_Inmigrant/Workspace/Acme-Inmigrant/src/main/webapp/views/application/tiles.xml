@@ -31,6 +31,11 @@
 		<put-attribute name="body" value="/views/application/display.jsp" />
 	</definition>
 	
+	<definition name="application/list" extends="master.page">	
+		<put-attribute name="title" value="List application" />
+		<put-attribute name="body" value="/views/application/list.jsp" />
+	</definition>
+	
 	<definition name="application/sectionDisplay" extends="master.page">	
 		<put-attribute name="title" value="Display sections" />
 		<put-attribute name="body" value="/views/application/sectionDisplay.jsp" />

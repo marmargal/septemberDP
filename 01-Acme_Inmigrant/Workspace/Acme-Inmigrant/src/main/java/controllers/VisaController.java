@@ -62,4 +62,29 @@ public class VisaController extends AbstractController {
 		result.addObject("visas", visas);
 		return result;
 	}
+	
+	@RequestMapping(value = "/country/list", method = RequestMethod.GET)
+	public ModelAndView listByCountry(@RequestParam int countryId) {
+		ModelAndView result;
+		Collection<Visa> visas = new ArrayList<>();
+		visas = visaService.findVisasByCountry(countryId);
+		result = new ModelAndView("visa/list");
+		result.addObject("requestURI", "visa/country/list.do");
+		result.addObject("visas", visas);
+		return result;
+	}
+	
+	// Display
+	@RequestMapping(value="/display", method=RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int visaId){
+		ModelAndView res;
+		Visa visa;
+	
+		visa = this.visaService.findOne(visaId);
+		
+		res = new ModelAndView("visa/display");
+		res.addObject("visa",visa);
+		
+		return res;
+	}
 }

@@ -54,7 +54,7 @@ public class CountryController extends AbstractController {
 		Country country = this.countryService.findOne(countryId);
 
 		result = new ModelAndView("country/display");
-		result.addObject("id", country.getId());
+		result.addObject("country", country);
 		
 		return result;
 	}

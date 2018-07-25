@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.CountryRepository;
 import repositories.VisaRepository;
 import domain.Category;
 import domain.Country;
@@ -22,6 +23,9 @@ public class VisaService {
 
 	@Autowired
 	private VisaRepository visaRepository;
+	
+	@Autowired
+	private CountryRepository countryRepository;
 
 	// Suporting services
 
@@ -39,7 +43,7 @@ public class VisaService {
 
 		String classes = "class";
 		String description = "description";
-		String price = "3 Euros";
+		int price = 3;
 
 		Country country;
 		Category category;
@@ -124,4 +128,14 @@ public class VisaService {
 
 		return res;
 	}
+	
+	public Collection<Visa> findVisasByCountry(int countryId) {
+		Collection<Visa> res;
+		res = new ArrayList<Visa>();
+		Assert.isTrue(countryId != 0);
+		res.addAll(visaRepository.findVisasByCountry(countryId));
+
+		return res;
+	}
+
 }

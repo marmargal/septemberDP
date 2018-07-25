@@ -2,12 +2,15 @@
 
 11.2 -> Immigrant edit personal data
 	Officer edit personal data
-	Investigator edit personal data
+	Investigator edit personal data.
+	Los inmigrantes pueden aplicar a visas.
+	las aplication no tienen relaciÃ³n con las visas, por lo que no se pueden asociar a una visa.
+	Esta relaciÃ³n serÃ­a manyToOne.
 
 12.1 -> Abrir y cerrar aplicaciones
-	¿Mostrar más información?
-	Si se cierra una aplicación, debe cerrarse para cualquiera
-	Puede ser editable solo mientras esté abierta
+	Â¿Mostrar mÃ¡s informaciÃ³n?
+	Si se cierra una aplicaciÃ³n, debe cerrarse para cualquiera
+	Puede ser editable solo mientras estÃ© abierta
 
 12.2 -> Enlazar las question desde la tabla de application
 
@@ -17,35 +20,32 @@
 
 13.2 -> Hay que hacerlo
 
-13.3 -> Está bien hecho, pero mostrar a que applicatión se está haciendo esa question
+13.3 -> EstÃ¡ bien hecho, pero mostrar a que applicatiÃ³n se estÃ¡ haciendo esa question
 
-13.4 -> En el display, mandar desde un botón igual que en Question, metiendo el id de la decision de ese officer
+13.4 -> En el display, mandar desde un botÃ³n igual que en Question, metiendo el id de la decision de ese officer
 	El display muestra tanto la tuya como la de otro officer mediante URL
-	Edit funciona bien, pero poner una explicación de que si se pone el Tick sería accepted y si no rejected.
-	Si se pone rejected el comentario debería ser obligatorio
-	Meter botón de create desde la vista de sus application que aún no está hecha para officer (13.2)
+	Edit funciona bien, pero poner una explicaciÃ³n de que si se pone el Tick serÃ­a accepted y si no rejected.
+	Si se pone rejected el comentario deberÃ­a ser obligatorio
+	Meter botÃ³n de create desde la vista de sus application que aÃºn no estÃ¡ hecha para officer (13.2)
 
-13.6 -> Funciona perfecto, pero hay que enlazarlo desde algún sitio
-
-14.1 -> Falta el registro de investigator
+13.6 -> Funciona perfecto, pero hay que enlazarlo desde algÃºn sitio
 
 14.2 -> Fallos tontos en las vistas del tipo que no se ha metido la URL en el edit y que faltan cosas en messages.properties
 
-14.3 -> La vista del Dashboard está hecha?
+14.3 -> La vista del Dashboard estÃ¡ hecha?
 
 
 -------------------------------------------------------  B  ----------------------------------------------------------
 
 
-25.1 -> Hacer un display de visa y enlazar country con su respectivo country
 
-25.2 -> El display de country no muestra nada y la lista de sus respectivas visas, muestra todas las visas de la base de datos
+25.2 -> la lista de country, sus respectivas visas, muestran todas las visas de la base de datos
 
-25.3 -> El botón de law dentro de requirements, el enlace parece que no está metido dentro del security.xml
+25.3 -> El botÃ³n de law dentro de requirements, el enlace parece que no estÃ¡ metido dentro del security.xml
 
-26.1 -> La creación de las visas en cada country tiene fallo en el messages.properties, y no se ha podido probar si funciona bien
+26.1 -> La creaciÃ³n de las visas en cada country tiene fallo en el messages.properties, y no se ha podido probar si funciona bien
 
-26.2 -> Probar que al crear una visa desde el hierarchy of visas se asigne a la categoría correspondiente
+26.2 -> Probar que al crear una visa desde el hierarchy of visas se asigne a la categorÃ­a correspondiente
 
 26.3 -> Falta create, edit y delete de Law
 

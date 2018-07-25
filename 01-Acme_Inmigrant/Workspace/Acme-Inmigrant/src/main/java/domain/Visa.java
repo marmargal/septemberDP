@@ -3,8 +3,9 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -22,7 +23,7 @@ public class Visa extends DomainEntity {
 
 	private String classes;
 	private String description;
-	private String price;
+	private Integer price;
 	private Boolean invalidate;
 
 	@NotBlank
@@ -43,12 +44,12 @@ public class Visa extends DomainEntity {
 		this.description = description;
 	}
 
-	@NotBlank
-	public String getPrice() {
+	@NotNull
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
@@ -66,7 +67,8 @@ public class Visa extends DomainEntity {
 	private Category category;
 
 	@Valid
-	@OneToOne(optional = false)
+	@NotNull
+	@ManyToOne(optional=false)
 	public Country getCountry() {
 		return country;
 	}
@@ -76,7 +78,8 @@ public class Visa extends DomainEntity {
 	}
 
 	@Valid
-	@OneToOne(optional = false)
+	@NotNull
+	@ManyToOne(optional=false)
 	public Category getCategory() {
 		return category;
 	}
