@@ -25,6 +25,7 @@
 				</ul>
 			</li>
 			<li><a href="category/list.do"><spring:message code="master.page.hierarchyVisa" /></a></li>
+			<li><a href="country/list.do"><spring:message code="master.page.countries" /></a></li>
 			<li><a href="visa/list.do"><spring:message code="master.page.findVisa" /></a></li>
 			<li><a href="#"><spring:message code="master.page.requirements" /></a></li>
 		</security:authorize>
@@ -36,7 +37,8 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
-			<li><a href="#"><spring:message code="master.page.hierarchyVisa" /></a></li>
+			<li><a href="category/list.do"><spring:message code="master.page.hierarchyVisa" /></a></li>
+			<li><a href="country/list.do"><spring:message code="master.page.countries" /></a></li>
 			<li><a href="visa/list.do"><spring:message code="master.page.findVisa" /></a></li>
 			<li><a href="requirement/administrator/list.do"><spring:message code="master.page.requirements" /></a></li>
 		</security:authorize>
@@ -69,12 +71,10 @@
 			<li><a class="fNiv" href=""><spring:message code="master.page.register" /></a>
 				<ul>
 					<li><a href="officer/administrator/register.do"><spring:message code="master.page.register.officer" /></a></li>
-					<li><a href="investigator/register.do"><spring:message code="master.page.register.investigator" /></a></li>
+					<li><a href="investigator/administrator/register.do"><spring:message code="master.page.register.investigator" /></a></li>
 				</ul>
 			</li>
-			<li><a href="#"><spring:message code="master.page.visas" /></a></li>
 			<li><a href="#"><spring:message code="master.page.dashboard" /></a></li>
-			<li><a href="#"><spring:message code="master.page.countries" /></a></li>
 			<li><a href="#"><spring:message code="master.page.laws" /></a></li>
 		</security:authorize>
 	</ul>
