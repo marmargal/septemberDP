@@ -106,7 +106,7 @@
 	
 								<!-- 		OFFICER		-->
 		<security:intercept-url pattern="/terms/list.do" access="permitAll" />
-	
+		
 								<!-- 		COUNTRY		-->
 		<security:intercept-url pattern="/country/list.do" access="permitAll" />
 		<security:intercept-url pattern="/country/display.do" access="permitAll" />
@@ -128,6 +128,11 @@
 								<!-- 		CATEGORY		-->
 		<security:intercept-url pattern="/category/list.do" access="permitAll" />
 		<security:intercept-url pattern="/visa/category/list.do" access="permitAll" />
+		
+								<!-- 	DECISION	 -->
+		<security:intercept-url pattern="/decision/officer/**" access="hasRole('OFFICER')" />
+		
+	
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
