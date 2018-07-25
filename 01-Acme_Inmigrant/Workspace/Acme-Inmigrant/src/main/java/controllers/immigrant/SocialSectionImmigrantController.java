@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,9 +51,17 @@ public class SocialSectionImmigrantController extends AbstractController {
 		ModelAndView result;
 		SocialSection socialSection;
 
+		Immigrant immigrant;
+		Application application;
+
+		immigrant = this.immigrantService.findByPrincipal();
 		socialSection = socialSectionService.findOne(socialSectionId);
-		Assert.notNull(socialSection);
-		result = this.createEditModelAndView(socialSection);
+		application = this.socialSectionService.findApplicationbySocialSection(socialSectionId);
+		if (application.getSocialSection().contains(socialSection) && immigrant.getApplications().contains(application)) {
+			result = this.createEditModelAndView(socialSection);
+		} else {
+			result = new ModelAndView("redirect:../../");
+		}
 
 		return result;
 	}

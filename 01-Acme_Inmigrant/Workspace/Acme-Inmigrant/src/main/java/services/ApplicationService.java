@@ -1,8 +1,10 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
 
@@ -12,10 +14,13 @@ import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ApplicationRepository;
 import domain.Application;
 import domain.ContactSection;
+import domain.CreditCard;
 import domain.EducationSection;
 import domain.Immigrant;
 import domain.PersonalSection;
@@ -36,6 +41,9 @@ public class ApplicationService {
 	
 	@Autowired
 	private ImmigrantService immigrantService;
+	
+	@Autowired
+	private Validator validator;
 	
 	// Constructors ------------------------------------------------------------
 	
@@ -100,6 +108,7 @@ public class ApplicationService {
 	public Application save(Application application){
 		Application res;
 		Immigrant immigrant;
+		Assert.isTrue(this.checkCreditCard(application.getCreditCard()));
 		immigrant = this.immigrantService.findByPrincipal();
 		application.setImmigrant(immigrant);
 		res = applicationRepository.save(application);
@@ -148,4 +157,58 @@ public class ApplicationService {
 		
 		return res;
 	}
+	
+	public boolean checkCreditCard(final CreditCard creditCard) {
+		boolean res;
+		Calendar calendar;
+		int actualYear;
+
+		res = false;
+		calendar = new GregorianCalendar();
+		actualYear = calendar.get(Calendar.YEAR);
+		actualYear = actualYear % 100;
+		
+		if (creditCard.getExpirationYear() != null) {
+			if (creditCard.getExpirationYear() > actualYear) {
+				res = true;
+			} else if (creditCard.getExpirationYear() == actualYear && creditCard.getExpirationMonth() >= calendar.get(Calendar.MONTH)) {
+				res = true;
+			} 
+		} 
+		return res;
+	}
+	
+	public Application reconstruct(final Application application, final BindingResult binding) {
+		Application res;
+		Application applicationFinal;
+		Date openedMoment;
+		if (application.getId() == 0) {
+			Immigrant immigrant;
+			
+			openedMoment = new Date(System.currentTimeMillis() - 1000);
+			application.setOpenedMoment(openedMoment);
+
+			immigrant = this.immigrantService.findByPrincipal();
+			application.setImmigrant(immigrant);
+			
+			res = application;
+		} else {
+			applicationFinal = this.applicationRepository.findOne(application.getId());
+			
+			application.setId(applicationFinal.getId());
+			application.setVersion(applicationFinal.getVersion());
+			application.setTicker(applicationFinal.getTicker());
+			application.setOpenedMoment(applicationFinal.getOpenedMoment());
+			application.setClosedMoment(applicationFinal.getClosedMoment());
+			
+			res = application;
+		}
+		this.validator.validate(res, binding);
+		return res;
+	}
+	
+	public void flush() {
+		this.applicationRepository.flush();
+	}
+	
 }

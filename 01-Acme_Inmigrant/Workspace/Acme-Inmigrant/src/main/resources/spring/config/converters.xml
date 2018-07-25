@@ -55,6 +55,8 @@
 		<bean class="converters.ApplicationToStringConverter" />
 		<bean class="converters.StringToCategoryConverter" />
 		<bean class="converters.CategoryToStringConverter" />
+		<bean class="converters.StringToDecisionConverter" />
+		<bean class="converters.DecisionToStringConverter" />
 
 	</util:list>
 

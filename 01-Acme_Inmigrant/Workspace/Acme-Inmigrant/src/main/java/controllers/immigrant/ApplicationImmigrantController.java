@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -119,11 +118,15 @@ public class ApplicationImmigrantController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int applicationId) {
 		ModelAndView result;
 		Application application;
+		Immigrant immigrant;
 
+		immigrant = this.immigrantService.findByPrincipal();
 		application = applicationService.findOne(applicationId);
-		Assert.notNull(application);
-		result = this.createEditModelAndView(application);
-
+		if (immigrant.getApplications().contains(application)) {
+			result = this.createEditModelAndView(application);
+		} else {
+			result = new ModelAndView("redirect:../../");
+		}
 		return result;
 	}
 
@@ -134,8 +137,7 @@ public class ApplicationImmigrantController extends AbstractController {
 			BindingResult binding) {
 		ModelAndView res;
 		
-		System.out.println(binding.getFieldError());
-		System.out.println(binding.getFieldErrors());
+		application = this.applicationService.reconstruct(application, binding);
 		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(application,
