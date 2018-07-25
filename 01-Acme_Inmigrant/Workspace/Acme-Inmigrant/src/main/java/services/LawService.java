@@ -2,7 +2,9 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -47,12 +49,15 @@ public class LawService {
 
 		List<Requirement> requirement;
 		List<Law> laws;
+		Law lawParent;
 
 		requirement = new ArrayList<Requirement>();
 		laws = new ArrayList<Law>();
+		lawParent= new Law();
 
 		res.setRequirement(requirement);
 		res.setLaws(laws);
+		res.setLawParent(lawParent);
 
 
 		return res;
@@ -77,6 +82,7 @@ public class LawService {
 		Assert.notNull(law);
 		Law res;
 		List<Law> laws = new ArrayList<Law>();
+		
 
 		res = lawRepository.save(law);
 		Collection<Country> ee = this.countryService.findCountryByLawId(law
@@ -130,8 +136,7 @@ public class LawService {
 		res.setRequirement(lawForm.getRequirement());
 
 
-		if (binding != null)
-			validator.validate(res, binding);
+		this.validator.validate(res, binding);
 
 		return res;
 	}

@@ -17,6 +17,12 @@
 <b><spring:message code="law.text"/>:&nbsp;</b><jstl:out value="${law.text}"/>
 <br/>
 
+<b><spring:message code="law.enactmentDate"/>:&nbsp;</b><jstl:out value="${law.enactmentDate}"/>
+<br/>
+
+<b><spring:message code="law.abrogationTime"/>:&nbsp;</b><jstl:out value="${law.abrogationTime}"/>
+<br/>
+
 <acme:cancel url="law/list.do" code="law.cancel"/>
 
 </form:form>

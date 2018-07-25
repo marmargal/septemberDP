@@ -14,18 +14,26 @@
 <form:form action="law/administrator/edit.do" modelAttribute="lawForm">
 
 	<form:hidden path="id"/>
-	<form:hidden path="enactmentDate"/>
-	<form:hidden path="abrogationTime"/>
+	<form:hidden path="requirement"/>
+	<form:hidden path="laws"/>
 	
 	<acme:textbox code="law.title" path="title" />
 	<br />
-
+	
 	<acme:textbox code="law.text" path="text" />
 	<br />
+
+	<acme:textbox code="law.enactmentDate" path="enactmentDate" />
+	<br />
 	
-	<acme:select items="${requirement}" itemLabel="title" code="law.requirement" path="requirement"/>
+	<acme:textbox code="law.abrogationTime" path="abrogationTime" />
+	<br />
 	
-	<acme:select items="${laws}" itemLabel="title" code="law.lawChildren" path="laws"/>
+	<acme:select items="${lawParent}" itemLabel="title" code="law.lawParent" path="lawParent"/>
+	
+	<acme:select items="${requirement}" itemLabel="title" code="law.requirement"
+		path="requirement" />
+		
 
 	<acme:submit name="save" code="law.save" />
 
