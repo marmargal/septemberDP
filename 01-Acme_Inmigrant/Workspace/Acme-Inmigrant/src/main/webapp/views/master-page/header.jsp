@@ -58,8 +58,8 @@
 				</ul>
 			</li>
 			<li><a href="question/officer/list.do"><spring:message code="master.page.questions" /></a></li>
-			<li><a href="/report/display.do"><spring:message code="master.page.reports" /></a></li>
 			<li><a href="immigrant/officer/list.do"><spring:message code="master.page.immigrants" /></a></li>
+			<li><a href="investigator/officer/list.do"><spring:message code="master.page.investigator" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('INVESTIGATOR')">
