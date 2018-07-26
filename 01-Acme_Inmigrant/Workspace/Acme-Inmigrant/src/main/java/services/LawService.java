@@ -95,38 +95,6 @@ public class LawService {
 	public void delete(Law law) {
 		Assert.notNull(law);
 		Assert.isTrue(law.getId() != 0);
-//		if (law.getLawParent() != null) {
-//			Law lawParent = this.findOne(law.getId());
-//			System.out.println(lawParent);
-//			List<Law> sons = lawParent.getLaws();
-//			sons.remove(law);
-//			lawParent.setLaws(sons);
-//			this.save(lawParent);
-//
-//		}
-//
-//		if (law.getLaws() != null) {
-//			for (Law l : law.getLaws()) {
-//				l.setLawParent(null);
-//			}
-//		}
-//		Collection<Country> country = countryService.findAll();
-//		for (Country c : country) {
-//			List<Law> leyes = c.getLaw();
-//			if(leyes.contains(law)){
-//				leyes.remove(law);
-//			}
-//			c.setLaw(leyes);
-//			countryService.save(c);
-//		}
-//
-//		Assert.isTrue(lawRepository.exists(law.getId()));
-//		Collection<Requirement> requirements = new ArrayList<Requirement>();
-//		requirements= law.getRequirement();
-//		
-//		for(Requirement r: requirements){
-//			r.setLaw(null);
-//		}
 		
 		Law lawParent = new Law();
 		List<Law> lawsSonsOfParent = new ArrayList<Law>();
@@ -134,6 +102,14 @@ public class LawService {
 		Country country = new Country();
 		List<Law> countryLaws = new ArrayList<Law>();
 		Collection<Requirement> requirementsOfLaw = new ArrayList<Requirement>();
+		
+		// Actualizando Laws hijas
+		lawsSons = law.getLaws();
+		if(!lawsSons.isEmpty()){
+			for(int i=0; i<lawsSons.size(); i++){
+				this.delete(lawsSons.get(i));
+			}
+		}	
 		
 		// Actualizando lawParent
 		lawParent = law.getLawParent();
@@ -158,14 +134,6 @@ public class LawService {
 				this.requirementService.delete(requirement);
 			}
 		}
-
-		//Actualizando Laws hijas
-//		lawsSons = law.getLaws();
-//		if(!lawsSons.isEmpty()){
-//			for(Law l: lawsSons){
-//				this.delete(l);
-//			}
-//		}
 		
 		lawRepository.delete(law);
 	}
