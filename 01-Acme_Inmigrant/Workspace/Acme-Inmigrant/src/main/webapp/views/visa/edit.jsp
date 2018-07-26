@@ -53,6 +53,7 @@
 
 	<spring:message var="visaSave" code="visa.save" />
 	<input type="submit" name="save" value="${visaSave}" />
+	
 
 
 	<spring:message var="visaCancel" code="visa.Cancel" />

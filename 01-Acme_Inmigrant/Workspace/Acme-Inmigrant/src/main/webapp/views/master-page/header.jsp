@@ -33,7 +33,6 @@
 		<security:authorize access="isAuthenticated()">
 			<li><a href="#" class="fNiv"><security:authentication property="principal.username" /></a>
 				<ul>
-					<li><a href="#"><spring:message code="master.page.editProfile" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
@@ -44,12 +43,22 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('IMMIGRANT')">
+			<li><a href="immigrant/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 			<li><a href="#"><spring:message code="master.page.application" /></a></li>
 			<li><a href="#"><spring:message code="master.page.myApplication" /></a></li>
-			<li><a href="application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
+			<li><a class="fNiv" href="#"><spring:message code="master.page.applicationList" /></a>
+				<ul>
+					<li><a href="application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
+					<li><a href="application/immigrant/listClosed.do"><spring:message code="master.page.register.closedApplication" /></a></li>
+					<li><a href="application/immigrant/listAccepted.do"><spring:message code="master.page.register.acceptedApplication" /></a></li>
+					<li><a href="application/immigrant/listRejected.do"><spring:message code="master.page.register.rejectedApplication" /></a></li>
+					<li><a href="immigrant/register.do"><spring:message code="master.page.register.assignApplication" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('OFFICER')">
+			<li><a href="officer/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 			<li><a class="fNiv" href="#"><spring:message code="master.page.applicationList" /></a>
 				<ul>
 					<li><a href="immigrant/register.do"><spring:message code="master.page.register.acceptedApplication" /></a></li>
@@ -58,16 +67,18 @@
 				</ul>
 			</li>
 			<li><a href="question/officer/list.do"><spring:message code="master.page.questions" /></a></li>
-			<li><a href="/report/display.do"><spring:message code="master.page.reports" /></a></li>
 			<li><a href="immigrant/officer/list.do"><spring:message code="master.page.immigrants" /></a></li>
+			<li><a href="investigator/officer/list.do"><spring:message code="master.page.investigator" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('INVESTIGATOR')">
+			<li><a href="investigator/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 			<li><a href="report/investigator/list.do"><spring:message code="master.page.reports" /></a></li>
 			<li><a href="immigrant/investigator/list.do"><spring:message code="master.page.immigrants" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('ADMIN')">
+			<li><a href="administrator/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 			<li><a class="fNiv" href=""><spring:message code="master.page.register" /></a>
 				<ul>
 					<li><a href="officer/administrator/register.do"><spring:message code="master.page.register.officer" /></a></li>
@@ -76,7 +87,7 @@
 			</li>
 			<li><a href="visa/administrator/list.do"><spring:message code="master.page.visas" /></a></li>
 			<li><a href="#"><spring:message code="master.page.dashboard" /></a></li>
-			<li><a href="#"><spring:message code="master.page.laws" /></a></li>
+			<li><a href="law/list.do"><spring:message code="master.page.laws" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

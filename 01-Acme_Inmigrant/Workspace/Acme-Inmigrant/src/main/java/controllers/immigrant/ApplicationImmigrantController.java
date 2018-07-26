@@ -2,6 +2,7 @@ package controllers.immigrant;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
 import services.ImmigrantService;
+import services.VisaService;
 import controllers.AbstractController;
 import domain.Application;
 import domain.ContactSection;
@@ -22,6 +24,7 @@ import domain.EducationSection;
 import domain.Immigrant;
 import domain.PersonalSection;
 import domain.SocialSection;
+import domain.Visa;
 import domain.WorkSection;
 
 @Controller
@@ -35,6 +38,9 @@ public class ApplicationImmigrantController extends AbstractController {
 
 	@Autowired
 	private ImmigrantService immigrantService;
+	
+	@Autowired
+	private VisaService visaService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -54,6 +60,39 @@ public class ApplicationImmigrantController extends AbstractController {
 		result.addObject("application", application);
 		return result;
 	}
+	
+	@RequestMapping(value = "/listClosed", method = RequestMethod.GET)
+	public ModelAndView listClosed() {
+		ModelAndView result;
+		Collection<Application> application = new ArrayList<Application>();
+		application = applicationService.findApplicationClosed();
+		result = new ModelAndView("application/listClosed");
+		result.addObject("requestURI", "application/immigrant/list.do");
+		result.addObject("application", application);
+		return result;
+	}
+	
+	@RequestMapping(value = "/listAccepted", method = RequestMethod.GET)
+	public ModelAndView listAccepted() {
+		ModelAndView result;
+		Collection<Application> application = new ArrayList<Application>();
+		application = applicationService.findApplicationAccepted();
+		result = new ModelAndView("application/listAccepted");
+		result.addObject("requestURI", "application/immigrant/list.do");
+		result.addObject("application", application);
+		return result;
+	}
+	
+	@RequestMapping(value = "/listRejected", method = RequestMethod.GET)
+	public ModelAndView listRejected() {
+		ModelAndView result;
+		Collection<Application> application = new ArrayList<Application>();
+		application = applicationService.findApplicationRejectedbyImmigrant();
+		result = new ModelAndView("application/listRejected");
+		result.addObject("requestURI", "application/immigrant/list.do");
+		result.addObject("application", application);
+		return result;
+	}
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
@@ -66,8 +105,8 @@ public class ApplicationImmigrantController extends AbstractController {
 		Collection<EducationSection> educationS = new ArrayList<EducationSection>();
 
 		Immigrant i = immigrantService.findByPrincipal();
-		int rangerId = i.getId();
-		application = applicationService.getApplicationByImmigrant(rangerId);
+		int immigrantId = i.getId();
+		application = applicationService.getApplicationByImmigrant(immigrantId);
 
 		for (Application a : application) {
 			personalS.add(a.getPersonalSection());
@@ -140,6 +179,7 @@ public class ApplicationImmigrantController extends AbstractController {
 		}
 		return result;
 	}
+	
 
 	// Saving --------------------------------------------------------------
 
@@ -147,6 +187,9 @@ public class ApplicationImmigrantController extends AbstractController {
 	public ModelAndView save(@Valid Application application,
 			BindingResult binding) {
 		ModelAndView res;
+		if(application.getClosed()==true){
+			application.setClosedMoment(new Date());
+		}
 		
 		application = this.applicationService.reconstruct(application, binding);
 		
@@ -159,12 +202,14 @@ public class ApplicationImmigrantController extends AbstractController {
 				res = new ModelAndView(
 						"redirect:../../application/immigrant/display.do");
 			} catch (final Throwable oops) {
+
 				res = this.createEditModelAndView(application,
 						"application.commit.error");
 			}
 
 		return res;
 	}
+
 
 	// Deleting -------------------------------------------------------------
 
@@ -209,9 +254,14 @@ public class ApplicationImmigrantController extends AbstractController {
 			final Application application, final String message) {
 
 		ModelAndView result;
+		Collection<Visa> visas = new ArrayList<Visa>();
+		visas = this.visaService.findAll();
+		
 		result = new ModelAndView("application/immigrant/edit");
 		result.addObject("application", application);
+		result.addObject("visa", visas);
 		result.addObject("message", message);
 		return result;
 	}
+	
 }

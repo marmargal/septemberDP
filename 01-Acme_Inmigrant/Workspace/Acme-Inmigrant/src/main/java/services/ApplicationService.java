@@ -23,9 +23,11 @@ import domain.ContactSection;
 import domain.CreditCard;
 import domain.EducationSection;
 import domain.Immigrant;
+import domain.Officer;
 import domain.PersonalSection;
 import domain.Question;
 import domain.SocialSection;
+import domain.Visa;
 import domain.WorkSection;
 
 @Service
@@ -41,6 +43,9 @@ public class ApplicationService {
 	
 	@Autowired
 	private ImmigrantService immigrantService;
+
+	@Autowired
+	private OfficerService officerService;
 	
 	@Autowired
 	private Validator validator;
@@ -60,7 +65,6 @@ public class ApplicationService {
 		res = new Application();
 		
 		Date openedMoment = new Date(System.currentTimeMillis()-1000);
-		Date closedMoment = new Date(System.currentTimeMillis()-10);
 		
 		PersonalSection personalSection;
 		List<ContactSection> contactSection;
@@ -78,7 +82,6 @@ public class ApplicationService {
 		
 		res.setTicker(this.generatedTicker());
 		res.setOpenedMoment(openedMoment);
-		res.setClosedMoment(closedMoment);
 		
 		res.setPersonalSection(personalSection);
 		res.setContactSection(contactSection);
@@ -115,6 +118,20 @@ public class ApplicationService {
 		Collection<Application> immigrantApplications = new ArrayList<Application>();
 		immigrantApplications = immigrant.getApplications();
 		immigrantApplications.add(application);
+		
+		if(application.getClosed()==true){
+			res.setClosedMoment(new Date());
+			Visa visa = new Visa();
+			visa = res.getVisa();
+			Collection<Application> applications = new ArrayList<Application>();
+			applications = this.applicationRepository.findApplicationClosedFalseByVisa(visa.getId());
+			for(Application a: applications){
+				if(a.getImmigrant()==immigrantService.findByPrincipal()){
+					a.setClosed(true);
+					save(a);
+				}
+			}
+		}
 		return res;
 	}
 	
@@ -209,6 +226,34 @@ public class ApplicationService {
 	
 	public void flush() {
 		this.applicationRepository.flush();
+	}
+	
+	public Application findApplicationRejected(){
+		Application res = new Application();
+		Officer officer = this.officerService.findByPrincipal();
+		res = this.applicationRepository.findApplicationRejected(officer.getId());
+		return res;
+	}
+	
+	public Collection<Application> findApplicationClosed(){
+		Collection<Application> res = new ArrayList<Application>();
+		Immigrant immigrant = this.immigrantService.findByPrincipal();
+		res = this.applicationRepository.findApplicationClosed(immigrant.getId());
+		return res;
+	}
+	
+	public Collection<Application> findApplicationAccepted(){
+		Collection<Application> res = new ArrayList<Application>();
+		Immigrant immigrant = this.immigrantService.findByPrincipal();
+		res = this.applicationRepository.findApplicationAccepted(immigrant.getId());
+		return res;
+	}
+	
+	public Collection<Application> findApplicationRejectedbyImmigrant(){
+		Collection<Application> res = new ArrayList<Application>();
+		Immigrant immigrant = this.immigrantService.findByPrincipal();
+		res = this.applicationRepository.findApplicationRejectedbyImmigrant(immigrant.getId());
+		return res;
 	}
 	
 }

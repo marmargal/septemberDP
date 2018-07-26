@@ -81,16 +81,16 @@ public class OfficerService {
 	public Officer save(Officer officer) {
 		Officer res;
 		
-		if (officer.getId() == 0) {
-			String pass = officer.getUserAccount().getPassword();
-			
-			final Md5PasswordEncoder code = new Md5PasswordEncoder();
-			
-			pass = code.encodePassword(pass, null);
-			
-			officer.getUserAccount().setPassword(pass);
-		}
+		String pass = officer.getUserAccount().getPassword();
+		
+		final Md5PasswordEncoder code = new Md5PasswordEncoder();
+		
+		pass = code.encodePassword(pass, null);
+		
+		officer.getUserAccount().setPassword(pass);
+
 		res = this.officerRepository.save(officer);
+		
 		return res;
 	}
 
@@ -132,6 +132,7 @@ public class OfficerService {
 		res.setEmail(officer.getEmail());
 		res.setPhoneNumber(officer.getPhoneNumber());
 		res.setAddress(officer.getAddress());
+		res.setUsername(officer.getUserAccount().getUsername());
 		
 		return res;
 	}

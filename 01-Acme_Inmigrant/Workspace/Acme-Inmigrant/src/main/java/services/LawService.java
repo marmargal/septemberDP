@@ -28,7 +28,14 @@ public class LawService {
 	private LawRepository lawRepository;
 
 	// Suporting services
+	@Autowired
 	private CountryService countryService;
+	
+	@Autowired
+	private AdministratorService administratorService;
+	
+	@Autowired
+	private RequirementService requirementService;
 
 	@Autowired
 	private Validator validator;
@@ -42,6 +49,7 @@ public class LawService {
 	// Simple CRUD methods
 
 	public Law create() {
+		this.administratorService.checkAuthority();
 		Law res;
 		res = new Law();
 
@@ -51,8 +59,8 @@ public class LawService {
 		requirement = new ArrayList<Requirement>();
 		laws = new ArrayList<Law>();
 
-		res.setRequirements(requirement);
-		res.setLaw(laws);
+		res.setRequirement(requirement);
+		res.setLaws(laws);
 
 		return res;
 	}
@@ -73,20 +81,12 @@ public class LawService {
 	}
 
 	public Law save(Law law) {
+		this.administratorService.checkAuthority();
 		Assert.notNull(law);
 		Law res;
-		List<Law> laws = new ArrayList<Law>();
 
 		res = lawRepository.save(law);
-		Collection<Country> ee = this.countryService.findCountryByLawId(law
-				.getId());
-		Country countryBueno = new Country();
-		for (Country l : ee) {
-			countryBueno = l;
-		}
 
-		laws.add(res);
-		countryBueno.setLaw(laws);
 
 		Assert.notNull(res);
 		return res;
@@ -95,20 +95,62 @@ public class LawService {
 	public void delete(Law law) {
 		Assert.notNull(law);
 		Assert.isTrue(law.getId() != 0);
-		Assert.isTrue(lawRepository.exists(law.getId()));
+		
+		Law lawParent = new Law();
+		List<Law> lawsSonsOfParent = new ArrayList<Law>();
+		List<Law> lawsSons = new ArrayList<Law>();
+		Country country = new Country();
+		List<Law> countryLaws = new ArrayList<Law>();
+		Collection<Requirement> requirementsOfLaw = new ArrayList<Requirement>();
+		
+		// Actualizando Laws hijas
+		lawsSons = law.getLaws();
+		if(!lawsSons.isEmpty()){
+			for(int i=0; i<lawsSons.size(); i++){
+				this.delete(lawsSons.get(i));
+			}
+		}	
+		
+		// Actualizando lawParent
+		lawParent = law.getLawParent();
+		if (lawParent != null){
+			lawsSonsOfParent = lawParent.getLaws();
+			lawsSonsOfParent.remove(law);
+			lawParent.setLaws(lawsSonsOfParent);
+			this.save(lawParent);
+		}
+		
+		// Actualizando Country
+		country = law.getCountry();
+		countryLaws = country.getLaw();
+		countryLaws.remove(law);
+		country.setLaw(countryLaws);
+		this.countryService.save(country);
+		
+		//Actualizando Requirement
+		requirementsOfLaw = law.getRequirement();
+		if(!requirementsOfLaw.isEmpty()){
+			for(Requirement requirement: requirementsOfLaw){
+				this.requirementService.delete(requirement);
+			}
+		}
+		
 		lawRepository.delete(law);
 	}
 
 	public LawForm construct(Law law) {
 		LawForm res = new LawForm();
 
+		res.setId(law.getId());
 		res.setAbrogationTime(law.getAbrogationTime());
 		res.setEnactmentDate(law.getEnactmentDate());
 		res.setText(law.getText());
 		res.setTitle(law.getTitle());
 
-		res.setLaw(law.getLaw());
-		res.setRequirement(law.getRequirements());
+		res.setLaws(law.getLaws());
+		res.setLawParent(law.getLawParent());
+		res.setRequirement(law.getRequirement());
+		res.setCountry(law.getCountry());
 
 		return res;
 	}
@@ -117,17 +159,34 @@ public class LawService {
 		Assert.notNull(lawForm);
 		Law res = new Law();
 
-		res.setAbrogationTime(lawForm.getAbrogationTime());
+		if (lawForm.getId() != 0)
+			res = this.findOne(lawForm.getId());
+		else
+			res = this.create();
+
+		res.setId(lawForm.getId());
+		if (lawForm.getAbrogationTime() == null) {
+			res.setAbrogationTime(null);
+		} else {
+			res.setAbrogationTime(lawForm.getAbrogationTime());
+		}
+
 		res.setEnactmentDate(lawForm.getEnactmentDate());
 		res.setText(lawForm.getText());
 		res.setTitle(lawForm.getTitle());
 
-		res.setLaw(lawForm.getLaw());
-		res.setRequirements(lawForm.getRequirement());
+		res.setLaws(lawForm.getLaws());
+		if (lawForm.getLawParent() == null) {
+			res.setLawParent(null);
+		} else {
+			res.setLawParent(lawForm.getLawParent());
+		}
 
-		if (binding != null)
-			validator.validate(res, binding);
+		res.setRequirement(lawForm.getRequirement());
+		res.setCountry(lawForm.getCountry());
 
+		this.validator.validate(res, binding);
+		System.out.println(binding);
 		return res;
 	}
 

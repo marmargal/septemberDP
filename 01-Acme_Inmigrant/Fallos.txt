@@ -1,16 +1,16 @@
--------------------------------------------------------  C  ----------------------------------------------------------
+﻿-------------------------------------------------------  C  ----------------------------------------------------------
 
 11.2 -> Immigrant edit personal data
 	Officer edit personal data
 	Investigator edit personal data.
-	Los inmigrantes pueden aplicar a visas.
-	las aplication no tienen relación con las visas, por lo que no se pueden asociar a una visa.
-	Esta relación sería manyToOne.
 
 12.1 -> Abrir y cerrar aplicaciones
 	¿Mostrar más información?
 	Si se cierra una aplicación, debe cerrarse para cualquiera
 	Puede ser editable solo mientras esté abierta
+	Los inmigrantes pueden aplicar a visas.
+	las aplication no tienen relación con las visas, por lo que no se pueden asociar a una visa.
+	Esta relación sería manyToOne.
 
 12.2 -> Enlazar las question desde la tabla de application
 

@@ -15,6 +15,8 @@ import repositories.InvestigatorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Application;
+import domain.Immigrant;
 import domain.Investigator;
 import domain.Report;
 import forms.ActorForm;
@@ -76,16 +78,16 @@ public class InvestigatorService {
 	public Investigator save(Investigator investigator) {
 		Investigator res;
 		
-		if (investigator.getId() == 0) {
-			String pass = investigator.getUserAccount().getPassword();
-			
-			final Md5PasswordEncoder code = new Md5PasswordEncoder();
-			
-			pass = code.encodePassword(pass, null);
-			
-			investigator.getUserAccount().setPassword(pass);
-		}
+		String pass = investigator.getUserAccount().getPassword();
+		
+		final Md5PasswordEncoder code = new Md5PasswordEncoder();
+		
+		pass = code.encodePassword(pass, null);
+		
+		investigator.getUserAccount().setPassword(pass);
+
 		res = this.investigatorRepository.save(investigator);
+		
 		return res;
 	}
 
@@ -127,6 +129,7 @@ public class InvestigatorService {
 		res.setEmail(investigator.getEmail());
 		res.setPhoneNumber(investigator.getPhoneNumber());
 		res.setAddress(investigator.getAddress());
+		res.setUsername(investigator.getUserAccount().getUsername());
 		
 		return res;
 	}
@@ -152,6 +155,18 @@ public class InvestigatorService {
 		this.validator.validate(res, binding);
 
 		return res;
+	}
+	
+	public Collection<Application> findApplicationByOfficer(int officerId){
+		return this.investigatorRepository.findApplicationByOfficer(officerId);
+	}
+	
+	public Immigrant findImmigrantByApplication(int applicationId){
+		return this.investigatorRepository.findImmigrantByApplication(applicationId);
+	}
+	
+	public Investigator findInvestigatorByImmigrant(int immigrantId){
+		return this.investigatorRepository.findInvestigatorByImmigrant(immigrantId);
 	}
 
 }
