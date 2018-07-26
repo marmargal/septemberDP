@@ -108,9 +108,9 @@ public class ImmigrantService {
 		Immigrant res;
 		UserAccount immigrantAccount;
 		immigrantAccount = LoginService.getPrincipal();
+		Assert.notNull(immigrantAccount);
 		res = this.immigrantRepository
 				.findImmigrantByUserAccountId(immigrantAccount.getId());
-		Assert.notNull(res);
 		return res;
 	}
 

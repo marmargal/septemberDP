@@ -30,6 +30,9 @@ public class DecisionService {
 	private ApplicationService applicationService;
 	
 	@Autowired
+	private OfficerService officerService;
+	
+	@Autowired
 	private Validator validator;
 
 	// Constructors
@@ -41,6 +44,9 @@ public class DecisionService {
 	// Simple CRUD methods
 
 	public Decision create(int applicationId) {
+		Assert.isTrue(officerService.findByPrincipal().
+				equals(applicationService.findOne(applicationId).getOfficer()));
+		
 		Decision res = new Decision();
 
 		Date moment = new Date(System.currentTimeMillis() - 1000);
@@ -70,7 +76,11 @@ public class DecisionService {
 	}
 
 	public Decision save(Decision decision) {
+		Assert.isTrue(officerService.findByPrincipal().
+				equals(decision.getApplication().getOfficer()));
+		
 		Decision res;
+		this.checkRejected(decision);
 		res = decisionRepository.save(decision);
 		return res;
 	}
@@ -114,6 +124,12 @@ public class DecisionService {
 			this.validator.validate(res,binding);
 		
 		return res;
+	}
+	
+	public void checkRejected(Decision decision){
+		if(decision.getAccept()==false){
+			Assert.isTrue(!(decision.getComment().isEmpty()));
+		}
 	}
 
 }

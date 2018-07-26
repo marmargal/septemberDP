@@ -139,6 +139,7 @@
 		
 								<!-- 	DECISION	 -->
 		<security:intercept-url pattern="/decision/officer/**" access="hasRole('OFFICER')" />
+		<security:intercept-url pattern="/decision/immigrant/**" access="hasRole('IMMIGRANT')" />
 		
 	
 		
