@@ -64,7 +64,6 @@ public class ApplicationService {
 		res = new Application();
 		
 		Date openedMoment = new Date(System.currentTimeMillis()-1000);
-		Date closedMoment = new Date(System.currentTimeMillis()-10);
 		
 		PersonalSection personalSection;
 		List<ContactSection> contactSection;
@@ -82,7 +81,6 @@ public class ApplicationService {
 		
 		res.setTicker(this.generatedTicker());
 		res.setOpenedMoment(openedMoment);
-		res.setClosedMoment(closedMoment);
 		
 		res.setPersonalSection(personalSection);
 		res.setContactSection(contactSection);
@@ -219,6 +217,13 @@ public class ApplicationService {
 		Application res = new Application();
 		Officer officer = this.officerService.findByPrincipal();
 		res = this.applicationRepository.findApplicationRejected(officer.getId());
+		return res;
+	}
+	
+	public Collection<Application> findApplicationClosed(){
+		Collection<Application> res = new ArrayList<Application>();
+		Immigrant immigrant = this.immigrantService.findByPrincipal();
+		res = this.applicationRepository.findApplicationClosed(immigrant.getId());
 		return res;
 	}
 	

@@ -577,6 +577,7 @@
 				<ref bean="question2" />
 			</list>
 		</property>
+		<property name="visa" ref="visa1" />
 	</bean>
 
 	<!-- Application 2 -->
@@ -609,6 +610,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="visa" ref="visa2" />
 	</bean>
 
 	<!-- Application 3 -->
@@ -641,6 +643,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="visa" ref="visa1" />
 	</bean>
 
 	<!-- Question -->

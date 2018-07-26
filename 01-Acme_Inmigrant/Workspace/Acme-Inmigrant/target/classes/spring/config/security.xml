@@ -74,6 +74,9 @@
 		<security:intercept-url pattern="/application/officer/listRejected.do" access="hasRole('OFFICER')" />
 		<security:intercept-url pattern="/application/officer/listNoDecision.do" access="hasRole('OFFICER')" />
 		<security:intercept-url pattern="/application/immigrant/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/application/immigrant/listClosed.do" access="hasRole('IMMIGRANT')" /> 
+		<security:intercept-url pattern="/application/immigrant/listAccepted.do" access="hasRole('IMMIGRANT')" /> 
+		<security:intercept-url pattern="/application/immigrant/listRejected.do" access="hasRole('IMMIGRANT')" /> 
 
 		
 								<!-- 		PERSONALSECTION		-->

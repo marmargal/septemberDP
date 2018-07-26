@@ -46,7 +46,15 @@
 		<security:authorize access="hasRole('IMMIGRANT')">
 			<li><a href="#"><spring:message code="master.page.application" /></a></li>
 			<li><a href="#"><spring:message code="master.page.myApplication" /></a></li>
-			<li><a href="application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
+			<li><a class="fNiv" href="#"><spring:message code="master.page.applicationList" /></a>
+				<ul>
+					<li><a href="application/immigrant/display.do"><spring:message code="master.page.application.display" /></a></li>
+					<li><a href="application/immigrant/listClosed.do"><spring:message code="master.page.register.closedApplication" /></a></li>
+					<li><a href="application/immigrant/listAccepted.do"><spring:message code="master.page.register.acceptedApplication" /></a></li>
+					<li><a href="application/immigrant/listRejected.do"><spring:message code="master.page.register.rejectedApplication" /></a></li>
+					<li><a href="immigrant/register.do"><spring:message code="master.page.register.assignApplication" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('OFFICER')">

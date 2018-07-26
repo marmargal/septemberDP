@@ -17,4 +17,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	@Query("select a from Officer o join o.decision d join d.application a where (d.accept=false and o.id=?1)")
 	Application findApplicationRejected(int officerId);
 	
+	@Query("select p from Immigrant i join i.applications p where (p.closedMoment != null and i.id=?1)")
+	Collection<Application> findApplicationClosed(int Id);
+	
 }
