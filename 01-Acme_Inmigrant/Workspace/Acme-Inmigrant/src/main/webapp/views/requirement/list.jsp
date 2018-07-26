@@ -39,6 +39,6 @@
 </display:table>
 
 <security:authorize access="hasRole('ADMIN')">
-	<a href="requirement/administrator/create.do"><spring:message code="requirement.create"/></a>
+	<a href="law/administrator/create.do"><spring:message code="requirement.create"/></a>
 </security:authorize>
 
