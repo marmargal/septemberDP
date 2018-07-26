@@ -31,6 +31,10 @@
 		</display:column>
 	</security:authorize>
 
+	<spring:message code="application.immigrant" var="immigrantHeader" />
+	<display:column property="immigrant.userAccount.username" title="${immigrantHeader}"
+		sortable="true" />
+
 	<spring:message code="application.ticker" var="tickerHeader" />
 	<display:column property="ticker" title="${tickerHeader}"
 		sortable="true" />
