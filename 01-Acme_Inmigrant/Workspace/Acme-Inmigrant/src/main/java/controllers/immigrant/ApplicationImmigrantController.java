@@ -75,7 +75,7 @@ public class ApplicationImmigrantController extends AbstractController {
 	public ModelAndView listAccepted() {
 		ModelAndView result;
 		Collection<Application> application = new ArrayList<Application>();
-		application = applicationService.findApplicationClosed();
+		application = applicationService.findApplicationAccepted();
 		result = new ModelAndView("application/listAccepted");
 		result.addObject("requestURI", "application/immigrant/list.do");
 		result.addObject("application", application);
@@ -86,7 +86,7 @@ public class ApplicationImmigrantController extends AbstractController {
 	public ModelAndView listRejected() {
 		ModelAndView result;
 		Collection<Application> application = new ArrayList<Application>();
-		application = applicationService.findApplicationClosed();
+		application = applicationService.findApplicationRejectedbyImmigrant();
 		result = new ModelAndView("application/listRejected");
 		result.addObject("requestURI", "application/immigrant/list.do");
 		result.addObject("application", application);

@@ -227,4 +227,18 @@ public class ApplicationService {
 		return res;
 	}
 	
+	public Collection<Application> findApplicationAccepted(){
+		Collection<Application> res = new ArrayList<Application>();
+		Immigrant immigrant = this.immigrantService.findByPrincipal();
+		res = this.applicationRepository.findApplicationAccepted(immigrant.getId());
+		return res;
+	}
+	
+	public Collection<Application> findApplicationRejectedbyImmigrant(){
+		Collection<Application> res = new ArrayList<Application>();
+		Immigrant immigrant = this.immigrantService.findByPrincipal();
+		res = this.applicationRepository.findApplicationRejectedbyImmigrant(immigrant.getId());
+		return res;
+	}
+	
 }
