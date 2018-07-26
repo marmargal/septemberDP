@@ -48,6 +48,6 @@
 		<acme:checkbox code="application.close" path="closed"/>
 		
 		<acme:submit name="save" code="application.submit" />
-		<acme:cancel url="application/display.do" code="application.cancel" />
+		<acme:cancel url="application/immigrant/display.do" code="application.cancel" />
 	</security:authorize>
 </form:form>

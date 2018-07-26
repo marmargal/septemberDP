@@ -27,6 +27,7 @@ import domain.Officer;
 import domain.PersonalSection;
 import domain.Question;
 import domain.SocialSection;
+import domain.Visa;
 import domain.WorkSection;
 
 @Service
@@ -120,6 +121,16 @@ public class ApplicationService {
 		
 		if(application.getClosed()==true){
 			res.setClosedMoment(new Date());
+			Visa visa = new Visa();
+			visa = res.getVisa();
+			Collection<Application> applications = new ArrayList<Application>();
+			applications = this.applicationRepository.findApplicationClosedFalseByVisa(visa.getId());
+			for(Application a: applications){
+				if(a.getImmigrant()==immigrantService.findByPrincipal()){
+					a.setClosed(true);
+					save(a);
+				}
+			}
 		}
 		return res;
 	}
