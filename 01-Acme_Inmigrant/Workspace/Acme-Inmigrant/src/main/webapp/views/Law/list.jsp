@@ -8,37 +8,45 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
+
+<display:table pagesize="6" class="displayLaw" keepStatus="true"
+	name="law" requestURI="${requestURI }" id="row">
+
+	<display:column>
+		<acme:links url="law/administrator/edit.do?lawId=${row.id}" code="law.edit" />
+	</display:column>
+
+	<acme:column property="title" code="law.title" />
+
+	<acme:column property="text" code="law.text" />
+
+	<display:column>
+		<a href="law/display.do?lawId=${row.lawParent.id}"><spring:message
+				code="law.lawParent" /></a>
+	</display:column>
+
+	<display:column>
+		<acme:links url="law/display.do?lawId=${row.id}" code="law.display" />
+	</display:column>
+
+
+
+
+</display:table>
 
 <security:authorize access="hasRole('ADMIN')">
-
-	<display:table pagesize="6" class="displayLaw" keepStatus="true"
-		name="law" requestURI="${requestURI }" id="row">
-
-		<acme:column property="title" code="law.title" />
-
-		<acme:column property="text" code="law.text" />
-
-		<display:column>
-			<acme:links url="law/administrator/display.do?lawId=${row.id}"
-				code="law.display" />
-		</display:column>
-
-		<display:column>
-			<acme:links url="law/administrator/edit.do?lawId=${row.id}"
-				code="law.edit" />
-		</display:column>
-
-
-
-
-
-	</display:table>
+	<a href="law/administrator/create.do"><spring:message
+			code="law.create" /></a>
 </security:authorize>
+
