@@ -24,8 +24,12 @@
 		type="submit">
 </form>
 
+
 <display:table pagesize="5" class="visas" keepStatus="true" name="visas"
 	requestURI="${requestURI }" id="row">
+
+
+
 
 	<security:authorize access="hasRole('ADMIN')">
 
@@ -39,17 +43,25 @@
 
 	<acme:column property="classes" code="visa.classes" />
 	<acme:column property="description" code="visa.description" />
-	<acme:column property="price" code="visa.price" />
+
+
+	<spring:message code="format.price" var="patternPrice" />
+	<spring:message code="visa.price" var="priceHeader" />
+	<display:column property="price" title="${priceHeader}" sortable="true"
+		format="${patternPrice}" />
+
 	<acme:column property="invalidate" code="visa.invalidate" />
 	<acme:column property="category.name" code="visa.category" />
 
 	<display:column>
+
 		<a href="visa/display.do?visaId=${row.id}"><spring:message
 				code="visa.display" /></a>
 	</display:column>
 
 	<display:column>
 		<acme:links url="country/display.do?countryId=${row.country.id }" code="visa.country" />
+
 	</display:column>
 
 

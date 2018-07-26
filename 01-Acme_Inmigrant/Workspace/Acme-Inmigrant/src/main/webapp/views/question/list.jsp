@@ -42,6 +42,11 @@
 	<spring:message var="formatDate" code="question.format.date"/>
 	<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
 
+	<security:authorize access="hasRole('OFFICER')">
+		<spring:message code="question.statement" var="applicationHeader" />
+		<display:column value="${application.ticker}" title="${applicationHeader}" sortable="true" />
+	</security:authorize>
+
 </display:table>
 
 <jstl:if test="${application != null }">

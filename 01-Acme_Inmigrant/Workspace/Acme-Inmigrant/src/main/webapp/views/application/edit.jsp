@@ -32,6 +32,7 @@
 		<form:hidden path="socialSection" />
 		<form:hidden path="educationSection" />
 		
+		<acme:select items="${visa}" itemLabel="classes" code="application.visa" path="visa" />
 		<acme:textbox path="creditCard.holderName" code="application.creditCard.holderName" />
 		<acme:textbox path="creditCard.brandName" code="application.creditCard.brandName" />
 		<acme:textbox path="creditCard.number" code="application.creditCard.number" />

@@ -63,8 +63,6 @@ public class Application extends DomainEntity{
 		this.openedMoment = openedMoment;
 	}
 
-	@Past
-	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getClosedMoment() {
@@ -101,6 +99,7 @@ public class Application extends DomainEntity{
 	private List<SocialSection> socialSection;
 	private List<EducationSection> educationSection;
 	private List<Question> question;
+	private Visa visa;
 
 	@Valid
 	@ManyToOne(optional=true)
@@ -183,6 +182,16 @@ public class Application extends DomainEntity{
 
 	public void setQuestion(List<Question> question) {
 		this.question = question;
+	}
+
+	@Valid
+	@ManyToOne(optional=true)
+	public Visa getVisa() {
+		return visa;
+	}
+
+	public void setVisa(Visa visa) {
+		this.visa = visa;
 	}
 
 	

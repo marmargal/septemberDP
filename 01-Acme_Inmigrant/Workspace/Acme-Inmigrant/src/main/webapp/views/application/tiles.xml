@@ -36,6 +36,21 @@
 		<put-attribute name="body" value="/views/application/list.jsp" />
 	</definition>
 	
+	<definition name="application/listClosed" extends="master.page">	
+		<put-attribute name="title" value="List application closed" />
+		<put-attribute name="body" value="/views/application/list.jsp" />
+	</definition>
+	
+	<definition name="application/listAccepted" extends="master.page">	
+		<put-attribute name="title" value="List application accepted" />
+		<put-attribute name="body" value="/views/application/list.jsp" />
+	</definition>
+	
+	<definition name="application/listRejected" extends="master.page">	
+		<put-attribute name="title" value="List application rejected" />
+		<put-attribute name="body" value="/views/application/list.jsp" />
+	</definition>
+	
 	<definition name="application/sectionDisplay" extends="master.page">	
 		<put-attribute name="title" value="Display sections" />
 		<put-attribute name="body" value="/views/application/sectionDisplay.jsp" />

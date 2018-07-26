@@ -15,6 +15,16 @@
 	name="application" requestURI="${requestURI }" id="row">
 
 	<!-- Attributes -->
+	
+	<security:authorize access="hasRole('IMMIGRANT')">
+		<spring:message code="application.edit" />
+		<display:column>
+			<jstl:set var="thisImmigrantId" value="${row.immigrant.id }" />
+			<jstl:if test="${row.immigrant.id == currentImmigrantId && row.closedMoment == null}">
+				<a href="application/immigrant/edit.do?applicationId=${row.id}"> <spring:message code="application.edit" /></a>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 
 	<spring:message code="application.ticker" var="tickerHeader" />
 	<display:column property="ticker" title="${tickerHeader}" sortable="true" />
@@ -33,16 +43,6 @@
 		<a href= "application/immigrant/sectionDisplay.do?applicationId=${row.id}">
 		<spring:message code="application.sections"/></a>
 	</display:column>
-
-	<security:authorize access="hasRole('IMMIGRANT')">
-		<spring:message code="application.edit" />
-		<display:column>
-			<jstl:set var="thisImmigrantId" value="${row.immigrant.id }" />
-			<jstl:if test="${row.immigrant.id == currentImmigrantId}">
-				<a href="application/immigrant/edit.do?applicationId=${row.id}"> <spring:message code="application.edit" /></a>
-			</jstl:if>
-		</display:column>
-	</security:authorize>
 
 </display:table>
 

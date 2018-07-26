@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
 import services.ImmigrantService;
+import services.VisaService;
 import controllers.AbstractController;
 import domain.Application;
 import domain.ContactSection;
@@ -22,6 +23,7 @@ import domain.EducationSection;
 import domain.Immigrant;
 import domain.PersonalSection;
 import domain.SocialSection;
+import domain.Visa;
 import domain.WorkSection;
 
 @Controller
@@ -35,6 +37,9 @@ public class ApplicationImmigrantController extends AbstractController {
 
 	@Autowired
 	private ImmigrantService immigrantService;
+	
+	@Autowired
+	private VisaService visaService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -50,6 +55,39 @@ public class ApplicationImmigrantController extends AbstractController {
 		Application application = new Application();
 		application = applicationService.findOne(applicationId);
 		result = new ModelAndView("application/list");
+		result.addObject("requestURI", "application/immigrant/list.do");
+		result.addObject("application", application);
+		return result;
+	}
+	
+	@RequestMapping(value = "/listClosed", method = RequestMethod.GET)
+	public ModelAndView listClosed() {
+		ModelAndView result;
+		Collection<Application> application = new ArrayList<Application>();
+		application = applicationService.findApplicationClosed();
+		result = new ModelAndView("application/listClosed");
+		result.addObject("requestURI", "application/immigrant/list.do");
+		result.addObject("application", application);
+		return result;
+	}
+	
+	@RequestMapping(value = "/listAccepted", method = RequestMethod.GET)
+	public ModelAndView listAccepted() {
+		ModelAndView result;
+		Collection<Application> application = new ArrayList<Application>();
+		application = applicationService.findApplicationAccepted();
+		result = new ModelAndView("application/listAccepted");
+		result.addObject("requestURI", "application/immigrant/list.do");
+		result.addObject("application", application);
+		return result;
+	}
+	
+	@RequestMapping(value = "/listRejected", method = RequestMethod.GET)
+	public ModelAndView listRejected() {
+		ModelAndView result;
+		Collection<Application> application = new ArrayList<Application>();
+		application = applicationService.findApplicationRejectedbyImmigrant();
+		result = new ModelAndView("application/listRejected");
 		result.addObject("requestURI", "application/immigrant/list.do");
 		result.addObject("application", application);
 		return result;
@@ -209,8 +247,12 @@ public class ApplicationImmigrantController extends AbstractController {
 			final Application application, final String message) {
 
 		ModelAndView result;
+		Collection<Visa> visas = new ArrayList<Visa>();
+		visas = this.visaService.findAll();
+		
 		result = new ModelAndView("application/immigrant/edit");
 		result.addObject("application", application);
+		result.addObject("visa", visas);
 		result.addObject("message", message);
 		return result;
 	}
