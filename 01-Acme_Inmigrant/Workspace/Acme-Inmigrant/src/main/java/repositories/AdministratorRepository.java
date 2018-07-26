@@ -18,23 +18,23 @@ public interface AdministratorRepository extends
 
 	// The average, the minimum, the maximum, and the standard deviation of the
 	// number of applications per user.
-//	@Query("select avg(i.applications.size),min(i.applications.size), max(i.applications.size), stddev(i.applications.size) from Immigrant i")
-//	Collection<Double> dataApplicationPerImmigrant();
-//
+	@Query("select avg(i.applications.size),min(i.applications.size), max(i.applications.size), stddev(i.applications.size) from Immigrant i")
+	Collection<Double> dataApplicationPerImmigrant();
+
 //	/*
 //	 * The average, the minimum, the maximum, and the standard deviation of the
 //	 * number of applications per officer.
 //	 */
-//	@Query("select avg(o.applications.size),min(o.applications.size), max(o.applications.size), stddev(o.applications.size) from Immigrant o")
-//	Collection<Double> dataApplicationsPerOfficer();
-//
+	@Query("select avg(o.applications.size),min(o.applications.size), max(o.applications.size), stddev(o.applications.size) from Immigrant o")
+	Collection<Double> dataApplicationsPerOfficer();
+
 ////	/*
 ////	 * The average, the minimum, the maximum, and the standard deviation of the
 ////	 * price of the visas
 ////	 */
-////	@Query("select avg(v.price),min(v.price), max(v.price), stddev(v.price) from Visa v")
-////	Collection<Double> dataPricePerVisa();
-////
+	@Query("select avg(v.price),min(v.price), max(v.price), stddev(v.price) from Visa v")
+	Collection<Double> dataPricePerVisa();
+
 ////	/*
 ////	 * The average, the minimum, the maximum, and the standard deviation of the
 ////	 * number immigrants that are investigated per investigator.
