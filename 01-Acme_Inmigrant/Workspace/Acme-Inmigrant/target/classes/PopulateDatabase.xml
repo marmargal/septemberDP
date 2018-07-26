@@ -236,8 +236,8 @@
 				<ref bean="answer1" />
 			</list>
 		</property>
-		<property name="investigator">
-			<null />
+		<property name="investigator" ref="investigator1">
+			
 		</property>
 	</bean>
 
@@ -258,8 +258,8 @@
 			<list>
 			</list>
 		</property>
-		<property name="investigator">
-			<null />
+		<property name="investigator" ref="investigator2">
+			
 		</property>
 	</bean>
 
@@ -345,6 +345,10 @@
 				<ref bean="report1" />
 			</list>
 		</property>
+		<property name="immigrants">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<!-- Investigator 2 -->
@@ -356,6 +360,10 @@
 		<property name="address" value="C/Girasol nº12" />
 		<property name="userAccount" ref="userAccount10" />
 		<property name="reports">
+			<list>
+			</list>
+		</property>
+		<property name="immigrants">
 			<list>
 			</list>
 		</property>
