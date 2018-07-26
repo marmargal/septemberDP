@@ -41,19 +41,12 @@ public class VisaService {
 		Visa res;
 		res = new Visa();
 
-		String classes = "class";
-		String description = "description";
-		int price = 3;
-
 		Country country;
 		Category category;
 
 		country = new Country();
 		category = new Category();
 
-		res.setClasses(classes);
-		res.setDescription(description);
-		res.setPrice(price);
 		res.setCountry(country);
 		res.setCategory(category);
 
