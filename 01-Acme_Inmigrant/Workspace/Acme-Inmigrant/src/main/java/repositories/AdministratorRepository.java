@@ -38,8 +38,8 @@ public interface AdministratorRepository extends
 ////	/*
 ////	 * The average, the minimum, the maximum, and the standard deviation of the
 ////	 * number immigrants that are investigated per investigator.
-////	 */
-//	//select count(*) from (select DISTINCT(i.immigrant) from Investigator r join r.reports i);
+////	 */select count(i)/(select count(n) from investigator n) from Immigrant i group by i.investigator;
+		//	me sale el número de immigrantes por investigador, pero agrupado por investigador
 ////	@Query("select avg(r.reports.size),min(r.reports.size), max(r.reports.size), stddev(r.reports.size) from Investigator r join r.reports i group by i.immigrant;")
 ////	Collection<Double> dataImmigrantsInvestigated();
 ////
