@@ -64,6 +64,44 @@ public class RegisterOfficerController extends AbstractController {
 
 		return res;
 	}
+	
+	// Editing ----------------------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(){
+		
+		ModelAndView res;
+		
+		Officer officer = this.officerService.findByPrincipal();
+		ActorForm officerForm = this.officerService.construct(officer);
+		
+		res = createEditModelAndViewEdit(officerForm);
+		res.addObject("actrForm", officerForm);
+		
+		return res;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveEdit(@Valid final ActorForm officerForm, final BindingResult binding) {
+		ModelAndView res;
+		Officer officer;
+
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(officerForm, "actor.params.error");
+		else if (!officerForm.getRepeatPassword().equals(officerForm.getPassword()))
+			res = this.createEditModelAndView(officerForm, "actor.commit.errorPassword");
+		else
+			try {
+				officer = officerService.reconstruct(officerForm, binding);
+				this.officerService.save(officer);
+				res = new ModelAndView("redirect:/j_spring_security_logout");
+			} catch (final Throwable oops) {
+				System.out.println(oops);
+				res = this.createEditModelAndView(officerForm, "actor.commit.error");
+			}
+
+		return res;
+	}
+	
 
 	// Ancillary methods --------------------------------------------------
 
@@ -83,6 +121,26 @@ public class RegisterOfficerController extends AbstractController {
 		result.addObject("actorForm", officerForm);
 		result.addObject("message", message);
 		result.addObject("requestURI","officer/register.do");
+
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndViewEdit(final ActorForm actorForm) {
+		ModelAndView result;
+
+		result = this.createEditModelAndViewEdit(actorForm, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewEdit(final ActorForm actorForm,
+			final String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("actor/register");
+		result.addObject("actorForm", actorForm);
+		result.addObject("message", message);
+		result.addObject("requestURI","officer/edit.do");
 
 		return result;
 	}

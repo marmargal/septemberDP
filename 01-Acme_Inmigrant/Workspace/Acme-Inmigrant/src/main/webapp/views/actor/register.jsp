@@ -20,6 +20,8 @@
 
 <form:form action="${requestURI }" modelAttribute="actorForm">
 	
+	<form:hidden path="id"/>
+	
 	<acme:textbox code="actor.name" path="name"/>
 	<br/>
 	<acme:textbox code="actor.surname" path="surname"/>
@@ -37,10 +39,11 @@
 	<acme:password code="actor.repeatPassword" path="repeatPassword"/>
 	<br/>
 	
-	<acme:checkbox code="actor.acceptTerms" path="termsAndConditions"/>
-	
-	<a href="terms/list.do"><spring:message code="actor.acceptTermsLink"/></a>
-	<br />
+	<jstl:if test="${requestURI == 'immigrant/register.do' or requestURI == 'officer/register.do' or requestURI == 'investigator/register.do'}">
+		<acme:checkbox code="actor.acceptTerms" path="termsAndConditions"/>
+		<a href="terms/list.do"><spring:message code="actor.acceptTermsLink"/></a>
+		<br />
+	</jstl:if>
 	
 	<acme:submit name="save" code="actor.save"/>
 	<acme:submit name="cancel" code="actor.cancel"/>
