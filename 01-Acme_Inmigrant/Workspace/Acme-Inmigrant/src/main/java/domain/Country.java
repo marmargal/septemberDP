@@ -68,7 +68,7 @@ public class Country extends DomainEntity {
 	private List<Law> law;
 
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy="country")
 	public List<Law> getLaw() {
 		return law;
 	}

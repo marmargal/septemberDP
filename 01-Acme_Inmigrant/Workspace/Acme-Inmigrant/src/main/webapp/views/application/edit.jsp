@@ -44,8 +44,10 @@
 		<acme:textbox path="personalSection.birthPlace" code="application.personalSection.birthPlace" />
 		<acme:date code="application.personalSection.birthDate" path="personalSection.birthDate" placeholder="dd/MM/yyyy"/>
 		<acme:textbox path="personalSection.picture" code="application.personalSection.picture" />
+		<br/>
+		<acme:checkbox code="application.close" path="closed"/>
 		
 		<acme:submit name="save" code="application.submit" />
-		<acme:cancel url="application/display.do" code="application.cancel" />
+		<acme:cancel url="application/immigrant/display.do" code="application.cancel" />
 	</security:authorize>
 </form:form>

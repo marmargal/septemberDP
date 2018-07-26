@@ -1,15 +1,14 @@
 package forms;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import domain.Country;
 import domain.Law;
 import domain.Requirement;
 
@@ -22,13 +21,16 @@ public class LawForm {
 
 	// Attributes
 
+	private int id;
 	private String title;
 	private String text;
 	private Date enactmentDate;
 	private Date abrogationTime;
 
-	private Collection<Requirement> requirement;
-	private List<Law> law;
+	private List<Requirement> requirement;
+	private List<Law> laws;
+	private Law lawParent;
+	private Country country;
 
 	@NotBlank
 	public String getTitle() {
@@ -67,22 +69,47 @@ public class LawForm {
 	}
 
 	@Valid
-	@OneToMany
-	public Collection<Requirement> getRequirement() {
+	public List<Requirement> getRequirement() {
 		return requirement;
 	}
 
-	public void setRequirement(Collection<Requirement> collection) {
+	public void setRequirement(List<Requirement> collection) {
 		this.requirement = collection;
 	}
 
 	@Valid
-	@OneToMany
-	public List<Law> getLaw() {
-		return law;
+	public List<Law> getLaws() {
+		return laws;
 	}
 
-	public void setLaw(List<Law> law) {
-		this.law = law;
+	public void setLaws(List<Law> laws) {
+		this.laws = laws;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Valid
+	public Law getLawParent() {
+		return lawParent;
+	}
+
+	public void setLawParent(Law lawParent) {
+		this.lawParent = lawParent;
+	}
+
+	@Valid
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
 }

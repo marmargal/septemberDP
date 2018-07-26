@@ -499,15 +499,17 @@
 		<property name="text" value="A text....." />
 		<property name="enactmentDate" value="11/11/2010" />
 		<property name="abrogationTime" value="11/12/2010" />
-		<property name="requirements">
+		<property name="requirement">
 			<list>
 				<ref bean="requirement1" />
 			</list>
 		</property>
-		<property name="law">
+		<property name="laws">
 			<list>
 			</list>
 		</property>
+		<property name="lawParent" ref="law2" />
+		<property name="country" ref="country1" />
 	</bean>
 	
 	<!-- Law 2 -->
@@ -516,16 +518,18 @@
 		<property name="text" value="A text....." />
 		<property name="enactmentDate" value="11/11/2010" />
 		<property name="abrogationTime" value="11/12/2010" />
-		<property name="requirements">
-			<list>
-				<ref bean="requirement2" />
-			</list>
-		</property>
-		<property name="law">
+		<property name="requirement">
 			<list>
 			</list>
 		</property>
+		<property name="laws">
+			<list>
+			</list>
+		</property>
+			<property name="country" ref="country2" />
 	</bean>
+	
+
 
 	<!-- Requirement -->
 	<!-- Requirement 1 -->
@@ -552,6 +556,7 @@
 		<property name="closedMoment" value="03/12/2010" />
 		<property name="creditCard" ref="creditCard1" />
 		<property name="statistics" value="2.0" />
+		<property name="closed" value="true" />
 		<property name="officer" ref="officer1" />
 		<property name="immigrant" ref="immigrant1" />
 		<property name="personalSection" ref="personalSection1" />
@@ -587,6 +592,7 @@
 		<property name="closedMoment" value="03/11/2010" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="statistics" value="6.0" />
+		<property name="closed" value="true" />
 		<property name="officer" ref="officer2" />
 		<property name="immigrant" ref="immigrant2" />
 		<property name="personalSection" ref="personalSection2" />
@@ -620,6 +626,7 @@
 		<property name="closedMoment" value="07/11/2010" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="statistics" value="6.0" />
+		<property name="closed" value="true" />
 		<property name="officer" ref="officer2" />
 		<property name="immigrant" ref="immigrant3" />
 		<property name="personalSection" ref="personalSection3" />
