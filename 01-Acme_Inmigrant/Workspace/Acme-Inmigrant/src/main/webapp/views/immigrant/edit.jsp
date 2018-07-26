@@ -35,7 +35,6 @@
 		<spring:message code="immigrant.investigator" />
 	</form:label>	
 	<form:select id="investigator" path="investigator">
-		<form:option value="0" label="----" />		
 		<form:options items="${investigator}" itemValue="id" itemLabel="name" />
 	</form:select>
 	<form:errors path="investigator" cssClass="error" />

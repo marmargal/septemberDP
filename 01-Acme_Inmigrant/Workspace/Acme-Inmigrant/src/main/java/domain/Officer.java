@@ -24,6 +24,7 @@ public class Officer extends Actor{
 	private Collection<Application> applications;
 	private Decision decision;
 	private Collection<Question> questions;
+	private Collection<Immigrant> immigrants;
 	
 	@Valid
 	@OneToMany(mappedBy = "officer")

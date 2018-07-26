@@ -20,6 +20,7 @@ public class Investigator extends Actor{
 	
 	// Relationships
 	private Collection<Report> reports;
+	private Collection<Immigrant> immigrants; 
 	
 	@Valid
 	@OneToMany(mappedBy = "writer")
@@ -29,5 +30,15 @@ public class Investigator extends Actor{
 	
 	public void setReports(Collection<Report> reports){
 		this.reports = reports;
+	}
+	
+	@Valid
+	@OneToMany
+	public Collection<Immigrant> getImmigrants() {
+		return immigrants;
+	}
+
+	public void setImmigrants(Collection<Immigrant> immigrants) {
+		this.immigrants = immigrants;
 	}
 }
