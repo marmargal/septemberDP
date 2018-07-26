@@ -23,11 +23,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Law extends DomainEntity {
 
 	// Constructors
-	
-	public Law(){
+
+	public Law() {
 		super();
 	}
-	
+
 	// Attributes
 
 	private String title;
@@ -76,15 +76,16 @@ public class Law extends DomainEntity {
 	public void setAbrogationTime(Date abrogationTime) {
 		this.abrogationTime = abrogationTime;
 	}
-	
+
 	// Relationships
-	
+
 	private List<Requirement> requirement;
 	private List<Law> laws;
 	private Law lawParent;
+	private Country country;
 
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy = "law")
 	public List<Requirement> getRequirement() {
 		return requirement;
 	}
@@ -92,8 +93,9 @@ public class Law extends DomainEntity {
 	public void setRequirement(List<Requirement> requirement) {
 		this.requirement = requirement;
 	}
+
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy = "lawParent")
 	public List<Law> getLaws() {
 		return laws;
 
@@ -113,6 +115,14 @@ public class Law extends DomainEntity {
 		this.lawParent = lawParent;
 	}
 
-	
-	
+	@Valid
+	@ManyToOne(optional = false)
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
 }

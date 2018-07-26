@@ -509,6 +509,7 @@
 			</list>
 		</property>
 		<property name="lawParent" ref="law2" />
+		<property name="country" ref="country1" />
 	</bean>
 	
 	<!-- Law 2 -->
@@ -525,7 +526,7 @@
 			<list>
 			</list>
 		</property>
-		<property name="lawParent" ref="law1" />
+			<property name="country" ref="country2" />
 	</bean>
 	
 

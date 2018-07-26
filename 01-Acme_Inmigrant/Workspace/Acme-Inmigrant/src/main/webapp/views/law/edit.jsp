@@ -14,7 +14,6 @@
 <form:form action="law/administrator/edit.do" modelAttribute="lawForm">
 
 	<form:hidden path="id"/>
-	<form:hidden path="requirement"/>
 	<form:hidden path="laws"/>
 	
 	<acme:textbox code="law.title" path="title" />
@@ -28,6 +27,8 @@
 	
 	<acme:textbox code="law.abrogationTime" path="abrogationTime" />
 	<br />
+	
+	<acme:select items="${countries}" itemLabel="name" code="law.country" path="country"/>
 	
 	<acme:select items="${lawParent}" itemLabel="title" code="law.lawParent" path="lawParent"/>
 	

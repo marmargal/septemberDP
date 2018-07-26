@@ -2,9 +2,6 @@ package controllers.administrator;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CountryService;
 import services.LawService;
 import services.RequirementService;
 import controllers.AbstractController;
+import domain.Country;
 import domain.Law;
 import domain.Requirement;
 import forms.LawForm;
@@ -30,6 +29,9 @@ public class LawAdministratorController extends AbstractController {
 	
 	@Autowired
 	private RequirementService requirementService;
+	
+	@Autowired
+	private CountryService countryService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -55,6 +57,7 @@ public class LawAdministratorController extends AbstractController {
 		ModelAndView res;
 
 		Law law = lawService.findOne(lawId);
+		System.out.println(law);
 		LawForm lawForm = lawService.construct(law);
 
 		res = createEditModelAndView(lawForm);
@@ -66,12 +69,12 @@ public class LawAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(final LawForm lawForm, final BindingResult binding) {
 		ModelAndView res;
-		Set<Requirement> requirement = new HashSet<Requirement>();
-		requirement.addAll(lawForm.getRequirement());
-		List<Requirement> newList=new ArrayList<Requirement>();
-		newList.addAll(requirement);
-		requirement.clear();
-		lawForm.setRequirement( newList);
+//		Set<Requirement> requirement = new HashSet<Requirement>();
+//		requirement.addAll(lawForm.getRequirement());
+//		List<Requirement> newList=new ArrayList<Requirement>();
+//		newList.addAll(requirement);
+//		requirement.clear();
+//		lawForm.setRequirement( newList);
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(lawForm, "law.params.error");
 			
@@ -83,8 +86,7 @@ public class LawAdministratorController extends AbstractController {
 
 				res = new ModelAndView("redirect:/law/list.do");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getMessage());
-				System.out.println(lawForm.getRequirement());
+				System.out.println(oops);
 				res = this.createEditModelAndView(lawForm, "law.commit.error");
 			}
 
@@ -98,7 +100,7 @@ public class LawAdministratorController extends AbstractController {
 		ModelAndView res;
 
 		try {
-			Law law = this.lawService.reconstruct(lawForm, binding);
+			Law law = this.lawService.findOne(lawForm.getId());
 			lawService.delete(law);
 			res = new ModelAndView("redirect:/law/list.do");
 		} catch (Throwable oops) {
@@ -120,8 +122,11 @@ public class LawAdministratorController extends AbstractController {
 		final ModelAndView result;
 		Collection<Law> laws = this.lawService.findAll();
 		Collection<Requirement> requirement = this.requirementService.findAll();
+		Collection<Country> countries = new ArrayList<Country>();
+		countries= this.countryService.findAll();
 
 		result = new ModelAndView("law/administrator/edit");
+		result.addObject("countries", countries);
 		result.addObject("requirement", requirement);
 		result.addObject("lawParent", laws);
 		result.addObject("lawForm", lawForm);

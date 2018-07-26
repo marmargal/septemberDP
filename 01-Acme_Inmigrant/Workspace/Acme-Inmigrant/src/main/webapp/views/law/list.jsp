@@ -23,9 +23,13 @@
 <display:table pagesize="6" class="displayLaw" keepStatus="true"
 	name="law" requestURI="${requestURI }" id="row">
 
-	<display:column>
-		<acme:links url="law/administrator/edit.do?lawId=${row.id}" code="law.edit" />
-	</display:column>
+
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<acme:links url="law/administrator/edit.do?lawId=${row.id}"
+				code="law.edit" />
+		</display:column>
+	</security:authorize>
 
 	<acme:column property="title" code="law.title" />
 

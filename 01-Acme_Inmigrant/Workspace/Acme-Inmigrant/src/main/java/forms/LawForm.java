@@ -1,16 +1,14 @@
 package forms;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import domain.Country;
 import domain.Law;
 import domain.Requirement;
 
@@ -32,7 +30,7 @@ public class LawForm {
 	private List<Requirement> requirement;
 	private List<Law> laws;
 	private Law lawParent;
-
+	private Country country;
 
 	@NotBlank
 	public String getTitle() {
@@ -71,7 +69,6 @@ public class LawForm {
 	}
 
 	@Valid
-	@OneToMany
 	public List<Requirement> getRequirement() {
 		return requirement;
 	}
@@ -81,7 +78,6 @@ public class LawForm {
 	}
 
 	@Valid
-	@OneToMany
 	public List<Law> getLaws() {
 		return laws;
 	}
@@ -97,8 +93,8 @@ public class LawForm {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	@Valid
-	@ManyToOne(optional = true)
 	public Law getLawParent() {
 		return lawParent;
 	}
@@ -106,5 +102,14 @@ public class LawForm {
 	public void setLawParent(Law lawParent) {
 		this.lawParent = lawParent;
 	}
-	
+
+	@Valid
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
 }
