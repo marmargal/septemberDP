@@ -117,6 +117,10 @@ public class ApplicationService {
 		Collection<Application> immigrantApplications = new ArrayList<Application>();
 		immigrantApplications = immigrant.getApplications();
 		immigrantApplications.add(application);
+		
+		if(application.getClosed()==true){
+			res.setClosedMoment(new Date());
+		}
 		return res;
 	}
 	

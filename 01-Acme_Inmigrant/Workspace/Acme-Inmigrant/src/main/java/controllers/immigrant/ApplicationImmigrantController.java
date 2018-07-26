@@ -2,6 +2,7 @@ package controllers.immigrant;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -104,8 +105,8 @@ public class ApplicationImmigrantController extends AbstractController {
 		Collection<EducationSection> educationS = new ArrayList<EducationSection>();
 
 		Immigrant i = immigrantService.findByPrincipal();
-		int rangerId = i.getId();
-		application = applicationService.getApplicationByImmigrant(rangerId);
+		int immigrantId = i.getId();
+		application = applicationService.getApplicationByImmigrant(immigrantId);
 
 		for (Application a : application) {
 			personalS.add(a.getPersonalSection());
@@ -178,6 +179,7 @@ public class ApplicationImmigrantController extends AbstractController {
 		}
 		return result;
 	}
+	
 
 	// Saving --------------------------------------------------------------
 
@@ -185,6 +187,9 @@ public class ApplicationImmigrantController extends AbstractController {
 	public ModelAndView save(@Valid Application application,
 			BindingResult binding) {
 		ModelAndView res;
+		if(application.getClosed()==true){
+			application.setClosedMoment(new Date());
+		}
 		
 		application = this.applicationService.reconstruct(application, binding);
 		
@@ -197,12 +202,14 @@ public class ApplicationImmigrantController extends AbstractController {
 				res = new ModelAndView(
 						"redirect:../../application/immigrant/display.do");
 			} catch (final Throwable oops) {
+
 				res = this.createEditModelAndView(application,
 						"application.commit.error");
 			}
 
 		return res;
 	}
+
 
 	// Deleting -------------------------------------------------------------
 
@@ -256,4 +263,5 @@ public class ApplicationImmigrantController extends AbstractController {
 		result.addObject("message", message);
 		return result;
 	}
+	
 }

@@ -552,6 +552,7 @@
 		<property name="closedMoment" value="03/12/2010" />
 		<property name="creditCard" ref="creditCard1" />
 		<property name="statistics" value="2.0" />
+		<property name="closed" value="true" />
 		<property name="officer" ref="officer1" />
 		<property name="immigrant" ref="immigrant1" />
 		<property name="personalSection" ref="personalSection1" />
@@ -587,6 +588,7 @@
 		<property name="closedMoment" value="03/11/2010" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="statistics" value="6.0" />
+		<property name="closed" value="true" />
 		<property name="officer" ref="officer2" />
 		<property name="immigrant" ref="immigrant2" />
 		<property name="personalSection" ref="personalSection2" />
@@ -620,6 +622,7 @@
 		<property name="closedMoment" value="07/11/2010" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="statistics" value="6.0" />
+		<property name="closed" value="true" />
 		<property name="officer" ref="officer2" />
 		<property name="immigrant" ref="immigrant3" />
 		<property name="personalSection" ref="personalSection3" />

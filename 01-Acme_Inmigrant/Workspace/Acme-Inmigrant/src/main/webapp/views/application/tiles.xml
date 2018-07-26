@@ -1,59 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- 
- * tiles.xml
- *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * tiles.xml * * Copyright (C) 2017 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+
 <tiles-definitions>
 
-	<definition name="application/immigrant/edit" extends="master.page">	
+	<definition name="application/immigrant/edit" extends="master.page">
 		<put-attribute name="title" value="Edit application" />
 		<put-attribute name="body" value="/views/application/edit.jsp" />
 	</definition>
-	
-	<definition name="application/immigrant/create" extends="master.page">	
+
+	<definition name="application/immigrant/create" extends="master.page">
 		<put-attribute name="title" value="Create application" />
 		<put-attribute name="body" value="/views/application/edit.jsp" />
 	</definition>
-	
-	<definition name="application/display" extends="master.page">	
+
+	<definition name="application/display" extends="master.page">
 		<put-attribute name="title" value="Display application" />
 		<put-attribute name="body" value="/views/application/display.jsp" />
 	</definition>
-	
-	<definition name="application/list" extends="master.page">	
+
+	<definition name="application/list" extends="master.page">
 		<put-attribute name="title" value="List application" />
 		<put-attribute name="body" value="/views/application/list.jsp" />
 	</definition>
-	
-	<definition name="application/listClosed" extends="master.page">	
+
+	<definition name="application/listClosed" extends="master.page">
 		<put-attribute name="title" value="List application closed" />
 		<put-attribute name="body" value="/views/application/list.jsp" />
 	</definition>
-	
-	<definition name="application/listAccepted" extends="master.page">	
+
+	<definition name="application/listAccepted" extends="master.page">
 		<put-attribute name="title" value="List application accepted" />
 		<put-attribute name="body" value="/views/application/list.jsp" />
 	</definition>
-	
-	<definition name="application/listRejected" extends="master.page">	
+
+	<definition name="application/listRejected" extends="master.page">
 		<put-attribute name="title" value="List application rejected" />
 		<put-attribute name="body" value="/views/application/list.jsp" />
 	</definition>
-	
-	<definition name="application/sectionDisplay" extends="master.page">	
+
+	<definition name="application/sectionDisplay" extends="master.page">
 		<put-attribute name="title" value="Display sections" />
-		<put-attribute name="body" value="/views/application/sectionDisplay.jsp" />
+		<put-attribute name="body"
+			value="/views/application/sectionDisplay.jsp" />
 	</definition>
-	
+
 </tiles-definitions>

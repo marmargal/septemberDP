@@ -27,7 +27,7 @@ public class Application extends DomainEntity{
 
 	
 	//Constructors
-	
+
 	public Application(){
 		super();
 	}
@@ -39,6 +39,7 @@ public class Application extends DomainEntity{
 	private Date closedMoment;
 	private CreditCard creditCard;
 	private Double statistics;
+	private Boolean closed;
 
 	@Column(unique = true)
 	@Pattern(regexp = "[0-9]{6}-[A-Z]{4}[0-9]{2}")
@@ -88,6 +89,16 @@ public class Application extends DomainEntity{
 	public void setStatistics(Double statistics) {
 		this.statistics = statistics;
 	}
+	
+	
+	public Boolean getClosed() {
+		return closed;
+	}
+
+	public void setClosed(Boolean closed) {
+		this.closed = closed;
+	}
+
 	
 	// Relationships
 	
