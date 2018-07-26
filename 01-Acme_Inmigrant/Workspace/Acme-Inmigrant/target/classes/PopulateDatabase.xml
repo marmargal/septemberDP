@@ -499,15 +499,17 @@
 		<property name="text" value="A text....." />
 		<property name="enactmentDate" value="11/11/2010" />
 		<property name="abrogationTime" value="11/12/2010" />
-		<property name="requirements">
+		<property name="requirement">
 			<list>
 				<ref bean="requirement1" />
 			</list>
 		</property>
-		<property name="law">
+		<property name="laws">
 			<list>
 			</list>
 		</property>
+		<property name="lawParent" ref="law2" />
+		<property name="country" ref="country1" />
 	</bean>
 	
 	<!-- Law 2 -->
@@ -516,16 +518,18 @@
 		<property name="text" value="A text....." />
 		<property name="enactmentDate" value="11/11/2010" />
 		<property name="abrogationTime" value="11/12/2010" />
-		<property name="requirements">
-			<list>
-				<ref bean="requirement2" />
-			</list>
-		</property>
-		<property name="law">
+		<property name="requirement">
 			<list>
 			</list>
 		</property>
+		<property name="laws">
+			<list>
+			</list>
+		</property>
+			<property name="country" ref="country2" />
 	</bean>
+	
+
 
 	<!-- Requirement -->
 	<!-- Requirement 1 -->

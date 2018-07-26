@@ -10,13 +10,19 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-
+<form:form action="law/display.do" modelAttribute="law">
 <b><spring:message code="law.title"/>:&nbsp;</b><jstl:out value="${law.title}"/>
 <br/>
+
 <b><spring:message code="law.text"/>:&nbsp;</b><jstl:out value="${law.text}"/>
 <br/>
+
 <b><spring:message code="law.enactmentDate"/>:&nbsp;</b><jstl:out value="${law.enactmentDate}"/>
 <br/>
+
 <b><spring:message code="law.abrogationTime"/>:&nbsp;</b><jstl:out value="${law.abrogationTime}"/>
 <br/>
-<br/>
+
+<acme:cancel url="law/list.do" code="law.cancel"/>
+
+</form:form>

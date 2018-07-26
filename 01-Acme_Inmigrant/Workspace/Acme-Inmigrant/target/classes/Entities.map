@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #./src/main/resources/Entities.map
 #Thu Jul 26 18:50:25 CEST 2018
 question1=132
@@ -43,3 +44,5 @@ answer1=134
 requirement2=128
 question2=133
 requirement1=127
+=======
+>>>>>>> master

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,11 +23,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Law extends DomainEntity {
 
 	// Constructors
-	
-	public Law(){
+
+	public Law() {
 		super();
 	}
-	
+
 	// Attributes
 
 	private String title;
@@ -75,31 +76,53 @@ public class Law extends DomainEntity {
 	public void setAbrogationTime(Date abrogationTime) {
 		this.abrogationTime = abrogationTime;
 	}
-	
+
 	// Relationships
-	
-	private List<Law> law;
-	private Collection<Requirement> requirements;
+
+	private List<Requirement> requirement;
+	private List<Law> laws;
+	private Law lawParent;
+	private Country country;
 
 	@Valid
-	@OneToMany
-	public List<Law> getLaw() {
-		return law;
+	@OneToMany(mappedBy = "law")
+	public List<Requirement> getRequirement() {
+		return requirement;
 	}
 
-	public void setLaw(List<Law> law) {
-		this.law = law;
+	public void setRequirement(List<Requirement> requirement) {
+		this.requirement = requirement;
 	}
 
 	@Valid
-	@OneToMany(mappedBy="law")
-	public Collection<Requirement> getRequirements() {
-		return requirements;
+	@OneToMany(mappedBy = "lawParent")
+	public List<Law> getLaws() {
+		return laws;
+
 	}
 
-	public void setRequirements(Collection<Requirement> requirements) {
-		this.requirements = requirements;
+	public void setLaws(List<Law> laws) {
+		this.laws = laws;
 	}
-	
-	
+
+	@Valid
+	@ManyToOne(optional = true)
+	public Law getLawParent() {
+		return lawParent;
+	}
+
+	public void setLawParent(Law lawParent) {
+		this.lawParent = lawParent;
+	}
+
+	@Valid
+	@ManyToOne(optional = false)
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
 }
