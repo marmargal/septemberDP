@@ -93,6 +93,7 @@ public class LawService {
 	}
 
 	public void delete(Law law) {
+		this.administratorService.checkAuthority();
 		Assert.notNull(law);
 		Assert.isTrue(law.getId() != 0);
 		

@@ -61,6 +61,7 @@
 			<li><a href="officer/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 			<li><a class="fNiv" href="#"><spring:message code="master.page.applicationList" /></a>
 				<ul>
+					<li><a href="application/officer/list.do"><spring:message code="master.page.applicationList" /></a></li>
 					<li><a href="immigrant/register.do"><spring:message code="master.page.register.acceptedApplication" /></a></li>
 					<li><a href="immigrant/register.do"><spring:message code="master.page.register.rejectedApplication" /></a></li>
 					<li><a href="immigrant/register.do"><spring:message code="master.page.register.assignApplication" /></a></li>

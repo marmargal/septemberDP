@@ -135,6 +135,13 @@ public class ApplicationService {
 		return res;
 	}
 	
+	public Application saveOfficerOfApplication(Application application){
+		this.officerService.checkAuthority();
+		Application res;
+		res = applicationRepository.save(application);
+		return res;
+	}
+	
 	public void delete(Application application){
 		Assert.notNull(application);
 		Assert.isTrue(application.getId() != 0);
@@ -254,6 +261,24 @@ public class ApplicationService {
 		Immigrant immigrant = this.immigrantService.findByPrincipal();
 		res = this.applicationRepository.findApplicationRejectedbyImmigrant(immigrant.getId());
 		return res;
+	}
+
+	public Collection<Application> findApplicationsSelfAssigning(){
+		Collection<Application> res = new ArrayList<Application>();
+		res = this.applicationRepository.findApplicationsSelfAssigning();
+		return res;
+	}
+	
+	public Collection<Application> findApplicationsWhitDecisionByOfficer(int officerId){
+		Collection<Application> res = new ArrayList<Application>();
+		res = this.applicationRepository.findApplicationsWhitDecisionByOfficer(officerId);
+		return res;
+	}
+
+	public void checkApplicationIsNotCloser(int applicationId){
+		Application application= new Application();
+		application = this.findOne(applicationId);
+		Assert.isTrue(application.getClosed() == false);
 	}
 	
 }

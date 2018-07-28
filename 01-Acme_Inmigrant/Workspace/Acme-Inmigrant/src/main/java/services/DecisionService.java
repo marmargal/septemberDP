@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -14,6 +15,7 @@ import org.springframework.validation.Validator;
 import repositories.DecisionRepository;
 import domain.Application;
 import domain.Decision;
+import domain.Officer;
 import forms.DecisionForm;
 
 @Service
@@ -48,6 +50,7 @@ public class DecisionService {
 				equals(applicationService.findOne(applicationId).getOfficer()));
 		
 		Decision res = new Decision();
+		Officer officer = this.officerService.findByPrincipal();
 
 		Date moment = new Date(System.currentTimeMillis() - 1000);
 
@@ -56,7 +59,8 @@ public class DecisionService {
 		res.setAccept(false);
 		res.setMoment(moment);
 		res.setApplication(application);
-
+		res.setOfficer(officer);
+		
 		return res;
 	}
 
@@ -80,8 +84,18 @@ public class DecisionService {
 				equals(decision.getApplication().getOfficer()));
 		
 		Decision res;
+		Officer officer = new Officer();
+		Collection<Decision> decisionsOfOfficer = new ArrayList<Decision>();
+		
 		this.checkRejected(decision);
 		res = decisionRepository.save(decision);
+		
+		officer = decision.getOfficer();
+		decisionsOfOfficer = officer.getDecision();
+		decisionsOfOfficer.add(decision);
+		officer.setDecision(decisionsOfOfficer);
+		this.officerService.saveDecision(officer);
+		
 		return res;
 	}
 

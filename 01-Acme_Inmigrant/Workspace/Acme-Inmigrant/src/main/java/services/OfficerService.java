@@ -31,6 +31,9 @@ public class OfficerService {
 	private OfficerRepository officerRepository;
 	
 	@Autowired
+	private ApplicationService applicationService;
+	
+	@Autowired
 	private Validator		validator;
 
 	// Supporting services
@@ -93,6 +96,26 @@ public class OfficerService {
 		
 		return res;
 	}
+	
+	public Officer saveApplications(Officer officer, Application application) {
+		this.checkAuthority();
+		Officer res;
+		
+		res = this.officerRepository.save(officer);
+		
+		application.setOfficer(officer);
+		this.applicationService.saveOfficerOfApplication(application);
+		return res;
+	}
+	
+	public Officer saveDecision(Officer officer) {
+		this.checkAuthority();
+		Officer res;
+		
+		res = this.officerRepository.save(officer);
+		
+		return res;
+	}
 
 	public void delete(Officer officer) {
 		Assert.notNull(officer);
@@ -122,6 +145,16 @@ public class OfficerService {
 		res.setAuthority("OFFICER");
 		Assert.isTrue(authority.contains(res));
 	}	
+	
+	public void checkApplicationIsNotAssign(int applicationId){
+		Collection<Application> allApplicationsAssignByAllOfficer = new ArrayList<Application>();
+		Application application = new Application();
+		
+		application = this.applicationService.findOne(applicationId);
+		allApplicationsAssignByAllOfficer = this.applicationService.findApplicationsSelfAssigning();
+		
+		Assert.isTrue(!allApplicationsAssignByAllOfficer.contains(application));
+	}
 	
 	public ActorForm construct(Officer officer){
 		ActorForm res = new ActorForm();
