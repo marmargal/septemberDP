@@ -427,7 +427,7 @@ public class ApplicationService {
 		
 		int i = 0;
 		while(i == 0){
-			if(iter.getApplication() != null){
+			if(iter.getApplication() != null && !applicationLinked.contains(iter.getApplication())){
 				son = iter.getApplication();
 				applicationLinked.add(son);
 				iter = son;
