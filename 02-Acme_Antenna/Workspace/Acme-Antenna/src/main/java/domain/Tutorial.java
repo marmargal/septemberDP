@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -70,7 +71,7 @@ public class Tutorial extends DomainEntity{
 	
 	// Relationships
 	private Actor actor;
-	private Comment comment;
+	private Collection<Comment> comments;
 	
 	@Valid
 	@ManyToOne(optional=false)
@@ -84,11 +85,11 @@ public class Tutorial extends DomainEntity{
 
 	@Valid
 	@OneToMany(mappedBy="tutorial")
-	public Comment getComment() {
-		return comment;
+	public Collection<Comment> getComments() {
+		return comments;
 	}
 
-	public void setComment(Comment comment) {
-		this.comment = comment;
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
 	}
 }

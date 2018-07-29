@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -28,7 +30,7 @@ public class Actor extends DomainEntity {
 	// Attributes
 	private String name;
 	private String surname;
-	private String picture;
+	private String pictures;
 	private String postalAddress;
 	private String phoneNumber;
 	private String email;
@@ -52,12 +54,12 @@ public class Actor extends DomainEntity {
 	}
 	
 	@URL
-	public String getPicture() {
-		return picture;
+	public String getPictures() {
+		return pictures;
 	}
 	
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setPictures(String pictures) {
+		this.pictures = pictures;
 	}
 	
 	
@@ -90,7 +92,7 @@ public class Actor extends DomainEntity {
 
 	// Relationships
 	private UserAccount userAccount;
-	private Tutorial tutorial;
+	private Collection<Tutorial> tutorials;
 	
 	@NotNull
 	@Valid
@@ -105,11 +107,11 @@ public class Actor extends DomainEntity {
 	
 	@Valid
 	@OneToMany(mappedBy="actor")
-	public Tutorial getTutorial() {
-		return tutorial;
+	public Collection<Tutorial> getTutorials() {
+		return tutorials;
 	}
 
-	public void setTutorial(Tutorial tutorial) {
-		this.tutorial = tutorial;
+	public void setTutorial(Collection<Tutorial> tutorials) {
+		this.tutorials = tutorials;
 	}
 }

@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -17,36 +19,36 @@ public class User extends Actor{
 	}
 	
 	// Relationships
-	private Comment comment;
-	private Subscription subscription;
-	private Antenna antenna;
+	private Collection<Comment> comments;
+	private Collection<Subscription> subscriptions;
+	private Collection<Antenna> antennas;
 	
 	@Valid
 	@OneToMany(mappedBy="user")
-	public Comment getComment() {
-		return comment;
+	public Collection<Comment> getComments() {
+		return comments;
 	}
 	
-	public void setComment(Comment comment) {
-		this.comment = comment;
-	}
-	
-	@Valid
-	@OneToMany(mappedBy="user")
-	public Subscription getSubscription() {
-		return subscription;
-	}
-	
-	public void setSubscription(Subscription subscription) {
-		this.subscription = subscription;
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
 	}
 	
 	@Valid
 	@OneToMany(mappedBy="user")
-	public Antenna getAntenna() {
-		return antenna;
+	public Collection<Subscription> getSubscriptions() {
+		return subscriptions;
 	}
-	public void setAntenna(Antenna antenna) {
-		this.antenna = antenna;
+	
+	public void setSubscriptions(Collection<Subscription> subscriptions) {
+		this.subscriptions = subscriptions;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy="user")
+	public Collection<Antenna> getAntennas() {
+		return antennas;
+	}
+	public void setAntennas(Collection<Antenna> antennas) {
+		this.antennas = antennas;
 	}
 }

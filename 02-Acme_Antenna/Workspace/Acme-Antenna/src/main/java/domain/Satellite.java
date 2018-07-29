@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -40,26 +42,26 @@ public class Satellite extends DomainEntity{
 	}
 	
 	// Relationships
-	private Antenna antenna;
-	private Platform platform;
+	private Collection<Antenna> antennas;
+	private Collection<Platform> platforms;
 	
 	@Valid
 	@OneToMany(mappedBy="satellite")
-	public Antenna getAntenna() {
-		return antenna;
+	public Collection<Antenna> getAntennas() {
+		return antennas;
 	}
 	
-	public void setAntenna(Antenna antenna) {
-		this.antenna = antenna;
+	public void setAntenna(Collection<Antenna> antennas) {
+		this.antennas = antennas;
 	}
 	
 	@Valid
 	@OneToMany(mappedBy="satellite")
-	public Platform getPlatform() {
-		return platform;
+	public Collection<Platform> getPlatforms() {
+		return platforms;
 	}
-	public void setPlatform(Platform platform) {
-		this.platform = platform;
+	public void setPlatforms(Collection<Platform> platforms) {
+		this.platforms = platforms;
 	}
 	
 	
