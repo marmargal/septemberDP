@@ -1,0 +1,69 @@
+package domain;
+
+import java.util.Collection;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+@Entity
+@Access(AccessType.PROPERTY)
+public class Platform extends DomainEntity{
+
+	// Constructors
+	public Platform(){
+		super();
+	}
+	
+	// Attributes
+	private String name;
+	private String description;
+	
+	@NotBlank
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@NotBlank
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	// Relationships
+	private Satellite satellite;
+	private Collection<Subscription> subscriptions;
+
+	@Valid
+	@ManyToOne(optional=false)
+	public Satellite getSatellite() {
+		return satellite;
+	}
+
+	public void setSatellite(Satellite satellite) {
+		this.satellite = satellite;
+	}
+
+	@Valid
+	@ManyToOne(optional=true)
+	public Collection<Subscription> getSubscriptions() {
+		return subscriptions;
+	}
+
+	public void setSubscription(Collection<Subscription> subscriptions) {
+		this.subscriptions = subscriptions;
+	}
+	
+	
+}
