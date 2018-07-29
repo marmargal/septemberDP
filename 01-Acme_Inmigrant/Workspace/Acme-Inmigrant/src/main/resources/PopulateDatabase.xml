@@ -175,7 +175,7 @@
 	<bean id="creditCard1" class="domain.CreditCard">
 		<property name="holderName" value="BBVA" />
 		<property name="brandName" value="MasterCard" />
-		<property name="number" value="4099537775843795" />
+		<property name="number" value="4024007146545768" />
 		<property name="expirationMonth" value="5" />
 		<property name="expirationYear" value="19" />
 		<property name="cvv" value="123" />
@@ -185,7 +185,7 @@
 	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holderName" value="Name creditCard1" />
 		<property name="brandName" value="VISA" />
-		<property name="number" value="4539009662278447" />
+		<property name="number" value="4150902751004463" />
 		<property name="expirationMonth" value="3" />
 		<property name="expirationYear" value="22" />
 		<property name="cvv" value="612" />
@@ -234,6 +234,7 @@
 		<property name="names">
 			<list>
 				<value>Mario Sánchez</value>
+				<value>Paco Rodríguez</value>
 			</list>
 		</property>
 		<property name="birthPlace" value="Spain" />
@@ -252,7 +253,49 @@
 		<property name="birthDate" value="03/10/1985" />
 		<property name="picture" value="https://google.com" />
 	</bean>
+	
+		<!-- SocialSection 1 -->
+	<bean id="socialSection1" class="domain.SocialSection">
+		<property name="nickName" value="Empresa1" />
+		<property name="socialNetwork" value="Facebook" />
+		<property name="profileLink" value="https://google.com" />
+	</bean>
 
+	<!-- SocialSection 2 -->
+	<bean id="socialSection2" class="domain.SocialSection">
+		<property name="nickName" value="Empresa2" />
+		<property name="socialNetwork" value="Twitter" />
+		<property name="profileLink" value="https://google.com" />
+	</bean>
+
+	<!-- SocialSection 3 -->
+	<bean id="socialSection3" class="domain.SocialSection">
+		<property name="nickName" value="Empresa3" />
+		<property name="socialNetwork" value="Youtube" />
+		<property name="profileLink" value="https://google.com" />
+	</bean>
+	
+	<!-- SocialSection 4 -->
+	<bean id="socialSection4" class="domain.SocialSection">
+		<property name="nickName" value="Empresa4" />
+		<property name="socialNetwork" value="Instagram" />
+		<property name="profileLink" value="https://google.com" />
+	</bean>
+	
+	<!-- SocialSection 5 -->
+	<bean id="socialSection5" class="domain.SocialSection">
+		<property name="nickName" value="Empresa5" />
+		<property name="socialNetwork" value="Goggle+" />
+		<property name="profileLink" value="https://google.com" />
+	</bean>
+	
+	<!-- SocialSection 6 -->
+	<bean id="socialSection6" class="domain.SocialSection">
+		<property name="nickName" value="Empresa6" />
+		<property name="socialNetwork" value="Linkedin" />
+		<property name="profileLink" value="https://google.com" />
+	</bean>
+	
 	<!-- Immigrant -->
 	<!-- Immigrant 1 -->
 	<bean id="immigrant1" class="domain.Immigrant">
@@ -645,6 +688,8 @@
 		</property>
 		<property name="socialSection">
 			<list>
+				<ref bean="socialSection1" />
+				<ref bean="socialSection2" />
 			</list>
 		</property>
 		<property name="educationSection">
@@ -657,6 +702,7 @@
 				<ref bean="question2" />
 			</list>
 		</property>
+		<property name="application"><null/></property>
 		<property name="visa" ref="visa1" />
 	</bean>
 
@@ -681,6 +727,7 @@
 		</property>
 		<property name="socialSection">
 			<list>
+			<ref bean="socialSection3" />
 			</list>
 		</property>
 		<property name="educationSection">
@@ -691,6 +738,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="application"><null/></property>
 		<property name="visa" ref="visa2" />
 	</bean>
 
@@ -715,6 +763,7 @@
 		</property>
 		<property name="socialSection">
 			<list>
+				<ref bean="socialSection4" />
 			</list>
 		</property>
 		<property name="educationSection">
@@ -725,6 +774,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="application"><null/></property>
 		<property name="visa" ref="visa1" />
 	</bean>
 	
@@ -749,6 +799,7 @@
 		</property>
 		<property name="socialSection">
 			<list>
+				<ref bean="socialSection5" />
 			</list>
 		</property>
 		<property name="educationSection">
@@ -759,6 +810,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="application" ref="application5" />
 		<property name="visa" ref="visa1" />
 	</bean>
 	
@@ -783,6 +835,7 @@
 		</property>
 		<property name="socialSection">
 			<list>
+				<ref bean="socialSection6" />
 			</list>
 		</property>
 		<property name="educationSection">
@@ -793,6 +846,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="application" ref="application2" />
 		<property name="visa" ref="visa1" />
 	</bean>
 

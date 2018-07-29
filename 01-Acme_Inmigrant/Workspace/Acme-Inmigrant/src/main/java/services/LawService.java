@@ -87,7 +87,6 @@ public class LawService {
 
 		res = lawRepository.save(law);
 
-
 		Assert.notNull(res);
 		return res;
 	}

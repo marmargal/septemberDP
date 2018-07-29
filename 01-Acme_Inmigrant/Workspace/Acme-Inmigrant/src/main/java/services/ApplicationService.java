@@ -29,6 +29,7 @@ import domain.Question;
 import domain.SocialSection;
 import domain.Visa;
 import domain.WorkSection;
+import forms.ApplicationForm;
 
 @Service
 @Transactional
@@ -89,6 +90,7 @@ public class ApplicationService {
 		res.setSocialSection(socialSection);
 		res.setEducationSection(educationSection);
 		res.setQuestion(question);
+		res.setImmigrant(immigrant);
 		
 		return res;
 	}
@@ -109,21 +111,25 @@ public class ApplicationService {
 	}
 	
 	public Application save(Application application){
-		Application res;
-		Immigrant immigrant;
-		Assert.isTrue(this.checkCreditCard(application.getCreditCard()));
-		immigrant = this.immigrantService.findByPrincipal();
-		application.setImmigrant(immigrant);
-		res = applicationRepository.save(application);
+		if(application.getCreditCard() != null){
+			Assert.isTrue(this.checkCreditCard(application.getCreditCard()));
+		}
+		
+		Visa visa = new Visa();
+		Application res = new Application();
+		Immigrant immigrant = new Immigrant();
+		List<Application> applicationsLinked = new ArrayList<Application>();
+		Collection<Application> applications = new ArrayList<Application>();
 		Collection<Application> immigrantApplications = new ArrayList<Application>();
+		
+		immigrant = application.getImmigrant();
 		immigrantApplications = immigrant.getApplications();
 		immigrantApplications.add(application);
+		this.immigrantService.saveImmigrant(immigrant);
 		
-		if(application.getClosed()==true){
-			res.setClosedMoment(new Date());
-			Visa visa = new Visa();
-			visa = res.getVisa();
-			Collection<Application> applications = new ArrayList<Application>();
+		if(application.isClosed()==true){
+			application.setClosedMoment(new Date());
+			visa = application.getVisa();
 			applications = this.applicationRepository.findApplicationClosedFalseByVisa(visa.getId());
 			for(Application a: applications){
 				if(a.getImmigrant()==immigrantService.findByPrincipal()){
@@ -131,7 +137,20 @@ public class ApplicationService {
 					save(a);
 				}
 			}
+			applicationsLinked = this.findApplicationsLinked(application);
+			if(!applicationsLinked.isEmpty()){
+				for(Application a: applicationsLinked){
+					if(!a.isClosed()){
+						a.setClosed(true);
+						a.setClosedMoment(new Date());
+						save(a);
+					}
+				}
+			}
 		}
+		
+		res = applicationRepository.save(application);
+		
 		return res;
 	}
 	
@@ -192,7 +211,7 @@ public class ApplicationService {
 		actualYear = calendar.get(Calendar.YEAR);
 		actualYear = actualYear % 100;
 		
-		if (creditCard.getExpirationYear() != null) {
+		if (creditCard.getExpirationYear() != 0) {
 			if (creditCard.getExpirationYear() > actualYear) {
 				res = true;
 			} else if (creditCard.getExpirationYear() == actualYear && creditCard.getExpirationMonth() >= calendar.get(Calendar.MONTH)) {
@@ -228,6 +247,125 @@ public class ApplicationService {
 			res = application;
 		}
 		this.validator.validate(res, binding);
+		return res;
+	}
+	
+	public ApplicationForm construct(Application application){
+		ApplicationForm res = new ApplicationForm();
+		CreditCard cc = new CreditCard();
+		PersonalSection personalSection = new PersonalSection();
+		SocialSection socialSection = new SocialSection();
+		
+		cc = application.getCreditCard();
+		personalSection = application.getPersonalSection();
+		socialSection = application.getSocialSection().get(0);
+		
+		//CREDIT CARD
+		if(cc != null){
+			
+			String brandName = cc.getBrandName();
+			String cvv = String.valueOf(cc.getCvv());
+			String expirationMonth = String.valueOf(cc.getExpirationMonth());
+			String expirationYear = String.valueOf(cc.getExpirationYear());
+			String holderName = cc.getHolderName();
+			String number = cc.getNumber();
+			
+			res.setBrandName(brandName);
+			res.setCvv(cvv);
+			res.setExpirationMonth(expirationMonth);
+			res.setExpirationYear(expirationYear);
+			res.setHolderName(holderName);
+			res.setNumber(number);
+		}
+		
+		//PERSONAL SECTION
+		res.setNames(personalSection.getNames());
+		res.setBithPlace(personalSection.getBirthPlace());
+		res.setBithDate(personalSection.getBirthDate());
+		res.setPicture(personalSection.getPicture());
+		
+		//SOCIAL SECTION
+		res.setNickName(socialSection.getNickName());
+		res.setSocialNetwork(socialSection.getSocialNetwork());
+		res.setProfileLink(socialSection.getProfileLink());
+		
+		//VISA
+		res.setVisa(application.getVisa());
+		
+		//APPLICATION
+		res.setId(application.getId());
+		res.setClosed(application.isClosed());
+		if(application.getApplication() != null){
+			res.setTickerApplicationLinked(application.getTicker());
+		}
+		
+		return res;
+	}
+	
+	public Application reconstruct(ApplicationForm applicationForm, BindingResult binding){
+		Assert.notNull(applicationForm);
+		
+		CreditCard cc = new CreditCard();
+		SocialSection socialSection = new SocialSection();
+		PersonalSection personalSection = new PersonalSection();
+		List<SocialSection> socialSections = new ArrayList<SocialSection>();
+		
+		Application res = new Application();
+
+		if (applicationForm.getId() != 0){
+			res = this.findOne(applicationForm.getId());
+			socialSection = res.getSocialSection().get(0);
+		}else 
+			res = this.create();
+		
+		//CREDIT CARD
+		if(!applicationForm.getBrandName().isEmpty() || !applicationForm.getCvv().isEmpty() || !applicationForm.getExpirationMonth().isEmpty() || 
+				!applicationForm.getExpirationYear().isEmpty() || !applicationForm.getHolderName().isEmpty() || !applicationForm.getNumber().isEmpty()){
+			int cvv = Integer.parseInt(applicationForm.getCvv());
+			int expirationMonth = Integer.parseInt(applicationForm.getExpirationMonth());
+			int expirationYear = Integer.parseInt(applicationForm.getExpirationYear());
+			
+			cc.setBrandName(applicationForm.getBrandName());
+			cc.setCvv(cvv);
+			cc.setExpirationMonth(expirationMonth);
+			cc.setExpirationYear(expirationYear);
+			cc.setHolderName(applicationForm.getHolderName());
+			cc.setNumber(applicationForm.getNumber());
+			res.setCreditCard(cc);
+		}else{
+			res.setCreditCard(null);
+		}
+		
+		//PERSONAL SECTION
+		personalSection.setNames(applicationForm.getNames());
+		personalSection.setBirthPlace(applicationForm.getBithPlace());
+		personalSection.setBirthDate(applicationForm.getBithDate());
+		personalSection.setPicture(applicationForm.getPicture());
+		res.setPersonalSection(personalSection);
+		
+		//SOCIAL SECTION
+		socialSection.setNickName(applicationForm.getNickName());
+		socialSection.setSocialNetwork(applicationForm.getSocialNetwork());
+		socialSection.setProfileLink(applicationForm.getProfileLink());
+		socialSections.add(0, socialSection);
+		res.setSocialSection(socialSections);
+		
+		//VISA	
+		res.setVisa(applicationForm.getVisa());
+		
+		//APPLICATION
+		res.setClosed(applicationForm.isClosed());
+		if(applicationForm.isClosed()){
+			res.setClosedMoment(new Date());
+		}
+		if(applicationForm.getTickerApplicationLinked() != null){
+			Application application = new Application();
+			application = this.findApplicationByTicker(applicationForm.getTickerApplicationLinked());
+			res.setApplication(application);
+		}
+		
+		this.validator.validate(res, binding);
+
 		return res;
 	}
 	
@@ -275,10 +413,35 @@ public class ApplicationService {
 		return res;
 	}
 
+	public Application findApplicationByTicker(String tickerValue){
+		Application application = new Application();
+		application = this.applicationRepository.findApplicationByTicker(tickerValue);
+		return application;
+	}
+	
+	public List<Application> findApplicationsLinked(Application application){
+		List<Application> applicationLinked = new ArrayList<Application>();
+		Application son = new Application();
+		Application iter = new Application();
+		iter = application;
+		
+		int i = 0;
+		while(i == 0){
+			if(iter.getApplication() != null){
+				son = iter.getApplication();
+				applicationLinked.add(son);
+				iter = son;
+			}else{
+				i = 1;
+			}
+		}
+		return applicationLinked;
+	}
+	
 	public void checkApplicationIsNotCloser(int applicationId){
 		Application application= new Application();
 		application = this.findOne(applicationId);
-		Assert.isTrue(application.getClosed() == false);
+		Assert.isTrue(application.isClosed() == false);
 	}
-	
+
 }

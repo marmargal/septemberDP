@@ -33,6 +33,6 @@
 		
 		
 		<acme:submit name="save" code="decision.save" />
-		<acme:cancel code="decision.cancel" url="decision/officer/display.do?decisionId=${id}"/>
+		<acme:cancel code="decision.cancel" url="application/officer/list.do"/>
 	</security:authorize>
 </form:form>

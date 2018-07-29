@@ -2,6 +2,7 @@ package controllers.officer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,7 +90,6 @@ public class ApplicationOfficerController extends AbstractController{
 		Collection<Application> allApplications = new ArrayList<Application>();
 		Collection<Application> applicationsSelfAssigning = new ArrayList<Application>();
 		Collection<Application> findApplicationsWhitDecisionByOfficer = new ArrayList<Application>();
-		
 
 		officer = this.officerService.findByPrincipal();
 		allApplications = this.applicationService.findAll();
@@ -116,14 +116,25 @@ public class ApplicationOfficerController extends AbstractController{
 			Officer officer = new Officer();
 			Application application = new Application();
 			Collection<Application> applicationOfOfficer = new ArrayList<Application>();
+			List<Application> applicationsLinked = new ArrayList<Application>();
 			
 			officer = this.officerService.findByPrincipal();
 			applicationOfOfficer = officer.getApplications();		
 			application = this.applicationService.findOne(applicationId);
+			applicationsLinked = this.applicationService.findApplicationsLinked(application);
 			
 			applicationOfOfficer.add(application);
 			
 			this.officerService.saveApplications(officer, application);
+			
+			if(!applicationsLinked.isEmpty()){
+				for(int i=0; i<applicationsLinked.size(); i++){
+					Application a = applicationsLinked.get(i);
+					if(a.getOfficer() == null && !a.isClosed()){
+						this.officerService.saveApplications(officer, a);
+					}
+				}
+			}
 
 			res = new ModelAndView("redirect:/application/officer/list.do");
 

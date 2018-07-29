@@ -39,7 +39,7 @@ public class Application extends DomainEntity{
 	private Date closedMoment;
 	private CreditCard creditCard;
 	private Double statistics;
-	private Boolean closed;
+	private boolean closed;
 
 	@Column(unique = true)
 	@Pattern(regexp = "[0-9]{6}-[A-Z]{4}[0-9]{2}")
@@ -90,14 +90,14 @@ public class Application extends DomainEntity{
 		this.statistics = statistics;
 	}
 	
-	
-	public Boolean getClosed() {
+	public boolean isClosed() {
 		return closed;
 	}
 
-	public void setClosed(Boolean closed) {
+	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}
+
 
 	
 	// Relationships
@@ -111,6 +111,7 @@ public class Application extends DomainEntity{
 	private List<EducationSection> educationSection;
 	private List<Question> question;
 	private Visa visa;
+	private Application application;
 
 	@Valid
 	@ManyToOne(optional=true)
@@ -122,7 +123,6 @@ public class Application extends DomainEntity{
 		this.officer = officer;
 	}
 	
-	
 	@Valid
 	@ManyToOne(optional=false)
 	public Immigrant getImmigrant() {
@@ -132,8 +132,6 @@ public class Application extends DomainEntity{
 	public void setImmigrant(Immigrant immigrant) {
 		this.immigrant = immigrant;
 	}
-	
-	
 	
 	@Valid
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
@@ -205,9 +203,14 @@ public class Application extends DomainEntity{
 		this.visa = visa;
 	}
 
-	
+	@Valid
+	@OneToOne
+	public Application getApplication() {
+		return application;
+	}
 
-	
-	
-	
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+
 }

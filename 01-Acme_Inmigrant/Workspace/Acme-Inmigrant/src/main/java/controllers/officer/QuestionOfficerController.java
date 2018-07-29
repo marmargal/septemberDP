@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ApplicationService;
 import services.QuestionService;
 import controllers.AbstractController;
 import domain.Application;
@@ -25,6 +26,9 @@ public class QuestionOfficerController extends AbstractController{
 	@Autowired
 	private QuestionService questionService;
 	
+	@Autowired
+	private ApplicationService applicationService;
+	
 	// Supporting services
 	
 //	@Autowired
@@ -38,12 +42,12 @@ public class QuestionOfficerController extends AbstractController{
 	
 	// Listing
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public ModelAndView list(){
+	public ModelAndView list(@RequestParam int applicationId){
 		ModelAndView res;
-		Application application;
+		Application application = new Application();
 		Collection<Question> questions = new ArrayList<Question>();
 		
-		application = this.questionService.findApplicationSelfAsign();
+		application = this.applicationService.findOne(applicationId);
 		
 		if(application != null){
 			questions = application.getQuestion();
@@ -90,7 +94,7 @@ public class QuestionOfficerController extends AbstractController{
 				Question question = this.questionService.reconstruct(questionForm, binding);
 				this.questionService.save(question);
 
-				res = new ModelAndView("redirect:/question/officer/list.do");
+				res = new ModelAndView("redirect:/question/officer/list.do?applicationId=" + question.getApplication().getId());
 			}catch (final Throwable oops) {
 				res = this.createEditModelAndView(questionForm, "question.commit.error");
 			}
