@@ -1,13 +1,8 @@
 package forms;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
-
-import domain.Immigrant;
 
 public class ReportForm {
 	

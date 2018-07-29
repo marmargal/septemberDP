@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -83,7 +84,7 @@ public class QuestionService {
 	}
 
 	public Question save(Question question) {
-		Assert.isTrue(checkCreateQuestion(question.getApplication().getId()));
+		Assert.isTrue(checkCreateQuestion(question.getApplication()));
 		Question res;
 		
 		res = questionRepository.save(question);
@@ -135,11 +136,13 @@ public class QuestionService {
 	}
 	
 	
-	private boolean checkCreateQuestion(int applicationId ){
+	private boolean checkCreateQuestion(Application application ){
 		Boolean res = true;
-		Application application;
-		application = findApplicationSelfAsign();
-		if(applicationId != application.getId()){
+		Collection<Application> applicationsAssign = new ArrayList<Application>();
+		
+		applicationsAssign = this.applicationService.findApplicationsSelfAssigning();
+		
+		if(!applicationsAssign.contains(application)){
 			res = false;
 		}
 		return res;

@@ -44,7 +44,9 @@
 				<jstl:if test="${hasAssign == 'true'}" >
 					<jstl:if test="${officer == row.officer}" >
 						<jstl:if test="${hasDecision == 'false'}" >
-							<a href="decision/officer/create.do?applicationId=${row.id }"><spring:message code="application.createDecision"/></a>	
+							<a href="decision/officer/create.do?applicationId=${row.id }"><spring:message code="application.createDecision"/></a>
+							<jstl:out value="${'-'}"></jstl:out>
+							<a href="question/officer/list.do?applicationId=${row.id }"><spring:message code="application.questions"/></a>	
 						</jstl:if>
 						<jstl:if test="${hasDecision == 'true'}" >
 							<jstl:forEach var="dec" items="${officer.decision}">														

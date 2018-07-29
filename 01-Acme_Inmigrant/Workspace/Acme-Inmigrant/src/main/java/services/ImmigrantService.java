@@ -94,6 +94,12 @@ public class ImmigrantService {
 		
 		return res;
 	}
+	
+	public Immigrant saveImmigrant(Immigrant immigrant) {
+		Immigrant res;
+		res = this.immigrantRepository.save(immigrant);
+		return res;
+	}
 
 	public void delete(Immigrant immigrant) {
 		Assert.notNull(immigrant);
