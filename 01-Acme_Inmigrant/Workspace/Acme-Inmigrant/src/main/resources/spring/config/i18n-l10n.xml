@@ -47,6 +47,7 @@
 		<value>/views/immigrant/messages</value>
 		<value>/views/category/messages</value>
 		<value>/views/decision/messages</value>
+		<value>/views/dashboard/messages</value>
 
 	</util:list>
 </beans>
