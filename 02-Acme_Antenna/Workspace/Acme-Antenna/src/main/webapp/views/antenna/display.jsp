@@ -11,25 +11,28 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<b><spring:message code="antenna.serialNumber"/>:&nbsp;</b><jstl:out value="${antenna.name}"/>
+<b><spring:message code="antenna.serialNumber"/>:&nbsp;</b><jstl:out value="${antenna.serialNumber}"/>
 <br/>
 
-<b><spring:message code="antenna.model"/>:&nbsp;</b><jstl:out value="${antenna.isoCode}"/>
+<b><spring:message code="antenna.model"/>:&nbsp;</b><jstl:out value="${antenna.model}"/>
 <br/>
 
-<b><spring:message code="antenna.latitude"/>:&nbsp;</b><img id="flag" src="<jstl:out value="${antenna.flag}"/>"/>
+<b><spring:message code="antenna.latitude"/>:&nbsp;</b><jstl:out value="${antenna.coordinates.latitude}"/>
 <br/>
 
-<b><spring:message code="antenna.longitude"/>:&nbsp;</b><img id="flag" src="<jstl:out value="${antenna.flag}"/>"/>
+<b><spring:message code="antenna.longitude"/>:&nbsp;</b><jstl:out value="${antenna.coordinates.longitude}"/>
 <br/>
 
-<b><spring:message code="antenna.azimuth"/>:&nbsp;</b><img id="flag" src="<jstl:out value="${antenna.flag}"/>"/>
+<b><spring:message code="antenna.azimuth"/>:&nbsp;</b><jstl:out value="${antenna.azimuth}"/>
 <br/>
 
-<b><spring:message code="antenna.elevation"/>:&nbsp;</b><img id="flag" src="<jstl:out value="${antenna.flag}"/>"/>
+<b><spring:message code="antenna.elevation"/>:&nbsp;</b><jstl:out value="${antenna.elevation}"/>
 <br/>
 
-<b><spring:message code="antenna.queality"/>:&nbsp;</b><img id="flag" src="<jstl:out value="${antenna.flag}"/>"/>
+<b><spring:message code="antenna.quality"/>:&nbsp;</b><jstl:out value="${antenna.quality}"/>
+<br/>
+
+<b><spring:message code="antenna.satellite"/>:&nbsp;</b><jstl:out value="${antenna.satellite.name}"/>
 <br/>
 
 <acme:cancel url="antenna/user/list.do" code="antenna.cancel"/>

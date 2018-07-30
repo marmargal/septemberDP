@@ -11,7 +11,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="antenna/administrator/edit.do" modelAttribute="antennaForm">
+<form:form action="${requestURI }" modelAttribute="antennaForm">
 	
 	<form:hidden path="id"/>
 	
@@ -33,8 +33,10 @@
 	<acme:textbox code="antenna.elevation" path="elevation"/>
 	<br/>
 	
-	<acme:textbox code="antenna.queality" path="queality"/>
+	<acme:textbox code="antenna.quality" path="quality"/>
 	<br/>
+	
+	<acme:select items="${satellites }" itemLabel="name" code="antenna.satellite" path="satellite"/>
 	
 	<acme:submit name="save" code="antenna.save"/>
 	<jstl:if test="${antennaForm.id != 0}">
