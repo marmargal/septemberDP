@@ -548,6 +548,8 @@
 			<list>
 			</list>
 		</property>
+		<property name="visas" ref="visa1" />
+		
 	</bean>
 
 	<bean id="category3" class="domain.Category">
@@ -570,6 +572,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="visas" ref="visa2" />
 	</bean>
 
 	<bean id="category5" class="domain.Category">

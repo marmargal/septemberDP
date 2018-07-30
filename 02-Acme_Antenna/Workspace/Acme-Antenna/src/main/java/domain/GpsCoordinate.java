@@ -11,24 +11,24 @@ import org.hibernate.validator.constraints.Range;
 public class GpsCoordinate {
 
 	// Attributes
-	private Double latitude;
-	private Double longitude;
+	private double latitude;
+	private double longitude;
 	
 	@Range(min=-90,max=90)
-	public Double getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 	
-	public void setLatitude(Double latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 	
 	@Range(min=-180,max=180)
-	public Double getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 	
-	public void setLongitude(Double longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 	

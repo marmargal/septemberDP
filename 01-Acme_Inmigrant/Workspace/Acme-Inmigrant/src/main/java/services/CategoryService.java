@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import repositories.CategoryRepository;
 import domain.Category;
+import domain.Visa;
 
 @Service
 @Transactional
@@ -37,13 +38,16 @@ public class CategoryService {
 		String name= "nombre";
 		Boolean rootCategory=false;
 		
+		
 		Category categoryParent= new Category();
 		List<Category> categories= new ArrayList<Category>();
+		List<Visa> visas= new ArrayList<Visa>();
 		
 		res.setName(name);
 		res.setRootCategory(rootCategory);
 		res.setCategoryParent(categoryParent);
 		res.setCategories(categories);
+		res.setVisas(visas);
 
 		return res;
 	}

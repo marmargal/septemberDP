@@ -27,7 +27,6 @@ public class Antenna extends DomainEntity {
 	private Double elevation;
 	private Double quality;
 	
-	@NotBlank
 	//TODO: pattern??
 	public Integer getSerialNumber() {
 		return serialNumber;

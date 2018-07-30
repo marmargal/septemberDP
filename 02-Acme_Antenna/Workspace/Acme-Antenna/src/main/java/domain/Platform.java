@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -43,7 +41,6 @@ public class Platform extends DomainEntity{
 	
 	// Relationships
 	private Satellite satellite;
-	private Collection<Subscription> subscriptions;
 
 	@Valid
 	@ManyToOne(optional=false)
@@ -54,16 +51,4 @@ public class Platform extends DomainEntity{
 	public void setSatellite(Satellite satellite) {
 		this.satellite = satellite;
 	}
-
-	@Valid
-	@ManyToOne(optional=true)
-	public Collection<Subscription> getSubscriptions() {
-		return subscriptions;
-	}
-
-	public void setSubscription(Collection<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
-	}
-	
-	
 }
