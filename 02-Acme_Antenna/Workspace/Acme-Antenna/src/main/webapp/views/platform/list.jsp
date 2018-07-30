@@ -28,12 +28,12 @@
 <display:table pagesize="5" class="platforms" keepStatus="true" name="platforms"
 	requestURI="${requestURI }" id="row">
 
-	<acme:column property="title" code="platform.title" />
+	<acme:column property="name" code="platform.title" />
 	<acme:column property="description" code="platform.description" />
 
 	<display:column>
 
-		<a href="satellite/list.do?platformId=${row.id}"><spring:message
+		<a href="satellite/platform/list.do?platformId=${row.id}"><spring:message
 				code="platform.satellites" /></a>
 	</display:column>
 </display:table>

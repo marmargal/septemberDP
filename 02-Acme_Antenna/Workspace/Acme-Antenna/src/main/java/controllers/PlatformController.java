@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.PlatformService;
+import services.SatelliteService;
 import domain.Platform;
+import domain.Satellite;
 
 @Controller
 @RequestMapping("/platform")
@@ -21,6 +23,9 @@ public class PlatformController extends AbstractController{
 
 		@Autowired
 		private PlatformService platformService;
+		
+		@Autowired
+		private SatelliteService satelliteService;
 
 		// Constructor
 
@@ -48,6 +53,21 @@ public class PlatformController extends AbstractController{
 			platforms = platformService.findAll();
 			result = new ModelAndView("platform/list");
 			result.addObject("requestURI", "platform/list.do");
+			result.addObject("platforms", platforms);
+			return result;
+		}
+		
+		@RequestMapping(value = "/satellite/list", method = RequestMethod.GET)
+		public ModelAndView list(@RequestParam int satelliteId) {
+			ModelAndView result;
+			Collection<Platform> platforms = new ArrayList<>();
+			
+			Satellite satellite = new Satellite();
+			satellite = satelliteService.findOne(satelliteId);
+			
+			platforms = satellite.getPlatforms();
+			result = new ModelAndView("platform/list");
+			result.addObject("requestURI", "platform/satellite/list.do");
 			result.addObject("platforms", platforms);
 			return result;
 		}

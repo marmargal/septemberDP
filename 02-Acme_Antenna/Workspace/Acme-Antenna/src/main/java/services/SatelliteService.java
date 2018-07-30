@@ -80,5 +80,4 @@ public class SatelliteService {
 		res.addAll(satelliteRepository.searchSatellite(criteria));
 		return res;
 	}
-
 }

@@ -28,6 +28,8 @@
 		<value>/views/profile/messages</value>
 		
 		<value>/views/antenna/messages</value>
+		<value>/views/satellite/messages</value>
+		<value>/views/platform/messages</value>
 	</util:list>
 
 </beans>
