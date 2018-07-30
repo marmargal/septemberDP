@@ -40,6 +40,10 @@
 			</li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('USER')">
+			<li><a href="antenna/user/list.do"><spring:message code="master.page.user.antennas" /></a></li>
+		</security:authorize>
+		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>

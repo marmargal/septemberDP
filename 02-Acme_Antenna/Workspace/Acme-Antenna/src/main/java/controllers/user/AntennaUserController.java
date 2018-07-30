@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AntennaService;
+import services.SatelliteService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Antenna;
+import domain.Satellite;
 import domain.User;
 import forms.AntennaForm;
 
@@ -29,6 +31,9 @@ public class AntennaUserController extends AbstractController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SatelliteService satelliteService;
 
 	
 	// Constructors ---------------------------------------------------------
@@ -37,6 +42,22 @@ public class AntennaUserController extends AbstractController {
 		super();
 	}
 
+	// Display
+	@RequestMapping(value="/display", method=RequestMethod.GET)
+	public ModelAndView display(@RequestParam int antennaId){
+		this.userService.checkAuthority();
+		this.antennaService.checkAntennaIsOfUserLogged(antennaId);
+		ModelAndView res;
+		Antenna antenna = new Antenna();
+		
+		antenna = this.antennaService.findOne(antennaId);
+	
+		res = new ModelAndView("antenna/display");
+		res.addObject("antenna", antenna);
+
+		return res;
+	}
+	
 	// Listing
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView list(){
@@ -98,6 +119,7 @@ public class AntennaUserController extends AbstractController {
 
 				res = new ModelAndView("redirect:/antenna/user/list.do");
 			}catch (final Throwable oops) {
+				System.out.println(oops);
 				res = this.createEditModelAndView(antennaForm, "antenna.commit.error");
 			}
 		
@@ -106,17 +128,17 @@ public class AntennaUserController extends AbstractController {
 	
 	// Delete --------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(AntennaForm anntenaForm, BindingResult binding){
+	public ModelAndView delete(AntennaForm antennaForm, BindingResult binding){
 		this.userService.checkAuthority();
 		
 		ModelAndView res;
 		
 		try{
-			Antenna antenna = this.antennaService.reconstruct(anntenaForm, binding);
+			Antenna antenna = this.antennaService.findOne(antennaForm.getId());
 			antennaService.delete(antenna);
 			res = new ModelAndView("redirect:/antenna/user/list.do");
 		}catch (Throwable oops) {
-			res = createEditModelAndView(anntenaForm, "antenna.commit.error");
+			res = createEditModelAndView(antennaForm, "antenna.commit.error");
 		}
 		
 		return res;
@@ -132,11 +154,14 @@ public class AntennaUserController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final AntennaForm antennaForm, final String message) {
 		ModelAndView res;
+		Collection<Satellite> satellites = new ArrayList<Satellite>();
 		
-		res = new ModelAndView("question/edit");
+		satellites = this.satelliteService.findAll();
+		res = new ModelAndView("antenna/edit");
 		
 		res.addObject("antennaForm", antennaForm);
 		res.addObject("message",message);
+		res.addObject("satellites",satellites);
 		res.addObject("requestURI","antenna/user/edit.do");
 		
 		return res;

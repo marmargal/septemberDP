@@ -15,16 +15,17 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <display:table pagesize="6" class="displaycomment" keepStatus="true"
-	name="antennaForm" requestURI="${requestURI }" id="row">
+	name="antenna" requestURI="${requestURI }" id="row">
 	
 	<display:column>
 		<a href="antenna/user/display.do?antennaId=${row.id }"><spring:message code="antenna.display"/></a>
 	</display:column>
 	
 	<display:column>
-		<a href="antenna/user/edit.do?antennaId=${row.id }"><spring:message code="edit.edit"/></a>
+		<a href="antenna/user/edit.do?antennaId=${row.id }"><spring:message code="antenna.edit"/></a>
 	</display:column>
 	
 	<spring:message code="antenna.serialNumber" var="serialNumberHeader" />

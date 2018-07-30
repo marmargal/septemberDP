@@ -75,8 +75,10 @@ public class AntennaService {
 
 	public Antenna save(final Antenna antenna) {
 		this.userService.checkAuthority();
-		Assert.isTrue(antenna.getUser().equals(this.userService.findByPrincipal()));
 		Assert.notNull(antenna);
+		if(antenna.getId() != 0){
+			this.checkAntennaIsOfUserLogged(antenna.getId());
+		}
 		Antenna res = new Antenna();;
 		res = this.antennaRepository.save(antenna);
 		return res;
@@ -84,6 +86,7 @@ public class AntennaService {
 
 	public void delete(Antenna antenna) {
 		this.userService.checkAuthority();
+		this.checkAntennaIsOfUserLogged(antenna.getId());
 		Assert.notNull(antenna);
 		Assert.isTrue(antenna.getId() != 0);
 		Assert.isTrue(this.antennaRepository.exists(antenna.getId()));
@@ -100,14 +103,20 @@ public class AntennaService {
 		double latitude = gpsCoordinate.getLatitude();
 		double longitude = gpsCoordinate.getLongitude();
 		
+		String serialNumber = String.valueOf(antenna.getSerialNumber());
+		String azimuth = String.valueOf(antenna.getAzimuth());
+		String elevation = String.valueOf(antenna.getElevation()); 
+		String quality = String.valueOf(antenna.getQuality()); 
+		
 		res.setId(antenna.getId());
-		res.setSerialNumber(antenna.getSerialNumber());
+		res.setSerialNumber(serialNumber);
 		res.setModel(antenna.getModel());
 		gpsCoordinate.setLatitude(latitude);
 		gpsCoordinate.setLongitude(longitude);
-		res.setAzimuth(antenna.getAzimuth());
-		res.setElevation(antenna.getElevation());
-		res.setQuality(antenna.getQuality());
+		res.setAzimuth(azimuth);
+		res.setElevation(elevation);antenna.getQuality();
+		res.setQuality(quality);
+		res.setSatellite(antenna.getSatellite());
 		
 		return res;
 	}
@@ -123,17 +132,23 @@ public class AntennaService {
 			res = this.create();
 		
 		GpsCoordinate gpsCoordinate = new GpsCoordinate();
-		double latitude = antennaForm.getLatitude();
-		double longitude = antennaForm.getLongitude();
+		Double latitude = Double.parseDouble(antennaForm.getLatitude());
+		Double longitude = Double.parseDouble(antennaForm.getLongitude());
 		gpsCoordinate.setLatitude(latitude);
 		gpsCoordinate.setLongitude(longitude);
 		
-		res.setSerialNumber(antennaForm.getSerialNumber());
+		Integer serialNumber = Integer.parseInt(antennaForm.getSerialNumber());
+		Double azimuth = Double.parseDouble(antennaForm.getAzimuth());
+		Double elevation = Double.parseDouble(antennaForm.getElevation()); 
+		Double quallity = Double.parseDouble(antennaForm.getQuality()); 
+		
+		res.setSerialNumber(serialNumber);
 		res.setModel(antennaForm.getModel());
 		res.setCoordinates(gpsCoordinate);
-		res.setAzimuth(antennaForm.getAzimuth());
-		res.setElevation(antennaForm.getElevation());
-		res.setQuality(antennaForm.getQuality());
+		res.setAzimuth(azimuth);
+		res.setElevation(elevation);
+		res.setQuality(quallity);
+		res.setSatellite(antennaForm.getSatellite());
 
 		this.validator.validate(res, binding);
 
@@ -144,6 +159,17 @@ public class AntennaService {
 		Collection<Antenna> antennas = new ArrayList<Antenna>();
 		antennas = this.antennaRepository.findAntennasByUser(userId);
 		return antennas;
+	}
+	public void checkAntennaIsOfUserLogged(int antennaId){
+		Collection<Antenna> antennasOfUser = new ArrayList<Antenna>();
+		Antenna antenna = new Antenna();
+		User user = new User();
+		
+		user = this.userService.findByPrincipal();
+		antenna = this.findOne(antennaId);
+		
+		antennasOfUser = user.getAntennas();
+		Assert.isTrue(antennasOfUser.contains(antenna));
 	}
 	
 }
