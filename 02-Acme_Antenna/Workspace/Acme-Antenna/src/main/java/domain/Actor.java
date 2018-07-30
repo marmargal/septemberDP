@@ -111,7 +111,7 @@ public class Actor extends DomainEntity {
 		return tutorials;
 	}
 
-	public void setTutorial(Collection<Tutorial> tutorials) {
+	public void setTutorials(Collection<Tutorial> tutorials) {
 		this.tutorials = tutorials;
 	}
 }
