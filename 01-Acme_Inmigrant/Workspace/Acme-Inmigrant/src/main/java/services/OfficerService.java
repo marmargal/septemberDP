@@ -31,6 +31,9 @@ public class OfficerService {
 	private OfficerRepository officerRepository;
 	
 	@Autowired
+	private ApplicationService applicationService;
+	
+	@Autowired
 	private Validator		validator;
 
 	// Supporting services
@@ -81,16 +84,36 @@ public class OfficerService {
 	public Officer save(Officer officer) {
 		Officer res;
 		
-		if (officer.getId() == 0) {
-			String pass = officer.getUserAccount().getPassword();
-			
-			final Md5PasswordEncoder code = new Md5PasswordEncoder();
-			
-			pass = code.encodePassword(pass, null);
-			
-			officer.getUserAccount().setPassword(pass);
-		}
+		String pass = officer.getUserAccount().getPassword();
+		
+		final Md5PasswordEncoder code = new Md5PasswordEncoder();
+		
+		pass = code.encodePassword(pass, null);
+		
+		officer.getUserAccount().setPassword(pass);
+
 		res = this.officerRepository.save(officer);
+		
+		return res;
+	}
+	
+	public Officer saveApplications(Officer officer, Application application) {
+		this.checkAuthority();
+		Officer res;
+		
+		res = this.officerRepository.save(officer);
+		
+		application.setOfficer(officer);
+		this.applicationService.saveOfficerOfApplication(application);
+		return res;
+	}
+	
+	public Officer saveDecision(Officer officer) {
+		this.checkAuthority();
+		Officer res;
+		
+		res = this.officerRepository.save(officer);
+		
 		return res;
 	}
 
@@ -123,6 +146,16 @@ public class OfficerService {
 		Assert.isTrue(authority.contains(res));
 	}	
 	
+	public void checkApplicationIsNotAssign(int applicationId){
+		Collection<Application> allApplicationsAssignByAllOfficer = new ArrayList<Application>();
+		Application application = new Application();
+		
+		application = this.applicationService.findOne(applicationId);
+		allApplicationsAssignByAllOfficer = this.applicationService.findApplicationsSelfAssigning();
+		
+		Assert.isTrue(!allApplicationsAssignByAllOfficer.contains(application));
+	}
+	
 	public ActorForm construct(Officer officer){
 		ActorForm res = new ActorForm();
 		
@@ -132,6 +165,7 @@ public class OfficerService {
 		res.setEmail(officer.getEmail());
 		res.setPhoneNumber(officer.getPhoneNumber());
 		res.setAddress(officer.getAddress());
+		res.setUsername(officer.getUserAccount().getUsername());
 		
 		return res;
 	}

@@ -25,6 +25,7 @@ import domain.PersonalSection;
 import domain.SocialSection;
 import domain.Visa;
 import domain.WorkSection;
+import forms.ApplicationForm;
 
 @Controller
 @RequestMapping("/application/immigrant")
@@ -104,8 +105,8 @@ public class ApplicationImmigrantController extends AbstractController {
 		Collection<EducationSection> educationS = new ArrayList<EducationSection>();
 
 		Immigrant i = immigrantService.findByPrincipal();
-		int rangerId = i.getId();
-		application = applicationService.getApplicationByImmigrant(rangerId);
+		int immigrantId = i.getId();
+		application = applicationService.getApplicationByImmigrant(immigrantId);
 
 		for (Application a : application) {
 			personalS.add(a.getPersonalSection());
@@ -166,56 +167,58 @@ public class ApplicationImmigrantController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int applicationId) {
 		ModelAndView result;
+		
+		ApplicationForm applicationForm;
 		Application application;
 		Immigrant immigrant;
 
 		immigrant = this.immigrantService.findByPrincipal();
 		application = applicationService.findOne(applicationId);
+		
 		if (immigrant.getApplications().contains(application)) {
-			result = this.createEditModelAndView(application);
+			applicationForm = this.applicationService.construct(application);
+			result = this.createEditModelAndView(applicationForm);
 		} else {
 			result = new ModelAndView("redirect:../../");
 		}
 		return result;
 	}
+	
 
 	// Saving --------------------------------------------------------------
-
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Application application,
-			BindingResult binding) {
+	@RequestMapping(value="/edit",method=RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid ApplicationForm applicationForm, final BindingResult binding){
 		ModelAndView res;
 		
-		application = this.applicationService.reconstruct(application, binding);
-		
-		if (binding.hasErrors()) {
-			res = this.createEditModelAndView(application,
-					"application.params.error");
-		} else
-			try {
+		if(binding.hasErrors()){
+			res = this.createEditModelAndView(applicationForm, "application.params.error");
+		}else
+			try{
+				
+				Application application = this.applicationService.reconstruct(applicationForm, binding);
 				this.applicationService.save(application);
-				res = new ModelAndView(
-						"redirect:../../application/immigrant/display.do");
-			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(application,
-						"application.commit.error");
-			}
 
+				res = new ModelAndView("redirect:../../");
+			}catch (final Throwable oops) {
+				System.out.println(oops);
+				res = this.createEditModelAndView(applicationForm, "application.commit.error");
+			}
+		
 		return res;
 	}
 
 	// Deleting -------------------------------------------------------------
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(Application application, BindingResult binding) {
+	public ModelAndView delete(ApplicationForm applicationForm, BindingResult binding) {
 		ModelAndView res;
-
+		Application application = new Application();
 		try {
+			application = this.applicationService.reconstruct(applicationForm, binding);
 			this.applicationService.delete(application);
 			res = new ModelAndView(
 					"redirect:../../application/immigrant/display.do");
 		} catch (Throwable oops) {
-			res = createEditModelAndView(application,
+			res = createEditModelAndView(applicationForm,
 					"application.commit.error");
 		}
 
@@ -223,37 +226,36 @@ public class ApplicationImmigrantController extends AbstractController {
 	}
 
 	// Creating ---------------------------------------------------------------
-
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Application a;
-
-		a = this.applicationService.create();
-		result = this.createEditModelAndView(a);
+		ApplicationForm applicationForm = new ApplicationForm();
+		
+		result = this.createEditModelAndView(applicationForm);
 
 		return result;
 	}
 
 	// Ancillary methods --------------------------------------------------
-
-	protected ModelAndView createEditModelAndView(final Application application) {
+	protected ModelAndView createEditModelAndView(final ApplicationForm applicationForm) {
 		ModelAndView result;
-		result = this.createEditModelAndView(application, null);
+		result = this.createEditModelAndView(applicationForm, null);
 		return result;
 	}
 
 	protected ModelAndView createEditModelAndView(
-			final Application application, final String message) {
+			final ApplicationForm applicationForm, final String message) {
 
 		ModelAndView result;
 		Collection<Visa> visas = new ArrayList<Visa>();
+		
 		visas = this.visaService.findAll();
 		
 		result = new ModelAndView("application/immigrant/edit");
-		result.addObject("application", application);
+		result.addObject("applicationForm", applicationForm);
 		result.addObject("visa", visas);
 		result.addObject("message", message);
 		return result;
 	}
+	
 }

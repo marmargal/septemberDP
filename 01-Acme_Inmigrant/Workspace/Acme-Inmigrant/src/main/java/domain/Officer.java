@@ -6,7 +6,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 
@@ -22,9 +21,8 @@ public class Officer extends Actor{
 	
 	// Relationships
 	private Collection<Application> applications;
-	private Decision decision;
+	private Collection<Decision> decision;
 	private Collection<Question> questions;
-	private Collection<Immigrant> immigrants;
 	
 	@Valid
 	@OneToMany(mappedBy = "officer")
@@ -37,12 +35,12 @@ public class Officer extends Actor{
 	}
 	
 	@Valid
-	@OneToOne
-	public Decision getDecision(){
+	@OneToMany(mappedBy = "officer")
+	public Collection<Decision> getDecision(){
 		return decision;
 	}
 	
-	public void setDecision(Decision decision){
+	public void setDecision(Collection<Decision> decision){
 		this.decision = decision;
 	}
 	

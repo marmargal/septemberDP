@@ -82,15 +82,21 @@ public class ImmigrantService {
 	public Immigrant save(Immigrant immigrant) {
 		Immigrant res;
 
-		if (immigrant.getId() == 0) {
-			String pass = immigrant.getUserAccount().getPassword();
+		String pass = immigrant.getUserAccount().getPassword();
 
-			final Md5PasswordEncoder code = new Md5PasswordEncoder();
+		final Md5PasswordEncoder code = new Md5PasswordEncoder();
 
-			pass = code.encodePassword(pass, null);
+		pass = code.encodePassword(pass, null);
 
-			immigrant.getUserAccount().setPassword(pass);
-		}
+		immigrant.getUserAccount().setPassword(pass);
+
+		res = this.immigrantRepository.save(immigrant);
+		
+		return res;
+	}
+	
+	public Immigrant saveImmigrant(Immigrant immigrant) {
+		Immigrant res;
 		res = this.immigrantRepository.save(immigrant);
 		return res;
 	}
@@ -108,9 +114,9 @@ public class ImmigrantService {
 		Immigrant res;
 		UserAccount immigrantAccount;
 		immigrantAccount = LoginService.getPrincipal();
+		Assert.notNull(immigrantAccount);
 		res = this.immigrantRepository
 				.findImmigrantByUserAccountId(immigrantAccount.getId());
-		Assert.notNull(res);
 		return res;
 	}
 
@@ -134,6 +140,7 @@ public class ImmigrantService {
 		res.setPhoneNumber(immigrant.getPhoneNumber());
 		res.setEmail(immigrant.getEmail());
 		res.setAddress(immigrant.getAddress());
+		res.setUsername(immigrant.getUserAccount().getUsername());
 		
 		return res;
 	}

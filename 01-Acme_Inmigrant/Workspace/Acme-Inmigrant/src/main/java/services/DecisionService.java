@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -14,6 +15,7 @@ import org.springframework.validation.Validator;
 import repositories.DecisionRepository;
 import domain.Application;
 import domain.Decision;
+import domain.Officer;
 import forms.DecisionForm;
 
 @Service
@@ -30,6 +32,9 @@ public class DecisionService {
 	private ApplicationService applicationService;
 	
 	@Autowired
+	private OfficerService officerService;
+	
+	@Autowired
 	private Validator validator;
 
 	// Constructors
@@ -41,7 +46,11 @@ public class DecisionService {
 	// Simple CRUD methods
 
 	public Decision create(int applicationId) {
+		Assert.isTrue(officerService.findByPrincipal().
+				equals(applicationService.findOne(applicationId).getOfficer()));
+		
 		Decision res = new Decision();
+		Officer officer = this.officerService.findByPrincipal();
 
 		Date moment = new Date(System.currentTimeMillis() - 1000);
 
@@ -50,7 +59,8 @@ public class DecisionService {
 		res.setAccept(false);
 		res.setMoment(moment);
 		res.setApplication(application);
-
+		res.setOfficer(officer);
+		
 		return res;
 	}
 
@@ -70,8 +80,22 @@ public class DecisionService {
 	}
 
 	public Decision save(Decision decision) {
+		Assert.isTrue(officerService.findByPrincipal().
+				equals(decision.getApplication().getOfficer()));
+		
 		Decision res;
+		Officer officer = new Officer();
+		Collection<Decision> decisionsOfOfficer = new ArrayList<Decision>();
+		
+		this.checkRejected(decision);
 		res = decisionRepository.save(decision);
+		
+		officer = decision.getOfficer();
+		decisionsOfOfficer = officer.getDecision();
+		decisionsOfOfficer.add(decision);
+		officer.setDecision(decisionsOfOfficer);
+		this.officerService.saveDecision(officer);
+		
 		return res;
 	}
 
@@ -114,6 +138,12 @@ public class DecisionService {
 			this.validator.validate(res,binding);
 		
 		return res;
+	}
+	
+	public void checkRejected(Decision decision){
+		if(decision.getAccept()==false){
+			Assert.isTrue(!(decision.getComment().isEmpty()));
+		}
 	}
 
 }

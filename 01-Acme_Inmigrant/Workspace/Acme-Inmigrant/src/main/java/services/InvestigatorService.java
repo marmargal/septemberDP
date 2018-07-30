@@ -78,16 +78,16 @@ public class InvestigatorService {
 	public Investigator save(Investigator investigator) {
 		Investigator res;
 		
-		if (investigator.getId() == 0) {
-			String pass = investigator.getUserAccount().getPassword();
-			
-			final Md5PasswordEncoder code = new Md5PasswordEncoder();
-			
-			pass = code.encodePassword(pass, null);
-			
-			investigator.getUserAccount().setPassword(pass);
-		}
+		String pass = investigator.getUserAccount().getPassword();
+		
+		final Md5PasswordEncoder code = new Md5PasswordEncoder();
+		
+		pass = code.encodePassword(pass, null);
+		
+		investigator.getUserAccount().setPassword(pass);
+
 		res = this.investigatorRepository.save(investigator);
+		
 		return res;
 	}
 
@@ -129,6 +129,7 @@ public class InvestigatorService {
 		res.setEmail(investigator.getEmail());
 		res.setPhoneNumber(investigator.getPhoneNumber());
 		res.setAddress(investigator.getAddress());
+		res.setUsername(investigator.getUserAccount().getUsername());
 		
 		return res;
 	}

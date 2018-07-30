@@ -7,7 +7,8 @@
  * TDG Licence, a copy of which you may download from 
  * http://www.tdg-seville.info/License.html
  --%>
-
+<%@page import="services.ApplicationService"%>
+<%@page import="domain.Application"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -18,34 +19,33 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="application/immigrant/edit.do" modelAttribute="application">
-	<security:authorize access="hasRole('IMMIGRANT')">
-		<form:hidden path="id" />
-		<form:hidden path="version" />
 
-		<form:hidden path="ticker" />
-		<form:hidden path="openedMoment" />
-		<form:hidden path="closedMoment" />
-		<form:hidden path="personalSection" />
-		<form:hidden path="contactSection" />
-		<form:hidden path="workSection" />
-		<form:hidden path="socialSection" />
-		<form:hidden path="educationSection" />
+<form:form action="application/immigrant/edit.do" modelAttribute="applicationForm">
+	<form:hidden path="id" />
 		
-		<acme:select items="${visa}" itemLabel="classes" code="application.visa" path="visa" />
-		<acme:textbox path="creditCard.holderName" code="application.creditCard.holderName" />
-		<acme:textbox path="creditCard.brandName" code="application.creditCard.brandName" />
-		<acme:textbox path="creditCard.number" code="application.creditCard.number" />
-		<acme:textbox path="creditCard.expirationMonth" code="application.creditCard.expirationMonth" />
-		<acme:textbox path="creditCard.expirationYear" code="application.creditCard.expirationYear" />
-		<acme:textbox path="creditCard.Cvv" code="application.creditCard.Cvv" />
-
-		<acme:textbox path="personalSection.names" code="application.personalSection.name" />
-		<acme:textbox path="personalSection.birthPlace" code="application.personalSection.birthPlace" />
-		<acme:date code="application.personalSection.birthDate" path="personalSection.birthDate" placeholder="dd/MM/yyyy"/>
-		<acme:textbox path="personalSection.picture" code="application.personalSection.picture" />
-		
-		<acme:submit name="save" code="application.submit" />
-		<acme:cancel url="application/display.do" code="application.cancel" />
-	</security:authorize>
+	<acme:select items="${visa}" itemLabel="classes" code="application.visa" path="visa" />
+	<acme:textbox path="holderName" code="application.creditCard.holderName" />
+	<acme:textbox path="brandName" code="application.creditCard.brandName" />
+	<acme:textbox path="number" code="application.creditCard.number" />
+	
+	<acme:textbox path="expirationMonth" code="application.creditCard.expirationMonth"/>
+	<acme:textbox path="expirationYear" code="application.creditCard.expirationYear"/>
+	<acme:textbox path="cvv" code="application.creditCard.Cvv"/>
+	
+	<acme:textbox path="names" code="application.personalSection.name" />
+	<acme:textbox path="bithPlace" code="application.personalSection.birthPlace" />
+	<acme:date code="personalSection.birthDate" path="bithDate" placeholder="dd/MM/yyyy"/>
+	<acme:textbox path="picture" code="application.personalSection.picture" />
+	
+	<acme:textbox path="nickName" code="application.socialSection.nickName" />
+	<acme:textbox path="socialNetwork" code="application.socialSection.socialNetwork" />
+	<acme:textbox path="profileLink" code="application.socialSection.profileLink" />
+	
+	<acme:textbox path="tickerApplicationLinked" code="application.linked" />
+	<br/>
+	<acme:checkbox code="application.close" path="closed"/>
+	
+	<acme:submit name="save" code="application.submit" />
+	<acme:cancel url="application/immigrant/display.do" code="application.cancel" />
+	
 </form:form>
