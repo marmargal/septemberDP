@@ -51,8 +51,8 @@ public interface AdministratorRepository extends
 	// // * number of visas per category.
 	// // */
 	// //
-	// @Query("select  avg(distinct(v.category)),min(distinct(v.category)), max(distinct(v.category)), stddev(distinct(v.category)) from Visa v")
-	// // Collection<Double> dataVisasPerCategory();
+	 @Query("select  avg((v.visas.size)),min((v.visas.size)), max((v.visas.size)), stddev((v.visas.size)) from Category v ")
+	 Collection<Double> dataVisasPerCategory();
 	// //
 	// // /*
 	// // * The minimum, the maximum, the average, and the standard deviation of
@@ -79,9 +79,8 @@ public interface AdministratorRepository extends
 	// // */
 	// //
 	// //
-	// @Query("select avg(d.moment-d.application.closedMoment),min(d.moment-d.application.closedMoment),max(d.moment-d.application.closedMoment),"
-	// // + "stddev(d.moment-d.application.closedMoment) from Decision d")
-	// // Collection<Date> dataTimeToMakeDecision();
-	// //
+	 @Query("select avg(d.moment-d.application.closedMoment),min(d.moment-d.application.closedMoment),max(d.moment-d.application.closedMoment),stddev(d.moment-d.application.closedMoment) from Decision d")
+	  Collection<Date> dataTimeToMakeDecision();
+	
 
 }
