@@ -1,5 +1,5 @@
 <%--
- * password.tag
+ * delete.tag
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -22,14 +22,14 @@
 
 <%-- Attributes --%> 
  
-<%@ attribute name="path" required="true" rtexprvalue="true" %>
-<%@ attribute name="code" required="true" rtexprvalue="true" %>
+<%@ attribute name="buttonCode" required="true" %>
+<%@ attribute name="confirmationCode" required="true" %>
+<%@ attribute name="id" required="true" %>
 
 <%-- Definition --%>
 
-<div>
-	<b><form:label path="${path}"><spring:message code="${code}" />:&nbsp;</form:label></b>
-	<form:password path="${path}"/>
-	<form:errors path="${path}" cssClass="error" />
-</div>
-
+<jstl:if test="${id != 0 }">
+	<spring:message code="${buttonCode }" var="var1"/>
+	<spring:message code="${confirmationCode }" var="var2"/>
+	<input type="submit" name="delete" value="${var1 }" onclick="return confirm('${var2}')"/>
+</jstl:if>

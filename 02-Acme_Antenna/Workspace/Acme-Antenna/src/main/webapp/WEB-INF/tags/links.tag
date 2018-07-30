@@ -1,5 +1,5 @@
 <%--
- * password.tag
+ * links.tag
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -22,14 +22,9 @@
 
 <%-- Attributes --%> 
  
-<%@ attribute name="path" required="true" rtexprvalue="true" %>
-<%@ attribute name="code" required="true" rtexprvalue="true" %>
+<%@ attribute name="url" required="true" %>
+<%@ attribute name="code" required="true" %>
 
 <%-- Definition --%>
 
-<div>
-	<b><form:label path="${path}"><spring:message code="${code}" />:&nbsp;</form:label></b>
-	<form:password path="${path}"/>
-	<form:errors path="${path}" cssClass="error" />
-</div>
-
+<a href="${url }"><spring:message code="${code }"/></a>

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -15,8 +16,11 @@ import repositories.UserRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Antenna;
+import domain.Comment;
+import domain.Subscription;
 import domain.User;
-import forms.ActorForm;
+import forms.UserForm;
 
 @Service
 @Transactional
@@ -113,42 +117,71 @@ public class UserService {
 		Assert.isTrue(authority.contains(res));
 	}
 
-	public ActorForm construct(User user) {
-		ActorForm res = new ActorForm();
-
-		res.setId(user.getId());
-		res.setName(user.getName());
-		res.setSurname(user.getSurname());
-		res.setPictures(user.getPictures());
-		res.setPostalAddress(user.getPostalAddress());
-		res.setPhoneNumber(user.getPhoneNumber());
-		res.setEmail(user.getEmail());
-		res.setUsername(user.getUserAccount().getUsername());
-
-		return res;
+	public UserForm reconstruct(final UserForm userForm, final BindingResult binding) {
+		User res;
+		UserForm userFinal = null;
+		res = userForm.getUser();
+		if (res.getId() == 0) {
+			Collection<Comment> comment;
+			Collection<Subscription> subscription;
+			Collection<Antenna> antenna;
+			UserAccount userAccount;
+			Authority authority;
+			userAccount = userForm.getUser().getUserAccount();
+			authority = new Authority();
+			comment = new ArrayList<Comment>();
+			subscription = new ArrayList<Subscription>();
+			antenna = new ArrayList<Antenna>();
+			userForm.getUser().setUserAccount(userAccount);
+			authority.setAuthority(Authority.USER);
+			userAccount.addAuthority(authority);
+			userForm.getUser().setComments(comment);
+			userForm.getUser().setSubscriptions(subscription);
+			userForm.getUser().setAntennas(antenna);
+			userFinal = userForm;
+		} else {
+			res = this.userRepository.findOne(userForm.getUser().getId());
+			userForm.getUser().setId(res.getId());
+			userForm.getUser().setVersion(res.getVersion());
+			userForm.getUser().setUserAccount(res.getUserAccount());
+			userForm.getUser().setComments(res.getComments());
+			userForm.getUser().setSubscriptions(res.getSubscriptions());
+			userForm.getUser().setAntennas(res.getAntennas());
+			userFinal = userForm;
+		}
+		this.validator.validate(userFinal, binding);
+		return userFinal;
 	}
 
-	public User reconstruct(final ActorForm userForm,
-			final BindingResult binding) {
-		Assert.notNull(userForm);
-		User res = new User();
+	public User reconstruct(final User user, final BindingResult binding) {
+		User res;
+		User userFinal;
+		if (user.getId() == 0) {
+			UserAccount userAccount;
+			Authority authority;
+			userAccount = user.getUserAccount();
+			user.setUserAccount(userAccount);
+			authority = new Authority();
+			authority.setAuthority(Authority.USER);
+			userAccount.addAuthority(authority);
+			String password = "";
+			password = user.getUserAccount().getPassword();
+			user.getUserAccount().setPassword(password);
+			userFinal = user;
+		} else {
+			res = this.userRepository.findOne(user.getId());
+			user.setId(res.getId());
+			user.setVersion(res.getVersion());
+			user.setUserAccount(res.getUserAccount());
+			user.getUserAccount().setPassword(user.getUserAccount().getPassword());
+			user.getUserAccount().setAuthorities(user.getUserAccount().getAuthorities());
+			userFinal = user;
+		}
+		this.validator.validate(userFinal, binding);
+		return userFinal;
+	}
 
-		if (userForm.getId() != 0)
-			res = this.findOne(userForm.getId());
-		else
-			res = this.create();
-
-		res.setName(userForm.getName());
-		res.setSurname(userForm.getSurname());
-		res.setPictures(userForm.getPictures());
-		res.setEmail(userForm.getEmail());
-		res.setPhoneNumber(userForm.getPhoneNumber());
-		res.setPostalAddress(userForm.getPostalAddress());
-		res.getUserAccount().setUsername(userForm.getUsername());
-		res.getUserAccount().setPassword(userForm.getPassword());
-
-		this.validator.validate(res, binding);
-
-		return res;
+	public void flush() {
+		this.userRepository.flush();
 	}
 }

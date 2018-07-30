@@ -1,5 +1,5 @@
 <%--
- * password.tag
+ * date.tag
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -21,15 +21,22 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <%-- Attributes --%> 
- 
-<%@ attribute name="path" required="true" rtexprvalue="true" %>
-<%@ attribute name="code" required="true" rtexprvalue="true" %>
+
+<%@ attribute name="path" required="true" %>
+<%@ attribute name="code" required="true" %>
+<%@ attribute name="placeholder" required="true" %>
+<%@ attribute name="readonly" required="false" %>
+
+<jstl:if test="${readonly == null}">
+	<jstl:set var="readonly" value="false" />
+</jstl:if>
 
 <%-- Definition --%>
 
-<div>
-	<b><form:label path="${path}"><spring:message code="${code}" />:&nbsp;</form:label></b>
-	<form:password path="${path}"/>
+<div class="form-group">
+	<form:label path="${path}">
+		<spring:message code="${code}" />
+	</form:label>
+	<form:input path="${path}" placeholder="${placeholder }" />
 	<form:errors path="${path}" cssClass="error" />
 </div>
-
