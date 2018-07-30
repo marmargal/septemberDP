@@ -1,20 +1,24 @@
 package forms;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
+
+import domain.Satellite;
 
 public class AntennaForm {
 
 	private int id;
-	private int serialNumber;
+	private String serialNumber;
 	private String model;
-	private int latitude;
-	private int longitude;
-	private double azimuth;
-	private double elevation;
-	private double quality;
+	private String latitude;
+	private String longitude;
+	private String azimuth;
+	private String elevation;
+	private String quality;
+	private Satellite satellite;
 	
 	public AntennaForm(){
 		super();
@@ -27,10 +31,12 @@ public class AntennaForm {
 		this.id = id;
 	}
 	
-	public int getSerialNumber() {
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getSerialNumber() {
 		return serialNumber;
 	}
-	public void setSerialNumber(int serialNumber) {
+	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}
 	
@@ -43,44 +49,58 @@ public class AntennaForm {
 		this.model = model;
 	}
 	
-	@Range(min=-90,max=90)
-	public int getLatitude() {
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(int latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 	
-	@Range(min=-180,max=180)
-	public int getLongitude() {
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(int longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 	
-	@Range(min=0,max=360)
-	public double getAzimuth() {
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getAzimuth() {
 		return azimuth;
 	}
-	public void setAzimuth(double azimuth) {
+	public void setAzimuth(String azimuth) {
 		this.azimuth = azimuth;
 	}
 	
-	@Range(min=0,max=90)
-	public double getElevation() {
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getElevation() {
 		return elevation;
 	}
-	public void setElevation(double elevation) {
+	public void setElevation(String elevation) {
 		this.elevation = elevation;
 	}
 	
-	@Range(min=0,max=100)
-	public double getQuality() {
+	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
+	public String getQuality() {
 		return quality;
 	}
-	public void setQuality(double quality) {
+	public void setQuality(String quality) {
 		this.quality = quality;
+	}
+
+	@NotNull
+	public Satellite getSatellite() {
+		return satellite;
+	}
+
+	public void setSatellite(Satellite satellite) {
+		this.satellite = satellite;
 	}
 	
 }
