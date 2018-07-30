@@ -50,6 +50,9 @@
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
+		
+												<!-- 	ANTENNA -->
+		<security:intercept-url pattern="/antenna/user/**" access="hasRole('USER')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

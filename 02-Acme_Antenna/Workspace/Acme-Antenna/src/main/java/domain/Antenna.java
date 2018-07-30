@@ -55,7 +55,6 @@ public class Antenna extends DomainEntity {
 		this.coordinates = coordinates;
 	}
 	
-	@NotBlank
 	@Range(min=0,max=360)
 	public Double getAzimuth() {
 		return azimuth;
@@ -65,7 +64,6 @@ public class Antenna extends DomainEntity {
 		this.azimuth = azimuth;
 	}
 	
-	@NotBlank
 	@Range(min=0,max=90)
 	public Double getElevation() {
 		return elevation;
@@ -75,7 +73,6 @@ public class Antenna extends DomainEntity {
 		this.elevation = elevation;
 	}
 	
-	@NotBlank
 	@Range(min=0,max=100)
 	public Double getQuality() {
 		return quality;
