@@ -30,6 +30,7 @@
 		<value>/views/antenna/tiles.xml</value>
 		<value>/views/satellite/tiles.xml</value>
 		<value>/views/platform/tiles.xml</value>
+		<value>/views/comment/tiles.xml</value>
 	</util:list>
 
 </beans>

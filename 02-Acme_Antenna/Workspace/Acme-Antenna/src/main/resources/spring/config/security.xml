@@ -66,6 +66,10 @@
 		<security:intercept-url pattern="/platform/list.do" access="permitAll" />
 		<security:intercept-url pattern="/platform/satellite/list.do" access="permitAll" />
 		<security:intercept-url pattern="/platform/search.do" access="permitAll" />
+		
+									<!-- COMMENT -->
+									
+		<security:intercept-url pattern="/comment/user/create.do" access="hasRole('USER')" />							
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
