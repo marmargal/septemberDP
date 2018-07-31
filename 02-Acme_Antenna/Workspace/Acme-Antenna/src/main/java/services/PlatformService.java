@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -78,4 +79,9 @@ public class PlatformService {
 
 	// Other business method --------------------------------------------------
 
+	public Collection<Platform> searchPlatform(String criteria) {
+		Collection<Platform> res = new ArrayList<Platform>();
+		res.addAll(platformRepository.searchPlatform(criteria));
+		return res;
+	}
 }

@@ -51,7 +51,7 @@ public class Satellite extends DomainEntity{
 		return antennas;
 	}
 	
-	public void setAntenna(Collection<Antenna> antennas) {
+	public void setAntennas(Collection<Antenna> antennas) {
 		this.antennas = antennas;
 	}
 	

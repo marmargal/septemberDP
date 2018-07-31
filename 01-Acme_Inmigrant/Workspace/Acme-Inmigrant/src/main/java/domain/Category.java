@@ -49,6 +49,7 @@ public class Category extends DomainEntity {
 	
 	private Category categoryParent;
 	private List<Category> categories;
+	private List<Visa> visas;
 
 	@Valid
 	@ManyToOne(optional = true)
@@ -68,6 +69,15 @@ public class Category extends DomainEntity {
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
+	}
+	@Valid
+	@OneToMany(mappedBy="category")
+	public List<Visa> getVisas() {
+		return visas;
+	}
+	
+	public void setVisas(List<Visa> visas) {
+		this.visas = visas;
 	}
 	
 	
