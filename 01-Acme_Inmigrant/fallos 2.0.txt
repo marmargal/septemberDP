@@ -1,0 +1,10 @@
+12 hay errores, volver a comprobar cuando se solucionen
+13 - en el list de las aplications cuando pasas de pagina peta
+     - la vista application/officer/listAccepted.do tiene un error 500
+     - en el create question del officer el boton cancel no funciona
+     - la vista application/officer/listRejected.do tiene un error 500 cuando hay una application rejected
+- peta al acceder a la vista del list investigator
+- falta por comprobar que un officer pueda leer los reportes de un investigador
+14 - las vistas edit y create category del admin petan
+- no se puede borrar un pais que tenga visas asignadas, peta porque hay que borrar las referencias del pais de las visas, que supongo que esto se hará borrando las visas de ese país y sus leyes también.
+- cuando editas una ley las fechas salen con el formato yyyy-mm-dd pero el formato en el tienes que introducirlas para guardarlas es dd/mm/yyyy, por lo que peta si en el edit cambias algo que no sea la fecha e intentas guardar. Lo suyo es cambiar el formato en el dominio y ponerlo igual que en la DB(yyyy-mm-dd)
