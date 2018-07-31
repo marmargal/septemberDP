@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -40,12 +41,11 @@ public class CommentService {
 		Comment res;
 		res = new Comment();
 		
-		Date moment = new Date(System.currentTimeMillis() - 1000);
+		Date moment = new Date(System.currentTimeMillis());
 		String title = "title";
 		String text = "text";
 		String pictures = "http://www.google.es";
 		
-		Tutorial tutorial = new Tutorial();
 		User user;
 		user = this.userService.findByPrincipal();
 		
@@ -53,7 +53,6 @@ public class CommentService {
 		res.setTitle(title);
 		res.setText(text);
 		res.setPictures(pictures);
-		res.setTutorial(tutorial);
 		res.setUser(user);
 
 		return res;
@@ -80,7 +79,18 @@ public class CommentService {
 				this.userService.findByPrincipal()));
 		Assert.notNull(comment);
 		Comment res;
+		
 		res = this.commentRepository.save(comment);
+		
+		Tutorial tutorial = res.getTutorial();
+		
+		Collection<Comment> comments = new ArrayList<Comment>();
+		comments.addAll(tutorial.getComments());
+		comments.add(res);
+		
+		tutorial.setComments(comments);
+		System.out.println("tutorial.setComments: " + tutorial.getComments());
+		
 		return res;
 	}
 	
