@@ -39,9 +39,7 @@
 </jstl:forEach>
 <br/>
 
-<b><acme:links url="comment/user/list.do?tutorialId=${tutorial.id }" code="tutorial.comments"/></b>
-<br/>
-
 <security:authorize access="hasRole('USER')">
-	<acme:links url="tutorial/user/edit.do?tutorialId=${tutorial.id }" code="tutorial.edit"/>
+	<b><acme:links url="comment/user/list.do?tutorialId=${tutorial.id }" code="tutorial.comments"/></b>
+	<br/>
 </security:authorize>
