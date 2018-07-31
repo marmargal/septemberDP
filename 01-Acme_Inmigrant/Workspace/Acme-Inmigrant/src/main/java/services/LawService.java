@@ -186,7 +186,6 @@ public class LawService {
 		res.setCountry(lawForm.getCountry());
 
 		this.validator.validate(res, binding);
-		System.out.println(binding);
 		return res;
 	}
 
