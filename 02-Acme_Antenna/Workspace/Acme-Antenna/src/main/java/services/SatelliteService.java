@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -72,4 +73,11 @@ public class SatelliteService {
 		this.satelliteRepository.delete(satellite);
 	}
 
+	// Other business methods -------------------------------------------------
+
+	public Collection<Satellite> searchSatellite(String criteria) {
+		Collection<Satellite> res = new ArrayList<Satellite>();
+		res.addAll(satelliteRepository.searchSatellite(criteria));
+		return res;
+	}
 }

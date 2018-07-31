@@ -51,6 +51,26 @@
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
+		
+												<!-- 	ANTENNA -->
+		<security:intercept-url pattern="/antenna/user/**" access="hasRole('USER')" />
+		
+									<!-- SATELLITE -->
+									
+		<security:intercept-url pattern="/satellite/list.do" access="permitAll" />
+		<security:intercept-url pattern="/satellite/platform/list.do" access="permitAll" />
+		<security:intercept-url pattern="/satellite/search.do" access="permitAll" />
+		
+		
+									<!-- PLATFORM -->
+									
+		<security:intercept-url pattern="/platform/list.do" access="permitAll" />
+		<security:intercept-url pattern="/platform/satellite/list.do" access="permitAll" />
+		<security:intercept-url pattern="/platform/search.do" access="permitAll" />
+		
+									<!-- COMMENT -->
+									
+		<security:intercept-url pattern="/comment/user/create.do" access="hasRole('USER')" />							
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
