@@ -46,6 +46,7 @@
 	<fieldset>
 		<div>
 			<b><spring:message code="dashboard.dataQualityPerAntennas" /></b>
+
 			<br />
 			<h4>
 				<jstl:out value=" AVG: " />
@@ -86,8 +87,9 @@
 
 <br /> --%>
 
+
 <%----%>
- <jstl:if test="${!(Top3AntennaPerpopularity eq null)}">
+<jstl:if test="${!(Top3AntennaPerpopularity[0] eq null)}">
 	<fieldset>
 		<div>
 			<b><spring:message code="dashboard.Top3AntennaPerpopularity" /></b>
@@ -122,6 +124,7 @@
 			<h4>
 				<jstl:out value=" AVG: " />
 				<jstl:out value="${dataTutorialPerUser[0][0]}" />
+
 				<br />
 			</h4>
 			<h4>
@@ -269,9 +272,3 @@
 </jstl:if>
 
 <br /> --%>
-<%----%>
-
-<%----%>
-<%----%>
-
-<%----%>
