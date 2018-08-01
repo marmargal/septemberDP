@@ -23,11 +23,17 @@ public class CommentService {
 
 	@Autowired
 	private CommentRepository commentRepository;
-
+	
 	// Suporting services
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AdministratorService administratorService;
+	
+	@Autowired
+	private TutorialService tutorialService;
 
 	// Constructors
 
@@ -38,22 +44,11 @@ public class CommentService {
 	// Simple CRUD methods
 
 	public Comment create() {
+		this.userService.checkAuthority();
 		Comment res;
 		res = new Comment();
 		
-		Date moment = new Date(System.currentTimeMillis());
-		String title = "title";
-		String text = "text";
-		String pictures = "http://www.google.es";
-		
-		User user;
-		user = this.userService.findByPrincipal();
-		
-		res.setMoment(moment);
-		res.setTitle(title);
-		res.setText(text);
-		res.setPictures(pictures);
-		res.setUser(user);
+		System.out.println("Moment de comment inicial: " + res.getMoment());
 
 		return res;
 	}
@@ -75,29 +70,67 @@ public class CommentService {
 	
 	public Comment save(final Comment comment) {
 		this.userService.checkAuthority();
-		Assert.isTrue(comment.getUser().equals(
-				this.userService.findByPrincipal()));
 		Assert.notNull(comment);
-		Comment res;
 		
-		res = this.commentRepository.save(comment);
+		if(comment.getId() == 0){
+			Date moment = new Date();
+			comment.setMoment(moment);
+		}
+		
+		User user;
+		user = this.userService.findByPrincipal();
+		comment.setUser(user);
+		
+		Comment res;
+		res = this.commentRepository.saveAndFlush(comment);
+		
+		Collection<Comment> comments = new ArrayList<Comment>();
+		comments = user.getComments();
+		
+		comments.add(res);
+		user.setComments(comments);
+		
+		this.userService.saveForComment(user);
 		
 		Tutorial tutorial = res.getTutorial();
 		
-		Collection<Comment> comments = new ArrayList<Comment>();
-		comments.addAll(tutorial.getComments());
-		comments.add(res);
+		Collection<Comment> tutorialComments = new ArrayList<Comment>();
+		tutorialComments = tutorial.getComments();
+		tutorialComments.add(res);
 		
-		tutorial.setComments(comments);
-		System.out.println("tutorial.setComments: " + tutorial.getComments());
+		tutorial.setComments(tutorialComments);
+
+		this.tutorialService.saveForComment(tutorial);
 		
 		return res;
 	}
 	
 	public void delete(Comment comment) {
-		Assert.notNull(comment);
-		Assert.isTrue(comment.getId() != 0);
-		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		administratorService.checkAuthority();
+//		Assert.notNull(comment);
+//		Assert.isTrue(comment.getId() != 0);
+//		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		User user;
+		user = comment.getUser();
+		System.out.println(user);
+		
+		Tutorial tutorial;
+		tutorial = comment.getTutorial();
+		System.out.println(tutorial);
+		
+		if(user.getComments().contains(comment)){
+			System.out.println(user.getComments());
+			user.getComments().remove(comment);
+			userService.saveForComment(user);
+			System.out.println(user.getComments());
+		}
+		if(tutorial.getComments().contains(comment)){
+			System.out.println(tutorial.getComments());
+			tutorial.getComments().remove(comment);
+			tutorialService.saveForComment(tutorial);
+			System.out.println(tutorial.getComments());
+		}
+		
 		this.commentRepository.delete(comment);
 	}
 

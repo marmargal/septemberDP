@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -32,7 +31,6 @@ public class Comment extends DomainEntity{
 	private String pictures;
 	
 	@Past
-	@NotNull
 	public Date getMoment() {
 		return moment;
 	}

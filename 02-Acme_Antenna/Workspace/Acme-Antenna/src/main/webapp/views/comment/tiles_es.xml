@@ -15,4 +15,8 @@
 		<put-attribute name="body" value="/views/comment/edit.jsp" />
 	</definition>
 
+	<definition name="comment/administrator/edit" extends="master.page">
+		<put-attribute name="title" value="Borrar comentario" />
+		<put-attribute name="body" value="/views/comment/edit.jsp" />
+	</definition>
 </tiles-definitions>

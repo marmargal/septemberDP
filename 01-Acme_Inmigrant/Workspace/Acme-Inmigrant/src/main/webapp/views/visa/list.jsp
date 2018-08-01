@@ -64,6 +64,11 @@
 
 	</display:column>
 
+<display:column>
+
+		<a href="requirement/list.do?visaId=${row.id}"><spring:message
+				code="visa.requirements" /></a>
+	</display:column>
 
 
 </display:table>

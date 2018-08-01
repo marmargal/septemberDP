@@ -73,8 +73,6 @@ public class EducationSectionImmigrantController extends AbstractController {
 			BindingResult binding) {
 		ModelAndView res;
 		
-		System.out.println(binding.getFieldError());
-		System.out.println(binding.getFieldErrors());
 		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(educationSection,
