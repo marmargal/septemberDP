@@ -32,6 +32,7 @@
 		<value>/views/platform/messages</value>
 		<value>/views/comment/messages</value>
 		<value>/views/actor/messages</value>
+		<value>/views/dashboard/messages</value>
 		
 	</util:list>
 
