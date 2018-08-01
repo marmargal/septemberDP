@@ -158,15 +158,21 @@ public class InvestigatorService {
 	}
 	
 	public Collection<Application> findApplicationByOfficer(int officerId){
-		return this.investigatorRepository.findApplicationByOfficer(officerId);
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = this.investigatorRepository.findApplicationByOfficer(officerId); 
+		return applications;
 	}
 	
 	public Immigrant findImmigrantByApplication(int applicationId){
-		return this.investigatorRepository.findImmigrantByApplication(applicationId);
+		Immigrant immigrant = new Immigrant();
+		immigrant = this.investigatorRepository.findImmigrantByApplication(applicationId); 
+		return immigrant;
 	}
 	
 	public Investigator findInvestigatorByImmigrant(int immigrantId){
-		return this.investigatorRepository.findInvestigatorByImmigrant(immigrantId);
+		Investigator investigator = new Investigator();
+		investigator = this.investigatorRepository.findInvestigatorByImmigrant(immigrantId); 
+		return investigator;
 	}
 
 }

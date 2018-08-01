@@ -1,18 +1,17 @@
+<%-- list.jsp --%>
+
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<security:authorize access="hasRole('OFFICER')">
-
-<display:table pagesize="5" class="investigator" keepStatus="true" name="investigator"
-	requestURI="${requestURI }" id="row">
+<display:table pagesize="5" class="displaytag" keepStatus="true"
+	name="investigator" requestURI="${requestURI }" id="row">
 
 	<acme:column property="name" code="investigator.name" />
 	<acme:column property="surname" code="investigator.surname" />
@@ -22,9 +21,8 @@
 
 	<display:column>
 		<a href="report/officer/list.do?investigatorId=${row.id}"><spring:message
-				code="investigator.reports" /></a>
-	</display:column>
+ 				code="investigator.reports" /></a> 
+ 	</display:column> 
 
 </display:table>
 
-</security:authorize>
