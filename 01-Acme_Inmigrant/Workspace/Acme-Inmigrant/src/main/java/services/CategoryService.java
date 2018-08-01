@@ -72,41 +72,49 @@ public class CategoryService {
 	public Category save(Category category) {
 		this.administratorService.checkAuthority();
 		Assert.notNull(category);
-		Category res = null;
-		Category categoryOld = categoryRepository.findOne(category.getId());
-		if (categoryOld.getCategoryParent() != category.getCategoryParent()) {
-			this.refreshOld(categoryOld, category);
+		Assert.isTrue(!category.getName().equals("root"));
+		Assert.isTrue(!category.getName().equals(
+				category.getCategoryParent().getName()));
+		Category saved = null;
+		try {
 
+			if (category.getId() == 0) {
+				Assert.isTrue(!this.categoryRepository.existsThisCategoryName(
+						category.getName(), category.getCategoryParent()
+								.getId()));
+				saved = this.categoryRepository.saveAndFlush(category);
+				saved.getCategoryParent().getCategories().add(saved);
+			} else {
+				final String oldName = this.categoryRepository.findOne(
+						category.getId()).getName();
+				Category oldCategory = this.categoryRepository.findOne(category
+						.getId());
+				if (category.getName().equals(oldName)) {
+					saved = this.categoryRepository.saveAndFlush(category);
+					List<Category> oldCategories = new ArrayList<>(
+							oldCategory.getCategories());
+					oldCategories.remove(category);
+					oldCategory.setCategories(oldCategories);
+					this.categoryRepository.save(oldCategory);
+
+					saved.getCategoryParent().getCategories().add(saved);
+
+				} else {
+
+					Assert.isTrue(!this.categoryRepository
+							.existsThisCategoryName(category.getName(),
+									category.getCategoryParent().getId()));
+					saved = this.categoryRepository.saveAndFlush(category);
+					oldCategory.getCategories().remove(category);
+					saved.getCategoryParent().getCategories().add(saved);
+
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
+		return saved;
 
-		res = categoryRepository.save(category);
-
-		if (categoryOld.getCategoryParent() != category.getCategoryParent()) {
-			Category newParent = categoryRepository.findOne(category
-					.getCategoryParent().getId());
-			
-			this.refreshNew(newParent, category);
-
-		}
-
-		return res;
-
-	}
-
-	private void refreshNew(Category newParent, Category category) {
-		List<Category> sonsNew = newParent.getCategories();
-		sonsNew.add(category);
-		newParent.setCategories(sonsNew);
-		categoryRepository.save(newParent);
-	}
-
-	//falla aquí, me borra las relaciones con el resto de categorias
-	private void refreshOld(Category categoryOld, Category category) {
-		Category oldParent = categoryOld.getCategoryParent();
-		List<Category> sonsOld = oldParent.getCategories();
-		sonsOld.remove(category);
-		oldParent.setCategories(sonsOld);
-		categoryRepository.save(oldParent);
 	}
 
 	public void delete(Category category) {
