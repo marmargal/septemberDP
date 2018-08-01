@@ -58,7 +58,6 @@ public class AdministratorController extends AbstractController {
 				this.administratorService.save(administrator);
 				res = new ModelAndView("redirect:/j_spring_security_logout");
 			} catch (final Throwable oops) {
-				System.out.println(oops);
 				res = this.createEditModelAndView(administratorForm, "actor.commit.error");
 			}
 

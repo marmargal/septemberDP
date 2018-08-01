@@ -53,11 +53,10 @@ public class LawAdministratorController extends AbstractController {
 	// Edit--------------
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int lawId) {
-
+		
 		ModelAndView res;
 
 		Law law = lawService.findOne(lawId);
-		System.out.println(law);
 		LawForm lawForm = lawService.construct(law);
 
 		res = createEditModelAndView(lawForm);
@@ -69,12 +68,7 @@ public class LawAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(final LawForm lawForm, final BindingResult binding) {
 		ModelAndView res;
-//		Set<Requirement> requirement = new HashSet<Requirement>();
-//		requirement.addAll(lawForm.getRequirement());
-//		List<Requirement> newList=new ArrayList<Requirement>();
-//		newList.addAll(requirement);
-//		requirement.clear();
-//		lawForm.setRequirement( newList);
+		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(lawForm, "law.params.error");
 			
@@ -86,7 +80,6 @@ public class LawAdministratorController extends AbstractController {
 
 				res = new ModelAndView("redirect:/law/list.do");
 			} catch (final Throwable oops) {
-				System.out.println(oops);
 				res = this.createEditModelAndView(lawForm, "law.commit.error");
 			}
 

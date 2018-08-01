@@ -55,7 +55,6 @@ public class AnswerImmigrantController extends AbstractController {
 
 				res = new ModelAndView("redirect:/answer/list.do?questionId=" + answerForm.getQuestionId());
 			}catch (final Throwable oops) {
-				System.out.println(oops);
 				res = this.createEditModelAndView(answerForm, "answer.commit.error");
 			}
 		

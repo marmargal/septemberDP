@@ -49,7 +49,6 @@ public class LawController extends AbstractController {
 		Law law;
 
 		law = this.lawService.findOne(lawId);
-		System.out.println(law);
 
 		res = new ModelAndView("law/display");
 		res.addObject("law", law);
