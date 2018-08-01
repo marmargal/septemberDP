@@ -18,34 +18,37 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${requestURI }" modelAttribute="actorForm">
+<form:form action="${requestURI }" modelAttribute="userForm">
 	
-	<form:hidden path="id"/>
+	<form:hidden path="user.id"/>
+	<form:hidden path="user.version"/>
 	
-	<acme:textbox code="actor.name" path="name"/>
+	<acme:textbox code="actor.name" path="user.name"/>
 	<br/>
-	<acme:textbox code="actor.surname" path="surname"/>
+	<acme:textbox code="actor.surname" path="user.surname"/>
 	<br/>
-	<acme:textbox code="actor.email" path="email"/>
+	<acme:textbox code="actor.email" path="user.email"/>
 	<br/>
-	<acme:textbox code="actor.phoneNumber" path="phoneNumber"/>
+	<acme:textbox code="actor.phoneNumber" path="user.phoneNumber"/>
 	<br/>
-	<acme:textbox code="actor.address" path="address"/>
+	<acme:textbox code="actor.address" path="user.postalAddress"/>
 	<br/>
-	<acme:textbox code="actor.pictures" path="pictures"/>
+	<acme:textbox code="actor.pictures" path="user.pictures"/>
 	<br/>
-	<acme:textbox code="actor.userName" path="username"/>
+	<acme:textbox code="actor.userName" path="user.userAccount.username"/>
 	<br/>
-	<acme:password code="actor.password" path="password"/>
+	<acme:password code="actor.password" path="user.userAccount.password"/>
 	<br/>
-	<acme:password code="actor.repeatPassword" path="repeatPassword"/>
+	<acme:password code="actor.repeatPassword" path="confirmPassword"/>
 	<br/>
 	
-	<jstl:if test="${requestURI == 'user/register.do'}">
-		<acme:checkbox code="actor.acceptTerms" path="termsAndConditions"/>
-		<a href="terms/list.do"><spring:message code="actor.acceptTermsLink"/></a>
-		<br />
-	</jstl:if>
+	<jstl:if test="${userForm.user.id == 0}">
+   		<form:label path="terms">
+		<spring:message code="actor.acceptTerms"/><a href="terms/list.do"><spring:message code="actor.acceptTerms"/></a>
+		</form:label>
+		<input type="checkbox" id="terms" name="terms" required /> <spring:message code="actor.acceptTermsLink" /><br>
+		<form:errors cssClass="error" path="terms"/>
+   </jstl:if>
 	
 	<acme:submit name="save" code="actor.save"/>
 	<acme:submit name="cancel" code="actor.cancel"/>

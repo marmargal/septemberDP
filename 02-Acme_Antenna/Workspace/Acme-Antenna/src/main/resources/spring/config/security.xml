@@ -52,7 +52,12 @@
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 		
-												<!-- 	ANTENNA -->
+		<security:intercept-url pattern="/user/register.do" access="isAnonymous()" />
+		
+									<!-- USER -->
+		<security:intercept-url pattern="/actor/user/edit.do" access="hasRole('USER')" />
+		
+									<!-- ANTENNA -->
 		<security:intercept-url pattern="/antenna/user/**" access="hasRole('USER')" />
 		
 									<!-- SATELLITE -->
