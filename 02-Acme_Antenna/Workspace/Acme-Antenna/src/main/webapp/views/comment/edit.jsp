@@ -41,13 +41,16 @@
 		modelAttribute="comment">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
-		<form:hidden path="tutorial" />
 		<form:hidden path="title" />
 		<form:hidden path="text" />
 		<form:hidden path="pictures" />
+		<form:hidden path="tutorial" />
+		<form:hidden path="user" />
+
 
 		<acme:cancel url="/" code="comment.cancel" />
-		<acme:delete confirmationCode="comment.confirmation.text.delete"
-			buttonCode="comment.delete" id="${comment.id }" />
+		<input type="submit" name="delete"
+				value="<spring:message code="comment.delete" />"
+				onclick="return confirm('<spring:message code="comment.confirmation.text.delete" />')" />&nbsp;
 	</form:form>
 </security:authorize>

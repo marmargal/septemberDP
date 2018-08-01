@@ -23,11 +23,14 @@ public class CommentService {
 
 	@Autowired
 	private CommentRepository commentRepository;
-
+	
 	// Suporting services
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 	
 	@Autowired
 	private TutorialService tutorialService;
@@ -97,26 +100,37 @@ public class CommentService {
 		
 		tutorial.setComments(tutorialComments);
 
-		this.tutorialService.save(tutorial);
+		this.tutorialService.saveForComment(tutorial);
 		
 		return res;
 	}
 	
 	public void delete(Comment comment) {
-		Assert.notNull(comment);
-		Assert.isTrue(comment.getId() != 0);
-		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		administratorService.checkAuthority();
+//		Assert.notNull(comment);
+//		Assert.isTrue(comment.getId() != 0);
+//		Assert.isTrue(this.commentRepository.exists(comment.getId()));
 		User user;
 		user = comment.getUser();
+		System.out.println(user);
 		
 		Tutorial tutorial;
 		tutorial = comment.getTutorial();
+		System.out.println(tutorial);
 		
-		user.getComments().remove(comment);
-		userService.saveForComment(user);
+		if(user.getComments().contains(comment)){
+			System.out.println(user.getComments());
+			user.getComments().remove(comment);
+			userService.saveForComment(user);
+			System.out.println(user.getComments());
+		}
+		if(tutorial.getComments().contains(comment)){
+			System.out.println(tutorial.getComments());
+			tutorial.getComments().remove(comment);
+			tutorialService.saveForComment(tutorial);
+			System.out.println(tutorial.getComments());
+		}
 		
-		tutorial.getComments().remove(comment);
-		tutorialService.save(tutorial);
 		this.commentRepository.delete(comment);
 	}
 

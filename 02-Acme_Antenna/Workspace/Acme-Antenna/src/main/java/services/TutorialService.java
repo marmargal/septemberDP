@@ -83,6 +83,14 @@ public class TutorialService {
 		res = this.tutorialRepository.save(tutorial);
 		return res;
 	}
+	
+	public Tutorial saveForComment(final Tutorial tutorial) {
+		Assert.notNull(tutorial);
+		
+		Tutorial res;
+		res = this.tutorialRepository.save(tutorial);
+		return res;
+	}
 
 	public void delete(Tutorial tutorial) {
 		administratorService.checkAuthority();

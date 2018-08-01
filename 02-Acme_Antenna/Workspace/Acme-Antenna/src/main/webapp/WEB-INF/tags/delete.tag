@@ -7,10 +7,10 @@
  * TDG Licence, a copy of which you may download from 
  * http://www.tdg-seville.info/License.html
  --%>
-
+ 
 <%@ tag language="java" body-content="empty" %>
-
-<%-- Taglibs --%>
+ 
+ <%-- Taglibs --%>
 
 <%@ taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
