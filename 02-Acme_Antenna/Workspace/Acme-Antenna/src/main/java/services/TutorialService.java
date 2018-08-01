@@ -75,9 +75,10 @@ public class TutorialService {
 	}
 
 	public Tutorial save(final Tutorial tutorial) {
-		Assert.isTrue(tutorial.getActor().equals(
-				this.actorService.findByPrincipal()));
 		Assert.notNull(tutorial);
+		Assert.isTrue(this.actorService.findByPrincipal()
+				.equals(tutorial.getActor()));
+		
 		Tutorial res;
 		res = this.tutorialRepository.save(tutorial);
 		return res;

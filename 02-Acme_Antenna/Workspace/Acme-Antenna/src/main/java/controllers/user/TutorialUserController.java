@@ -1,5 +1,7 @@
 package controllers.user;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -67,14 +69,14 @@ public class TutorialUserController extends AbstractController {
 		if(actorPrincipal.equals(tutorial.getActor()))
 			res = this.createEditModelAndView(tutorialForm);
 		else 
-			res = new ModelAndView("redirect:/tutorial/user/list.do");
+			res = new ModelAndView("redirect:/tutorial/list.do");
 		
 		return res;
 	}
 	
 	// Save ------------------------------------------
 	@RequestMapping(value="/edit", method=RequestMethod.POST, params ="save")
-	public ModelAndView save(final TutorialForm tutorialForm, final BindingResult binding){
+	public ModelAndView save(@Valid final TutorialForm tutorialForm, final BindingResult binding){
 		ModelAndView res;
 		
 		if(binding.hasErrors())
@@ -85,9 +87,10 @@ public class TutorialUserController extends AbstractController {
 				this.tutorialService.save(tutorial);
 				
 				res = new ModelAndView(
-						"redirect:/tutorial/user/list.do");
+						"redirect:/tutorial/list.do");
 			}catch (final Throwable oops) {
 				res = this.createEditModelAndView(tutorialForm, "tutorial.commit.error");
+				System.out.println(oops);
 			}
 		}
 		return res;

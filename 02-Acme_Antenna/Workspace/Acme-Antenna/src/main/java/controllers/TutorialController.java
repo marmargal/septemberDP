@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Tutorial;
-
+import services.ActorService;
 import services.TutorialService;
+import domain.Actor;
+import domain.Tutorial;
 
 @Controller
 @RequestMapping("/tutorial")
@@ -20,6 +21,9 @@ public class TutorialController extends AbstractController{
 	// Services ---------------------------------
 	@Autowired
 	private TutorialService tutorialService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	// Constructors ------------------------------
 	public TutorialController(){
@@ -32,8 +36,11 @@ public class TutorialController extends AbstractController{
 		ModelAndView res;
 		Collection<Tutorial> tutorials = this.tutorialService.findAll();
 		
+		Actor actor = this.actorService.findByPrincipal();
+		
 		res = new ModelAndView("tutorial/list");
 		res.addObject("tutorial",tutorials);
+		res.addObject("actor",actor);
 		res.addObject("requestURI","tutorial/list.do");
 		
 		return res;

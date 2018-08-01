@@ -43,3 +43,9 @@
 	<b><acme:links url="comment/user/list.do?tutorialId=${tutorial.id }" code="tutorial.comments"/></b>
 	<br/>
 </security:authorize>
+
+<security:authorize access="hasRole('ADMIN')">
+	<input type="submit" name="delete" 
+		value="<spring:message code="tutorial.delete"/>"
+		onclick="return confirm('<spring:message code="tutorial.confirm.delete"/>')" />&nbsp;
+</security:authorize>

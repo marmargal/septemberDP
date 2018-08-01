@@ -24,11 +24,11 @@
 	<spring:message code="tutorial.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}"	sortable="true" />
 		
-	<spring:message code="tutorial.momment" var="mommentHeader" />
-	<display:column property="momment" title="${mommentHeader}"	sortable="true" />
+	<spring:message code="tutorial.moment" var="momentHeader" />
+	<display:column property="moment" title="${momentHeader}"	sortable="true" />
 
 	<spring:message code="tutorial.actor" var="actorHeader" />
-	<display:column property="actor" title="${actorHeader}"	sortable="true" />
+	<display:column property="actor.name" title="${actorHeader}"	sortable="true" />
 	
 	<display:column>
 		<acme:links url="tutorial/display.do?tutorialId=${row.id }" code="tutorial.display"/>
@@ -36,7 +36,9 @@
 
 	<security:authorize access="hasRole('USER')">
 		<display:column>
-			<acme:links url="tutorial/user/edit.do?tutorialId=${row.id }" code="tutorial.edit"/>
+			<jstl:if test="${actor == row.actor}">
+				<acme:links url="tutorial/user/edit.do?tutorialId=${row.id }" code="tutorial.edit"/>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 	
