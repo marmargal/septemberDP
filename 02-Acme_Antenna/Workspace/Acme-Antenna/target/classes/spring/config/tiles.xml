@@ -31,12 +31,8 @@
 		<value>/views/satellite/tiles.xml</value>
 		<value>/views/platform/tiles.xml</value>
 		<value>/views/comment/tiles.xml</value>
-<<<<<<< HEAD
 		<value>/views/actor/tiles.xml</value>
-		
-=======
 		<value>/views/tutorial/tiles.xml</value>
->>>>>>> Inma
 	</util:list>
 
 </beans>

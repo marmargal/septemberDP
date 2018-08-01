@@ -31,12 +31,8 @@
 		<value>/views/satellite/messages</value>
 		<value>/views/platform/messages</value>
 		<value>/views/comment/messages</value>
-<<<<<<< HEAD
 		<value>/views/actor/messages</value>
-		
-=======
 		<value>/views/tutorial/messages</value>
->>>>>>> Inma
 	</util:list>
 
 </beans>
