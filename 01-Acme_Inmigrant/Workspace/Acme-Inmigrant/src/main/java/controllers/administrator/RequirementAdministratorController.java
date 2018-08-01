@@ -88,7 +88,6 @@ public class RequirementAdministratorController extends AbstractController{
 
 				res = new ModelAndView("redirect:/requirement/administrator/list.do");
 			}catch (final Throwable oops) {
-				System.out.println(oops);
 				res = this.createEditModelAndView(requirementForm, "requirement.commit.error");
 			}
 		

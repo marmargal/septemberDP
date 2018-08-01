@@ -200,7 +200,6 @@ public class ApplicationImmigrantController extends AbstractController {
 
 				res = new ModelAndView("redirect:../../");
 			}catch (final Throwable oops) {
-				System.out.println(oops);
 				res = this.createEditModelAndView(applicationForm, "application.commit.error");
 			}
 		

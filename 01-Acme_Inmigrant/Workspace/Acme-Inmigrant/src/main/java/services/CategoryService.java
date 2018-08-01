@@ -23,6 +23,9 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
+	@Autowired
+	private AdministratorService administratorService;
+
 	// Suporting services
 
 	// Constructors
@@ -34,15 +37,14 @@ public class CategoryService {
 	// Simple CRUD methods
 	public Category create() {
 		Category res = new Category();
-		
-		String name= "nombre";
-		Boolean rootCategory=false;
-		
-		
-		Category categoryParent= new Category();
-		List<Category> categories= new ArrayList<Category>();
-		List<Visa> visas= new ArrayList<Visa>();
-		
+
+		String name = "nombre";
+		Boolean rootCategory = false;
+
+		Category categoryParent = new Category();
+		List<Category> categories = new ArrayList<Category>();
+		List<Visa> visas = new ArrayList<Visa>();
+
 		res.setName(name);
 		res.setRootCategory(rootCategory);
 		res.setCategoryParent(categoryParent);
@@ -68,20 +70,79 @@ public class CategoryService {
 	}
 
 	public Category save(Category category) {
-		Category res;
+		this.administratorService.checkAuthority();
+		Assert.notNull(category);
+		Category res = null;
+		Category categoryOld = categoryRepository.findOne(category.getId());
+		if (categoryOld.getCategoryParent() != category.getCategoryParent()) {
+			this.refreshOld(categoryOld, category);
+
+		}
+
 		res = categoryRepository.save(category);
+
+		if (categoryOld.getCategoryParent() != category.getCategoryParent()) {
+			Category newParent = categoryRepository.findOne(category
+					.getCategoryParent().getId());
+			
+			this.refreshNew(newParent, category);
+
+		}
+
 		return res;
+
+	}
+
+	private void refreshNew(Category newParent, Category category) {
+		List<Category> sonsNew = newParent.getCategories();
+		sonsNew.add(category);
+		newParent.setCategories(sonsNew);
+		categoryRepository.save(newParent);
+	}
+
+	//falla aquí, me borra las relaciones con el resto de categorias
+	private void refreshOld(Category categoryOld, Category category) {
+		Category oldParent = categoryOld.getCategoryParent();
+		List<Category> sonsOld = oldParent.getCategories();
+		sonsOld.remove(category);
+		oldParent.setCategories(sonsOld);
+		categoryRepository.save(oldParent);
 	}
 
 	public void delete(Category category) {
+		this.administratorService.checkAuthority();
+
 		Assert.notNull(category);
 		Assert.isTrue(category.getId() != 0);
 		Assert.isTrue(categoryRepository.exists(category.getId()));
+
+		Category categoryParent = new Category();
+		List<Category> categorysSonsOfParent = new ArrayList<Category>();
+		List<Category> categorysSons = new ArrayList<Category>();
+		// Actualizando Categorys hijas
+		categorysSons = category.getCategories();
+		if (!categorysSons.isEmpty()) {
+			for (int i = 0; i < categorysSons.size(); i++) {
+				categorysSons.get(i).setCategoryParent(
+						categoryRepository.findCategories());
+				this.save(categorysSons.get(i));
+			}
+		}
+
+		// Actualizando categoryParent
+		categoryParent = category.getCategoryParent();
+		if (categoryParent != null) {
+			categorysSonsOfParent = categoryParent.getCategories();
+			categorysSonsOfParent.remove(category);
+			categoryParent.setCategories(categorysSonsOfParent);
+			this.save(categoryParent);
+		}
+
 		categoryRepository.delete(category);
 	}
-	
+
 	// Other business methods
-	
+
 	public Collection<Category> getCategoryChildren() {
 		Collection<Category> categories;
 		Category c;

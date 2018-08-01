@@ -58,7 +58,6 @@ public class InvestigatorController extends AbstractController {
 				this.investigatorService.save(investigator);
 				res = new ModelAndView("redirect:/j_spring_security_logout");
 			} catch (final Throwable oops) {
-				System.out.println(oops);
 				res = this.createEditModelAndView(investigatorForm, "actor.commit.error");
 			}
 

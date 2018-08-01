@@ -24,7 +24,8 @@
 	name="law" requestURI="${requestURI }" id="row">
 
 	<display:column>
-		<acme:links url="law/administrator/edit.do?lawId=${row.id}" code="law.edit" />
+		<acme:links url="law/administrator/edit.do?lawId=${row.id}"
+			code="law.edit" />
 	</display:column>
 
 	<acme:column property="title" code="law.title" />
@@ -32,8 +33,10 @@
 	<acme:column property="text" code="law.text" />
 
 	<display:column>
-		<a href="law/display.do?lawId=${row.lawParent.id}"><spring:message
-				code="law.lawParent" /></a>
+		<jstl:if test="${row.lawParent.id != null}">
+			<a href="law/display.do?lawId=${row.lawParent.id}"><spring:message
+					code="law.lawParent" /></a>
+		</jstl:if>
 	</display:column>
 
 	<display:column>

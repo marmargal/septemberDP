@@ -150,6 +150,9 @@
 		<security:intercept-url pattern="/category/list.do" access="permitAll" />
 		<security:intercept-url pattern="/visa/category/list.do" access="permitAll" />
 		<security:intercept-url pattern="/category/administrator/create.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/category/administrator/edit.do" access="hasRole('ADMIN')" />
+		
+		
 		
 								<!-- 	DECISION	 -->
 		<security:intercept-url pattern="/decision/officer/**" access="hasRole('OFFICER')" />
