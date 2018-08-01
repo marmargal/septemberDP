@@ -20,8 +20,12 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message
-						code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href=""><spring:message code="master.page.register" /></a>
+				<ul>
+					<li><a href="user/register.do"><spring:message code="master.page.register.user" /></a></li>
+				</ul>
+			</li>
 			<li><a href="satellite/list.do"><spring:message code="master.page.satellites" /></a></li>
 			<li><a href="platform/list.do"><spring:message code="master.page.platforms" /></a></li>
 
@@ -64,7 +68,7 @@
 	</ul>
 </div>
 <div>
-	<img src="images/logo.png" alt="Acme-Antenna Co., Inc." />
+	<a href="/Acme-Antenna"><img src="images/logo.png" alt="Acme-Antenna Co., Inc." /></a>
 </div>
 </nav>
 

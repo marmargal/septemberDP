@@ -31,7 +31,7 @@ public class RegisterUserController extends AbstractController {
 	
 	// Registering ----------------------------------------------------------
 	
-	@RequestMapping(value = "/register_User", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView create(){
 		ModelAndView res;
 		User user;
@@ -40,32 +40,33 @@ public class RegisterUserController extends AbstractController {
 		UserForm userForm;
 		userForm = new UserForm(user);
 		
-		res = new ModelAndView("user/register_User");
+		res = new ModelAndView("user/register");
 		res.addObject("userForm", userForm);
 		
 		return res;
 	}
 	
-	@RequestMapping(value = "/register_User", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("userForm") UserForm userForm,
 			final BindingResult binding) {
 		ModelAndView res;
 		userForm = this.userService.reconstruct(userForm, binding);
+		
+		System.out.println(binding.getFieldError());
+		System.out.println(binding.getClass());
+		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(userForm, "actor.params.error");
 		} else {
 			try {
 				if ((userForm.getUser().getId() == 0)) {
 					Assert.isTrue(userForm.getUser().getUserAccount().getPassword().equals(userForm.getConfirmPassword()), "password does not match");
-//					Assert.isTrue(userForm.getTerms(), "the conditions must be accepted");
 				}
 				this.userService.save(userForm.getUser());
 				res = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable oops) {
 				if (oops.getMessage().equals("password does not match"))
 					res = this.createEditModelAndView(userForm, "actor.password.check");
-//				else if (oops.getMessage().equals("the conditions must be accepted"))
-//					res = this.createEditModelAndView(userForm, "actor.terms.conditions");
 				else if (oops.getMessage().equals("could not execute statement; SQL [n/a]; constraint [null]" + "; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"))
 					res = this.createEditModelAndView(userForm, "actor.commit.duplicate");
 				else
@@ -89,7 +90,7 @@ public class RegisterUserController extends AbstractController {
 				final String message) {
 			ModelAndView result;
 
-			result = new ModelAndView("user/register_User");
+			result = new ModelAndView("user/register");
 			result.addObject("user", userForm);
 			result.addObject("message", message);
 			

@@ -31,6 +31,8 @@
 		<value>/views/satellite/messages</value>
 		<value>/views/platform/messages</value>
 		<value>/views/comment/messages</value>
+		<value>/views/actor/messages</value>
+		
 	</util:list>
 
 </beans>
