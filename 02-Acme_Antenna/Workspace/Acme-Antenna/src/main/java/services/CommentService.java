@@ -45,9 +45,6 @@ public class CommentService {
 		Comment res;
 		res = new Comment();
 		
-		Date moment = new Date();
-		res.setMoment(moment);
-		
 		System.out.println("Moment de comment inicial: " + res.getMoment());
 
 		return res;
@@ -72,8 +69,10 @@ public class CommentService {
 		this.userService.checkAuthority();
 		Assert.notNull(comment);
 		
-		Date moment = new Date();
-		comment.setMoment(moment);
+		if(comment.getId() == 0){
+			Date moment = new Date();
+			comment.setMoment(moment);
+		}
 		
 		User user;
 		user = this.userService.findByPrincipal();
@@ -88,7 +87,7 @@ public class CommentService {
 		comments.add(res);
 		user.setComments(comments);
 		
-		this.userService.save(user);
+		this.userService.saveForComment(user);
 		
 		Tutorial tutorial = res.getTutorial();
 		
@@ -107,6 +106,17 @@ public class CommentService {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
 		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		User user;
+		user = comment.getUser();
+		
+		Tutorial tutorial;
+		tutorial = comment.getTutorial();
+		
+		user.getComments().remove(comment);
+		userService.saveForComment(user);
+		
+		tutorial.getComments().remove(comment);
+		tutorialService.save(tutorial);
 		this.commentRepository.delete(comment);
 	}
 

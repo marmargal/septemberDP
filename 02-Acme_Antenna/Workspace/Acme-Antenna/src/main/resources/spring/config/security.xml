@@ -74,7 +74,8 @@
 		
 									<!-- COMMENT -->
 									
-		<security:intercept-url pattern="/comment/user/create.do" access="hasRole('USER')" />							
+		<security:intercept-url pattern="/comment/user/create.do" access="hasRole('USER')" />	
+		<security:intercept-url pattern="/comment/administrator/edit.do" access="hasRole('ADMIN')" />						
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
