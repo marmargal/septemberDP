@@ -44,8 +44,14 @@
 		</security:authorize>
 
 		<security:authorize access="hasRole('USER')">
-			<li><a href="antenna/user/list.do"><spring:message
-						code="master.page.user.antennas" /></a></li>
+			<li><a class="fNiv"> <spring:message code="master.page.profile" /> (<security:authentication property="principal.username" />)</a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="actor/user/edit.do"><spring:message code="master.page.edit.profile" /></a></li>
+					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+				</ul>
+			</li>
+			<li><a href="antenna/user/list.do"><spring:message code="master.page.user.antennas" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">

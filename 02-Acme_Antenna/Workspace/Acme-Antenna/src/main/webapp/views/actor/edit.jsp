@@ -22,13 +22,12 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="userAccount" />
-	<form:hidden path="answer" />
 
 	<acme:textbox code="actor.name" path="name" />
 	<acme:textbox code="actor.surname" path="surname" />
 	<acme:textbox code="actor.email" path="email" />
 	<acme:textbox code="actor.phoneNumber" path="phoneNumber" />
-	<acme:textbox code="actor.postalAddress" path="postalAddress" />
+	<acme:textbox code="actor.address" path="postalAddress" />
 	<acme:textbox code="actor.pictures" path="pictures" />
 
 	<security:authorize access="hasRole('USER')">
@@ -40,6 +39,6 @@
 	</security:authorize>
 
 	<acme:submit name="save" code="actor.submit" />
-	<acme:cancel url="/" code="answer.cancel" />
+	<acme:cancel url="/" code="actor.cancel" />
 
 </form:form>

@@ -53,7 +53,10 @@
 		
 		<security:intercept-url pattern="/user/register.do" access="isAnonymous()" />
 		
-												<!-- 	ANTENNA -->
+									<!-- USER -->
+		<security:intercept-url pattern="/actor/user/edit.do" access="hasRole('USER')" />
+		
+									<!-- ANTENNA -->
 		<security:intercept-url pattern="/antenna/user/**" access="hasRole('USER')" />
 		
 									<!-- SATELLITE -->
