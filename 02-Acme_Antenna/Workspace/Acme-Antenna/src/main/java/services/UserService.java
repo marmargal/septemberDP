@@ -87,6 +87,25 @@ public class UserService {
 		return res;
 
 	}
+	
+	public User saveForComment(User user) {
+		User res;
+
+		if(user.getId() == 0){
+			String pass = user.getUserAccount().getPassword();
+
+			final Md5PasswordEncoder code = new Md5PasswordEncoder();
+
+			pass = code.encodePassword(pass, null);
+
+			user.getUserAccount().setPassword(pass);
+		}
+
+		res = this.userRepository.save(user);
+
+		return res;
+
+	}
 
 	public void delete(User user) {
 		Assert.notNull(user);

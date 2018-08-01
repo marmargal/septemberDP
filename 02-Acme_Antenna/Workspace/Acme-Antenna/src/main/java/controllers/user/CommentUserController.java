@@ -42,7 +42,6 @@ public class CommentUserController extends AbstractController {
 		Comment comment;
 		Tutorial tutorial;
 
-
 		comment = this.commentService.create();
 		
 		System.out.println("Comment después del create: " + comment);
@@ -71,19 +70,14 @@ public class CommentUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Comment comment, final BindingResult binding) {
 		ModelAndView res;
+		System.out.println(binding.getFieldError());
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(comment, "comment.params.error");
 		else
 			try {
 				this.commentService.save(comment);
-				res = new ModelAndView("redirect:../../../");
+				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getLocalizedMessage());
-				System.out.println(oops.toString());
-				System.out.println(oops.fillInStackTrace());
-				System.out.println(oops.getCause());
-				System.out.println(oops.getStackTrace());
-				System.out.println(oops.getSuppressed());
 				System.out.println(oops.getMessage());
 				res = this.createEditModelAndView(comment,
 						"comment.commit.error");
