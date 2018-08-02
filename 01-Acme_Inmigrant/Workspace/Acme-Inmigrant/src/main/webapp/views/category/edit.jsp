@@ -16,12 +16,16 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="rootCategory" />
-	
+	<form:hidden path="categories" />
+	<form:hidden path="visas" />
+
+
+
 
 	<acme:textbox code="category.name" path="name" />
 	<br />
 
-	
+
 	<acme:select items="${parents}" itemLabel="name"
 		code="category.categoryParent" path="categoryParent" />
 
