@@ -110,9 +110,17 @@ public class CommentService {
 	
 	public void delete(Comment comment) {
 		administratorService.checkAuthority();
-//		Assert.notNull(comment);
-//		Assert.isTrue(comment.getId() != 0);
-//		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		Assert.notNull(comment);
+		Assert.isTrue(comment.getId() != 0);
+		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		
+//		this.administratorService.checkAuthority();
+//		if(comment.getReplies().size()!=0){
+//			for(Comment c : comment.getReplies())
+//				this.delete(c);
+//		}
+//		this.commentRepository.delete(comment);
+		
 		User user;
 		user = comment.getUser();
 		
@@ -133,4 +141,9 @@ public class CommentService {
 
 	// Other business method --------------------------------------------------
 
+	public void deleteAll(Collection<Comment> comments){
+		this.administratorService.checkAuthority();
+		for (Comment c : comments)
+			this.commentRepository.delete(c);
+	}
 }
