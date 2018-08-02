@@ -26,6 +26,9 @@ public class CategoryService {
 	@Autowired
 	private AdministratorService administratorService;
 
+	@Autowired
+	private VisaService visaService;
+
 	// Suporting services
 
 	// Constructors
@@ -121,32 +124,34 @@ public class CategoryService {
 		this.administratorService.checkAuthority();
 
 		Assert.notNull(category);
-		Assert.isTrue(category.getId() != 0);
-		Assert.isTrue(categoryRepository.exists(category.getId()));
+		Assert.isTrue(!category.getName().equals("root"));
+		Category root = categoryRepository.findCategories();
+		Category deleted=categoryRepository.findOne(category.getId());
+		System.out.println(root.getName());
 
-		Category categoryParent = new Category();
-		List<Category> categorysSonsOfParent = new ArrayList<Category>();
-		List<Category> categorysSons = new ArrayList<Category>();
-		// Actualizando Categorys hijas
-		categorysSons = category.getCategories();
-		if (!categorysSons.isEmpty()) {
-			for (int i = 0; i < categorysSons.size(); i++) {
-				categorysSons.get(i).setCategoryParent(
-						categoryRepository.findCategories());
-				this.save(categorysSons.get(i));
+		category.getCategoryParent().getCategories().remove(category);
+
+		System.out.println("antes");
+		System.out.println(category.getCategories()+"111111111111111111");
+		List<Category> categoriesSonRoot=root.getCategories();
+			for (Visa visa : category.getVisas()) {
+				System.out.println("primer for");
+
+				visa.setCategory(root);
+				visaService.save(visa);
+				
+
 			}
-		}
-
-		// Actualizando categoryParent
-		categoryParent = category.getCategoryParent();
-		if (categoryParent != null) {
-			categorysSonsOfParent = categoryParent.getCategories();
-			categorysSonsOfParent.remove(category);
-			categoryParent.setCategories(categorysSonsOfParent);
-			this.save(categoryParent);
-		}
-
-		categoryRepository.delete(category);
+			for (Category categorySons : category.getCategories()) {
+				System.out.println("segundo for");
+				categorySons.setCategoryParent(root);
+				categoryRepository.save(categorySons);
+				categoriesSonRoot.add(categorySons);
+			}
+			root.setCategories(categoriesSonRoot);
+			categoryRepository.delete(category);
+			System.out.println("despues del delete");
+	
 	}
 
 	// Other business methods

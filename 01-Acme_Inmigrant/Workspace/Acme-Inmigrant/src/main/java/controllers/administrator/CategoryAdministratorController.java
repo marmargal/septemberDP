@@ -1,6 +1,5 @@
 package controllers.administrator;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CategoryService;
-
 import controllers.AbstractController;
 import domain.Category;
-import domain.Law;
-import forms.CountryForm;
-import forms.LawForm;
 
 @Controller
 @RequestMapping("/category/administrator")
@@ -54,9 +49,9 @@ public class CategoryAdministratorController extends AbstractController {
 	public ModelAndView save(final Category category,
 			final BindingResult binding) {
 		ModelAndView res;
-
 		if (binding.hasErrors()) {
-			res = this.createEditModelAndView(category, "law.params.error");
+			res = this
+					.createEditModelAndView(category, "category.params.error");
 
 		} else
 			try {
@@ -68,6 +63,24 @@ public class CategoryAdministratorController extends AbstractController {
 
 				res = this.createEditModelAndView(category, "law.commit.error");
 			}
+
+		return res;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Category category,
+			final BindingResult binding) {
+		ModelAndView res;
+
+		try {
+
+			this.categoryService.delete(category);
+
+			res = new ModelAndView("redirect:/category/list.do");
+		} catch (final Throwable oops) {
+
+			res = this.createEditModelAndView(category, "law.commit.error");
+		}
 
 		return res;
 	}
