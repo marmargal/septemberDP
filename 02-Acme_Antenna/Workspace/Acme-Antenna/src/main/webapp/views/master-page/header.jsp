@@ -32,6 +32,8 @@
 							code="master.page.satellites" /></a></li>
 				<li><a href="platform/list.do"><spring:message
 							code="master.page.platforms" /></a></li>
+				<li><a href="tutorial/list.do"><spring:message
+							code="master.page.tutorials" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('ADMIN')">
@@ -61,6 +63,12 @@
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">
+				<li><a href="satellite/list.do"><spring:message
+							code="master.page.satellites" /></a></li>
+				<li><a href="platform/list.do"><spring:message
+							code="master.page.platforms" /></a></li>
+				<li><a href="tutorial/list.do"><spring:message
+							code="master.page.tutorials" /></a></li>
 			</security:authorize>
 		</ul>
 	</div>

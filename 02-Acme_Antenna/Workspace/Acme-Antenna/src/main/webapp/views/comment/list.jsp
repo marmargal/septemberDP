@@ -18,39 +18,29 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="tutorial" requestURI="${requestURI }" id="row">
+<display:table pagesize="5" class="comments" keepStatus="true"
+	name="comments" requestURI="${requestURI }" id="row">
 
-	<spring:message code="tutorial.title" var="titleHeader" />
+	<spring:message code="comment.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}"	sortable="true" />
 		
-	<spring:message code="tutorial.moment" var="momentHeader" />
+	<spring:message code="comment.moment" var="momentHeader" />
 	<display:column property="moment" title="${momentHeader}"	sortable="true" />
 
-	<spring:message code="tutorial.actor" var="actorHeader" />
-	<display:column property="actor.name" title="${actorHeader}"	sortable="true" />
+	<spring:message code="comment.text" var="textHeader" />
+	<display:column property="text" title="${textHeader}"	sortable="true" />
 	
-	<display:column>
-		<acme:links url="tutorial/display.do?tutorialId=${row.id }" code="tutorial.display"/>
-	</display:column>
-
-	<security:authorize access="hasRole('USER')">
-		<display:column>
-			<jstl:if test="${actor == row.actor}">
-				<acme:links url="tutorial/user/edit.do?tutorialId=${row.id }" code="tutorial.edit"/>
-			</jstl:if>
-		</display:column>
-	</security:authorize>
+	<spring:message code="comment.user" var="userHeader" />
+	<display:column property="user.name" title="${userHeader}"	sortable="true" />
 	
-	<!-- botón de borrar del admin en el list o en el display? -->
 	<security:authorize access="hasRole('ADMIN')">
-		<display:column>
-			<acme:links url="tutorial/administrator/edit.do?tutorialId=${row.id }" code="tutorial.delete"/>
-		</display:column>
+	<display:column>
+	<acme:links url="comment/administrator/edit.do?commentId=${row.id}" code="comment.delete"/>
+	</display:column>
 	</security:authorize>
 
 </display:table>
 
 <security:authorize access="hasRole('USER')">
-	<acme:links url="tutorial/user/create.do?" code="tutorial.create"/>
+	<acme:links url="comment/user/create.do?tutorialId=${tutorial.id}" code="comment.create"/>
 </security:authorize>
