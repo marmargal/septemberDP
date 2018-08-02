@@ -119,7 +119,7 @@ public class ApplicationOfficerController extends AbstractController{
 		res.addObject("officer",officer);
 		res.addObject("applicationsSelfAssigningAllOfficer",applicationsSelfAssigning);
 		res.addObject("applicationsWhitDecisionByOfficer",findApplicationsWhitDecisionByOfficer);
-		res.addObject("requestURI","application/officer/assign.do");
+		res.addObject("requestURI","application/officer/list.do");
 		
 		return res;
 	}

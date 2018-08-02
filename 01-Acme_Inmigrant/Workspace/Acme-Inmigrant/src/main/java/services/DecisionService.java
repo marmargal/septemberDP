@@ -90,6 +90,11 @@ public class DecisionService {
 		this.checkRejected(decision);
 		res = decisionRepository.save(decision);
 		
+		Application application = new Application();
+		application = decision.getApplication();
+		Date closedMoment = new Date(System.currentTimeMillis()-1000);
+		application.setClosedMoment(closedMoment);
+		
 		officer = decision.getOfficer();
 		decisionsOfOfficer = officer.getDecision();
 		decisionsOfOfficer.add(decision);
