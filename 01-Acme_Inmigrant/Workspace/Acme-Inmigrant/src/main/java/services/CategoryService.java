@@ -79,41 +79,35 @@ public class CategoryService {
 		Assert.isTrue(!category.getName().equals(
 				category.getCategoryParent().getName()));
 		Category saved = null;
-		try {
 
-			if (category.getId() == 0) {
-				System.out.println("333333333333333333");
+		if (category.getId() == 0) {
+			Assert.isTrue(!this.categoryRepository.existsThisCategoryName(
+					category.getName(), category.getCategoryParent().getId()));
+			saved = this.categoryRepository.saveAndFlush(category);
+			saved.getCategoryParent().getCategories().add(saved);
+		} else {
+			final String oldName = this.categoryRepository.findOne(
+					category.getId()).getName();
+			Category oldCategory = this.categoryRepository.findOne(category
+					.getId());
+			if (category.getName().equals(oldName)) {
+
+				oldCategory.getCategoryParent().getCategories()
+						.remove(category);
+				saved = this.categoryRepository.saveAndFlush(category);
+				saved.getCategoryParent().getCategories().add(saved);
+
+			} else {
+
 				Assert.isTrue(!this.categoryRepository.existsThisCategoryName(
 						category.getName(), category.getCategoryParent()
 								.getId()));
+				oldCategory.getCategoryParent().getCategories()
+						.remove(category);
 				saved = this.categoryRepository.saveAndFlush(category);
 				saved.getCategoryParent().getCategories().add(saved);
-			} else {
-				final String oldName = this.categoryRepository.findOne(
-						category.getId()).getName();
-				Category oldCategory = this.categoryRepository.findOne(category
-						.getId());
-				if (category.getName().equals(oldName)) {
 
-					oldCategory.getCategoryParent().getCategories()
-							.remove(category);
-					saved = this.categoryRepository.saveAndFlush(category);
-					saved.getCategoryParent().getCategories().add(saved);
-
-				} else {
-
-					Assert.isTrue(!this.categoryRepository
-							.existsThisCategoryName(category.getName(),
-									category.getCategoryParent().getId()));
-					oldCategory.getCategoryParent().getCategories()
-							.remove(category);
-					saved = this.categoryRepository.saveAndFlush(category);
-					saved.getCategoryParent().getCategories().add(saved);
-
-				}
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
 		return saved;
 
