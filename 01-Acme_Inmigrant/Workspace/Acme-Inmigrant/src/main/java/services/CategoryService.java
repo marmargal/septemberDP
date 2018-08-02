@@ -126,32 +126,23 @@ public class CategoryService {
 		Assert.notNull(category);
 		Assert.isTrue(!category.getName().equals("root"));
 		Category root = categoryRepository.findCategories();
-		Category deleted=categoryRepository.findOne(category.getId());
-		System.out.println(root.getName());
 
 		category.getCategoryParent().getCategories().remove(category);
 
-		System.out.println("antes");
-		System.out.println(category.getCategories()+"111111111111111111");
-		List<Category> categoriesSonRoot=root.getCategories();
-			for (Visa visa : category.getVisas()) {
-				System.out.println("primer for");
+		List<Category> categoriesSonRoot = root.getCategories();
+		for (Visa visa : category.getVisas()) {
 
-				visa.setCategory(root);
-				visaService.save(visa);
-				
+			visa.setCategory(root);
+			visaService.save(visa);
 
-			}
-			for (Category categorySons : category.getCategories()) {
-				System.out.println("segundo for");
-				categorySons.setCategoryParent(root);
-				categoryRepository.save(categorySons);
-				categoriesSonRoot.add(categorySons);
-			}
-			root.setCategories(categoriesSonRoot);
-			categoryRepository.delete(category);
-			System.out.println("despues del delete");
-	
+		}
+		for (Category categorySons : category.getCategories()) {
+			categorySons.setCategoryParent(root);
+			categoryRepository.save(categorySons);
+			categoriesSonRoot.add(categorySons);
+		}
+		root.setCategories(categoriesSonRoot);
+		categoryRepository.delete(category);
 	}
 
 	// Other business methods
