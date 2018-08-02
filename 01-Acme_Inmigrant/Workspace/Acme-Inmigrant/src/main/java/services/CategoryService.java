@@ -82,6 +82,7 @@ public class CategoryService {
 		try {
 
 			if (category.getId() == 0) {
+				System.out.println("333333333333333333");
 				Assert.isTrue(!this.categoryRepository.existsThisCategoryName(
 						category.getName(), category.getCategoryParent()
 								.getId()));
@@ -93,13 +94,10 @@ public class CategoryService {
 				Category oldCategory = this.categoryRepository.findOne(category
 						.getId());
 				if (category.getName().equals(oldName)) {
-					saved = this.categoryRepository.saveAndFlush(category);
-					List<Category> oldCategories = new ArrayList<>(
-							oldCategory.getCategories());
-					oldCategories.remove(category);
-					oldCategory.setCategories(oldCategories);
-					this.categoryRepository.save(oldCategory);
 
+					oldCategory.getCategoryParent().getCategories()
+							.remove(category);
+					saved = this.categoryRepository.saveAndFlush(category);
 					saved.getCategoryParent().getCategories().add(saved);
 
 				} else {
@@ -107,8 +105,9 @@ public class CategoryService {
 					Assert.isTrue(!this.categoryRepository
 							.existsThisCategoryName(category.getName(),
 									category.getCategoryParent().getId()));
+					oldCategory.getCategoryParent().getCategories()
+							.remove(category);
 					saved = this.categoryRepository.saveAndFlush(category);
-					oldCategory.getCategories().remove(category);
 					saved.getCategoryParent().getCategories().add(saved);
 
 				}
