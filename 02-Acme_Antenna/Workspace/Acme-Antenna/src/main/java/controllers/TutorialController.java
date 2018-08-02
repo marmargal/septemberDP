@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.TutorialService;
 import domain.Actor;
+import domain.Comment;
 import domain.Tutorial;
 
 @Controller
@@ -53,9 +54,11 @@ public class TutorialController extends AbstractController{
 		Tutorial tutorial;
 		
 		tutorial = this.tutorialService.findOne(tutorialId);
+		Collection<Comment> comments = tutorial.getComments();
 		
 		res = new ModelAndView("tutorial/display");
 		res.addObject("tutorial",tutorial);
+		res.addObject("comments",comments);
 		res.addObject("requestURI","tutorial/display.do");
 		
 		return res;

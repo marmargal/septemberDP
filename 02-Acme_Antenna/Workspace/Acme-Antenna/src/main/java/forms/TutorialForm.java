@@ -1,7 +1,5 @@
 package forms;
 
-import java.util.Collection;
-
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;

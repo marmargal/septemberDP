@@ -1,5 +1,8 @@
 package controllers.user;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,25 @@ public class CommentUserController extends AbstractController {
 	public CommentUserController() {
 		super();
 	}
+	
+	// Listing -----------------------------------
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public ModelAndView list(@RequestParam final int tutorialId){
+		ModelAndView res;
+		
+		Tutorial tutorial;
+		tutorial = tutorialService.findOne(tutorialId);
+		
+		Collection<Comment> comments = new ArrayList<Comment>();
+		comments.addAll(tutorial.getComments());
+		
+		res = new ModelAndView("comment/list");
+		res.addObject("comments",comments);
+		res.addObject("tutorial",tutorial);
+		res.addObject("requestURI","comment/user/list.do");
+		
+		return res;
+	}
 
 	// Creation ---------------------------------------------------------------
 
@@ -44,21 +66,8 @@ public class CommentUserController extends AbstractController {
 
 		comment = this.commentService.create();
 		
-		System.out.println("Comment después del create: " + comment);
 		tutorial = tutorialService.findOne(tutorialId);
-		System.out.println("Tutorial después del findOne: " + tutorial);
 		comment.setTutorial(tutorial);
-		System.out.println("comment.setTutorial: " + comment.getTutorial());
-		System.out.println("tutorial.getComments: " + tutorial.getComments());
-		System.out.println("=====================================================");
-		System.out.println(comment.getPictures());
-		System.out.println(comment.getText());
-		System.out.println(comment.getTitle());
-		System.out.println(comment.getCommentParent());
-		System.out.println(comment.getMoment());
-		System.out.println(comment.getReplies());
-		System.out.println(comment.getTutorial());
-		System.out.println(comment.getUser());
 
 		res = this.createEditModelAndView(comment);
 
