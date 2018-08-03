@@ -85,16 +85,16 @@ public class RegisterOfficerController extends AbstractController {
 		Officer officer;
 
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(officerForm, "actor.params.error");
+			res = this.createEditModelAndViewEdit(officerForm, "actor.params.error");
 		else if (!officerForm.getRepeatPassword().equals(officerForm.getPassword()))
-			res = this.createEditModelAndView(officerForm, "actor.commit.errorPassword");
+			res = this.createEditModelAndViewEdit(officerForm, "actor.commit.errorPassword");
 		else
 			try {
 				officer = officerService.reconstruct(officerForm, binding);
 				this.officerService.save(officer);
 				res = new ModelAndView("redirect:/j_spring_security_logout");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(officerForm, "actor.commit.error");
+				res = this.createEditModelAndViewEdit(officerForm, "actor.commit.error");
 			}
 
 		return res;

@@ -49,16 +49,16 @@ public class InvestigatorController extends AbstractController {
 		Investigator investigator;
 
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(investigatorForm, "actor.params.error");
+			res = this.createEditModelAndViewEdit(investigatorForm, "actor.params.error");
 		else if (!investigatorForm.getRepeatPassword().equals(investigatorForm.getPassword()))
-			res = this.createEditModelAndView(investigatorForm, "actor.commit.errorPassword");
+			res = this.createEditModelAndViewEdit(investigatorForm, "actor.commit.errorPassword");
 		else
 			try {
 				investigator = investigatorService.reconstruct(investigatorForm, binding);
 				this.investigatorService.save(investigator);
 				res = new ModelAndView("redirect:/j_spring_security_logout");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(investigatorForm, "actor.commit.error");
+				res = this.createEditModelAndViewEdit(investigatorForm, "actor.commit.error");
 			}
 
 		return res;
