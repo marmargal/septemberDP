@@ -20,10 +20,12 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authorize access="hasRole('USER')">
-	<form:form action="comment/user/create.do" modelAttribute="comment">
+	<form:form action="comment/user/edit.do" modelAttribute="comment">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
 		<form:hidden path="tutorial" />
+		<form:hidden path="commentParent" />
+		<form:hidden path="replies" />
 
 		<acme:textbox code="comment.title" path="title" />
 		<acme:textbox code="comment.text" path="text" />
@@ -46,6 +48,8 @@
 		<form:hidden path="pictures" />
 		<form:hidden path="tutorial" />
 		<form:hidden path="user" />
+		<form:hidden path="commentParent" />
+		<form:hidden path="replies" />
 
 
 		<acme:cancel url="/" code="comment.cancel" />
