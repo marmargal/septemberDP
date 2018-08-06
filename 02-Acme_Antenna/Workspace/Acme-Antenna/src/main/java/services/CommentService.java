@@ -49,7 +49,7 @@ public class CommentService {
 		Comment res;
 		res = new Comment();
 		
-		Date moment = new Date();
+		Date moment = new Date(System.currentTimeMillis()-1000);
 		res.setMoment(moment);
 		
 		res.setReplies(new ArrayList<Comment>());
@@ -77,7 +77,7 @@ public class CommentService {
 		Assert.notNull(comment);
 		
 		if(comment.getId() == 0){
-			Date moment = new Date();
+			Date moment = new Date(System.currentTimeMillis()-1000);
 			comment.setMoment(moment);
 		}
 		

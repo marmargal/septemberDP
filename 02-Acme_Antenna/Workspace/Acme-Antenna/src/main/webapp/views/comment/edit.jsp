@@ -33,7 +33,7 @@
 
 		<spring:message code="comment.confirmation.text" />
 		<acme:submit name="save" code="comment.submit" />
-		<acme:cancel url="tutorial/user/list.do" code="comment.cancel" />
+		<acme:cancel url="tutorial/list.do" code="comment.cancel" />
 	</form:form>
 </security:authorize>
 

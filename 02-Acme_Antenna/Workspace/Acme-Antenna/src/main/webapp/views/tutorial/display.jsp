@@ -23,6 +23,11 @@
 	<jstl:out value="${tutorial.title }"/>
 </p>
 
+<jstl:forEach var="p" items="${pictures }" varStatus="status">
+	<img class="imagen" src="${p }"/>
+	<br/>
+</jstl:forEach>
+
 <p>
 	<b><spring:message code="tutorial.moment"/>:&nbsp;</b>
 	<jstl:out value="${tutorial.moment }"/>
@@ -33,7 +38,6 @@
 	<jstl:out value="${tutorial.text }"/>
 </p>
 
-<h4><spring:message code="tutorial.comments"/>:&nbsp;</h4>
 <table style="width:100%">
 <jstl:forEach var="comment" items="${comments }" varStatus="status">
 <tr>
@@ -41,15 +45,15 @@
 <td>${comment.title}</td>
 <td>${comment.text}</td>
 <td>${comment.moment}</td>
+<td>
+<jstl:forEach var="p" items="${comment.pictures }">
+	<img class="imagen" src="${p }"/>	
+</jstl:forEach>
+</td>
 </tr>
 <hr/>
 </jstl:forEach>
 </table>
-
-<jstl:forEach var="picture" items="${pictures }">
-	<img src="<jstl:out value="${picture }"/>" 
-	width="450" height="174">
-</jstl:forEach>
 <br/>
 
 <security:authorize access="hasRole('USER')">

@@ -13,7 +13,6 @@ import org.springframework.validation.Validator;
 
 import repositories.TutorialRepository;
 import domain.Actor;
-import domain.Comment;
 import domain.Tutorial;
 import forms.TutorialForm;
 
