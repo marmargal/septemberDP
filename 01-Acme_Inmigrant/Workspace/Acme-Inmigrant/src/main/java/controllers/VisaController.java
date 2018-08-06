@@ -40,7 +40,7 @@ public class VisaController extends AbstractController {
 		res.addObject("requestURI", "visa/list.do");
 		return res;
 	}
-	
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -51,7 +51,7 @@ public class VisaController extends AbstractController {
 		result.addObject("visas", visas);
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/category/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam int categoryId) {
 		ModelAndView result;
@@ -62,7 +62,7 @@ public class VisaController extends AbstractController {
 		result.addObject("visas", visas);
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/country/list", method = RequestMethod.GET)
 	public ModelAndView listByCountry(@RequestParam int countryId) {
 		ModelAndView result;
@@ -73,18 +73,21 @@ public class VisaController extends AbstractController {
 		result.addObject("visas", visas);
 		return result;
 	}
-	
+
 	// Display
-	@RequestMapping(value="/display", method=RequestMethod.GET)
-	public ModelAndView display(@RequestParam final int visaId){
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int visaId) {
 		ModelAndView res;
 		Visa visa;
-	
-		visa = this.visaService.findOne(visaId);
-		
-		res = new ModelAndView("visa/display");
-		res.addObject("visa",visa);
-		
+		try {
+
+			visa = this.visaService.findOne(visaId);
+
+			res = new ModelAndView("visa/display");
+			res.addObject("visa", visa);
+		} catch (Exception e) {
+			res = new ModelAndView("redirect:/visa/list.do");
+		}
 		return res;
 	}
 }

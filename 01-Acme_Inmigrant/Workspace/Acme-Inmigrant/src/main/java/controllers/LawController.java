@@ -47,12 +47,16 @@ public class LawController extends AbstractController {
 	public ModelAndView display(@RequestParam final int lawId) {
 		ModelAndView res;
 		Law law;
+		try {
 
-		law = this.lawService.findOne(lawId);
+			law = this.lawService.findOne(lawId);
 
-		res = new ModelAndView("law/display");
-		res.addObject("law", law);
+			res = new ModelAndView("law/display");
+			res.addObject("law", law);
+		} catch (Exception e) {
+			res = new ModelAndView("redirect:/law/list.do");
 
+		}
 		return res;
 	}
 }

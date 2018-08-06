@@ -131,6 +131,9 @@ public class ApplicationImmigrantController extends AbstractController {
 	@RequestMapping(value = "/sectionDisplay", method = RequestMethod.GET)
 	public ModelAndView sectionDisplay(@RequestParam final int applicationId) {
 		ModelAndView result;
+	try {
+		
+	
 		PersonalSection personalS = new PersonalSection();
 		Collection<ContactSection> contactS = new ArrayList<ContactSection>();
 		Collection<WorkSection> workS = new ArrayList<WorkSection>();
@@ -146,11 +149,8 @@ public class ApplicationImmigrantController extends AbstractController {
 		socialS = applicationS.getSocialSection();
 		educationS = applicationS.getEducationSection();
 
-		Immigrant currentImmigrant = immigrantService.findByPrincipal();
-		int currentImmigrantId = currentImmigrant.getId();
 
 		result = new ModelAndView("application/sectionDisplay");
-		result.addObject("currentImmigrantId", currentImmigrantId);
 		result.addObject("personalSection", personalS);
 		result.addObject("contactSection", contactS);
 		result.addObject("workSection", workS);
@@ -158,7 +158,11 @@ public class ApplicationImmigrantController extends AbstractController {
 		result.addObject("educationSection", educationS);
 		result.addObject("applicationId", applicationId);
 		result.addObject("requestURI", "application/immigrant/sectionDisplay.do");
+	} catch (Exception e) {
+		System.out.println(e.getMessage());
+		result = new ModelAndView("application/sectionDisplay");
 
+	}
 		return result;
 	}
 
