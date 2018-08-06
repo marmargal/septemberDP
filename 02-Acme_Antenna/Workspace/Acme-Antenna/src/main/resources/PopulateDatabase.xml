@@ -159,7 +159,12 @@
 		<property name="title" value="Tutorial muy bueno" />
 		<property name="text"
 			value="Me ha encantado, me ha sido de verdadera ayuda." />
-		<property name="pictures" value="http://www.google.es" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
 		<property name="tutorial" ref="tutorial1" />
 		<property name="commentParent">
 			<null />
@@ -175,7 +180,12 @@
 		<property name="moment" value="01/07/2018" />
 		<property name="title" value="Tutorial muy malo" />
 		<property name="text" value="Este tutorial no sirve para nada." />
-		<property name="pictures" value="http://www.google.es" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
 		<property name="tutorial" ref="tutorial2" />
 		<property name="commentParent">
 			<null />

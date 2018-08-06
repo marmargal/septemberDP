@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.TutorialService;
+import services.UserService;
 import domain.Actor;
 import domain.Comment;
 import domain.Tutorial;
@@ -25,6 +27,9 @@ public class TutorialController extends AbstractController{
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private UserService userService;
 	
 	// Constructors ------------------------------
 	public TutorialController(){
@@ -54,11 +59,20 @@ public class TutorialController extends AbstractController{
 		Tutorial tutorial;
 		
 		tutorial = this.tutorialService.findOne(tutorialId);
-		Collection<Comment> comments = tutorial.getComments();
+		Collection<Comment> comments = new ArrayList<Comment>();
+		
 		
 		res = new ModelAndView("tutorial/display");
 		res.addObject("tutorial",tutorial);
-		res.addObject("comments",comments);
+		try {
+			userService.checkAuthority();
+			comments = tutorial.getComments();
+			res.addObject("comments", comments);
+		} catch (Exception e) {
+			
+			res.addObject("comments", comments);
+		}
+		
 		res.addObject("requestURI","tutorial/display.do");
 		
 		return res;

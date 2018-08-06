@@ -11,6 +11,11 @@
 body {
 }
 
+.imagen {
+	max-width: 200px;
+	max-height: 200px;
+}
+
 .error {
 	color: red;
 	font-weight: bolder;

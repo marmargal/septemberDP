@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -12,7 +13,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -28,7 +28,7 @@ public class Comment extends DomainEntity{
 	private String title;
 	private String text;
 	//TODO: pictures como String y se separan por split o como collection?
-	private String pictures;
+	private Collection<String> pictures;
 	
 	@Past
 	public Date getMoment() {
@@ -57,11 +57,11 @@ public class Comment extends DomainEntity{
 		this.text = text;
 	}
 	
-	@URL
-	public String getPictures() {
+	@ElementCollection
+	public Collection<String> getPictures() {
 		return pictures;
 	}
-	public void setPictures(String pictures) {
+	public void setPictures(Collection<String> pictures) {
 		this.pictures = pictures;
 	}  
 	
