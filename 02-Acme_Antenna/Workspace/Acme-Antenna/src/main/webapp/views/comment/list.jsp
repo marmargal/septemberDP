@@ -33,6 +33,9 @@
 	<spring:message code="comment.user" var="userHeader" />
 	<display:column property="user.name" title="${userHeader}"	sortable="true" />
 	
+	<display:column> <acme:links url="comment/user/createReply.do?commentId=${row.id}" code="comment.createReply" /> </display:column>
+	<display:column> <acme:links url="comment/user/listReplies.do?commentId=${row.id}" code="comment.reply" /> </display:column>
+	
 	<security:authorize access="hasRole('ADMIN')">
 	<display:column>
 	<acme:links url="comment/administrator/edit.do?commentId=${row.id}" code="comment.delete"/>
