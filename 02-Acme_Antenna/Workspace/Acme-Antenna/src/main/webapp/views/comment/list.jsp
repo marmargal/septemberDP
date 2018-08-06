@@ -33,6 +33,15 @@
 	<spring:message code="comment.user" var="userHeader" />
 	<display:column property="user.name" title="${userHeader}"	sortable="true" />
 	
+	<display:column>
+	<jstl:forEach var="p" items="${row.pictures }">
+		<img class="imagen" src="${p }"/>	
+	</jstl:forEach>
+	</display:column>
+	
+	<display:column> <acme:links url="comment/user/createReply.do?commentId=${row.id}" code="comment.createReply" /> </display:column>
+	<display:column> <acme:links url="comment/user/listReplies.do?commentId=${row.id}" code="comment.reply" /> </display:column>
+	
 	<security:authorize access="hasRole('ADMIN')">
 	<display:column>
 	<acme:links url="comment/administrator/edit.do?commentId=${row.id}" code="comment.delete"/>
@@ -42,5 +51,7 @@
 </display:table>
 
 <security:authorize access="hasRole('USER')">
-	<acme:links url="comment/user/create.do?tutorialId=${tutorial.id}" code="comment.create"/>
+	<jstl:if test="${(requestScope['javax.servlet.forward.request_uri'] == '/Acme-Antenna/comment/user/list.do')}">
+		<acme:links url="comment/user/create.do?tutorialId=${tutorial.id}" code="comment.create"/>
+	</jstl:if>
 </security:authorize>

@@ -34,6 +34,7 @@
 		<value>/views/dashboard/tiles.xml</value>
 		<value>/views/actor/tiles.xml</value>
 		<value>/views/tutorial/tiles.xml</value>
+		<value>/views/subscription/tiles.xml</value>
 	</util:list>
 
 </beans>

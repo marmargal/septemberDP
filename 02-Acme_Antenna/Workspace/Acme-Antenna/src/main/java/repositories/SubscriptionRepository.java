@@ -7,5 +7,6 @@ import domain.Subscription;
 
 @Repository
 public interface SubscriptionRepository extends JpaRepository<Subscription, Integer>{
-
+	
+	
 }
