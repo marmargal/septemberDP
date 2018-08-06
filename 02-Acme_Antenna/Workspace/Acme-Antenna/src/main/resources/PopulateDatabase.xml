@@ -223,6 +223,12 @@
 		<property name="satellite" ref="satellite2" />
 	</bean>
 
+	<bean id="platform3" class="domain.Platform">
+		<property name="name" value="Platform C17" />
+		<property name="description" value="Japan Platform" />
+		<property name="satellite" ref="satellite3" />
+	</bean>
+
 	<!-- SATELLITE -->
 
 	<bean id="satellite1" class="domain.Satellite">
@@ -254,6 +260,21 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="satellite3" class="domain.Satellite">
+		<property name="name" value="Satellite R2D2" />
+		<property name="description" value="American Satellite" />
+		<property name="antennas">
+			<list>
+				<ref bean="antenna2" />
+			</list>
+		</property>
+		<property name="platforms">
+			<list>
+				<ref bean="platform3" />
+			</list>
+		</property>
+	</bean>
 
 	<!-- SUBSCRIPTION -->
 
@@ -263,6 +284,7 @@
 		<property name="creditCard" ref="creditCard1" />
 		<property name="user" ref="user1" />
 		<property name="platform" ref="platform1" />
+		<property name="keyCode" value="101201-ASDF00" />
 	</bean>
 
 	<bean id="subscription2" class="domain.Subscription">
@@ -271,6 +293,7 @@
 		<property name="creditCard" ref="creditCard2" />
 		<property name="user" ref="user2" />
 		<property name="platform" ref="platform2" />
+		<property name="keyCode" value="111201-ASDF02" />
 	</bean>
 
 	<!-- TUTORIAL -->

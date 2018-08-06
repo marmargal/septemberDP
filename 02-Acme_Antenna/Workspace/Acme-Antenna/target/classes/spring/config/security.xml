@@ -73,6 +73,9 @@
 		<security:intercept-url pattern="/tutorial/**" access="permitAll" />
 		<security:intercept-url pattern="/tutorial/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/tutorial/administrador/**" access="hasRole('ADMIN')" />
+		
+									<!-- SUBSCRIPTION -->
+		<security:intercept-url pattern="/subscription/user/**" access="hasRole('USER')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

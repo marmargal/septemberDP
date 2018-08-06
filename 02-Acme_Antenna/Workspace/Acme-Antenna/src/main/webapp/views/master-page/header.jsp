@@ -60,6 +60,8 @@
 					</ul></li>
 				<li><a href="antenna/user/list.do"><spring:message
 							code="master.page.user.antennas" /></a></li>
+				<li><a href="subscription/user/list.do"><spring:message
+							code="master.page.user.subscription" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">
