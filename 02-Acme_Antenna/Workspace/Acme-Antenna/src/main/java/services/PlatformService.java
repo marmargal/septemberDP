@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.PlatformRepository;
 import domain.Platform;
 import domain.Satellite;
+import domain.User;
 
 @Service
 @Transactional
@@ -83,5 +85,13 @@ public class PlatformService {
 		Collection<Platform> res = new ArrayList<Platform>();
 		res.addAll(platformRepository.searchPlatform(criteria));
 		return res;
+	}
+	
+	public Collection<Platform> findPlatformByUser(User user){
+		Collection<Platform> platforms = new ArrayList<Platform>();
+		int userId = user.getId();
+		
+		platforms = this.platformRepository.findPlatformByUser(userId, new Date());
+		return platforms;
 	}
 }
