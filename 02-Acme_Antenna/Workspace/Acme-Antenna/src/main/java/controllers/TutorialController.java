@@ -59,11 +59,16 @@ public class TutorialController extends AbstractController{
 		Tutorial tutorial;
 		
 		tutorial = this.tutorialService.findOne(tutorialId);
+		
+		Collection<String> pictures = new ArrayList<String>();
+		pictures = tutorial.getPictures();
+		
 		Collection<Comment> comments = new ArrayList<Comment>();
 		
 		
 		res = new ModelAndView("tutorial/display");
 		res.addObject("tutorial",tutorial);
+		res.addObject("pictures",pictures);
 		try {
 			userService.checkAuthority();
 			comments = tutorial.getComments();

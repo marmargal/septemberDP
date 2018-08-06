@@ -161,7 +161,8 @@
 			value="Me ha encantado, me ha sido de verdadera ayuda." />
 		<property name="pictures">
 			<list>
-				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png</value>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
 				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
 			</list>
 		</property>
@@ -182,7 +183,8 @@
 		<property name="text" value="Este tutorial no sirve para nada." />
 		<property name="pictures">
 			<list>
-				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png</value>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
 				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
 			</list>
 		</property>
@@ -280,7 +282,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="satellite3" class="domain.Satellite">
 		<property name="name" value="Satellite R2D2" />
 		<property name="description" value="American Satellite" />
@@ -322,7 +324,13 @@
 		<property name="moment" value="02/28/2018" />
 		<property name="title" value="How to fix an antenna" />
 		<property name="text" value="First, you need an antenna to fix it." />
-		<property name="pictures" value="http://www.google.es" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
 		<property name="actor" ref="user1" />
 		<property name="comments">
 			<list>
@@ -335,7 +343,13 @@
 		<property name="moment" value="05/04/2018" />
 		<property name="title" value="How to fix a satellite" />
 		<property name="text" value="First, you need a satellite to fix it." />
-		<property name="pictures" value="http://www.google.es" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
 		<property name="actor" ref="user2" />
 		<property name="comments">
 			<list>
