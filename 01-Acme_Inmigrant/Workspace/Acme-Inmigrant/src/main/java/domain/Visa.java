@@ -67,8 +67,7 @@ public class Visa extends DomainEntity {
 	private Category category;
 
 	@Valid
-	@NotNull
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=true)
 	public Country getCountry() {
 		return country;
 	}

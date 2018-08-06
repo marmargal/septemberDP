@@ -24,8 +24,6 @@ public class VisaService {
 	@Autowired
 	private VisaRepository visaRepository;
 	
-	@Autowired
-	private CountryRepository countryRepository;
 
 	// Suporting services
 
@@ -87,31 +85,7 @@ public class VisaService {
 		return res;
 	}
 
-	private double conversionToEuro(String currency, double price) {
-		double res = 0.;
-		if (currency.equals("dolar")) {
-			res = price * 0.86;
-		} else if (currency.equals("pound")) {
-			res = price * 1.112;
-		} else {
-			res = price;
-		}
 
-		return res;
-	}
-
-	private double conversionToOther(String currency, double price) {
-		double res = 0.;
-		if (currency.equals("dolar")) {
-			res = price * 1.17;
-		} else if (currency.equals("pound")) {
-			res = price * 0.89;
-		} else {
-			res = price;
-		}
-
-		return res;
-	}
 	
 	public Collection<Visa> findVisasByCategory(int categoryId) {
 		Collection<Visa> res;

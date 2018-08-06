@@ -15,9 +15,8 @@ import domain.Country;
 
 @Controller
 @RequestMapping("/country")
-
 public class CountryController extends AbstractController {
-	
+
 	// Services -------------------------------------------------------------
 
 	@Autowired
@@ -34,11 +33,11 @@ public class CountryController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView res;
-		
+
 		Collection<Country> countries = new ArrayList<Country>();
-		
+
 		countries = this.countryService.findAll();
-		
+
 		res = new ModelAndView("country/list");
 		res.addObject("country", countries);
 		res.addObject("requestURI", "country/list.do");
@@ -50,14 +49,19 @@ public class CountryController extends AbstractController {
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int countryId) {
 		ModelAndView result;
-		
-		Country country = this.countryService.findOne(countryId);
+		try {
 
-		result = new ModelAndView("country/display");
-		result.addObject("country", country);
-		
+			Country country = this.countryService.findOne(countryId);
+
+			result = new ModelAndView("country/display");
+			result.addObject("country", country);
+
+		} catch (Exception e) {
+			result = new ModelAndView("redirect:/country/list.do");
+			String message = "country.commit.error.invalid";
+			result.addObject("message", message);
+		}
 		return result;
 	}
-	
-	
+
 }

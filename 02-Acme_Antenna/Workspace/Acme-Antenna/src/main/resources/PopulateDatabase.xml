@@ -133,7 +133,17 @@
 
 	<bean id="antenna2" class="domain.Antenna">
 		<property name="serialNumber" value="4321" />
-		<property name="model" value="Modelo F-563" />
+		<property name="model" value="Modelo H-113" />
+		<property name="coordinates" ref="coordinates2" />
+		<property name="azimuth" value="160." />
+		<property name="elevation" value="34." />
+		<property name="quality" value="85.2" />
+		<property name="user" ref="user2" />
+		<property name="satellite" ref="satellite2" />
+	</bean>
+	<bean id="antenna3" class="domain.Antenna">
+		<property name="serialNumber" value="4388" />
+		<property name="model" value="Modelo H-113" />
 		<property name="coordinates" ref="coordinates2" />
 		<property name="azimuth" value="160." />
 		<property name="elevation" value="34." />
