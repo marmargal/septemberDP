@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -76,12 +77,20 @@ public class VisaAdministratorController extends AbstractController {
 			result = this.createEditModelAndView(visa);
 		} else {
 			try {
+				Assert.notNull(visa.getCountry());
+
 				visaService.save(visa);
 
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable ooops) {
+				if (visa.getCountry() == null) {
+					result = this.createEditModelAndView(visa,
+							"visa.commit.error.country");
 
-				result = this.createEditModelAndView(visa, "visa.commit.error");
+				} else
+
+					result = this.createEditModelAndView(visa,
+							"visa.commit.error");
 
 			}
 		}

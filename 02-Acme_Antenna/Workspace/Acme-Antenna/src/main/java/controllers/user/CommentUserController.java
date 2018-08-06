@@ -48,12 +48,35 @@ public class CommentUserController extends AbstractController {
 		Collection<Comment> comments = new ArrayList<Comment>();
 		comments.addAll(tutorial.getComments());
 		
+		Collection<Comment> commentsFinal = new ArrayList<Comment>();
+		for(Comment c: comments){
+			if(c.getCommentParent() == null){
+				commentsFinal.add(c);
+			}
+		}
+		
 		res = new ModelAndView("comment/list");
-		res.addObject("comments",comments);
+		res.addObject("comments",commentsFinal);
 		res.addObject("tutorial",tutorial);
 		res.addObject("requestURI","comment/user/list.do");
 		
 		return res;
+	}
+	
+	@RequestMapping(value = "/listReplies", method = RequestMethod.GET)
+	public ModelAndView listReplies(@RequestParam final int commentId) {
+		ModelAndView result;
+		Collection<Comment> comments;
+
+		final Comment c = this.commentService.findOne(commentId);
+
+		comments = c.getReplies();
+
+		result = new ModelAndView("comment/list");
+		result.addObject("comments", comments);
+		result.addObject("requestURI", "comment/list.do");
+
+		return result;
 	}
 
 	// Creation ---------------------------------------------------------------
@@ -73,10 +96,30 @@ public class CommentUserController extends AbstractController {
 
 		return res;
 	}
+	
+	@RequestMapping(value = "/createReply", method = RequestMethod.GET)
+	public ModelAndView createReply(@RequestParam final int commentId) {
+		ModelAndView res;
+		if (this.commentService.findOne(commentId) == null)
+			res = new ModelAndView("redirect:../../");
+		else {
+			Comment result;
+
+			Comment commentParent;
+
+			commentParent = this.commentService.findOne(commentId);
+
+			result = this.commentService.create();
+			result.setCommentParent(commentParent);
+			result.setTutorial(commentParent.getTutorial());
+			res = this.createEditModelAndView(result);
+		}
+		return res;
+	}
 
 	// Saving --------------------------------------------------------------
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Comment comment, final BindingResult binding) {
 		ModelAndView res;
 		System.out.println(binding.getFieldError());
@@ -111,7 +154,7 @@ public class CommentUserController extends AbstractController {
 		result = new ModelAndView("comment/edit");
 		result.addObject("comment", comment);
 		result.addObject("message", message);
-		result.addObject("requestUri", "comment/user/create.do");
+		result.addObject("requestUri", "comment/user/edit.do");
 
 		return result;
 	}

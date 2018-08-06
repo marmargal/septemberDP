@@ -3,6 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -48,11 +49,11 @@ public class CommentService {
 		Comment res;
 		res = new Comment();
 		
-		Date moment = new Date();
+		Date moment = new Date(System.currentTimeMillis()-1000);
 		res.setMoment(moment);
 		
-		System.out.println("Moment de comment inicial: " + res.getMoment());
-
+		res.setReplies(new ArrayList<Comment>());
+		
 		return res;
 	}
 	
@@ -76,9 +77,11 @@ public class CommentService {
 		Assert.notNull(comment);
 		
 		if(comment.getId() == 0){
-			Date moment = new Date();
+			Date moment = new Date(System.currentTimeMillis()-1000);
 			comment.setMoment(moment);
 		}
+		
+		
 		
 		User user;
 		user = this.userService.findByPrincipal();
@@ -104,6 +107,16 @@ public class CommentService {
 		tutorial.setComments(tutorialComments);
 
 		this.tutorialService.saveForComment(tutorial);
+		
+		if(comment.getCommentParent() != null){
+			List<Comment> replies = new ArrayList<Comment>();
+			if(comment.getCommentParent().getReplies() != null){
+				replies.addAll(comment.getCommentParent().getReplies());
+			}
+			replies.add(res);
+			comment.getCommentParent().setReplies(replies);
+			this.commentRepository.save(comment.getCommentParent());
+		}
 		
 		return res;
 	}
@@ -146,4 +159,5 @@ public class CommentService {
 		for (Comment c : comments)
 			this.commentRepository.delete(c);
 	}
+	
 }

@@ -33,7 +33,6 @@
 	<jstl:out value="${tutorial.text }"/>
 </p>
 
-<h4><spring:message code="tutorial.comments"/>:&nbsp;</h4>
 <table style="width:100%">
 <jstl:forEach var="comment" items="${comments }" varStatus="status">
 <tr>
@@ -41,6 +40,11 @@
 <td>${comment.title}</td>
 <td>${comment.text}</td>
 <td>${comment.moment}</td>
+<td>
+<jstl:forEach var="p" items="${comment.pictures }">
+	<img class="imagen" src="${p }"/>	
+</jstl:forEach>
+</td>
 </tr>
 <hr/>
 </jstl:forEach>
