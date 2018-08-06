@@ -15,6 +15,7 @@ import org.springframework.validation.Validator;
 import repositories.CountryRepository;
 import domain.Country;
 import domain.Law;
+import domain.Visa;
 import forms.CountryForm;
 
 @Service
@@ -26,11 +27,14 @@ public class CountryService {
 	@Autowired
 	private CountryRepository countryRepository;
 
+	@Autowired
+	private VisaService visaService;
+
 	// Suporting services
 
 	@Autowired
-	private Validator		validator;
-	
+	private Validator validator;
+
 	@Autowired
 	private AdministratorService administratorService;
 
@@ -79,6 +83,16 @@ public class CountryService {
 		Assert.notNull(country);
 		Assert.isTrue(country.getId() != 0);
 		Assert.isTrue(countryRepository.exists(country.getId()));
+		Collection<Visa> visas = this.countryRepository.visaCheck(country
+				.getId());
+		if (visas != null && !visas.isEmpty()) {
+			for (Visa visa : visas) {
+				visa.setInvalidate(true);
+				visa.setCountry(null);
+				visaService.save(visa);
+
+			}
+		}
 		countryRepository.delete(country);
 	}
 
@@ -92,28 +106,28 @@ public class CountryService {
 		return res;
 	}
 
-	public CountryForm construct(Country country){
+	public CountryForm construct(Country country) {
 		CountryForm res = new CountryForm();
-		
+
 		res.setId(country.getId());
 		res.setName(country.getName());
 		res.setIsoCode(country.getIsoCode());
 		res.setFlag(country.getFlag());
 		res.setLink(country.getLink());
-		
+
 		return res;
 	}
-	
-	public Country reconstruct(CountryForm countryForm, BindingResult binding){
+
+	public Country reconstruct(CountryForm countryForm, BindingResult binding) {
 		Assert.notNull(countryForm);
-		
+
 		Country res = new Country();
 
 		if (countryForm.getId() != 0)
 			res = this.findOne(countryForm.getId());
 		else
 			res = this.create();
-		
+
 		res.setName(countryForm.getName());
 		res.setIsoCode(countryForm.getIsoCode());
 		res.setFlag(countryForm.getFlag());
@@ -123,6 +137,5 @@ public class CountryService {
 
 		return res;
 	}
-	
-	
+
 }

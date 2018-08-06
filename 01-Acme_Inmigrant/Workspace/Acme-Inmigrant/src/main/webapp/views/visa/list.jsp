@@ -59,18 +59,21 @@
 				code="visa.display" /></a>
 	</display:column>
 
+
 	<display:column>
-		<acme:links url="country/display.do?countryId=${row.country.id }" code="visa.country" />
-
-	</display:column>
-
-<display:column>
 
 		<a href="requirement/list.do?visaId=${row.id}"><spring:message
 				code="visa.requirements" /></a>
 	</display:column>
 
 
+	<display:column>
+		<jstl:if test="${row.country.id != null}">
+			<acme:links url="country/display.do?countryId=${row.country.id }"
+				code="visa.country" />
+		</jstl:if>
+
+	</display:column>
 </display:table>
 
 <security:authorize access="hasRole('ADMIN')">
