@@ -68,19 +68,14 @@
 
 	<spring:message code="application.decision" var="officer.decision" />
 	<display:column>
-		<jstl:if test="${row.officer.decision.id!=0}">
-			<security:authorize access="hasRole('OFFICER')">
-				<acme:links url="decision/officer/display.do?decisionId=${row.officer.decision.id }" code="application.decision" />
-			</security:authorize>
-			<security:authorize access="hasRole('IMMIGRANT')">
-				<acme:links url="decision/immigrant/display.do?decisionId=${row.officer.decision.id }" code="application.decision" />
-			</security:authorize>
-		</jstl:if>
-		<jstl:if test="${row.officer.decision.id==0}">
-			<security:authorize access="hasRole('OFFICER')">
-					<acme:links url="decision/officer/create.do?applicationId=${row.id }" code="application.createDecision" />
-			</security:authorize>
-		</jstl:if>
+		<jstl:set var="hasDecision" value="false"/>
+		<jstl:forEach var="decision" items="${allDecisions}">
+			<jstl:if test="${decision.application == row }">
+				<security:authorize access="hasRole('IMMIGRANT')">
+					<acme:links url="decision/immigrant/display.do?decisionId=${decision.id }" code="application.decision" />
+				</security:authorize>		
+			</jstl:if>
+		</jstl:forEach>
 	</display:column>
 
 </display:table>

@@ -42,7 +42,6 @@
 		
 		<security:authorize access="hasRole('IMMIGRANT')">
 			<li><a href="immigrant/edit.do"><spring:message code="master.page.editProfile" /></a></li>
-			<li><a href="application/immigrant/create.do"><spring:message code="master.page.application" /></a></li>
 			<li><a href="application/immigrant/display.do"><spring:message code="master.page.myApplication" /></a></li>
 			<li><a class="fNiv" href="#"><spring:message code="master.page.applicationList" /></a>
 				<ul>

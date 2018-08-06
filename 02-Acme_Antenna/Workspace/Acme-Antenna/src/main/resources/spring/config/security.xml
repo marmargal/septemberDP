@@ -41,16 +41,18 @@
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 
+
 		<security:intercept-url pattern="/administrator/action-1.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/action-2.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/list.do" access="hasRole('ADMIN')" /> 
 
-		<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
+	<!-- 	<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
 
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" />  -->
+
 		
 		<security:intercept-url pattern="/user/register.do" access="isAnonymous()" />
 		
@@ -76,13 +78,14 @@
 									<!-- COMMENT -->
 									
 		<security:intercept-url pattern="/comment/user/create.do" access="hasRole('USER')" />	
-		<security:intercept-url pattern="/comment/administrator/edit.do" access="hasRole('ADMIN')" />						
+		<security:intercept-url pattern="/comment/administrator/edit.do" access="hasRole('ADMIN')" />	
+		<security:intercept-url pattern="/comment/user/list.do" access="hasAnyRole('USER','ADMIN')" />						
 		
 									<!-- TUTORIAL -->
 									
 		<security:intercept-url pattern="/tutorial/**" access="permitAll" />
 		<security:intercept-url pattern="/tutorial/user/**" access="hasRole('USER')" />
-		<security:intercept-url pattern="/tutorial/admin/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/tutorial/administrador/**" access="hasRole('ADMIN')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

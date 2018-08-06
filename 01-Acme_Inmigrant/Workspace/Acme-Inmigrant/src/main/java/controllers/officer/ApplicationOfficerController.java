@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
+import services.DecisionService;
 import services.OfficerService;
 import services.QuestionService;
 import controllers.AbstractController;
 import domain.Application;
+import domain.Decision;
 import domain.Officer;
 
 @Controller
@@ -33,6 +35,8 @@ public class ApplicationOfficerController extends AbstractController{
 	@Autowired
 	private OfficerService officerService;
 	
+	@Autowired
+	private DecisionService decisionService;
 	
 	// Constructors --------------------------------
 	public ApplicationOfficerController(){
@@ -44,11 +48,14 @@ public class ApplicationOfficerController extends AbstractController{
 	public ModelAndView listAccepted(){
 		ModelAndView res;
 		Application application = new Application();
+		Collection<Decision> allDecisions = new ArrayList<Decision>();
 		
 		application = this.questionService.findApplicationSelfAsign();
+		allDecisions = this.decisionService.findAll();
 		
 		res = new ModelAndView("application/display");
 		res.addObject("application",application);
+		res.addObject("allDecisions",allDecisions);
 		res.addObject("requestURI", "application/officer/list.do");
 		
 		return res;
@@ -71,12 +78,23 @@ public class ApplicationOfficerController extends AbstractController{
 	@RequestMapping(value="/listNoDecision",method=RequestMethod.GET)
 	public ModelAndView listNoDecision(){
 		ModelAndView res;
-		Application application = new Application();
+		Collection<Application> applicationsAssign = new ArrayList<Application>();
+		Collection<Application> applicationsWhitDecision = new ArrayList<Application>();
+		Collection<Application> applicationsWhitoutDecision = new ArrayList<Application>();
+		Officer officer = new Officer();
 		
-//		application = this.applicationService.;
+		officer = this.officerService.findByPrincipal();
+		applicationsAssign = officer.getApplications();
+		applicationsWhitDecision = this.applicationService.findApplicationsWhitDecisionByOfficer(officer.getId());
+		
+		for(Application a : applicationsAssign){
+			if(!applicationsWhitDecision.contains(a)){
+				applicationsWhitoutDecision.add(a);	
+			}
+		}
 		
 		res = new ModelAndView("application/display");
-//		res.addObject("application",application);
+		res.addObject("application",applicationsWhitoutDecision);
 		res.addObject("requestURI", "application/officer/list.do");
 		
 		return res;
@@ -101,7 +119,7 @@ public class ApplicationOfficerController extends AbstractController{
 		res.addObject("officer",officer);
 		res.addObject("applicationsSelfAssigningAllOfficer",applicationsSelfAssigning);
 		res.addObject("applicationsWhitDecisionByOfficer",findApplicationsWhitDecisionByOfficer);
-		res.addObject("requestURI","application/officer/assign.do");
+		res.addObject("requestURI","application/officer/list.do");
 		
 		return res;
 	}

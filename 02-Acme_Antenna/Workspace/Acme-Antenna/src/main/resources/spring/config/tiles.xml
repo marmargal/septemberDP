@@ -23,9 +23,10 @@
 		<value>/views/security/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
 		
-		<value>/views/administrator/tiles.xml</value>
+<!-- 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/customer/tiles.xml</value>
 		<value>/views/profile/tiles.xml</value>
+ -->
 		<value>/views/antenna/tiles.xml</value>
 		<value>/views/satellite/tiles.xml</value>
 		<value>/views/platform/tiles.xml</value>

@@ -2,7 +2,6 @@ package controllers.officer;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.InvestigatorService;
 import services.OfficerService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Application;
 import domain.Immigrant;
 import domain.Investigator;
@@ -23,12 +24,16 @@ import domain.Officer;
 public class InvestigatorOfficerController extends AbstractController {
 
 	// Services ----------------------
+	
 	@Autowired
 	private InvestigatorService investigatorService;
 	
 	@Autowired
 	private OfficerService officerService;
 
+	@Autowired
+	private ActorService actorService;
+	
 	// Constructors ------------------
 	public InvestigatorOfficerController() {
 		super();
@@ -39,31 +44,32 @@ public class InvestigatorOfficerController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView res;
 		
-		Collection<Application> application = new ArrayList<Application>();
-		Collection<Immigrant> immigrant = new ArrayList<Immigrant>();
-		List<Investigator> investigator = new ArrayList<Investigator>();
-		
-		Officer officer;
+		Collection<Application> applicationOfOfficer = new ArrayList<Application>();
+		Collection<Immigrant> immigrants = new ArrayList<Immigrant>();
+		Collection<Investigator> investigators = new ArrayList<Investigator>();
+		Officer officer = new Officer();
+		Collection<Actor> investigatorActors = new ArrayList<Actor>();
+
 		officer = officerService.findByPrincipal();
 
-		application = this.investigatorService.findApplicationByOfficer(officer.getId());
+		applicationOfOfficer = officer.getApplications();
 
-		for(Application a: application){
-			immigrant.add(this.investigatorService.findImmigrantByApplication(a.getId()));
+		for(Application a: applicationOfOfficer){
+			immigrants.add(this.investigatorService.findImmigrantByApplication(a.getId()));
 		}
 		
-		for(Immigrant i: immigrant){
-			investigator.add(this.investigatorService.findInvestigatorByImmigrant(i.getId()));
+		for(Immigrant i: immigrants){
+				investigators.add(this.investigatorService.findInvestigatorByImmigrant(i.getId()));
 		}
 		
-		for(int i = 0; i < 1; i++){
-			if(investigator.get(i) == null){
-				investigator = new ArrayList<Investigator>();
+		for(Investigator i: investigators){
+			if(i != null){
+				investigatorActors.add(this.actorService.findByUserAccount(i.getUserAccount()));
 			}
 		}
 		
-		res = new ModelAndView("investigator/officer/list");
-		res.addObject("investigator", investigator);
+		res = new ModelAndView("investigator/list");
+		res.addObject("investigator", investigatorActors);
 		res.addObject("requestURI", "investigator/officer/list.do");
 
 		return res;

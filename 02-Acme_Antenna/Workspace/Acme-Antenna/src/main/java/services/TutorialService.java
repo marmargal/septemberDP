@@ -13,6 +13,7 @@ import org.springframework.validation.Validator;
 
 import repositories.TutorialRepository;
 import domain.Actor;
+import domain.Comment;
 import domain.Tutorial;
 import forms.TutorialForm;
 
@@ -26,6 +27,9 @@ public class TutorialService {
 	private TutorialRepository tutorialRepository;
 
 	// Suporting services
+	
+	@Autowired
+	private CommentService commentService;
 
 	@Autowired
 	private ActorService actorService;
@@ -96,7 +100,13 @@ public class TutorialService {
 		administratorService.checkAuthority();
 		Assert.notNull(tutorial);
 		Assert.isTrue(tutorial.getId() != 0);
-		Assert.isTrue(this.tutorialRepository.exists(tutorial.getId()));
+//		Assert.isTrue(this.tutorialRepository.exists(tutorial.getId()));
+		
+		tutorial.getActor().getTutorials().remove(tutorial);
+		
+		if(tutorial.getComments().size()>0)
+			this.commentService.deleteAll(tutorial.getComments());
+		
 		this.tutorialRepository.delete(tutorial);
 	}
 

@@ -31,25 +31,20 @@ public class CommentAdministratorController extends AbstractController{
 		Comment comment;
 
 		comment = this.commentService.findOne(commentId);
-		System.out.println("Comment en edit: "+comment);
 		result = this.createEditModelAndView(comment);
 
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@Valid final Comment comment, final BindingResult binding) {
-		System.out.println("Comment en delete: " + comment);
 		ModelAndView res;
 		if (binding.hasErrors()) {
-			System.out.println(binding.getAllErrors());
 			res = this.createEditModelAndView(comment, "comment.params.error");
 		} else {
 			try {
 				this.commentService.delete(comment);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getMessage());
-				System.out.println(oops.getStackTrace());
 				res = this.createEditModelAndView(comment, "comment.commit.error");
 			}
 		}

@@ -48,6 +48,9 @@ public class CommentService {
 		Comment res;
 		res = new Comment();
 		
+		Date moment = new Date();
+		res.setMoment(moment);
+		
 		System.out.println("Moment de comment inicial: " + res.getMoment());
 
 		return res;
@@ -107,28 +110,30 @@ public class CommentService {
 	
 	public void delete(Comment comment) {
 		administratorService.checkAuthority();
-//		Assert.notNull(comment);
-//		Assert.isTrue(comment.getId() != 0);
-//		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		Assert.notNull(comment);
+		Assert.isTrue(comment.getId() != 0);
+		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		
+//		this.administratorService.checkAuthority();
+//		if(comment.getReplies().size()!=0){
+//			for(Comment c : comment.getReplies())
+//				this.delete(c);
+//		}
+//		this.commentRepository.delete(comment);
+		
 		User user;
 		user = comment.getUser();
-		System.out.println(user);
 		
 		Tutorial tutorial;
 		tutorial = comment.getTutorial();
-		System.out.println(tutorial);
 		
 		if(user.getComments().contains(comment)){
-			System.out.println(user.getComments());
 			user.getComments().remove(comment);
 			userService.saveForComment(user);
-			System.out.println(user.getComments());
 		}
 		if(tutorial.getComments().contains(comment)){
-			System.out.println(tutorial.getComments());
 			tutorial.getComments().remove(comment);
 			tutorialService.saveForComment(tutorial);
-			System.out.println(tutorial.getComments());
 		}
 		
 		this.commentRepository.delete(comment);
@@ -136,4 +141,9 @@ public class CommentService {
 
 	// Other business method --------------------------------------------------
 
+	public void deleteAll(Collection<Comment> comments){
+		this.administratorService.checkAuthority();
+		for (Comment c : comments)
+			this.commentRepository.delete(c);
+	}
 }

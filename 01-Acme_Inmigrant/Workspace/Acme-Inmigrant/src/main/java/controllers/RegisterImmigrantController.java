@@ -84,16 +84,16 @@ public class RegisterImmigrantController extends AbstractController {
 		ModelAndView res;
 		
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(actorForm, "actor.params.error");
+			res = this.createEditModelAndViewEdit(actorForm, "actor.params.error");
 		else if (!actorForm.getRepeatPassword().equals(actorForm.getPassword()))
-			res = this.createEditModelAndView(actorForm, "actor.commit.errorPassword");
+			res = this.createEditModelAndViewEdit(actorForm, "actor.commit.errorPassword");
 		else 
 			try{
 				Immigrant immigrant = this.immigrantService.reconstruct(actorForm, binding);
 				this.immigrantService.save(immigrant);
 				res = new ModelAndView("redirect:/j_spring_security_logout");
 			}catch (final Throwable oops) {
-				res = this.createEditModelAndView(actorForm, "actor.commit.error");
+				res = this.createEditModelAndViewEdit(actorForm, "actor.commit.error");
 			}
 		
 		return res;

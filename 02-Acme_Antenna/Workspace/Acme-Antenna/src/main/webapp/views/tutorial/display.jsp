@@ -18,20 +18,33 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<h2>
+<p>
 	<b><spring:message code="tutorial.title"/>:&nbsp;</b>
 	<jstl:out value="${tutorial.title }"/>
-</h2>
+</p>
 
-<h4>
+<p>
 	<b><spring:message code="tutorial.moment"/>:&nbsp;</b>
 	<jstl:out value="${tutorial.moment }"/>
-</h4>
+</p>
 
-<h3>
+<p>
 	<b><spring:message code="tutorial.text"/>:&nbsp;</b>
 	<jstl:out value="${tutorial.text }"/>
-</h3>
+</p>
+
+<h4><spring:message code="tutorial.comments"/>:&nbsp;</h4>
+<table style="width:100%">
+<jstl:forEach var="comment" items="${comments }" varStatus="status">
+<tr>
+<td><b>${status.index + 1 }</b></td>
+<td>${comment.title}</td>
+<td>${comment.text}</td>
+<td>${comment.moment}</td>
+</tr>
+<hr/>
+</jstl:forEach>
+</table>
 
 <jstl:forEach var="picture" items="${pictures }">
 	<img src="<jstl:out value="${picture }"/>" 
@@ -45,7 +58,6 @@
 </security:authorize>
 
 <security:authorize access="hasRole('ADMIN')">
-	<input type="submit" name="delete" 
-		value="<spring:message code="tutorial.delete"/>"
-		onclick="return confirm('<spring:message code="tutorial.confirm.delete"/>')" />&nbsp;
+	<b><acme:links url="comment/user/list.do?tutorialId=${tutorial.id }" code="tutorial.comments"/></b>
+	<br/>
 </security:authorize>
