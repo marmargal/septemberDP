@@ -45,7 +45,6 @@ public class TutorialForm {
 		this.text = text;
 	}
 	
-	@NotBlank
 	@SafeHtml(whitelistType=WhiteListType.NONE)
 	public String getPictures() {
 		return pictures;
