@@ -112,7 +112,7 @@ public class TutorialUserController extends AbstractController {
 		ModelAndView res = new ModelAndView("tutorial/edit");
 		res.addObject("tutorialForm",tutorialForm);
 		res.addObject("message",message);
-		res.addObject("requestUri","tutorial/user/edit.do");
+		res.addObject("requestURI","tutorial/user/edit.do");
 	
 		return res;
 	}
