@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.TutorialService;
-import services.UserService;
 import domain.Actor;
 import domain.Comment;
 import domain.Tutorial;
@@ -27,9 +26,6 @@ public class TutorialController extends AbstractController{
 	
 	@Autowired
 	private ActorService actorService;
-	
-	@Autowired
-	private UserService userService;
 	
 	// Constructors ------------------------------
 	public TutorialController(){
@@ -70,7 +66,6 @@ public class TutorialController extends AbstractController{
 		res.addObject("tutorial",tutorial);
 		res.addObject("pictures",pictures);
 		try {
-			userService.checkAuthority();
 			comments = tutorial.getComments();
 			res.addObject("comments", comments);
 		} catch (Exception e) {

@@ -3,6 +3,8 @@ package controllers.user;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -104,7 +106,7 @@ public class AntennaUserController extends AbstractController {
 	}
 	
 	@RequestMapping(value="/edit",method=RequestMethod.POST, params = "save")
-	public ModelAndView save( final AntennaForm antennaForm,
+	public ModelAndView save(@Valid final AntennaForm antennaForm,
 			final BindingResult binding){
 		this.userService.checkAuthority();
 		ModelAndView res;

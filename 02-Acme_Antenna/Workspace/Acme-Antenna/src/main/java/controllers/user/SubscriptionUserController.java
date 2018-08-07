@@ -16,7 +16,6 @@ import services.PlatformService;
 import services.SubscriptionService;
 import services.UserService;
 import controllers.AbstractController;
-import domain.Antenna;
 import domain.Platform;
 import domain.Subscription;
 import domain.User;
@@ -110,7 +109,7 @@ public class SubscriptionUserController extends AbstractController {
 		
 		
 		result = new ModelAndView("subscription/create");
-		result.addObject("subscription", subscriptionForm);
+		result.addObject("subscriptionForm", subscriptionForm);
 		result.addObject("platforms", platformsNotSubscription);
 		result.addObject("message", message);
 		result.addObject("requestUri", "subscription/user/create.do");
