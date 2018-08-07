@@ -58,8 +58,6 @@ public class CountryController extends AbstractController {
 
 		} catch (Exception e) {
 			result = new ModelAndView("redirect:/country/list.do");
-			String message = "country.commit.error.invalid";
-			result.addObject("message", message);
 		}
 		return result;
 	}

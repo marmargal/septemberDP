@@ -6,10 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import repositories.ActorRepository;
 import repositories.DecisionRepository;
-
-import domain.Actor;
 import domain.Decision;
 
 @Component
