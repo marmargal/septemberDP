@@ -28,7 +28,7 @@ public interface AdministratorRepository extends
 
 	// A chart with the number of antennas per model.
 	@Query("select count(a),a.model from Antenna a group by a.model")
-	Object[] dataNumAntennasPerModel();
+	Collection<String> dataNumAntennasPerModel();
 
 	// The top-3 antenna models in terms of popularity.
 	@Query("select a from Antenna a group by a.model order by count(a.model) desc")
@@ -44,7 +44,6 @@ public interface AdministratorRepository extends
 	@Query("select avg(u.comments.size), stddev(u.comments.size) from Tutorial u")
 	Collection<Double> dataNumCommentPerTutorial();
 
-	//  funciona pero comprobar mas adelante con mas cosas en el populate
 	// The actors who have published a number of tutorials that is above the
 	// aver-age plus the standard deviation.
 	@Query("select a  from Actor a where a.tutorials.size>(select avg(b.tutorials.size)+stddev(b.tutorials.size) from Actor b)")
@@ -59,15 +58,13 @@ public interface AdministratorRepository extends
 	@Query("select avg(LENGTH(c.text)), stddev(LENGTH(c.text)) from Comment c")
 	Collection<Double> dataNumLengthOfComments();
 
-//	//falta atributo pictures
-//	// The average and the standard deviation of the number of pictures per
-//	// tutorial.
-//	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Tutorial u")
-//	Collection<Double> dataNumPicturesPerTutorial();
-//
-//	//falta atributo pictures
-//	// The average and the standard deviation of the number of pictures per
-//	// comment.
-//	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Comment u")
-//	Collection<Double> dataNumPicturesPerComment();
+	// The average and the standard deviation of the number of pictures per
+	// tutorial.
+	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Tutorial u")
+	Collection<Double> dataNumPicturesPerTutorial();
+
+	// The average and the standard deviation of the number of pictures per
+	// comment.
+	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Comment u")
+	Collection<Double> dataNumPicturesPerComment();
 }
