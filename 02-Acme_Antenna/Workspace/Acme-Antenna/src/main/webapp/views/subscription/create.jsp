@@ -11,16 +11,16 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="${requestURI }" modelAttribute="subscription">
+<form:form action="${requestURI }" modelAttribute="subscriptionForm">
 	
 	<form:hidden path="id"/>
 	
-	<acme:textbox path="holderName" code="subscription.creditCard.holderName" />
-	<acme:textbox path="brandName" code="subscription.creditCard.brandName" />
-	<acme:textbox path="number" code="subscription.creditCard.number" />
-	<acme:textbox path="expirationMonth" code="subscription.creditCard.expirationMonth"/>
-	<acme:textbox path="expirationYear" code="subscription.creditCard.expirationYear"/>
-	<acme:textbox path="cvv" code="subscription.creditCard.Cvv"/>
+	<acme:textbox code="subscription.creditCard.holderName" path="holderName" />
+	<acme:textbox code="subscription.creditCard.brandName" path="brandName" />
+	<acme:textbox code="subscription.creditCard.number" path="number" />
+	<acme:textbox code="subscription.creditCard.expirationMonth" path="expirationMonth" />
+	<acme:textbox code="subscription.creditCard.expirationYear" path="expirationYear" />
+	<acme:textbox code="subscription.creditCard.Cvv" path="cvv" />
 	
 	<acme:date code="subscription.endDate" path="endDate" placeholder="dd/MM/yyyy"/>
 	
