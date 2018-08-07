@@ -155,50 +155,69 @@ public class AdministratorService {
 
 		return res;
 	}
-	
-	//methods for dashboard
+
+	// methods for dashboard
 	public Collection<Double> dataAntennasPerUser() {
 		return administratorRepository.dataAntennasPerUser();
 
 	}
+
 	public Collection<Double> dataQualityPerAntennas() {
 		return administratorRepository.dataQualityPerAntennas();
 
 	}
-	public Object[] dataNumAntennasPerModel() {
+
+	public Collection<String> dataNumAntennasPerModel() {
+//		Collection<String> res = new ArrayList<String>();
+//		for (Object o : administratorRepository.dataNumAntennasPerModel()) {
+//			if (o instanceof String) {
+//				String ins = (String) o;
+//				res.add(ins);
+//			}
+//		}
+
 		return administratorRepository.dataNumAntennasPerModel();
 
 	}
+	
+
 	public Collection<Antenna> Top3AntennaPerpopularity() {
 		return administratorRepository.Top3AntennaPerpopularity();
 
 	}
+
 	public Collection<Double> dataTutorialPerUser() {
 		return administratorRepository.dataTutorialPerUser();
 
 	}
+
 	public Collection<Double> dataNumCommentPerTutorial() {
 		return administratorRepository.dataNumCommentPerTutorial();
 
 	}
+
 	public Collection<Actor> actorHasPublished() {
 		return administratorRepository.actorHasPublished();
 
 	}
+
 	public Collection<Double> dataNumRepliesPerComment() {
 		return administratorRepository.dataNumRepliesPerComment();
 
 	}
+
 	public Collection<Double> dataNumLengthOfComments() {
 		return administratorRepository.dataNumLengthOfComments();
 
 	}
-//	public Collection<Double> dataNumPicturesPerTutorial() {
-//		return administratorRepository.dataNumPicturesPerTutorial();
-//
-//	}
-//	public Collection<Double> dataNumPicturesPerComment() {
-//		return administratorRepository.dataNumPicturesPerComment();
-//
-//	}
+
+	public Collection<Double> dataNumPicturesPerTutorial() {
+		return administratorRepository.dataNumPicturesPerTutorial();
+
+	}
+
+	public Collection<Double> dataNumPicturesPerComment() {
+		return administratorRepository.dataNumPicturesPerComment();
+
+	}
 }

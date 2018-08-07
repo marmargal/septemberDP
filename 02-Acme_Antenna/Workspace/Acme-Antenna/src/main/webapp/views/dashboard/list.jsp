@@ -22,8 +22,7 @@
 <jstl:if test="${!(dataAntennasPerUser[0] eq null)}">
 	<fieldset>
 		<div>
-			<b><spring:message code="dashboard.dataAntennasPerUser" /></b>
-			<br />
+			<b><spring:message code="dashboard.dataAntennasPerUser" /></b> <br />
 			<h4>
 				<jstl:out value=" AVG: " />
 				<jstl:out value="${dataAntennasPerUser[0][0]}" />
@@ -34,20 +33,18 @@
 				<jstl:out value="${dataAntennasPerUser[0][1]}" />
 				<br />
 			</h4>
-			
+
 		</div>
 	</fieldset>
 </jstl:if>
 
 <br />
 <%----%>
- 
+
 <jstl:if test="${!(dataQualityPerAntennas[0] eq null)}">
 	<fieldset>
 		<div>
-			<b><spring:message code="dashboard.dataQualityPerAntennas" /></b>
-
-			<br />
+			<b><spring:message code="dashboard.dataQualityPerAntennas" /></b> <br />
 			<h4>
 				<jstl:out value=" AVG: " />
 				<jstl:out value="${dataQualityPerAntennas[0][0]}" />
@@ -58,34 +55,41 @@
 				<jstl:out value="${dataQualityPerAntennas[0][1]}" />
 				<br />
 			</h4>
-			
+
 		</div>
 	</fieldset>
 </jstl:if>
 
-<br /> 
+<br />
 <%----%>
-<%-- <jstl:if test="${!(dataNumAntennasPerModel[0] eq null)}">
-	<fieldset>
-		<div>
-			<b><spring:message code="dashboard.dataNumAntennasPerModel" /></b>
-			<br />
-			<h4>
-				<jstl:out value=" AVG: " />
-				<jstl:out value="${dataNumAntennasPerModel}" />
-				<br />
-			</h4>
-			<h4>
-				<jstl:out value=" STDDEV: " />
-				<jstl:out value="${dataNumAntennasPerModel}" />
-				<br />
-			</h4>
-			
-		</div>
-	</fieldset>
-</jstl:if>
+<div>
 
-<br /> --%>
+	<b><spring:message code="dashboard.dataNumAntennasPerModel" /></b> <br />
+	<jstl:forEach var="datos" items="${dataNumAntennasPerModel}">
+<table>
+<tr>
+<td>
+		<h4>
+			<jstl:out value=" Number: " />
+			<jstl:out value="${datos[0]}" />
+			<br />
+		</h4>
+		</td>
+		<td>
+		<h4>
+			<jstl:out value=" Tipo: " />
+			<jstl:out value="${datos[1]}" />
+			<br />
+		</h4>
+		</td>
+		</tr>
+</table>
+
+
+
+	</jstl:forEach>
+</div>
+<br />
 
 
 <%----%>
@@ -109,18 +113,17 @@
 				<jstl:out value="${Top3AntennaPerpopularity[2].model}" />
 				<br />
 			</h4>
-			
+
 		</div>
 	</fieldset>
 </jstl:if>
 
-<br /> 
+<br />
 <%----%>
 <jstl:if test="${!(dataTutorialPerUser[0] eq null)}">
 	<fieldset>
 		<div>
-			<b><spring:message code="dashboard.dataTutorialPerUser" /></b>
-			<br />
+			<b><spring:message code="dashboard.dataTutorialPerUser" /></b> <br />
 			<h4>
 				<jstl:out value=" AVG: " />
 				<jstl:out value="${dataTutorialPerUser[0][0]}" />
@@ -132,7 +135,7 @@
 				<jstl:out value="${dataTutorialPerUser[0][1]}" />
 				<br />
 			</h4>
-			
+
 		</div>
 	</fieldset>
 </jstl:if>
@@ -154,7 +157,7 @@
 				<jstl:out value="${dataNumCommentPerTutorial[0][1]}" />
 				<br />
 			</h4>
-			
+
 		</div>
 	</fieldset>
 </jstl:if>
@@ -164,25 +167,19 @@
 <jstl:if test="${!(actorHasPublished eq null)}">
 	<fieldset>
 		<div>
-			<b><spring:message code="dashboard.actorHasPublished" /></b>
-			<br />
+			<b><spring:message code="dashboard.actorHasPublished" /></b> <br />
 			<h4>
 				<jstl:out value=" 1: " />
 				<jstl:out value="${actorHasPublished[0].name}" />
 				<br />
 			</h4>
-			<h4>
-				<jstl:out value=" 2: " />
-				<jstl:out value="${actorHasPublished[1].name}" />
-				<br />
-			</h4>
-			
-			
+
+
 		</div>
 	</fieldset>
 </jstl:if>
 
-<br /> 
+<br />
 
 <%----%>
 <jstl:if test="${!(dataNumRepliesPerComment[0] eq null)}">
@@ -200,7 +197,7 @@
 				<jstl:out value="${dataNumRepliesPerComment[0][1]}" />
 				<br />
 			</h4>
-			
+
 		</div>
 	</fieldset>
 </jstl:if>
@@ -210,8 +207,7 @@
 <jstl:if test="${!(dataNumLengthOfComments[0] eq null)}">
 	<fieldset>
 		<div>
-			<b><spring:message code="dashboard.dataNumLengthOfComments" /></b>
-			<br />
+			<b><spring:message code="dashboard.dataNumLengthOfComments" /></b> <br />
 			<h4>
 				<jstl:out value=" AVG: " />
 				<jstl:out value="${dataNumLengthOfComments[0][0]}" />
@@ -222,14 +218,14 @@
 				<jstl:out value="${dataNumLengthOfComments[0][1]}" />
 				<br />
 			</h4>
-			
+
 		</div>
 	</fieldset>
 </jstl:if>
 
 <br />
 <%----%>
-<%-- <jstl:if test="${!(dataNumPicturesPerTutorial[0] eq null)}">
+<jstl:if test="${!(dataNumPicturesPerTutorial[0] eq null)}">
 	<fieldset>
 		<div>
 			<b><spring:message code="dashboard.dataNumPicturesPerTutorial" /></b>
@@ -244,14 +240,14 @@
 				<jstl:out value="${dataNumPicturesPerTutorial[0][1]}" />
 				<br />
 			</h4>
-			
+
 		</div>
 	</fieldset>
 </jstl:if>
 
-<br /> --%>
+<br />
 <%----%>
-<%-- <jstl:if test="${!(dataNumPicturesPerComment[0] eq null)}">
+<jstl:if test="${!(dataNumPicturesPerComment[0] eq null)}">
 	<fieldset>
 		<div>
 			<b><spring:message code="dashboard.dataNumPicturesPerComment" /></b>
@@ -266,9 +262,9 @@
 				<jstl:out value="${dataNumPicturesPerComment[0][1]}" />
 				<br />
 			</h4>
-			
+
 		</div>
 	</fieldset>
 </jstl:if>
 
-<br /> --%>
+<br />

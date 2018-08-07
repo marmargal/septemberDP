@@ -151,6 +151,16 @@
 		<property name="user" ref="user2" />
 		<property name="satellite" ref="satellite2" />
 	</bean>
+	<bean id="antenna4" class="domain.Antenna">
+		<property name="serialNumber" value="4312" />
+		<property name="model" value="Modelo G-238" />
+		<property name="coordinates" ref="coordinates2" />
+		<property name="azimuth" value="160." />
+		<property name="elevation" value="34." />
+		<property name="quality" value="85.2" />
+		<property name="user" ref="user2" />
+		<property name="satellite" ref="satellite2" />
+	</bean>
 
 	<!-- COMMENT -->
 
@@ -340,6 +350,44 @@
 	</bean>
 
 	<bean id="tutorial2" class="domain.Tutorial">
+		<property name="moment" value="05/04/2018" />
+		<property name="title" value="How to fix a satellite" />
+		<property name="text" value="First, you need a satellite to fix it." />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="actor" ref="user2" />
+		<property name="comments">
+			<list>
+				<ref bean="comment2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="tutorial3" class="domain.Tutorial">
+		<property name="moment" value="05/04/2018" />
+		<property name="title" value="How to fix a satellite" />
+		<property name="text" value="First, you need a satellite to fix it." />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="actor" ref="user2" />
+		<property name="comments">
+			<list>
+				<ref bean="comment2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="tutorial4" class="domain.Tutorial">
 		<property name="moment" value="05/04/2018" />
 		<property name="title" value="How to fix a satellite" />
 		<property name="text" value="First, you need a satellite to fix it." />

@@ -28,9 +28,8 @@ public class DashboardAdministratorController {
 				administratorService.dataAntennasPerUser());
 		result.addObject("dataQualityPerAntennas",
 				administratorService.dataQualityPerAntennas());
-
-		// result.addObject("dataNumAntennasPerModel",
-		// administratorService.dataNumAntennasPerModel());
+		result.addObject("dataNumAntennasPerModel",
+				administratorService.dataNumAntennasPerModel());
 
 		result.addObject("Top3AntennaPerpopularity",
 				administratorService.Top3AntennaPerpopularity());
@@ -50,11 +49,11 @@ public class DashboardAdministratorController {
 		result.addObject("dataNumLengthOfComments",
 				administratorService.dataNumLengthOfComments());
 
-		// result.addObject("dataNumPicturesPerTutorial",
-		// administratorService.dataNumPicturesPerTutorial());
-		//
-		// result.addObject("dataNumPicturesPerComment",
-		// administratorService.dataNumPicturesPerComment());
+		result.addObject("dataNumPicturesPerTutorial",
+				administratorService.dataNumPicturesPerTutorial());
+
+		result.addObject("dataNumPicturesPerComment",
+				administratorService.dataNumPicturesPerComment());
 
 		return result;
 	}
