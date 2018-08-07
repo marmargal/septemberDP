@@ -1,6 +1,6 @@
 package forms;
 
-import java.util.Collection;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -16,7 +16,7 @@ public class TutorialForm {
 	private int id;
 	private String title;
 	private String text;
-	private Collection<String> pictures;
+	private String pictures;
 	private int actorId;
 	
 	
@@ -45,11 +45,12 @@ public class TutorialForm {
 		this.text = text;
 	}
 	
+	@NotBlank
 	@SafeHtml(whitelistType=WhiteListType.NONE)
-	public Collection<String> getPictures() {
+	public String getPictures() {
 		return pictures;
 	}
-	public void setPictures(Collection<String> pictures) {
+	public void setPictures(String pictures) {
 		this.pictures = pictures;
 	}
 	

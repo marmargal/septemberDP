@@ -43,11 +43,7 @@ public class TutorialUserController extends AbstractController {
 		userService.checkAuthority();
 		
 		ModelAndView res;
-		Tutorial tutorial;
-		TutorialForm tutorialForm;
-		
-		tutorial = this.tutorialService.create();
-		tutorialForm = this.tutorialService.construct(tutorial);
+		TutorialForm tutorialForm = new TutorialForm();
 		
 		res = this.createEditModelAndView(tutorialForm);
 		
