@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * security.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"	
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+    ">
+
+	<!-- Security infrastructure -->
+
+	<bean id="loginService" class="security.LoginService" />
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+	<!-- Access control -->
+
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/" access="permitAll" /> 
+
+		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
+		<security:intercept-url pattern="/images/**" access="permitAll" /> 
+		<security:intercept-url pattern="/scripts/**" access="permitAll" /> 
+		<security:intercept-url pattern="/styles/**" access="permitAll" /> 
+
+		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
+
+		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
+		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
+
+		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
+
+
+		<security:intercept-url pattern="/administrator/action-1.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/administrator/action-2.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/administrator/list.do" access="hasRole('ADMIN')" /> 
+
+	<!-- 	<security:intercept-url pattern="/customer/action-1.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
+
+		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" />  -->
+
+		
+		<security:intercept-url pattern="/user/register.do" access="isAnonymous()" />
+		
+									<!-- USER -->
+		<security:intercept-url pattern="/actor/user/edit.do" access="hasRole('USER')" />
+		
+									<!-- ANTENNA -->
+		<security:intercept-url pattern="/antenna/user/**" access="hasRole('USER')" />
+		
+									<!-- SATELLITE -->
+									
+		<security:intercept-url pattern="/satellite/list.do" access="permitAll" />
+		<security:intercept-url pattern="/satellite/platform/list.do" access="permitAll" />
+		<security:intercept-url pattern="/satellite/search.do" access="permitAll" />
+		
+		
+									<!-- PLATFORM -->
+									
+		<security:intercept-url pattern="/platform/list.do" access="permitAll" />
+		<security:intercept-url pattern="/platform/satellite/list.do" access="permitAll" />
+		<security:intercept-url pattern="/platform/search.do" access="permitAll" />
+		
+									<!-- COMMENT -->
+									
+		<security:intercept-url pattern="/comment/user/create.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/comment/user/edit.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/comment/administrator/edit.do" access="hasRole('ADMIN')" />	
+		<security:intercept-url pattern="/comment/user/list.do" access="hasAnyRole('USER','ADMIN')" />	
+		<security:intercept-url pattern="/comment/user/listReplies.do" access="hasAnyRole('USER','ADMIN')" />
+		<security:intercept-url pattern="/comment/user/createReply.do" access="hasAnyRole('USER','ADMIN')" />
+		
+									<!-- TUTORIAL -->
+									
+		<security:intercept-url pattern="/tutorial/**" access="permitAll" />
+		<security:intercept-url pattern="/tutorial/user/**" access="hasRole('USER')" />
+		<security:intercept-url pattern="/tutorial/administrador/**" access="hasRole('ADMIN')" />
+		
+									<!-- SUBSCRIPTION -->
+		<security:intercept-url pattern="/subscription/user/**" access="hasRole('USER')" />
+	
+		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
+
+		<security:form-login 
+			login-page="/security/login.do"
+			password-parameter="password" 
+			username-parameter="username"
+			authentication-failure-url="/security/loginFailure.do" />
+
+		<security:logout 
+			logout-success-url="/" 
+			invalidate-session="true" />
+	</security:http>
+
+</beans>
