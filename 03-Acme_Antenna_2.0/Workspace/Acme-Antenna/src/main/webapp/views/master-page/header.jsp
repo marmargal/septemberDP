@@ -27,6 +27,8 @@
 					<ul>
 						<li><a href="user/register.do"><spring:message
 									code="master.page.register.user" /></a></li>
+						<li><a href="handyworker/register.do"><spring:message
+									code="master.page.register.handyworker" /></a></li>
 					</ul></li>
 				<li><a href="satellite/list.do"><spring:message
 							code="master.page.satellites" /></a></li>
@@ -75,7 +77,7 @@
 		</ul>
 	</div>
 	<div>
-		<a href="/Acme-Antenna"><img src="images/logo.png"
+		<a href="/Acme-Antenna"><img class="logo" src="images/logo.png"
 			alt="Acme-Antenna Co., Inc." /></a>
 	</div>
 </nav>

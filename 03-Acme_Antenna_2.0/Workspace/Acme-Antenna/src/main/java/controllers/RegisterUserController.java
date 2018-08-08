@@ -52,9 +52,6 @@ public class RegisterUserController extends AbstractController {
 		ModelAndView res;
 		userForm = this.userService.reconstruct(userForm, binding);
 		
-		System.out.println(binding.getFieldError());
-		System.out.println(binding.getClass());
-		
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(userForm, "actor.params.error");
 		} else {

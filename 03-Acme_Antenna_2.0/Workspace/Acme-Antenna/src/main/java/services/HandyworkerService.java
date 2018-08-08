@@ -15,9 +15,7 @@ import repositories.HandyworkerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Administrator;
 import domain.Handyworker;
-import domain.User;
 import forms.ActorForm;
 
 @Service

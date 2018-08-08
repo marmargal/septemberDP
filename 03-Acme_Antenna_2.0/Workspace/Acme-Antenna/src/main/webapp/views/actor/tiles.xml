@@ -19,6 +19,11 @@
 		<put-attribute name="title" value="Register user" />
 		<put-attribute name="body" value="/views/actor/register.jsp" />
 	</definition>
+	
+	<definition name="handyworker/register" extends="master.page">
+		<put-attribute name="title" value="Register handyworker" />
+		<put-attribute name="body" value="/views/actor/registerHandyworker.jsp" />
+	</definition>
 
 	<definition name="actor/register" extends="master.page">
 		<put-attribute name="title" value="Register" />

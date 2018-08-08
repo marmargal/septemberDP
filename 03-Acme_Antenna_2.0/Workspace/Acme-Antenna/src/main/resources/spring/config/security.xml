@@ -93,6 +93,9 @@
 		
 									<!-- SUBSCRIPTION -->
 		<security:intercept-url pattern="/subscription/user/**" access="hasRole('USER')" />
+		
+									<!-- HANDYWORKER -->
+		<security:intercept-url pattern="/handyworker/register.do" access="permitAll" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
