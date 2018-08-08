@@ -11,6 +11,16 @@
 body {
 }
 
+.language {
+	margin-left:20px;
+}
+
+.logo {
+	margin-top:20px;
+	max-width: 150px;
+	max-height: 150px;
+}
+
 .imagen {
 	max-width: 200px;
 	max-height: 200px;
