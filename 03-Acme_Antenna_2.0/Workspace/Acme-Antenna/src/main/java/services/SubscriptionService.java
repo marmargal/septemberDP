@@ -7,7 +7,6 @@ import java.util.Random;
 
 import javax.transaction.Transactional;
 
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -98,26 +97,15 @@ public class SubscriptionService {
 	}
 	
 	public String generatedKeyCode() {
-		String ticker;
-		LocalDate date;
-		String letters;
-		String numbers;
-		Random r;
+		String alphanumeric = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		Random random = new Random();
 		
-		letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		numbers = "0123456789";
-		r = new Random();
-		date = new LocalDate();
+		StringBuilder keyCode = new StringBuilder(32);
 		
-		ticker = String.valueOf(date.getYear() % 100 < 10 ? "0" + date.getYear() : date.getYear() % 100) + 
-					String.valueOf(date.getMonthOfYear() < 10 ? "0" + date.getMonthOfYear() : date.getMonthOfYear())
-					+ String.valueOf(date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : date.getDayOfMonth()) + "-";
-		for (int i = 0; i < 4; i++)
-			ticker = ticker + letters.charAt(r.nextInt(letters.length()));
-		for (int i = 0; i < 2; i++)
-			ticker = ticker + numbers.charAt(r.nextInt(numbers.length()));
-		
-		return ticker;
+		for(int i = 0; i < 32; i++)
+			keyCode.append(alphanumeric.charAt(random.nextInt(alphanumeric.length())));
+			
+		return keyCode.toString();
 	}
 	
 	public Subscription reconstruct(SubscriptionForm subscriptionForm, BindingResult binding){

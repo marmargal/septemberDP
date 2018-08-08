@@ -75,12 +75,12 @@
 		</ul>
 	</div>
 	<div>
-		<a href="/Acme-Antenna"><img src="images/logo.png"
+		<a href="/Acme-Antenna"><img class="logo" src="images/logo.png"
 			alt="Acme-Antenna Co., Inc." /></a>
 	</div>
 </nav>
 
 <div>
-	<a href="?language=en">en</a> | <a href="?language=es">es</a>
+	<a class="language" href="?language=en">en</a> | <a href="?language=es">es</a>
 </div>
 
