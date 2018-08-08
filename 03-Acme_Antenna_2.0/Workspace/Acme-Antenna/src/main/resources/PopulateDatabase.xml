@@ -47,7 +47,50 @@
 			</list>
 		</property>
 	</bean>
-
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="agent1" />
+		<property name="password" value="83a87fd756ab57199c0bb6d5e11168cb" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AGENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="agent2" />
+		<property name="password" value="b1a4a6b01cc297d4677c4ca6656e14d7" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AGENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="handyworker1" />
+		<property name="password" value="3d0e201c52a6e13f27d22b6777711541" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="HANDYWORKER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="handyworker2" />
+		<property name="password" value="549dbd77d30ecab6ca4c047cd795333f" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="HANDYWORKER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 	<!-- Other domain beans come here -->
 
 	<!-- ADMIN -->
@@ -118,6 +161,110 @@
 		</property>
 	</bean>
 
+	<!-- AGENT -->
+
+
+	<bean id="agent1" class="domain.Agent">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="banners">
+			<list>
+				<ref bean="banner1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="agent2" class="domain.Agent">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount5" />
+		<property name="banners">
+			<list>
+				<ref bean="banner2" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- HANDYWORKER -->
+
+	<bean id="handyworker1" class="domain.Handyworker">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount6" />
+		<property name="requests">
+			<list>
+				<ref bean="request1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="handyworker2" class="domain.Handyworker">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount7" />
+		<property name="requests">
+			<list>
+				<ref bean="request2" />
+			</list>
+		</property>
+	</bean>
+	<!-- BANNER -->
+	<bean id="banner1" class="domain.Banner">
+		<property name="picture"
+			value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" />
+		<property name="targetPage"
+			value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="agent" ref="agent1" />
+	</bean>
+
+	<bean id="banner2" class="domain.Banner">
+		<property name="picture"
+			value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" />
+		<property name="targetPage"
+			value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="agent" ref="agent2" />
+	</bean>
+
+	<!-- REQUEST -->
+
+	<bean id="request1" class="domain.Request">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="moment" value="02/06/2010" />
+		<property name="description" value="description" />
+		<property name="finishMoment" value="02/06/2018" />
+		<property name="result" value="result" />
+		<property name="handyworker" ref="handyworker1" />
+		<property name="user" ref="user1" />
+	</bean>
+
+	<bean id="request2" class="domain.Request">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="moment" value="02/06/2010" />
+		<property name="description" value="description" />
+		<property name="finishMoment" value="02/06/2017" />
+		<property name="result" value="result" />
+		<property name="handyworker" ref="handyworker2" />
+		<property name="user" ref="user2" />
+	</bean>
 	<!-- ANTENNA -->
 
 	<bean id="antenna1" class="domain.Antenna">
@@ -367,7 +514,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="tutorial3" class="domain.Tutorial">
 		<property name="moment" value="05/04/2018" />
 		<property name="title" value="How to fix a satellite" />
@@ -386,7 +533,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="tutorial4" class="domain.Tutorial">
 		<property name="moment" value="05/04/2018" />
 		<property name="title" value="How to fix a satellite" />

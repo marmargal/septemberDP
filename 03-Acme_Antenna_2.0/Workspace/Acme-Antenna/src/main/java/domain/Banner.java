@@ -7,6 +7,9 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Banner extends DomainEntity {
@@ -19,6 +22,9 @@ public class Banner extends DomainEntity {
 	private String targetPage;
 	private CreditCard creditCard;
 
+	@URL
+	@NotBlank
+	@NotNull
 	public String getPicture() {
 		return picture;
 	}
@@ -27,6 +33,9 @@ public class Banner extends DomainEntity {
 		this.picture = picture;
 	}
 
+	@URL
+	@NotBlank
+	@NotNull
 	public String getTargetPage() {
 		return targetPage;
 	}
@@ -35,6 +44,8 @@ public class Banner extends DomainEntity {
 		this.targetPage = targetPage;
 	}
 
+	@Valid
+	@NotNull
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}
@@ -43,12 +54,12 @@ public class Banner extends DomainEntity {
 		this.creditCard = creditCard;
 	}
 
-	//relaciones
+	// relaciones
 	private Agent agent;
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	public Agent getAgent() {
 		return agent;
 	}
