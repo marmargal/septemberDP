@@ -22,7 +22,18 @@ public class User extends Actor{
 	private Collection<Comment> comments;
 	private Collection<Subscription> subscriptions;
 	private Collection<Antenna> antennas;
+	private Collection<Request> requests;
 	
+	@Valid
+	@OneToMany(mappedBy="user")
+	public Collection<Request> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(Collection<Request> requests) {
+		this.requests = requests;
+	}
+
 	@Valid
 	@OneToMany(mappedBy="user")
 	public Collection<Comment> getComments() {
