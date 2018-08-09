@@ -8,4 +8,6 @@ import domain.Request;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Integer> {
 
+
+
 }

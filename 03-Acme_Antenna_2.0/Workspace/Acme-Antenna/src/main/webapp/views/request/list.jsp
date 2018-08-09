@@ -19,8 +19,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="5" class="requests" keepStatus="true" name="requests"
-	requestURI="${requestURI }" id="row">
+<display:table pagesize="5" class="requests" keepStatus="true"
+	name="requests" requestURI="${requestURI }" id="row">
 
 	<acme:column property="moment" code="request.moment" />
 	<acme:column property="description" code="request.description" />
@@ -33,4 +33,15 @@
 		<a href="user/list.do?requestId=${row.id}"><spring:message
 				code="request.user" /></a>
 	</display:column>
+
+	<security:authorize access="hasRole('HANDYWORKER')">
+		<display:column>
+			<jstl:if test="${row.handyworker==null }">
+			<form name="submitForm" method="POST" action="request/handyworker/assign.do?requestId=${row.id }">
+				    	<input type="hidden" name="param1" value="param1Value">
+				    	<acme:submit name="assign" code="request.assign"/>
+					</form>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 </display:table>
