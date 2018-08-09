@@ -36,6 +36,8 @@
 							code="master.page.platforms" /></a></li>
 				<li><a href="tutorial/list.do"><spring:message
 							code="master.page.tutorials" /></a></li>
+				<li><a href="handyworker/list.do"><spring:message
+							code="master.page.handyworkers" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('ADMIN')">
@@ -66,6 +68,21 @@
 							code="master.page.user.subscription" /></a></li>
 			</security:authorize>
 
+			<security:authorize access="hasRole('HANDYWORKER')">
+				<li><a href="#" class="fNiv"> <spring:message
+							code="master.page.profile" /> (<security:authentication
+							property="principal.username" />)
+				</a>
+					<ul>
+						<li class="arrow"></li>
+						<li><a href="j_spring_security_logout"><spring:message
+									code="master.page.logout" /> </a></li>
+					</ul></li>
+					
+				<li><a href="request/handyworker/list.do"><spring:message
+							code="master.page.requests" /></a></li>	
+			</security:authorize>
+
 			<security:authorize access="isAuthenticated()">
 				<li><a href="satellite/list.do"><spring:message
 							code="master.page.satellites" /></a></li>
@@ -73,6 +90,8 @@
 							code="master.page.platforms" /></a></li>
 				<li><a href="tutorial/list.do"><spring:message
 							code="master.page.tutorials" /></a></li>
+				<li><a href="handyworker/list.do"><spring:message
+							code="master.page.handyworkers" /></a></li>
 			</security:authorize>
 		</ul>
 	</div>
