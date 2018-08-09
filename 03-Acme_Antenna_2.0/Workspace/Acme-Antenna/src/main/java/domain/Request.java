@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -20,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Request extends DomainEntity {
 
 	public Request() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	private CreditCard creditCard;
@@ -50,7 +51,6 @@ public class Request extends DomainEntity {
 		this.moment = moment;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getDescription() {
 		return description;
@@ -60,7 +60,7 @@ public class Request extends DomainEntity {
 		this.description = description;
 	}
 
-	@NotNull
+//	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getFinishMoment() {
@@ -72,7 +72,6 @@ public class Request extends DomainEntity {
 	}
 
 	@NotNull
-	@NotBlank
 	public String getResult() {
 		return result;
 	}
@@ -84,10 +83,10 @@ public class Request extends DomainEntity {
 	// relaciones
 	private Handyworker handyworker;
 	private User user;
+	private Antenna antenna;
 
 	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Handyworker getHandyworker() {
 		return handyworker;
 	}
@@ -97,7 +96,6 @@ public class Request extends DomainEntity {
 	}
 
 	@Valid
-	@NotNull
 	@ManyToOne(optional = false)
 	public User getUser() {
 		return user;
@@ -105,5 +103,15 @@ public class Request extends DomainEntity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Valid
+	@OneToOne
+	public Antenna getAntenna() {
+		return antenna;
+	}
+
+	public void setAntenna(Antenna antenna) {
+		this.antenna = antenna;
 	}
 }
