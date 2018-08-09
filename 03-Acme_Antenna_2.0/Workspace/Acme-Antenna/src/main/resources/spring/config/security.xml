@@ -96,6 +96,9 @@
 		
 									<!-- HANDYWORKER -->
 		<security:intercept-url pattern="/handyworker/register.do" access="permitAll" />
+		
+									<!-- REQUEST -->
+		<security:intercept-url pattern="/request/user/**" access="hasRole('USER')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

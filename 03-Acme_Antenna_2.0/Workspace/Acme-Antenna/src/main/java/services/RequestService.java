@@ -7,11 +7,15 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.RequestRepository;
+import domain.CreditCard;
 import domain.Handyworker;
 import domain.Request;
 import domain.User;
+import forms.RequestForm;
 
 @Service
 @Transactional
@@ -28,6 +32,12 @@ public class RequestService {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AntennaService antennaService;
+	
+	@Autowired
+	private Validator validator;
 
 	// Constructors
 
@@ -88,6 +98,45 @@ public class RequestService {
 		Assert.isTrue(request.getId() != 0);
 		Assert.isTrue(this.requestRepository.exists(request.getId()));
 		this.requestRepository.delete(request);
+	}
+	
+	
+
+	// Other business method --------------------------------
+
+	public Request reconstruct(RequestForm requestForm, BindingResult binding) {
+		Assert.notNull(requestForm);
+		
+		Request res;
+		CreditCard cc = new CreditCard();
+		
+		if(requestForm.getId()!=0)
+			res = this.findOne(requestForm.getId());
+		else
+			res = this.create();
+		
+		//CREDIT CARD
+		int cvv = Integer.parseInt(requestForm.getCvv());
+		int expirationMonth = Integer.parseInt(requestForm.getExpirationMonth());
+		int expirationYear = Integer.parseInt(requestForm.getExpirationYear());
+		
+		cc.setBrandName(requestForm.getBrandName());
+		cc.setCvv(cvv);
+		cc.setExpirationMonth(expirationMonth);
+		cc.setExpirationYear(expirationYear);
+		cc.setHolderName(requestForm.getHolderName());
+		cc.setNumber(requestForm.getNumber());
+		
+		
+		res.setCreditCard(cc);
+		res.setDescription(requestForm.getDescription());
+		res.setResult(requestForm.getResult());
+		res.setAntenna(this.antennaService.findOne(requestForm.getAntennaId()));
+		
+		if(binding!=null)
+			this.validator.validate(res, binding);
+		
+		return res;
 	}
 
 }
