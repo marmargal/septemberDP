@@ -23,7 +23,7 @@
 <!-- Listing grid -->
 
 <security:authorize access="hasRole('ADMIN')">
-<display:table pagesize="5" class="actors" keepStatus="true"
+<display:table pagesize="5" class="actorsBan" keepStatus="true"
 	name="actors" requestURI="${RequestUri }" id="row">
 	
 	<spring:message code="actor.banned"/>
