@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- * tiles.xml * * Copyright (C) 2017 Universidad de Sevilla * * The use 
-	of this project is hereby constrained to the conditions of the * TDG Licence, 
-	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+<!-- * tiles_es.xml * * Copyright (C) 2017 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
@@ -14,5 +14,10 @@
 		<put-attribute name="title" value="Lista de peticiones" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
+
+	<definition name="request/create" extends="master.page">
+		<put-attribute name="title" value="Create request" />
+		<put-attribute name="body" value="/views/request/create.jsp" />
+	</definition>	
 
 </tiles-definitions>

@@ -254,6 +254,7 @@
 		<property name="result" value="result" />
 		<property name="handyworker" ref="handyworker1" />
 		<property name="user" ref="user1" />
+		<property name="antenna" ref="antenna1"/>
 	</bean>
 
 	<bean id="request2" class="domain.Request">
@@ -264,6 +265,7 @@
 		<property name="result" value="result" />
 		<property name="handyworker" ref="handyworker2" />
 		<property name="user" ref="user2" />
+		<property name="antenna" ref="antenna2"/>
 	</bean>
 	<!-- ANTENNA -->
 
