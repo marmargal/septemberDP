@@ -11,12 +11,12 @@
 <tiles-definitions>
 
 	<definition name="request/list" extends="master.page">
-		<put-attribute name="title" value="Lista de peticiones" />
+		<put-attribute name="title" value="Lista de peticiones terminadas" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
 	
 	<definition name="request/listWithoutServiced" extends="master.page">
-		<put-attribute name="title" value="Lista de peticiones" />
+		<put-attribute name="title" value="Lista de peticiones no terminadas" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
 	
