@@ -51,7 +51,7 @@ public class ActorAdministratorController extends AbstractController {
 
 		result = new ModelAndView("actor/administrator");
 		result.addObject("actors", actors);
-		result.addObject("requestURI", "actor/administrator/list.do");
+		result.addObject("requestUri", "actor/administrator/list.do");
 
 		return result;
 	}

@@ -29,6 +29,8 @@
 									code="master.page.register.user" /></a></li>
 						<li><a href="handyworker/register.do"><spring:message
 									code="master.page.register.handyworker" /></a></li>
+						<li><a href="agent/register.do"><spring:message
+									code="master.page.register.agent" /></a></li>
 					</ul></li>
 				<li><a href="satellite/list.do"><spring:message
 							code="master.page.satellites" /></a></li>
@@ -50,6 +52,16 @@
 					</ul></li>
 				<li><a href="actor/administrator/list.do"><spring:message
 							code="master.page.ban.actor" /></a></li>
+			</security:authorize>
+			
+			<security:authorize access="hasRole('AGENT')">
+				<li><a href="#" class="fNiv"><spring:message
+							code="master.page.agent" /></a>
+					<ul>
+						<li class="arrow"></li>
+						<li><a href="j_spring_security_logout"><spring:message
+									code="master.page.logout" /> </a></li>
+					</ul></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('USER')">

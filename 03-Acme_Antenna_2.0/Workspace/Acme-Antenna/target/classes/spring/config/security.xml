@@ -107,6 +107,10 @@
 		<security:intercept-url pattern="/actor/administrator/list.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/actor/administrator/ban.do" access="hasRole('ADMIN')" />
 
+									<!-- AGENT -->
+		<security:intercept-url pattern="/agent/register.do" access="permitAll" />							
+
+
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

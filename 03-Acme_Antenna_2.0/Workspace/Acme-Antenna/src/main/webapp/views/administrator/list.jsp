@@ -24,7 +24,7 @@
 
 <security:authorize access="hasRole('ADMIN')">
 <display:table pagesize="5" class="actors" keepStatus="true"
-	name="actors" requestURI="${RequestURI }" id="row">
+	name="actors" requestURI="${RequestUri }" id="row">
 	
 	<spring:message code="actor.banned"/>
 	<display:column>
