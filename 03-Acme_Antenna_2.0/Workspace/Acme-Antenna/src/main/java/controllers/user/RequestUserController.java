@@ -1,6 +1,8 @@
 package controllers.user;
 
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,33 @@ public class RequestUserController extends AbstractController{
 		return res;
 	}
 	
+	// List his or her already-serviced requests. ---------------------------
+	@RequestMapping(value="/listAlreadyServicedRequest", method=RequestMethod.GET)
+	public ModelAndView listServicedRequest(){
+		ModelAndView res;
+		User user = this.userService.findByPrincipal();
+		
+		Collection<Request> requests = this.requestService.alreadyServicedRequest(user.getId());
+		
+		res = new ModelAndView("request/list");
+		res.addObject("requests",requests);
+		res.addObject("requestURI", "request/user/list.do");
+		return res;
+	}
+	
+	// List his or her not-yet-serviced requests. ---------------------------
+		@RequestMapping(value="/listNotYetServicedRequest", method=RequestMethod.GET)
+		public ModelAndView listNotServicedRequest(){
+			ModelAndView res;
+			User user = this.userService.findByPrincipal();
+			
+			Collection<Request> requests = this.requestService.notYetServicedRequest(user.getId());
+			
+			res = new ModelAndView("request/list");
+			res.addObject("requests",requests);
+			res.addObject("requestURI", "request/user/list.do");
+			return res;
+		}
 	
 	// Ancillary methods -----------------------------
 		private ModelAndView createEditModelAndView(final RequestForm requestForm) {

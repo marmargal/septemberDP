@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -107,6 +108,18 @@ public class RequestService {
 	
 
 	// Other business method --------------------------------
+	
+	public Collection<Request> alreadyServicedRequest(int userId) {
+		Collection<Request> requests = new ArrayList<Request>();
+		requests = this.requestRepository.alreadyServicedRequest(userId);
+		return requests;
+	}
+
+	public Collection<Request> notYetServicedRequest(int userId) {
+		Collection<Request> requests = new ArrayList<Request>();
+		requests = this.requestRepository.notYetServicedRequest(userId);
+		return requests;
+	}
 
 	public Request reconstruct(RequestForm requestForm, BindingResult binding) {
 		Assert.notNull(requestForm);
@@ -142,5 +155,7 @@ public class RequestService {
 		
 		return res;
 	}
+
+	
 
 }
