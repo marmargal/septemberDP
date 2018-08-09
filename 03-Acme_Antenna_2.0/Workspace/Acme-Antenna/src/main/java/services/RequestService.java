@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -50,15 +51,18 @@ public class RequestService {
 	public Request create() {
 		Request res;
 		res = new Request();
+		
+		Date moment = new Date(System.currentTimeMillis() - 1000);
 
-		Handyworker handyworker;
-		handyworker = handyworkerService.findByPrincipal();
+//		Handyworker handyworker;
+//		handyworker = handyworkerService.findByPrincipal();
 
 		User user;
 		user = userService.findByPrincipal();
 
 		res.setUser(user);
-		res.setHandyworker(handyworker);
+//		res.setHandyworker(handyworker);
+		res.setMoment(moment);
 
 		return res;
 	}
@@ -79,13 +83,13 @@ public class RequestService {
 	}
 
 	public Request save(final Request request) {
-		this.handyworkerService.checkAuthority();
-		this.userService.checkAuthority();
+//		this.handyworkerService.checkAuthority();
+//		this.userService.checkAuthority();
 
 		Assert.isTrue(request.getUser().equals(
 				this.userService.findByPrincipal()));
-		Assert.isTrue(request.getHandyworker().equals(
-				this.handyworkerService.findByPrincipal()));
+//		Assert.isTrue(request.getHandyworker().equals(
+//				this.handyworkerService.findByPrincipal()));
 		Assert.notNull(request);
 
 		Request res;
