@@ -22,11 +22,11 @@
 <display:table pagesize="5" class="requests" keepStatus="true" name="requests"
 	requestURI="${requestURI }" id="row">
 
-	<acme:column property="creditCard" code="request.creditCard" />
 	<acme:column property="moment" code="request.moment" />
 	<acme:column property="description" code="request.description" />
 	<acme:column property="finishMoment" code="request.finishMoment" />
 	<acme:column property="result" code="request.result" />
+	<acme:column property="antenna.model" code="request.antenna" />
 
 	<display:column>
 
