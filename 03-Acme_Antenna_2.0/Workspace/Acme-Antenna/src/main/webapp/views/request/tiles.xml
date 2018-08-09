@@ -14,6 +14,16 @@
 		<put-attribute name="title" value="List of requests" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
+	
+	<definition name="request/listAlreadyServicedRequest" extends="master.page">
+		<put-attribute name="title" value="List of already serviced requests" />
+		<put-attribute name="body" value="/views/request/list.jsp" />
+	</definition>
+	
+	<definition name="request/listNotYetServicedRequest" extends="master.page">
+		<put-attribute name="title" value="List of not yet serviced requests" />
+		<put-attribute name="body" value="/views/request/list.jsp" />
+	</definition>
 
 	<definition name="request/create" extends="master.page">
 		<put-attribute name="title" value="Create request" />
