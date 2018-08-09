@@ -48,6 +48,8 @@
 						<li><a href="j_spring_security_logout"><spring:message
 									code="master.page.logout" /> </a></li>
 					</ul></li>
+				<li><a href="actor/administrator/list.do"><spring:message
+							code="master.page.ban.actor" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('USER')">
@@ -66,6 +68,8 @@
 							code="master.page.user.antennas" /></a></li>
 				<li><a href="subscription/user/list.do"><spring:message
 							code="master.page.user.subscription" /></a></li>
+				<li><a href="request/user/create.do"><spring:message
+							code="master.page.request" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('HANDYWORKER')">
@@ -78,9 +82,9 @@
 						<li><a href="j_spring_security_logout"><spring:message
 									code="master.page.logout" /> </a></li>
 					</ul></li>
-					
+
 				<li><a href="request/handyworker/list.do"><spring:message
-							code="master.page.requests" /></a></li>	
+							code="master.page.requests" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">

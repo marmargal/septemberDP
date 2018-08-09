@@ -36,6 +36,7 @@
 		
 		<value>/views/handyworker/messages</value>
 		<value>/views/request/messages</value>
+		<value>/views/administrator/messages</value>
 	</util:list>
 
 </beans>

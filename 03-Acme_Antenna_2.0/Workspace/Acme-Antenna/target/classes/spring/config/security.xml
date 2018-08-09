@@ -102,6 +102,10 @@
 		<security:intercept-url pattern="/request/handyworker/list.do" access="hasRole('HANDYWORKER')" />			
 		<security:intercept-url pattern="/request/list.do" access="hasRole('HANDYWORKER')" />			
 		<security:intercept-url pattern="/request/user/**" access="hasRole('USER')" />
+		
+									<!-- BAN ACTORS -->
+		<security:intercept-url pattern="/actor/administrator/list.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/actor/administrator/ban.do" access="hasRole('ADMIN')" />
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
