@@ -53,7 +53,7 @@
 				<li><a href="actor/administrator/list.do"><spring:message
 							code="master.page.ban.actor" /></a></li>
 			</security:authorize>
-			
+
 			<security:authorize access="hasRole('AGENT')">
 				<li><a href="#" class="fNiv"><spring:message
 							code="master.page.agent" /></a>
@@ -80,13 +80,16 @@
 							code="master.page.user.antennas" /></a></li>
 				<li><a href="subscription/user/list.do"><spring:message
 							code="master.page.user.subscription" /></a></li>
-				<li><a class="fNiv" href="#"><spring:message code="master.page.request" /></a>
+				<li><a class="fNiv" href="#"><spring:message
+							code="master.page.request" /></a>
 					<ul>
-						<li><a href="request/user/create.do"><spring:message code="master.page.request.create" /></a></li>
-						<li><a href="request/user/listAlreadyServicedRequest.do"><spring:message code="master.page.request.servicedRequest" /></a></li>
-						<li><a href="request/user/listNotYetServicedRequest.do"><spring:message code="master.page.request.notServicedRequest" /></a></li>
-					</ul>			
-				</li>
+						<li><a href="request/user/create.do"><spring:message
+									code="master.page.request.create" /></a></li>
+						<li><a href="request/user/listAlreadyServicedRequest.do"><spring:message
+									code="master.page.request.servicedRequest" /></a></li>
+						<li><a href="request/user/listNotYetServicedRequest.do"><spring:message
+									code="master.page.request.notServicedRequest" /></a></li>
+					</ul></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('HANDYWORKER')">
@@ -102,6 +105,8 @@
 
 				<li><a href="request/handyworker/list.do"><spring:message
 							code="master.page.requests" /></a></li>
+				<li><a href="request/handyworker/listWithoutServiced.do"><spring:message
+							code="master.page.requests.without.serviced" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">

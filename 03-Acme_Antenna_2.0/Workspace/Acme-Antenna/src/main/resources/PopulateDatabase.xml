@@ -267,6 +267,7 @@
 		<property name="user" ref="user2" />
 		<property name="antenna" ref="antenna2"/>
 	</bean>
+
 	<!-- ANTENNA -->
 
 	<bean id="antenna1" class="domain.Antenna">

@@ -15,6 +15,11 @@
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
 	
+	<definition name="request/listWithoutServiced" extends="master.page">
+		<put-attribute name="title" value="Lista de peticiones" />
+		<put-attribute name="body" value="/views/request/list.jsp" />
+	</definition>
+	
 	<definition name="request/listAlreadyServicedRequest" extends="master.page">
 		<put-attribute name="title" value="Lista de peticiones ya atendidas" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
