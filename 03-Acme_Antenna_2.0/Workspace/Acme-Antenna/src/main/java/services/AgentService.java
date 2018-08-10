@@ -97,7 +97,7 @@ public class AgentService {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		res = agentRepository.findAgentByUserAccountId(userAccount.getId());
-		Assert.notNull(res);
+//		Assert.notNull(res);
 		return res;
 	}
 

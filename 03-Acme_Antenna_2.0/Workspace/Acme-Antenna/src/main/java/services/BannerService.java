@@ -22,6 +22,7 @@ public class BannerService {
 	private BannerRepository bannerRepository;
 
 	// Suporting services
+	@Autowired
 	private AgentService agentService;
 
 	// Constructors

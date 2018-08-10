@@ -13,7 +13,7 @@ import javax.validation.Valid;
 public class Agent extends Actor {
 
 	public Agent() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	// relaciones
