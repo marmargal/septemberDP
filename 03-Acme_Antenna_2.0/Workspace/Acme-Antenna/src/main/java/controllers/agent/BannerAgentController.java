@@ -47,7 +47,7 @@ public class BannerAgentController extends AbstractController {
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Banner banner,
+	public ModelAndView save(@Valid final Banner banner,
 			final BindingResult binding) {
 		ModelAndView res;
 		System.out.println(binding.getFieldError());
