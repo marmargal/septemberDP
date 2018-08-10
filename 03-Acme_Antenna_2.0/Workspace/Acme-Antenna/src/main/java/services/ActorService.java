@@ -24,6 +24,9 @@ public class ActorService {
 
 		// Supporting services ----------------------------------------------------
 
+		@Autowired
+		private AdministratorService administratorService;
+		
 		// Constructors -----------------------------------------------------------
 
 		public ActorService() {
@@ -107,6 +110,18 @@ public class ActorService {
 			result = this.actorRepository.findByUserAccountId(userAccount.getId());
 			Assert.notNull(result);
 
+			return result;
+		}
+		
+		public boolean ban(Actor actor) {
+			administratorService.checkAuthority();
+			boolean result;
+			if (actor.getUserAccount().getBanned() == true) {
+				actor.getUserAccount().setBanned(false);
+			} else {
+				actor.getUserAccount().setBanned(true);
+			}
+			result = actor.getUserAccount().getBanned();
 			return result;
 		}
 }

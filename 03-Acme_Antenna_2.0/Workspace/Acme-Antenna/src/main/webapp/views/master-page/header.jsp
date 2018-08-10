@@ -29,6 +29,8 @@
 									code="master.page.register.user" /></a></li>
 						<li><a href="handyworker/register.do"><spring:message
 									code="master.page.register.handyworker" /></a></li>
+						<li><a href="agent/register.do"><spring:message
+									code="master.page.register.agent" /></a></li>
 					</ul></li>
 				<li><a href="satellite/list.do"><spring:message
 							code="master.page.satellites" /></a></li>
@@ -43,6 +45,18 @@
 			<security:authorize access="hasRole('ADMIN')">
 				<li><a href="#" class="fNiv"><spring:message
 							code="master.page.administrator" /></a>
+					<ul>
+						<li class="arrow"></li>
+						<li><a href="j_spring_security_logout"><spring:message
+									code="master.page.logout" /> </a></li>
+					</ul></li>
+				<li><a href="actor/administrator/list.do"><spring:message
+							code="master.page.ban.actor" /></a></li>
+			</security:authorize>
+
+			<security:authorize access="hasRole('AGENT')">
+				<li><a href="#" class="fNiv"><spring:message
+							code="master.page.agent" /></a>
 					<ul>
 						<li class="arrow"></li>
 						<li><a href="j_spring_security_logout"><spring:message
@@ -66,6 +80,16 @@
 							code="master.page.user.antennas" /></a></li>
 				<li><a href="subscription/user/list.do"><spring:message
 							code="master.page.user.subscription" /></a></li>
+				<li><a class="fNiv" href="#"><spring:message
+							code="master.page.request" /></a>
+					<ul>
+						<li><a href="request/user/create.do"><spring:message
+									code="master.page.request.create" /></a></li>
+						<li><a href="request/user/listAlreadyServicedRequest.do"><spring:message
+									code="master.page.request.servicedRequest" /></a></li>
+						<li><a href="request/user/listNotYetServicedRequest.do"><spring:message
+									code="master.page.request.notServicedRequest" /></a></li>
+					</ul></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('HANDYWORKER')">
@@ -78,9 +102,11 @@
 						<li><a href="j_spring_security_logout"><spring:message
 									code="master.page.logout" /> </a></li>
 					</ul></li>
-					
+
 				<li><a href="request/handyworker/list.do"><spring:message
-							code="master.page.requests" /></a></li>	
+							code="master.page.requests" /></a></li>
+				<li><a href="request/handyworker/listWithoutServiced.do"><spring:message
+							code="master.page.requests.without.serviced" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">

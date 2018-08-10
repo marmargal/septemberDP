@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.HandyworkerService;
-import services.RequestService;
 import controllers.AbstractController;
 import domain.Handyworker;
 import domain.Request;
@@ -37,16 +36,25 @@ public class RequestHandyworkerController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
+		Collection<Request> lista = new ArrayList<>();
 		Collection<Request> requests = new ArrayList<>();
 
 		Handyworker handyworker = handyworkerService.findByPrincipal();
 
-		requests = handyworker.getRequests();
+
+		lista = handyworker.getRequests();
+		for (Request r : lista) {
+			if (r.getFinishMoment() != null) {
+				requests.add(r);
+			}
+		}
+
 		result = new ModelAndView("request/list");
 		result.addObject("requests", requests);
 		result.addObject("requestURI", "request/handyworker/list.do");
 		return result;
 	}
+
 
 	@RequestMapping(value = "/listUnassigned", method = RequestMethod.GET)
 	public ModelAndView listUnassigned() {
@@ -86,6 +94,32 @@ public class RequestHandyworkerController extends AbstractController {
 
 		}
 		return res;
+	}
+
+
+	@RequestMapping(value = "/listWithoutServiced", method = RequestMethod.GET)
+	public ModelAndView listWithoutServiced() {
+		ModelAndView result;
+		Collection<Request> lista = new ArrayList<>();
+		Collection<Request> requests = new ArrayList<>();
+
+		Handyworker handyworker = handyworkerService.findByPrincipal();
+
+		lista = handyworker.getRequests();
+
+		for (Request r : lista) {
+			if (r.getFinishMoment() == null) {
+				requests.add(r);
+			}
+		}
+		System.out.println(lista);
+		System.out.println(requests);
+
+		result = new ModelAndView("request/listWithoutServiced");
+		result.addObject("requests", requests);
+		result.addObject("requestURI",
+				"request/handyworker/listWithoutServiced.do");
+		return result;
 	}
 
 }

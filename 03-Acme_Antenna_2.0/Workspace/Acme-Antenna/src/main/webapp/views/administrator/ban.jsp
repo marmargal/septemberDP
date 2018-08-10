@@ -12,20 +12,25 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="5" class="handyworkers" keepStatus="true" name="handyworkers"
-	requestURI="${requestURI }" id="row">
+<!-- Listing grid -->
+<security:authorize access="hasRole('ADMIN')">
+<form:form action="actor/administrator/ban.do" modelAttribute="actor">
 
-	<acme:column property="name" code="handyworker.name" />
-	<acme:column property="surname" code="handyworker.surname" />
-	<acme:column property="postalAddress" code="handyworker.address" />
-	<acme:column property="email" code="handyworker.email" />
-	<acme:column property="phoneNumber" code="handyworker.phoneNumber" />
-	<acme:column property="userAccount.username" code="handyworker.username" />
-</display:table>
+	<form:hidden path="id"/>
+	<form:hidden path="version"/>
+	<form:hidden path="userAccount"/>
+	<form:hidden path="userAccount.password"/>
+	<form:hidden path="userAccount.authorities"/>
+	
+	<acme:cancel url="/actor/administrator/list.do" code="ban.return" />
+	
+</form:form>
+</security:authorize>
