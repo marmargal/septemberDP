@@ -108,9 +108,6 @@
 
 		<security:intercept-url pattern="/request/handyworker/assign.do" access="hasRole('HANDYWORKER')" />			
 		
-		
-
-		
 									<!-- BAN ACTORS -->
 		<security:intercept-url pattern="/actor/administrator/list.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/actor/administrator/ban.do" access="hasRole('ADMIN')" />
@@ -121,6 +118,9 @@
 									<!-- BANNER -->
 		<security:intercept-url pattern="/banner/agent/create.do" access="hasRole('AGENT')" />
 		<security:intercept-url pattern="/banner/agent/edit.do" access="hasRole('AGENT')" />
+		
+									<!-- CONFIGURATION -->
+		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMIN')" />							
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

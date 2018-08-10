@@ -564,5 +564,16 @@
 			</list>
 		</property>
 	</bean>
+	
+		<!-- CONFIGURATION -->
+	
+	<bean id="configuration" class="domain.Configuration">
+	<property name="tabooWords">
+		<list>
+			<value>sex</value>
+			<value>viagra</value>
+		</list>
+	</property>
+	</bean>
 
 </beans>

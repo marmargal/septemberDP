@@ -42,6 +42,7 @@
 		<value>/views/request/tiles.xml</value>
 		<value>/views/administrator/tiles.xml</value>
 		<value>/views/banner/tiles.xml</value>
+		<value>/views/configuration/tiles.xml</value>
 	</util:list>
 
 </beans>

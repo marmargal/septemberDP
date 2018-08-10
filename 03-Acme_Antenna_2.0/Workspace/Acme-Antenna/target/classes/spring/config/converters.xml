@@ -45,6 +45,8 @@
 		<bean class="converters.StringToSubscriptionConverter" />
 		<bean class="converters.TutorialToStringConverter" />
 		<bean class="converters.StringToTutorialConverter" />
+		<bean class="converters.ConfigurationToStringConverter" />
+		<bean class="converters.StringToConfigurationConverter" />
 
 	</util:list>
 	

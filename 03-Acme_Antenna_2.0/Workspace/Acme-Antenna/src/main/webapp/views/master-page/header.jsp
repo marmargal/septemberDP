@@ -52,6 +52,8 @@
 					</ul></li>
 				<li><a href="actor/administrator/list.do"><spring:message
 							code="master.page.ban.actor" /></a></li>
+				<li><a href="configuration/administrator/edit.do"><spring:message
+							code="master.page.manage.taboo.words" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('AGENT')">
