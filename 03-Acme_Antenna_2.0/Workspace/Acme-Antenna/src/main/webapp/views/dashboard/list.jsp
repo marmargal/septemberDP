@@ -330,5 +330,41 @@
 	</fieldset>
 </jstl:if>
 
+<jstl:if test="${!(dataNumBannerPerAgent[0] eq null)}">
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataNumBannerPerAgent" /></b> <br />
+			<h4>
+				<jstl:out value=" AVG: " />
+				<jstl:out value="${dataNumBannerPerAgent[0]}" />
+				<br />
+			</h4>
 
 
+		</div>
+	</fieldset>
+</jstl:if>
+
+<jstl:if test="${!(topAgentNumberBanners[0] eq null)}">
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.topAgentNumberBanners" /></b> <br />
+			<h4>
+				<jstl:out value=" 1: " />
+				<jstl:out value="${topAgentNumberBanners[0].name}" />
+				<br />
+				<jstl:out value=" 2: " />
+
+				<jstl:out value="${topAgentNumberBanners[1].name}" />
+				<br />
+				<jstl:out value=" 3: " />
+
+				<jstl:out value="${topAgentNumberBanners[2].name}" />
+
+				<br />
+			</h4>
+
+
+		</div>
+	</fieldset>
+</jstl:if>

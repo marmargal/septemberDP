@@ -17,6 +17,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
+import domain.Agent;
 import domain.Antenna;
 import forms.ActorForm;
 
@@ -231,4 +232,11 @@ public class AdministratorService {
 		return administratorRepository.dataNumRequestPerHandy();
 	}
 
+	public Collection<Double> dataNumBannerPerAgent() {
+		return administratorRepository.dataNumBannerPerAgent();
+	}
+
+	public Collection<Agent> topAgentNumberBanners() {
+		return administratorRepository.topAgentNumberBanners();
+	}
 }

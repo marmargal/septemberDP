@@ -64,6 +64,12 @@ public class DashboardAdministratorController {
 		result.addObject("dataNumRequestPerHandy",
 				administratorService.dataNumRequestPerHandy());
 
+		result.addObject("dataNumBannerPerAgent",
+				administratorService.dataNumBannerPerAgent());
+
+		result.addObject("topAgentNumberBanners",
+				administratorService.topAgentNumberBanners());
+
 		return result;
 	}
 }
