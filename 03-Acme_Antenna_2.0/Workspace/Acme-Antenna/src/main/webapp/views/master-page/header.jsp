@@ -62,6 +62,8 @@
 						<li><a href="j_spring_security_logout"><spring:message
 									code="master.page.logout" /> </a></li>
 					</ul></li>
+				<li><a href="banner/agent/create.do"><spring:message
+							code="master.page.create.banner" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('USER')">

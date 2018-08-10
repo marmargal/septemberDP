@@ -41,6 +41,7 @@
 		<value>/views/handyworker/tiles.xml</value>
 		<value>/views/request/tiles.xml</value>
 		<value>/views/administrator/tiles.xml</value>
+		<value>/views/banner/tiles.xml</value>
 	</util:list>
 
 </beans>

@@ -35,8 +35,8 @@ public class BannerService {
 	public Banner create() {
 		Banner res;
 		res = new Banner();
+		
 		Agent agent = agentService.findByPrincipal();
-
 		res.setAgent(agent);
 
 		return res;
@@ -60,6 +60,8 @@ public class BannerService {
 	public Banner save(final Banner banner) {
 		Assert.notNull(banner);
 		Banner res;
+
+		
 		res = this.bannerRepository.save(banner);
 		return res;
 	}

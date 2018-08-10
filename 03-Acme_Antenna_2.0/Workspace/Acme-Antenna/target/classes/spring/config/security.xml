@@ -111,6 +111,9 @@
 									<!-- AGENT -->
 		<security:intercept-url pattern="/agent/register.do" access="permitAll" />							
 
+									<!-- BANNER -->
+		<security:intercept-url pattern="/banner/agent/create.do" access="hasRole('AGENT')" />
+		<security:intercept-url pattern="/banner/agent/edit.do" access="hasRole('AGENT')" />
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
