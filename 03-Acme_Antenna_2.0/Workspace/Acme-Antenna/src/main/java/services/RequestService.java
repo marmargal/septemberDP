@@ -14,7 +14,6 @@ import org.springframework.validation.Validator;
 
 import repositories.RequestRepository;
 import domain.CreditCard;
-import domain.Handyworker;
 import domain.Request;
 import domain.User;
 import forms.RequestForm;
@@ -87,8 +86,18 @@ public class RequestService {
 		// this.handyworkerService.checkAuthority();
 		// this.userService.checkAuthority();
 
-		Assert.isTrue(request.getUser().equals(
-				this.userService.findByPrincipal()));
+		if (this.userService.findByPrincipal() != null) {
+			Assert.isTrue(request.getUser().equals(
+					this.userService.findByPrincipal()));
+
+		} else if (this.handyworkerService.findByPrincipal() != null) {
+			Assert.isTrue(request.getHandyworker().equals(
+					this.handyworkerService.findByPrincipal()));
+		} else {
+			Assert.notNull(null);
+
+		}
+
 		// Assert.isTrue(request.getHandyworker().equals(
 		// this.handyworkerService.findByPrincipal()));
 		Assert.notNull(request);
@@ -106,7 +115,7 @@ public class RequestService {
 	}
 
 	// Other business method --------------------------------
-	
+
 	public Collection<Request> alreadyServicedRequest(int userId) {
 		Collection<Request> requests = new ArrayList<Request>();
 		requests = this.requestRepository.alreadyServicedRequest(userId);
@@ -154,7 +163,6 @@ public class RequestService {
 		return res;
 	}
 
-
 	public Collection<Request> requestUnassigned() {
 		Collection<Request> requests = new ArrayList<>();
 		for (Request r : this.findAll()) {
@@ -164,6 +172,5 @@ public class RequestService {
 		}
 		return requests;
 	}
-
 
 }

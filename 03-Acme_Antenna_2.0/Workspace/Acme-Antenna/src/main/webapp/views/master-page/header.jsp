@@ -107,6 +107,8 @@
 							code="master.page.requests" /></a></li>
 				<li><a href="request/handyworker/listWithoutServiced.do"><spring:message
 							code="master.page.requests.without.serviced" /></a></li>
+				<li><a href="request/handyworker/listUnassigned.do"><spring:message
+							code="master.page.requests.unassign.serviced" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">

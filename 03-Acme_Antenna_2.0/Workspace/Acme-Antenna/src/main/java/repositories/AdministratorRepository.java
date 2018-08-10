@@ -67,4 +67,20 @@ public interface AdministratorRepository extends
 	// comment.
 	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Comment u")
 	Collection<Double> dataNumPicturesPerComment();
+	
+//	
+	
+//	The average and the standard deviation of the number of requests per user.
+
+	@Query("select avg(u.requests.size), stddev(u.requests.size) from User u")
+	Collection<Double> dataNumRequestPerUser();
+	
+//	 The average ratio of serviced requests per user.
+	@Query(" select avg(u.requests.size), stddev(u.requests.size) from User u join u.requests r where r.finishMoment<=current_date")
+	Collection<Double> dataServicedRequestPerUser();
+	
+//	 The average ratio of serviced requests per handyworker.
+	@Query("select avg(u.requests.size), stddev(u.requests.size) from Handyworker u")
+	Collection<Double> dataNumRequestPerHandy();
+	
 }

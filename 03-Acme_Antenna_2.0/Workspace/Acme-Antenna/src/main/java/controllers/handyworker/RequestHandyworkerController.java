@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.HandyworkerService;
+import services.RequestService;
 import controllers.AbstractController;
 import domain.Handyworker;
 import domain.Request;
@@ -41,7 +42,6 @@ public class RequestHandyworkerController extends AbstractController {
 
 		Handyworker handyworker = handyworkerService.findByPrincipal();
 
-
 		lista = handyworker.getRequests();
 		for (Request r : lista) {
 			if (r.getFinishMoment() != null) {
@@ -55,32 +55,15 @@ public class RequestHandyworkerController extends AbstractController {
 		return result;
 	}
 
-
-	@RequestMapping(value = "/listUnassigned", method = RequestMethod.GET)
-	public ModelAndView listUnassigned() {
-		ModelAndView result;
-		Collection<Request> requests = new ArrayList<>();
-
-		
-
-		requests = this.requestService.requestUnassigned();
-		result = new ModelAndView("request/list");
-		result.addObject("requests", requests);
-		result.addObject("requestURI", "request/handyworker/list.do");
-		return result;
-	}
 	@RequestMapping(value = "/assign", method = RequestMethod.POST, params = "assign")
 	public ModelAndView save(@RequestParam int requestId) {
 		ModelAndView res;
 		try {
-			System.out.println("llega");
 			Request request = this.requestService.findOne(requestId);
 			Handyworker handyworker = this.handyworkerService.findByPrincipal();
 			if (request.equals(null) || request.getHandyworker() != null) {
-				System.out.println("falla");
 				res = new ModelAndView("redirect:/request/handyworker/list.do");
 			} else {
-				System.out.println("entra");
 				request.setHandyworker(handyworker);
 				handyworker.getRequests().add(request);
 				requestService.save(request);
@@ -89,13 +72,11 @@ public class RequestHandyworkerController extends AbstractController {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			res = new ModelAndView("redirect:/request/handyworker/list.do");
 
 		}
 		return res;
 	}
-
 
 	@RequestMapping(value = "/listWithoutServiced", method = RequestMethod.GET)
 	public ModelAndView listWithoutServiced() {
@@ -112,8 +93,6 @@ public class RequestHandyworkerController extends AbstractController {
 				requests.add(r);
 			}
 		}
-		System.out.println(lista);
-		System.out.println(requests);
 
 		result = new ModelAndView("request/listWithoutServiced");
 		result.addObject("requests", requests);
@@ -122,4 +101,15 @@ public class RequestHandyworkerController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/listUnassigned", method = RequestMethod.GET)
+	public ModelAndView listUnassigned() {
+		ModelAndView result;
+		Collection<Request> requests = new ArrayList<>();
+
+		requests = this.requestService.requestUnassigned();
+		result = new ModelAndView("request/listUnassigned");
+		result.addObject("requests", requests);
+		result.addObject("requestURI", "request/handyworker/listUnassigned.do");
+		return result;
+	}
 }

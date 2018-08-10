@@ -100,7 +100,9 @@
 	
 									<!-- REQUEST -->
 		<security:intercept-url pattern="/request/handyworker/list.do" access="hasRole('HANDYWORKER')" />
-		<security:intercept-url pattern="/request/handyworker/listWithoutServiced.do" access="hasRole('HANDYWORKER')" />				
+		<security:intercept-url pattern="/request/handyworker/listWithoutServiced.do" access="hasRole('HANDYWORKER')" />
+		<security:intercept-url pattern="/request/handyworker/listUnassigned.do" access="hasRole('HANDYWORKER')" />				
+						
 		<security:intercept-url pattern="/request/list.do" access="hasRole('HANDYWORKER')" />			
 		<security:intercept-url pattern="/request/user/**" access="hasRole('USER')" />
 
@@ -115,7 +117,6 @@
 
 									<!-- AGENT -->
 		<security:intercept-url pattern="/agent/register.do" access="permitAll" />							
-
 
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

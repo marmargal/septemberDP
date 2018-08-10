@@ -167,18 +167,17 @@ public class AdministratorService {
 	}
 
 	public Collection<String> dataNumAntennasPerModel() {
-//		Collection<String> res = new ArrayList<String>();
-//		for (Object o : administratorRepository.dataNumAntennasPerModel()) {
-//			if (o instanceof String) {
-//				String ins = (String) o;
-//				res.add(ins);
-//			}
-//		}
+		// Collection<String> res = new ArrayList<String>();
+		// for (Object o : administratorRepository.dataNumAntennasPerModel()) {
+		// if (o instanceof String) {
+		// String ins = (String) o;
+		// res.add(ins);
+		// }
+		// }
 
 		return administratorRepository.dataNumAntennasPerModel();
 
 	}
-	
 
 	public Collection<Antenna> Top3AntennaPerpopularity() {
 		return administratorRepository.Top3AntennaPerpopularity();
@@ -219,4 +218,17 @@ public class AdministratorService {
 		return administratorRepository.dataNumPicturesPerComment();
 
 	}
+
+	public Collection<Double> dataNumRequestPerUser() {
+		return administratorRepository.dataNumRequestPerUser();
+	}
+
+	public Collection<Double> dataServicedRequestPerUser() {
+		return administratorRepository.dataServicedRequestPerUser();
+	}
+
+	public Collection<Double> dataNumRequestPerHandy() {
+		return administratorRepository.dataNumRequestPerHandy();
+	}
+
 }

@@ -66,24 +66,24 @@
 
 	<b><spring:message code="dashboard.dataNumAntennasPerModel" /></b> <br />
 	<jstl:forEach var="datos" items="${dataNumAntennasPerModel}">
-<table>
-<tr>
-<td>
-		<h4>
-			<jstl:out value=" Number: " />
-			<jstl:out value="${datos[0]}" />
-			<br />
-		</h4>
-		</td>
-		<td>
-		<h4>
-			<jstl:out value=" Tipo: " />
-			<jstl:out value="${datos[1]}" />
-			<br />
-		</h4>
-		</td>
-		</tr>
-</table>
+		<table>
+			<tr>
+				<td>
+					<h4>
+						<jstl:out value=" Number: " />
+						<jstl:out value="${datos[0]}" />
+						<br />
+					</h4>
+				</td>
+				<td>
+					<h4>
+						<jstl:out value=" Tipo: " />
+						<jstl:out value="${datos[1]}" />
+						<br />
+					</h4>
+				</td>
+			</tr>
+		</table>
 
 
 
@@ -268,3 +268,67 @@
 </jstl:if>
 
 <br />
+
+
+<jstl:if test="${!(dataNumRequestPerUser[0] eq null)}">
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataNumRequestPerUser" /></b> <br />
+			<h4>
+				<jstl:out value=" AVG: " />
+				<jstl:out value="${dataNumRequestPerUser[0][0]}" />
+				<br />
+			</h4>
+			<h4>
+				<jstl:out value=" STDDEV: " />
+				<jstl:out value="${dataNumRequestPerUser[0][1]}" />
+				<br />
+			</h4>
+
+		</div>
+	</fieldset>
+</jstl:if>
+
+
+<jstl:if test="${!(dataServicedRequestPerUser[0] eq null)}">
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataServicedRequestPerUser" /></b>
+			<br />
+			<h4>
+				<jstl:out value=" AVG: " />
+				<jstl:out value="${dataServicedRequestPerUser[0][0]}" />
+				<br />
+			</h4>
+			<h4>
+				<jstl:out value=" STDDEV: " />
+				<jstl:out value="${dataServicedRequestPerUser[0][1]}" />
+				<br />
+			</h4>
+
+		</div>
+	</fieldset>
+</jstl:if>
+
+
+<jstl:if test="${!(dataNumRequestPerHandy[0] eq null)}">
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataNumRequestPerHandy" /></b> <br />
+			<h4>
+				<jstl:out value=" AVG: " />
+				<jstl:out value="${dataNumRequestPerHandy[0][0]}" />
+				<br />
+			</h4>
+			<h4>
+				<jstl:out value=" STDDEV: " />
+				<jstl:out value="${dataNumRequestPerHandy[0][1]}" />
+				<br />
+			</h4>
+
+		</div>
+	</fieldset>
+</jstl:if>
+
+
+

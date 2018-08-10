@@ -14,18 +14,20 @@
 		<put-attribute name="title" value="List of finished requests" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
-	
-		<definition name="request/listWithoutServiced" extends="master.page">
+
+	<definition name="request/listWithoutServiced" extends="master.page">
 		<put-attribute name="title" value="List of not finished requests" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
-	
-	<definition name="request/listAlreadyServicedRequest" extends="master.page">
+
+	<definition name="request/listAlreadyServicedRequest"
+		extends="master.page">
 		<put-attribute name="title" value="List of already serviced requests" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
-	
-	<definition name="request/listNotYetServicedRequest" extends="master.page">
+
+	<definition name="request/listNotYetServicedRequest"
+		extends="master.page">
 		<put-attribute name="title" value="List of not yet serviced requests" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
@@ -33,6 +35,11 @@
 	<definition name="request/create" extends="master.page">
 		<put-attribute name="title" value="Create request" />
 		<put-attribute name="body" value="/views/request/create.jsp" />
+	</definition>
+	
+	<definition name="request/listUnassigned" extends="master.page">
+		<put-attribute name="title" value="List of not yet assigned requests" />
+		<put-attribute name="body" value="/views/request/list.jsp" />
 	</definition>
 
 </tiles-definitions>
