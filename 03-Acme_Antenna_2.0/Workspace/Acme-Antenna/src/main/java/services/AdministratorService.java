@@ -17,6 +17,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
+import domain.Agent;
 import domain.Antenna;
 import forms.ActorForm;
 
@@ -167,18 +168,17 @@ public class AdministratorService {
 	}
 
 	public Collection<String> dataNumAntennasPerModel() {
-//		Collection<String> res = new ArrayList<String>();
-//		for (Object o : administratorRepository.dataNumAntennasPerModel()) {
-//			if (o instanceof String) {
-//				String ins = (String) o;
-//				res.add(ins);
-//			}
-//		}
+		// Collection<String> res = new ArrayList<String>();
+		// for (Object o : administratorRepository.dataNumAntennasPerModel()) {
+		// if (o instanceof String) {
+		// String ins = (String) o;
+		// res.add(ins);
+		// }
+		// }
 
 		return administratorRepository.dataNumAntennasPerModel();
 
 	}
-	
 
 	public Collection<Antenna> Top3AntennaPerpopularity() {
 		return administratorRepository.Top3AntennaPerpopularity();
@@ -218,5 +218,25 @@ public class AdministratorService {
 	public Collection<Double> dataNumPicturesPerComment() {
 		return administratorRepository.dataNumPicturesPerComment();
 
+	}
+
+	public Collection<Double> dataNumRequestPerUser() {
+		return administratorRepository.dataNumRequestPerUser();
+	}
+
+	public Collection<Double> dataServicedRequestPerUser() {
+		return administratorRepository.dataServicedRequestPerUser();
+	}
+
+	public Collection<Double> dataNumRequestPerHandy() {
+		return administratorRepository.dataNumRequestPerHandy();
+	}
+
+	public Collection<Double> dataNumBannerPerAgent() {
+		return administratorRepository.dataNumBannerPerAgent();
+	}
+
+	public Collection<Agent> topAgentNumberBanners() {
+		return administratorRepository.topAgentNumberBanners();
 	}
 }

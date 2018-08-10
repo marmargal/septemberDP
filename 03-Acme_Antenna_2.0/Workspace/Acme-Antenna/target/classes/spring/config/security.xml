@@ -100,9 +100,16 @@
 	
 									<!-- REQUEST -->
 		<security:intercept-url pattern="/request/handyworker/list.do" access="hasRole('HANDYWORKER')" />
-		<security:intercept-url pattern="/request/handyworker/listWithoutServiced.do" access="hasRole('HANDYWORKER')" />				
+		<security:intercept-url pattern="/request/handyworker/listWithoutServiced.do" access="hasRole('HANDYWORKER')" />
+		<security:intercept-url pattern="/request/handyworker/listUnassigned.do" access="hasRole('HANDYWORKER')" />				
+						
 		<security:intercept-url pattern="/request/list.do" access="hasRole('HANDYWORKER')" />			
 		<security:intercept-url pattern="/request/user/**" access="hasRole('USER')" />
+
+		<security:intercept-url pattern="/request/handyworker/assign.do" access="hasRole('HANDYWORKER')" />			
+		
+		
+
 		
 									<!-- BAN ACTORS -->
 		<security:intercept-url pattern="/actor/administrator/list.do" access="hasRole('ADMIN')" />

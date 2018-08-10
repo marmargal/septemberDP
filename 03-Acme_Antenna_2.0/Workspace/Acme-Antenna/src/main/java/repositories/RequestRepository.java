@@ -11,10 +11,12 @@ import domain.Request;
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Integer> {
 
+
 	@Query("select r from Request r where (r.user.id = ?1 and r.finishMoment is not null)")
 	Collection<Request> alreadyServicedRequest(int userId);
 
 	@Query("select r from Request r where (r.user.id = ?1 and r.finishMoment is null)")
 	Collection<Request> notYetServicedRequest(int userId);
+
 
 }

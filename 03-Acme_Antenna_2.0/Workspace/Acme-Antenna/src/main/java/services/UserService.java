@@ -121,7 +121,7 @@ public class UserService {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		res = userRepository.findUserByUserAccountId(userAccount.getId());
-		Assert.notNull(res);
+		//Assert.notNull(res);
 		return res;
 	}
 

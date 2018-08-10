@@ -14,7 +14,6 @@ import org.springframework.validation.Validator;
 
 import repositories.RequestRepository;
 import domain.CreditCard;
-import domain.Handyworker;
 import domain.Request;
 import domain.User;
 import forms.RequestForm;
@@ -34,10 +33,10 @@ public class RequestService {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private AntennaService antennaService;
-	
+
 	@Autowired
 	private Validator validator;
 
@@ -52,17 +51,17 @@ public class RequestService {
 	public Request create() {
 		Request res;
 		res = new Request();
-		
+
 		Date moment = new Date(System.currentTimeMillis() - 1000);
 
-//		Handyworker handyworker;
-//		handyworker = handyworkerService.findByPrincipal();
+		// Handyworker handyworker;
+		// handyworker = handyworkerService.findByPrincipal();
 
 		User user;
 		user = userService.findByPrincipal();
 
 		res.setUser(user);
-//		res.setHandyworker(handyworker);
+		// res.setHandyworker(handyworker);
 		res.setMoment(moment);
 
 		return res;
@@ -84,13 +83,23 @@ public class RequestService {
 	}
 
 	public Request save(final Request request) {
-//		this.handyworkerService.checkAuthority();
-//		this.userService.checkAuthority();
+		// this.handyworkerService.checkAuthority();
+		// this.userService.checkAuthority();
 
-		Assert.isTrue(request.getUser().equals(
-				this.userService.findByPrincipal()));
-//		Assert.isTrue(request.getHandyworker().equals(
-//				this.handyworkerService.findByPrincipal()));
+		if (this.userService.findByPrincipal() != null) {
+			Assert.isTrue(request.getUser().equals(
+					this.userService.findByPrincipal()));
+
+		} else if (this.handyworkerService.findByPrincipal() != null) {
+			Assert.isTrue(request.getHandyworker().equals(
+					this.handyworkerService.findByPrincipal()));
+		} else {
+			Assert.notNull(null);
+
+		}
+
+		// Assert.isTrue(request.getHandyworker().equals(
+		// this.handyworkerService.findByPrincipal()));
 		Assert.notNull(request);
 
 		Request res;
@@ -104,11 +113,9 @@ public class RequestService {
 		Assert.isTrue(this.requestRepository.exists(request.getId()));
 		this.requestRepository.delete(request);
 	}
-	
-	
 
 	// Other business method --------------------------------
-	
+
 	public Collection<Request> alreadyServicedRequest(int userId) {
 		Collection<Request> requests = new ArrayList<Request>();
 		requests = this.requestRepository.alreadyServicedRequest(userId);
@@ -123,39 +130,47 @@ public class RequestService {
 
 	public Request reconstruct(RequestForm requestForm, BindingResult binding) {
 		Assert.notNull(requestForm);
-		
+
 		Request res;
 		CreditCard cc = new CreditCard();
-		
-		if(requestForm.getId()!=0)
+
+		if (requestForm.getId() != 0)
 			res = this.findOne(requestForm.getId());
 		else
 			res = this.create();
-		
-		//CREDIT CARD
+
+		// CREDIT CARD
 		int cvv = Integer.parseInt(requestForm.getCvv());
-		int expirationMonth = Integer.parseInt(requestForm.getExpirationMonth());
+		int expirationMonth = Integer
+				.parseInt(requestForm.getExpirationMonth());
 		int expirationYear = Integer.parseInt(requestForm.getExpirationYear());
-		
+
 		cc.setBrandName(requestForm.getBrandName());
 		cc.setCvv(cvv);
 		cc.setExpirationMonth(expirationMonth);
 		cc.setExpirationYear(expirationYear);
 		cc.setHolderName(requestForm.getHolderName());
 		cc.setNumber(requestForm.getNumber());
-		
-		
+
 		res.setCreditCard(cc);
 		res.setDescription(requestForm.getDescription());
 		res.setResult(requestForm.getResult());
 		res.setAntenna(this.antennaService.findOne(requestForm.getAntennaId()));
-		
-		if(binding!=null)
+
+		if (binding != null)
 			this.validator.validate(res, binding);
-		
+
 		return res;
 	}
 
-	
+	public Collection<Request> requestUnassigned() {
+		Collection<Request> requests = new ArrayList<>();
+		for (Request r : this.findAll()) {
+			if (r.getHandyworker() == null) {
+				requests.add(r);
+			}
+		}
+		return requests;
+	}
 
 }

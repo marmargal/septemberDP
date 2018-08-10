@@ -55,6 +55,21 @@ public class DashboardAdministratorController {
 		result.addObject("dataNumPicturesPerComment",
 				administratorService.dataNumPicturesPerComment());
 
+		result.addObject("dataNumRequestPerUser",
+				administratorService.dataNumRequestPerUser());
+
+		result.addObject("dataServicedRequestPerUser",
+				administratorService.dataServicedRequestPerUser());
+
+		result.addObject("dataNumRequestPerHandy",
+				administratorService.dataNumRequestPerHandy());
+
+		result.addObject("dataNumBannerPerAgent",
+				administratorService.dataNumBannerPerAgent());
+
+		result.addObject("topAgentNumberBanners",
+				administratorService.topAgentNumberBanners());
+
 		return result;
 	}
 }

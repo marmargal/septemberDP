@@ -1,6 +1,5 @@
 package repositories;
 
-
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import domain.Actor;
 import domain.Administrator;
+import domain.Agent;
 import domain.Antenna;
 
 @Repository
@@ -21,7 +21,7 @@ public interface AdministratorRepository extends
 	// The average and the standard deviation of the number of antennas per user
 	@Query("select avg(u.antennas.size), stddev(u.antennas.size) from User u")
 	Collection<Double> dataAntennasPerUser();
-	
+
 	// The average and the standard deviation of the quality of the antennas.
 	@Query("select avg(a.quality), stddev(a.quality) from Antenna a")
 	Collection<Double> dataQualityPerAntennas();
@@ -67,4 +67,28 @@ public interface AdministratorRepository extends
 	// comment.
 	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Comment u")
 	Collection<Double> dataNumPicturesPerComment();
+
+	//
+
+	// The average and the standard deviation of the number of requests per
+	// user.
+
+	@Query("select avg(u.requests.size), stddev(u.requests.size) from User u")
+	Collection<Double> dataNumRequestPerUser();
+
+	// The average ratio of serviced requests per user.
+	@Query(" select avg(u.requests.size), stddev(u.requests.size) from User u join u.requests r where r.finishMoment<=current_date")
+	Collection<Double> dataServicedRequestPerUser();
+
+	// The average ratio of serviced requests per handyworker.
+	@Query("select avg(u.requests.size), stddev(u.requests.size) from Handyworker u")
+	Collection<Double> dataNumRequestPerHandy();
+
+	// The average number of banners per agent.
+	@Query("select avg(u.banners.size) from Agent u")
+	Collection<Double> dataNumBannerPerAgent();
+
+	// The top-3 agents in terms of number of banners.
+	@Query("select a from Agent a order by a.banners.size desc")
+	Collection<Agent> topAgentNumberBanners();
 }

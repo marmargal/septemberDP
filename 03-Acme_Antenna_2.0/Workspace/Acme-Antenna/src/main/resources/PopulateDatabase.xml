@@ -267,6 +267,15 @@
 		<property name="user" ref="user2" />
 		<property name="antenna" ref="antenna2"/>
 	</bean>
+	<bean id="request3" class="domain.Request">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="moment" value="02/06/2010" />
+		<property name="description" value="description" />
+		<property name="finishMoment" value="02/06/2018" />
+		<property name="result" value="result" />
+		<property name="user" ref="user1" />
+		<property name="antenna" ref="antenna1"/>
+	</bean>
 
 	<!-- ANTENNA -->
 

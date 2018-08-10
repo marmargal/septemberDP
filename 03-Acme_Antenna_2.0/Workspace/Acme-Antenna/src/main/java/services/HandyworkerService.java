@@ -98,7 +98,7 @@ public class HandyworkerService {
 		userAccount = LoginService.getPrincipal();
 		res = handyworkerRepository.findHandyworkerByUserAccountId(userAccount
 				.getId());
-		Assert.notNull(res);
+	//	Assert.notNull(res);
 		return res;
 	}
 
