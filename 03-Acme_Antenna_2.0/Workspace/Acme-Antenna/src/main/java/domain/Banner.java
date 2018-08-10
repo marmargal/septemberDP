@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.URL;
 public class Banner extends DomainEntity {
 
 	public Banner() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	private String picture;
@@ -24,7 +24,6 @@ public class Banner extends DomainEntity {
 
 	@URL
 	@NotBlank
-	@NotNull
 	public String getPicture() {
 		return picture;
 	}
@@ -35,7 +34,6 @@ public class Banner extends DomainEntity {
 
 	@URL
 	@NotBlank
-	@NotNull
 	public String getTargetPage() {
 		return targetPage;
 	}
@@ -44,7 +42,6 @@ public class Banner extends DomainEntity {
 		this.targetPage = targetPage;
 	}
 
-	@Valid
 	@NotNull
 	public CreditCard getCreditCard() {
 		return creditCard;
@@ -58,7 +55,6 @@ public class Banner extends DomainEntity {
 	private Agent agent;
 
 	@Valid
-	@NotNull
 	@ManyToOne(optional = false)
 	public Agent getAgent() {
 		return agent;

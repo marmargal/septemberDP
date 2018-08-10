@@ -45,8 +45,19 @@
 		<bean class="converters.StringToSubscriptionConverter" />
 		<bean class="converters.TutorialToStringConverter" />
 		<bean class="converters.StringToTutorialConverter" />
+<<<<<<< HEAD
 		<bean class="converters.ConfigurationToStringConverter" />
 		<bean class="converters.StringToConfigurationConverter" />
+=======
+		<bean class="converters.AgentToStringConverter" />
+		<bean class="converters.StringToAgentConverter" />
+		<bean class="converters.BannerToStringConverter" />
+		<bean class="converters.StringToBannerConverter" />
+		<bean class="converters.HandyworkerToStringConverter" />
+		<bean class="converters.StringToHandyworkerConverter" />
+		<bean class="converters.RequestToStringConverter" />
+		<bean class="converters.StringToRequestConverter" />
+>>>>>>> Inma
 
 	</util:list>
 	
