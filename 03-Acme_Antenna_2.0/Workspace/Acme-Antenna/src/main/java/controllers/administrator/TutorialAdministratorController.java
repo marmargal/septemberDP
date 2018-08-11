@@ -1,5 +1,7 @@
 package controllers.administrator;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +66,18 @@ public class TutorialAdministratorController extends AbstractController{
 				res = this.createEditModelAndView(tutorialForm, "comment.commit.error");
 			}
 		}
+		
+		return res;
+	}
+	
+	@RequestMapping(value="/tutorialsTabooList", method=RequestMethod.GET)
+	public ModelAndView tutorialsTabooList(){
+		ModelAndView res;
+		Collection<Tutorial> tutorials = this.tutorialService.tutorialsTaboo();
+		
+		res = new ModelAndView("tutorial/list");
+		res.addObject("tutorial",tutorials);
+		res.addObject("requestURI","tutorial/administrator/list.do");
 		
 		return res;
 	}

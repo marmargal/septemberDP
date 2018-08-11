@@ -367,6 +367,29 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="comment3" class="domain.Comment">
+		<property name="moment" value="02/02/2018" />
+		<property name="title" value="Sex" />
+		<property name="text"
+			value="Me ha encantado." />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="tutorial" ref="tutorial1" />
+		<property name="commentParent">
+			<null />
+		</property>
+		<property name="user" ref="user1" />
+		<property name="replies">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- CREDIT CARD -->
 
@@ -529,8 +552,8 @@
 
 	<bean id="tutorial3" class="domain.Tutorial">
 		<property name="moment" value="05/04/2018" />
-		<property name="title" value="How to fix a satellite" />
-		<property name="text" value="First, you need a satellite to fix it." />
+		<property name="title" value="How to fix a satellite (taboo)" />
+		<property name="text" value="First, you need a viagra to fix it." />
 		<property name="pictures">
 			<list>
 				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png

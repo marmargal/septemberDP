@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
 import domain.Comment;
+import domain.Configuration;
 import domain.Tutorial;
 import domain.User;
 
@@ -35,6 +36,9 @@ public class CommentService {
 	
 	@Autowired
 	private TutorialService tutorialService;
+	
+	@Autowired
+	private ConfigurationService configurationService;
 
 	// Constructors
 
@@ -160,4 +164,30 @@ public class CommentService {
 			this.commentRepository.delete(c);
 	}
 	
+	public Collection<Comment> commentsTaboo(){
+		Assert.notNull(administratorService.findByPrincipal());
+		
+		Configuration configuration;
+		Collection<String> tabooWords = new ArrayList<String>();
+		Collection<Comment> comments = new ArrayList<Comment>();
+		Collection<Comment> res = new ArrayList<Comment>();
+		
+		configuration = this.configurationService.findAll().iterator().next();
+		tabooWords = configuration.getTabooWords();
+		comments = this.findAll();
+		
+		for (Comment comment : comments){
+			for (String tabooWord : tabooWords){
+				String lowTabooWord = tabooWord.toLowerCase();
+				if(comment.getTitle().toLowerCase().contains(lowTabooWord.trim()) || 
+					comment.getText().toLowerCase().contains(lowTabooWord.trim())){
+					if(!res.contains(comment)){
+						res.add(comment);
+					}
+				}
+			}
+		}
+		
+		return res;
+	}
 }

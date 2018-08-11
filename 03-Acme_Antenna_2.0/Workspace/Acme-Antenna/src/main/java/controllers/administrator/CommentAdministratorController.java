@@ -1,5 +1,7 @@
 package controllers.administrator;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,18 @@ public class CommentAdministratorController extends AbstractController{
 				res = this.createEditModelAndView(comment, "comment.commit.error");
 			}
 		}
+		
+		return res;
+	}
+	
+	@RequestMapping(value="/commentsTabooList", method=RequestMethod.GET)
+	public ModelAndView commentsTabooList(){
+		ModelAndView res;
+		Collection<Comment> comments = this.commentService.commentsTaboo();
+		
+		res = new ModelAndView("comment/administrator/list");
+		res.addObject("comments",comments);
+		res.addObject("requestURI","comment/administrator/commentsTabooList.do");
 		
 		return res;
 	}

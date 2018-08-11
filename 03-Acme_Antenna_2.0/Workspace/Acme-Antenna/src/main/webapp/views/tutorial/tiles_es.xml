@@ -34,5 +34,10 @@
 		<put-attribute name="title" value="Borrar tutorial" />
 		<put-attribute name="body" value="/views/tutorial/edit.jsp" />
 	</definition>
+	
+	<definition name="tutorial/tutorialsTabooList" extends="master.page">
+		<put-attribute name="title" value="Lista de tutoriales con palabras tabú" />
+		<put-attribute name="body" value="/views/tutorial/list.jsp" />
+	</definition>
 
 </tiles-definitions>

@@ -14,6 +14,7 @@ import org.springframework.validation.Validator;
 
 import repositories.TutorialRepository;
 import domain.Actor;
+import domain.Configuration;
 import domain.Tutorial;
 import forms.TutorialForm;
 
@@ -39,6 +40,9 @@ public class TutorialService {
 	
 	@Autowired
 	private Validator validator;
+	
+	@Autowired
+	private ConfigurationService configurationService;
 
 	// Constructors
 
@@ -156,6 +160,34 @@ public class TutorialService {
 		
 		if(binding!=null)
 			this.validator.validate(res,binding);
+		
+		return res;
+	}
+	
+	public Collection<Tutorial> tutorialsTaboo(){
+		Assert.notNull(administratorService.findByPrincipal());
+		
+		Collection<Configuration> configuration;
+		Collection<String> tabooWords = new ArrayList<String>();
+		Collection<Tutorial> tutorials = new ArrayList<Tutorial>();
+		Collection<Tutorial> res = new ArrayList<Tutorial>();
+		
+		configuration = this.configurationService.findAll();
+		for (Configuration c : configuration)
+			tabooWords = c.getTabooWords();
+		tutorials = this.findAll();
+		
+		for (Tutorial tutorial : tutorials){
+			for (String tabooWord : tabooWords){
+				String lowTabooWord = tabooWord.toLowerCase();
+				if(tutorial.getTitle().toLowerCase().contains(lowTabooWord.trim()) || 
+					tutorial.getText().toLowerCase().contains(lowTabooWord.trim())){
+					if(!res.contains(tutorial)){
+						res.add(tutorial);
+					}
+				}
+			}
+		}
 		
 		return res;
 	}

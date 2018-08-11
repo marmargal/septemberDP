@@ -52,8 +52,12 @@
 					</ul></li>
 				<li><a href="actor/administrator/list.do"><spring:message
 							code="master.page.ban.actor" /></a></li>
-				<li><a href="configuration/administrator/edit.do"><spring:message
-							code="master.page.manage.taboo.words" /></a></li>
+				<li><a href="#" class="fNiv"><spring:message code="master.page.taboo.words" /></a>
+					<ul>
+						<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.manage.taboo.words" /></a></li>
+						<li><a href="comment/administrator/commentsTabooList.do"><spring:message code="master.page.comments.taboo" /></a></li>
+						<li><a href="tutorial/administrator/tutorialsTabooList.do"><spring:message code="master.page.tutorials.taboo" /></a></li>
+					</ul></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('AGENT')">

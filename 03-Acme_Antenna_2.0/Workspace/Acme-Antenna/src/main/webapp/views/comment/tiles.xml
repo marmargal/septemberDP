@@ -24,4 +24,9 @@
 		<put-attribute name="title" value="List of comments" />
 		<put-attribute name="body" value="/views/comment/list.jsp" />
 	</definition>
+	
+	<definition name="comment/commentsTabooList" extends="master.page">
+		<put-attribute name="title" value="List of comments with taboo words" />
+		<put-attribute name="body" value="/views/comment/list.jsp" />
+	</definition>
 </tiles-definitions>
