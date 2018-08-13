@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Collection;
+
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +41,9 @@ public class AbstractController {
 	protected String bannerImage(){
 		String banner;
 		
-		banner = this.bannerService.findAll().iterator().next().getPicture();
+		Collection<String> pictures = this.bannerService.allPictures();
+		
+		banner = pictures.iterator().next();
 		
 		return banner;
 	}
