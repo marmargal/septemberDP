@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -31,32 +25,380 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="USER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="USER" />
 				</bean>
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Other domain beans come here -->	
-	
+
+
+
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="inkeeper1" />
+		<property name="password" value="a8585e9b2e3f039edd1ff2bd631ec062" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="INKEEPER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="inkeeper2" />
+		<property name="password" value="81dceac4cdcc31459802cc62c3aed60c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="INKEEPER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- admin -->
+	<bean id="admin" class="domain.Administrator">
+		<property name="name" value="Administrator" />
+		<property name="surname" value="Acme Antenna" />
+		<property name="email" value="admin@admin.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Admin" />
+		<property name="userAccount" ref="userAccount1" />
+
+	</bean>
+
+
+	<!-- user -->
+
+
+	<bean id="user1" class="domain.User">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount2" />
+		<property name="chirps">
+			<list>
+				<ref bean="chirp1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment1" />
+				<ref bean="comment3" />
+
+			</list>
+		</property>
+		<property name="routes">
+			<list>
+				<ref bean="route1" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="user2" class="domain.User">
+		<property name="name" value="María" />
+		<property name="surname" value="García Velázquez" />
+		<property name="email" value="magarve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="666666666" />
+		<property name="postalAddress" value="C/María" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="chirps">
+			<list>
+				<ref bean="chirp2" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment2" />
+				<ref bean="comment4" />
+
+			</list>
+		</property>
+		<property name="routes">
+			<list>
+				<ref bean="route2" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- inkeeper -->
+
+	<bean id="inkeeper1" class="domain.Inkeeper">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="inns">
+			<list>
+				<ref bean="inn1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="inkeeper2" class="domain.Inkeeper">
+		<property name="name" value="María" />
+		<property name="surname" value="García Velázquez" />
+		<property name="email" value="magarve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="666666666" />
+		<property name="postalAddress" value="C/María" />
+		<property name="userAccount" ref="userAccount5" />
+		<property name="inns">
+			<list>
+				<ref bean="inn2" />
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- route -->
+
+	<bean id="route1" class="domain.Route">
+		<property name="name" value="route1" />
+		<property name="lentgh" value="30.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hike" ref="hike1" />
+		<property name="comments">
+			<list>
+				<ref bean="comment1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="route2" class="domain.Route">
+		<property name="name" value="route2" />
+		<property name="lentgh" value="30.0" />
+		<property name="description" value="description2" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user2" />
+		<property name="hike" ref="hike2" />
+		<property name="comments">
+			<list>
+				<ref bean="comment2" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- hike -->
+
+	<bean id="hike1" class="domain.Hike">
+		<property name="name" value="hike1" />
+		<property name="lentgh" value="30.0" />
+		<property name="description" value="description1" />
+		<property name="originCity" value="originCity1" />
+		<property name="destinationCity" value="destinationCity1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="route" ref="route1" />
+		<property name="comments">
+			<list>
+				<ref bean="comment3" />
+			</list>
+		</property>
+		<property name="dificultLevel" value="EASY" />
+	</bean>
+
+	<bean id="hike2" class="domain.Hike">
+		<property name="name" value="hike2" />
+		<property name="lentgh" value="30.0" />
+		<property name="description" value="description2" />
+		<property name="originCity" value="originCity2" />
+		<property name="destinationCity" value="destinationCity2" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="route" ref="route2" />
+		<property name="comments">
+			<list>
+				<ref bean="comment4" />
+			</list>
+		</property>
+		<property name="dificultLevel" value="EASY" />
+	</bean>
+
+
+	<!-- CHIRP -->
+
+
+
+	<bean id="chirp1" class="domain.Chirp">
+		<property name="moment" value="06/01/2017" />
+		<property name="title" value="title1" />
+		<property name="text" value="text1" />
+		<property name="user" ref="user1" />
+	</bean>
+
+	<bean id="chirp2" class="domain.Chirp">
+		<property name="moment" value="06/01/2017" />
+		<property name="title" value="title2" />
+		<property name="text" value="text2" />
+		<property name="user" ref="user2" />
+	</bean>
+
+	<!-- comment -->
+	<bean id="comment1" class="domain.Comment">
+		<property name="moment" value="06/01/2017" />
+		<property name="title" value="title1" />
+		<property name="text" value="text1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="rating" value="1" />
+
+		<property name="user" ref="user1" />
+		<property name="route" ref="route1" />
+
+	</bean>
+
+	<bean id="comment2" class="domain.Comment">
+		<property name="moment" value="06/01/2017" />
+		<property name="title" value="title2" />
+		<property name="text" value="text2" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="rating" value="2" />
+
+		<property name="user" ref="user2" />
+		<property name="route" ref="route2" />
+
+	</bean>
+
+	<bean id="comment3" class="domain.Comment">
+		<property name="moment" value="06/01/2017" />
+		<property name="title" value="title3" />
+		<property name="text" value="text3" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="rating" value="2" />
+
+		<property name="user" ref="user1" />
+		<property name="hike" ref="hike1" />
+	</bean>
+
+
+	<bean id="comment4" class="domain.Comment">
+		<property name="moment" value="06/01/2017" />
+		<property name="title" value="title4" />
+		<property name="text" value="text4" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="rating" value="2" />
+
+		<property name="user" ref="user2" />
+		<property name="hike" ref="hike2" />
+	</bean>
+
+	<!-- creditcard -->
+
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="BBVA" />
+		<property name="brandName" value="MasterCard" />
+		<property name="number" value="4024007146545768" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="123" />
+	</bean>
+
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Name creditCard1" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4150902751004463" />
+		<property name="expirationMonth" value="3" />
+		<property name="expirationYear" value="22" />
+		<property name="cvv" value="612" />
+	</bean>
+
+
+	<!-- inn -->
+
+	<bean id="inn1" class="domain.Inn">
+		<property name="name" value="inn1" />
+		<property name="badge" value="badge1" />
+		<property name="Address" value="C/Edu" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="webSite" value="http://www.google.es" />
+		<property name="creditCard" ref="creditCard1" />
+	</bean>
+
+	<bean id="inn2" class="domain.Inn">
+		<property name="name" value="inn2" />
+		<property name="badge" value="badge2" />
+		<property name="Address" value="C/Edu" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="webSite" value="http://www.google.es" />
+		<property name="creditCard" ref="creditCard2" />
+	</bean>
 </beans>
