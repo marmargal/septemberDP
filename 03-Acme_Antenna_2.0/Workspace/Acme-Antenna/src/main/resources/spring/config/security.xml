@@ -63,6 +63,9 @@
 									<!-- AGENT -->
 		<security:intercept-url pattern="/actor/agent/edit.do" access="hasRole('AGENT')" />
 		
+									<!-- HANDYWORKER -->
+		<security:intercept-url pattern="/actor/handyworker/edit.do" access="hasRole('HANDYWORKER')" />
+		
 									<!-- ANTENNA -->
 		<security:intercept-url pattern="/antenna/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/antenna/handyworker/display.do" access="hasRole('HANDYWORKER')" />

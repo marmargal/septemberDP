@@ -43,6 +43,12 @@
 		<form:hidden path="banners"/>
 	
 	</security:authorize>
+	
+	<security:authorize access="hasRole('HANDYWORKER')">
+		
+		<form:hidden path="requests"/>
+	
+	</security:authorize>
 
 	<acme:submit name="save" code="actor.submit" />
 	<acme:cancel url="/" code="actor.cancel" />
