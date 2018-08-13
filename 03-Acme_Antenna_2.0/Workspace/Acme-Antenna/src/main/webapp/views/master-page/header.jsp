@@ -52,6 +52,7 @@
 					</ul></li>
 				<li><a href="actor/administrator/list.do"><spring:message
 							code="master.page.ban.actor" /></a></li>
+				<li><a href="banner/administrator/list.do"><spring:message code="master.page.manage.banner.list" /></a></li>
 				<li><a href="#" class="fNiv"><spring:message code="master.page.taboo.words" /></a>
 					<ul>
 						<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.manage.taboo.words" /></a></li>
@@ -70,6 +71,7 @@
 					</ul></li>
 				<li><a href="banner/agent/create.do"><spring:message
 							code="master.page.create.banner" /></a></li>
+				<li><a href="banner/agent/list.do"><spring:message code="master.page.manage.banner.list" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('USER')">

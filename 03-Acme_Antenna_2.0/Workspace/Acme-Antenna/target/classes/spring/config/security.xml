@@ -118,6 +118,9 @@
 									<!-- BANNER -->
 		<security:intercept-url pattern="/banner/agent/create.do" access="hasRole('AGENT')" />
 		<security:intercept-url pattern="/banner/agent/edit.do" access="hasRole('AGENT')" />
+		<security:intercept-url pattern="/banner/agent/list.do" access="hasRole('AGENT')" />
+		<security:intercept-url pattern="/banner/administrator/list.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/banner/administrator/edit.do" access="hasRole('ADMIN')" />
 		
 									<!-- CONFIGURATION -->
 		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMIN')" />							

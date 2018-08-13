@@ -41,6 +41,19 @@
 
 		<acme:submit name="save" code="banner.submit" />
 	</security:authorize>
-
+	
+	<security:authorize access="hasRole('ADMIN')">
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="agent" />
+	<form:hidden path="picture" />
+	<form:hidden path="targetPage" />
+	<form:hidden path="creditCard" />
+	
+	<acme:cancel url="/" code="banner.cancel" />
+		<input type="submit" name="delete"
+				value="<spring:message code="banner.delete" />"
+				onclick="return confirm('<spring:message code="banner.confirm.delete" />')" />&nbsp;
+	</security:authorize>
 
 </form:form>
