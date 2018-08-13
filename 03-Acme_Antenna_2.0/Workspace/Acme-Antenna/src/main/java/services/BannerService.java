@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -75,5 +76,11 @@ public class BannerService {
 	}
 
 	// Other business method --------------------------------------------------
+	
+	public Collection<String> allPictures(){
+		Collection<String> res = new ArrayList<String>();
+		res.addAll(this.bannerRepository.allPictures());
+		return res;
+	}
 
 }

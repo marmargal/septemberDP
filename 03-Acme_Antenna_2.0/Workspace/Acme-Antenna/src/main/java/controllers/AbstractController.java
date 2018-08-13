@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BannerService;
 import services.FranchiseService;
 import domain.Franchise;
 
@@ -16,6 +17,9 @@ public class AbstractController {
 	
 	@Autowired
 	private FranchiseService franchiseService;
+	
+	@Autowired
+	private BannerService bannerService;
 
 	// Panic handler ----------------------------------------------------------
 
@@ -29,6 +33,15 @@ public class AbstractController {
 		result.addObject("stackTrace", ExceptionUtils.getStackTrace(oops));
 
 		return result;
+	}
+	
+	@ModelAttribute(value = "bannerImage")
+	protected String bannerImage(){
+		String banner;
+		
+		banner = this.bannerService.findAll().iterator().next().getPicture();
+		
+		return banner;
 	}
 	
 	@ModelAttribute(value = "bannerShowImage")

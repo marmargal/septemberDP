@@ -237,7 +237,7 @@
 
 	<bean id="banner2" class="domain.Banner">
 		<property name="picture"
-			value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" />
+			value="http://www.imagen.com.mx/assets/img/imagen_share.png" />
 		<property name="targetPage"
 			value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" />
 		<property name="creditCard" ref="creditCard1" />
