@@ -66,6 +66,8 @@
 							code="master.page.agent" /></a>
 					<ul>
 						<li class="arrow"></li>
+						<li><a href="actor/agent/edit.do"><spring:message
+									code="master.page.edit.profile" /></a></li>
 						<li><a href="j_spring_security_logout"><spring:message
 									code="master.page.logout" /> </a></li>
 					</ul></li>

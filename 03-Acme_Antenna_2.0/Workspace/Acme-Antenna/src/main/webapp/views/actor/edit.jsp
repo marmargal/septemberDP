@@ -20,15 +20,15 @@
 
 <form:form action="${requestUri}" modelAttribute="actor">
 
-	<form:hidden path="id" />
-	<form:hidden path="userAccount" />
+		<form:hidden path="id" />
+		<form:hidden path="userAccount" />
 
-	<acme:textbox code="actor.name" path="name" />
-	<acme:textbox code="actor.surname" path="surname" />
-	<acme:textbox code="actor.email" path="email" />
-	<acme:textbox code="actor.phoneNumber" path="phoneNumber" />
-	<acme:textbox code="actor.address" path="postalAddress" />
-	<acme:textbox code="actor.pictures" path="pictures" />
+		<acme:textbox code="actor.name" path="name" />
+		<acme:textbox code="actor.surname" path="surname" />
+		<acme:textbox code="actor.email" path="email" />
+		<acme:textbox code="actor.phoneNumber" path="phoneNumber" />
+		<acme:textbox code="actor.address" path="postalAddress" />
+		<acme:textbox code="actor.pictures" path="pictures" />
 
 	<security:authorize access="hasRole('USER')">
 		
@@ -36,6 +36,12 @@
 		<form:hidden path="subscriptions"/>
 		<form:hidden path="antennas"/>
 
+	</security:authorize>
+	
+	<security:authorize access="hasRole('AGENT')">
+		
+		<form:hidden path="banners"/>
+	
 	</security:authorize>
 
 	<acme:submit name="save" code="actor.submit" />
