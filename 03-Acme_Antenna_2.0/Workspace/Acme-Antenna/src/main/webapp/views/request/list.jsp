@@ -27,6 +27,10 @@
 	<acme:column property="finishMoment" code="request.finishMoment" />
 	<acme:column property="result" code="request.result" />
 	<acme:column property="antenna.model" code="request.antenna" />
+	
+	<display:column>
+		<a href="antenna/handyworker/display.do?antennaId=${row.antenna.id }"><spring:message code="antenna.display"/></a>
+	</display:column>
 
 	<display:column>
 

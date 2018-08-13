@@ -35,4 +35,6 @@
 <b><spring:message code="antenna.satellite"/>:&nbsp;</b><jstl:out value="${antenna.satellite.name}"/>
 <br/>
 
+<security:authorize access="hasRole('USER')">
 <acme:cancel url="antenna/user/list.do" code="antenna.cancel"/>
+</security:authorize>

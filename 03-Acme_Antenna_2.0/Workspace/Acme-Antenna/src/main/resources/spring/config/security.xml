@@ -62,6 +62,7 @@
 		
 									<!-- ANTENNA -->
 		<security:intercept-url pattern="/antenna/user/**" access="hasRole('USER')" />
+		<security:intercept-url pattern="/antenna/handyworker/display.do" access="hasRole('HANDYWORKER')" />
 		
 									<!-- SATELLITE -->
 									
