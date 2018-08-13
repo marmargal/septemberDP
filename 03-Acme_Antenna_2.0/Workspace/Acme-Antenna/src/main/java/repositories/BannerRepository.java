@@ -11,7 +11,7 @@ import domain.Banner;
 @Repository
 public interface BannerRepository extends JpaRepository<Banner, Integer> {
 	
-	@Query("select p from Banner b join b.picture p")
-	Collection<String> allPictures();
+//	@Query("select p from Banner b join b.picture p")
+//	Collection<String> allPictures();
 
 }
