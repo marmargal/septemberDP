@@ -59,7 +59,7 @@ public class CommentAdministratorController extends AbstractController{
 		ModelAndView res;
 		Collection<Comment> comments = this.commentService.commentsTaboo();
 		
-		res = new ModelAndView("comment/administrator/list");
+		res = new ModelAndView("comment/list");
 		res.addObject("comments",comments);
 		res.addObject("requestURI","comment/administrator/commentsTabooList.do");
 		

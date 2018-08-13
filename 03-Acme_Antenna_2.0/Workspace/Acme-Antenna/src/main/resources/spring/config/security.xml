@@ -83,7 +83,7 @@
 		<security:intercept-url pattern="/comment/user/list.do" access="hasAnyRole('USER','ADMIN')" />	
 		<security:intercept-url pattern="/comment/user/listReplies.do" access="hasAnyRole('USER','ADMIN')" />
 		<security:intercept-url pattern="/comment/user/createReply.do" access="hasAnyRole('USER','ADMIN')" />
-		<security:intercept-url pattern="/comment/administrador/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/comment/administrator/**" access="hasRole('ADMIN')" />
 		
 									<!-- TUTORIAL -->
 									
