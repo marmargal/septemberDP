@@ -55,6 +55,8 @@
 		<bean class="converters.StringToHandyworkerConverter" />
 		<bean class="converters.RequestToStringConverter" />
 		<bean class="converters.StringToRequestConverter" />
+		<bean class="converters.FranchiseToStringConverter" />
+		<bean class="converters.StringToFranchiseConverter" />
 
 	</util:list>
 	

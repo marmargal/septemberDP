@@ -53,6 +53,7 @@
 				<li><a href="actor/administrator/list.do"><spring:message
 							code="master.page.ban.actor" /></a></li>
 				<li><a href="banner/administrator/list.do"><spring:message code="master.page.manage.banner.list" /></a></li>
+				<li><a href="administrator/franchise.do"><spring:message code="master.page.manage.franchise" /></a></li>
 				<li><a href="#" class="fNiv"><spring:message code="master.page.taboo.words" /></a>
 					<ul>
 						<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.manage.taboo.words" /></a></li>
@@ -138,6 +139,8 @@
 		</ul>
 	</div>
 	<div>
+		<b>${businessName}</b>
+		<img class="logo" src="${bannerShowImage}"/>
 		<a href="/Acme-Antenna"><img class="logo" src="images/logo.png"
 			alt="Acme-Antenna Co., Inc." /></a>
 	</div>

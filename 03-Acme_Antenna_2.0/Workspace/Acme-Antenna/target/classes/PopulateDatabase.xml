@@ -599,5 +599,15 @@
 		</list>
 	</property>
 	</bean>
+	
+	<!-- FRANCHISE -->
+
+	<bean id="franchise1" class="domain.Franchise">
+		<property name="businessName" value="Crazy antenna" />
+		<property name="banner" value="http://indyfree.tv/wp-content/uploads/2015/08/long-range-hdr-antenna-method.jpg" />
+		<property name="welcomeEnglishMessage"
+			value="Cha wanna get crazy 'bout your rabbit ears?" />
+		<property name="welcomeSpanishMessage" value="¿Te quieres antenizar con nosotros?" />
+	</bean>
 
 </beans>

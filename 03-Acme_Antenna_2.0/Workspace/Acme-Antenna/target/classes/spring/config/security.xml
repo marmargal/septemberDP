@@ -66,6 +66,9 @@
 									<!-- HANDYWORKER -->
 		<security:intercept-url pattern="/actor/handyworker/edit.do" access="hasRole('HANDYWORKER')" />
 		
+									<!-- ADMIN -->
+		<security:intercept-url pattern="/administrator/franchise.do" access="hasRole('ADMIN')" />
+		
 									<!-- ANTENNA -->
 		<security:intercept-url pattern="/antenna/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/antenna/handyworker/display.do" access="hasRole('HANDYWORKER')" />
