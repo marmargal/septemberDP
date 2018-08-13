@@ -35,9 +35,6 @@ public class RequestService {
 	private UserService userService;
 
 	@Autowired
-	private AntennaService antennaService;
-
-	@Autowired
 	private Validator validator;
 
 	// Constructors
@@ -153,22 +150,13 @@ public class RequestService {
 			res = this.create();
 
 		// CREDIT CARD
-		int cvv = Integer.parseInt(requestForm.getCvv());
-		int expirationMonth = Integer
-				.parseInt(requestForm.getExpirationMonth());
-		int expirationYear = Integer.parseInt(requestForm.getExpirationYear());
-
-		cc.setBrandName(requestForm.getBrandName());
-		cc.setCvv(cvv);
-		cc.setExpirationMonth(expirationMonth);
-		cc.setExpirationYear(expirationYear);
-		cc.setHolderName(requestForm.getHolderName());
-		cc.setNumber(requestForm.getNumber());
+		cc = requestForm.getCreditCard();
 
 		res.setCreditCard(cc);
 		res.setDescription(requestForm.getDescription());
 		res.setResult(requestForm.getResult());
-		res.setAntenna(this.antennaService.findOne(requestForm.getAntennaId()));
+		res.setAntenna(requestForm.getAntenna());
+		res.setRequestHandyworker(requestForm.getRequestHandyworker());
 
 		if (binding != null)
 			this.validator.validate(res, binding);

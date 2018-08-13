@@ -28,6 +28,7 @@
 	<br/>
 	
 	<acme:select items="${antennas }" itemLabel="model" code="request.antenna" path="antenna.id"/>
+	<acme:select items="${handyworkers }" itemLabel="userAccount.username" code="request.handyworker" path="requestHandyworker.id"/>
 	<br/>
 	
 	

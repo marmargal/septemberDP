@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.HandyworkerService;
 import services.RequestService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.CreditCard;
+import domain.Handyworker;
 import domain.Request;
 import domain.User;
 import forms.RequestForm;
@@ -33,6 +35,9 @@ public class RequestUserController extends AbstractController{
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private HandyworkerService handyworkerService;
 	
 	
 	// Constructor -------------------------------------------
@@ -125,11 +130,13 @@ public class RequestUserController extends AbstractController{
 				final String message) {
 			
 			User user = this.userService.findByPrincipal();
+			Collection<Handyworker> handyworkers = this.handyworkerService.findAll();
 			
 			ModelAndView res = new ModelAndView("request/create");
 			res.addObject("requestForm",requestForm);
 			res.addObject("message",message);
 			res.addObject("antennas", user.getAntennas());
+			res.addObject("handyworkers", handyworkers);
 			res.addObject("requestURI","request/user/create.do");
 		
 			return res;
@@ -147,11 +154,13 @@ public class RequestUserController extends AbstractController{
 				final String message) {
 			
 			User user = this.userService.findByPrincipal();
+			Collection<Handyworker> handyworkers = this.handyworkerService.findAll();
 			
 			ModelAndView res = new ModelAndView("request/create");
 			res.addObject("requestForm",request);
 			res.addObject("message",message);
 			res.addObject("antennas", user.getAntennas());
+			res.addObject("handyworkers", handyworkers);
 			res.addObject("requestURI","request/user/create.do");
 		
 			return res;
