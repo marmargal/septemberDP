@@ -52,17 +52,16 @@ public class RequestService {
 		Request res;
 		res = new Request();
 
-		Date moment = new Date(System.currentTimeMillis() - 1000);
-
-		// Handyworker handyworker;
-		// handyworker = handyworkerService.findByPrincipal();
+		Collection<CreditCard> creditCards = new ArrayList<CreditCard>();
 
 		User user;
 		user = userService.findByPrincipal();
 
 		res.setUser(user);
-		// res.setHandyworker(handyworker);
-		res.setMoment(moment);
+		
+		creditCards = this.findAllCreditCard(user.getId());
+		if (creditCards.size() > 0)
+			res.setCreditCard(creditCards.iterator().next());
 
 		return res;
 	}
@@ -85,6 +84,12 @@ public class RequestService {
 	public Request save(final Request request) {
 		// this.handyworkerService.checkAuthority();
 		// this.userService.checkAuthority();
+		
+		if (request.getId() == 0) {
+			Date moment;
+			moment = new Date(System.currentTimeMillis() - 1000);
+			request.setMoment(moment);
+		}
 
 		if (this.userService.findByPrincipal() != null) {
 			Assert.isTrue(request.getUser().equals(
@@ -126,6 +131,14 @@ public class RequestService {
 		Collection<Request> requests = new ArrayList<Request>();
 		requests = this.requestRepository.notYetServicedRequest(userId);
 		return requests;
+	}
+	
+	public Collection<CreditCard> findAllCreditCard(int userId) {
+		Collection<CreditCard> creditcCards = new ArrayList<CreditCard>();
+
+		creditcCards = requestRepository.findAllCreditCard(userId);
+
+		return creditcCards;
 	}
 
 	public Request reconstruct(RequestForm requestForm, BindingResult binding) {

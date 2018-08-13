@@ -16,18 +16,18 @@
 	<form:hidden path="id"/>
 	<form:hidden path="result"/>
 	
-	<acme:textbox code="request.creditCard.holderName" path="holderName" />
-	<acme:textbox code="request.creditCard.brandName" path="brandName" />
-	<acme:textbox code="request.creditCard.number" path="number" />
-	<acme:textbox code="request.creditCard.expirationMonth" path="expirationMonth" />
-	<acme:textbox code="request.creditCard.expirationYear" path="expirationYear" />
-	<acme:textbox code="request.creditCard.Cvv" path="cvv" />
+	<acme:textbox code="request.creditCard.holderName" path="creditCard.holderName" />
+	<acme:textbox code="request.creditCard.brandName" path="creditCard.brandName" />
+	<acme:textbox code="request.creditCard.number" path="creditCard.number" />
+	<acme:textbox code="request.creditCard.expirationMonth" path="creditCard.expirationMonth" />
+	<acme:textbox code="request.creditCard.expirationYear" path="creditCard.expirationYear" />
+	<acme:textbox code="request.creditCard.Cvv" path="creditCard.cvv" />
 	<br/>
 	
 	<acme:textarea code="request.description" path="description"/>
 	<br/>
 	
-	<acme:select items="${antennas }" itemLabel="model" code="request.antenna" path="antennaId"/>
+	<acme:select items="${antennas }" itemLabel="model" code="request.antenna" path="antenna.id"/>
 	<br/>
 	
 	
