@@ -77,10 +77,10 @@ public class BannerService {
 
 	// Other business method --------------------------------------------------
 	
-//	public Collection<String> allPictures(){
-//		Collection<String> res = new ArrayList<String>();
-//		res.addAll(this.bannerRepository.allPictures());
-//		return res;
-//	}
+	public Collection<String> allPictures(){
+		Collection<String> res = new ArrayList<String>();
+		res.addAll(this.bannerRepository.allPictures());
+		return res;
+	}
 
 }
