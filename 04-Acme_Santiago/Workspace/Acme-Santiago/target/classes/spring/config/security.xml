@@ -55,6 +55,9 @@
 
 		<security:intercept-url pattern="/route/search.do"
 			access="permitAll" />
+			
+		<security:intercept-url pattern="/route/user/**"
+			access="hasRole('USER')" />
 
 		<security:intercept-url pattern="/user/register.do"
 			access="permitAll" />
