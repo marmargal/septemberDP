@@ -27,24 +27,26 @@
 	<acme:column property="finishMoment" code="request.finishMoment" />
 	<acme:column property="result" code="request.result" />
 	<acme:column property="antenna.model" code="request.antenna" />
-	
-	<display:column>
-		<a href="antenna/handyworker/display.do?antennaId=${row.antenna.id }"><spring:message code="antenna.display"/></a>
-	</display:column>
 
 	<display:column>
-
-		<a href="user/list.do?requestId=${row.id}"><spring:message
-				code="request.user" /></a>
+		<a href="antenna/handyworker/display.do?antennaId=${row.antenna.id }"><spring:message
+				code="antenna.display" /></a>
 	</display:column>
-
 	<security:authorize access="hasRole('HANDYWORKER')">
 		<display:column>
+			<jstl:if test="${row.result=='' && row.handyworker != null}">
+				<a href="request/handyworker/edit.do?requestId=${row.id}"><spring:message
+					code="request.apply" /></a>
+			</jstl:if>
+		</display:column>
+
+		<display:column>
 			<jstl:if test="${row.handyworker==null }">
-			<form name="submitForm" method="POST" action="request/handyworker/assign.do?requestId=${row.id }">
-				    	<input type="hidden" name="param1" value="param1Value">
-				    	<acme:submit name="assign" code="request.assign"/>
-					</form>
+				<form name="submitForm" method="POST"
+					action="request/handyworker/assign.do?requestId=${row.id }">
+					<input type="hidden" name="param1" value="param1Value">
+					<acme:submit name="assign" code="request.assign" />
+				</form>
 			</jstl:if>
 		</display:column>
 	</security:authorize>

@@ -3,8 +3,11 @@ package controllers.handyworker;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +18,7 @@ import services.RequestService;
 import controllers.AbstractController;
 import domain.Handyworker;
 import domain.Request;
+import forms.RequestForm;
 
 @Controller
 @RequestMapping("/request/handyworker")
@@ -68,7 +72,7 @@ public class RequestHandyworkerController extends AbstractController {
 				handyworker.getRequests().add(request);
 				requestService.save(request);
 				handyworkerService.save(handyworker);
-				res = new ModelAndView("redirect:/request/handyworker/list.do");
+				res = new ModelAndView("redirect:/request/handyworker/listWithoutServiced.do");
 			}
 
 		} catch (Exception e) {
@@ -111,5 +115,72 @@ public class RequestHandyworkerController extends AbstractController {
 		result.addObject("requests", requests);
 		result.addObject("requestURI", "request/handyworker/listUnassigned.do");
 		return result;
+	}
+
+	// Edit ----------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int requestId) {
+
+		ModelAndView res;
+		Request request;
+		RequestForm requestForm;
+
+		Handyworker handyworkerPrincipal = this.handyworkerService
+				.findByPrincipal();
+
+		request = this.requestService.findOne(requestId);
+		requestForm = this.requestService.construct(request);
+
+		if (handyworkerPrincipal.equals(request.getHandyworker()))
+			res = this.createEditModelAndView(requestForm);
+		else
+			res = new ModelAndView("redirect:/tutorial/list.do");
+
+		return res;
+	}
+
+	// Save ------------------------------------------
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final RequestForm requestForm,
+			final BindingResult binding) {
+		ModelAndView res;
+		System.out.println(binding.getFieldError());
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(requestForm,
+					"request.params.error");
+		else {
+			try {
+				Request request = this.requestService.reconstruct(
+						requestForm, binding);
+				this.requestService.save(request);
+
+				res = new ModelAndView("redirect:/request/handyworker/list.do");
+			} catch (final Throwable oops) {
+				System.out.println(oops.getMessage());
+				res = this.createEditModelAndView(requestForm,
+						"request.commit.error");
+			}
+		}
+		return res;
+	}
+
+	// Ancillary methods -----------------------------
+	private ModelAndView createEditModelAndView(final RequestForm requestForm) {
+		ModelAndView res;
+
+		res = this.createEditModelAndView(requestForm, null);
+
+		return res;
+	}
+
+	private ModelAndView createEditModelAndView(final RequestForm requestForm,
+			final String message) {
+
+		ModelAndView res = new ModelAndView("request/edit");
+		res.addObject("requestForm", requestForm);
+		res.addObject("message", message);
+		res.addObject("requestURI", "request/handyworker/edit.do");
+
+		return res;
 	}
 }

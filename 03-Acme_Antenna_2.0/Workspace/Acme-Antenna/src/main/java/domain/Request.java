@@ -84,6 +84,7 @@ public class Request extends DomainEntity {
 	private Handyworker handyworker;
 	private User user;
 	private Antenna antenna;
+	private Handyworker requestHandyworker;
 
 	@Valid
 	@ManyToOne(optional = true)
@@ -113,5 +114,15 @@ public class Request extends DomainEntity {
 
 	public void setAntenna(Antenna antenna) {
 		this.antenna = antenna;
+	}
+
+	@Valid
+	@ManyToOne(optional = true)
+	public Handyworker getRequestHandyworker() {
+		return requestHandyworker;
+	}
+
+	public void setRequestHandyworker(Handyworker requestHandyworker) {
+		this.requestHandyworker = requestHandyworker;
 	}
 }

@@ -36,10 +36,15 @@
 		<put-attribute name="title" value="Create request" />
 		<put-attribute name="body" value="/views/request/create.jsp" />
 	</definition>
-	
+
 	<definition name="request/listUnassigned" extends="master.page">
 		<put-attribute name="title" value="List of not yet assigned requests" />
 		<put-attribute name="body" value="/views/request/list.jsp" />
+	</definition>
+
+	<definition name="request/edit" extends="master.page">
+		<put-attribute name="title" value="Edit request" />
+		<put-attribute name="body" value="/views/request/edit.jsp" />
 	</definition>
 
 </tiles-definitions>
