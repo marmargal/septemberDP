@@ -8,8 +8,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -103,7 +103,7 @@ public class Hike extends DomainEntity {
 	private Collection<Comment> comments;
 
 	@Valid
-	@OneToOne(optional = true)
+	@ManyToOne(optional = true)
 	public Route getRoute() {
 		return route;
 	}

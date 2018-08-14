@@ -76,4 +76,8 @@ public class RouteService {
 	public void flush() {
 		this.routeRepository.flush();
 	}
+
+	public Collection<Route> searchRoute(String criteria) {
+		return this.routeRepository.searchRoute(criteria);
+	}
 }

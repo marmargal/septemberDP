@@ -31,12 +31,14 @@
 	<jstl:set var="readonly" value="false" />
 </jstl:if>
 
+<jstl:if test="${placeholder == null}">
+	<jstl:set var="placeholder" value="" />
+</jstl:if>
+
 <%-- Definition --%>
 
 <div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />
-	</form:label>	
-	<form:input path="${path}" readonly="${readonly}" />	
+	<b><form:label path="${path}"><spring:message code="${code}" />:&nbsp;</form:label></b>
+	<form:input path="${path}" readonly="${readonly}" placeholder="${placeholder}"/>	
 	<form:errors path="${path}" cssClass="error" />
 </div>	

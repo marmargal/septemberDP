@@ -194,7 +194,11 @@
 			</list>
 		</property>
 		<property name="user" ref="user1" />
-		<property name="hike" ref="hike1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
 		<property name="comments">
 			<list>
 				<ref bean="comment1" />
@@ -214,7 +218,11 @@
 			</list>
 		</property>
 		<property name="user" ref="user2" />
-		<property name="hike" ref="hike2" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike2" />
+			</list>
+		</property>
 		<property name="comments">
 			<list>
 				<ref bean="comment2" />
