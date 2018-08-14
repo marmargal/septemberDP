@@ -71,7 +71,7 @@ public class RequestHandyworkerController extends AbstractController {
 				request.setHandyworker(handyworker);
 				handyworker.getRequests().add(request);
 				requestService.save(request);
-				handyworkerService.save(handyworker);
+				handyworkerService.saveRequest(handyworker);
 				res = new ModelAndView("redirect:/request/handyworker/listWithoutServiced.do");
 			}
 

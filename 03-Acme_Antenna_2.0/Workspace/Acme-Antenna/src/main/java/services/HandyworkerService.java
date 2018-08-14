@@ -82,6 +82,15 @@ public class HandyworkerService {
 		return res;
 
 	}
+	
+	public Handyworker saveRequest(Handyworker handyworker) {
+		Handyworker res;
+
+		res = this.handyworkerRepository.save(handyworker);
+
+		return res;
+
+	}
 
 	public void delete(Handyworker handyworker) {
 		Assert.notNull(handyworker);

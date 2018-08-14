@@ -96,18 +96,19 @@ public class RequestService {
 		} else if (this.handyworkerService.findByPrincipal() != null) {
 			Assert.isTrue(request.getHandyworker().equals(
 					this.handyworkerService.findByPrincipal()));
-//			if(request.getResult() != "" || request.getResult() != null){
-//				request.setFinishMoment(new Date());
-//			}
 		} else {
 			Assert.notNull(null);
 
 		}
-
+		
 		// Assert.isTrue(request.getHandyworker().equals(
 		// this.handyworkerService.findByPrincipal()));
 		Assert.notNull(request);
 
+		if(!request.getResult().isEmpty()){
+			request.setFinishMoment(new Date());
+		}
+		
 		Request res;
 		res = this.requestRepository.save(request);
 		return res;
