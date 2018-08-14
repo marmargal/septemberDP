@@ -14,6 +14,7 @@ import org.springframework.validation.Validator;
 
 import repositories.RequestRepository;
 import domain.CreditCard;
+import domain.Handyworker;
 import domain.Request;
 import domain.User;
 import forms.RequestForm;
@@ -95,6 +96,9 @@ public class RequestService {
 		} else if (this.handyworkerService.findByPrincipal() != null) {
 			Assert.isTrue(request.getHandyworker().equals(
 					this.handyworkerService.findByPrincipal()));
+//			if(request.getResult() != "" || request.getResult() != null){
+//				request.setFinishMoment(new Date());
+//			}
 		} else {
 			Assert.notNull(null);
 
@@ -137,6 +141,22 @@ public class RequestService {
 
 		return creditcCards;
 	}
+	
+	public RequestForm construct(Request request) {
+		Assert.notNull(request);
+		RequestForm res = new RequestForm();
+		
+		res.setRequest(request);
+		
+		res.setAntenna(request.getAntenna());
+		res.setCreditCard(request.getCreditCard());
+		res.setDescription(request.getDescription());
+		res.setId(request.getId());
+		res.setRequestHandyworker(request.getRequestHandyworker());
+		res.setResult(request.getResult());
+
+		return res;
+	}
 
 	public Request reconstruct(RequestForm requestForm, BindingResult binding) {
 		Assert.notNull(requestForm);
@@ -166,9 +186,14 @@ public class RequestService {
 
 	public Collection<Request> requestUnassigned() {
 		Collection<Request> requests = new ArrayList<>();
+		
+		Handyworker handyworker = handyworkerService.findByPrincipal();
+		System.out.println(handyworker);
+		
 		for (Request r : this.findAll()) {
-			if (r.getHandyworker() == null) {
+			if (r.getHandyworker() == null && r.getRequestHandyworker().getId() == handyworker.getId()) {
 				requests.add(r);
+				System.out.println(r.getRequestHandyworker());
 			}
 		}
 		return requests;

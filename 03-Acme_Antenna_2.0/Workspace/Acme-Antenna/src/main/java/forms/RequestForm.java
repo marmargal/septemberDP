@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import domain.Antenna;
 import domain.CreditCard;
 import domain.Handyworker;
+import domain.Request;
 
 
 public class RequestForm {
@@ -25,6 +26,8 @@ public class RequestForm {
 	private String result;
 	private Antenna antenna;
 	private Handyworker requestHandyworker;
+	private Request request;
+	
 	
 	public int getId() {
 		return id;
@@ -75,6 +78,14 @@ public class RequestForm {
 	
 	public void setRequestHandyworker(Handyworker requestHandyworker) {
 		this.requestHandyworker = requestHandyworker;
+	}
+	
+	public Request getRequest() {
+		return request;
+	}
+	
+	public void setRequest(Request request) {
+		this.request = request;
 	}
 	
 	

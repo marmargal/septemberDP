@@ -139,11 +139,9 @@
 		</ul>
 	</div>
 	<div>
-		<img src="${bannerImage}"/>
+		<img class="imagen" src="${bannerImage}"/>
 		<b>${businessName}</b>
-		<img src="${bannerShowImage}"/>
-		<a href="/Acme-Antenna"><img class="logo" src="images/logo.png"
-			alt="Acme-Antenna Co., Inc." /></a>
+		<a href="/Acme-Antenna"><img class="imagen" src="${bannerShowImage}" alt="Acme-Antenna Co., Inc."/></a>
 	</div>
 </nav>
 
