@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.HikeRepository;
+import domain.Comment;
 import domain.Hike;
 
 @Service
@@ -20,6 +22,13 @@ public class HikeService {
 	private HikeRepository hikeRepository;
 
 	// Suporting services
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private CommentService commentService;
+	
 	// Constructors
 
 	public HikeService() {
@@ -31,6 +40,8 @@ public class HikeService {
 	public Hike create() {
 		Hike res;
 		res = new Hike();
+		
+		userService.findByPrincipal();
 
 		return res;
 	}
@@ -61,7 +72,14 @@ public class HikeService {
 		Assert.notNull(hike);
 		Assert.isTrue(hike.getId() != 0);
 		Assert.isTrue(this.hikeRepository.exists(hike.getId()));
+		
+		Collection<Comment> comments = new ArrayList<Comment>();
+		comments = hike.getComments();
+		for (Comment comment : comments) {
+			this.commentService.delete(comment);
+		}
 		this.hikeRepository.delete(hike);
+		
 	}
 
 	// Other business methods

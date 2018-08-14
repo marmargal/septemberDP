@@ -27,10 +27,6 @@
 
 		</security:authorize>
 
-		<security:authorize access="hasRole('USER')">
-
-		</security:authorize>
-
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message
 						code="master.page.login" /></a></li>
@@ -58,6 +54,12 @@
 						code="master.page.route.search" /></a></li>
 			<li><a href="user/list.do"><spring:message
 						code="master.page.user.list" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('USER')">
+		<li><a href="hike/user/list.do"><spring:message
+						code="master.page.hike.list" /></a></li>
+
 		</security:authorize>
 	</ul>
 </div>

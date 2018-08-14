@@ -58,6 +58,9 @@
 			
 		<security:intercept-url pattern="/route/user/**"
 			access="hasRole('USER')" />
+			
+		<security:intercept-url pattern="/hike/user/**"
+			access="hasRole('USER')" />
 
 		<security:intercept-url pattern="/user/register.do"
 			access="permitAll" />

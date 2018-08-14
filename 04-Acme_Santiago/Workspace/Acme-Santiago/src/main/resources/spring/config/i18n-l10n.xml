@@ -21,6 +21,7 @@
 		<value>/views/actor/messages</value>
 		<value>/views/route/messages</value>
 		<value>/views/user/messages</value>
+		<value>/views/hike/messages</value>
 
 	</util:list>
 

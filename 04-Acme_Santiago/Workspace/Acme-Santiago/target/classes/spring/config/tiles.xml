@@ -21,6 +21,7 @@
 		<value>/views/actor/tiles.xml</value>
 		<value>/views/route/tiles.xml</value>
 		<value>/views/user/tiles.xml</value>
+		<value>/views/hike/tiles.xml</value>
 
 	</util:list>
 

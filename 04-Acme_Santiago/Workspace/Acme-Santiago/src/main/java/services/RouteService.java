@@ -28,6 +28,9 @@ public class RouteService {
 	private UserService userService;
 	
 	@Autowired
+	private HikeService hikeService;
+	
+	@Autowired
 	private CommentService commentService;
 
 	// Constructors
@@ -78,7 +81,8 @@ public class RouteService {
 		Collection<Hike> hikes = new ArrayList<Hike>();
 		hikes = route.getHikes();
 		for (Hike hike : hikes) {
-			hike.setRoute(null);
+			hikes.remove(hike);
+			this.hikeService.delete(hike);
 		}
 		
 		Collection<Comment> comments = new ArrayList<Comment>();
