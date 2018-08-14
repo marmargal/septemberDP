@@ -46,6 +46,10 @@
 		<security:intercept-url pattern="/route/list.do"
 			access="permitAll" />
 
+		<security:intercept-url pattern="/route/lentghSearch.do"
+			access="permitAll" />
+			<security:intercept-url pattern="/route/hikesSearch.do"
+			access="permitAll" />
 		<security:intercept-url pattern="/route/display.do"
 			access="permitAll" />
 

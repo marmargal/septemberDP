@@ -30,7 +30,7 @@ public class RouteController extends AbstractController {
 
 	// Registering ----------------------------------------------------------
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView searchList(@RequestParam int routeId ) {
+	public ModelAndView searchList(@RequestParam int routeId) {
 		ModelAndView res;
 		Route route;
 
@@ -39,6 +39,61 @@ public class RouteController extends AbstractController {
 		res = new ModelAndView("route/display");
 		res.addObject("route", route);
 		res.addObject("requestURI", "route/display.do");
+		return res;
+	}
+
+	@RequestMapping(value = "/lentghSearch", method = RequestMethod.GET)
+	public ModelAndView lentghList(
+			@RequestParam(defaultValue = "99999.0") String max,
+			@RequestParam(defaultValue = "0.0") String min) {
+		ModelAndView res = null;
+		Collection<Route> routes;
+		try {
+			double maxValued = Double.valueOf(max);
+			double minValued = Double.valueOf(min);
+			int maxValue = (int) maxValued;
+			int minValue = (int) minValued;
+			routes = this.routeService.lentghRoute(maxValue, minValue);
+			res = new ModelAndView("route/list");
+			res.addObject("routes", routes);
+			res.addObject("requestURI", "route/list.do");
+		} catch (Exception e) {
+			String message = "search.params.error";
+			res = new ModelAndView("route/list");
+			res.addObject("message", message);
+			res.addObject("requestURI", "route/list.do");
+
+		}
+
+		return res;
+	}
+
+	@RequestMapping(value = "/hikesSearch", method = RequestMethod.GET)
+	public ModelAndView hikesList(
+			@RequestParam(defaultValue = "99999.") String max,
+			@RequestParam(defaultValue = "0.") String min) {
+		ModelAndView res = null;
+
+		Collection<Route> routes;
+		try {
+
+			double maxValued = Double.valueOf(max);
+			double minValued = Double.valueOf(min);
+			int maxValue = (int) maxValued;
+			int minValue = (int) minValued;
+
+			routes = this.routeService.numHikesRoute(maxValue, minValue);
+			res = new ModelAndView("route/list");
+			res.addObject("routes", routes);
+			res.addObject("requestURI", "route/list.do");
+
+		} catch (Exception e) {
+			String message = "search.params.error";
+			res = new ModelAndView("route/list");
+			res.addObject("message", message);
+			res.addObject("requestURI", "route/list.do");
+
+		}
 		return res;
 	}
 
@@ -51,6 +106,7 @@ public class RouteController extends AbstractController {
 
 		res = new ModelAndView("route/list");
 		res.addObject("routes", routes);
+
 		res.addObject("requestURI", "route/list.do");
 		return res;
 	}

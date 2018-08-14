@@ -18,8 +18,6 @@
 		<value>/views/welcome/messages</value>
 
 		<value>/views/administrator/messages</value>
-		<value>/views/customer/messages</value>
-		<value>/views/profile/messages</value>
 		<value>/views/actor/messages</value>
 		<value>/views/route/messages</value>
 

@@ -19,14 +19,29 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<spring:message code="route.searchCriteria" />
 <form method=GET action="route/search.do">
 	Search: <input type="text" name="criteria"> <input
 		type="submit">
 </form>
+<br />
 
+<spring:message code="route.searchLentgh" />
+<form method=GET action="route/lentghSearch.do">
+	MIN: <input type="number" name="min"> MAX:<input type="number"
+		name="max"> <input type="submit">
+</form>
+<br />
 
-<display:table pagesize="5" class="routes" keepStatus="true" name="routes"
-	requestURI="${requestURI }" id="row">
+<spring:message code="route.searchHikes" />
+<form method=GET action="route/hikesSearch.do">
+	MIN: <input type="number" name="min"> MAX:<input type="number"
+		name="max"> <input type="submit">
+</form>
+<br />
+
+<display:table pagesize="5" class="routes" keepStatus="true"
+	name="routes" requestURI="${requestURI }" id="row">
 
 	<acme:column property="name" code="route.title" />
 	<acme:column property="description" code="route.description" />
@@ -37,3 +52,4 @@
 				code="route.display" /></a>
 	</display:column>
 </display:table>
+<jstl:out value="${nums }" />

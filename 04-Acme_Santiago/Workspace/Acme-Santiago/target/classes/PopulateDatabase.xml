@@ -208,7 +208,7 @@
 
 	<bean id="route2" class="domain.Route">
 		<property name="name" value="route2" />
-		<property name="lentgh" value="30.0" />
+		<property name="lentgh" value="50.0" />
 		<property name="description" value="description2" />
 		<property name="pictures">
 			<list>

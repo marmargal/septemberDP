@@ -18,8 +18,6 @@
 		<value>/views/welcome/tiles.xml</value>
 
 		<value>/views/administrator/tiles.xml</value>
-		<value>/views/customer/tiles.xml</value>
-		<value>/views/profile/tiles.xml</value>
 		<value>/views/actor/tiles.xml</value>
 		<value>/views/route/tiles.xml</value>
 

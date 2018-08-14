@@ -80,4 +80,12 @@ public class RouteService {
 	public Collection<Route> searchRoute(String criteria) {
 		return this.routeRepository.searchRoute(criteria);
 	}
+
+	public Collection<Route> lentghRoute(double max, double min) {
+		return this.routeRepository.lentghRoute(max, min);
+	}
+
+	public Collection<Route> numHikesRoute(int max, int min) {
+		return this.routeRepository.numHikesRoute(max, min);
+	}
 }
