@@ -81,8 +81,8 @@ public class RouteService {
 		return this.routeRepository.searchRoute(criteria);
 	}
 
-	public Collection<Route> lentghRoute(double max, double min) {
-		return this.routeRepository.lentghRoute(max, min);
+	public Collection<Route> lengthRoute(double max, double min) {
+		return this.routeRepository.lengthRoute(max, min);
 	}
 
 	public Collection<Route> numHikesRoute(int max, int min) {

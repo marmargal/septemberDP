@@ -26,7 +26,7 @@ public class Hike extends DomainEntity {
 
 	// Attributes
 	private String name;
-	private Double lentgh;
+	private Double length;
 	private String description;
 	private String originCity;
 	private String destinationCity;
@@ -81,12 +81,12 @@ public class Hike extends DomainEntity {
 	}
 
 	@NotNull
-	public Double getLentgh() {
-		return lentgh;
+	public Double getLength() {
+		return length;
 	}
 
-	public void setLentgh(Double lentgh) {
-		this.lentgh = lentgh;
+	public void setLength(Double length) {
+		this.length = length;
 	}
 
 	@ElementCollection

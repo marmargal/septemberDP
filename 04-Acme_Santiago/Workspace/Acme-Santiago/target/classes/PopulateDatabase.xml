@@ -184,7 +184,7 @@
 
 	<bean id="route1" class="domain.Route">
 		<property name="name" value="route1" />
-		<property name="lentgh" value="30.0" />
+		<property name="length" value="30.0" />
 		<property name="description" value="description1" />
 		<property name="pictures">
 			<list>
@@ -208,7 +208,7 @@
 
 	<bean id="route2" class="domain.Route">
 		<property name="name" value="route2" />
-		<property name="lentgh" value="50.0" />
+		<property name="length" value="50.0" />
 		<property name="description" value="description2" />
 		<property name="pictures">
 			<list>
@@ -234,7 +234,7 @@
 
 	<bean id="hike1" class="domain.Hike">
 		<property name="name" value="hike1" />
-		<property name="lentgh" value="30.0" />
+		<property name="length" value="30.0" />
 		<property name="description" value="description1" />
 		<property name="originCity" value="originCity1" />
 		<property name="destinationCity" value="destinationCity1" />
@@ -256,7 +256,7 @@
 
 	<bean id="hike2" class="domain.Hike">
 		<property name="name" value="hike2" />
-		<property name="lentgh" value="30.0" />
+		<property name="length" value="30.0" />
 		<property name="description" value="description2" />
 		<property name="originCity" value="originCity2" />
 		<property name="destinationCity" value="destinationCity2" />

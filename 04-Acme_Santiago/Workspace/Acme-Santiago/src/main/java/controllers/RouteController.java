@@ -42,8 +42,8 @@ public class RouteController extends AbstractController {
 		return res;
 	}
 
-	@RequestMapping(value = "/lentghSearch", method = RequestMethod.GET)
-	public ModelAndView lentghList(
+	@RequestMapping(value = "/lengthSearch", method = RequestMethod.GET)
+	public ModelAndView lengthList(
 			@RequestParam(defaultValue = "99999.0") String max,
 			@RequestParam(defaultValue = "0.0") String min) {
 		ModelAndView res = null;
@@ -53,7 +53,7 @@ public class RouteController extends AbstractController {
 			double minValued = Double.valueOf(min);
 			int maxValue = (int) maxValued;
 			int minValue = (int) minValued;
-			routes = this.routeService.lentghRoute(maxValue, minValue);
+			routes = this.routeService.lengthRoute(maxValue, minValue);
 			res = new ModelAndView("route/list");
 			res.addObject("routes", routes);
 			res.addObject("requestURI", "route/list.do");

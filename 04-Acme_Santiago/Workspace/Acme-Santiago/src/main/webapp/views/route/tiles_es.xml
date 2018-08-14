@@ -20,7 +20,7 @@
 		<put-attribute name="body" value="/views/route/list.jsp" />
 	</definition>
 
-	<definition name="route/lentghSearch" extends="master.page">
+	<definition name="route/lengthSearch" extends="master.page">
 		<put-attribute name="title" value="Lista de rutas" />
 		<put-attribute name="body" value="/views/route/list.jsp" />
 	</definition>

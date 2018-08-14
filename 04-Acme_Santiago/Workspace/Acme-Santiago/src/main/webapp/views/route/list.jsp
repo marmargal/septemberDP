@@ -26,8 +26,8 @@
 </form>
 <br />
 
-<spring:message code="route.searchLentgh" />
-<form method=GET action="route/lentghSearch.do">
+<spring:message code="route.searchLength" />
+<form method=GET action="route/lengthSearch.do">
 	MIN: <input type="number" name="min"> MAX:<input type="number"
 		name="max"> <input type="submit">
 </form>
