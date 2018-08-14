@@ -13,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.HikeService;
 import services.RouteService;
-import services.UserService;
 import controllers.AbstractController;
 import domain.Hike;
 import domain.Route;
-import domain.User;
 
 @Controller
 @RequestMapping("/route/user")
@@ -30,12 +27,9 @@ public class RouteUserController extends AbstractController {
 	@Autowired
 	private RouteService routeService;
 	
-	@Autowired
-	private UserService userService;
+//	@Autowired
+//	private UserService userService;
 	
-	@Autowired
-	private HikeService hikeService;
-
 	// Constructors ---------------------------------------------------------
 
 	public RouteUserController() {
@@ -59,7 +53,7 @@ public class RouteUserController extends AbstractController {
 			ModelAndView result;
 			Route route;
 			route = this.routeService.findOne(routeId);
-			final User user = this.userService.findByPrincipal();
+//			final User user = this.userService.findByPrincipal();
 //			if (user.getRoute().contains(route))
 				result = this.createEditModelAndView(route);
 //			else
@@ -113,11 +107,19 @@ public class RouteUserController extends AbstractController {
 			ModelAndView result;
 			
 			Collection<Hike> hikes = new ArrayList<Hike>();
-			hikes = this.hikeService.findAll();
+			hikes = this.routeService.hikesWithoutRoute();
+			
+			Collection<Hike> routeHikes = new ArrayList<Hike>();
+			routeHikes = route.getHikes();
 
 			result = new ModelAndView("route/edit");
 			result.addObject("route", route);
-			result.addObject("hikes", hikes);
+			if (route.getId() == 0) {
+				result.addObject("hikes", hikes);
+			} else {
+				result.addObject("hikes", routeHikes);
+			}
+			
 			result.addObject("message", message);
 			result.addObject("requestURI", "route/user/edit.do");
 

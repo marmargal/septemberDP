@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.RouteRepository;
+import domain.Comment;
+import domain.Hike;
 import domain.Route;
 import domain.User;
 
@@ -23,6 +26,9 @@ public class RouteService {
 	// Suporting services
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CommentService commentService;
 
 	// Constructors
 
@@ -68,6 +74,19 @@ public class RouteService {
 		Assert.notNull(route);
 		Assert.isTrue(route.getId() != 0);
 		Assert.isTrue(this.routeRepository.exists(route.getId()));
+		
+		Collection<Hike> hikes = new ArrayList<Hike>();
+		hikes = route.getHikes();
+		for (Hike hike : hikes) {
+			hike.setRoute(null);
+		}
+		
+		Collection<Comment> comments = new ArrayList<Comment>();
+		comments = route.getComments();
+		for (Comment comment : comments) {
+			this.commentService.delete(comment);
+		}
+		
 		this.routeRepository.delete(route);
 	}
 
@@ -88,4 +107,11 @@ public class RouteService {
 	public Collection<Route> numHikesRoute(int max, int min) {
 		return this.routeRepository.numHikesRoute(max, min);
 	}
+	
+	public Collection<Hike> hikesWithoutRoute() {
+		Collection<Hike> hikes = new ArrayList<Hike>();
+		hikes = this.routeRepository.hikesWithoutRoute();
+		return hikes;
+	}
+	
 }

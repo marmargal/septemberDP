@@ -33,7 +33,7 @@
 	<acme:select items="${hikes }" itemLabel="name" code="route.hikes" path="hikes"/>
 	
 	<acme:submit name="save" code="route.save"/>
-	<jstl:if test="${routeForm.id != 0}">
+	<jstl:if test="${route.id != 0}">
 			<input type="submit" name="delete"
 				value="<spring:message code="route.delete" />"
 				onclick="return confirm('<spring:message code="route.confirm.delete" />')" />&nbsp;
