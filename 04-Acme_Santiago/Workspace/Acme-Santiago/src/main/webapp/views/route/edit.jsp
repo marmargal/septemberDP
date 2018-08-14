@@ -22,6 +22,9 @@
 <form:form action="${requestURI }" modelAttribute="route">
 	
 	<form:hidden path="id"/>
+	<form:hidden path="version"/>
+	<form:hidden path="comments"/>
+	<form:hidden path="user"/>
 	
 	<acme:textbox code="route.name" path="name"/>
 	<acme:textbox code="route.length" path="length"/>

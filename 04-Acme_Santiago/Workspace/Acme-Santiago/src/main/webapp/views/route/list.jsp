@@ -47,8 +47,19 @@
 	<acme:column property="description" code="route.description" />
 
 	<display:column>
-
 		<a href="route/display.do?routeId=${row.id}"><spring:message
 				code="route.display" /></a>
 	</display:column>
+	
+	<security:authorize access="hasRole('USER')">
+	<display:column>
+			<a href="route/user/edit.do?routeId=${row.id}"><spring:message
+					code="route.edit" /></a>
+		</display:column>
+	</security:authorize>
+	
 </display:table>
+
+<security:authorize access="hasRole('USER')">
+	<acme:links url="route/user/create.do" code="route.create" />
+</security:authorize>
