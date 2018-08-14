@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -91,7 +92,7 @@ public class Route extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy = "route", cascade = CascadeType.REMOVE)
 	public Collection<Hike> getHikes() {
 		return hikes;
 	}

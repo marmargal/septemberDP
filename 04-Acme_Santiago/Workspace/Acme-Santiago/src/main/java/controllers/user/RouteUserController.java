@@ -89,6 +89,8 @@ public class RouteUserController extends AbstractController {
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(route, "route.commit.error");
+				System.out.println(oops.getMessage());
+				System.out.println(oops.getLocalizedMessage());
 			}
 			return res;
 		}

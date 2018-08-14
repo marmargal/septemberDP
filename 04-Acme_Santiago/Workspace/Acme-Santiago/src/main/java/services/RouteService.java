@@ -79,9 +79,8 @@ public class RouteService {
 		Assert.isTrue(this.routeRepository.exists(route.getId()));
 		
 		Collection<Hike> hikes = new ArrayList<Hike>();
-		hikes = route.getHikes();
+		hikes = new ArrayList<Hike>(this.hikeService.findHikeByRoute(route.getId()));
 		for (Hike hike : hikes) {
-			hikes.remove(hike);
 			this.hikeService.delete(hike);
 		}
 		

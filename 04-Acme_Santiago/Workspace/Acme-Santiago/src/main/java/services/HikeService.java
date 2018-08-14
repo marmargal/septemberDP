@@ -83,6 +83,12 @@ public class HikeService {
 	}
 
 	// Other business methods
+	
+	public Collection<Hike> findHikeByRoute(int id) {
+		Collection<Hike> res;
+		res = this.hikeRepository.findHikeByRoute(id);
+		return res;
+	}
 
 	public void flush() {
 		this.hikeRepository.flush();
