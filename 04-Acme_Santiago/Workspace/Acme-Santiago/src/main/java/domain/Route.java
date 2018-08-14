@@ -8,7 +8,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -25,7 +24,7 @@ public class Route extends DomainEntity {
 
 	// Attributes
 	private String name;
-	private Double lentgh;
+	private Double length;
 	private String description;
 	private Collection<String> pictures;
 
@@ -48,12 +47,12 @@ public class Route extends DomainEntity {
 	}
 
 	@NotNull
-	public Double getLentgh() {
-		return lentgh;
+	public Double getLength() {
+		return length;
 	}
 
-	public void setLentgh(Double lentgh) {
-		this.lentgh = lentgh;
+	public void setLength(Double length) {
+		this.length = length;
 	}
 
 	@ElementCollection
@@ -67,7 +66,7 @@ public class Route extends DomainEntity {
 
 	// Relationships
 	private User user;
-	private Hike hike;
+	private Collection<Hike> hikes;
 	private Collection<Comment> comments;
 
 	@Valid
@@ -81,16 +80,6 @@ public class Route extends DomainEntity {
 	}
 
 	@Valid
-	@OneToOne(optional = false)
-	public Hike getHike() {
-		return hike;
-	}
-
-	public void setHike(Hike hike) {
-		this.hike = hike;
-	}
-
-	@Valid
 	@OneToMany(mappedBy = "route")
 	public Collection<Comment> getComments() {
 		return comments;
@@ -98,6 +87,17 @@ public class Route extends DomainEntity {
 
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany
+	public Collection<Hike> getHikes() {
+		return hikes;
+	}
+
+	public void setHikes(Collection<Hike> hikes) {
+		this.hikes = hikes;
 	}
 
 }

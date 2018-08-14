@@ -6,11 +6,12 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -25,12 +26,12 @@ public class Hike extends DomainEntity {
 
 	// Attributes
 	private String name;
-	private Double lentgh;
+	private Double length;
 	private String description;
 	private String originCity;
 	private String destinationCity;
 	private Collection<String> pictures;
-	private String dificultLevel;
+	private DificultLevel dificultLevel;
 
 	@NotBlank
 	public String getName() {
@@ -68,22 +69,24 @@ public class Hike extends DomainEntity {
 		this.destinationCity = destinationCity;
 	}
 
-	@Pattern(regexp = "\\EASY\\z|\\MEDIUM\\z|\\DIFFICULT\\z")
-	public String getDificultLevel() {
+	@Valid
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	public DificultLevel getDificultLevel() {
 		return dificultLevel;
 	}
 
-	public void setDificultLevel(String dificultLevel) {
+	public void setDificultLevel(DificultLevel dificultLevel) {
 		this.dificultLevel = dificultLevel;
 	}
 
 	@NotNull
-	public Double getLentgh() {
-		return lentgh;
+	public Double getLength() {
+		return length;
 	}
 
-	public void setLentgh(Double lentgh) {
-		this.lentgh = lentgh;
+	public void setLength(Double length) {
+		this.length = length;
 	}
 
 	@ElementCollection
@@ -100,7 +103,7 @@ public class Hike extends DomainEntity {
 	private Collection<Comment> comments;
 
 	@Valid
-	@OneToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Route getRoute() {
 		return route;
 	}
