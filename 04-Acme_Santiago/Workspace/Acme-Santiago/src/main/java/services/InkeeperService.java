@@ -55,7 +55,6 @@ public class InkeeperService {
 	public Collection<Inkeeper> findAll() {
 		Collection<Inkeeper> res;
 		res = inkeeperRepository.findAll();
-		Assert.notNull(res);
 		return res;
 	}
 
@@ -63,7 +62,6 @@ public class InkeeperService {
 		Assert.isTrue(inkeeperId != 0);
 		Inkeeper res;
 		res = inkeeperRepository.findOne(inkeeperId);
-		Assert.notNull(res);
 		return res;
 	}
 

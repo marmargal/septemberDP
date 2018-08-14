@@ -20,6 +20,7 @@
 		<value>/views/administrator/messages</value>
 		<value>/views/actor/messages</value>
 		<value>/views/route/messages</value>
+		<value>/views/user/messages</value>
 
 	</util:list>
 

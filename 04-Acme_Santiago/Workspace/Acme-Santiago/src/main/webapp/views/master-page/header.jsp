@@ -39,6 +39,8 @@
 						code="master.page.register.user" /></a></li>
 			<li><a href="route/list.do"><spring:message
 						code="master.page.route.search" /></a></li>
+			<li><a href="user/list.do"><spring:message
+						code="master.page.user.list" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
@@ -52,6 +54,10 @@
 					<li><a href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /> </a></li>
 				</ul></li>
+			<li><a href="route/list.do"><spring:message
+						code="master.page.route.search" /></a></li>
+			<li><a href="user/list.do"><spring:message
+						code="master.page.user.list" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

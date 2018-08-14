@@ -52,4 +52,3 @@
 				code="route.display" /></a>
 	</display:column>
 </display:table>
-<jstl:out value="${nums }" />
