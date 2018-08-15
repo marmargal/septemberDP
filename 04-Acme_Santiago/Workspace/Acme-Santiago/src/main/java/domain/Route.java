@@ -92,7 +92,7 @@ public class Route extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToMany(mappedBy = "route", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
 	public Collection<Hike> getHikes() {
 		return hikes;
 	}
