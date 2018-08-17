@@ -74,6 +74,10 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/route/user/**"
 			access="hasRole('USER')" />
+		<security:intercept-url pattern="/route/administrator/list.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/route/administrator/edit.do"
+			access="hasRole('ADMIN')" />
 			
 											<!-- HIKE -->
 			

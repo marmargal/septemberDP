@@ -58,6 +58,13 @@
 		</display:column>
 	</security:authorize>
 	
+	<security:authorize access="hasRole('ADMIN')">
+	<display:column>
+			<a href="route/administrator/edit.do?routeId=${row.id}"><spring:message
+					code="route.edit" /></a>
+		</display:column>
+	</security:authorize>
+	
 </display:table>
 
 <security:authorize access="hasRole('USER')">

@@ -34,12 +34,25 @@
 		<put-attribute name="title" value="List of routes" />
 		<put-attribute name="body" value="/views/route/list.jsp" />
 	</definition>
+	
 	<definition name="route/hikesSearch" extends="master.page">
 		<put-attribute name="title" value="List of routes" />
 		<put-attribute name="body" value="/views/route/list.jsp" />
 	</definition>
+	
 	<definition name="route/display" extends="master.page">
 		<put-attribute name="title" value="Display route" />
 		<put-attribute name="body" value="/views/route/display.jsp" />
 	</definition>
+	
+	<definition name="route/administrator/list" extends="master.page">
+		<put-attribute name="title" value="List routes" />
+		<put-attribute name="body" value="/views/route/list.jsp" />
+	</definition>
+	
+	<definition name="route/administrator/edit" extends="master.page">
+		<put-attribute name="title" value="Edit route" />
+		<put-attribute name="body" value="/views/route/edit.jsp" />
+	</definition>
+	
 </tiles-definitions>
