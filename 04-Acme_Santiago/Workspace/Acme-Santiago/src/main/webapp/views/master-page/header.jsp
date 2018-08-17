@@ -27,6 +27,7 @@
 			<ul>
 				<li class="arrow"></li>
 				<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+				<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.edit.configuration" /></a></li>
 			</ul>
 		</li>
 		<li><a href="chirp/administrator/list.do"><spring:message code="master.page.chirp.taboo" /></a>

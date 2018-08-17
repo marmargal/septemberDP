@@ -88,6 +88,11 @@
 		<security:intercept-url pattern="/chirp/user/display.do"
 			access="hasRole('USER')" />
 			
+											<!-- CONFIGURATION -->
+			
+		<security:intercept-url pattern="/configuration/administrator/edit.do"
+			access="hasRole('ADMIN')" />
+			
 		<security:intercept-url pattern="/**"
 			access="hasRole('NONE')" />
 
