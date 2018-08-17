@@ -410,7 +410,12 @@
 	</bean>
 
 
-	<!-- inn -->
+
+
+
+
+
+</bean>
 
 	<bean id="inn1" class="domain.Inn">
 		<property name="name" value="inn1" />
@@ -420,7 +425,11 @@
 		<property name="email" value="edferve@gmail.com" />
 		<property name="webSite" value="http://www.google.es" />
 		<property name="creditCard" ref="creditCard1" />
+		<property name="inkeeper" ref="inkeeper1" />
+
+
 	</bean>
+
 
 	<bean id="inn2" class="domain.Inn">
 		<property name="name" value="inn2" />
@@ -430,17 +439,20 @@
 		<property name="email" value="edferve@gmail.com" />
 		<property name="webSite" value="http://www.google.es" />
 		<property name="creditCard" ref="creditCard2" />
+		<property name="inkeeper" ref="inkeeper2" />
+
+
 	</bean>
-	
+
 	<!-- CONFIGURATION -->
-	
+
 	<bean id="configuration" class="domain.Configuration">
-	<property name="tabooWords">
-		<list>
-			<value>sex</value>
-			<value>viagra</value>
-			<value>cialis</value>
-		</list>
-	</property>
+		<property name="tabooWords">
+			<list>
+				<value>sex</value>
+				<value>viagra</value>
+				<value>cialis</value>
+			</list>
+		</property>
 	</bean>
 </beans>

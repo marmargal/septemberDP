@@ -16,6 +16,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import domain.User;
 import forms.ActorForm;
 
 @Service
@@ -151,6 +152,43 @@ public class AdministratorService {
 		this.validator.validate(res, binding);
 
 		return res;
+	}
+
+	// dashboard
+	public Collection<Double> dataRoutesPerUser() {
+		return administratorRepository.dataRoutesPerUser();
+	}
+
+	public Collection<Double> dataHikesPerRoute() {
+		return administratorRepository.dataHikesPerRoute();
+	}
+
+	public Collection<Double> dataLengthOfRoutes() {
+		return administratorRepository.dataLengthOfRoutes();
+	}
+
+	public Collection<Double> dataLengthOfHikes() {
+		return administratorRepository.dataLengthOfHikes();
+	}
+
+	public Collection<Double> dataNumChirpsPerUser() {
+		return administratorRepository.dataNumChirpsPerUser();
+	}
+
+	public Collection<User> dataUserMore75Chirps() {
+		return administratorRepository.dataUserMore75Chirps();
+	}
+
+	public Collection<User> dataUserLess25Chirps() {
+		return administratorRepository.dataUserLess25Chirps();
+	}
+
+	public Collection<Double> dataCommentPerRoute() {
+		return administratorRepository.dataCommentPerRoute();
+	}
+
+	public Collection<Double> dataInnsPerInkeeper() {
+		return administratorRepository.dataInnsPerInkeeper();
 	}
 
 }

@@ -24,6 +24,7 @@
 		<value>/views/hike/tiles.xml</value>
 		<value>/views/chirp/tiles.xml</value>
 		<value>/views/configuration/tiles.xml</value>
+		<value>/views/dashboard/tiles.xml</value>
 
 	</util:list>
 
