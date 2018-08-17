@@ -409,14 +409,6 @@
 		<property name="cvv" value="612" />
 	</bean>
 
-
-
-
-
-
-
-</bean>
-
 	<bean id="inn1" class="domain.Inn">
 		<property name="name" value="inn1" />
 		<property name="badge" value="badge1" />
@@ -430,7 +422,6 @@
 
 	</bean>
 
-
 	<bean id="inn2" class="domain.Inn">
 		<property name="name" value="inn2" />
 		<property name="badge" value="badge2" />
@@ -440,7 +431,6 @@
 		<property name="webSite" value="http://www.google.es" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="inkeeper" ref="inkeeper2" />
-
 
 	</bean>
 
