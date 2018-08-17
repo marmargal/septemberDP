@@ -42,19 +42,21 @@ public class UserController extends AbstractController {
 		User user;
 		User currentUser;
 		Integer currentUserId;
+		
+		user = this.userService.findOne(userId);
+		
+		res = new ModelAndView("user/display");
+		res.addObject("user", user);
+		res.addObject("followTable", user);
 		try {
 
-			user = this.userService.findOne(userId);
-			res = new ModelAndView("user/display");
 			currentUser = this.userService.findByPrincipal();
 			currentUserId = currentUser.getId();
 			res.addObject("currentUserId", currentUserId);
-			res.addObject("user", user);
-			res.addObject("followTable", user);
-			res.addObject("requestURI", "user/display.do");
 		} catch (Exception e) {
-			res = new ModelAndView("redirect:/user/list.do");
+			res.addObject("currentUserId", userId);
 		}
+		res.addObject("requestURI", "user/display.do");
 
 		return res;
 	}
