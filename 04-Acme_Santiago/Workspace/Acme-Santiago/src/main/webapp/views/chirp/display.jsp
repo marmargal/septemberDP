@@ -30,4 +30,5 @@
 	<acme:column property="text" code="chirp.text" />
 	
 </display:table>
+<acme:links url="chirp/user/create.do" code="chirp.create" />
 </security:authorize>
