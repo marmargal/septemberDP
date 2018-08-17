@@ -40,11 +40,17 @@ public class UserController extends AbstractController {
 	public ModelAndView searchList(@RequestParam(defaultValue = "0") int userId) {
 		ModelAndView res;
 		User user;
+		User currentUser;
+		Integer currentUserId;
 		try {
 
 			user = this.userService.findOne(userId);
 			res = new ModelAndView("user/display");
+			currentUser = this.userService.findByPrincipal();
+			currentUserId = currentUser.getId();
+			res.addObject("currentUserId", currentUserId);
 			res.addObject("user", user);
+			res.addObject("followTable", user);
 			res.addObject("requestURI", "user/display.do");
 		} catch (Exception e) {
 			res = new ModelAndView("redirect:/user/list.do");
@@ -64,5 +70,103 @@ public class UserController extends AbstractController {
 
 		return res;
 	}
+	
+	// Followers and Following
+	
+		@RequestMapping(value = "/listFollowers", method = RequestMethod.GET)
+		public ModelAndView listFollowers(@RequestParam int userId) {
+			ModelAndView result;
+			User user;
+			Collection<User> followers;
+
+			user = this.userService.findOne(userId);
+			followers = user.getFollowers();
+
+			result = new ModelAndView("user/listFollowers");
+			result.addObject("users", followers);
+			result.addObject("requestURI", "user/listFollowers.do");
+
+			return result;
+		}
+		
+		@RequestMapping(value = "/listFollowing", method = RequestMethod.GET)
+		public ModelAndView listFollowing(@RequestParam int userId) {
+			ModelAndView result;
+			User user;
+			Collection<User> following;
+
+			user = this.userService.findOne(userId);
+			following = user.getFollowing();
+
+			result = new ModelAndView("user/listFollowing");
+			result.addObject("users", following);
+			result.addObject("requestURI", "user/listFollowing.do");
+
+			return result;
+		}
+		
+		// Follow
+		
+		@RequestMapping(value = "/follow", method = RequestMethod.GET)
+		public ModelAndView follow(@RequestParam int userId) {
+			ModelAndView result;
+			User user;
+			
+			user = userService.findOne(userId);
+			userService.follow(userId);
+			result = this.createEditModelAndView(user);
+
+			return result;
+		}
+		
+		@RequestMapping(value = "/unfollow", method = RequestMethod.GET)
+		public ModelAndView unfollow(@RequestParam int userId) {
+			ModelAndView result;
+			User user;
+			
+			user = userService.findOne(userId);
+			userService.unfollow(userId);
+			result = this.createEditModelAndViewUnfollow(user);
+
+			return result;
+		}
+		
+		// Ancillary methods --------------------------------------------------
+
+		protected ModelAndView createEditModelAndView(final User user) {
+			ModelAndView result;
+
+			result = this.createEditModelAndView(user, null);
+
+			return result;
+		}
+
+		protected ModelAndView createEditModelAndView(final User user,
+				final String message) {
+			ModelAndView result;
+			result = new ModelAndView("user/follow");
+			result.addObject("message", message);
+			result.addObject("requestURI", "user/follow.do");
+			return result;
+
+		}
+		
+		protected ModelAndView createEditModelAndViewUnfollow(final User user) {
+			ModelAndView result;
+
+			result = this.createEditModelAndView(user, null);
+
+			return result;
+		}
+
+		protected ModelAndView createEditModelAndViewUnfollow(final User user,
+				final String message) {
+			ModelAndView result;
+			result = new ModelAndView("user/unfollow");
+			result.addObject("message", message);
+			result.addObject("requestURI", "user/unfollow.do");
+			return result;
+
+		}
 
 }

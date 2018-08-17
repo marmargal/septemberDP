@@ -11,6 +11,22 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<form:form action="user/display.do" modelAttribute="user">
+
+<security:authorize access="hasRole('USER')">
+<display:table name="followTable" class="displaytag" id="row">
+
+<jstl:if test="${row.id != currentUserId }">
+	<display:column><acme:links url="user/follow.do?userId=${row.id}" code="user.follow" /></display:column>
+	<display:column><acme:links url="user/unfollow.do?userId=${row.id}" code="user.unfollow" /></display:column>
+</jstl:if>
+
+<display:column><acme:links url="user/listFollowers.do?userId=${row.id }" code="user.followers" /></display:column>
+<display:column><acme:links url="user/listFollowing.do?userId=${row.id }" code="user.following" /></display:column>
+
+</display:table>
+</security:authorize>
+
 <b><spring:message code="user.name" />:&nbsp;</b>
 <jstl:out value="${user.name}" />
 <br />
@@ -55,3 +71,5 @@
 	<br />
 </jstl:forEach>
 <br />
+
+</form:form>

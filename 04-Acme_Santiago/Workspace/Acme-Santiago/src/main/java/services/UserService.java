@@ -71,21 +71,27 @@ public class UserService {
 		return res;
 	}
 
-	public User save(User user) {
-		User res;
-
-		String pass = user.getUserAccount().getPassword();
-
-		final Md5PasswordEncoder code = new Md5PasswordEncoder();
-
-		pass = code.encodePassword(pass, null);
-
-		user.getUserAccount().setPassword(pass);
-
-		res = this.userRepository.save(user);
-
-		return res;
-
+	public User save(final User user) {
+		User result = user;
+		Assert.notNull(user);
+		if (user.getId() == 0) {
+			Class<?> caught;
+			caught = null;
+			try {
+				LoginService.getPrincipal();
+			} catch (final Throwable oops) {
+				caught = oops.getClass();
+			}
+			this.checkExceptions(IllegalArgumentException.class, caught);
+		}
+		if (user.getId() == 0) {
+			String pass = user.getUserAccount().getPassword();
+			final Md5PasswordEncoder code = new Md5PasswordEncoder();
+			pass = code.encodePassword(pass, null);
+			user.getUserAccount().setPassword(pass);
+		}
+		result = this.userRepository.save(result);
+		return result;
 	}
 
 	public User saveForComment(User user) {
@@ -115,6 +121,54 @@ public class UserService {
 	}
 
 	// Other business methods
+	
+	public void follow(int userId){
+		User actual;
+		actual = this.findByPrincipal();
+		
+		User follow;
+		follow = this.findOne(userId);
+		
+		if (actual != follow) {
+			Collection<User> following;
+			following = actual.getFollowing();
+			
+			Collection<User> followers;
+			followers = follow.getFollowers();
+			
+			if (followers.contains(actual)) {
+				follow.setFollowers(followers);
+				actual.setFollowing(following);
+				
+			} else {
+				following.add(follow);
+				followers.add(actual);
+				
+				follow.setFollowers(followers);
+				actual.setFollowing(following);
+			}
+		}
+	}
+	
+	public void unfollow(int userId){
+		User actual;
+		actual = this.findByPrincipal();
+		
+		User unfollow;
+		unfollow = this.findOne(userId);
+		
+		Collection<User> following;
+		following = actual.getFollowing();
+		
+		Collection<User> followers;
+		followers = unfollow.getFollowers();
+		
+		following.remove(unfollow);
+		followers.remove(actual);
+		
+		unfollow.setFollowers(followers);
+		actual.setFollowing(following);
+	}
 
 	public User findByPrincipal() {
 		User res;
@@ -213,4 +267,14 @@ public class UserService {
 	public void flush() {
 		this.userRepository.flush();
 	}
+	
+	protected void checkExceptions(final Class<?> expected, final Class<?> caught) {
+		if (expected != null && caught == null)
+			throw new RuntimeException(expected.getName() + " was expected");
+		else if (expected == null && caught != null)
+			throw new RuntimeException(caught.getName() + " was unexpected");
+		else if (expected != null && caught != null && !expected.equals(caught))
+			throw new RuntimeException(expected.getName() + " was expected, but " + caught.getName() + " was thrown");
+	}
+	
 }

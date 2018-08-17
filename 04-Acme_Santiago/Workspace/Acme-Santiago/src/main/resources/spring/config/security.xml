@@ -51,6 +51,14 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/user/display.do"
 			access="permitAll" />
+		<security:intercept-url pattern="/user/listFollowers.do"
+			access="permitAll" />
+		<security:intercept-url pattern="/user/listFollowing.do"
+			access="permitAll" />
+		<security:intercept-url pattern="/user/follow.do"
+			access="hasRole('USER')" />
+		<security:intercept-url pattern="/user/unfollow.do"
+			access="hasRole('USER')" />
 			
 											<!-- ROUTE -->
 
