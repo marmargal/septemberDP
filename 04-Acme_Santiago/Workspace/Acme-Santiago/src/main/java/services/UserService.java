@@ -145,6 +145,8 @@ public class UserService {
 			Collection<Comment> comment;
 			Collection<Chirp> chirps;
 			Collection<Route> routes;
+			Collection<User> following;
+			Collection<User> followers;
 			UserAccount userAccount;
 			Authority authority;
 			userAccount = userForm.getUser().getUserAccount();
@@ -152,12 +154,16 @@ public class UserService {
 			comment = new ArrayList<Comment>();
 			chirps = new ArrayList<Chirp>();
 			routes = new ArrayList<>();
+			following = new ArrayList<User>();
+			followers = new ArrayList<User>();
 			userForm.getUser().setUserAccount(userAccount);
 			authority.setAuthority(Authority.USER);
 			userAccount.addAuthority(authority);
 			userForm.getUser().setComments(comment);
 			userForm.getUser().setChirps(chirps);
 			userForm.getUser().setRoutes(routes);
+			userForm.getUser().setFollowing(following);
+			userForm.getUser().setFollowers(followers);
 
 			userFinal = userForm;
 		} else {
@@ -166,6 +172,8 @@ public class UserService {
 			userForm.getUser().setVersion(res.getVersion());
 			userForm.getUser().setUserAccount(res.getUserAccount());
 			userForm.getUser().setComments(res.getComments());
+			userForm.getUser().setFollowing(res.getFollowing());
+			userForm.getUser().setFollowers(res.getFollowers());
 			userFinal = userForm;
 		}
 		this.validator.validate(userFinal, binding);

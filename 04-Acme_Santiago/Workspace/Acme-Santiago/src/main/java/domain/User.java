@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
@@ -22,6 +23,8 @@ public class User extends Actor {
 	private Collection<Comment> comments;
 	private Collection<Chirp> chirps;
 	private Collection<Route> routes;
+	private Collection<User> following;
+	private Collection<User> followers;
 
 	@Valid
 	@OneToMany(mappedBy = "user")
@@ -51,5 +54,25 @@ public class User extends Actor {
 
 	public void setRoutes(Collection<Route> routes) {
 		this.routes = routes;
+	}
+	
+	@Valid
+	@ManyToMany
+	public Collection<User> getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(Collection<User> following) {
+		this.following = following;
+	}
+
+	@Valid
+	@ManyToMany(mappedBy = "following")
+	public Collection<User> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(Collection<User> followers) {
+		this.followers = followers;
 	}
 }

@@ -22,6 +22,7 @@
 		<value>/views/route/messages</value>
 		<value>/views/user/messages</value>
 		<value>/views/hike/messages</value>
+		<value>/views/chirp/messages</value>
 
 	</util:list>
 

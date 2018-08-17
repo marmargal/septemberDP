@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles.xml * * Copyright (C) 2017 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="chirp/user/edit" extends="master.page">
+		<put-attribute name="title" value="Edit chirp" />
+		<put-attribute name="body" value="/views/chirp/edit.jsp" />
+	</definition>
+
+	<definition name="chirp/user/display" extends="master.page">
+		<put-attribute name="title" value="Show chirps" />
+		<put-attribute name="body" value="/views/chirp/display.jsp" />
+	</definition>
+
+	<definition name="chirp/administrator/list" extends="master.page">
+		<put-attribute name="title" value="List taboo chirps" />
+		<put-attribute name="body" value="/views/chirp/listTaboo.jsp" />
+	</definition>
+	
+	<definition name="chirp/administrator/listAll" extends="master.page">
+		<put-attribute name="title" value="List Chirps" />
+		<put-attribute name="body" value="/views/chirp/list.jsp" />
+	</definition>
+	
+	<definition name="chirp/administrator/edit" extends="master.page">
+		<put-attribute name="title" value="Edit chirp" />
+		<put-attribute name="body" value="/views/chirp/edit.jsp" />
+	</definition>
+
+</tiles-definitions>

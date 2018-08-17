@@ -42,34 +42,52 @@
 
 		<security:intercept-url pattern="/welcome/index.do"
 			access="permitAll" />
+			
+											<!-- USER -->
+			
+		<security:intercept-url pattern="/user/register.do"
+			access="permitAll" />
+		<security:intercept-url pattern="/user/list.do"
+			access="permitAll" />
+		<security:intercept-url pattern="/user/display.do"
+			access="permitAll" />
+			
+											<!-- ROUTE -->
 
 		<security:intercept-url pattern="/route/list.do"
 			access="permitAll" />
-
 		<security:intercept-url pattern="/route/lengthSearch.do"
 			access="permitAll" />
 		<security:intercept-url pattern="/route/hikesSearch.do"
 			access="permitAll" />
 		<security:intercept-url pattern="/route/display.do"
 			access="permitAll" />
-
 		<security:intercept-url pattern="/route/search.do"
 			access="permitAll" />
-			
 		<security:intercept-url pattern="/route/user/**"
 			access="hasRole('USER')" />
+			
+											<!-- HIKE -->
 			
 		<security:intercept-url pattern="/hike/user/**"
 			access="hasRole('USER')" />
 
-		<security:intercept-url pattern="/user/register.do"
-			access="permitAll" />
-
-		<security:intercept-url pattern="/user/list.do"
-			access="permitAll" />
-		<security:intercept-url pattern="/user/display.do"
-			access="permitAll" />
-
+											<!-- CHIRP -->
+			
+		<security:intercept-url pattern="/chirp/administrator/list.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/chirp/administrator/listAll.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/chirp/administrator/edit.do"
+			access="hasRole('ADMIN')" />
+			
+		<security:intercept-url pattern="/chirp/user/edit.do"
+			access="hasRole('USER')" />
+		<security:intercept-url pattern="/chirp/user/create.do"
+			access="hasRole('USER')" />
+		<security:intercept-url pattern="/chirp/user/display.do"
+			access="hasRole('USER')" />
+			
 		<security:intercept-url pattern="/**"
 			access="hasRole('NONE')" />
 

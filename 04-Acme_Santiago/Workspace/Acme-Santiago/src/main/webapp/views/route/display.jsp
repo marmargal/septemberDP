@@ -15,8 +15,8 @@
 <jstl:out value="${route.name}" />
 <br />
 
-<b><spring:message code="route.lentgh" />:&nbsp;</b>
-<jstl:out value="${route.lentgh}" />
+<b><spring:message code="route.length" />:&nbsp;</b>
+<jstl:out value="${route.length}" />
 <br />
 
 <b><spring:message code="route.description" />:&nbsp;</b>

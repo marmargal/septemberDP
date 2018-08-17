@@ -117,6 +117,16 @@
 				<ref bean="route1" />
 			</list>
 		</property>
+		<property name="following">
+			<list>
+				<ref bean="user2" />
+			</list>
+		</property>
+		<property name="followers">
+			<list>
+				<ref bean="user2" />
+			</list>
+		</property>
 	</bean>
 
 
@@ -143,6 +153,16 @@
 		<property name="routes">
 			<list>
 				<ref bean="route2" />
+			</list>
+		</property>
+		<property name="following">
+			<list>
+				<ref bean="user1" />
+			</list>
+		</property>
+		<property name="followers">
+			<list>
+				<ref bean="user1" />
 			</list>
 		</property>
 	</bean>
@@ -286,6 +306,7 @@
 		<property name="title" value="title1" />
 		<property name="text" value="text1" />
 		<property name="user" ref="user1" />
+		<property name="taboo" value="false" />
 	</bean>
 
 	<bean id="chirp2" class="domain.Chirp">
@@ -293,6 +314,7 @@
 		<property name="title" value="title2" />
 		<property name="text" value="text2" />
 		<property name="user" ref="user2" />
+		<property name="taboo" value="false" />
 	</bean>
 
 	<!-- comment -->
@@ -408,5 +430,17 @@
 		<property name="email" value="edferve@gmail.com" />
 		<property name="webSite" value="http://www.google.es" />
 		<property name="creditCard" ref="creditCard2" />
+	</bean>
+	
+	<!-- CONFIGURATION -->
+	
+	<bean id="configuration" class="domain.Configuration">
+	<property name="tabooWords">
+		<list>
+			<value>sex</value>
+			<value>viagra</value>
+			<value>cialis</value>
+		</list>
+	</property>
 	</bean>
 </beans>
