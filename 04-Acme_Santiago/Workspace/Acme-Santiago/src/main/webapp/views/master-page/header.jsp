@@ -33,7 +33,8 @@
 		<li><a href="chirp/administrator/list.do"><spring:message code="master.page.chirp.taboo" /></a>
 		<li><a href="chirp/administrator/listAll.do"><spring:message code="master.page.list.chirp" /></a>
 		<li><a href="administrator/list.do"><spring:message code="master.page.dashboard" /></a>
-		
+		<li><a href="comment/administrator/list.do"><spring:message code="master.page.comment.taboo" /></a>
+		<li><a href="comment/administrator/listAll.do"><spring:message code="master.page.comment" /></a>
 		
 		</security:authorize>
 		

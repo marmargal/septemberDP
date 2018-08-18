@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles.xml * * Copyright (C) 2017 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="comment/user/edit" extends="master.page">
+		<put-attribute name="title" value="Edit comment" />
+		<put-attribute name="body" value="/views/comment/edit.jsp" />
+	</definition>
+
+	<definition name="comment/user/display" extends="master.page">
+		<put-attribute name="title" value="Show comments" />
+		<put-attribute name="body" value="/views/comment/display.jsp" />
+	</definition>
+
+	<definition name="comment/administrator/list" extends="master.page">
+		<put-attribute name="title" value="List taboo comments" />
+		<put-attribute name="body" value="/views/comment/listTaboo.jsp" />
+	</definition>
+	
+	<definition name="comment/administrator/listAll" extends="master.page">
+		<put-attribute name="title" value="List Comments" />
+		<put-attribute name="body" value="/views/comment/list.jsp" />
+	</definition>
+	
+	<definition name="comment/administrator/edit" extends="master.page">
+		<put-attribute name="title" value="Edit comment" />
+		<put-attribute name="body" value="/views/comment/edit.jsp" />
+	</definition>
+	
+	<definition name="comment/create" extends="master.page">
+		<put-attribute name="title" value="Create comment" />
+		<put-attribute name="body" value="/views/hike/edit.jsp" />
+	</definition>
+
+</tiles-definitions>

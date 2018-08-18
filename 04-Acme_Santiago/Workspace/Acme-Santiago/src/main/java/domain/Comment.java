@@ -28,9 +28,9 @@ public class Comment extends DomainEntity {
 	private Date moment;
 	private String title;
 	private String text;
-	// TODO: pictures como String y se separan por split o como collection?
 	private Collection<String> pictures;
 	private Integer rating;
+	private boolean taboo;
 
 	@Past
 	public Date getMoment() {
@@ -111,6 +111,14 @@ public class Comment extends DomainEntity {
 
 	public void setHike(Hike hike) {
 		this.hike = hike;
+	}
+
+	public boolean isTaboo() {
+		return taboo;
+	}
+
+	public void setTaboo(boolean taboo) {
+		this.taboo = taboo;
 	}
 
 }

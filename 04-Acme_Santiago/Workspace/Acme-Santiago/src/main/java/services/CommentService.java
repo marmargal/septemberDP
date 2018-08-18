@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -23,6 +24,9 @@ public class CommentService {
 	// Suporting services
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	// Constructors
 
@@ -59,7 +63,15 @@ public class CommentService {
 	public Comment save(final Comment comment) {
 		Assert.notNull(comment);
 		Comment res;
-
+		Collection<String> tabooWords = new ArrayList<String>();
+		tabooWords = configurationService.findTabooWords();
+		for (String s : tabooWords) {
+			if (comment.getTitle().toLowerCase().contains(s.toLowerCase())
+					|| comment.getText().toLowerCase()
+							.contains(s.toLowerCase())) {
+				comment.setTaboo(true);
+			}
+		}
 		res = this.commentRepository.save(comment);
 		return res;
 	}
@@ -68,6 +80,8 @@ public class CommentService {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
 		Assert.isTrue(this.commentRepository.exists(comment.getId()));
+		this.userService.findOne(comment.getUser().getId()).getComments()
+				.remove(comment);
 		this.commentRepository.delete(comment);
 	}
 
@@ -76,4 +90,9 @@ public class CommentService {
 	public void flush() {
 		this.commentRepository.flush();
 	}
+
+	public Collection<Comment> findCommentTaboo() {
+		return commentRepository.findCommentTaboo();
+	}
+
 }

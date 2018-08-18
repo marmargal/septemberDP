@@ -24,6 +24,7 @@
 		<value>/views/chirp/messages</value>
 		<value>/views/configuration/messages</value>
 		<value>/views/dashboard/messages</value>
+		<value>/views/comment/messages</value>
 
 	</util:list>
 
