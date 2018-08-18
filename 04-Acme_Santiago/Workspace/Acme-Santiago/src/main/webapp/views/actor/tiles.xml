@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles.xml * * Copyright (C) 2017 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="actor/user/edit" extends="master.page">
+		<put-attribute name="title" value="Edit profile" />
+		<put-attribute name="body" value="/views/actor/edit.jsp" />
+	</definition>
+	
+	<definition name="actor/agent/edit" extends="master.page">
+		<put-attribute name="title" value="Edit profile" />
+		<put-attribute name="body" value="/views/actor/edit.jsp" />
+	</definition>
+	
+	<definition name="actor/handyworker/edit" extends="master.page">
+		<put-attribute name="title" value="Edit profile" />
+		<put-attribute name="body" value="/views/actor/edit.jsp" />
+	</definition>
+
+	<definition name="user/register" extends="master.page">
+		<put-attribute name="title" value="Register user" />
+		<put-attribute name="body" value="/views/actor/register.jsp" />
+	</definition>
+
+	<definition name="handyworker/register" extends="master.page">
+		<put-attribute name="title" value="Register handyworker" />
+		<put-attribute name="body"
+			value="/views/actor/registerHandyworker.jsp" />
+	</definition>
+
+	<definition name="agent/register" extends="master.page">
+		<put-attribute name="title" value="Register agent" />
+		<put-attribute name="body"
+			value="/views/actor/registerAgent.jsp" />
+	</definition>
+
+	<definition name="actor/register" extends="master.page">
+		<put-attribute name="title" value="Register" />
+		<put-attribute name="body" value="/views/actor/register.jsp" />
+	</definition>
+
+</tiles-definitions>

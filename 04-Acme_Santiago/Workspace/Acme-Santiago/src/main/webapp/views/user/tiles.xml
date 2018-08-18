@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles.xml * * Copyright (C) 2017 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="user/list" extends="master.page">
+		<put-attribute name="title" value="Lis of users" />
+		<put-attribute name="body" value="/views/user/list.jsp" />
+	</definition>
+
+	<definition name="user/display" extends="master.page">
+		<put-attribute name="title" value="Display user" />
+		<put-attribute name="body" value="/views/user/display.jsp" />
+	</definition>
+	
+	<definition name="user/listFollowers" extends="master.page">
+		<put-attribute name="title" value="List followers" />
+		<put-attribute name="body" value="/views/user/list.jsp" />
+	</definition>
+	
+	<definition name="user/listFollowing" extends="master.page">
+		<put-attribute name="title" value="List following" />
+		<put-attribute name="body" value="/views/user/list.jsp" />
+	</definition>
+	
+	<definition name="user/follow" extends="master.page">
+		<put-attribute name="title" value="Follow" />
+		<put-attribute name="body" value="/views/user/follow.jsp" />
+	</definition>
+	
+	<definition name="user/unfollow" extends="master.page">
+		<put-attribute name="title" value="Unfollow" />
+		<put-attribute name="body" value="/views/user/unfollow.jsp" />
+	</definition>
+	
+</tiles-definitions>
