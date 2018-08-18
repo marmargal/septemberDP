@@ -132,33 +132,33 @@
 
 
 <%----%>
-	<fieldset>
+<fieldset>
 
-<div>
-	<b><spring:message code="dashboard.dataUserMore75Chirps" /></b> <br />
-	<h4>
+	<div>
+		<b><spring:message code="dashboard.dataUserMore75Chirps" /></b> <br />
+		<h4>
 
-		<jstl:forEach items="${dataUserMore75Chirps }" var="d">
-			<jstl:out value="${d.name}" />
-			<br />
-		</jstl:forEach>
-	</h4>
-</div>
+			<jstl:forEach items="${dataUserMore75Chirps }" var="d">
+				<jstl:out value="${d.name}" />
+				<br />
+			</jstl:forEach>
+		</h4>
+	</div>
 </fieldset>
 <br />
 <%----%>
-	<fieldset>
+<fieldset>
 
-<div>
-	<b><spring:message code="dashboard.dataUserLess25Chirps" /></b> <br />
-	<h4>
+	<div>
+		<b><spring:message code="dashboard.dataUserLess25Chirps" /></b> <br />
+		<h4>
 
-		<jstl:forEach items="${dataUserLess25Chirps }" var="p">
-			<jstl:out value="${p.name }" />
-			<br />
-		</jstl:forEach>
-	</h4>
-</div>
+			<jstl:forEach items="${dataUserLess25Chirps }" var="p">
+				<jstl:out value="${p.name }" />
+				<br />
+			</jstl:forEach>
+		</h4>
+	</div>
 </fieldset>
 <br />
 <%----%>
@@ -197,3 +197,29 @@
 		</div>
 	</fieldset>
 </jstl:if>
+
+<jstl:if test="${!(dataNumUserPerDayInns[0] eq null)}">
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataNumUserPerDayInns" /></b> <br />
+
+			<jstl:forEach items="${dataNumUserPerDayInns }" var="i">
+				<h4>
+					<jstl:out value=" AVG: " />
+					<jstl:out value="${i[0] }" />
+					<br />
+				</h4>
+				<h4>
+					<jstl:out value=" STDDEV: " />
+					<jstl:out value="${i[1] }" />
+					<br />
+				</h4>
+			</jstl:forEach>
+
+		</div>
+
+	</fieldset>
+</jstl:if>
+
+<br />
+

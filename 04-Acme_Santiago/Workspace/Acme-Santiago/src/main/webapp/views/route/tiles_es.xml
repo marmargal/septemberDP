@@ -21,7 +21,7 @@
 	</definition>
 	
 	<definition name="route/create" extends="master.page">
-		<put-attribute name="title" value="Crear ruta />
+		<put-attribute name="title" value="Crear ruta "/>
 		<put-attribute name="body" value="/views/route/edit.jsp" />
 	</definition>
 

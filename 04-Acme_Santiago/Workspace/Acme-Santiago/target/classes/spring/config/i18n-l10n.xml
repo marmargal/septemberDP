@@ -16,7 +16,6 @@
 		<value>/views/misc/messages</value>
 		<value>/views/security/messages</value>
 		<value>/views/welcome/messages</value>
-
 		<value>/views/administrator/messages</value>
 		<value>/views/actor/messages</value>
 		<value>/views/route/messages</value>

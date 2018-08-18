@@ -62,8 +62,7 @@ public interface AdministratorRepository extends
 
 	// The average and the standard deviation of the number of users per day who
 	// stay in the inns.
-	// TODO
-	@Query("select avg(i.inns.size), stddev(i.inns.size) from Inkeeper i")
+	@Query("select avg(i.registries.size), stddev(i.registries.size) from Inn i join i.registries r group by r.date")
 	Collection<Double> dataNumUserPerDayInns();
 
 }

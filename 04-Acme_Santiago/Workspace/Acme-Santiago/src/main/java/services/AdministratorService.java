@@ -191,4 +191,8 @@ public class AdministratorService {
 		return administratorRepository.dataInnsPerInkeeper();
 	}
 
+	public Collection<Double> dataNumUserPerDayInns() {
+		return administratorRepository.dataNumUserPerDayInns();
+	}
+
 }

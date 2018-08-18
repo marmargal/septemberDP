@@ -418,7 +418,11 @@
 		<property name="webSite" value="http://www.google.es" />
 		<property name="creditCard" ref="creditCard1" />
 		<property name="inkeeper" ref="inkeeper1" />
-
+		<property name="registries">
+			<list>
+				<ref bean="registry1" />
+			</list>
+		</property>
 
 	</bean>
 
@@ -431,9 +435,22 @@
 		<property name="webSite" value="http://www.google.es" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="inkeeper" ref="inkeeper2" />
-
+		<property name="registries">
+			<list>
+				<ref bean="registry2" />
+			</list>
+		</property>
+	</bean>
+	<!-- REGISTRY -->
+	<bean id="registry1" class="domain.Registry">
+		<property name="date" value="20/05/2011" />
+		<property name="inn" ref="inn1" />
 	</bean>
 
+	<bean id="registry2" class="domain.Registry">
+		<property name="date" value="20/05/2010"></property>
+		<property name="inn" ref="inn2" />
+	</bean>
 	<!-- CONFIGURATION -->
 
 	<bean id="configuration" class="domain.Configuration">

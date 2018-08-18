@@ -51,6 +51,9 @@ public class DashboardAdministratorController {
 		result.addObject("dataInnsPerInkeeper",
 				administratorService.dataInnsPerInkeeper());
 
+		result.addObject("dataNumUserPerDayInns",
+				administratorService.dataNumUserPerDayInns());
+
 		return result;
 	}
 }
