@@ -25,6 +25,7 @@
 		<value>/views/configuration/messages</value>
 		<value>/views/dashboard/messages</value>
 		<value>/views/comment/messages</value>
+		<value>/views/inn/messages</value>
 
 	</util:list>
 

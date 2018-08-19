@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
@@ -28,6 +30,7 @@ public class CreditCard {
 	private int expirationMonth;
 	private int expirationYear;
 	private int cvv;
+	private boolean expired;
 
 	@NotBlank
 	public String getHolderName() {
@@ -87,6 +90,24 @@ public class CreditCard {
 
 	public void setCvv(int cvv) {
 		this.cvv = cvv;
+	}
+
+	public boolean getExpired() {
+		boolean res= false;
+		Date moment=new Date(System.currentTimeMillis());
+		int year = moment.getYear();
+		int month = moment.getMonth();
+		
+		if(this.getExpirationYear()<= year){
+			if(this.getExpirationMonth()>=month){
+				res= true;
+			}
+		}
+		return res;
+	}
+
+	public void setExpired(boolean expired) {
+		this.expired = expired;
 	}
 	
 

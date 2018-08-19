@@ -410,8 +410,8 @@
 		<property name="holderName" value="Name creditCard1" />
 		<property name="brandName" value="VISA" />
 		<property name="number" value="4150902751004463" />
-		<property name="expirationMonth" value="3" />
-		<property name="expirationYear" value="22" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="18" />
 		<property name="cvv" value="612" />
 	</bean>
 
@@ -447,6 +447,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	
 	<!-- REGISTRY -->
 	<bean id="registry1" class="domain.Registry">
 		<property name="date" value="20/05/2011" />

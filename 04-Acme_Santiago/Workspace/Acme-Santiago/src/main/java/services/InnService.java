@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.InnRepository;
+import domain.Comment;
 import domain.Inkeeper;
 import domain.Inn;
 
@@ -75,5 +76,9 @@ public class InnService {
 
 	public void flush() {
 		this.innRepository.flush();
+	}
+
+	public Collection<Inn> findCcExpiration() {
+		return innRepository.findCcExpiration();
 	}
 }
