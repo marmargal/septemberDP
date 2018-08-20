@@ -27,8 +27,13 @@
 	<acme:column property="description" code="hike.description" />
 	<acme:column property="originCity" code="hike.originCity" />
 	<acme:column property="destinationCity" code="hike.destinationCity" />
-	<acme:column property="pictures" code="hike.pictures" />
 	<acme:column property="dificultLevel" code="hike.dificultLevel" />
+	
+	<display:column>
+	<jstl:forEach var="p" items="${row.pictures }">
+		<img class="imagen" src="${p }"/>	
+	</jstl:forEach>
+	</display:column>
 
 	<security:authorize access="hasRole('USER')">
 	<display:column>
