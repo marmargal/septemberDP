@@ -43,7 +43,8 @@
 			</security:authorize>
 
 			<security:authorize access="hasRole('USER')">
-				<li><a href="#" class="fNiv"><spring:message code="master.page.user" /></a>
+				<li><a href="#" class="fNiv"><spring:message
+							code="master.page.user" /></a>
 					<ul>
 						<li class="arrow"></li>
 						<li><a href="j_spring_security_logout"><spring:message
@@ -64,13 +65,24 @@
 							code="master.page.route.search" /></a></li>
 				<li><a href="user/list.do"><spring:message
 							code="master.page.user.list" /></a></li>
+				<li><a href="inn/list.do"><spring:message
+							code="master.page.inn.list" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">
+				<li><a href="#" class="fNiv"><spring:message
+							code="master.page.inkeeper" /></a>
+					<ul>
+						<li class="arrow"></li>
+						<li><a href="j_spring_security_logout"><spring:message
+									code="master.page.logout" /> </a></li>
+					</ul></li>
 				<li><a href="route/list.do"><spring:message
 							code="master.page.route.search" /></a></li>
 				<li><a href="user/list.do"><spring:message
 							code="master.page.user.list" /></a></li>
+				<li><a href="inn/list.do"><spring:message
+							code="master.page.inn.list" /></a></li>
 			</security:authorize>
 
 		</ul>
