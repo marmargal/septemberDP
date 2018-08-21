@@ -113,12 +113,15 @@
 			access="hasRole('USER')" />
 		<security:intercept-url pattern="/chirp/user/display.do"
 			access="hasRole('USER')" />
-			
-			
-			<!-- INN -->
+
+
+		<!-- INN -->
 
 		<security:intercept-url pattern="/inn/list.do"
 			access="permitAll" />
+
+		<security:intercept-url pattern="/inn/inkeeper/register.do"
+			access="hasRole('INKEEPER')" />
 
 		<!-- CONFIGURATION -->
 
