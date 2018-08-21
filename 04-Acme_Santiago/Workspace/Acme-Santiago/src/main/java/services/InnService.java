@@ -76,9 +76,6 @@ public class InnService {
 		this.innRepository.flush();
 	}
 
-	public Collection<Inn> findCcExpiration() {
-		return innRepository.findCcExpiration();
-	}
 	public Collection<Inn> findCcExpirationYear(int a, int b) {
 		return innRepository.findCcExpirationYear(a,b);
 	}

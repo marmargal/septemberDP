@@ -12,8 +12,6 @@ import domain.Inn;
 @Repository
 public interface InnRepository extends JpaRepository<Inn, Integer>{
 	
-	@Query("select i from Inn i join i.creditCard c where c.expired=false")
-	Collection<Inn> findCcExpiration();
 	
 	@Query("select i from Inn i join i.creditCard c where c.expirationYear>=?1 OR (c.expirationYear=?1 AND c.expirationMonth>=?2)")
 	Collection<Inn> findCcExpirationYear(int year, int month);
