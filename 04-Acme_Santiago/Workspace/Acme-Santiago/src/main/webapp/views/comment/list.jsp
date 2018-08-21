@@ -27,6 +27,19 @@
 
 	<!-- Attributes -->
 
+	<security:authorize access="hasRole('USER')">
+		<acme:column property="title" code="comment.title" />
+		<acme:column property="moment" code="comment.moment" />
+		<acme:column property="text" code="comment.text" />
+		<display:column>
+			<jstl:forEach var="p" items="${row.pictures }">
+				<img class="imagen" src="${p }" />
+			</jstl:forEach>
+		</display:column>
+		<acme:column code="comment.rating" property="rating" />
+
+	</security:authorize>
+
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
 			<acme:links url="comment/administrator/edit.do?commentId=${row.id}"

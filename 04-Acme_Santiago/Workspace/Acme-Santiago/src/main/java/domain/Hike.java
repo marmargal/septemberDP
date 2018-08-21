@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -114,7 +113,7 @@ public class Hike extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "hike", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "hike")
 	public Collection<Comment> getComments() {
 		return comments;
 	}

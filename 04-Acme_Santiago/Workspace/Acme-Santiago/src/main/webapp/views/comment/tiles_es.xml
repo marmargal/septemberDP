@@ -24,20 +24,40 @@
 		<put-attribute name="title" value="Listar los comentarios tabú" />
 		<put-attribute name="body" value="/views/comment/listTaboo.jsp" />
 	</definition>
-	
-		<definition name="comment/administrator/listAll" extends="master.page">
+
+	<definition name="comment/administrator/listAll" extends="master.page">
 		<put-attribute name="title" value="Lista de comentarios" />
 		<put-attribute name="body" value="/views/comment/list.jsp" />
 	</definition>
-	
+
 	<definition name="comment/administrator/edit" extends="master.page">
 		<put-attribute name="title" value="Editar comentario" />
 		<put-attribute name="body" value="/views/comment/edit.jsp" />
 	</definition>
-	
+
 	<definition name="comment/create" extends="master.page">
 		<put-attribute name="title" value="Crear comentario" />
 		<put-attribute name="body" value="/views/hike/edit.jsp" />
+	</definition>
+
+	<definition name="comment/user/listRoute" extends="master.page">
+		<put-attribute name="title" value="Lista de comentarios" />
+		<put-attribute name="body" value="/views/comment/list.jsp" />
+	</definition>
+
+	<definition name="comment/user/listHike" extends="master.page">
+		<put-attribute name="title" value="Lista de comentarios" />
+		<put-attribute name="body" value="/views/comment/list.jsp" />
+	</definition>
+
+	<definition name="comment/user/editRoute" extends="master.page">
+		<put-attribute name="title" value="Crear un comentario" />
+		<put-attribute name="body" value="/views/comment/createRoute.jsp" />
+	</definition>
+
+	<definition name="comment/user/editHike" extends="master.page">
+		<put-attribute name="title" value="Crear un comentario" />
+		<put-attribute name="body" value="/views/comment/createHike.jsp" />
 	</definition>
 
 </tiles-definitions>
