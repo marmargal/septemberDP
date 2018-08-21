@@ -1,5 +1,5 @@
 <%--
- * list.jsp
+ * edit.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -19,21 +19,26 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="5" class="inn" keepStatus="true" name="inn"
-	requestURI="${requestURI }" id="row">
+<form:form action="${requestURI}" modelAttribute="innForm">
 
-	<acme:column property="name" code="inn.name" />
-	<acme:column property="badge" code="inn.badge" />
-	<acme:column property="address" code="inn.address" />
-	<acme:column property="phoneNumber" code="inn.phoneNumber" />
-	<acme:column property="email" code="inn.email" />
-	<acme:column property="webSite" code="inn.webSite" />
-	<acme:column property="creditCard.holderName" code="inn.creditCard" />
-	<security:authorize access="hasRole('INKEEPER')">
-		<display:column>
-			<acme:links url="inn/inkeeper/register.do?innId=${row.id}"
-				code="inn.register" />
-		</display:column>
-	</security:authorize>
-</display:table>
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+	<form:hidden path="inkeeper" />
+	<form:hidden path="name" />
+	<form:hidden path="badge" />
+	<form:hidden path="address" />
+	<form:hidden path="phoneNumber" />
+	<form:hidden path="email" />
+	<form:hidden path="webSite" />
+	<form:hidden path="creditCard" />
 
+	<acme:date code="inn.register" path="date" placeholder="dd/MM/yyyy" />
+
+
+	<!-- Buttons -->
+
+
+	<acme:submit name="save" code="inn.submit" />
+	<acme:cancel url="/" code="inn.cancel" />
+
+</form:form>

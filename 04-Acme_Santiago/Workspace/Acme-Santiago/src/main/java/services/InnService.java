@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.InnRepository;
-import domain.Comment;
 import domain.Inkeeper;
 import domain.Inn;
 
@@ -53,7 +52,6 @@ public class InnService {
 		Assert.isTrue(id != 0);
 		Inn res;
 		res = this.innRepository.findOne(id);
-		Assert.notNull(res);
 		return res;
 	}
 
@@ -78,9 +76,6 @@ public class InnService {
 		this.innRepository.flush();
 	}
 
-	public Collection<Inn> findCcExpiration() {
-		return innRepository.findCcExpiration();
-	}
 	public Collection<Inn> findCcExpirationYear(int a, int b) {
 		return innRepository.findCcExpirationYear(a,b);
 	}

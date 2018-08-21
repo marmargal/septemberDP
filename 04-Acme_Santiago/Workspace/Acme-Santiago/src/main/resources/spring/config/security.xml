@@ -135,6 +135,9 @@
 		<security:intercept-url pattern="/inn/list.do"
 			access="permitAll" />
 
+		<security:intercept-url pattern="/inn/inkeeper/register.do"
+			access="hasRole('INKEEPER')" />
+
 		<!-- CONFIGURATION -->
 
 		<security:intercept-url pattern="/configuration/administrator/edit.do"
