@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,14 @@ public class InnController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView res;
 		Collection<Inn> inn = new ArrayList<>();
-		inn = this.innService.findCcExpiration();
+		
+		Calendar fecha = Calendar.getInstance();
+		int year= fecha.get(Calendar.YEAR);
+		int month= fecha.get(Calendar.MONTH);
+		year= year%100;
+		System.out.println(year);		
+		inn= this.innService.findCcExpirationYear(year, month);
+		
 		res = new ModelAndView("inn/list");
 		res.addObject("requestURI", "inn/list.do");
 		res.addObject("inn", inn);
