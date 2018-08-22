@@ -33,7 +33,7 @@
 </jstl:if>
 
 <jstl:if test="${type == null}">
-	<jstl:set var="type" value="" />
+	<jstl:set var="type" value="false" />
 </jstl:if>
 
 <jstl:if test="${placeholder == null}">
@@ -44,6 +44,6 @@
 
 <div>
 	<b><form:label path="${path}"><spring:message code="${code}" />:&nbsp;</form:label></b>
-	<form:input type="${type}" path="${path}" readonly="${readonly}" placeholder="${placeholder}"/>	
+	<form:input type="number" path="${path}" readonly="${readonly}" placeholder="${placeholder}"/>	
 	<form:errors path="${path}" cssClass="error" />
 </div>	

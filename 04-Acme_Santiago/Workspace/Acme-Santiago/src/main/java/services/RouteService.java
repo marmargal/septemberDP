@@ -61,7 +61,6 @@ public class RouteService {
 		Assert.isTrue(id != 0);
 		Route res;
 		res = this.routeRepository.findOne(id);
-		Assert.notNull(res);
 		return res;
 	}
 

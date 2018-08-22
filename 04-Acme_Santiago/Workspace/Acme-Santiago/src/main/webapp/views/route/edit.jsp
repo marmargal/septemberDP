@@ -27,9 +27,9 @@
 	<form:hidden path="user"/>
 	
 	<acme:textbox code="route.name" path="name"/>
-	<acme:textbox code="route.length" path="length"/>
+	<acme:textbox type="number" code="route.length" path="length"/>
 	<acme:textbox code="route.description" path="description"/>
-	<acme:textbox code="route.pictures" path="pictures"/>
+	<acme:textbox type ="url" code="route.pictures" path="pictures"/>
 	<acme:select items="${hikes }" itemLabel="name" code="route.hikes" path="hikes"/>
 	
 	<acme:submit name="save" code="route.save"/>

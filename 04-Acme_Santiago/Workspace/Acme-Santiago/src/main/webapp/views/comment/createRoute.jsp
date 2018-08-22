@@ -26,7 +26,7 @@
 		<form:hidden path="route" />
 		<form:hidden path="hike" />
 
-		<acme:textbox code="comment.rating" path="rating" />
+		<acme:textbox code="comment.rating" path="rating" type="number"/>
 		<acme:textbox code="comment.title" path="title" />
 		<acme:textbox code="comment.text" path="text" />
 		<acme:textbox code="comment.pictures" path="pictures" />

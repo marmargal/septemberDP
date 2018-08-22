@@ -30,15 +30,23 @@ public class RouteController extends AbstractController {
 
 	// Registering ----------------------------------------------------------
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView searchList(@RequestParam int routeId) {
+	public ModelAndView searchList(@RequestParam(defaultValue = "0") int routeId) {
 		ModelAndView res;
 		Route route;
 
-		route = this.routeService.findOne(routeId);
+		if (routeId == 0) {
+			res = new ModelAndView("redirect:../");
 
-		res = new ModelAndView("route/display");
-		res.addObject("route", route);
-		res.addObject("requestURI", "route/display.do");
+		} else if (this.routeService.findOne(routeId) == null) {
+			res = new ModelAndView("redirect:../");
+		} else {
+
+			route = this.routeService.findOne(routeId);
+
+			res = new ModelAndView("route/display");
+			res.addObject("route", route);
+			res.addObject("requestURI", "route/display.do");
+		}
 		return res;
 	}
 
@@ -98,7 +106,7 @@ public class RouteController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView searchList(@RequestParam String criteria) {
+	public ModelAndView searchList(@RequestParam(defaultValue = "") String criteria) {
 		ModelAndView res;
 		Collection<Route> routes;
 

@@ -49,7 +49,7 @@ public class ChirpAdministratorController extends AbstractController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public ModelAndView listAll() {
 		ModelAndView result;
@@ -57,10 +57,10 @@ public class ChirpAdministratorController extends AbstractController {
 		Collection<Chirp> tabooChirps;
 
 		chirps = chirpService.findAll();
-		
+
 		chirpService.checkTabooWords();
 		tabooChirps = this.chirpService.findChirpTaboo();
-		
+
 		chirps.removeAll(tabooChirps);
 
 		result = new ModelAndView("chirp/administrator/listAll");
@@ -73,14 +73,20 @@ public class ChirpAdministratorController extends AbstractController {
 	// Editing ---------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int chirpId) {
+	public ModelAndView edit(@RequestParam(defaultValue = "0") final int chirpId) {
 		ModelAndView result;
 		Chirp chirp;
+		if (chirpId == 0) {
+			result = new ModelAndView("redirect:../../");
 
-		chirp = this.chirpService.findOne(chirpId);
-		result = this.createEditModelAndView(chirp);
-		result.addObject("chirp", chirp);
+		} else if (this.chirpService.findOne(chirpId) == null) {
+			result = new ModelAndView("redirect:../../");
+		} else {
 
+			chirp = this.chirpService.findOne(chirpId);
+			result = this.createEditModelAndView(chirp);
+			result.addObject("chirp", chirp);
+		}
 		return result;
 	}
 
@@ -94,8 +100,7 @@ public class ChirpAdministratorController extends AbstractController {
 			this.chirpService.delete(chirp);
 			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(chirp,
-					"chirp.commit.error");
+			res = this.createEditModelAndView(chirp, "chirp.commit.error");
 		}
 		return res;
 	}

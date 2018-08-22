@@ -67,7 +67,6 @@ public class UserService {
 		Assert.isTrue(userId != 0);
 		User res;
 		res = userRepository.findOne(userId);
-		Assert.notNull(res);
 		return res;
 	}
 

@@ -55,14 +55,21 @@ public class ChirpUserController extends AbstractController {
 	// Editing ---------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int chirpId) {
+	public ModelAndView edit(@RequestParam(defaultValue = "0") final int chirpId) {
 		ModelAndView result;
 		Chirp chirp;
+		
+		if (chirpId == 0) {
+			result = new ModelAndView("redirect:../../");
+
+		} else if (this.chirpService.findOne(chirpId) == null) {
+			result = new ModelAndView("redirect:../../");
+		} else {
 
 		chirp = this.chirpService.findOne(chirpId);
 		result = this.createEditModelAndView(chirp);
 		result.addObject("chirp", chirp);
-		
+		}
 		return result;
 	}
 
