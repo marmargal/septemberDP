@@ -94,7 +94,7 @@
 	</div>
 
 	<div>
-		<a href="/Acme-Santiago"><img src="images/logo.png"
+		<a href="/Acme-Santiago"><img class="imagen" src="images/logo.jpg"
 			alt="Acme-Santiago Co., Inc." /></a>
 	</div>
 </nav>
