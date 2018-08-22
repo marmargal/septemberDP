@@ -23,7 +23,7 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="inkeeper" />
+	<form:hidden path="innkeeper" />
 	<form:hidden path="name" />
 	<form:hidden path="badge" />
 	<form:hidden path="address" />

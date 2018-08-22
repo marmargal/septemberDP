@@ -57,8 +57,8 @@ public interface AdministratorRepository extends
 
 	// The average and the standard deviation of the number of inns managed per
 	// innkeeper.
-	@Query("select avg(i.inns.size), stddev(i.inns.size) from Inkeeper i")
-	Collection<Double> dataInnsPerInkeeper();
+	@Query("select avg(i.inns.size), stddev(i.inns.size) from Innkeeper i")
+	Collection<Double> dataInnsPerInnkeeper();
 
 	// The average and the standard deviation of the number of users per day who
 	// stay in the inns.

@@ -48,8 +48,8 @@ public class DashboardAdministratorController {
 		result.addObject("dataCommentPerRoute",
 				administratorService.dataCommentPerRoute());
 
-		result.addObject("dataInnsPerInkeeper",
-				administratorService.dataInnsPerInkeeper());
+		result.addObject("dataInnsPerInnkeeper",
+				administratorService.dataInnsPerInnkeeper());
 
 		result.addObject("dataNumUserPerDayInns",
 				administratorService.dataNumUserPerDayInns());

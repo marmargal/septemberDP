@@ -23,7 +23,7 @@ public class RegistrytService {
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private InkeeperService inkeeperService;
+	private InnkeeperService innkeeperService;
 
 	// Constructor ------------------------------------------------------------
 
@@ -34,7 +34,7 @@ public class RegistrytService {
 	// Simple CRUD methods ----------------------------------------------------
 
 	public Registry create() {
-		this.inkeeperService.checkAuthority();
+		this.innkeeperService.checkAuthority();
 		Registry result;
 		Date moment;
 
@@ -61,7 +61,7 @@ public class RegistrytService {
 	}
 
 	public Registry save(Registry registry) {
-		this.inkeeperService.checkAuthority();
+		this.innkeeperService.checkAuthority();
 		Assert.notNull(registry);
 		Registry res;
 		res = this.registytRepositoty.save(registry);

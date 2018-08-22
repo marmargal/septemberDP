@@ -5,24 +5,24 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.InkeeperRepository;
-import domain.Inkeeper;
+import repositories.InnkeeperRepository;
+import domain.Innkeeper;
 
 @Component
 @Transactional
-public class StringToInkeeperConverter implements Converter<String, Inkeeper> {
+public class StringToInnkeeperConverter implements Converter<String, Innkeeper> {
 
 	@Autowired
-	InkeeperRepository	inkeeperRepository;
+	InnkeeperRepository	innkeeperRepository;
 
 	@Override
-	public Inkeeper convert(final String text) {
-		Inkeeper result;
+	public Innkeeper convert(final String text) {
+		Innkeeper result;
 		int id;
 
 		try {
 			id = Integer.valueOf(text);
-			result = this.inkeeperRepository.findOne(id);
+			result = this.innkeeperRepository.findOne(id);
 		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}

@@ -10,11 +10,11 @@ import javax.validation.Valid;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Inkeeper extends Actor {
+public class Innkeeper extends Actor {
 
 	// Constructors
 
-	public Inkeeper() {
+	public Innkeeper() {
 		super();
 	}
 
@@ -22,7 +22,7 @@ public class Inkeeper extends Actor {
 	private Collection<Inn> inns;
 
 	@Valid
-	@OneToMany(mappedBy = "inkeeper")
+	@OneToMany(mappedBy = "innkeeper")
 	public Collection<Inn> getInns() {
 		return inns;
 	}

@@ -1,4 +1,4 @@
-package controllers.inkeeper;
+package controllers.innkeeper;
 
 import javax.validation.Valid;
 
@@ -18,8 +18,8 @@ import domain.Registry;
 import forms.InnForm;
 
 @Controller
-@RequestMapping("/inn/inkeeper")
-public class InnInkeeperController extends AbstractController {
+@RequestMapping("/inn/innkeeper")
+public class InnInnkeeperController extends AbstractController {
 
 	// Services -------------------------------------------------------------
 
@@ -31,7 +31,7 @@ public class InnInkeeperController extends AbstractController {
 
 	// Constructors ---------------------------------------------------------
 
-	public InnInkeeperController() {
+	public InnInnkeeperController() {
 		super();
 	}
 
@@ -58,7 +58,7 @@ public class InnInkeeperController extends AbstractController {
 			innForm.setPhoneNumber(inn.getPhoneNumber());
 			innForm.setVersion(inn.getVersion());
 			innForm.setWebSite(inn.getWebSite());
-			innForm.setInkeeper(inn.getInkeeper());
+			innForm.setInnkeeper(inn.getInnkeeper());
 			result = this.createEditModelAndView(innForm);
 			result.addObject("innForm", innForm);
 		}
@@ -96,10 +96,10 @@ public class InnInkeeperController extends AbstractController {
 			final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("inn/inkeeper/register");
+		result = new ModelAndView("inn/innkeeper/register");
 		result.addObject("inn", inn);
 		result.addObject("message", message);
-		result.addObject("requestURI", "inn/inkeeper/register.do");
+		result.addObject("requestURI", "inn/innkeeper/register.do");
 
 		return result;
 	}

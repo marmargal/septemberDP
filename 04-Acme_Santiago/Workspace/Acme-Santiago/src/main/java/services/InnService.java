@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.InnRepository;
-import domain.Inkeeper;
+import domain.Innkeeper;
 import domain.Inn;
 
 @Service
@@ -22,7 +22,7 @@ public class InnService {
 
 	// Suporting services
 	@Autowired
-	private InkeeperService inkeeperService;
+	private InnkeeperService innkeeperService;
 
 	// Constructors
 
@@ -36,8 +36,8 @@ public class InnService {
 		Inn res;
 		res = new Inn();
 
-		Inkeeper inkeeper = inkeeperService.findByPrincipal();
-		res.setInkeeper(inkeeper);
+		Innkeeper innkeeper = innkeeperService.findByPrincipal();
+		res.setInnkeeper(innkeeper);
 
 		return res;
 	}

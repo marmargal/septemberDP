@@ -4,20 +4,20 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Inkeeper;
+import domain.Innkeeper;
 
 @Component
 @Transactional
-public class InkeeperToStringConverter implements Converter<Inkeeper, String> {
+public class InnkeeperToStringConverter implements Converter<Innkeeper, String> {
 	
 	@Override
-	public String convert(final Inkeeper inkeeper) {
+	public String convert(final Innkeeper innkeeper) {
 		String result;
 
-		if (inkeeper == null)
+		if (innkeeper == null)
 			result = null;
 		else
-			result = String.valueOf(inkeeper.getId());
+			result = String.valueOf(innkeeper.getId());
 
 		return result;
 	}

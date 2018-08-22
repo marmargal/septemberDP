@@ -183,13 +183,13 @@
 </jstl:if>
 
 
-<jstl:if test="${!(dataInnsPerInkeeper[0] eq null)}">
+<jstl:if test="${!(dataInnsPerInnkeeper[0] eq null)}">
 	<fieldset>
 		<div>
-			<b><spring:message code="dashboard.dataInnsPerInkeeper" /></b> <br />
+			<b><spring:message code="dashboard.dataInnsPerInnkeeper" /></b> <br />
 			<h4>
 				<jstl:out value=" AVG: " />
-				<jstl:out value="${dataInnsPerInkeeper[0][0] }" />
+				<jstl:out value="${dataInnsPerInnkeeper[0][0] }" />
 				<br />
 			</h4>
 

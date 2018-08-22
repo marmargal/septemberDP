@@ -40,7 +40,7 @@
 	</security:authorize>
 
 
-	<security:authorize access="hasRole('INKEEPER')">
+	<security:authorize access="hasRole('INNKEEPER')">
 
 		<form:hidden path="inns" />
 

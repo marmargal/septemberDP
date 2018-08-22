@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import domain.CreditCard;
-import domain.Inkeeper;
+import domain.Innkeeper;
 
 public class InnForm {
 
@@ -28,15 +28,15 @@ public class InnForm {
 	private String webSite;
 	private CreditCard creditCard;
 	private Date date;
-	private Inkeeper inkeeper;
+	private Innkeeper innkeeper;
 
 	@Valid
-	public Inkeeper getInkeeper() {
-		return inkeeper;
+	public Innkeeper getInnkeeper() {
+		return innkeeper;
 	}
 
-	public void setInkeeper(Inkeeper inkeeper) {
-		this.inkeeper = inkeeper;
+	public void setInnkeeper(Innkeeper innkeeper) {
+		this.innkeeper = innkeeper;
 	}
 
 	@Past

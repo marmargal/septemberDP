@@ -187,8 +187,8 @@ public class AdministratorService {
 		return administratorRepository.dataCommentPerRoute();
 	}
 
-	public Collection<Double> dataInnsPerInkeeper() {
-		return administratorRepository.dataInnsPerInkeeper();
+	public Collection<Double> dataInnsPerInnkeeper() {
+		return administratorRepository.dataInnsPerInnkeeper();
 	}
 
 	public Collection<Double> dataNumUserPerDayInns() {

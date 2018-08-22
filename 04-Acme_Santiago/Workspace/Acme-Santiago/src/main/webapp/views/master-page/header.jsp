@@ -55,6 +55,16 @@
 				<li><a href="chirp/user/display.do"><spring:message
 							code="master.page.chirp" /></a>
 			</security:authorize>
+			
+			<security:authorize access="hasRole('INNKEEPER')">
+				<li><a href="#" class="fNiv"><spring:message
+							code="master.page.innkeeper" /></a>
+					<ul>
+						<li class="arrow"></li>
+						<li><a href="j_spring_security_logout"><spring:message
+									code="master.page.logout" /> </a></li>
+					</ul></li>
+			</security:authorize>
 
 			<security:authorize access="isAnonymous()">
 				<li><a class="fNiv" href="security/login.do"><spring:message
@@ -70,13 +80,6 @@
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">
-				<li><a href="#" class="fNiv"><spring:message
-							code="master.page.inkeeper" /></a>
-					<ul>
-						<li class="arrow"></li>
-						<li><a href="j_spring_security_logout"><spring:message
-									code="master.page.logout" /> </a></li>
-					</ul></li>
 				<li><a href="route/list.do"><spring:message
 							code="master.page.route.search" /></a></li>
 				<li><a href="user/list.do"><spring:message

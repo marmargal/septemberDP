@@ -135,8 +135,13 @@
 		<security:intercept-url pattern="/inn/list.do"
 			access="permitAll" />
 
-		<security:intercept-url pattern="/inn/inkeeper/register.do"
-			access="hasRole('INKEEPER')" />
+		<security:intercept-url pattern="/inn/innkeeper/register.do"
+			access="hasRole('INNKEEPER')" />
+			
+		<!-- TERMS -->
+		
+		<security:intercept-url pattern="/terms/list.do"
+			access="permitAll" />
 
 		<!-- CONFIGURATION -->
 

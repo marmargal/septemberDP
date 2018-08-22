@@ -23,15 +23,17 @@
 	requestURI="${requestURI }" id="row">
 
 	<acme:column property="name" code="inn.name" />
-	<acme:column property="badge" code="inn.badge" />
+	<display:column>
+		<img class="imagen" src="${row.badge }" />
+	</display:column>
 	<acme:column property="address" code="inn.address" />
 	<acme:column property="phoneNumber" code="inn.phoneNumber" />
 	<acme:column property="email" code="inn.email" />
 	<acme:column property="webSite" code="inn.webSite" />
 	<acme:column property="creditCard.holderName" code="inn.creditCard" />
-	<security:authorize access="hasRole('INKEEPER')">
+	<security:authorize access="hasRole('INNKEEPER')">
 		<display:column>
-			<acme:links url="inn/inkeeper/register.do?innId=${row.id}"
+			<acme:links url="inn/innkeeper/register.do?innId=${row.id}"
 				code="inn.register" />
 		</display:column>
 	</security:authorize>

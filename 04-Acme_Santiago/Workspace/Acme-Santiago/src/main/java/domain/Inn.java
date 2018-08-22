@@ -43,6 +43,7 @@ public class Inn extends DomainEntity {
 	}
 
 	@NotBlank
+	@URL
 	public String getBadge() {
 		return badge;
 	}
@@ -100,17 +101,17 @@ public class Inn extends DomainEntity {
 	
 
 	// Relationships
-	private Inkeeper inkeeper;
+	private Innkeeper innkeeper;
 	private Collection<Registry> registries;
 
 	@Valid
 	@ManyToOne
-	public Inkeeper getInkeeper() {
-		return inkeeper;
+	public Innkeeper getInnkeeper() {
+		return innkeeper;
 	}
 
-	public void setInkeeper(Inkeeper inkeeper) {
-		this.inkeeper = inkeeper;
+	public void setInnkeeper(Innkeeper innkeeper) {
+		this.innkeeper = innkeeper;
 	}
 
 	@Valid

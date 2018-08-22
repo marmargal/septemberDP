@@ -36,8 +36,8 @@
 		<bean class="converters.HikeToStringConverter" />
 		<bean class="converters.StringToHikeConverter" />
 
-		<bean class="converters.InkeeperToStringConverter" />
-		<bean class="converters.StringToInkeeperConverter" />
+		<bean class="converters.InnkeeperToStringConverter" />
+		<bean class="converters.StringToInnkeeperConverter" />
 
 		<bean class="converters.InnToStringConverter" />
 		<bean class="converters.StringToInnConverter" />
