@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.RegistryRepository;
+import domain.Innkeeper;
 import domain.Registry;
 
 @Service
@@ -63,6 +64,8 @@ public class RegistrytService {
 	public Registry save(Registry registry) {
 		this.innkeeperService.checkAuthority();
 		Assert.notNull(registry);
+		Innkeeper principal = innkeeperService.findByPrincipal();
+		Assert.isTrue(registry.getInn().getInnkeeper() == principal);
 		Registry res;
 		res = this.registytRepositoty.save(registry);
 		return res;

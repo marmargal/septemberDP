@@ -108,7 +108,7 @@
 			access="hasRole('USER')" />
 		<security:intercept-url pattern="/comment/user/editRoute.do"
 			access="hasRole('USER')" />
-			
+
 		<security:intercept-url pattern="/comment/user/createHike.do"
 			access="hasRole('USER')" />
 		<security:intercept-url pattern="/comment/user/editHike.do"
@@ -135,11 +135,14 @@
 		<security:intercept-url pattern="/inn/list.do"
 			access="permitAll" />
 
+		<security:intercept-url pattern="/inn/innkeeper/list.do"
+			access="hasRole('INNKEEPER')" />
+
 		<security:intercept-url pattern="/inn/innkeeper/register.do"
 			access="hasRole('INNKEEPER')" />
-			
+
 		<!-- TERMS -->
-		
+
 		<security:intercept-url pattern="/terms/list.do"
 			access="permitAll" />
 

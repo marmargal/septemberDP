@@ -11,7 +11,12 @@
 <tiles-definitions>
 
 	<definition name="inn/list" extends="master.page">
-		<put-attribute name="title" value="Lista de inns" />
+		<put-attribute name="title" value="Lista de posadas" />
+		<put-attribute name="body" value="/views/inn/list.jsp" />
+	</definition>
+	
+		<definition name="inn/innkeeper/list" extends="master.page">
+		<put-attribute name="title" value="Lista de posadas" />
 		<put-attribute name="body" value="/views/inn/list.jsp" />
 	</definition>
 	

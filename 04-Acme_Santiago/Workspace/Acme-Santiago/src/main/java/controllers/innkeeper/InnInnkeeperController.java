@@ -1,5 +1,9 @@
 package controllers.innkeeper;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.InnService;
+import services.InnkeeperService;
 import services.RegistrytService;
 import controllers.AbstractController;
 import domain.Inn;
+import domain.Innkeeper;
 import domain.Registry;
 import forms.InnForm;
 
@@ -25,6 +31,9 @@ public class InnInnkeeperController extends AbstractController {
 
 	@Autowired
 	private InnService innService;
+	
+	@Autowired
+	private InnkeeperService innkeeperService;
 
 	@Autowired
 	private RegistrytService registryService;
@@ -33,6 +42,36 @@ public class InnInnkeeperController extends AbstractController {
 
 	public InnInnkeeperController() {
 		super();
+	}
+
+	// list
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView res;
+		Collection<Inn> inn = new ArrayList<>();
+
+		Calendar fecha = Calendar.getInstance();
+		int year = fecha.get(Calendar.YEAR);
+		int month = fecha.get(Calendar.MONTH);
+		year = year % 100;
+		System.out.println(year);
+		inn = this.innService.findCcExpirationYear(year, month);
+
+		Innkeeper innkeeper = innkeeperService.findByPrincipal();
+		
+		Collection<Inn> innPrincipal = new ArrayList<>();
+		innPrincipal = innkeeper.getInns();
+		
+		inn.retainAll(innPrincipal);
+		
+		boolean boton = true;
+		
+		res = new ModelAndView("inn/innkeeper/list");
+		res.addObject("requestURI", "inn/innkeeper/list.do");
+		res.addObject("inn", inn);
+		res.addObject("boton", boton);
+
+		return res;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)

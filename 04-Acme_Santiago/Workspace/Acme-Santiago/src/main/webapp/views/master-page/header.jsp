@@ -55,7 +55,7 @@
 				<li><a href="chirp/user/display.do"><spring:message
 							code="master.page.chirp" /></a>
 			</security:authorize>
-			
+
 			<security:authorize access="hasRole('INNKEEPER')">
 				<li><a href="#" class="fNiv"><spring:message
 							code="master.page.innkeeper" /></a>
@@ -64,6 +64,8 @@
 						<li><a href="j_spring_security_logout"><spring:message
 									code="master.page.logout" /> </a></li>
 					</ul></li>
+				<li><a href="inn/innkeeper/list.do"><spring:message
+							code="master.page.inn.innkeeper.list" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="isAnonymous()">

@@ -40,9 +40,12 @@ public class InnController extends AbstractController {
 		System.out.println(year);		
 		inn= this.innService.findCcExpirationYear(year, month);
 		
+		boolean boton = false;
+		
 		res = new ModelAndView("inn/list");
 		res.addObject("requestURI", "inn/list.do");
 		res.addObject("inn", inn);
+		res.addObject("boton", boton);
 
 		return res;
 	}

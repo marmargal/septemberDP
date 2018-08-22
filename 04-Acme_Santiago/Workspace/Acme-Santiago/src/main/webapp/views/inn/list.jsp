@@ -32,10 +32,19 @@
 	<acme:column property="webSite" code="inn.webSite" />
 	<acme:column property="creditCard.holderName" code="inn.creditCard" />
 	<security:authorize access="hasRole('INNKEEPER')">
-		<display:column>
-			<acme:links url="inn/innkeeper/register.do?innId=${row.id}"
-				code="inn.register" />
-		</display:column>
+		<jstl:if test="${boton }">
+			<spring:message code="inn.registries" var="registriesHeader" />
+			<display:column title="${registriesHeader }">
+				<jstl:forEach var="r" items="${row.registries}">
+					<p>${r.date} </p>
+					<hr color="blue"/>
+				</jstl:forEach>
+			</display:column>
+			<display:column>
+				<acme:links url="inn/innkeeper/register.do?innId=${row.id}"
+					code="inn.register" />
+			</display:column>
+		</jstl:if>
 	</security:authorize>
 </display:table>
 
