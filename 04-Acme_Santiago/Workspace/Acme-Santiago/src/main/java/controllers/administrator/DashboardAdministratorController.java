@@ -35,7 +35,6 @@ public class DashboardAdministratorController {
 
 		result.addObject("dataLengthOfHikes",
 				administratorService.dataLengthOfHikes());
-
 		result.addObject("dataNumChirpsPerUser",
 				administratorService.dataNumChirpsPerUser());
 
@@ -53,6 +52,9 @@ public class DashboardAdministratorController {
 
 		result.addObject("dataNumUserPerDayInns",
 				administratorService.dataNumUserPerDayInns());
+
+		result.addObject("dataOutlierOfRoutes",
+				administratorService.dataOutlierOfRoutes());
 
 		return result;
 	}

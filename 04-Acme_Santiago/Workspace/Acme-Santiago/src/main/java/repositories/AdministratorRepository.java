@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Administrator;
+import domain.Route;
 import domain.User;
 
 @Repository
@@ -65,4 +66,6 @@ public interface AdministratorRepository extends
 	@Query("select avg(i.registries.size), stddev(i.registries.size) from Inn i join i.registries r group by r.date")
 	Collection<Double> dataNumUserPerDayInns();
 
+	@Query("select r from Route r where r.length<=((select avg(f.length) from Route f)-(select stddev(h.length) from Route h)*3) or r.length>=((select avg(e.length) from Route e)+(select stddev(w.length) from Route w)*3)")
+	Collection<Route> dataOutlierOfRoutes();
 }

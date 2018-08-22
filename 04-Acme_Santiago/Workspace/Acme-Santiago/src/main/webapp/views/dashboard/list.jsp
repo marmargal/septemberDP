@@ -223,3 +223,17 @@
 
 <br />
 
+
+<jstl:if test="${!(dataOutlierOfRoutes[0] eq null)}">
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataOutlierOfRoutes" /></b> <br />
+			<h4>
+				<jstl:forEach items="${dataOutlierOfRoutes }" var="i">
+					<jstl:out value="${i.name }" />
+					<br />
+				</jstl:forEach>
+			</h4>
+		</div>
+	</fieldset>
+</jstl:if>

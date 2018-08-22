@@ -115,6 +115,32 @@
 		<property name="routes">
 			<list>
 				<ref bean="route1" />
+				<ref bean="route3" />
+				<ref bean="route4" />
+				<ref bean="route5" />
+				<ref bean="route6" />
+				<ref bean="route7" />
+				<ref bean="route8" />
+				<ref bean="route9" />
+				<ref bean="route10" />
+				<ref bean="route11" />
+				<ref bean="route12" />
+				<ref bean="route13" />
+				<ref bean="route14" />
+				<ref bean="route15" />
+				<ref bean="route16" />
+				<ref bean="route17" />
+				<ref bean="route18" />
+				<ref bean="route19" />
+				<ref bean="route20" />
+				<ref bean="route21" />
+				<ref bean="route22" />
+				<ref bean="route23" />
+				<ref bean="route24" />
+				<ref bean="route25" />
+				<ref bean="route26" />
+				<ref bean="route27" />
+				<ref bean="route28" />
 			</list>
 		</property>
 		<property name="following">
@@ -204,7 +230,7 @@
 
 	<bean id="route1" class="domain.Route">
 		<property name="name" value="route1" />
-		<property name="length" value="30.0" />
+		<property name="length" value="300.0" />
 		<property name="description" value="description1" />
 		<property name="pictures">
 			<list>
@@ -228,7 +254,7 @@
 
 	<bean id="route2" class="domain.Route">
 		<property name="name" value="route2" />
-		<property name="length" value="50.0" />
+		<property name="length" value="300.0" />
 		<property name="description" value="description2" />
 		<property name="pictures">
 			<list>
@@ -250,6 +276,589 @@
 		</property>
 	</bean>
 
+
+
+	<bean id="route3" class="domain.Route">
+		<property name="name" value="route3" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description3" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="route4" class="domain.Route">
+		<property name="name" value="route4" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description4" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="route5" class="domain.Route">
+		<property name="name" value="route5" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description5" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="route6" class="domain.Route">
+		<property name="name" value="route6" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description6" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="route7" class="domain.Route">
+		<property name="name" value="route7" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description7" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="route8" class="domain.Route">
+		<property name="name" value="route8" />
+		<property name="length" value="250.0" />
+		<property name="description" value="description8" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="route9" class="domain.Route">
+		<property name="name" value="route9" />
+		<property name="length" value="350.0" />
+		<property name="description" value="description9" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+
+	<bean id="route10" class="domain.Route">
+		<property name="name" value="route10" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description10" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route11" class="domain.Route">
+		<property name="name" value="route11" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route12" class="domain.Route">
+		<property name="name" value="route12" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route13" class="domain.Route">
+		<property name="name" value="route13" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route14" class="domain.Route">
+		<property name="name" value="route14" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route15" class="domain.Route">
+		<property name="name" value="route15" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route16" class="domain.Route">
+		<property name="name" value="route16" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route17" class="domain.Route">
+		<property name="name" value="route17" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route18" class="domain.Route">
+		<property name="name" value="route18" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route19" class="domain.Route">
+		<property name="name" value="route19" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route20" class="domain.Route">
+		<property name="name" value="route20" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route21" class="domain.Route">
+		<property name="name" value="route21" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route22" class="domain.Route">
+		<property name="name" value="route22" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route23" class="domain.Route">
+		<property name="name" value="route23" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route24" class="domain.Route">
+		<property name="name" value="route24" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route25" class="domain.Route">
+		<property name="name" value="route25" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route26" class="domain.Route">
+		<property name="name" value="route26" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route27" class="domain.Route">
+		<property name="name" value="route27" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
+	<bean id="route28" class="domain.Route">
+		<property name="name" value="route28" />
+		<property name="length" value="300.0" />
+		<property name="description" value="description1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
+				</value>
+				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
+			</list>
+		</property>
+		<property name="user" ref="user1" />
+		<property name="hikes">
+			<list>
+				<ref bean="hike1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+			</list>
+		</property>
+	</bean>
 	<!-- hike -->
 
 	<bean id="hike1" class="domain.Hike">
@@ -417,7 +1026,8 @@
 
 	<bean id="inn1" class="domain.Inn">
 		<property name="name" value="inn1" />
-		<property name="badge" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYMinrf4pQgWsM5Cg8YtBO_Xv55cqY6vnn2hm2zhPwHCTSCj9K" />
+		<property name="badge"
+			value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYMinrf4pQgWsM5Cg8YtBO_Xv55cqY6vnn2hm2zhPwHCTSCj9K" />
 		<property name="Address" value="C/Edu" />
 		<property name="phoneNumber" value="654565656" />
 		<property name="email" value="edferve@gmail.com" />
@@ -434,7 +1044,8 @@
 
 	<bean id="inn2" class="domain.Inn">
 		<property name="name" value="inn2" />
-		<property name="badge" value="https://image.shutterstock.com/image-vector/star-badge-vector-icon-260nw-491672602.jpg" />
+		<property name="badge"
+			value="https://image.shutterstock.com/image-vector/star-badge-vector-icon-260nw-491672602.jpg" />
 		<property name="Address" value="C/Edu" />
 		<property name="phoneNumber" value="654565656" />
 		<property name="email" value="edferve@gmail.com" />
@@ -447,8 +1058,8 @@
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<!-- REGISTRY -->
 	<bean id="registry1" class="domain.Registry">
 		<property name="date" value="20/05/2011" />
