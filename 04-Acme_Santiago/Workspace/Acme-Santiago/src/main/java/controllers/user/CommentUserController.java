@@ -44,94 +44,129 @@ public class CommentUserController extends AbstractController {
 
 	// Listing -----------------------------------
 	@RequestMapping(value = "/listRoute", method = RequestMethod.GET)
-	public ModelAndView listRoute(@RequestParam final int routeId) {
+	public ModelAndView listRoute(
+			@RequestParam(defaultValue = "0") final int routeId) {
 		ModelAndView res;
 
 		Route route;
-		route = routeService.findOne(routeId);
 
-		Collection<Comment> comment = new ArrayList<Comment>();
-		comment.addAll(route.getComments());
+		if (routeId == 0) {
+			res = new ModelAndView("redirect:../../");
 
-		res = new ModelAndView("comment/user/listRoute");
-		res.addObject("comment", comment);
-		res.addObject("route", route);
-		res.addObject("requestURI", "comment/user/listRoute.do");
+		} else if (this.routeService.findOne(routeId) == null) {
+			res = new ModelAndView("redirect:../../");
 
+		} else {
+			route = routeService.findOne(routeId);
+
+			Collection<Comment> comment = new ArrayList<Comment>();
+			comment.addAll(route.getComments());
+
+			res = new ModelAndView("comment/user/listRoute");
+			res.addObject("comment", comment);
+			res.addObject("route", route);
+			res.addObject("requestURI", "comment/user/listRoute.do");
+
+		}
 		return res;
 	}
 
 	// Listing -----------------------------------
 	@RequestMapping(value = "/listHike", method = RequestMethod.GET)
-	public ModelAndView listHike(@RequestParam final int hikeId) {
+	public ModelAndView listHike(
+			@RequestParam(defaultValue = "0") final int hikeId) {
 		ModelAndView res;
 
 		Hike hike;
-		hike = hikeService.findOne(hikeId);
 
-		Collection<Comment> comment = new ArrayList<Comment>();
-		comment.addAll(hike.getComments());
+		if (hikeId == 0) {
+			res = new ModelAndView("redirect:../../");
 
-		res = new ModelAndView("comment/user/listHike");
-		res.addObject("comment", comment);
-		res.addObject("hike", hike);
-		res.addObject("requestURI", "comment/user/listHike.do");
+		} else if (this.hikeService.findOne(hikeId) == null) {
+			res = new ModelAndView("redirect:../../");
+		} else {
+			hike = hikeService.findOne(hikeId);
 
+			Collection<Comment> comment = new ArrayList<Comment>();
+			comment.addAll(hike.getComments());
+
+			res = new ModelAndView("comment/user/listHike");
+			res.addObject("comment", comment);
+			res.addObject("hike", hike);
+			res.addObject("requestURI", "comment/user/listHike.do");
+		}
 		return res;
 	}
 
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/createRoute", method = RequestMethod.GET)
-	public ModelAndView createRoute(@RequestParam final int routeId) {
+	public ModelAndView createRoute(
+			@RequestParam(defaultValue = "0") final int routeId) {
 		ModelAndView res;
 		Comment comment;
 		Route route;
 
-		comment = this.commentService.create();
+		if (routeId == 0) {
+			res = new ModelAndView("redirect:../../");
 
-		route = routeService.findOne(routeId);
-		comment.setRoute(route);
-		
-		Collection<Comment> comments = new ArrayList<Comment>();
-		comments.addAll(route.getComments());
-		comments.add(comment);
-		route.setComments(comments);
+		} else if (this.routeService.findOne(routeId) == null) {
+			res = new ModelAndView("redirect:../../");
+		} else {
 
-		res = this.createEditModelAndViewRoute(comment);
+			comment = this.commentService.create();
 
+			route = routeService.findOne(routeId);
+			comment.setRoute(route);
+
+			Collection<Comment> comments = new ArrayList<Comment>();
+			comments.addAll(route.getComments());
+			comments.add(comment);
+			route.setComments(comments);
+
+			res = this.createEditModelAndViewRoute(comment);
+		}
 		return res;
 	}
 
 	@RequestMapping(value = "/createHike", method = RequestMethod.GET)
-	public ModelAndView createHike(@RequestParam final int hikeId) {
+	public ModelAndView createHike(@RequestParam(defaultValue = "0")  final int hikeId) {
 		ModelAndView res;
 		Comment comment;
 		Hike hike;
+		
+		if (hikeId == 0) {
+			res = new ModelAndView("redirect:../../");
+
+		} else if (this.hikeService.findOne(hikeId) == null) {
+			res = new ModelAndView("redirect:../../");
+		} else {
 
 		comment = this.commentService.create();
 
 		hike = hikeService.findOne(hikeId);
 		comment.setHike(hike);
-		
+
 		Collection<Comment> comments = new ArrayList<Comment>();
 		comments.addAll(hike.getComments());
 		comments.add(comment);
 		hike.setComments(comments);
 
 		res = this.createEditModelAndViewHike(comment);
-
+		}
 		return res;
 	}
-	
+
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/editRoute", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveRoute(@Valid Comment comment, final BindingResult binding) {
+	public ModelAndView saveRoute(@Valid Comment comment,
+			final BindingResult binding) {
 		ModelAndView res;
 		System.out.println(binding.getFieldError());
 		if (binding.hasErrors())
-			res = this.createEditModelAndViewRoute(comment, "comment.params.error");
+			res = this.createEditModelAndViewRoute(comment,
+					"comment.params.error");
 		else
 			try {
 				this.commentService.save(comment);
@@ -143,13 +178,15 @@ public class CommentUserController extends AbstractController {
 			}
 		return res;
 	}
-	
+
 	@RequestMapping(value = "/editHike", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveHike(@Valid Comment comment, final BindingResult binding) {
+	public ModelAndView saveHike(@Valid Comment comment,
+			final BindingResult binding) {
 		ModelAndView res;
 		System.out.println(binding.getFieldError());
 		if (binding.hasErrors())
-			res = this.createEditModelAndViewHike(comment, "comment.params.error");
+			res = this.createEditModelAndViewHike(comment,
+					"comment.params.error");
 		else
 			try {
 				this.commentService.save(comment);
@@ -183,7 +220,7 @@ public class CommentUserController extends AbstractController {
 
 		return result;
 	}
-	
+
 	protected ModelAndView createEditModelAndViewHike(final Comment comment) {
 		ModelAndView result;
 

@@ -27,7 +27,7 @@
 	<form:hidden path="comments"/>
 	
 	<acme:textbox code="hike.name" path="name"/>
-	<acme:textbox code="hike.length" path="length"/>
+	<acme:textbox type= "number" code="hike.length" path="length"/>
 	<acme:textbox code="hike.description" path="description"/>
 	<acme:textbox code="hike.originCity" path="originCity"/>
 	<acme:textbox code="hike.destinationCity" path="destinationCity"/>

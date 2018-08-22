@@ -34,14 +34,20 @@ public class RouteAdministratorController extends AbstractController {
 	// Editing ---------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int routeId) {
+	public ModelAndView edit(@RequestParam(defaultValue = "0") final int routeId) {
 		ModelAndView result;
 		Route route;
+		if (routeId == 0) {
+			result = new ModelAndView("redirect:../../");
 
-		route = this.routeService.findOne(routeId);
-		result = this.createEditModelAndView(route);
-		result.addObject("route", route);
+		} else if (this.routeService.findOne(routeId) == null) {
+			result = new ModelAndView("redirect:../../");
+		} else {
 
+			route = this.routeService.findOne(routeId);
+			result = this.createEditModelAndView(route);
+			result.addObject("route", route);
+		}
 		return result;
 	}
 
@@ -55,8 +61,7 @@ public class RouteAdministratorController extends AbstractController {
 			this.routeService.delete(route);
 			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(route,
-					"route.commit.error");
+			res = this.createEditModelAndView(route, "route.commit.error");
 		}
 		return res;
 	}

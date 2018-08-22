@@ -48,15 +48,14 @@ public class CommentAdministratorController extends AbstractController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public ModelAndView listAll() {
 		ModelAndView result;
 		Collection<Comment> comments;
 
 		comments = commentService.findAll();
-		
-		
+
 		result = new ModelAndView("comment/administrator/listAll");
 		result.addObject("comment", comments);
 		result.addObject("requestURI", "comment/administrator/listAll.do");
@@ -67,14 +66,21 @@ public class CommentAdministratorController extends AbstractController {
 	// Editing ---------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int commentId) {
+	public ModelAndView edit(
+			@RequestParam(defaultValue = "0") final int commentId) {
 		ModelAndView result;
 		Comment comment;
+		if (commentId == 0) {
+			result = new ModelAndView("redirect:../../");
 
-		comment = this.commentService.findOne(commentId);
-		result = this.createEditModelAndView(comment);
-		result.addObject("comment", comment);
+		} else if (this.commentService.findOne(commentId) == null) {
+			result = new ModelAndView("redirect:../../");
+		} else {
 
+			comment = this.commentService.findOne(commentId);
+			result = this.createEditModelAndView(comment);
+			result.addObject("comment", comment);
+		}
 		return result;
 	}
 
@@ -88,8 +94,7 @@ public class CommentAdministratorController extends AbstractController {
 			this.commentService.delete(comment);
 			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {
-			res = this.createEditModelAndView(comment,
-					"comment.commit.error");
+			res = this.createEditModelAndView(comment, "comment.commit.error");
 		}
 		return res;
 	}

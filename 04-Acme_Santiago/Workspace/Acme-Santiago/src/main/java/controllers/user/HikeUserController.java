@@ -34,9 +34,9 @@ public class HikeUserController extends AbstractController {
 	public HikeUserController() {
 		super();
 	}
-	
+
 	// Listing --------------------------------------------------------------
-	
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView res;
@@ -63,12 +63,19 @@ public class HikeUserController extends AbstractController {
 	// Editing ---------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int hikeId) {
+	public ModelAndView edit(@RequestParam(defaultValue = "0") final int hikeId) {
 		ModelAndView result;
 		Hike hike;
-		hike = this.hikeService.findOne(hikeId);
-		result = this.createEditModelAndView(hike);
 
+		if (hikeId == 0) {
+			result = new ModelAndView("redirect:../../");
+
+		} else if (this.hikeService.findOne(hikeId) == null) {
+			result = new ModelAndView("redirect:../../");
+		} else {
+			hike = this.hikeService.findOne(hikeId);
+			result = this.createEditModelAndView(hike);
+		}
 		return result;
 	}
 

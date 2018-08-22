@@ -56,7 +56,6 @@ public class CommentService {
 		Assert.isTrue(id != 0);
 		Comment res;
 		res = this.commentRepository.findOne(id);
-		Assert.notNull(res);
 		return res;
 	}
 

@@ -43,6 +43,13 @@ public class UserController extends AbstractController {
 		User currentUser;
 		Integer currentUserId;
 		
+		if (userId == 0) {
+			res = new ModelAndView("redirect:../");
+
+		} else if (this.userService.findOne(userId) == null) {
+			res = new ModelAndView("redirect:../");
+		} else {
+		
 		user = this.userService.findOne(userId);
 		
 		res = new ModelAndView("user/display");
@@ -57,7 +64,7 @@ public class UserController extends AbstractController {
 			res.addObject("currentUserId", userId);
 		}
 		res.addObject("requestURI", "user/display.do");
-
+		}
 		return res;
 	}
 

@@ -21,7 +21,7 @@ public interface RouteRepository extends JpaRepository<Route, Integer> {
 	@Query("select p from Route p where p.hikes.size<=?1 and p.hikes.size>=?2")
 	Collection<Route> numHikesRoute(int max, int min);
 	
-	@Query("select h from Hike h where h.route = null)")
+	@Query("select h from Hike h where h.route = null")
 	Collection<Hike> hikesWithoutRoute();
 
 }
