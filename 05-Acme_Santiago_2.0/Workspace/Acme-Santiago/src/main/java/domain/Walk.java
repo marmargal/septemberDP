@@ -7,7 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -72,16 +71,6 @@ public class Walk extends DomainEntity {
 
 	public void setRoute(Route route) {
 		this.route = route;
-	}
-
-	@Valid
-	@ManyToMany
-	public Collection<Comment> getCommentsOfEachHike() {
-		return commentsOfEachHike;
-	}
-
-	public void setCommentsOfEachHike(Collection<Comment> commentsOfEachHike) {
-		this.commentsOfEachHike = commentsOfEachHike;
 	}
 
 	@Valid
