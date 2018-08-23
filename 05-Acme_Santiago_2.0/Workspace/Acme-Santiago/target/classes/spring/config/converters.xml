@@ -50,6 +50,21 @@
 
 		<bean class="converters.UserToStringConverter" />
 		<bean class="converters.StringToUserConverter" />
+		
+		<bean class="converters.AgentToStringConverter" />
+		<bean class="converters.StringToAgentConverter" />
+		
+		<bean class="converters.AdvertisementToStringConverter" />
+		<bean class="converters.StringToAdvertisementConverter" />
+		
+		<bean class="converters.WalkToStringConverter" />
+		<bean class="converters.StringToWalkConverter" />
+		
+		<bean class="converters.CompostelaToStringConverter" />
+		<bean class="converters.StringToCompostelaConverter" />
+		
+		<bean class="converters.AmenityToStringConverter" />
+		<bean class="converters.StringToAmenityConverter" />
 
 	</util:list>
 
