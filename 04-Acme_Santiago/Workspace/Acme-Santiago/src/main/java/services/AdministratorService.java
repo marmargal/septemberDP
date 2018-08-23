@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -16,6 +17,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
+import domain.Route;
 import domain.User;
 import forms.ActorForm;
 
@@ -193,6 +195,11 @@ public class AdministratorService {
 
 	public Collection<Double> dataNumUserPerDayInns() {
 		return administratorRepository.dataNumUserPerDayInns();
+	}
+
+	public Collection<Route> dataOutlierOfRoutes() {
+
+		return this.administratorRepository.dataOutlierOfRoutes();
 	}
 
 }
