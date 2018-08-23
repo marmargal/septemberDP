@@ -20,6 +20,7 @@ public class Innkeeper extends Actor {
 
 	// Relationships
 	private Collection<Inn> inns;
+	private Collection<Amenity> amenities;
 
 	@Valid
 	@OneToMany(mappedBy = "innkeeper")
@@ -29,5 +30,15 @@ public class Innkeeper extends Actor {
 
 	public void setInns(Collection<Inn> inns) {
 		this.inns = inns;
+	}
+	
+	@Valid
+	@OneToMany
+	public Collection<Amenity> getAmenities() {
+		return amenities;
+	}
+
+	public void setAmenities(Collection<Amenity> amenities) {
+		this.amenities = amenities;
 	}
 }
