@@ -88,6 +88,10 @@
 
 		<security:intercept-url pattern="/hike/user/**"
 			access="hasRole('USER')" />
+			
+		<security:intercept-url pattern="/hike/agent/**"
+			access="hasRole('AGENT')" />
+			
 
 		<!-- COMMENT -->
 
@@ -140,6 +144,12 @@
 
 		<security:intercept-url pattern="/inn/innkeeper/register.do"
 			access="hasRole('INNKEEPER')" />
+			
+		<!-- AGENT -->
+		
+		<security:intercept-url pattern="/agent/register.do"
+			access="permitAll" />
+			
 
 		<!-- TERMS -->
 

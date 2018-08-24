@@ -14,4 +14,7 @@ public interface HikeRepository extends JpaRepository<Hike, Integer>{
 	@Query("select h from Hike h where h.route.id=?1")
 	Collection<Hike> findHikeByRoute(int id);
 	
+	@Query("select a.hike from Advertisement a where a.id = ?1")
+	Collection<Hike> findHikeByAdvertisement(int id);
+	
 }

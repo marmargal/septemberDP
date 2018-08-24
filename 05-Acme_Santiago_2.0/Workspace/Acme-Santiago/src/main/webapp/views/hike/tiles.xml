@@ -14,12 +14,22 @@
 		<put-attribute name="title" value="List of hikes" />
 		<put-attribute name="body" value="/views/hike/list.jsp" />
 	</definition>
+
+	<definition name="hike/agent/list" extends="master.page">
+		<put-attribute name="title" value="List of hikes" />
+		<put-attribute name="body" value="/views/hike/list.jsp" />
+	</definition>
 	
+	<definition name="hike/agent/listWithoutAd" extends="master.page">
+		<put-attribute name="title" value="List of hikes" />
+		<put-attribute name="body" value="/views/hike/list.jsp" />
+	</definition>
+
 	<definition name="hike/edit" extends="master.page">
 		<put-attribute name="title" value="Edit hike" />
 		<put-attribute name="body" value="/views/hike/edit.jsp" />
 	</definition>
-	
+
 	<definition name="hike/create" extends="master.page">
 		<put-attribute name="title" value="Create hike" />
 		<put-attribute name="body" value="/views/hike/edit.jsp" />

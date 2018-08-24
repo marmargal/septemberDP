@@ -92,4 +92,8 @@ public class HikeService {
 	public void flush() {
 		this.hikeRepository.flush();
 	}
+	
+	public Collection<Hike> findHikeByAdvertisement(int id){
+		return this.hikeRepository.findHikeByAdvertisement(id);
+	}
 }

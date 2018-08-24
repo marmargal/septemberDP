@@ -68,11 +68,27 @@
 							code="master.page.inn.innkeeper.list" /></a></li>
 			</security:authorize>
 
+			<security:authorize access="hasRole('AGENT')">
+				<li><a href="#" class="fNiv"><spring:message
+							code="master.page.agent" /></a>
+					<ul>
+						<li class="arrow"></li>
+						<li><a href="j_spring_security_logout"><spring:message
+									code="master.page.logout" /> </a></li>
+					</ul></li>
+				<li><a href="hike/agent/list.do"><spring:message
+							code="master.page.hike.list" /></a></li>
+				<li><a href="hike/agent/listWithoutAd.do"><spring:message
+							code="master.page.hike.list.without.ad" /></a></li>
+			</security:authorize>
+
 			<security:authorize access="isAnonymous()">
 				<li><a class="fNiv" href="security/login.do"><spring:message
 							code="master.page.login" /></a></li>
 				<li><a href="user/register.do"><spring:message
 							code="master.page.register.user" /></a></li>
+				<li><a href="agent/register.do"><spring:message
+							code="master.page.register.agent" /></a></li>
 				<li><a href="route/list.do"><spring:message
 							code="master.page.route.search" /></a></li>
 				<li><a href="user/list.do"><spring:message
