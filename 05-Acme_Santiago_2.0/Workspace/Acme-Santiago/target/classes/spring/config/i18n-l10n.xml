@@ -27,6 +27,7 @@
 		<value>/views/comment/messages</value>
 		<value>/views/inn/messages</value>
 		<value>/views/terms/messages</value>
+		<value>/views/advertisement/messages</value>
 
 	</util:list>
 

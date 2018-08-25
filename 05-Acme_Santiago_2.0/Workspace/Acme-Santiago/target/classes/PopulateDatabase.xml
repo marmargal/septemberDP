@@ -1147,6 +1147,7 @@
 		<property name="creditCard" ref="creditCard1" />
 		<property name="activeDays" value="12" />
 		<property name="hike" ref="hike1" />
+		<property name="taboo" value="false" />
 	</bean>
 
 	<bean id="advertisement2" class="domain.Advertisement">
@@ -1157,6 +1158,7 @@
 		<property name="creditCard" ref="creditCard1" />
 		<property name="activeDays" value="15" />
 		<property name="hike" ref="hike2" />
+		<property name="taboo" value="false" />
 	</bean>
 
 	<!-- COMPOSTELA -->

@@ -27,6 +27,7 @@ public class Advertisement extends DomainEntity{
 	private String targetPage;
 	private CreditCard creditCard;
 	private Integer activeDays;
+	private boolean taboo;
 	
 	@NotBlank
 	public String getTitle() {
@@ -73,7 +74,14 @@ public class Advertisement extends DomainEntity{
 	public void setActiveDays(Integer activeDays) {
 		this.activeDays = activeDays;
 	}
+	
+	public boolean isTaboo() {
+		return taboo;
+	}
 
+	public void setTaboo(boolean taboo) {
+		this.taboo = taboo;
+	}
 	
 	//Relationships
 	

@@ -49,6 +49,16 @@
 					code="hike.edit" /></a>
 		</display:column>
 	</security:authorize>
+	<security:authorize access="hasRole('AGENT')">
+		<display:column>
+			<a href="advertisement/agent/create.do?hikeId=${row.id}"><spring:message
+					code="hike.advertisement" /></a>
+		</display:column>
+		<display:column>
+			<a href="advertisement/agent/list.do?hikeId=${row.id}"><spring:message
+					code="hike.advertisement.list" /></a>
+		</display:column>
+	</security:authorize>
 </display:table>
 
 <security:authorize access="hasRole('USER')">

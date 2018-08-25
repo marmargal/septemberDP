@@ -40,6 +40,8 @@
 							code="master.page.comment.taboo" /></a>
 				<li><a href="comment/administrator/listAll.do"><spring:message
 							code="master.page.comment" /></a>
+				<li><a href="advertisement/administrator/list.do"><spring:message
+							code="master.page.advertisement" /></a>
 			</security:authorize>
 
 			<security:authorize access="hasRole('USER')">

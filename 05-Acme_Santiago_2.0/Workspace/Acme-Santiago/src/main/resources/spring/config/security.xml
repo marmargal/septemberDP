@@ -150,6 +150,13 @@
 		<security:intercept-url pattern="/agent/register.do"
 			access="permitAll" />
 			
+		<!-- ADVERTISEMENT -->
+		
+		<security:intercept-url pattern="/advertisement/agent/**"
+			access="hasRole('AGENT')" />
+		
+		<security:intercept-url pattern="/advertisement/administrator/**"
+			access="hasRole('ADMIN')" />
 
 		<!-- TERMS -->
 
