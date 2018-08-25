@@ -3,6 +3,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -24,6 +26,7 @@ public class Compostela extends DomainEntity {
 	private String footer;
 	private String logo;
 	private boolean decision;
+	private boolean finallyDecision;
 	private String justification;
 
 	@NotBlank
@@ -69,6 +72,15 @@ public class Compostela extends DomainEntity {
 	public void setDecision(boolean decision) {
 		this.decision = decision;
 	}
+	
+	public boolean isfinallyDecision() {
+		return finallyDecision;
+	}
+
+	public void setfinallyDecision(boolean finallyDecision) {
+		this.finallyDecision = finallyDecision;
+	}
+
 
 	public String getJustification() {
 		return justification;
@@ -76,6 +88,20 @@ public class Compostela extends DomainEntity {
 
 	public void setJustification(String justification) {
 		this.justification = justification;
+	}
+	
+	// Relationships
+	
+	private Walk walk;
+
+	@Valid
+	@ManyToOne
+	public Walk getWalk() {
+		return walk;
+	}
+
+	public void setWalk(Walk walk) {
+		this.walk = walk;
 	}
 
 }

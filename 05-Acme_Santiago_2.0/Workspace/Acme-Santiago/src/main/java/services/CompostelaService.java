@@ -50,7 +50,9 @@ public class CompostelaService {
 	public Compostela save(Compostela compostela){
 		Assert.notNull(compostela);
 		Compostela res;
+		
 		res = this.compostelaRepository.save(compostela);
+		
 		return res;
 	}
 	
@@ -61,7 +63,7 @@ public class CompostelaService {
 		this.compostelaRepository.delete(compostela);
 	}
 	
-	public Collection<Compostela> findCompostelaByDecision(boolean decision){
-		return this.compostelaRepository.findCompostelaByDecision(decision);
+	public Collection<Compostela> findCompostelaByFinallyDecision(boolean decision){
+		return this.compostelaRepository.findCompostelaByFinallyDecision(decision);
 	}
 }

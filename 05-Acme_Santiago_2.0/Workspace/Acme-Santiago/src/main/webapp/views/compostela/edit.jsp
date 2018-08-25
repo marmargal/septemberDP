@@ -1,5 +1,5 @@
 <%--
- * list.jsp
+ * create.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -17,26 +17,24 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="5" class="compostelas" keepStatus="true"
-	name="compostelas" requestURI="${requestURI }" id="row">
+<form:form action="${requestURI }" modelAttribute="compostela">
 	<security:authorize access="hasRole('ADMIN')">
+	<form:hidden path="id"/>
+	<form:hidden path="version"/>
+	<form:hidden path="header"/>
+	<form:hidden path="body"/>
+	<form:hidden path="footer"/>
+	<form:hidden path="logo"/>
+	<form:hidden path="walk"/>
 
-		<acme:column property="header" code="compostela.header" />
-		<acme:column property="body" code="compostela.body" />
-		<acme:column property="footer" code="compostela.footer" />
-
-		<display:column>
-			<jstl:forEach var="p" items="${row.logo }">
-				<img class="imagen" src="${p }" />
-			</jstl:forEach>
-		</display:column>
-
-		<display:column>
-			<a href="compostela/administrator/edit.do?compostelaId=${row.id}"><spring:message
-					code="compostela.edit" /></a>
-		</display:column>
-
+	<acme:checkbox code="compostela.approveDecision" path="decision"/>
+	<acme:textbox code="compostela.justification" path="justification"/>
+	</br>
+	<acme:checkbox code="compostela.finallyDecision" path="finallyDecision"/>
+	
+	<acme:submit name="save" code="compostela.save"/>
+	<acme:cancel url="/" code="compostela.cancel"/>
 	</security:authorize>
-</display:table>
+</form:form>

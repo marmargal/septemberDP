@@ -162,6 +162,9 @@
 		
 		<security:intercept-url pattern="/compostela/administrator/**"
 			access="hasRole('ADMIN')" />
+			
+		<security:intercept-url pattern="/compostela/user/**"
+			access="hasRole('USER')" />
 
 		<!-- TERMS -->
 

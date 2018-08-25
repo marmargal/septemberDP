@@ -12,6 +12,6 @@ import domain.Compostela;
 public interface CompostelaRepository extends JpaRepository<Compostela, Integer>{
 
 	
-	@Query("select c from Compostela c where c.decision = ?1")
-	Collection<Compostela> findCompostelaByDecision(boolean decision);
+	@Query("select c from Compostela c where c.finallyDecision = ?1")
+	Collection<Compostela> findCompostelaByFinallyDecision(boolean decision);
 }

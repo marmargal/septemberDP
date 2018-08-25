@@ -15,4 +15,14 @@
 		<put-attribute name="body" value="/views/compostela/list.jsp" />
 	</definition>
 
+	<definition name="compostela/user/edit" extends="master.page">
+		<put-attribute name="title" value="Solicitar un compostela" />
+		<put-attribute name="body" value="/views/compostela/request.jsp" />
+	</definition>
+
+	<definition name="compostela/administrator/edit" extends="master.page">
+		<put-attribute name="title" value="Aprobar una compostela" />
+		<put-attribute name="body" value="/views/compostela/edit.jsp" />
+	</definition>
+
 </tiles-definitions>

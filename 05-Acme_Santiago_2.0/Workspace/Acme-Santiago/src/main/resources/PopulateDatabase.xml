@@ -1170,6 +1170,7 @@
 		<property name="footer" value="Copyright C CompostelaMáximo" />
 		<property name="logo"
 			value="https://i.pinimg.com/originals/55/0a/d0/550ad0c177ceb2fdf7eeba43e2584251.jpg" />
+		<property name="walk" ref="walk1" />
 	</bean>
 
 	<bean id="compostela2" class="domain.Compostela">
@@ -1179,6 +1180,7 @@
 		<property name="footer" value="Copyright C CompostelaMínimo" />
 		<property name="logo"
 			value="https://seeklogo.com/images/C/Camino_De_Santiago-logo-9D7A8CF90C-seeklogo.com.png" />
+		<property name="walk" ref="walk2" />
 	</bean>
 
 	<!-- WALK -->
