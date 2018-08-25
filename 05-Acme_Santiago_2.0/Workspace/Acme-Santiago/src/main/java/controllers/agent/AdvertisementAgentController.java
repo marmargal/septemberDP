@@ -40,10 +40,12 @@ public class AdvertisementAgentController extends AbstractController {
 	// Listing --------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(final int hikeId) {
+	public ModelAndView list(@RequestParam(defaultValue = "0") final int hikeId) {
 		ModelAndView res;
+		
 		Collection<Advertisement> advertisements = new ArrayList<>();
-		advertisements = this.advertisementService.findAdvertisementByHike(hikeId);
+		advertisements.addAll(this.advertisementService.findAdvertisementByHike(hikeId));
+		
 		res = new ModelAndView("advertisement/list");
 		res.addObject("requestURI", "advertisements/agent/list.do");
 		res.addObject("advertisements", advertisements);

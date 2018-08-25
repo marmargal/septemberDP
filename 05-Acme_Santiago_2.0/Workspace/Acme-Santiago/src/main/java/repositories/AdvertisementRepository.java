@@ -12,7 +12,7 @@ import domain.Agent;
 @Repository
 public interface AdvertisementRepository extends JpaRepository<Advertisement, Integer>{
 	
-	@Query("select a from Advertisement a where a.hike = ?1")
+	@Query("select a from Advertisement a where a.hike.id = ?1")
 	Collection<Advertisement> findAdvertisementByHike(int hikeId);
 	
 	@Query("select a from Agent a join a.advertisements s where s.id = ?1")
