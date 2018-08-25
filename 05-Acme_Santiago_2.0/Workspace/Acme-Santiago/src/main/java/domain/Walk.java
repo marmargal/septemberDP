@@ -50,7 +50,6 @@ public class Walk extends DomainEntity {
 
 	private Collection<Comment> comments;
 	private Route route;
-	private Collection<Comment> commentsOfEachHike;
 	private Inn inn;
 
 	@Valid

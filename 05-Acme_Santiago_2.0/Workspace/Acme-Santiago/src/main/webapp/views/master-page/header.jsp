@@ -58,6 +58,8 @@
 							code="master.page.hike.list" /></a></li>
 				<li><a href="chirp/user/display.do"><spring:message
 							code="master.page.chirp" /></a>
+				<li><a href="walk/user/list.do"><spring:message
+							code="master.page.walk" /></a>
 			</security:authorize>
 
 			<security:authorize access="hasRole('INNKEEPER')">

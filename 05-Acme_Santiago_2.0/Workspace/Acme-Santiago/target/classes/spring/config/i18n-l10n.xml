@@ -29,6 +29,7 @@
 		<value>/views/terms/messages</value>
 		<value>/views/advertisement/messages</value>
 		<value>/views/compostela/messages</value>
+		<value>/views/walk/messages</value>
 
 	</util:list>
 

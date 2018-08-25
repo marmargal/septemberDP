@@ -29,7 +29,7 @@
 		<value>/views/terms/tiles.xml</value>
 		<value>/views/advertisement/tiles.xml</value>
 		<value>/views/compostela/tiles.xml</value>
-		
+		<value>/views/walk/tiles.xml</value>
 
 	</util:list>
 

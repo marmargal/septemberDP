@@ -69,4 +69,8 @@ public class WalkService {
 		Assert.isTrue(this.walkRepository.exists(walk.getId()));
 		this.walkRepository.delete(walk);
 	}
+	
+	public Collection<Walk> findWalkByUser(int userId){
+		return this.walkRepository.findWalkByUser(userId);
+	}
 }
