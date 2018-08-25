@@ -42,6 +42,8 @@
 							code="master.page.comment" /></a>
 				<li><a href="advertisement/administrator/list.do"><spring:message
 							code="master.page.advertisement" /></a>
+				<li><a href="compostela/administrator/list.do"><spring:message
+							code="master.page.compostela" /></a>
 			</security:authorize>
 
 			<security:authorize access="hasRole('USER')">

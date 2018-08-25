@@ -60,4 +60,8 @@ public class CompostelaService {
 		Assert.isTrue(this.compostelaRepository.exists(compostela.getId()));
 		this.compostelaRepository.delete(compostela);
 	}
+	
+	public Collection<Compostela> findCompostelaByDecision(boolean decision){
+		return this.compostelaRepository.findCompostelaByDecision(decision);
+	}
 }
