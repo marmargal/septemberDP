@@ -19,12 +19,24 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="5" class="walks" keepStatus="true"
-	name="walks" requestURI="${requestURI }" id="row">
+<display:table pagesize="5" class="walks" keepStatus="true" name="walks"
+	requestURI="${requestURI }" id="row">
 	<security:authorize access="hasRole('USER')">
 
-		<acme:column property="title" code="compostela.title" />
-		<acme:column property="daysOfEachHike" code="compostela.daysOfEachHike" />
+		<acme:column property="title" code="walk.title" />
+		<display:column>
+			<%! int count = 0; %>
+			<jstl:forEach var="d" items="${row.daysOfEachHike }">
+			<% count = count + 1; %>
+				<spring:message code="walk.number.hike"
+					var="numberHike" />
+				<jstl:out value="${numberHike }"></jstl:out><%=count%>
+				<br/>
+				<jstl:out value="${d }"></jstl:out>
+				<hr/>
+			</jstl:forEach>
+		</display:column>
+		<acme:column property="route.name" code="walk.route" />
 
 	</security:authorize>
 </display:table>

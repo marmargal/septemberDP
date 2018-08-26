@@ -11,6 +11,8 @@ import org.springframework.util.Assert;
 
 import repositories.WalkRepository;
 import domain.Comment;
+import domain.Hike;
+import domain.Route;
 import domain.Walk;
 
 @Service
@@ -31,12 +33,20 @@ public class WalkService {
 	
 	// Simple CRUD methods
 	
-	public Walk create(){
+	public Walk create(Route route){
 		Walk res = new Walk();
 		
 		Collection<Date> daysOfEachHike = new ArrayList<Date>();
 		Collection<Comment> comments = new ArrayList<Comment>();
 		
+//		comments.addAll(route.getComments());
+		
+		Collection<Hike> hikes = new ArrayList<>();
+		hikes.addAll(route.getHikes());
+		
+		res.setRoute(route);
+		
+		//TODO: Ver como se hace lo de meter cada día de cada Hike
 		res.setDaysOfEachHike(daysOfEachHike);
 		res.setComments(comments);
 		
