@@ -59,7 +59,7 @@ public class CompostelaService {
 		Compostela res;
 		
 		if(compostela.isfinallyDecision() == true && compostela.isDecision() == true){
-			compostela.setDate(new Date());
+			compostela.setDate(new Date(System.currentTimeMillis() - 100));
 		}
 		
 		res = this.compostelaRepository.save(compostela);

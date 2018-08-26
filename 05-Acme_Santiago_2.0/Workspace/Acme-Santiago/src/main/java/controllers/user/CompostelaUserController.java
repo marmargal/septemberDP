@@ -1,5 +1,8 @@
 package controllers.user;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,32 @@ public class CompostelaUserController extends AbstractController {
 	public CompostelaUserController() {
 		super();
 	}
+	
+	// Listing --------------------------------------------------------------
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView res;
+		
+		User user = userService.findByPrincipal();
+		
+		Collection<Compostela> compostelas = new ArrayList<>();
+		compostelas = user.getCompostelas();
+		
+		Collection<Compostela> compostelasFinal = new ArrayList<>();
+		
+		for(Compostela c: compostelas){
+			if(c.isDecision() == true && c.isfinallyDecision() == true){
+				compostelasFinal.add(c);
+			}
+		}
+		
+		res = new ModelAndView("compostela/user/list");
+		res.addObject("requestURI", "compostelas/user/list.do");
+		res.addObject("compostelas", compostelasFinal);
+
+		return res;
+	}
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(@RequestParam(defaultValue = "0") int compostelaId) {
@@ -47,7 +76,7 @@ public class CompostelaUserController extends AbstractController {
 		User user = userService.findByPrincipal();
 		compostela = this.compostelaService.findOne(compostelaId);
 
-		if (compostelaId == 0 || compostela.getUser().getId() != user.getId()) {
+		if (compostelaId == 0 || compostela.getUser().getId() != user.getId() || (compostela.isDecision() == false && compostela.isfinallyDecision() == true)) {
 			res = new ModelAndView("redirect:../../");
 
 		} else if (this.compostelaService.findOne(compostelaId) == null) {

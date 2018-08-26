@@ -15,6 +15,11 @@
 		<put-attribute name="body" value="/views/compostela/list.jsp" />
 	</definition>
 
+	<definition name="compostela/user/list" extends="master.page">
+		<put-attribute name="title" value="List of compostelas" />
+		<put-attribute name="body" value="/views/compostela/list.jsp" />
+	</definition>
+
 	<definition name="compostela/user/edit" extends="master.page">
 		<put-attribute name="title" value="Request a compostela" />
 		<put-attribute name="body" value="/views/compostela/request.jsp" />

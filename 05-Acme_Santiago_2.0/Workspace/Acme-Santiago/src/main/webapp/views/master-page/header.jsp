@@ -60,6 +60,8 @@
 							code="master.page.chirp" /></a>
 				<li><a href="walk/user/list.do"><spring:message
 							code="master.page.walk" /></a>
+				<li><a href="compostela/user/list.do"><spring:message
+							code="master.page.compostela" /></a>
 			</security:authorize>
 
 			<security:authorize access="hasRole('INNKEEPER')">
