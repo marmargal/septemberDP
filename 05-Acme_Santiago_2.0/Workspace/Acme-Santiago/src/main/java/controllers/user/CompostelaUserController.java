@@ -43,18 +43,17 @@ public class CompostelaUserController extends AbstractController {
 	public ModelAndView display(@RequestParam(defaultValue = "0") int compostelaId) {
 		ModelAndView res;
 		Compostela compostela;
+		
+		User user = userService.findByPrincipal();
+		compostela = this.compostelaService.findOne(compostelaId);
 
-		if (compostelaId == 0) {
-			res = new ModelAndView("redirect:../");
+		if (compostelaId == 0 || compostela.getUser().getId() != user.getId()) {
+			res = new ModelAndView("redirect:../../");
 
 		} else if (this.compostelaService.findOne(compostelaId) == null) {
-			res = new ModelAndView("redirect:../");
+			res = new ModelAndView("redirect:../../");
 		} else {
 
-			compostela = this.compostelaService.findOne(compostelaId);
-
-			User user = userService.findUserByCompostela(compostela);
-			
 			res = new ModelAndView("compostela/display");
 			res.addObject("compostela", compostela);
 			res.addObject("user", user);
