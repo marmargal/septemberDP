@@ -36,6 +36,9 @@
 				<jstl:out value="${d }"></jstl:out>
 				<hr />
 			</jstl:forEach>
+					<%
+			count = 0;
+		%>
 		</display:column>
 		<acme:column property="route.name" code="walk.route" />
 

@@ -120,7 +120,7 @@
 		<property name="name" value="Eduardo" />
 		<property name="surname" value="Fernández Velázquez" />
 		<property name="email" value="edferve@gmail.com" />
-		<property name="pictures" value="http://www.google.es" />
+		<property name="pictures" value="http://www.repuestosparamotos.co/page/images/user.png" />
 		<property name="phoneNumber" value="654565656" />
 		<property name="postalAddress" value="C/Edu" />
 		<property name="userAccount" ref="userAccount2" />
@@ -189,7 +189,7 @@
 		<property name="name" value="María" />
 		<property name="surname" value="García Velázquez" />
 		<property name="email" value="magarve@gmail.com" />
-		<property name="pictures" value="http://www.google.es" />
+		<property name="pictures" value="http://www.repuestosparamotos.co/page/images/user.png" />
 		<property name="phoneNumber" value="666666666" />
 		<property name="postalAddress" value="C/María" />
 		<property name="userAccount" ref="userAccount3" />
