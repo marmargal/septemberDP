@@ -23,15 +23,13 @@
 	<security:authorize access="hasRole('ADMIN')">
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<form:hidden path="header"/>
-	<form:hidden path="body"/>
-	<form:hidden path="footer"/>
-	<form:hidden path="logo"/>
 	<form:hidden path="walk"/>
+	<form:hidden path="user"/>
+	
 
 	<acme:checkbox code="compostela.approveDecision" path="decision"/>
 	<acme:textbox code="compostela.justification" path="justification"/>
-	</br>
+	<br/>
 	<acme:checkbox code="compostela.finallyDecision" path="finallyDecision"/>
 	
 	<acme:submit name="save" code="compostela.save"/>

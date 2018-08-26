@@ -1164,23 +1164,15 @@
 	<!-- COMPOSTELA -->
 
 	<bean id="compostela1" class="domain.Compostela">
-		<property name="header" value="Compostela Máximo" />
-		<property name="body"
-			value="Este es el mejor compostela que se podrá entregar" />
-		<property name="footer" value="Copyright C CompostelaMáximo" />
-		<property name="logo"
-			value="https://i.pinimg.com/originals/55/0a/d0/550ad0c177ceb2fdf7eeba43e2584251.jpg" />
 		<property name="walk" ref="walk1" />
+		<property name="date" value="10/09/2014" />
+		<property name="user" ref="user1" />
 	</bean>
 
 	<bean id="compostela2" class="domain.Compostela">
-		<property name="header" value="Compostela Mínimo" />
-		<property name="body"
-			value="Este es el peor compostela que se podrá entregar" />
-		<property name="footer" value="Copyright C CompostelaMínimo" />
-		<property name="logo"
-			value="https://seeklogo.com/images/C/Camino_De_Santiago-logo-9D7A8CF90C-seeklogo.com.png" />
 		<property name="walk" ref="walk2" />
+		<property name="date" value="01/02/2015" />
+		<property name="user" ref="user2" />
 	</bean>
 
 	<!-- WALK -->

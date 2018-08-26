@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CompostelaService;
+import services.UserService;
 import controllers.AbstractController;
 import domain.Compostela;
+import domain.User;
 
 @Controller
 @RequestMapping("/compostela/administrator")
@@ -25,6 +27,9 @@ public class CompostelaAdministratorController extends AbstractController {
 
 	@Autowired
 	private CompostelaService compostelaService;
+	
+	@Autowired
+	private UserService userService;
 
 	// Constructors ---------------------------------------------------------
 

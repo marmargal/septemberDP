@@ -25,18 +25,23 @@
 
 		<acme:column property="title" code="walk.title" />
 		<display:column>
-			<%! int count = 0; %>
+			<%!int count = 0;%>
 			<jstl:forEach var="d" items="${row.daysOfEachHike }">
-			<% count = count + 1; %>
-				<spring:message code="walk.number.hike"
-					var="numberHike" />
+				<%
+					count = count + 1;
+				%>
+				<spring:message code="walk.number.hike" var="numberHike" />
 				<jstl:out value="${numberHike }"></jstl:out><%=count%>
-				<br/>
+				<br />
 				<jstl:out value="${d }"></jstl:out>
-				<hr/>
+				<hr />
 			</jstl:forEach>
 		</display:column>
 		<acme:column property="route.name" code="walk.route" />
 
+		<display:column>
+			<a href="compostela/user/create.do?walkId=${row.id}"><spring:message
+					code="walk.request.compostela" /></a>
+		</display:column>
 	</security:authorize>
 </display:table>

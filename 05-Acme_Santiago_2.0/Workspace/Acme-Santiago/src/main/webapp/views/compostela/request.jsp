@@ -27,12 +27,8 @@
 	<form:hidden path="finallyDecision"/>
 	<form:hidden path="justification"/>
 	<form:hidden path="walk"/>
-	
-	<acme:textbox code="compostela.header" path="header"/>
-	<acme:textbox code="compostela.body" path="body"/>
-	<acme:textbox code="compostela.footer" path="footer"/>
-	<acme:textbox code="compostela.logo" path="logo"/>
-	
+	<form:hidden path="user"/>
+
 	<acme:submit name="save" code="compostela.save"/>
 	<acme:cancel url="/" code="compostela.cancel"/>
 	</security:authorize>

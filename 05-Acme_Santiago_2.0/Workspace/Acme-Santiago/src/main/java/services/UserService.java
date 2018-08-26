@@ -18,6 +18,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Chirp;
 import domain.Comment;
+import domain.Compostela;
 import domain.Route;
 import domain.User;
 import forms.UserForm;
@@ -274,6 +275,10 @@ public class UserService {
 			throw new RuntimeException(caught.getName() + " was unexpected");
 		else if (expected != null && caught != null && !expected.equals(caught))
 			throw new RuntimeException(expected.getName() + " was expected, but " + caught.getName() + " was thrown");
+	}
+	
+	public User findUserByCompostela(Compostela compostela){
+		return this.userRepository.findUserByCompostela(compostela);
 	}
 	
 }

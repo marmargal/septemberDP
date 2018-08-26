@@ -25,4 +25,9 @@
 		<put-attribute name="body" value="/views/compostela/edit.jsp" />
 	</definition>
 
+	<definition name="compostela/display" extends="master.page">
+		<put-attribute name="title" value="Compostela" />
+		<put-attribute name="body" value="/views/compostela/display.jsp" />
+	</definition>
+
 </tiles-definitions>
