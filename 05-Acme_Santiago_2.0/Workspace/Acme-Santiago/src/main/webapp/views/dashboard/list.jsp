@@ -237,3 +237,43 @@
 		</div>
 	</fieldset>
 </jstl:if>
+
+<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataRatioRoutedWithAvertisement" /></b> <br />
+			<h4>
+					<jstl:out value="${dataRatioRoutedWithAvertisement}" />
+					<br />
+			</h4>
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataRatioAdvertisementWithTaboo" /></b> <br />
+			<h4>
+					<jstl:out value="${dataRatioAdvertisementWithTaboo}" />
+					<br />
+			</h4>
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataRatioRequestWaiting" /></b> <br />
+			<h4>
+					<jstl:out value="${dataRatioRequestWaiting}" />
+					<br />
+			</h4>
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<div>
+			<b><spring:message code="dashboard.dataRatioRequestApproved" /></b> <br />
+			<h4>
+					<jstl:out value="${dataRatioRequestApproved}" />
+					<br />
+			</h4>
+		</div>
+	</fieldset>

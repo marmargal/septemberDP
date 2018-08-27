@@ -201,4 +201,32 @@ public class AdministratorService {
 		return this.administratorRepository.dataOutlierOfRoutes();
 	}
 
+	public Double dataRatioRoutedWithAvertisement() {
+		Double primero = this.administratorRepository
+				.dataRatioRoutedWithAvertisement1();
+		Double segundo = this.administratorRepository
+				.dataRatioRoutedWithAvertisement2();
+		if (primero == null || segundo == null) {
+			return 0.;
+		} else {
+
+			return primero / segundo;
+		}
+	}
+
+	public Double dataRatioAdvertisementWithTaboo() {
+
+		return this.administratorRepository.dataRatioAdvertisementWithTaboo();
+	}
+
+	public Double dataRatioRequestWaiting() {
+
+		return this.administratorRepository.dataRatioRequestWaiting();
+	}
+
+	public Double dataRatioRequestApproved() {
+
+		return this.administratorRepository.dataRatioRequestApproved();
+	}
+
 }

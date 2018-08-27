@@ -71,21 +71,24 @@ public interface AdministratorRepository extends
 
 	// Acme-Santiago 2.0
 
-//	// The ratio of routes that have at least one advertisement versus the
-//	// routes that dont have any.
-//	@Query("select (select count(u) from Route u where u.advertisement=0)* 1.0/count(u) from User u where u.advertisement.size!= 0)") 
-//	Double dataRatioRoutedWithAvertisement();
-//	// The ratio of advertisements that have taboo words.
-//	@Query("select cast(count(a) as float)/(select count(a) from Advertisement a) from Advertisement a where a.taboo=true") 
-//	Double dataRatioAdvertisementWithTaboo();
-//
-//	// The ratio of Compostela requests that are awaiting a decision versus the
-//	// total number of requests.
-//	@Query("select (select count(u) from Route u where u.advertisement=0)* 1.0/count(u) from User u where u.advertisement.size!= 0)") 
-//	Double dataRatioRequestWaiting();
-//	// The ratio of Compostela requests that are approved versus the total
-//	// number
-//	// of Compostela requests that are rejected.
-//	@Query("select (select count(u) from Route u where u.advertisement=0)* 1.0/count(u) from User u where u.advertisement.size!= 0)") 
-//	Double dataRatioRequestApproved();
+	// The ratio of routes that have at least one advertisement versus the
+	// routes that dont have any.
+	@Query("select distinct(count(u.hike.route)) from Advertisement u  ") 
+	Double dataRatioRoutedWithAvertisement1();
+	
+	@Query("select count(r)- (select distinct(count(u.hike.route)) from Advertisement u  )from Route r ") 
+	Double dataRatioRoutedWithAvertisement2();
+	// The ratio of advertisements that have taboo words.
+	@Query("select cast(count(a) as float)/(select count(a) from Advertisement a) from Advertisement a where a.taboo=true") 
+	Double dataRatioAdvertisementWithTaboo();
+
+	// The ratio of Compostela requests that are awaiting a decision versus the
+	// total number of requests.
+	@Query("select (select count(u) from Compostela u where u.finallyDecision=false)* 1.0/count(c) from Compostela c where c.decision=true)") 
+	Double dataRatioRequestWaiting();
+	// The ratio of Compostela requests that are approved versus the total
+	// number
+	// of Compostela requests that are rejected.
+	@Query("select (select count(u) from Compostela u where u.finallyDecision=true)* 1.0/count(c) from Compostela c where c.decision=true)") 
+	Double dataRatioRequestApproved();
 }
