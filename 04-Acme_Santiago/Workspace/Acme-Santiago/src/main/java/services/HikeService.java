@@ -56,7 +56,6 @@ public class HikeService {
 		Assert.isTrue(id != 0);
 		Hike res;
 		res = this.hikeRepository.findOne(id);
-		Assert.notNull(res);
 		return res;
 	}
 

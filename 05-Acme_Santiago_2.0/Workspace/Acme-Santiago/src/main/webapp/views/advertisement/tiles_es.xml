@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles_es.xml * * Copyright (C) 2017 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+<definition name="advertisement/list" extends="master.page">
+		<put-attribute name="title" value="Lista de anuncios" />
+		<put-attribute name="body" value="/views/advertisement/list.jsp" />
+	</definition>
+
+	<definition name="advertisement/edit" extends="master.page">
+		<put-attribute name="title" value="Editar anuncios" />
+		<put-attribute name="body" value="/views/advertisement/edit.jsp" />
+	</definition>
+
+	<definition name="advertisement/create" extends="master.page">
+		<put-attribute name="title" value="Crear anuncios" />
+		<put-attribute name="body" value="/views/advertisement/edit.jsp" />
+	</definition>
+
+</tiles-definitions>

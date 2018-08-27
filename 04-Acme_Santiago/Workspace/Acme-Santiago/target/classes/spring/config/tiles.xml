@@ -25,6 +25,8 @@
 		<value>/views/configuration/tiles.xml</value>
 		<value>/views/dashboard/tiles.xml</value>
 		<value>/views/comment/tiles.xml</value>
+		<value>/views/inn/tiles.xml</value>
+		<value>/views/terms/tiles.xml</value>
 
 	</util:list>
 

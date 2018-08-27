@@ -50,21 +50,29 @@
 		<a href="route/display.do?routeId=${row.id}"><spring:message
 				code="route.display" /></a>
 	</display:column>
-	
+
 	<security:authorize access="hasRole('USER')">
-	<display:column>
+		<display:column>
+			<a href="comment/user/createRoute.do?routeId=${row.id}"><spring:message
+					code="route.leaveComments" /></a>
+		</display:column>
+		<display:column>
+			<a href="comment/user/listRoute.do?routeId=${row.id}"><spring:message
+					code="route.comments" /></a>
+		</display:column>
+		<display:column>
 			<a href="route/user/edit.do?routeId=${row.id}"><spring:message
 					code="route.edit" /></a>
 		</display:column>
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('ADMIN')">
-	<display:column>
+		<display:column>
 			<a href="route/administrator/edit.do?routeId=${row.id}"><spring:message
 					code="route.edit" /></a>
 		</display:column>
 	</security:authorize>
-	
+
 </display:table>
 
 <security:authorize access="hasRole('USER')">
