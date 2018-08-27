@@ -120,7 +120,8 @@
 		<property name="name" value="Eduardo" />
 		<property name="surname" value="Fernández Velázquez" />
 		<property name="email" value="edferve@gmail.com" />
-		<property name="pictures" value="http://www.repuestosparamotos.co/page/images/user.png" />
+		<property name="pictures"
+			value="http://www.repuestosparamotos.co/page/images/user.png" />
 		<property name="phoneNumber" value="654565656" />
 		<property name="postalAddress" value="C/Edu" />
 		<property name="userAccount" ref="userAccount2" />
@@ -179,7 +180,7 @@
 		</property>
 		<property name="compostelas">
 			<list>
-				<ref bean="compostela1"/>
+				<ref bean="compostela1" />
 			</list>
 		</property>
 	</bean>
@@ -189,7 +190,8 @@
 		<property name="name" value="María" />
 		<property name="surname" value="García Velázquez" />
 		<property name="email" value="magarve@gmail.com" />
-		<property name="pictures" value="http://www.repuestosparamotos.co/page/images/user.png" />
+		<property name="pictures"
+			value="http://www.repuestosparamotos.co/page/images/user.png" />
 		<property name="phoneNumber" value="666666666" />
 		<property name="postalAddress" value="C/María" />
 		<property name="userAccount" ref="userAccount3" />
@@ -222,7 +224,7 @@
 		</property>
 		<property name="compostelas">
 			<list>
-				<ref bean="compostela2"/>
+				<ref bean="compostela2" />
 			</list>
 		</property>
 	</bean>
@@ -1062,7 +1064,13 @@
 		<property name="name" value="inn1" />
 		<property name="badge"
 			value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYMinrf4pQgWsM5Cg8YtBO_Xv55cqY6vnn2hm2zhPwHCTSCj9K" />
-		<property name="Address" value="C/Edu" />
+		<property name="address">
+			<list>
+				<value>C/Edu</value>
+				<value>5</value>
+				<value>destinationCity1</value>
+			</list>
+		</property>
 		<property name="phoneNumber" value="654565656" />
 		<property name="email" value="edferve@gmail.com" />
 		<property name="webSite" value="http://www.google.es" />
@@ -1080,7 +1088,13 @@
 		<property name="name" value="inn2" />
 		<property name="badge"
 			value="https://image.shutterstock.com/image-vector/star-badge-vector-icon-260nw-491672602.jpg" />
-		<property name="Address" value="C/Edu" />
+		<property name="address">
+			<list>
+				<value>C/Edu</value>
+				<value>5</value>
+				<value>destinationCity1</value>
+			</list>
+		</property>
 		<property name="phoneNumber" value="654565656" />
 		<property name="email" value="edferve@gmail.com" />
 		<property name="webSite" value="http://www.google.es" />
@@ -1098,11 +1112,16 @@
 	<bean id="registry1" class="domain.Registry">
 		<property name="date" value="20/05/2011" />
 		<property name="inn" ref="inn1" />
+		<property name="user" ref="user1" />
+		<property name="hike" ref="hike1" />
+
 	</bean>
 
 	<bean id="registry2" class="domain.Registry">
 		<property name="date" value="20/05/2010"></property>
 		<property name="inn" ref="inn2" />
+		<property name="user" ref="user2" />
+		<property name="hike" ref="hike2" />
 	</bean>
 
 	<!-- AGENT -->

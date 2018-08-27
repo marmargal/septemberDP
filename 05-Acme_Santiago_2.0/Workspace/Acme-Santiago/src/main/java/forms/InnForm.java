@@ -1,5 +1,6 @@
 package forms;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Temporal;
@@ -14,7 +15,9 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import domain.CreditCard;
+import domain.Hike;
 import domain.Innkeeper;
+import domain.User;
 
 public class InnForm {
 
@@ -22,13 +25,31 @@ public class InnForm {
 	private int version;
 	private String name;
 	private String badge;
-	private String address;
+	private Collection<String> address;
 	private String phoneNumber;
 	private String email;
 	private String webSite;
 	private CreditCard creditCard;
 	private Date date;
 	private Innkeeper innkeeper;
+	private User user;
+	private Hike hike;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Hike getHike() {
+		return hike;
+	}
+
+	public void setHike(Hike hike) {
+		this.hike = hike;
+	}
 
 	@Valid
 	public Innkeeper getInnkeeper() {
@@ -69,12 +90,12 @@ public class InnForm {
 		this.badge = badge;
 	}
 
-	@NotBlank
-	public String getAddress() {
+	@NotNull
+	public Collection<String> getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Collection<String> address) {
 		this.address = address;
 	}
 

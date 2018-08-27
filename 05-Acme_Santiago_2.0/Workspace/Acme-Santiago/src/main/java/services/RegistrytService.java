@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.RegistryRepository;
+import domain.Hike;
+import domain.Inn;
 import domain.Innkeeper;
 import domain.Registry;
+import domain.User;
 
 @Service
 @Transactional
@@ -42,7 +45,6 @@ public class RegistrytService {
 		result = new Registry();
 		moment = new Date(System.currentTimeMillis() - 1000);
 		result.setDate(moment);
-
 		return result;
 	}
 
@@ -67,8 +69,15 @@ public class RegistrytService {
 		Innkeeper principal = innkeeperService.findByPrincipal();
 		Assert.isTrue(registry.getInn().getInnkeeper() == principal);
 		Registry res;
+
 		res = this.registytRepositoty.save(registry);
 		return res;
+	}
+
+	
+
+	public Registry findRegistry(Date date, Inn inn, User user,Hike hike) {
+		return this.registytRepositoty.findRegistry(date, inn, user,hike);
 	}
 
 	// Other business method --------------------------------------------------

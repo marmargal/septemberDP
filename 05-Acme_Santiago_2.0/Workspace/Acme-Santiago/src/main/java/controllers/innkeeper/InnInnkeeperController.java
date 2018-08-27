@@ -8,19 +8,24 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.HikeService;
 import services.InnService;
 import services.InnkeeperService;
 import services.RegistrytService;
+import services.UserService;
 import controllers.AbstractController;
+import domain.Hike;
 import domain.Inn;
 import domain.Innkeeper;
 import domain.Registry;
+import domain.User;
 import forms.InnForm;
 
 @Controller
@@ -31,12 +36,18 @@ public class InnInnkeeperController extends AbstractController {
 
 	@Autowired
 	private InnService innService;
-	
+
 	@Autowired
 	private InnkeeperService innkeeperService;
 
 	@Autowired
 	private RegistrytService registryService;
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private HikeService hikeService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -58,14 +69,14 @@ public class InnInnkeeperController extends AbstractController {
 		inn = this.innService.findCcExpirationYear(year, month);
 
 		Innkeeper innkeeper = innkeeperService.findByPrincipal();
-		
+
 		Collection<Inn> innPrincipal = new ArrayList<>();
 		innPrincipal = innkeeper.getInns();
-		
+
 		inn.retainAll(innPrincipal);
-		
+
 		boolean boton = true;
-		
+
 		res = new ModelAndView("inn/innkeeper/list");
 		res.addObject("requestURI", "inn/innkeeper/list.do");
 		res.addObject("inn", inn);
@@ -100,6 +111,7 @@ public class InnInnkeeperController extends AbstractController {
 			innForm.setInnkeeper(inn.getInnkeeper());
 			result = this.createEditModelAndView(innForm);
 			result.addObject("innForm", innForm);
+
 		}
 		return result;
 	}
@@ -107,18 +119,30 @@ public class InnInnkeeperController extends AbstractController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid InnForm innForm, final BindingResult binding) {
 		ModelAndView res;
+		boolean a = false;
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(innForm, "inn.params.error");
 		else
 			try {
 				Inn inn = this.innService.findOne(innForm.getId());
 				Registry registry = this.registryService.create();
+				registry.setHike(innForm.getHike());
+				registry.setUser(innForm.getUser());
 				registry.setDate(innForm.getDate());
 				registry.setInn(inn);
+					a = this.registryService.findRegistry(registry.getDate(),
+							registry.getInn(), registry.getUser(),registry.getHike()) == null;
+					Assert.isTrue(a);
 				registryService.save(registry);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(innForm, "inn.commit.error");
+				if (!a) {
+					res = this.createEditModelAndView(innForm,
+							"inn.commit.error.register");
+				} else {
+					res = this.createEditModelAndView(innForm,
+							"inn.commit.error");
+				}
 			}
 		return res;
 	}
@@ -137,6 +161,11 @@ public class InnInnkeeperController extends AbstractController {
 
 		result = new ModelAndView("inn/innkeeper/register");
 		result.addObject("inn", inn);
+		Collection<User> users = this.userService.findAll();
+		Collection<Hike> hikes = this.hikeService.findByCity(inn.getAddress()
+				.toArray()[2].toString());
+		result.addObject("users", users);
+		result.addObject("hikes", hikes);
 		result.addObject("message", message);
 		result.addObject("requestURI", "inn/innkeeper/register.do");
 

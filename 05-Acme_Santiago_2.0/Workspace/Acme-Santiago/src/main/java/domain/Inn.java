@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -27,7 +28,7 @@ public class Inn extends DomainEntity {
 	// Attributes
 	private String name;
 	private String badge;
-	private String address;
+	private Collection<String> address;
 	private String phoneNumber;
 	private String email;
 	private String webSite;
@@ -52,12 +53,13 @@ public class Inn extends DomainEntity {
 		this.badge = badge;
 	}
 
-	@NotBlank
-	public String getAddress() {
+	@ElementCollection
+	@NotNull
+	public Collection<String> getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address) {
+	public void setAddress(Collection<String> address) {
 		this.address = address;
 	}
 
@@ -98,8 +100,6 @@ public class Inn extends DomainEntity {
 		this.creditCard = creditCard;
 	}
 
-	
-
 	// Relationships
 	private Innkeeper innkeeper;
 	private Collection<Registry> registries;
@@ -115,7 +115,7 @@ public class Inn extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany(mappedBy="inn",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "inn", cascade = CascadeType.ALL)
 	public Collection<Registry> getRegistries() {
 		return registries;
 	}

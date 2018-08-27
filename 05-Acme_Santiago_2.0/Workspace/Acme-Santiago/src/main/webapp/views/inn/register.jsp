@@ -32,8 +32,21 @@
 	<form:hidden path="webSite" />
 	<form:hidden path="creditCard" />
 
-	<acme:date code="inn.register" path="date" placeholder="dd/MM/yyyy" />
 
+	<acme:date code="inn.register" path="date" placeholder="dd/MM/yyyy" />
+	<b><spring:message code="inn.user" />:&nbsp;
+	</b>
+
+	<form:select items="${users }" itemLabel="name" code="inn.user"
+		path="user"></form:select>
+	<br />
+	<br />
+	<b> <spring:message code="inn.hike" />:&nbsp;
+	</b>
+	<form:select items="${hikes }" itemLabel="name" code="inn.hike"
+		path="hike"></form:select>
+	<br />
+	<br />
 
 	<!-- Buttons -->
 
