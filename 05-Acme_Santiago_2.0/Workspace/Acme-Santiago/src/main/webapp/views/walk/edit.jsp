@@ -1,5 +1,5 @@
 <%--
- * create.jsp
+ * edit.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -19,17 +19,19 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${requestURI }" modelAttribute="compostela">
-	<security:authorize access="hasRole('USER')">
+<form:form action="${requestURI }" modelAttribute="walk">
+	
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
-	<form:hidden path="decision"/>
-	<form:hidden path="finallyDecision"/>
-	<form:hidden path="justification"/>
-	<form:hidden path="walk"/>
-	<form:hidden path="user"/>
-
-	<acme:submit name="save" code="compostela.save"/>
-	<acme:cancel url="/" code="compostela.cancel"/>
-	</security:authorize>
+	<form:hidden path="route"/>
+	<form:hidden path="comments"/>
+	
+	<acme:textbox code="walk.title" path="title"/>
+<%-- 	<acme:textbox code="walk.comments" path="comments"/> --%>
+	<acme:select items="${inns }" itemLabel="name" code="walk.inn" path="inn"/>
+	<acme:textbox code="walk.daysOfEachHike" path="daysOfEachHike"/>
+	
+	<acme:submit name="save" code="walk.save"/>
+	<acme:cancel url="/" code="walk.cancel"/>
+	
 </form:form>

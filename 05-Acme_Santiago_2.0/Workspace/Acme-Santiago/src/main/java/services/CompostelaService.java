@@ -1,15 +1,16 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Compostela;
-
 import repositories.CompostelaRepository;
+import domain.Compostela;
+import domain.User;
 
 @Service
 @Transactional
@@ -21,6 +22,8 @@ public class CompostelaService {
 	
 	// Supporting services
 	
+	@Autowired
+	private UserService userService;
 	
 	// Constructors
 	public CompostelaService(){
@@ -31,6 +34,10 @@ public class CompostelaService {
 	
 	public Compostela create(){
 		Compostela res = new Compostela();
+		
+		User user = userService.findByPrincipal();
+		res.setUser(user);
+		
 		return res;
 	}
 	
@@ -50,6 +57,10 @@ public class CompostelaService {
 	public Compostela save(Compostela compostela){
 		Assert.notNull(compostela);
 		Compostela res;
+		
+		if(compostela.isfinallyDecision() == true && compostela.isDecision() == true){
+			compostela.setDate(new Date(System.currentTimeMillis() - 100));
+		}
 		
 		res = this.compostelaRepository.save(compostela);
 		

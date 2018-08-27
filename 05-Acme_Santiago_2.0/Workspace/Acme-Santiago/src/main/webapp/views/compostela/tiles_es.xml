@@ -15,6 +15,11 @@
 		<put-attribute name="body" value="/views/compostela/list.jsp" />
 	</definition>
 
+	<definition name="compostela/user/list" extends="master.page">
+		<put-attribute name="title" value="Lista de compostelas" />
+		<put-attribute name="body" value="/views/compostela/list.jsp" />
+	</definition>
+
 	<definition name="compostela/user/edit" extends="master.page">
 		<put-attribute name="title" value="Solicitar un compostela" />
 		<put-attribute name="body" value="/views/compostela/request.jsp" />
@@ -23,6 +28,11 @@
 	<definition name="compostela/administrator/edit" extends="master.page">
 		<put-attribute name="title" value="Aprobar una compostela" />
 		<put-attribute name="body" value="/views/compostela/edit.jsp" />
+	</definition>
+
+	<definition name="compostela/display" extends="master.page">
+		<put-attribute name="title" value="Compostela" />
+		<put-attribute name="body" value="/views/compostela/display.jsp" />
 	</definition>
 
 </tiles-definitions>

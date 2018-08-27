@@ -25,6 +25,7 @@ public class User extends Actor {
 	private Collection<Route> routes;
 	private Collection<User> following;
 	private Collection<User> followers;
+	private Collection<Compostela> compostelas;
 
 	@Valid
 	@OneToMany(mappedBy = "user")
@@ -76,12 +77,8 @@ public class User extends Actor {
 		this.followers = followers;
 	}
 	
-	//Relationships
-	
-	private Collection<Compostela> compostelas;
-	
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy="user")
 	public Collection<Compostela> getCompostelas() {
 		return compostelas;
 	}
@@ -89,4 +86,6 @@ public class User extends Actor {
 	public void setCompostelas(Collection<Compostela> compostelas) {
 		this.compostelas = compostelas;
 	}
+	
+
 }

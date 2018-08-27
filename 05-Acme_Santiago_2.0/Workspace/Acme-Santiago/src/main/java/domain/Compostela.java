@@ -1,13 +1,13 @@
 package domain;
 
+import java.util.Date;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
+import javax.validation.constraints.Past;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -21,49 +21,10 @@ public class Compostela extends DomainEntity {
 
 	// Attributes
 
-	private String header;
-	private String body;
-	private String footer;
-	private String logo;
 	private boolean decision;
 	private boolean finallyDecision;
 	private String justification;
-
-	@NotBlank
-	public String getHeader() {
-		return header;
-	}
-
-	public void setHeader(String header) {
-		this.header = header;
-	}
-
-	@NotBlank
-	public String getBody() {
-		return body;
-	}
-
-	public void setBody(String body) {
-		this.body = body;
-	}
-
-	@NotBlank
-	public String getFooter() {
-		return footer;
-	}
-
-	public void setFooter(String footer) {
-		this.footer = footer;
-	}
-
-	@URL
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
+	private Date date;
 
 	public boolean isDecision() {
 		return decision;
@@ -90,9 +51,19 @@ public class Compostela extends DomainEntity {
 		this.justification = justification;
 	}
 	
+	@Past
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
 	// Relationships
 	
 	private Walk walk;
+	private User user;
 
 	@Valid
 	@ManyToOne
@@ -102,6 +73,16 @@ public class Compostela extends DomainEntity {
 
 	public void setWalk(Walk walk) {
 		this.walk = walk;
+	}
+	
+	@Valid
+	@ManyToOne
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

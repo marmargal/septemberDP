@@ -64,6 +64,10 @@
 			<a href="route/user/edit.do?routeId=${row.id}"><spring:message
 					code="route.edit" /></a>
 		</display:column>
+		<display:column>
+			<a href="walk/user/create.do?routeId=${row.id}"><spring:message
+					code="route.instantiate.walk" /></a>
+		</display:column>
 	</security:authorize>
 
 	<security:authorize access="hasRole('ADMIN')">

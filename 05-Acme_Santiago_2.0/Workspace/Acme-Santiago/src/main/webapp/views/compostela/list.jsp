@@ -23,20 +23,21 @@
 	name="compostelas" requestURI="${requestURI }" id="row">
 	<security:authorize access="hasRole('ADMIN')">
 
-		<acme:column property="header" code="compostela.header" />
-		<acme:column property="body" code="compostela.body" />
-		<acme:column property="footer" code="compostela.footer" />
-
-		<display:column>
-			<jstl:forEach var="p" items="${row.logo }">
-				<img class="imagen" src="${p }" />
-			</jstl:forEach>
-		</display:column>
+		<acme:column property="user.name" code="compostela.user" />
 
 		<display:column>
 			<a href="compostela/administrator/edit.do?compostelaId=${row.id}"><spring:message
 					code="compostela.edit" /></a>
 		</display:column>
 
+	</security:authorize>
+	<security:authorize access="hasRole('USER')">
+		<acme:column property="user.name" code="compostela.user" />
+		<acme:column property="date" code="compostela.date" />
+
+		<display:column>
+			<a href="compostela/user/display.do?compostelaId=${row.id}"><spring:message
+					code="compostela.display" /></a>
+		</display:column>
 	</security:authorize>
 </display:table>

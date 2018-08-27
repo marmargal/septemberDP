@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CompostelaService;
+import services.RegistrytService;
 import controllers.AbstractController;
 import domain.Compostela;
+import domain.Hike;
+import domain.Registry;
 
 @Controller
 @RequestMapping("/compostela/administrator")
@@ -25,6 +28,9 @@ public class CompostelaAdministratorController extends AbstractController {
 
 	@Autowired
 	private CompostelaService compostelaService;
+
+	@Autowired
+	private RegistrytService registryService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -103,9 +109,18 @@ public class CompostelaAdministratorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Compostela compostela,
 			final String message) {
 		ModelAndView result;
-
+		Collection<Hike> hikes = compostela.getWalk().getRoute().getHikes();
+		Collection<Registry> registries = this.registryService
+				.findByUser(compostela.getUser());
+		Collection<Hike> hikesRegistries = new ArrayList<>();
+		for (Registry registry : registries) {
+			hikesRegistries.add(registry.getHike());
+		}
+		boolean test = hikesRegistries.containsAll(hikes);
 		result = new ModelAndView("compostela/administrator/edit");
 		result.addObject("compostela", compostela);
+		
+		result.addObject("test", test);
 		result.addObject("message", message);
 		result.addObject("requestURI", "compostela/administrator/edit.do");
 

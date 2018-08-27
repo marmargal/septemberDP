@@ -37,9 +37,13 @@ public class Registry extends DomainEntity {
 		this.date = date;
 	}
 
+	
+
 	// relaciones
 
 	private Inn inn;
+	private User user;
+	private Hike hike;
 
 	@Valid
 	@ManyToOne
@@ -49,5 +53,26 @@ public class Registry extends DomainEntity {
 
 	public void setInn(Inn inn) {
 		this.inn = inn;
+
+	}
+
+	@NotNull
+	@ManyToOne(optional = false)
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@NotNull
+	@ManyToOne(optional = false)
+	public Hike getHike() {
+		return hike;
+	}
+
+	public void setHike(Hike hike) {
+		this.hike = hike;
 	}
 }

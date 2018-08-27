@@ -15,4 +15,9 @@
 		<put-attribute name="body" value="/views/walk/list.jsp" />
 	</definition>
 
+	<definition name="walk/user/edit" extends="master.page">
+		<put-attribute name="title" value="Edit walks" />
+		<put-attribute name="body" value="/views/walk/edit.jsp" />
+	</definition>
+
 </tiles-definitions>

@@ -96,4 +96,8 @@ public class HikeService {
 	public Collection<Hike> findHikeByAdvertisement(int id){
 		return this.hikeRepository.findHikeByAdvertisement(id);
 	}
+
+	public Collection<Hike> findByCity(String city) {
+		return this.hikeRepository.findByCity(city);
+	}
 }
