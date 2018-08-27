@@ -19,6 +19,7 @@ import services.UserService;
 import services.WalkService;
 import controllers.AbstractController;
 import domain.Inn;
+import domain.Route;
 import domain.User;
 import domain.Walk;
 
@@ -58,6 +59,7 @@ public class WalkUserController extends AbstractController {
 		walks = this.walkService.findWalkByUser(user.getId());
 		res = new ModelAndView("walk/user/list");
 		res.addObject("requestURI", "walk/user/list.do");
+//		res.addObject("user",user);
 		res.addObject("walks", walks);
 
 		return res;
@@ -68,9 +70,17 @@ public class WalkUserController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam(defaultValue = "0") int routeId) {
 		ModelAndView res;
-		Walk walk;
-		walk = this.walkService.create(routeService.findOne(routeId));
-		res = this.createEditModelAndView(walk);
+		
+		Route route = this.routeService.findOne(routeId);
+		if(route.getUser().equals(this.userService.findByPrincipal())){
+			Walk walk;
+			walk = this.walkService.create(routeService.findOne(routeId));
+
+			res = this.createEditModelAndView(walk);
+		}else{
+			res = new ModelAndView("redirect:../../");
+		}
+		
 		return res;
 	}
 
