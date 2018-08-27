@@ -21,6 +21,13 @@
 
 <display:table pagesize="5" class="hikes" keepStatus="true" name="hikes"
 	requestURI="${requestURI }" id="row">
+	
+	<security:authorize access="hasRole('AGENT')">
+		<display:column>
+			<a href="hike/agent/display.do?hikeId=${row.id}"><spring:message
+					code="hike.display" /></a>
+		</display:column>
+	</security:authorize>
 
 	<acme:column property="name" code="hike.name" />
 	<acme:column property="length" code="hike.length" />
