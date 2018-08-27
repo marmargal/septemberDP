@@ -65,8 +65,12 @@
 					code="route.edit" /></a>
 		</display:column>
 		<display:column>
-			<a href="walk/user/create.do?routeId=${row.id}"><spring:message
-					code="route.instantiate.walk" /></a>
+			<jstl:if test="${user!=null }">
+				<jstl:if test="${user == row.user }">	
+					<a href="walk/user/create.do?routeId=${row.id}"><spring:message
+							code="route.instantiate.walk" /></a>
+				</jstl:if>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.RouteService;
+import services.UserService;
 import domain.Route;
+import domain.User;
 
 @Controller
 @RequestMapping("/route")
@@ -21,6 +23,9 @@ public class RouteController extends AbstractController {
 
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private UserService userService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -122,11 +127,15 @@ public class RouteController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView res;
+		
 		Collection<Route> routes = new ArrayList<>();
 		routes = this.routeService.findAll();
+		User principal = this.userService.findByPrincipal();
+		
 		res = new ModelAndView("route/list");
 		res.addObject("requestURI", "routes/list.do");
 		res.addObject("routes", routes);
+		res.addObject("user", principal);
 
 		return res;
 	}
