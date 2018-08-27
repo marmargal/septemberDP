@@ -6,6 +6,9 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -50,6 +53,20 @@ public class Amenity extends DomainEntity {
 
 	public void setPictures(Collection<String> pictures) {
 		this.pictures = pictures;
+	}
+
+	// Relationships
+	private Inn inn;
+
+	@Valid
+	@NotNull
+	@OneToOne
+	public Inn getInn() {
+		return inn;
+	}
+
+	public void setInn(Inn inn) {
+		this.inn = inn;
 	}
 
 }

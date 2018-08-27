@@ -1231,8 +1231,11 @@
 		<property name="description" value="Este es el primer amenity" />
 		<property name="pictures">
 			<list>
+				<value>http://cdn.luxuo.com/2011/10/Waldorf-Astoria-Salvatore-Ferragamo-amenity-kits.jpg</value>
+				<value>https://s3.amazonaws.com/waterline-prod/uploads/2017/01/02215529/WL3_Amenity_534X300.jpg</value>
 			</list>
 		</property>
+		<property name="inn" ref="inn1" />
 	</bean>
 
 	<bean id="amenity2" class="domain.Amenity">
@@ -1242,6 +1245,7 @@
 			<list>
 			</list>
 		</property>
+		<property name="inn" ref="inn2" />
 	</bean>
 
 
