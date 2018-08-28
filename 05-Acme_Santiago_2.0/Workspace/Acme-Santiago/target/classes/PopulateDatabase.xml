@@ -1186,12 +1186,29 @@
 		<property name="walk" ref="walk1" />
 		<property name="date" value="10/09/2014" />
 		<property name="user" ref="user1" />
+		
 	</bean>
 
 	<bean id="compostela2" class="domain.Compostela">
 		<property name="walk" ref="walk2" />
 		<property name="date" value="01/02/2015" />
 		<property name="user" ref="user2" />
+	</bean>
+	
+	<bean id="compostela3" class="domain.Compostela">
+		<property name="walk" ref="walk1" />
+		<property name="date" value="10/09/2014" />
+		<property name="user" ref="user1" />
+		<property name="decision" value="true" />
+		
+	</bean>
+
+	<bean id="compostela4" class="domain.Compostela">
+		<property name="walk" ref="walk2" />
+		<property name="date" value="01/02/2015" />
+		<property name="user" ref="user2" />
+		<property name="decision" value="true" />
+		<property name="finallyDecision" value="true" />
 	</bean>
 
 	<!-- WALK -->
@@ -1247,7 +1264,6 @@
 		</property>
 		<property name="inn" ref="inn2" />
 	</bean>
-
 
 	<!-- CONFIGURATION -->
 

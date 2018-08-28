@@ -61,12 +61,18 @@
 					code="route.comments" /></a>
 		</display:column>
 		<display:column>
+		<jstl:if test="${user == row.user }">	
 			<a href="route/user/edit.do?routeId=${row.id}"><spring:message
 					code="route.edit" /></a>
+		</jstl:if>
 		</display:column>
 		<display:column>
-			<a href="walk/user/create.do?routeId=${row.id}"><spring:message
-					code="route.instantiate.walk" /></a>
+			<jstl:if test="${user!=null }">
+				<jstl:if test="${user == row.user }">	
+					<a href="walk/user/create.do?routeId=${row.id}"><spring:message
+							code="route.instantiate.walk" /></a>
+				</jstl:if>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 

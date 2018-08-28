@@ -21,18 +21,26 @@
 
 <form:form action="${requestURI }" modelAttribute="compostela">
 	<security:authorize access="hasRole('ADMIN')">
-	<form:hidden path="id"/>
-	<form:hidden path="version"/>
-	<form:hidden path="walk"/>
-	<form:hidden path="user"/>
-	
+		<form:hidden path="id" />
+		<form:hidden path="version" />
+		<form:hidden path="walk" />
+		<form:hidden path="user" />
+		<jstl:if test="${test==true }">
+			<b> <spring:message code="compostela.true" />:&nbsp;
+			</b>
+		</jstl:if>
+		<jstl:if test="${test==false }">
+			<b><spring:message code="compostela.false" />:&nbsp;</b>
+		</jstl:if>
 
-	<acme:checkbox code="compostela.approveDecision" path="decision"/>
-	<acme:textbox code="compostela.justification" path="justification"/>
-	<br/>
-	<acme:checkbox code="compostela.finallyDecision" path="finallyDecision"/>
-	
-	<acme:submit name="save" code="compostela.save"/>
-	<acme:cancel url="/" code="compostela.cancel"/>
+
+		<acme:checkbox code="compostela.approveDecision" path="decision" />
+		<acme:textbox code="compostela.justification" path="justification" />
+		<br />
+		<acme:checkbox code="compostela.finallyDecision"
+			path="finallyDecision" />
+
+		<acme:submit name="save" code="compostela.save" />
+		<acme:cancel url="/" code="compostela.cancel" />
 	</security:authorize>
 </form:form>

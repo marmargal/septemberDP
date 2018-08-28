@@ -80,6 +80,10 @@ public class RegistrytService {
 		return this.registytRepositoty.findRegistry(date, inn, user,hike);
 	}
 
+	public Collection<Registry> findByUser(User user) {
+		return this.registytRepositoty.findByUser(user);
+	}
+
 	// Other business method --------------------------------------------------
 
 }

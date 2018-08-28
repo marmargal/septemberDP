@@ -55,6 +55,20 @@ public class DashboardAdministratorController {
 
 		result.addObject("dataOutlierOfRoutes",
 				administratorService.dataOutlierOfRoutes());
+		
+		// Acme-Santiago 2.0
+
+		result.addObject("dataRatioRoutedWithAvertisement",
+				administratorService.dataRatioRoutedWithAvertisement());
+
+		result.addObject("dataRatioAdvertisementWithTaboo",
+				administratorService.dataRatioAdvertisementWithTaboo());
+
+		result.addObject("dataRatioRequestWaiting",
+				administratorService.dataRatioRequestWaiting());
+
+		result.addObject("dataRatioRequestApproved",
+				administratorService.dataRatioRequestApproved());
 
 		return result;
 	}
