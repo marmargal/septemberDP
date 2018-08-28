@@ -51,12 +51,12 @@
 			<a href="comment/user/listHike.do?hikeId=${row.id}"><spring:message
 					code="hike.comments" /></a>
 		</display:column>
-		<jstl:if test="${row.route.user == user}">
-			<display:column>
+		<display:column>
+			<jstl:if test="${row.route.user == user}">
 				<a href="hike/user/edit.do?hikeId=${row.id}"><spring:message
 						code="hike.edit" /></a>
-			</display:column>
-		</jstl:if>
+						</jstl:if>
+		</display:column>
 	</security:authorize>
 	<security:authorize access="hasRole('AGENT')">
 		<display:column>

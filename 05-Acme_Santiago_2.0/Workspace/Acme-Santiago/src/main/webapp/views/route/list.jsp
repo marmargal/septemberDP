@@ -61,8 +61,10 @@
 					code="route.comments" /></a>
 		</display:column>
 		<display:column>
+		<jstl:if test="${user == row.user }">	
 			<a href="route/user/edit.do?routeId=${row.id}"><spring:message
 					code="route.edit" /></a>
+		</jstl:if>
 		</display:column>
 		<display:column>
 			<jstl:if test="${user!=null }">
