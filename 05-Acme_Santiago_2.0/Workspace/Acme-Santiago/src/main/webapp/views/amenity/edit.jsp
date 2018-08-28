@@ -34,6 +34,6 @@
 			value="<spring:message code="amenity.delete" />"
 			onclick="return confirm('<spring:message code="amenity.confirm.delete" />')" />&nbsp;
 	</jstl:if>
-	<acme:cancel url="amenity/list.do" code="amenity.cancel"/>
+	<acme:cancel url="./" code="amenity.cancel"/>
 	
 </form:form>
