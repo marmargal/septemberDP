@@ -46,5 +46,10 @@
 			</display:column>
 		</jstl:if>
 	</security:authorize>
+	<security:authorize access="isAuthenticated()">
+		<display:column>
+			<acme:links url="amenity/list.do?innId=${row.id}" code="inn.amenities" />
+		</display:column>
+	</security:authorize>
 </display:table>
 

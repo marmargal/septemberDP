@@ -30,6 +30,7 @@
 		<value>/views/advertisement/tiles.xml</value>
 		<value>/views/compostela/tiles.xml</value>
 		<value>/views/walk/tiles.xml</value>
+		<value>/views/amenity/tiles.xml</value>
 
 	</util:list>
 

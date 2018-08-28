@@ -171,6 +171,17 @@
 		<security:intercept-url pattern="/walk/user/**"
 			access="hasRole('USER')" />
 
+		<!-- AMENITY -->
+		
+		<security:intercept-url pattern="/amenity/list.do"
+			access="isAuthenticated()" />
+		
+		<security:intercept-url pattern="/amenity/display.do"
+			access="isAuthenticated()" />
+				
+		<security:intercept-url pattern="/amenity/innkeeper/**"
+			access="hasRole('INNKEEPER')" />
+
 		<!-- TERMS -->
 
 		<security:intercept-url pattern="/terms/list.do"
