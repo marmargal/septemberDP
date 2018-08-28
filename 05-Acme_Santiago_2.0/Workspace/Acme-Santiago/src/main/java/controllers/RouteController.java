@@ -66,7 +66,11 @@ public class RouteController extends AbstractController {
 			double minValued = Double.valueOf(min);
 			int maxValue = (int) maxValued;
 			int minValue = (int) minValued;
-			routes = this.routeService.lengthRoute(maxValue, minValue);
+			if (max == "" && min == "") {
+				routes = this.routeService.findAll();
+			} else {
+				routes = this.routeService.lengthRoute(maxValue, minValue);
+			}
 			res = new ModelAndView("route/list");
 			res.addObject("routes", routes);
 			res.addObject("requestURI", "route/list.do");
@@ -94,8 +98,11 @@ public class RouteController extends AbstractController {
 			double minValued = Double.valueOf(min);
 			int maxValue = (int) maxValued;
 			int minValue = (int) minValued;
-
+			if (max == "" && min == "") {
+				routes = this.routeService.findAll();
+			} else {
 			routes = this.routeService.numHikesRoute(maxValue, minValue);
+			}
 			res = new ModelAndView("route/list");
 			res.addObject("routes", routes);
 			res.addObject("requestURI", "route/list.do");
@@ -114,8 +121,12 @@ public class RouteController extends AbstractController {
 	public ModelAndView searchList(@RequestParam(defaultValue = "") String criteria) {
 		ModelAndView res;
 		Collection<Route> routes;
-
-		routes = this.routeService.searchRoute(criteria);
+		
+		if (criteria.isEmpty()) {
+			routes = this.routeService.findAll();
+		} else {
+			routes = this.routeService.searchRoute(criteria);
+		}
 
 		res = new ModelAndView("route/list");
 		res.addObject("routes", routes);
