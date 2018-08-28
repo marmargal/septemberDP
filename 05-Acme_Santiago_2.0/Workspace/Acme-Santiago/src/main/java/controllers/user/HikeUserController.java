@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.HikeService;
+import services.UserService;
 import controllers.AbstractController;
 import domain.Hike;
+import domain.User;
 
 @Controller
 @RequestMapping("/hike/user")
@@ -26,8 +28,8 @@ public class HikeUserController extends AbstractController {
 	@Autowired
 	private HikeService hikeService;
 
-	// @Autowired
-	// private UserService userService;
+	@Autowired
+	private UserService userService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -42,10 +44,11 @@ public class HikeUserController extends AbstractController {
 		ModelAndView res;
 		Collection<Hike> hikes = new ArrayList<>();
 		hikes = this.hikeService.findAll();
+		User user = this.userService.findByPrincipal();
 		res = new ModelAndView("hike/list");
 		res.addObject("requestURI", "hikes/user/list.do");
 		res.addObject("hikes", hikes);
-
+		res.addObject("user", user);
 		return res;
 	}
 
@@ -66,14 +69,15 @@ public class HikeUserController extends AbstractController {
 	public ModelAndView edit(@RequestParam(defaultValue = "0") final int hikeId) {
 		ModelAndView result;
 		Hike hike;
+		hike = this.hikeService.findOne(hikeId);
+		User user = this.userService.findByPrincipal();
 
 		if (hikeId == 0) {
 			result = new ModelAndView("redirect:../../");
 
-		} else if (this.hikeService.findOne(hikeId) == null) {
+		} else if (this.hikeService.findOne(hikeId) == null || !user.equals(hike.getRoute().getUser())) {
 			result = new ModelAndView("redirect:../../");
 		} else {
-			hike = this.hikeService.findOne(hikeId);
 			result = this.createEditModelAndView(hike);
 		}
 		return result;

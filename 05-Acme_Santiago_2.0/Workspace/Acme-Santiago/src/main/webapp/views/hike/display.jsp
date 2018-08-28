@@ -39,7 +39,9 @@
 <display:table name="advertisement" class="displaytag" id="row">
 
 	<acme:column property="title" code="advertisement.title" />
-	<acme:column property="banner" code="advertisement.banner" />
+	<display:column>
+		<img class="imagen" src="${row.banner }" />
+	</display:column>
 	<acme:column property="targetPage" code="advertisement.targetPage" />
 	<acme:column property="creditCard.number" code="advertisement.creditCard.number" />
 	<acme:column property="activeDays" code="advertisement.activeDays" />

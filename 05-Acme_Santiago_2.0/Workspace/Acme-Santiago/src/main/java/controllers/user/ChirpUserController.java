@@ -127,6 +127,7 @@ public class ChirpUserController extends AbstractController {
 			chirps.addAll(u.getChirps());
 		}
 		
+		chirps.addAll(user.getChirps());
 		Collection<Chirp> tabooChirps;
 		tabooChirps = chirpService.findChirpTaboo();
 		
