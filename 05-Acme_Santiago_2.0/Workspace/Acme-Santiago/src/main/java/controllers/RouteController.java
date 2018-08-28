@@ -133,7 +133,7 @@ public class RouteController extends AbstractController {
 		User principal;
 		
 		res = new ModelAndView("route/list");
-		res.addObject("requestURI", "routes/list.do");
+		res.addObject("requestURI", "route/list.do");
 		res.addObject("routes", routes);
 		try{
 			principal = this.userService.findByPrincipal();
