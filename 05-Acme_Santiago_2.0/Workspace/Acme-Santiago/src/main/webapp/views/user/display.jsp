@@ -72,4 +72,30 @@
 </jstl:forEach>
 <br />
 
+<h4>
+	<spring:message code="user.compostelas" />
+	:&nbsp;
+</h4>
+<table style="width:100%">
+<jstl:forEach var="comp" items="${user.compostelas }" varStatus="status">
+<tr>
+<td><b>${status.index +1 }</b></td>
+<td>${comp.walk.title }</td>
+<td>
+	<%!int count = 0;%>
+			<jstl:forEach var="d" items="${comp.walk.daysOfEachHike }">
+				<%
+					count = count + 1;
+				%>
+				<b><jstl:out value="${numberHike }"/> <%=count%>: </b>
+				<jstl:out value="${d }"/>
+				<br/>
+			</jstl:forEach>
+		<%
+			count = 0;
+		%>
+</td>
+</tr>
+</jstl:forEach>
+</table>
 </form:form>
