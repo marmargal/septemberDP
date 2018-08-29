@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.UserService;
+import domain.Compostela;
+import domain.Route;
 import domain.User;
 
 @Controller
@@ -42,28 +44,34 @@ public class UserController extends AbstractController {
 		User user;
 		User currentUser;
 		Integer currentUserId;
-		
+
 		if (userId == 0) {
 			res = new ModelAndView("redirect:../");
 
 		} else if (this.userService.findOne(userId) == null) {
 			res = new ModelAndView("redirect:../");
 		} else {
-		
-		user = this.userService.findOne(userId);
-		
-		res = new ModelAndView("user/display");
-		res.addObject("user", user);
-		res.addObject("followTable", user);
-		try {
 
-			currentUser = this.userService.findByPrincipal();
-			currentUserId = currentUser.getId();
-			res.addObject("currentUserId", currentUserId);
-		} catch (Exception e) {
-			res.addObject("currentUserId", userId);
-		}
-		res.addObject("requestURI", "user/display.do");
+			user = this.userService.findOne(userId);
+			ArrayList<Route> routes = new ArrayList<>();
+			for (Compostela com : user.getCompostelas()) {
+				if (com.isDecision() && com.isfinallyDecision()) {
+					routes.add(com.getWalk().getRoute());
+				}
+			}
+			res = new ModelAndView("user/display");
+			res.addObject("user", user);
+			res.addObject("routes",routes);
+			res.addObject("followTable", user);
+			try {
+
+				currentUser = this.userService.findByPrincipal();
+				currentUserId = currentUser.getId();
+				res.addObject("currentUserId", currentUserId);
+			} catch (Exception e) {
+				res.addObject("currentUserId", userId);
+			}
+			res.addObject("requestURI", "user/display.do");
 		}
 		return res;
 	}
@@ -79,103 +87,103 @@ public class UserController extends AbstractController {
 
 		return res;
 	}
-	
+
 	// Followers and Following
-	
-		@RequestMapping(value = "/listFollowers", method = RequestMethod.GET)
-		public ModelAndView listFollowers(@RequestParam int userId) {
-			ModelAndView result;
-			User user;
-			Collection<User> followers;
 
-			user = this.userService.findOne(userId);
-			followers = user.getFollowers();
+	@RequestMapping(value = "/listFollowers", method = RequestMethod.GET)
+	public ModelAndView listFollowers(@RequestParam int userId) {
+		ModelAndView result;
+		User user;
+		Collection<User> followers;
 
-			result = new ModelAndView("user/listFollowers");
-			result.addObject("users", followers);
-			result.addObject("requestURI", "user/listFollowers.do");
+		user = this.userService.findOne(userId);
+		followers = user.getFollowers();
 
-			return result;
-		}
-		
-		@RequestMapping(value = "/listFollowing", method = RequestMethod.GET)
-		public ModelAndView listFollowing(@RequestParam int userId) {
-			ModelAndView result;
-			User user;
-			Collection<User> following;
+		result = new ModelAndView("user/listFollowers");
+		result.addObject("users", followers);
+		result.addObject("requestURI", "user/listFollowers.do");
 
-			user = this.userService.findOne(userId);
-			following = user.getFollowing();
+		return result;
+	}
 
-			result = new ModelAndView("user/listFollowing");
-			result.addObject("users", following);
-			result.addObject("requestURI", "user/listFollowing.do");
+	@RequestMapping(value = "/listFollowing", method = RequestMethod.GET)
+	public ModelAndView listFollowing(@RequestParam int userId) {
+		ModelAndView result;
+		User user;
+		Collection<User> following;
 
-			return result;
-		}
-		
-		// Follow
-		
-		@RequestMapping(value = "/follow", method = RequestMethod.GET)
-		public ModelAndView follow(@RequestParam int userId) {
-			ModelAndView result;
-			User user;
-			
-			user = userService.findOne(userId);
-			userService.follow(userId);
-			result = this.createEditModelAndView(user);
+		user = this.userService.findOne(userId);
+		following = user.getFollowing();
 
-			return result;
-		}
-		
-		@RequestMapping(value = "/unfollow", method = RequestMethod.GET)
-		public ModelAndView unfollow(@RequestParam int userId) {
-			ModelAndView result;
-			User user;
-			
-			user = userService.findOne(userId);
-			userService.unfollow(userId);
-			result = this.createEditModelAndViewUnfollow(user);
+		result = new ModelAndView("user/listFollowing");
+		result.addObject("users", following);
+		result.addObject("requestURI", "user/listFollowing.do");
 
-			return result;
-		}
-		
-		// Ancillary methods --------------------------------------------------
+		return result;
+	}
 
-		protected ModelAndView createEditModelAndView(final User user) {
-			ModelAndView result;
+	// Follow
 
-			result = this.createEditModelAndView(user, null);
+	@RequestMapping(value = "/follow", method = RequestMethod.GET)
+	public ModelAndView follow(@RequestParam int userId) {
+		ModelAndView result;
+		User user;
 
-			return result;
-		}
+		user = userService.findOne(userId);
+		userService.follow(userId);
+		result = this.createEditModelAndView(user);
 
-		protected ModelAndView createEditModelAndView(final User user,
-				final String message) {
-			ModelAndView result;
-			result = new ModelAndView("user/follow");
-			result.addObject("message", message);
-			result.addObject("requestURI", "user/follow.do");
-			return result;
+		return result;
+	}
 
-		}
-		
-		protected ModelAndView createEditModelAndViewUnfollow(final User user) {
-			ModelAndView result;
+	@RequestMapping(value = "/unfollow", method = RequestMethod.GET)
+	public ModelAndView unfollow(@RequestParam int userId) {
+		ModelAndView result;
+		User user;
 
-			result = this.createEditModelAndView(user, null);
+		user = userService.findOne(userId);
+		userService.unfollow(userId);
+		result = this.createEditModelAndViewUnfollow(user);
 
-			return result;
-		}
+		return result;
+	}
 
-		protected ModelAndView createEditModelAndViewUnfollow(final User user,
-				final String message) {
-			ModelAndView result;
-			result = new ModelAndView("user/unfollow");
-			result.addObject("message", message);
-			result.addObject("requestURI", "user/unfollow.do");
-			return result;
+	// Ancillary methods --------------------------------------------------
 
-		}
+	protected ModelAndView createEditModelAndView(final User user) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(user, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final User user,
+			final String message) {
+		ModelAndView result;
+		result = new ModelAndView("user/follow");
+		result.addObject("message", message);
+		result.addObject("requestURI", "user/follow.do");
+		return result;
+
+	}
+
+	protected ModelAndView createEditModelAndViewUnfollow(final User user) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(user, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewUnfollow(final User user,
+			final String message) {
+		ModelAndView result;
+		result = new ModelAndView("user/unfollow");
+		result.addObject("message", message);
+		result.addObject("requestURI", "user/unfollow.do");
+		return result;
+
+	}
 
 }
