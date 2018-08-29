@@ -2,9 +2,12 @@ package controllers.administrator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +22,7 @@ import controllers.AbstractController;
 import domain.Compostela;
 import domain.Hike;
 import domain.Registry;
+import domain.Route;
 
 @Controller
 @RequestMapping("/compostela/administrator")
@@ -113,13 +117,52 @@ public class CompostelaAdministratorController extends AbstractController {
 		Collection<Registry> registries = this.registryService
 				.findByUser(compostela.getUser());
 		Collection<Hike> hikesRegistries = new ArrayList<>();
+		Map<Hike, Registry> map = new HashedMap();
+		ArrayList<Hike> hikesWithoutRegistry = new ArrayList<>();
+		hikesWithoutRegistry.addAll(hikes);
+		hikesWithoutRegistry.removeAll(hikesRegistries);
 		for (Registry registry : registries) {
-			hikesRegistries.add(registry.getHike());
+			if (hikes.contains(registry.getHike())) {
+				hikesRegistries.add(registry.getHike());
+				map.put(registry.getHike(), registry);
+			}
 		}
+		if (!hikesWithoutRegistry.isEmpty()) {
+			for (Hike hike : hikesWithoutRegistry) {
+				map.put(hike, null);
+			}
+		}
+
 		boolean test = hikesRegistries.containsAll(hikes);
+		ArrayList<Date> dates = new ArrayList<>();
+		dates.addAll(compostela.getWalk().getDaysOfEachHike());
+		boolean days = true;
+		if (dates == null || dates.isEmpty()) {
+			days = false;
+
+		} else if (dates.size() > 1) {
+			for (int i = 1; i < dates.size(); i++) {
+				if (dates.get(i).getYear() != dates.get(i - 1).getYear()) {
+					days = false;
+					break;
+				} else if (dates.get(i).getMonth()
+						- dates.get(i - 1).getMonth() != 1) {
+					days = false;
+					break;
+				} else if (dates.get(i).getDay() - dates.get(i - 1).getDay() != 1) {
+					days = false;
+					break;
+				}
+			}
+		}
+
 		result = new ModelAndView("compostela/administrator/edit");
 		result.addObject("compostela", compostela);
-		
+		Route route = compostela.getWalk().getRoute();
+		result.addObject("route", route);
+
+		result.addObject("map", map);
+		result.addObject("days", days);
 		result.addObject("test", test);
 		result.addObject("message", message);
 		result.addObject("requestURI", "compostela/administrator/edit.do");

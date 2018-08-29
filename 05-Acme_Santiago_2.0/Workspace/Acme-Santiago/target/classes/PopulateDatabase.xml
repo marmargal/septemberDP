@@ -395,7 +395,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -418,7 +418,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -441,7 +441,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -464,7 +464,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -488,7 +488,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -510,7 +510,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -532,7 +532,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -554,7 +554,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -576,7 +576,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -598,7 +598,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -620,7 +620,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -642,7 +642,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -664,7 +664,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -686,7 +686,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -708,7 +708,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -730,7 +730,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -752,7 +752,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -774,7 +774,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -796,7 +796,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -818,7 +818,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -840,7 +840,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -862,7 +862,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -884,7 +884,7 @@
 		<property name="user" ref="user1" />
 		<property name="hikes">
 			<list>
-				
+
 			</list>
 		</property>
 		<property name="comments">
@@ -1214,7 +1214,9 @@
 	<bean id="walk1" class="domain.Walk">
 		<property name="title" value="Moonwalk" />
 		<property name="daysOfEachHike">
-			<list></list>
+			<list>
+				<value>2011/05/20</value>
+			</list>
 		</property>
 		<property name="comments">
 			<list>
@@ -1228,7 +1230,9 @@
 	<bean id="walk2" class="domain.Walk">
 		<property name="title" value="Sunwalk" />
 		<property name="daysOfEachHike">
-			<list></list>
+			<list>
+				<value>2011/05/20</value>
+			</list>
 		</property>
 		<property name="comments">
 			<list>
@@ -1246,8 +1250,10 @@
 		<property name="description" value="Este es el primer amenity" />
 		<property name="pictures">
 			<list>
-				<value>http://cdn.luxuo.com/2011/10/Waldorf-Astoria-Salvatore-Ferragamo-amenity-kits.jpg</value>
-				<value>https://s3.amazonaws.com/waterline-prod/uploads/2017/01/02215529/WL3_Amenity_534X300.jpg</value>
+				<value>http://cdn.luxuo.com/2011/10/Waldorf-Astoria-Salvatore-Ferragamo-amenity-kits.jpg
+				</value>
+				<value>https://s3.amazonaws.com/waterline-prod/uploads/2017/01/02215529/WL3_Amenity_534X300.jpg
+				</value>
 			</list>
 		</property>
 		<property name="inn" ref="inn1" />
