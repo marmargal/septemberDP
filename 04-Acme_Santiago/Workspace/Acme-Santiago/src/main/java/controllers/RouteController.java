@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.RouteService;
+import services.UserService;
 import domain.Route;
+import domain.User;
 
 @Controller
 @RequestMapping("/route")
@@ -21,6 +23,9 @@ public class RouteController extends AbstractController {
 
 	@Autowired
 	private RouteService routeService;
+	
+	@Autowired
+	private UserService userService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -61,7 +66,11 @@ public class RouteController extends AbstractController {
 			double minValued = Double.valueOf(min);
 			int maxValue = (int) maxValued;
 			int minValue = (int) minValued;
-			routes = this.routeService.lengthRoute(maxValue, minValue);
+			if (max == "" && min == "") {
+				routes = this.routeService.findAll();
+			} else {
+				routes = this.routeService.lengthRoute(maxValue, minValue);
+			}
 			res = new ModelAndView("route/list");
 			res.addObject("routes", routes);
 			res.addObject("requestURI", "route/list.do");
@@ -89,8 +98,11 @@ public class RouteController extends AbstractController {
 			double minValued = Double.valueOf(min);
 			int maxValue = (int) maxValued;
 			int minValue = (int) minValued;
-
+			if (max == "" && min == "") {
+				routes = this.routeService.findAll();
+			} else {
 			routes = this.routeService.numHikesRoute(maxValue, minValue);
+			}
 			res = new ModelAndView("route/list");
 			res.addObject("routes", routes);
 			res.addObject("requestURI", "route/list.do");
@@ -109,24 +121,37 @@ public class RouteController extends AbstractController {
 	public ModelAndView searchList(@RequestParam(defaultValue = "") String criteria) {
 		ModelAndView res;
 		Collection<Route> routes;
-
-		routes = this.routeService.searchRoute(criteria);
+		
+		if (criteria.isEmpty()) {
+			routes = this.routeService.findAll();
+		} else {
+			routes = this.routeService.searchRoute(criteria);
+		}
 
 		res = new ModelAndView("route/list");
 		res.addObject("routes", routes);
 
-		res.addObject("requestURI", "route/list.do");
+		res.addObject("requestURI", "route/search.do");
 		return res;
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView res;
+		
 		Collection<Route> routes = new ArrayList<>();
 		routes = this.routeService.findAll();
+		User principal;
+		
 		res = new ModelAndView("route/list");
-		res.addObject("requestURI", "routes/list.do");
+		res.addObject("requestURI", "route/list.do");
 		res.addObject("routes", routes);
+		try{
+			principal = this.userService.findByPrincipal();
+			res.addObject("user",principal);
+		}catch (Exception e) {
+			res.addObject("user",null);
+		}
 
 		return res;
 	}

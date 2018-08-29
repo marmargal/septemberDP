@@ -1,3 +1,4 @@
+
 package domain;
 
 import java.util.Collection;
@@ -53,7 +54,7 @@ public class Walk extends DomainEntity {
 	private Inn inn;
 
 	@Valid
-	@OneToMany
+	@OneToMany(mappedBy = "walk")
 	public Collection<Comment> getComments() {
 		return comments;
 	}

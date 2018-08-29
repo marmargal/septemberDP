@@ -67,7 +67,10 @@ public class RouteService {
 	public Route save(final Route route) {
 		Assert.notNull(route);
 		Route res;
-
+		for (Hike hike : route.getHikes()) {
+			hike.setRoute(route);
+			this.hikeService.save(hike);
+			}
 		res = this.routeRepository.save(route);
 		return res;
 	}

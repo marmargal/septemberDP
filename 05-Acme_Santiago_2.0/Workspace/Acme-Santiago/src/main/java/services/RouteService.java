@@ -26,10 +26,10 @@ public class RouteService {
 	// Suporting services
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private HikeService hikeService;
-	
+
 	@Autowired
 	private CommentService commentService;
 
@@ -67,7 +67,10 @@ public class RouteService {
 	public Route save(final Route route) {
 		Assert.notNull(route);
 		Route res;
-
+		for (Hike hike : route.getHikes()) {
+			hike.setRoute(route);
+			this.hikeService.save(hike);
+		}
 		res = this.routeRepository.save(route);
 		return res;
 	}
@@ -76,19 +79,20 @@ public class RouteService {
 		Assert.notNull(route);
 		Assert.isTrue(route.getId() != 0);
 		Assert.isTrue(this.routeRepository.exists(route.getId()));
-		
+
 		Collection<Hike> hikes = new ArrayList<Hike>();
-		hikes = new ArrayList<Hike>(this.hikeService.findHikeByRoute(route.getId()));
+		hikes = new ArrayList<Hike>(this.hikeService.findHikeByRoute(route
+				.getId()));
 		for (Hike hike : hikes) {
 			this.hikeService.delete(hike);
 		}
-		
+
 		Collection<Comment> comments = new ArrayList<Comment>();
 		comments = route.getComments();
 		for (Comment comment : comments) {
 			this.commentService.delete(comment);
 		}
-		
+
 		this.routeRepository.delete(route);
 	}
 
@@ -99,7 +103,10 @@ public class RouteService {
 	}
 
 	public Collection<Route> searchRoute(String criteria) {
-		return this.routeRepository.searchRoute(criteria);
+		Collection<Route> routes = new ArrayList<>();
+		routes.addAll(this.routeRepository.searchRoute(criteria));
+		routes.addAll(this.routeRepository.searchRoute2(criteria));
+		return routes;
 	}
 
 	public Collection<Route> lengthRoute(double max, double min) {
@@ -109,11 +116,11 @@ public class RouteService {
 	public Collection<Route> numHikesRoute(int max, int min) {
 		return this.routeRepository.numHikesRoute(max, min);
 	}
-	
+
 	public Collection<Hike> hikesWithoutRoute() {
 		Collection<Hike> hikes = new ArrayList<Hike>();
 		hikes = this.routeRepository.hikesWithoutRoute();
 		return hikes;
 	}
-	
+
 }

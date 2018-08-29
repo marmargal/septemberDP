@@ -1,3 +1,4 @@
+
 package repositories;
 
 import java.util.Collection;
@@ -12,9 +13,11 @@ import domain.Route;
 @Repository
 public interface RouteRepository extends JpaRepository<Route, Integer> {
 
-	@Query("select p from Route p join p.hikes h where (p.name like %?1% or p.description like %?1% or h.name like %?1%)")
+	@Query("select p from Route p where p.name like %?1% or p.description like %?1%")
 	Collection<Route> searchRoute(String criteria);
 
+	@Query("select p from Route p join p.hikes h where h.name like %?1%")
+	Collection<Route> searchRoute2(String hike);
 	@Query("select p from Route p where p.length<=?1 and p.length>=?2")
 	Collection<Route> lengthRoute(double max, double min);
 

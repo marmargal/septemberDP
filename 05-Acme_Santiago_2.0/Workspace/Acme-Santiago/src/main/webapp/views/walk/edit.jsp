@@ -29,7 +29,7 @@
 	<acme:textbox code="walk.title" path="title"/>
 <%-- 	<acme:textbox code="walk.comments" path="comments"/> --%>
 	<acme:select items="${inns }" itemLabel="name" code="walk.inn" path="inn"/>
-	<acme:textbox code="walk.daysOfEachHike" path="daysOfEachHike"/>
+	<acme:textbox code="walk.daysOfEachHike" path="daysOfEachHike" placeholder="dd/mm/yyyy,dd/mm/yyyy"/>
 	
 	<acme:submit name="save" code="walk.save"/>
 	<acme:cancel url="/" code="walk.cancel"/>

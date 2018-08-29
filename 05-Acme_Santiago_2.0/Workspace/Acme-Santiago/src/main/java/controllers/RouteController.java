@@ -131,7 +131,7 @@ public class RouteController extends AbstractController {
 		res = new ModelAndView("route/list");
 		res.addObject("routes", routes);
 
-		res.addObject("requestURI", "route/list.do");
+		res.addObject("requestURI", "route/search.do");
 		return res;
 	}
 
