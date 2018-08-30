@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Warehouse extends Actor{
+public class Warehouse extends DomainEntity{
 	
 	// Constructors
 	

@@ -20,16 +20,16 @@ public class Stand extends DomainEntity{
 		super();
 	}
 
-	private Integer numMaxVluntaries;
+	private Integer numMaxVoluntaries;
 	private String fliers;
 	private Boolean isOfCompany;
 	
 	@NotNull
-	public Integer getNumMaxVluntaries() {
-		return numMaxVluntaries;
+	public Integer getNumMaxVoluntaries() {
+		return numMaxVoluntaries;
 	}
-	public void setNumMaxVluntaries(Integer numMaxVluntaries) {
-		this.numMaxVluntaries = numMaxVluntaries;
+	public void setNumMaxVluntaries(Integer numMaxVoluntaries) {
+		this.numMaxVoluntaries = numMaxVoluntaries;
 	}
 
 	@URL

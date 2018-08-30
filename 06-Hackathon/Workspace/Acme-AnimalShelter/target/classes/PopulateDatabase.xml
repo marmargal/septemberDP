@@ -31,32 +31,339 @@
 	</bean>
 
 	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
+		<property name="username" value="boss1" />
+		<property name="password" value="c333ba0d6e308bdb32ce3f2785301ae8" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="BOSS" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="username" value="employee1" />
+		<property name="password" value="03a395eaf1edb673e0f99c7ca8eb156a" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
+					<property name="authority" value="EMPLOYEE" />
 				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="employee2" />
+		<property name="password" value="af74a83ae0d5777401f86af4df941e98" />
+		<property name="authorities">
+			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="EMPLOYEE" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="client1" />
+		<property name="password" value="a165dd3c2e98d5d607181d0b87a4c66b" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CLIENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="client2" />
+		<property name="password" value="2c66045d4e4a90814ce9280272e510ec" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CLIENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="voluntary1" />
+		<property name="password" value="289d55daa57d68a5201fda6648d11881" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VOLUNTARY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="voluntary2" />
+		<property name="password" value="cecd5649f4ef9dabb84c930ea7e5d79c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VOLUNTARY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="veterinary1" />
+		<property name="password" value="5c2ccb960ff6491b69c4f9e9187f2cf8" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VETERINARY" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="veterinary2" />
+		<property name="password" value="6027817087f7027fa9d9d6c20988a53f" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="VETERINARY" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 	
 	<!-- Other domain beans come here -->	
+	
+	<!-- ADMIN -->
+	<bean id="admin" class="domain.Administrator">
+		<property name="name" value="Administrator" />
+		<property name="surname" value="Acme Animal Shelter" />
+		<property name="email" value="admin@admin.com" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="address" value="C/Admin" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+	
+	<!-- BOSS -->
+	<bean id="boss1" class="domain.Boss">
+		<property name="name" value="Boss" />
+		<property name="surname" value="Acme Animal Shelter" />
+		<property name="email" value="boss@boss.com" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="address" value="C/Boss" />
+		<property name="userAccount" ref="userAccount2" />
+		<property name="center" ref="center1"/>
+	</bean>
+	
+	<bean id="employee1" class="domain.Employee">
+		<property name="name" value="Antonio" />
+		<property name="surname" value="Perez" />
+		<property name="email" value="antperz@hotmail.com" />
+		<property name="phoneNumber" value="654323232" />
+		<property name="address" value="C/Antonio" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="stand" ref="stand1"/>
+		<property name="reports">
+			<list>
+				<ref bean="report1"/>
+			</list>
+		</property>
+		<property name="center" ref="center1"/>
+	</bean>
+	
+	<bean id="employee2" class="domain.Employee">
+		<property name="name" value="Manuela" />
+		<property name="surname" value="Martin" />
+		<property name="email" value="manuelamartin@gmail.com" />
+		<property name="phoneNumber" value="654323287" />
+		<property name="address" value="C/Manuela" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="stand" ref="stand2"/>
+		<property name="reports">
+			<list>
+			</list>
+		</property>
+		<property name="center" ref="center1"/>
+	</bean>
+	
+	
+	<!-- CLIENT -->
+	<bean id="client1" class="domain.Client">
+		<property name="name" value="Pedro" />
+		<property name="surname" value="Galvez" />
+		<property name="email" value="pedrogl@gmail.com" />
+		<property name="phoneNumber" value="654563356" />
+		<property name="address" value="C/Galvez" />
+		<property name="userAccount" ref="userAccount5" />
+		<property name="applications">
+			<list>
+				<ref bean="application1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="client2" class="domain.Client">
+		<property name="name" value="Ana" />
+		<property name="surname" value="Vazquez" />
+		<property name="email" value="anvaz@gmail.com" />
+		<property name="phoneNumber" value="655463356" />
+		<property name="address" value="C/Vazquez" />
+		<property name="userAccount" ref="userAccount6" />
+		<property name="applications">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- VOLUNTARY -->
+	<bean id="voluntary1" class="domain.Voluntary">
+		<property name="name" value="Juan" />
+		<property name="surname" value="Donoso" />
+		<property name="email" value="jdonoso@gmail.com" />
+		<property name="phoneNumber" value="654993356" />
+		<property name="address" value="C/Donoso" />
+		<property name="userAccount" ref="userAccount7" />
+	</bean>
+	
+	<bean id="voluntary2" class="domain.Voluntary">
+		<property name="name" value="Marta" />
+		<property name="surname" value="Alonso" />
+		<property name="email" value="malonso@gmail.com" />
+		<property name="phoneNumber" value="676993356" />
+		<property name="address" value="C/Alonso" />
+		<property name="userAccount" ref="userAccount8" />
+	</bean>
+	
+	
+	<!-- VETERINARY -->
+	<bean id="veterinary1" class="domain.Veterinary">
+		<property name="name" value="Carlos" />
+		<property name="surname" value="Martos" />
+		<property name="email" value="carlosmartos@gmail.com" />
+		<property name="phoneNumber" value="676900356" />
+		<property name="address" value="C/Martos" />
+		<property name="userAccount" ref="userAccount9" />
+	</bean>
+	
+	<bean id="veterinary2" class="domain.Veterinary">
+		<property name="name" value="Carla" />
+		<property name="surname" value="Fernandez" />
+		<property name="email" value="cfernandez@gmail.com" />
+		<property name="phoneNumber" value="679800356" />
+		<property name="address" value="C/Martos" />
+		<property name="userAccount" ref="userAccount10" />
+	</bean>
+	
+	
+	<!-- CENTER -->
+	<bean id="center1" class="domain.Center">
+		<property name="address" value="C/Margarita n1"/>
+		<property name="capacity" value="30000"/>
+		<property name="stock" value="5000"/>
+		<property name="picture" value="http:google.com"/>
+		<property name="description" value="Animal Shelter center 1"/>
+		<property name="warehouse" ref="warehouse1"/>
+		<property name="pets">
+			<list>
+			</list>
+		</property>
+		<property name="employees">
+			<list>
+				<ref bean="employee1"/>
+				<ref bean="employee2"/>
+			</list>
+		</property>
+		<property name="events">
+			<list>
+			</list>
+		</property>
+		<property name="boss" ref="boss1"/>
+	</bean>
+	
+	
+	<!-- WAREHOUSE -->
+	<bean id="warehouse1" class="domain.Warehouse">
+		<property name="capacity" value="300"/>
+		<property name="stock" value="100"/>
+		<property name="dogFood" value="50"/>
+		<property name="catFood" value="70"/>
+		<property name="birdFood" value="60"/>
+	</bean>
+	
+	
+	<!-- Stand -->
+	<bean id="stand1" class="domain.Stand">
+		<property name="numMaxVoluntaries" value="20"/>
+		<property name="fliers" value="Fliers stand1"/>
+		<property name="isOfCompany" value="true"/>
+		<property name="volutary" ref="voluntary1"/>
+		<property name="company" ref="company1"/>
+	</bean>
+	
+	<bean id="stand2" class="domain.Stand">
+		<property name="numMaxVoluntaries" value="20"/>
+		<property name="fliers" value="Fliers stand2"/>
+		<property name="isOfCompany" value="false"/>
+		<property name="volutary" ref="voluntary2"/>
+		<property name="company" ref="company1"/>
+	</bean>
+	
+	
+	<!-- COMPANY -->
+	<bean id="company1" class="domain.Company">
+		<property name="name" value="Company 1 SA"/>
+		<property name="description" value="This is Company 1 SA"/>
+		<property name="articles" value="Article of Company 1 SA"/>
+		<property name="logo" value="http:google.com"/>
+		<property name="stands">
+			<list>
+				<ref bean="stand1"/>
+				<ref bean="stand2"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- APPLICATION -->
+	<bean id="application1" class="domain.Application">
+		<property name="ticker" value="1234567SDFGH"/>
+		<property name="createMoment" value="12/06/2018"/>
+		<property name="closed" value="true"/>
+		<property name="pet" ref="pet1"/>
+		<property name="client" ref="client1"/>
+		<property name="report" ref="report1"/>
+	</bean>
+	
+	
+	<!-- REPORT -->
+	<bean id="report1" class="domain.Report">
+		<property name="description" value="Report 1"/>
+		<property name="suitable" value="false"/>
+		<property name="makeMoment" value="12/12/2017"/>
+		<property name="employee" ref="employee1"/>
+		<property name="application" ref="application1"/>
+	</bean>
+	
+	
+	<!-- PET -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </beans>

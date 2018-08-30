@@ -30,7 +30,7 @@ public class Application extends DomainEntity{
 	private Date createMoment;
 	private Boolean closed;
 	
-	//TODO: Hacer pattern.
+	//TODO: Hacer pattern --> cambiarlo en el populate
 	@NotBlank
 	public String getTicker() {
 		return ticker;
