@@ -53,7 +53,7 @@ public class Donation extends DomainEntity{
 	private Client client;
 	
 	@Valid
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=true)
 	public Voluntary getVoluntary() {
 		return voluntary;
 	}
@@ -63,7 +63,7 @@ public class Donation extends DomainEntity{
 	}
 
 	@Valid
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=true)
 	public Client getClient() {
 		return client;
 	}

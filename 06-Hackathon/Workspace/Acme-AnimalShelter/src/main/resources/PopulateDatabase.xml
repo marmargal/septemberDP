@@ -162,6 +162,8 @@
 		<property name="center" ref="center1"/>
 	</bean>
 	
+	
+	<!-- EMPLOYEE -->
 	<bean id="employee1" class="domain.Employee">
 		<property name="name" value="Antonio" />
 		<property name="surname" value="Perez" />
@@ -188,6 +190,8 @@
 		<property name="stand" ref="stand2"/>
 		<property name="reports">
 			<list>
+				<ref bean="report2"/>
+				<ref bean="report3"/>
 			</list>
 		</property>
 		<property name="center" ref="center1"/>
@@ -268,7 +272,7 @@
 		<property name="address" value="C/Margarita n1"/>
 		<property name="capacity" value="30000"/>
 		<property name="stock" value="5000"/>
-		<property name="picture" value="http:google.com"/>
+		<property name="picture" value="https://google.com"/>
 		<property name="description" value="Animal Shelter center 1"/>
 		<property name="warehouse" ref="warehouse1"/>
 		<property name="pets">
@@ -322,7 +326,7 @@
 		<property name="name" value="Company 1 SA"/>
 		<property name="description" value="This is Company 1 SA"/>
 		<property name="articles" value="Article of Company 1 SA"/>
-		<property name="logo" value="http:google.com"/>
+		<property name="logo" value="https://google.com"/>
 		<property name="stands">
 			<list>
 				<ref bean="stand1"/>
@@ -342,6 +346,24 @@
 		<property name="report" ref="report1"/>
 	</bean>
 	
+	<bean id="application2" class="domain.Application">
+		<property name="ticker" value="1234567SDFGH"/>
+		<property name="createMoment" value="24/06/2018"/>
+		<property name="closed" value="true"/>
+		<property name="pet" ref="pet2"/>
+		<property name="client" ref="client2"/>
+		<property name="report" ref="report2"/>
+	</bean>
+	
+	<bean id="application3" class="domain.Application">
+		<property name="ticker" value="1234567SDFGH"/>
+		<property name="createMoment" value="12/07/2018"/>
+		<property name="closed" value="true"/>
+		<property name="pet" ref="pet3"/>
+		<property name="client" ref="client1"/>
+		<property name="report" ref="report3"/>
+	</bean>
+	
 	
 	<!-- REPORT -->
 	<bean id="report1" class="domain.Report">
@@ -352,16 +374,175 @@
 		<property name="application" ref="application1"/>
 	</bean>
 	
+	<bean id="report2" class="domain.Report">
+		<property name="description" value="Report 2"/>
+		<property name="suitable" value="false"/>
+		<property name="makeMoment" value="12/12/2017"/>
+		<property name="employee" ref="employee2"/>
+		<property name="application" ref="application2"/>
+	</bean>
+	
+	<bean id="report3" class="domain.Report">
+		<property name="description" value="Report 3"/>
+		<property name="suitable" value="false"/>
+		<property name="makeMoment" value="12/12/2017"/>
+		<property name="employee" ref="employee2"/>
+		<property name="application" ref="application3"/>
+	</bean>
+	
 	
 	<!-- PET -->
+	<bean id="pet1" class="domain.Pet">
+		<property name="name" value="Puppy"/>
+		<property name="type" value="DOG"/>
+		<property name="foodExpense" value="20"/>
+		<property name="status" value="true"/>
+		<property name="identifier" value="12345678"/>
+		<property name="date" value="21/01/2017"/>
+		<property name="age" value="2"/>
+		<property name="chip" value="true"/>
+		<property name="center" ref="center1"/>
+		<property name="application" ref="application1"/>
+		<property name="medicalReport" ref="medicalReport1"/>
+	</bean>
+	
+	<bean id="pet2" class="domain.Pet">
+		<property name="name" value="Kitty"/>
+		<property name="type" value="CAT"/>
+		<property name="foodExpense" value="20"/>
+		<property name="status" value="true"/>
+		<property name="identifier" value="12345678"/>
+		<property name="date" value="21/01/2018"/>
+		<property name="age" value="1"/>
+		<property name="chip" value="false"/>
+		<property name="center" ref="center1"/>
+		<property name="application" ref="application2"/>
+		<property name="medicalReport" ref="medicalReport2"/>
+	</bean>
+	
+	<bean id="pet3" class="domain.Pet">
+		<property name="name" value="Piolin"/>
+		<property name="type" value="BIRD"/>
+		<property name="foodExpense" value="20"/>
+		<property name="status" value="true"/>
+		<property name="identifier" value="12345678"/>
+		<property name="date" value="21/04/2018"/>
+		<property name="age" value="1"/>
+		<property name="chip" value="false"/>
+		<property name="center" ref="center1"/>
+		<property name="application" ref="application3"/>
+		<property name="medicalReport" ref="medicalReport3"/>
+	</bean>
 	
 	
+	<!-- MEDICAL REPORT -->
+	<bean id="medicalReport1" class="domain.MedicalReport">
+		<property name="diagnosis" value="Herida en pata delantera derecha."/>
+		<property name="initialState" value="Herido"/>
+		<property name="treatment" value="Venda en la pata herida y collar isabelino."/>
+		<property name="diaseases">
+			<list>
+			</list>
+		</property>
+		<property name="date" value="12/12/2017"/>
+		<property name="pet" value="pet1"/>
+		<property name="veterinary" value="veterinary1"/>
+	</bean>
+	
+	<bean id="medicalReport2" class="domain.MedicalReport">
+		<property name="diagnosis" value="Corte en cola."/>
+		<property name="initialState" value="Herido"/>
+		<property name="treatment" value="Coser herida y collar isabelino."/>
+		<property name="diaseases">
+			<list>
+				<value>Ceguera en ojo derecho.</value>
+			</list>
+		</property>
+		<property name="date" value="12/12/2017"/>
+		<property name="pet" value="pet2"/>
+		<property name="veterinary" value="veterinary1"/>
+	</bean>
+	
+	<bean id="medicalReport3" class="domain.MedicalReport">
+		<property name="diagnosis" value="Pata rota."/>
+		<property name="initialState" value="Herido"/>
+		<property name="treatment" value="Vendar pata."/>
+		<property name="diaseases">
+			<list>
+			</list>
+		</property>
+		<property name="date" value="12/12/2017"/>
+		<property name="pet" value="pet3"/>
+		<property name="veterinary" value="veterinary2"/>
+	</bean>
 	
 	
+	<!-- CREDIT CARD -->
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="BBVA" />
+		<property name="brandName" value="MasterCard" />
+		<property name="number" value="4024007146545768" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="20" />
+		<property name="cvv" value="123" />
+	</bean>
+
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Name creditCard1" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4150902751004463" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="21" />
+		<property name="cvv" value="612" />
+	</bean>
+	
+	<!-- DONATION -->
+	<bean id="donation1" class="domain.Donation">
+		<property name="cuantity" value="200.50"/>
+		<property name="name" value="Donation 1"/>
+		<property name="creditCard" ref="creditCard1"/>
+		<property name="voluntary"><null/></property>
+		<property name="client" ref="client1"/>
+	</bean>
+	
+	<bean id="donation2" class="domain.Donation">
+		<property name="cuantity" value="200.50"/>
+		<property name="name" value="Donation 2"/>
+		<property name="creditCard" ref="creditCard2"/>
+		<property name="voluntary" ref="voluntary2"/>
+		<property name="client"><null/></property>
+	</bean>
+	
+	<!-- EVENT -->
+	<bean id="event1" class="domain.Event">
+		<property name="title" value="Event 1"/>
+		<property name="description" value="An event"/>
+		<property name="donation" value="150.90"/>
+		<property name="nameSite" value="Maria Luisa Park"/>
+		<property name="address" value="Maria Luisa Park"/>
+		<property name="placard" value="https://google.com"/>
+		<property name="startDate" value="09/01/2019"/>
+		<property name="endDate" value="09/01/2019"/>
+		<property name="publicationDate" value="09/10/2018"/>
+		<property name="openTime" value="12:00"/>
+		<property name="closeTime" value="17:00"/>
+		<property name="center" value="center1"/>
+	</bean>
 	
 	
+	<!-- FOLDER -->
 	
 	
+	<!-- MESSAGE -->
+	
+	
+	<!-- NOTICE -->
+	
+	
+	<!-- GPS COORDINATE -->
+	
+	
+	<!-- CONFIGURATION -->
 	
 	
 	
