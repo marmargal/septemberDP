@@ -22,6 +22,50 @@
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 
 		-->
+		
+
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.GpsCoordinateToStringConverter" />
+		<bean class="converters.StringToGpsCoordinateConverter" />
+		<bean class="converters.ConfigurationToStringConverter" />
+		<bean class="converters.StringToConfigurationConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.ApplicationToStringConverter" />
+		<bean class="converters.StringToApplicationConverter" />
+		<bean class="converters.BossToStringConverter" />
+		<bean class="converters.StringToBossConverter" />
+		<bean class="converters.CenterToStringConverter" />
+		<bean class="converters.StringToCenterConverter" />
+		<bean class="converters.ClientToStringConverter" />
+		<bean class="converters.StringToClientConverter" />
+		<bean class="converters.CompanyToStringConverter" />
+		<bean class="converters.StringToCompanyConverter" />
+		<bean class="converters.CreditCardToStringConverter" />
+		<bean class="converters.StringToCreditCardConverter" />
+		<bean class="converters.DonationToStringConverter" />
+		<bean class="converters.StringToDonationConverter" />
+		<bean class="converters.EmployeeToStringConverter" />
+		<bean class="converters.StringToEmployeeConverter" />
+		<bean class="converters.EventToStringConverter" />
+		<bean class="converters.StringToEventConverter" />
+		<bean class="converters.MedicalReportToStringConverter" />
+		<bean class="converters.StringToMedicalReportConverter" />
+		<bean class="converters.NoticeToStringConverter" />
+		<bean class="converters.StringToNoticeConverter" />
+		<bean class="converters.PetToStringConverter" />
+		<bean class="converters.StringToPetConverter" />
+		<bean class="converters.ReportToStringConverter" />
+		<bean class="converters.StringToReportConverter" />
+		<bean class="converters.StandToStringConverter" />
+		<bean class="converters.StringToStandConverter" />
+		<bean class="converters.VeterinaryToStringConverter" />
+		<bean class="converters.StringToVeterinaryConverter" />
+		<bean class="converters.VoluntaryToStringConverter" />
+		<bean class="converters.StringToVoluntaryConverter" />
+		<bean class="converters.WarehouseToStringConverter" />
+		<bean class="converters.StringToWarehouseConverter" />
 	</util:list>
 	
 </beans>
