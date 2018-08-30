@@ -9,14 +9,14 @@ import org.hibernate.validator.constraints.URL;
 
 @Embeddable
 @Access(AccessType.PROPERTY)
-public class Configuration {
+public class Configuration extends DomainEntity {
 
 	// Constructors
-	
-	public Configuration(){
+
+	public Configuration() {
 		super();
 	}
-	
+
 	// Attributes
 
 	private String banner;
@@ -29,6 +29,7 @@ public class Configuration {
 	public String getBanner() {
 		return banner;
 	}
+
 	public void setBanner(String banner) {
 		this.banner = banner;
 	}
@@ -52,7 +53,7 @@ public class Configuration {
 	}
 
 	@NotBlank
-	//TODO: hacer pattern.
+	// TODO: hacer pattern.
 	public String getCountryCode() {
 		return countryCode;
 	}
@@ -60,10 +61,5 @@ public class Configuration {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	
-
-	
-
-	
 
 }
