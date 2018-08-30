@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -13,7 +12,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -28,7 +26,6 @@ public class Center extends DomainEntity{
 
 	private String address;
 	private Integer capacity;
-	private Collection<Employee> employees;
 	private Integer stock;
 	private String picture;
 	private String description;
@@ -50,16 +47,6 @@ public class Center extends DomainEntity{
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
-	}
-
-	@NotEmpty
-	@ElementCollection
-	public Collection<Employee> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(Collection<Employee> employees) {
-		this.employees = employees;
 	}
 
 	@NotNull
@@ -94,8 +81,8 @@ public class Center extends DomainEntity{
 	
 	private Warehouse warehouse;
 	private Collection<Pet> pets;
-	private Collection<Employee> employee;
-	private Collection<Event> event;
+	private Collection<Employee> employees;
+	private Collection<Event> events;
 	private Boss boss;
 	
 	@Valid
@@ -120,22 +107,22 @@ public class Center extends DomainEntity{
 
 	@Valid
 	@OneToMany(mappedBy = "center")
-	public Collection<Employee> getEmployee() {
-		return employee;
+	public Collection<Employee> getEmployees() {
+		return employees;
 	}
 
-	public void setEmployee(Collection<Employee> employee) {
-		this.employee = employee;
+	public void setEmployees(Collection<Employee> employees) {
+		this.employees = employees;
 	}
 
 	@Valid
 	@OneToMany(mappedBy = "center")
-	public Collection<Event> getEvent() {
-		return event;
+	public Collection<Event> getEvents() {
+		return events;
 	}
 
-	public void setEvent(Collection<Event> event) {
-		this.event = event;
+	public void setEvents(Collection<Event> events) {
+		this.events = events;
 	}
 
 	@Valid

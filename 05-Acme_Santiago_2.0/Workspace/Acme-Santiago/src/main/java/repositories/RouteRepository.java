@@ -18,6 +18,7 @@ public interface RouteRepository extends JpaRepository<Route, Integer> {
 
 	@Query("select p from Route p join p.hikes h where h.name like %?1%")
 	Collection<Route> searchRoute2(String hike);
+	
 	@Query("select p from Route p where p.length<=?1 and p.length>=?2")
 	Collection<Route> lengthRoute(double max, double min);
 
