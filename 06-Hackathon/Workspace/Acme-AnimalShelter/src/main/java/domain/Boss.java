@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -19,16 +21,16 @@ public class Boss extends Actor{
 	
 	// Relationships
 
-	private Center center;
+	private Collection<Center> centers;
 	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "boss")
-	public Center getCenter() {
-		return center;
+	public Collection<Center> getCenters() {
+		return centers;
 	}
 
-	public void setCenter(Center center) {
-		this.center = center;
+	public void setCenters(Collection<Center> centers) {
+		this.centers = centers;
 	}
 }

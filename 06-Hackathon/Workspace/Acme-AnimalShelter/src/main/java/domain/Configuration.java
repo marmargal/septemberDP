@@ -3,11 +3,12 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
-@Embeddable
+@Entity
 @Access(AccessType.PROPERTY)
 public class Configuration extends DomainEntity {
 

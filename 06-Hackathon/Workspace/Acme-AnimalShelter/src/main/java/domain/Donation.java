@@ -7,6 +7,8 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Donation extends DomainEntity{
@@ -14,7 +16,7 @@ public class Donation extends DomainEntity{
 	// Constructors
 	
 	private Double cuantity;
-	private Integer name;
+	private String name;
 	private CreditCard creditCard;
 	
 	public Donation(){
@@ -30,12 +32,12 @@ public class Donation extends DomainEntity{
 		this.cuantity = cuantity;
 	}
 
-	@NotNull
-	public Integer getName() {
+	@NotBlank
+	public String getName() {
 		return name;
 	}
 
-	public void setName(Integer name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

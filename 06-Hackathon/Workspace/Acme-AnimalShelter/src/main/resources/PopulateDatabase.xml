@@ -148,6 +148,13 @@
 		<property name="phoneNumber" value="654565656" />
 		<property name="address" value="C/Admin" />
 		<property name="userAccount" ref="userAccount1" />
+		<property name="folders">
+			<list>
+				<ref bean="folder1"/>
+				<ref bean="folder2"/>
+				<ref bean="folder3"/>
+			</list>
+		</property>
 	</bean>
 	
 	
@@ -159,7 +166,18 @@
 		<property name="phoneNumber" value="654565656" />
 		<property name="address" value="C/Boss" />
 		<property name="userAccount" ref="userAccount2" />
-		<property name="center" ref="center1"/>
+		<property name="centers">
+		 	<list>
+		  		<ref bean="center1"/>
+		 	</list>
+		 </property>
+		<property name="folders">
+			<list>
+				<ref bean="folder4"/>
+				<ref bean="folder5"/>
+				<ref bean="folder6"/>
+			</list>
+		</property>
 	</bean>
 	
 	
@@ -178,6 +196,13 @@
 			</list>
 		</property>
 		<property name="center" ref="center1"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder7"/>
+				<ref bean="folder8"/>
+				<ref bean="folder9"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="employee2" class="domain.Employee">
@@ -195,6 +220,13 @@
 			</list>
 		</property>
 		<property name="center" ref="center1"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder10"/>
+				<ref bean="folder11"/>
+				<ref bean="folder12"/>
+			</list>
+		</property>
 	</bean>
 	
 	
@@ -211,6 +243,13 @@
 				<ref bean="application1"/>
 			</list>
 		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder13"/>
+				<ref bean="folder14"/>
+				<ref bean="folder15"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="client2" class="domain.Client">
@@ -222,6 +261,14 @@
 		<property name="userAccount" ref="userAccount6" />
 		<property name="applications">
 			<list>
+				<ref bean="application2"/>
+			</list>
+		</property>
+		<property name="folders">
+			<list>
+				<ref bean="folder16"/>
+				<ref bean="folder17"/>
+				<ref bean="folder18"/>
 			</list>
 		</property>
 	</bean>
@@ -235,6 +282,13 @@
 		<property name="phoneNumber" value="654993356" />
 		<property name="address" value="C/Donoso" />
 		<property name="userAccount" ref="userAccount7" />
+		<property name="folders">
+			<list>
+				<ref bean="folder19"/>
+				<ref bean="folder20"/>
+				<ref bean="folder21"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="voluntary2" class="domain.Voluntary">
@@ -244,6 +298,13 @@
 		<property name="phoneNumber" value="676993356" />
 		<property name="address" value="C/Alonso" />
 		<property name="userAccount" ref="userAccount8" />
+		<property name="folders">
+			<list>
+				<ref bean="folder22"/>
+				<ref bean="folder23"/>
+				<ref bean="folder24"/>
+			</list>
+		</property>
 	</bean>
 	
 	
@@ -255,6 +316,13 @@
 		<property name="phoneNumber" value="676900356" />
 		<property name="address" value="C/Martos" />
 		<property name="userAccount" ref="userAccount9" />
+		<property name="folders">
+			<list>
+				<ref bean="folder25"/>
+				<ref bean="folder26"/>
+				<ref bean="folder27"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="veterinary2" class="domain.Veterinary">
@@ -264,7 +332,333 @@
 		<property name="phoneNumber" value="679800356" />
 		<property name="address" value="C/Martos" />
 		<property name="userAccount" ref="userAccount10" />
+		<property name="folders">
+			<list>
+				<ref bean="folder28"/>
+				<ref bean="folder29"/>
+				<ref bean="folder30"/>
+			</list>
+		</property>
 	</bean>
+	
+	
+	<!-- FOLDER -->
+	<bean id="folder1" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder2" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder3" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="folder4" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder5" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder6" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="folder7" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder8" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder9" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="folder10" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder11" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder12" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="folder13" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+				<ref bean="message2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder14" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder15" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="folder16" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder17" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder18" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="folder19" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder20" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder21" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="folder22" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder23" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder24" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="folder25" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+				<ref bean="message1"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder26" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+				<ref bean="message2"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder27" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="folder28" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder29" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder30" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- MESSAGE -->
+	<bean id="message1" class="domain.Message">
+		<property name="moment" value="04/03/2017"/>
+		<property name="subject" value="Hola"/>
+		<property name="body" value="¿Cómo está Puppy?"/>
+		<property name="priority" value="LOW"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder14"/>
+				<ref bean="folder26"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message2" class="domain.Message">
+		<property name="moment" value="05/03/2017"/>
+		<property name="subject" value="Hola"/>
+		<property name="body" value="Puppy está bien."/>
+		<property name="priority" value="LOW"/>
+		<property name="folders">
+			<list>
+				<ref bean="folder26"/>
+				<ref bean="folder13"/>
+			</list>
+		</property>
+	</bean>
+	
 	
 	
 	<!-- CENTER -->
@@ -277,6 +671,9 @@
 		<property name="warehouse" ref="warehouse1"/>
 		<property name="pets">
 			<list>
+				<ref bean="pet1"/>
+				<ref bean="pet2"/>
+				<ref bean="pet3"/>
 			</list>
 		</property>
 		<property name="employees">
@@ -287,6 +684,7 @@
 		</property>
 		<property name="events">
 			<list>
+				<ref bean="event1"/>
 			</list>
 		</property>
 		<property name="boss" ref="boss1"/>
@@ -308,7 +706,7 @@
 		<property name="numMaxVoluntaries" value="20"/>
 		<property name="fliers" value="Fliers stand1"/>
 		<property name="isOfCompany" value="true"/>
-		<property name="volutary" ref="voluntary1"/>
+		<property name="voluntary" ref="voluntary1"/>
 		<property name="company" ref="company1"/>
 	</bean>
 	
@@ -316,7 +714,7 @@
 		<property name="numMaxVoluntaries" value="20"/>
 		<property name="fliers" value="Fliers stand2"/>
 		<property name="isOfCompany" value="false"/>
-		<property name="volutary" ref="voluntary2"/>
+		<property name="voluntary" ref="voluntary2"/>
 		<property name="company" ref="company1"/>
 	</bean>
 	
@@ -339,7 +737,7 @@
 	<!-- APPLICATION -->
 	<bean id="application1" class="domain.Application">
 		<property name="ticker" value="1234567SDFGH"/>
-		<property name="createMoment" value="12/06/2018"/>
+		<property name="createMoment" value="12/06/2011"/>
 		<property name="closed" value="true"/>
 		<property name="pet" ref="pet1"/>
 		<property name="client" ref="client1"/>
@@ -348,7 +746,7 @@
 	
 	<bean id="application2" class="domain.Application">
 		<property name="ticker" value="1234567SDFGH"/>
-		<property name="createMoment" value="24/06/2018"/>
+		<property name="createMoment" value="24/06/2011"/>
 		<property name="closed" value="true"/>
 		<property name="pet" ref="pet2"/>
 		<property name="client" ref="client2"/>
@@ -357,7 +755,7 @@
 	
 	<bean id="application3" class="domain.Application">
 		<property name="ticker" value="1234567SDFGH"/>
-		<property name="createMoment" value="12/07/2018"/>
+		<property name="createMoment" value="12/07/2011"/>
 		<property name="closed" value="true"/>
 		<property name="pet" ref="pet3"/>
 		<property name="client" ref="client1"/>
@@ -440,40 +838,40 @@
 		<property name="diagnosis" value="Herida en pata delantera derecha."/>
 		<property name="initialState" value="Herido"/>
 		<property name="treatment" value="Venda en la pata herida y collar isabelino."/>
-		<property name="diaseases">
+		<property name="diseases">
 			<list>
 			</list>
 		</property>
-		<property name="date" value="12/12/2017"/>
-		<property name="pet" value="pet1"/>
-		<property name="veterinary" value="veterinary1"/>
+		<property name="date" value="12/12/2011"/>
+		<property name="pet" ref="pet1"/>
+		<property name="veterinary" ref="veterinary1"/>
 	</bean>
 	
 	<bean id="medicalReport2" class="domain.MedicalReport">
 		<property name="diagnosis" value="Corte en cola."/>
 		<property name="initialState" value="Herido"/>
 		<property name="treatment" value="Coser herida y collar isabelino."/>
-		<property name="diaseases">
+		<property name="diseases">
 			<list>
 				<value>Ceguera en ojo derecho.</value>
 			</list>
 		</property>
-		<property name="date" value="12/12/2017"/>
-		<property name="pet" value="pet2"/>
-		<property name="veterinary" value="veterinary1"/>
+		<property name="date" value="12/12/2011"/>
+		<property name="pet" ref="pet2"/>
+		<property name="veterinary" ref="veterinary1"/>
 	</bean>
 	
 	<bean id="medicalReport3" class="domain.MedicalReport">
 		<property name="diagnosis" value="Pata rota."/>
 		<property name="initialState" value="Herido"/>
 		<property name="treatment" value="Vendar pata."/>
-		<property name="diaseases">
+		<property name="diseases">
 			<list>
 			</list>
 		</property>
-		<property name="date" value="12/12/2017"/>
-		<property name="pet" value="pet3"/>
-		<property name="veterinary" value="veterinary2"/>
+		<property name="date" value="12/12/2011"/>
+		<property name="pet" ref="pet3"/>
+		<property name="veterinary" ref="veterinary2"/>
 	</bean>
 	
 	
@@ -521,29 +919,55 @@
 		<property name="nameSite" value="Maria Luisa Park"/>
 		<property name="address" value="Maria Luisa Park"/>
 		<property name="placard" value="https://google.com"/>
-		<property name="startDate" value="09/01/2019"/>
-		<property name="endDate" value="09/01/2019"/>
+		<property name="startDate" value="09/01/2019 12:00"/>
+		<property name="endDate" value="09/01/2019 17:00"/>
 		<property name="publicationDate" value="09/10/2018"/>
-		<property name="openTime" value="12:00"/>
-		<property name="closeTime" value="17:00"/>
-		<property name="center" value="center1"/>
+		<property name="center" ref="center1"/>
 	</bean>
 	
 	
-	<!-- FOLDER -->
-	
-	
-	<!-- MESSAGE -->
+	<!-- GPS COORDINATE -->
+	<bean id="coordinates1" class="domain.GpsCoordinate">
+		<property name="latitude" value="45." />
+		<property name="longitude" value="45." />
+	</bean>
+
+	<bean id="coordinates2" class="domain.GpsCoordinate">
+		<property name="latitude" value="60." />
+		<property name="longitude" value="13.4" />
+	</bean>
 	
 	
 	<!-- NOTICE -->
+	<bean id="notice1" class="domain.Notice">
+		<property name="description" value="Perro herido en la carretera."/>
+		<property name="type" value="DOG"/>
+		<property name="gpsCoordinates" ref="coordinates1"/>
+		<property name="level" value="3"/>
+		<property name="date" value="03/04/2017"/>
+		<property name="descarted" value="false"/>
+		<property name="voluntary" ref="voluntary1"/>
+	</bean>
 	
+	<bean id="notice2" class="domain.Notice">
+		<property name="description" value="Gato herido en el parque."/>
+		<property name="type" value="CAT"/>
+		<property name="gpsCoordinates" ref="coordinates2"/>
+		<property name="level" value="2"/>
+		<property name="date" value="03/06/2017"/>
+		<property name="descarted" value="true"/>
+		<property name="voluntary" ref="voluntary2"/>
+	</bean>
 	
-	<!-- GPS COORDINATE -->
 	
 	
 	<!-- CONFIGURATION -->
-	
+	<bean id="configuration" class="domain.Configuration">
+		<property name="banner" value="https://google.com"/>
+		<property name="englishWelcome" value="Welcome to Acme Animal Shelter!!"/>
+		<property name="spanishWelcome" value="¡¡Bienvenido a Acme Animal Shelter!!"/>
+		<property name="countryCode" value="ES"/>
+	</bean>
 	
 	
 	

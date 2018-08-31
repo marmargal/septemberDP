@@ -1,9 +1,11 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -42,16 +44,16 @@ public class Folder extends DomainEntity{
 	
 	// Relationships
 	
-	private Message message;
+	private Collection<Message> messages;
 	
 	@Valid
-	@OneToMany(mappedBy = "folder")
-	public Message getMessage() {
-		return message;
+	@ManyToMany(mappedBy = "folders")
+	public Collection<Message> getMessages() {
+		return messages;
 	}
 
-	public void setMessage(Message message) {
-		this.message = message;
+	public void setMessages(Collection<Message> messages) {
+		this.messages = messages;
 	}
 	
 }

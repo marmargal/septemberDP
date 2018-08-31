@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -79,7 +81,7 @@ public class Actor extends DomainEntity {
 	// Relationships
 
 	private UserAccount userAccount;
-	private Folder folder;
+	private Collection<Folder> folders;
 
 	@NotNull
 	@Valid
@@ -95,11 +97,11 @@ public class Actor extends DomainEntity {
 	@Valid
 	@NotNull
 	@OneToMany
-	public Folder getFolder() {
-		return folder;
+	public Collection<Folder> getFolders() {
+		return folders;
 	}
 
-	public void setFolder(Folder folder) {
-		this.folder = folder;
+	public void setFolders(Collection<Folder> folders) {
+		this.folders = folders;
 	}
 }

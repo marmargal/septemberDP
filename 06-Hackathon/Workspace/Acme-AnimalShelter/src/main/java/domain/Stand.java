@@ -28,7 +28,7 @@ public class Stand extends DomainEntity{
 	public Integer getNumMaxVoluntaries() {
 		return numMaxVoluntaries;
 	}
-	public void setNumMaxVluntaries(Integer numMaxVoluntaries) {
+	public void setNumMaxVoluntaries(Integer numMaxVoluntaries) {
 		this.numMaxVoluntaries = numMaxVoluntaries;
 	}
 

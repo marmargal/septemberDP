@@ -72,7 +72,7 @@ public class MedicalReport extends DomainEntity{
 		this.date = date;
 	}
 
-	@NotEmpty
+	@NotNull
 	@ElementCollection
 	public Collection<String> getDiseases() {
 		return diseases;
@@ -88,7 +88,7 @@ public class MedicalReport extends DomainEntity{
 	private Veterinary veterinary;
 	
 	@Valid
-	@OneToOne(optional=false)
+	@OneToOne
 	public Pet getPet() {
 		return pet;
 	}

@@ -67,7 +67,7 @@ public class Application extends DomainEntity{
 	private Report report;
 
 	@Valid
-	@OneToOne(optional=false)
+	@OneToOne
 	public Pet getPet() {
 		return pet;
 	}

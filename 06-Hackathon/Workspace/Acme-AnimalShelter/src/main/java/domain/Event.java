@@ -34,8 +34,8 @@ public class Event extends DomainEntity{
 	private Date startDate;
 	private Date endDate;
 	private Date publicationDate;
-	private Date openTime;
-	private Date closeTime;
+//	private Date openTime;
+//	private Date closeTime;
 	
 	
 	@NotBlank
@@ -95,7 +95,7 @@ public class Event extends DomainEntity{
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -106,7 +106,7 @@ public class Event extends DomainEntity{
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -126,27 +126,27 @@ public class Event extends DomainEntity{
 		this.publicationDate = publicationDate;
 	}
 
-	@NotNull
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "HH:mm")
-	public Date getOpenTime() {
-		return openTime;
-	}
-
-	public void setOpenTime(Date openTime) {
-		this.openTime = openTime;
-	}
-
-	@NotNull
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "HH:mm")
-	public Date getCloseTime() {
-		return closeTime;
-	}
-
-	public void setCloseTime(Date closeTime) {
-		this.closeTime = closeTime;
-	}
+//	@NotNull
+//	@Temporal(TemporalType.TIME)
+//	@DateTimeFormat(pattern = "HH:mm")
+//	public Date getOpenTime() {
+//		return openTime;
+//	}
+//
+//	public void setOpenTime(Date openTime) {
+//		this.openTime = openTime;
+//	}
+//
+//	@NotNull
+//	@Temporal(TemporalType.TIME)
+//	@DateTimeFormat(pattern = "HH:mm")
+//	public Date getCloseTime() {
+//		return closeTime;
+//	}
+//
+//	public void setCloseTime(Date closeTime) {
+//		this.closeTime = closeTime;
+//	}
 
 	// Relationships
 	

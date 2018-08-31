@@ -1,11 +1,12 @@
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -73,16 +74,16 @@ public class Message extends DomainEntity{
 	
 	// Relationships
 	
-	private Folder folder;
+	private Collection<Folder> folders;
 	
 	@Valid
-	@ManyToOne(optional=false)
-	public Folder getFolder() {
-		return folder;
+	@ManyToMany
+	public Collection<Folder> getFolders() {
+		return folders;
 	}
 
-	public void setFolder(Folder folder) {
-		this.folder = folder;
+	public void setFolders(Collection<Folder> folders) {
+		this.folders = folders;
 	}
 	
 	
