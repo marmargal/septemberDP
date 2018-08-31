@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,10 @@ public class PetService {
 
 	// Other business methods
 	
-	
+	public Collection<Pet> findPetsNotAdopted(){
+		Collection<Pet> pets = new ArrayList<Pet>();
+		pets = this.petRepository.findPetsNotAdopted();
+		return pets;
+	}
 
 }

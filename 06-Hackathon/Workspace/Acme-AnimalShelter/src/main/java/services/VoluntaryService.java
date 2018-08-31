@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +8,16 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.VoluntaryRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Folder;
 import domain.Voluntary;
+import forms.ActorForm;
 
 
 @Service
@@ -26,6 +31,8 @@ public class VoluntaryService {
 	
 	// Supporting services
 	
+	@Autowired
+	private Validator		validator;
 	
 	// Constructors
 
@@ -38,6 +45,7 @@ public class VoluntaryService {
 	public Voluntary create() {
 		Voluntary res = new Voluntary();
 		
+		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		
@@ -45,6 +53,7 @@ public class VoluntaryService {
 		userAccount.addAuthority(authority);
 
 		res.setUserAccount(userAccount);
+		res.setFolders(folders);
 		
 		return res;
 	}
@@ -109,6 +118,41 @@ public class VoluntaryService {
 		Assert.isTrue(authority.contains(res));
 	}	
 	
+	public ActorForm construct(Voluntary voluntary){
+		ActorForm res = new ActorForm();
+		
+		res.setId(voluntary.getId());
+		res.setName(voluntary.getName());
+		res.setSurname(voluntary.getSurname());
+		res.setEmail(voluntary.getEmail());
+		res.setPhoneNumber(voluntary.getPhoneNumber());
+		res.setAddress(voluntary.getAddress());
+		res.setUsername(voluntary.getUserAccount().getUsername());
+		
+		return res;
+	}
 	
+	public Voluntary reconstruct(ActorForm voluntaryForm, BindingResult binding){
+		Assert.notNull(voluntaryForm);
+		
+		Voluntary res = new Voluntary();
+
+		if (voluntaryForm.getId() != 0)
+			res = this.findOne(voluntaryForm.getId());
+		else
+			res = this.create();
+		
+		res.setName(voluntaryForm.getName());
+		res.setSurname(voluntaryForm.getSurname());
+		res.setEmail(voluntaryForm.getEmail());
+		res.setPhoneNumber(voluntaryForm.getPhoneNumber());
+		res.setAddress(voluntaryForm.getAddress());
+		res.getUserAccount().setUsername(voluntaryForm.getUsername());
+		res.getUserAccount().setPassword(voluntaryForm.getPassword());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
 
 }

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +8,17 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.ClientRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Application;
 import domain.Client;
+import domain.Folder;
+import forms.ActorForm;
 
 
 @Service
@@ -26,6 +32,8 @@ public class ClientService {
 	
 	// Supporting services
 	
+	@Autowired
+	private Validator		validator;
 	
 	// Constructors
 
@@ -38,13 +46,18 @@ public class ClientService {
 	public Client create() {
 		Client res = new Client();
 		
+		Collection<Application> applications = new ArrayList<Application>();
+		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
+		
 		
 		authority.setAuthority(Authority.CLIENT);
 		userAccount.addAuthority(authority);
 
 		res.setUserAccount(userAccount);
+		res.setApplications(applications);
+		res.setFolders(folders);
 		
 		return res;
 	}
@@ -109,6 +122,41 @@ public class ClientService {
 		Assert.isTrue(authority.contains(res));
 	}	
 	
+	public ActorForm construct(Client client){
+		ActorForm res = new ActorForm();
+		
+		res.setId(client.getId());
+		res.setName(client.getName());
+		res.setSurname(client.getSurname());
+		res.setEmail(client.getEmail());
+		res.setPhoneNumber(client.getPhoneNumber());
+		res.setAddress(client.getAddress());
+		res.setUsername(client.getUserAccount().getUsername());
+		
+		return res;
+	}
 	
+	public Client reconstruct(ActorForm clientForm, BindingResult binding){
+		Assert.notNull(clientForm);
+		
+		Client res = new Client();
+
+		if (clientForm.getId() != 0)
+			res = this.findOne(clientForm.getId());
+		else
+			res = this.create();
+		
+		res.setName(clientForm.getName());
+		res.setSurname(clientForm.getSurname());
+		res.setEmail(clientForm.getEmail());
+		res.setPhoneNumber(clientForm.getPhoneNumber());
+		res.setAddress(clientForm.getAddress());
+		res.getUserAccount().setUsername(clientForm.getUsername());
+		res.getUserAccount().setPassword(clientForm.getPassword());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
 
 }

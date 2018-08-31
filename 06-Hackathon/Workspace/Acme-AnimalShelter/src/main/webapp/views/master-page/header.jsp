@@ -14,7 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<img src="images/logo.png" alt="Acme-AnimalShelter Co., Inc." />
+	<a href="/Acme-AnimalShelter"><img src="images/logo.png" alt="Acme-AnimalShelter Co., Inc." /></a>
 </div>
 
 <div>
@@ -42,6 +42,13 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href=""><spring:message code="master.page.register" /></a>
+				<ul>
+					<li><a href="client/register.do"><spring:message code="master.page.register.client" /></a></li>
+					<li><a href="voluntary/register.do"><spring:message code="master.page.register.voluntary" /></a></li>
+				</ul>
+			</li>
+			<li><a href="pet/listNotAdopted.do"><spring:message code="master.page.petNotAdopted" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

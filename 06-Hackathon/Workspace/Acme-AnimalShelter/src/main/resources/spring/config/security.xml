@@ -50,6 +50,19 @@
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
+		
+											<!--    	TERMS 		-->
+		<security:intercept-url pattern="/terms/list.do" access="permitAll" /> 
+		
+											<!--    	CLIENT 		-->
+		<security:intercept-url pattern="/client/register.do" access="isAnonymous()" /> 	
+		
+											<!--    	VOLUNTARY 		-->
+		<security:intercept-url pattern="/voluntary/register.do" access="isAnonymous()" /> 
+		
+		
+											<!-- 		PET 		-->
+		<security:intercept-url pattern="/pet/listNotAdopted.do" access="permitAll" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

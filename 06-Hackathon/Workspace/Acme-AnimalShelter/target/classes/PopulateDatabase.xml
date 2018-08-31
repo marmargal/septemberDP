@@ -822,7 +822,7 @@
 		<property name="name" value="Piolin"/>
 		<property name="type" value="BIRD"/>
 		<property name="foodExpense" value="20"/>
-		<property name="status" value="true"/>
+		<property name="status" value="false"/>
 		<property name="identifier" value="12345678"/>
 		<property name="date" value="21/04/2013"/>
 		<property name="age" value="1"/>
