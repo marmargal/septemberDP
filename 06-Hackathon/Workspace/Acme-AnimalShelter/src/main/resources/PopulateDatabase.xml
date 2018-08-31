@@ -704,7 +704,7 @@
 	<!-- Stand -->
 	<bean id="stand1" class="domain.Stand">
 		<property name="numMaxVoluntaries" value="20"/>
-		<property name="fliers" value="Fliers stand1"/>
+		<property name="fliers" value="http://www.google.com"/>
 		<property name="isOfCompany" value="true"/>
 		<property name="voluntary" ref="voluntary1"/>
 		<property name="company" ref="company1"/>
@@ -712,7 +712,7 @@
 	
 	<bean id="stand2" class="domain.Stand">
 		<property name="numMaxVoluntaries" value="20"/>
-		<property name="fliers" value="Fliers stand2"/>
+		<property name="fliers" value="http://www.localhost.com"/>
 		<property name="isOfCompany" value="false"/>
 		<property name="voluntary" ref="voluntary2"/>
 		<property name="company" ref="company1"/>
@@ -796,7 +796,7 @@
 		<property name="foodExpense" value="20"/>
 		<property name="status" value="true"/>
 		<property name="identifier" value="12345678"/>
-		<property name="date" value="21/01/2017"/>
+		<property name="date" value="21/01/2011"/>
 		<property name="age" value="2"/>
 		<property name="chip" value="true"/>
 		<property name="center" ref="center1"/>
@@ -810,7 +810,7 @@
 		<property name="foodExpense" value="20"/>
 		<property name="status" value="true"/>
 		<property name="identifier" value="12345678"/>
-		<property name="date" value="21/01/2018"/>
+		<property name="date" value="21/01/2012"/>
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
@@ -824,7 +824,7 @@
 		<property name="foodExpense" value="20"/>
 		<property name="status" value="true"/>
 		<property name="identifier" value="12345678"/>
-		<property name="date" value="21/04/2018"/>
+		<property name="date" value="21/04/2013"/>
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>

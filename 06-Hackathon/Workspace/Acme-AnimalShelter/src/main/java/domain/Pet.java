@@ -37,8 +37,7 @@ public class Pet extends DomainEntity{
 	private Boolean chip;
 	
 	@NotBlank
-//	@Pattern(regexp = "^((DOG)|(CAT)|(BIRD))$")
-//	@Pattern(regexp = "^DOG|CAT|BIRD$")
+	@Pattern(regexp = "^((DOG)|(CAT)|(BIRD))$")
 	public String getType() {
 		return type;
 	}
