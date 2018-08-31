@@ -60,9 +60,11 @@
 											<!--    	VOLUNTARY 		-->
 		<security:intercept-url pattern="/voluntary/register.do" access="isAnonymous()" /> 
 		
-		
 											<!-- 		PET 		-->
 		<security:intercept-url pattern="/pet/listNotAdopted.do" access="permitAll" /> 
+		
+											<!-- 		CENTER 		-->
+		<security:intercept-url pattern="/center/list.do" access="permitAll" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

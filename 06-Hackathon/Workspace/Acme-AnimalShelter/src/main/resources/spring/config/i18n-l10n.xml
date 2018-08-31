@@ -30,6 +30,7 @@
 		<value>/views/actor/messages</value>
 		<value>/views/terms/messages</value>
 		<value>/views/pet/messages</value>
+		<value>/views/center/messages</value>
 	</util:list>
 
 </beans>
