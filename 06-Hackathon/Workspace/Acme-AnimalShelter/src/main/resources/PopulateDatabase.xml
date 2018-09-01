@@ -256,7 +256,7 @@
 	</bean>
 	
 	<bean id="client2" class="domain.Client">
-		<property name="ban" value="false" />
+		<property name="ban" value="true" />
 		<property name="name" value="Ana" />
 		<property name="surname" value="Vazquez" />
 		<property name="email" value="anvaz@gmail.com" />
