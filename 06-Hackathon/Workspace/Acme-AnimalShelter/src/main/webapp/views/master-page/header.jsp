@@ -64,6 +64,11 @@
 		<security:authorize access="hasRole('VOLUNTARY')">
 			<li><a href="voluntary/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 		</security:authorize>
+		
+		<security:authorize access="hasRole('ADMIN')">
+			<li><a href="administrator/list.do"><spring:message code="master.page.listUsers" /></a></li>
+			<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.editConfiguration" /></a></li>
+		</security:authorize>
 	</ul>
 </div>
 
