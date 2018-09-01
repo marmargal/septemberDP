@@ -55,13 +55,16 @@
 		<security:intercept-url pattern="/terms/list.do" access="permitAll" /> 
 		
 											<!--    	CLIENT 		-->
-		<security:intercept-url pattern="/client/register.do" access="isAnonymous()" /> 	
+		<security:intercept-url pattern="/client/register.do" access="isAnonymous()" />
+		<security:intercept-url pattern="/client/edit.do" access="hasRole('CLIENT')" /> 	
 		
 											<!--    	VOLUNTARY 		-->
 		<security:intercept-url pattern="/voluntary/register.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/voluntary/edit.do" access="hasRole('VOLUNTARY')" /> 
 		
 											<!-- 		PET 		-->
-		<security:intercept-url pattern="/pet/listNotAdopted.do" access="permitAll" /> 
+		<security:intercept-url pattern="/pet/petsWaitingAdoption.do" access="permitAll" /> 
+		<security:intercept-url pattern="/pet/petsPermitAdoption.do" access="permitAll" /> 
 		
 											<!-- 		CENTER 		-->
 		<security:intercept-url pattern="/center/list.do" access="permitAll" /> 

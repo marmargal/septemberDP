@@ -38,12 +38,25 @@ public class PetController extends AbstractController {
 
 	// List ---------------------------------------------------------------		
 
-	@RequestMapping("/listNotAdopted")
-	public ModelAndView list() {
+	@RequestMapping("/petsWaitingAdoption")
+	public ModelAndView listPetsWaitingAdoption() {
 		ModelAndView result;
 
 		Collection<Pet> pets = new ArrayList<Pet>(); 
-		pets = this.petService.findPetsNotAdopted();
+		pets = this.petService.findPetsWaitingAdoption();
+		
+		result = new ModelAndView("pet/list");
+		result.addObject("pets", pets);
+
+		return result;
+	}
+	
+	@RequestMapping("/petsPermitAdoption")
+	public ModelAndView listPetsPermitAdoption() {
+		ModelAndView result;
+
+		Collection<Pet> pets = new ArrayList<Pet>(); 
+		pets = this.petService.findPetsPermitAdoption();
 		
 		result = new ModelAndView("pet/list");
 		result.addObject("pets", pets);

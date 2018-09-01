@@ -666,7 +666,7 @@
 		<property name="address" value="C/Margarita n1"/>
 		<property name="capacity" value="30000"/>
 		<property name="stock" value="5000"/>
-		<property name="picture" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Joyce_Center.jpg/1200px-Joyce_Center.jpg"/>
+		<property name="picture" value="http://www.helpsavepets.org/wp-content/uploads/2015/11/Shorewood.jpg"/>
 		<property name="description" value="Animal Shelter center 1"/>
 		<property name="warehouse" ref="warehouse1"/>
 		<property name="pets">
@@ -674,6 +674,7 @@
 				<ref bean="pet1"/>
 				<ref bean="pet2"/>
 				<ref bean="pet3"/>
+				<ref bean="pet4"/>
 			</list>
 		</property>
 		<property name="employees">
@@ -756,12 +757,11 @@
 	<bean id="application3" class="domain.Application">
 		<property name="ticker" value="1234567SDFGH"/>
 		<property name="createMoment" value="12/07/2011"/>
-		<property name="closed" value="true"/>
+		<property name="closed" value="false"/>
 		<property name="pet" ref="pet3"/>
 		<property name="client" ref="client1"/>
 		<property name="report" ref="report3"/>
 	</bean>
-	
 	
 	<!-- REPORT -->
 	<bean id="report1" class="domain.Report">
@@ -794,7 +794,7 @@
 		<property name="name" value="Puppy"/>
 		<property name="type" value="DOG"/>
 		<property name="foodExpense" value="20"/>
-		<property name="status" value="true"/>
+		<property name="status" value="false"/>
 		<property name="identifier" value="12345678"/>
 		<property name="date" value="21/01/2011"/>
 		<property name="age" value="2"/>
@@ -808,7 +808,7 @@
 		<property name="name" value="Kitty"/>
 		<property name="type" value="CAT"/>
 		<property name="foodExpense" value="20"/>
-		<property name="status" value="true"/>
+		<property name="status" value="false"/>
 		<property name="identifier" value="12345678"/>
 		<property name="date" value="21/01/2012"/>
 		<property name="age" value="1"/>
@@ -830,6 +830,34 @@
 		<property name="center" ref="center1"/>
 		<property name="application" ref="application3"/>
 		<property name="medicalReport" ref="medicalReport3"/>
+	</bean>
+	
+	<bean id="pet4" class="domain.Pet">
+		<property name="name" value="Jara"/>
+		<property name="type" value="DOG"/>
+		<property name="foodExpense" value="10"/>
+		<property name="status" value="true"/>
+		<property name="identifier" value="985454"/>
+		<property name="date" value="21/04/2014"/>
+		<property name="age" value="5"/>
+		<property name="chip" value="false"/>
+		<property name="center" ref="center1"/>
+		<property name="application"><null/></property>
+		<property name="medicalReport" ref="medicalReport4"/>
+	</bean>
+	
+	<bean id="pet5" class="domain.Pet">
+		<property name="name" value="Turka"/>
+		<property name="type" value="CAT"/>
+		<property name="foodExpense" value="10"/>
+		<property name="status" value="true"/>
+		<property name="identifier" value="656161"/>
+		<property name="date" value="21/04/2015"/>
+		<property name="age" value="8"/>
+		<property name="chip" value="true"/>
+		<property name="center" ref="center1"/>
+		<property name="application"><null/></property>
+		<property name="medicalReport" ref="medicalReport5"/>
 	</bean>
 	
 	
@@ -872,6 +900,32 @@
 		<property name="date" value="12/12/2011"/>
 		<property name="pet" ref="pet3"/>
 		<property name="veterinary" ref="veterinary2"/>
+	</bean>
+	
+	<bean id="medicalReport4" class="domain.MedicalReport">
+		<property name="diagnosis" value="Parásito."/>
+		<property name="initialState" value="Enfermo"/>
+		<property name="treatment" value="Medicamnetos."/>
+		<property name="diseases">
+			<list>
+			</list>
+		</property>
+		<property name="date" value="09/11/2011"/>
+		<property name="pet" ref="pet4"/>
+		<property name="veterinary" ref="veterinary2"/>
+	</bean>
+	
+	<bean id="medicalReport5" class="domain.MedicalReport">
+		<property name="diagnosis" value="Virus."/>
+		<property name="initialState" value="Enfermo"/>
+		<property name="treatment" value="Medicamnetos."/>
+		<property name="diseases">
+			<list>
+			</list>
+		</property>
+		<property name="date" value="08/10/2012"/>
+		<property name="pet" ref="pet5"/>
+		<property name="veterinary" ref="veterinary1"/>
 	</bean>
 	
 	

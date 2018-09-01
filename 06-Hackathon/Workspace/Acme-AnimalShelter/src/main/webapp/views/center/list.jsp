@@ -17,7 +17,7 @@
 
 	<spring:message code="center.picture" var="pictureHeader" />
 	<display:column title="${pictureHeader}" sortable="false" >
-		<img src="<jstl:out value="${picture}"/>" width="200" height="87">
+		<img src="<jstl:out value="${row.picture}"/>" width="200" height="87">
 	</display:column>
 	
 	<acme:column property="description" code="center.description" />

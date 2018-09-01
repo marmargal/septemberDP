@@ -36,7 +36,8 @@
 					<li><a href="voluntary/register.do"><spring:message code="master.page.register.voluntary" /></a></li>
 				</ul>
 			</li>
-			<li><a href="pet/listNotAdopted.do"><spring:message code="master.page.petNotAdopted" /></a></li>
+			<li><a href="pet/petsWaitingAdoption.do"><spring:message code="master.page.petsWaitingAdoption" /></a></li>
+			<li><a href="pet/petsPermitAdoption.do"><spring:message code="master.page.petsPermitAdoption" /></a></li>
 			<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>
 		</security:authorize>
 		
@@ -48,11 +49,20 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="pet/listNotAdopted.do"><spring:message code="master.page.petNotAdopted" /></a></li>
+					<li><a href="pet/petsWaitingAdoption.do"><spring:message code="master.page.petsWaitingAdoption" /></a></li>
+					<li><a href="pet/petsPermitAdoption.do"><spring:message code="master.page.petsPermitAdoption" /></a></li>
 					<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>				
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('CLIENT')">
+			<li><a href="client/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('VOLUNTARY')">
+			<li><a href="voluntary/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

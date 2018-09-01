@@ -68,10 +68,18 @@ public class PetService {
 
 	// Other business methods
 	
-	public Collection<Pet> findPetsNotAdopted(){
+	public Collection<Pet> findPetsWaitingAdoption(){
 		Collection<Pet> pets = new ArrayList<Pet>();
-		pets = this.petRepository.findPetsNotAdopted();
+		pets = this.petRepository.findPetsWaitingAdoption();
 		return pets;
 	}
+	
+	public Collection<Pet> findPetsPermitAdoption(){
+		Collection<Pet> pets = new ArrayList<Pet>();
+		pets = this.petRepository.findPetsPermitAdoption();
+		return pets;
+	}
+	
+	
 
 }

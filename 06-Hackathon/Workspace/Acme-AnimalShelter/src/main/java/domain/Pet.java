@@ -127,7 +127,7 @@ public class Pet extends DomainEntity{
 	}
 
 	@Valid
-	@OneToOne
+	@OneToOne(optional=true)
 	public Application getApplication() {
 		return application;
 	}
