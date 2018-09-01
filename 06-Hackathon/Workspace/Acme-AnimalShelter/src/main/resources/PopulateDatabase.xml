@@ -876,6 +876,8 @@
 		<property name="treatment" value="Venda en la pata herida y collar isabelino."/>
 		<property name="diseases">
 			<list>
+				<value>Enfermedad 1</value>
+				<value>Enfermedad 2</value>
 			</list>
 		</property>
 		<property name="date" value="12/12/2011"/>
@@ -903,6 +905,8 @@
 		<property name="treatment" value="Vendar pata."/>
 		<property name="diseases">
 			<list>
+				<value>Enfermedad 3</value>
+				<value>Enfermedad 4</value>
 			</list>
 		</property>
 		<property name="date" value="12/12/2011"/>

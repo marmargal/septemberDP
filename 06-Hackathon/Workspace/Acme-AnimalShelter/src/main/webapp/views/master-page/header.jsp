@@ -42,6 +42,7 @@
 				</ul>
 			</li>
 			<li><a href="notice/administrator/list.do"><spring:message code="master.page.notices" /></a></li>
+			<li><a href="medicalReport/administrator/list.do"><spring:message code="master.page.medicalReport" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">

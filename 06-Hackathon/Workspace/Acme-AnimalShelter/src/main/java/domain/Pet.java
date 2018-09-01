@@ -136,7 +136,7 @@ public class Pet extends DomainEntity{
 	}
 
 	@Valid
-	@OneToOne
+	@OneToOne(optional=true)
 	public MedicalReport getMedicalReport() {
 		return medicalReport;
 	}

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.MedicalReportRepository;
 import domain.MedicalReport;
+import domain.Pet;
 
 
 @Service
@@ -22,6 +24,12 @@ public class MedicalReportService {
 
 	// Suporting services
 
+	@Autowired
+	private AdministratorService administratorService;
+	
+	@Autowired
+	private PetService petService;
+	
 	// Constructors
 
 	public MedicalReportService() {
@@ -59,14 +67,25 @@ public class MedicalReportService {
 	}
 
 	public void delete(MedicalReport medicalReport) {
+		this.administratorService.checkAuthority();
+		Assert.isTrue(medicalReport.getVeterinary().isBan());
 		Assert.notNull(medicalReport);
 		Assert.isTrue(medicalReport.getId() != 0);
 		Assert.isTrue(medicalReportRepository.exists(medicalReport.getId()));
+		
+		Pet pet = medicalReport.getPet();
+		pet.setMedicalReport(null);
+		this.petService.save(pet);
+		
 		medicalReportRepository.delete(medicalReport);
 	}
 
 	// Other business methods
 	
-	
+	public Collection<MedicalReport> findMedicalReportsVeterinaryBanned(){
+		Collection<MedicalReport> medicalReports = new ArrayList<MedicalReport>();
+		medicalReports = this.medicalReportRepository.findMedicalReportsVeterinaryBanned();
+		return medicalReports;
+	}
 
 }

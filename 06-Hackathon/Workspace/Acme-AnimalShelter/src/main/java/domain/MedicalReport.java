@@ -88,7 +88,7 @@ public class MedicalReport extends DomainEntity{
 	private Veterinary veterinary;
 	
 	@Valid
-	@OneToOne
+	@OneToOne(optional=false)
 	public Pet getPet() {
 		return pet;
 	}
