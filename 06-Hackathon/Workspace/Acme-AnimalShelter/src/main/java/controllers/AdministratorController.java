@@ -25,12 +25,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdministratorService;
+import services.BossService;
 import services.ClientService;
 import services.EmployeeService;
 import services.VeterinaryService;
 import services.VoluntaryService;
 import domain.Actor;
 import domain.Administrator;
+import domain.Boss;
 import domain.Client;
 import domain.Employee;
 import domain.Veterinary;
@@ -67,6 +69,9 @@ public class AdministratorController extends AbstractController {
 	
 	@Autowired
 	private VeterinaryService veterinaryService;
+	
+	@Autowired
+	private BossService bossService;
 
 	// List actors ---------------------------------------------------------------		
 
@@ -122,6 +127,20 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", veterinaries);
 		result.addObject("role", "veterinary");
+
+		return result;
+	}
+	
+	@RequestMapping("/listBoss")
+	public ModelAndView listBoss() {
+		ModelAndView result;
+		Collection<Boss> boss = new ArrayList<Boss>();
+		
+		boss = this.bossService.findAll();
+		
+		result = new ModelAndView("actor/list");
+		result.addObject("actors", boss);
+		result.addObject("role", "boss");
 
 		return result;
 	}

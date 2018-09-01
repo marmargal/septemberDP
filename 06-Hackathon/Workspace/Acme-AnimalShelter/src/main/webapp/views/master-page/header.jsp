@@ -21,6 +21,7 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
+			<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.editConfiguration" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.actors" /></a>
 				<ul>
@@ -29,6 +30,7 @@
 					<li><a href="administrator/listClients.do"><spring:message code="master.page.listClients" /></a></li>
 					<li><a href="administrator/listVoluntaries.do"><spring:message code="master.page.listVoluntaries" /></a></li>
 					<li><a href="administrator/listVeterinaries.do"><spring:message code="master.page.listVeterinaries" /></a></li>
+					<li><a href="administrator/listBoss.do"><spring:message code="master.page.listBoss" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -70,11 +72,6 @@
 			<li><a href="voluntary/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('ADMIN')">
-			<li><a href="administrator/list.do"><spring:message code="master.page.listUsers" /></a></li>
-			<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.editConfiguration" /></a></li>
-		</security:authorize>
-			
 		<security:authorize access="hasRole('BOSS')">
 			<li><a href="boss/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 		</security:authorize>
