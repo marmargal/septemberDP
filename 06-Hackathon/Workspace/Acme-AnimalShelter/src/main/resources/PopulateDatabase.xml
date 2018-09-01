@@ -183,6 +183,7 @@
 	
 	<!-- EMPLOYEE -->
 	<bean id="employee1" class="domain.Employee">
+		<property name="ban" value="false" />
 		<property name="name" value="Antonio" />
 		<property name="surname" value="Perez" />
 		<property name="email" value="antperz@hotmail.com" />
@@ -206,6 +207,7 @@
 	</bean>
 	
 	<bean id="employee2" class="domain.Employee">
+		<property name="ban" value="true" />
 		<property name="name" value="Manuela" />
 		<property name="surname" value="Martin" />
 		<property name="email" value="manuelamartin@gmail.com" />
@@ -232,6 +234,7 @@
 	
 	<!-- CLIENT -->
 	<bean id="client1" class="domain.Client">
+		<property name="ban" value="false" />
 		<property name="name" value="Pedro" />
 		<property name="surname" value="Galvez" />
 		<property name="email" value="pedrogl@gmail.com" />
@@ -253,6 +256,7 @@
 	</bean>
 	
 	<bean id="client2" class="domain.Client">
+		<property name="ban" value="false" />
 		<property name="name" value="Ana" />
 		<property name="surname" value="Vazquez" />
 		<property name="email" value="anvaz@gmail.com" />
@@ -276,6 +280,7 @@
 	
 	<!-- VOLUNTARY -->
 	<bean id="voluntary1" class="domain.Voluntary">
+		<property name="ban" value="false" />
 		<property name="name" value="Juan" />
 		<property name="surname" value="Donoso" />
 		<property name="email" value="jdonoso@gmail.com" />
@@ -292,6 +297,7 @@
 	</bean>
 	
 	<bean id="voluntary2" class="domain.Voluntary">
+		<property name="ban" value="true" />
 		<property name="name" value="Marta" />
 		<property name="surname" value="Alonso" />
 		<property name="email" value="malonso@gmail.com" />
@@ -310,6 +316,7 @@
 	
 	<!-- VETERINARY -->
 	<bean id="veterinary1" class="domain.Veterinary">
+		<property name="ban" value="false" />
 		<property name="name" value="Carlos" />
 		<property name="surname" value="Martos" />
 		<property name="email" value="carlosmartos@gmail.com" />
@@ -326,6 +333,7 @@
 	</bean>
 	
 	<bean id="veterinary2" class="domain.Veterinary">
+		<property name="ban" value="true" />
 		<property name="name" value="Carla" />
 		<property name="surname" value="Fernandez" />
 		<property name="email" value="cfernandez@gmail.com" />

@@ -13,4 +13,15 @@ public class Veterinary extends Actor{
 	public Veterinary(){
 		super();
 	}
+	
+	private boolean ban;
+
+	public boolean isBan() {
+		return ban;
+	}
+
+	public void setBan(boolean ban) {
+		this.ban = ban;
+	}
+
 }

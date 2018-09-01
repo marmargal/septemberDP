@@ -20,6 +20,16 @@ public class Employee extends Actor{
 		super();
 	}
 	
+	private boolean ban;
+
+	public boolean isBan() {
+		return ban;
+	}
+
+	public void setBan(boolean ban) {
+		this.ban = ban;
+	}
+	
 	// Relationships
 
 	private Stand stand;
@@ -54,4 +64,5 @@ public class Employee extends Actor{
 	public void setCenter(Center center) {
 		this.center = center;
 	}
+	
 }

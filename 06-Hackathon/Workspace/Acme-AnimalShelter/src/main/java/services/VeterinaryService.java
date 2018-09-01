@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import repositories.VeterinaryRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Folder;
 import domain.Veterinary;
 
 
@@ -38,6 +40,7 @@ public class VeterinaryService {
 	public Veterinary create() {
 		Veterinary res = new Veterinary();
 		
+		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		
@@ -45,6 +48,8 @@ public class VeterinaryService {
 		userAccount.addAuthority(authority);
 
 		res.setUserAccount(userAccount);
+		res.setFolders(folders);
+		res.setBan(false);
 		
 		return res;
 	}

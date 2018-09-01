@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Employee;
+import domain.Folder;
 
 
 @Service
@@ -38,6 +40,7 @@ public class EmployeeService {
 	public Employee create() {
 		Employee res = new Employee();
 		
+		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		
@@ -45,6 +48,8 @@ public class EmployeeService {
 		userAccount.addAuthority(authority);
 
 		res.setUserAccount(userAccount);
+		res.setFolders(folders);
+		res.setBan(false);
 		
 		return res;
 	}
