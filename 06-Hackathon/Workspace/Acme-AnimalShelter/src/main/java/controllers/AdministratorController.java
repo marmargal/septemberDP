@@ -23,12 +23,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.AdministratorService;
+import services.BossService;
 import services.ClientService;
 import services.EmployeeService;
 import services.VeterinaryService;
 import services.VoluntaryService;
+import domain.Actor;
 import domain.Administrator;
+import domain.Boss;
 import domain.Client;
 import domain.Employee;
 import domain.Veterinary;
@@ -45,6 +49,10 @@ public class AdministratorController extends AbstractController {
 		super();
 	}
 	
+	// Services ---------------------------------------------------------------
+	@Autowired
+	private ActorService actorService;
+
 	// Supporting services
 	
 	@Autowired
@@ -61,6 +69,9 @@ public class AdministratorController extends AbstractController {
 	
 	@Autowired
 	private VeterinaryService veterinaryService;
+	
+	@Autowired
+	private BossService bossService;
 
 	// List actors ---------------------------------------------------------------		
 
@@ -116,6 +127,20 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", veterinaries);
 		result.addObject("role", "veterinary");
+
+		return result;
+	}
+	
+	@RequestMapping("/listBoss")
+	public ModelAndView listBoss() {
+		ModelAndView result;
+		Collection<Boss> boss = new ArrayList<Boss>();
+		
+		boss = this.bossService.findAll();
+		
+		result = new ModelAndView("actor/list");
+		result.addObject("actors", boss);
+		result.addObject("role", "boss");
 
 		return result;
 	}
@@ -290,6 +315,21 @@ public class AdministratorController extends AbstractController {
 		result.addObject("actorForm", actorForm);
 		result.addObject("message", message);
 		result.addObject("requestURI","administrator/edit.do");
+
+		return result;
+	}
+	
+	//list users --------------------------------------------------------------
+	
+	@RequestMapping("/list")
+	public ModelAndView list() {
+		ModelAndView result;
+
+		Collection<Actor> actors = new ArrayList<Actor>(); 
+		actors = this.actorService.findAll();
+		
+		result = new ModelAndView("administrator/list");
+		result.addObject("actors", actors);
 
 		return result;
 	}

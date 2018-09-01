@@ -80,6 +80,5 @@
 	<acme:column property="name" code="actor.name" />
 	<acme:column property="surname" code="actor.surname" />
 	<acme:column property="email" code="actor.email" />
-	<acme:column property="ban" code="actor.ban" />
 	
 </display:table>
