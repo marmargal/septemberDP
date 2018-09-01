@@ -41,6 +41,7 @@
 					<li><a href="application/administrator/listClientBan.do"><spring:message code="master.page.listClientBan" /></a></li>
 				</ul>
 			</li>
+			<li><a href="notice/administrator/list.do"><spring:message code="master.page.notices" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
@@ -67,8 +68,13 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
-			<li><a href="pet/petsWaitingAdoption.do"><spring:message code="master.page.petsWaitingAdoption" /></a></li>
-			<li><a href="pet/petsPermitAdoption.do"><spring:message code="master.page.petsPermitAdoption" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.pets" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="pet/petsWaitingAdoption.do"><spring:message code="master.page.petsWaitingAdoption" /></a></li>
+					<li><a href="pet/petsPermitAdoption.do"><spring:message code="master.page.petsPermitAdoption" /></a></li>
+				</ul>
+			</li>
 			<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>		
 		</security:authorize>
 		

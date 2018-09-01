@@ -33,6 +33,7 @@
 		<value>/views/center/tiles.xml</value>
 		<value>/views/application/tiles.xml</value>
 		<value>/views/configuration/tiles.xml</value>
+		<value>/views/notice/tiles.xml</value>
 	</util:list>
 
 </beans>

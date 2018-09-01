@@ -56,6 +56,10 @@
 											<!--    	TERMS 		-->
 		<security:intercept-url pattern="/terms/list.do" access="permitAll" /> 
 		
+											<!-- 		ADMIN 		-->
+		<security:intercept-url pattern="/administrator/**" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('VETERINARY')" />
+		
 											<!--    	CLIENT 		-->
 		<security:intercept-url pattern="/client/register.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/client/edit.do" access="hasRole('CLIENT')" /> 	
@@ -83,10 +87,9 @@
 											<!-- 		APPLICATION 		-->
 		<security:intercept-url pattern="/application/administrator/**" access="hasRole('ADMIN')" /> 
 		
-											<!-- 		ADMIN 		-->
-		<security:intercept-url pattern="/administrator/**" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('VETERINARY')" />
-	
+											<!-- 		NOTICE 		-->
+		<security:intercept-url pattern="/notice/administrator/**" access="hasRole('ADMIN')" /> 
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 
