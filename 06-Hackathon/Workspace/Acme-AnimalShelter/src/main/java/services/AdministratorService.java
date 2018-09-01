@@ -7,6 +7,8 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.AdministratorRepository;
 import security.Authority;
@@ -17,6 +19,7 @@ import domain.Client;
 import domain.Employee;
 import domain.Veterinary;
 import domain.Voluntary;
+import forms.ActorForm;
 
 
 @Service
@@ -41,6 +44,9 @@ public class AdministratorService {
 	
 	@Autowired
 	private VeterinaryService veterinaryService;
+	
+	@Autowired
+	private Validator		validator;
 	
 	// Constructors
 
@@ -178,6 +184,43 @@ public class AdministratorService {
 		Veterinary veterinary = this.veterinaryService.findOne(veterinaryId);
 		veterinary.setBan(false);
 		this.veterinaryService.save(veterinary);
+	}
+	
+	public ActorForm construct(Administrator administrator){
+		ActorForm res = new ActorForm();
+		
+		res.setId(administrator.getId());
+		res.setName(administrator.getName());
+		res.setSurname(administrator.getSurname());
+		res.setEmail(administrator.getEmail());
+		res.setPhoneNumber(administrator.getPhoneNumber());
+		res.setAddress(administrator.getAddress());
+		res.setUsername(administrator.getUserAccount().getUsername());
+		
+		return res;
+	}
+	
+	public Administrator reconstruct(ActorForm administratorForm, BindingResult binding){
+		Assert.notNull(administratorForm);
+		
+		Administrator res = new Administrator();
+
+		if (administratorForm.getId() != 0)
+			res = this.findOne(administratorForm.getId());
+		else
+			res = this.create();
+		
+		res.setName(administratorForm.getName());
+		res.setSurname(administratorForm.getSurname());
+		res.setEmail(administratorForm.getEmail());
+		res.setPhoneNumber(administratorForm.getPhoneNumber());
+		res.setAddress(administratorForm.getAddress());
+		res.getUserAccount().setUsername(administratorForm.getUsername());
+		res.getUserAccount().setPassword(administratorForm.getPassword());
+
+		this.validator.validate(res, binding);
+
+		return res;
 	}
 	
 

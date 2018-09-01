@@ -53,6 +53,15 @@
 		<security:intercept-url pattern="/voluntary/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/voluntary/edit.do" access="hasRole('VOLUNTARY')" /> 
 		
+											<!--    	BOSS 		-->
+		<security:intercept-url pattern="/boss/edit.do" access="hasRole('BOSS')" />
+		
+											<!--    	EMPLOYEE 		-->
+		<security:intercept-url pattern="/employee/edit.do" access="hasRole('EMPLOYEE')" />
+		
+											<!--    	VETERINARY 		-->
+		<security:intercept-url pattern="/veterinary/edit.do" access="hasRole('VETERINARY')" />
+		
 											<!-- 		PET 		-->
 		<security:intercept-url pattern="/pet/petsWaitingAdoption.do" access="permitAll" /> 
 		<security:intercept-url pattern="/pet/petsPermitAdoption.do" access="permitAll" /> 
@@ -62,6 +71,7 @@
 		
 											<!-- 		ADMIN 		-->
 		<security:intercept-url pattern="/administrator/**" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('VETERINARY')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

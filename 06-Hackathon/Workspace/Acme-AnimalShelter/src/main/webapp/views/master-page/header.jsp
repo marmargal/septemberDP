@@ -69,6 +69,18 @@
 		<security:authorize access="hasRole('VOLUNTARY')">
 			<li><a href="voluntary/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 		</security:authorize>
+		
+		<security:authorize access="hasRole('BOSS')">
+			<li><a href="boss/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('EMPLOYEE')">
+			<li><a href="employee/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('VETERINARY')">
+			<li><a href="veterinary/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+		</security:authorize>
 	</ul>
 </div>
 

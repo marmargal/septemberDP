@@ -8,6 +8,8 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.BossRepository;
 import security.Authority;
@@ -15,6 +17,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Boss;
 import domain.Folder;
+import forms.ActorForm;
 
 
 @Service
@@ -28,6 +31,8 @@ public class BossService {
 	
 	// Supporting services
 	
+	@Autowired
+	private Validator		validator;
 	
 	// Constructors
 
@@ -112,6 +117,43 @@ public class BossService {
 		res.setAuthority("BOSS");
 		Assert.isTrue(authority.contains(res));
 	}	
+	
+	public ActorForm construct(Boss boss){
+		ActorForm res = new ActorForm();
+		
+		res.setId(boss.getId());
+		res.setName(boss.getName());
+		res.setSurname(boss.getSurname());
+		res.setEmail(boss.getEmail());
+		res.setPhoneNumber(boss.getPhoneNumber());
+		res.setAddress(boss.getAddress());
+		res.setUsername(boss.getUserAccount().getUsername());
+		
+		return res;
+	}
+	
+	public Boss reconstruct(ActorForm bossForm, BindingResult binding){
+		Assert.notNull(bossForm);
+		
+		Boss res = new Boss();
+
+		if (bossForm.getId() != 0)
+			res = this.findOne(bossForm.getId());
+		else
+			res = this.create();
+		
+		res.setName(bossForm.getName());
+		res.setSurname(bossForm.getSurname());
+		res.setEmail(bossForm.getEmail());
+		res.setPhoneNumber(bossForm.getPhoneNumber());
+		res.setAddress(bossForm.getAddress());
+		res.getUserAccount().setUsername(bossForm.getUsername());
+		res.getUserAccount().setPassword(bossForm.getPassword());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
 	
 	
 
