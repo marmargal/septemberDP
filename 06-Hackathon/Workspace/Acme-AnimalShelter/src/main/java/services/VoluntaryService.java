@@ -54,6 +54,7 @@ public class VoluntaryService {
 
 		res.setUserAccount(userAccount);
 		res.setFolders(folders);
+		res.setBan(false);
 		
 		return res;
 	}

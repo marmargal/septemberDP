@@ -58,6 +58,7 @@ public class ClientService {
 		res.setUserAccount(userAccount);
 		res.setApplications(applications);
 		res.setFolders(folders);
+		res.setBan(false);
 		
 		return res;
 	}

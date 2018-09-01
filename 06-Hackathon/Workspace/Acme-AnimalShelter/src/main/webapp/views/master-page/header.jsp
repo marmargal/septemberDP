@@ -21,9 +21,14 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
-			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.actors" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="administrator/listEmployees.do"><spring:message code="master.page.listEmployees" /></a></li>
+					<li><a href="administrator/listClients.do"><spring:message code="master.page.listClients" /></a></li>
+					<li><a href="administrator/listVoluntaries.do"><spring:message code="master.page.listVoluntaries" /></a></li>
+					<li><a href="administrator/listVeterinaries.do"><spring:message code="master.page.listVeterinaries" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -49,12 +54,12 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="pet/petsWaitingAdoption.do"><spring:message code="master.page.petsWaitingAdoption" /></a></li>
-					<li><a href="pet/petsPermitAdoption.do"><spring:message code="master.page.petsPermitAdoption" /></a></li>
-					<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>				
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
+			<li><a href="pet/petsWaitingAdoption.do"><spring:message code="master.page.petsWaitingAdoption" /></a></li>
+			<li><a href="pet/petsPermitAdoption.do"><spring:message code="master.page.petsPermitAdoption" /></a></li>
+			<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>		
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CLIENT')">
@@ -68,6 +73,18 @@
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a href="administrator/list.do"><spring:message code="master.page.listUsers" /></a></li>
 			<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.editConfiguration" /></a></li>
+		</security:authorize>
+			
+		<security:authorize access="hasRole('BOSS')">
+			<li><a href="boss/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('EMPLOYEE')">
+			<li><a href="employee/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('VETERINARY')">
+			<li><a href="veterinary/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

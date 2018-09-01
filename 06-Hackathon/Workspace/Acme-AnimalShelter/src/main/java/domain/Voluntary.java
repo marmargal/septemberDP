@@ -14,5 +14,15 @@ public class Voluntary extends Actor{
 		super();
 	}
 	
+	private boolean ban;
+
+	public boolean isBan() {
+		return ban;
+	}
+
+	public void setBan(boolean ban) {
+		this.ban = ban;
+	}
+	
 
 }

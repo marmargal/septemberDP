@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +8,16 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.EmployeeRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Employee;
+import domain.Folder;
+import forms.ActorForm;
 
 
 @Service
@@ -26,6 +31,8 @@ public class EmployeeService {
 	
 	// Supporting services
 	
+	@Autowired
+	private Validator		validator;
 	
 	// Constructors
 
@@ -38,6 +45,7 @@ public class EmployeeService {
 	public Employee create() {
 		Employee res = new Employee();
 		
+		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		
@@ -45,6 +53,8 @@ public class EmployeeService {
 		userAccount.addAuthority(authority);
 
 		res.setUserAccount(userAccount);
+		res.setFolders(folders);
+		res.setBan(false);
 		
 		return res;
 	}
@@ -109,6 +119,41 @@ public class EmployeeService {
 		Assert.isTrue(authority.contains(res));
 	}	
 	
+	public ActorForm construct(Employee employee){
+		ActorForm res = new ActorForm();
+		
+		res.setId(employee.getId());
+		res.setName(employee.getName());
+		res.setSurname(employee.getSurname());
+		res.setEmail(employee.getEmail());
+		res.setPhoneNumber(employee.getPhoneNumber());
+		res.setAddress(employee.getAddress());
+		res.setUsername(employee.getUserAccount().getUsername());
+		
+		return res;
+	}
 	
+	public Employee reconstruct(ActorForm employeeForm, BindingResult binding){
+		Assert.notNull(employeeForm);
+		
+		Employee res = new Employee();
+
+		if (employeeForm.getId() != 0)
+			res = this.findOne(employeeForm.getId());
+		else
+			res = this.create();
+		
+		res.setName(employeeForm.getName());
+		res.setSurname(employeeForm.getSurname());
+		res.setEmail(employeeForm.getEmail());
+		res.setPhoneNumber(employeeForm.getPhoneNumber());
+		res.setAddress(employeeForm.getAddress());
+		res.getUserAccount().setUsername(employeeForm.getUsername());
+		res.getUserAccount().setPassword(employeeForm.getPassword());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
 
 }

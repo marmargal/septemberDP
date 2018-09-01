@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +8,16 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.VeterinaryRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Folder;
 import domain.Veterinary;
+import forms.ActorForm;
 
 
 @Service
@@ -26,6 +31,8 @@ public class VeterinaryService {
 	
 	// Supporting services
 	
+	@Autowired
+	private Validator		validator;
 	
 	// Constructors
 
@@ -38,6 +45,7 @@ public class VeterinaryService {
 	public Veterinary create() {
 		Veterinary res = new Veterinary();
 		
+		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		
@@ -45,6 +53,8 @@ public class VeterinaryService {
 		userAccount.addAuthority(authority);
 
 		res.setUserAccount(userAccount);
+		res.setFolders(folders);
+		res.setBan(false);
 		
 		return res;
 	}
@@ -109,6 +119,41 @@ public class VeterinaryService {
 		Assert.isTrue(authority.contains(res));
 	}	
 	
+	public ActorForm construct(Veterinary veterinary){
+		ActorForm res = new ActorForm();
+		
+		res.setId(veterinary.getId());
+		res.setName(veterinary.getName());
+		res.setSurname(veterinary.getSurname());
+		res.setEmail(veterinary.getEmail());
+		res.setPhoneNumber(veterinary.getPhoneNumber());
+		res.setAddress(veterinary.getAddress());
+		res.setUsername(veterinary.getUserAccount().getUsername());
+		
+		return res;
+	}
 	
+	public Veterinary reconstruct(ActorForm veterinaryForm, BindingResult binding){
+		Assert.notNull(veterinaryForm);
+		
+		Veterinary res = new Veterinary();
+
+		if (veterinaryForm.getId() != 0)
+			res = this.findOne(veterinaryForm.getId());
+		else
+			res = this.create();
+		
+		res.setName(veterinaryForm.getName());
+		res.setSurname(veterinaryForm.getSurname());
+		res.setEmail(veterinaryForm.getEmail());
+		res.setPhoneNumber(veterinaryForm.getPhoneNumber());
+		res.setAddress(veterinaryForm.getAddress());
+		res.getUserAccount().setUsername(veterinaryForm.getUsername());
+		res.getUserAccount().setPassword(veterinaryForm.getPassword());
+
+		this.validator.validate(res, binding);
+
+		return res;
+	}
 
 }

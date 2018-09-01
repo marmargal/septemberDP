@@ -18,6 +18,16 @@ public class Client extends Actor{
 		super();
 	}
 	
+	private boolean ban;
+
+	public boolean isBan() {
+		return ban;
+	}
+
+	public void setBan(boolean ban) {
+		this.ban = ban;
+	}
+	
 	// Relationships
 
 	private Collection<Application> applications;
@@ -31,4 +41,5 @@ public class Client extends Actor{
 	public void setApplications(Collection<Application> applications) {
 		this.applications = applications;
 	}
+
 }
