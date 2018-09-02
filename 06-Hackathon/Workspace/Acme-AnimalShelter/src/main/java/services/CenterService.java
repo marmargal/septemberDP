@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CenterRepository;
-import domain.Boss;
 import domain.Center;
 import domain.Employee;
 import domain.Event;
@@ -24,8 +23,20 @@ public class CenterService {
 
 	@Autowired
 	private CenterRepository centerRepository;
-
+	
 	// Suporting services
+	
+	@Autowired
+	private EmployeeService employeeService;
+	
+	@Autowired
+	private EventService eventService;
+	
+	@Autowired
+	private AdministratorService administratorService;
+	
+	@Autowired
+	private PetService petService;
 
 	// Constructors
 
@@ -38,16 +49,6 @@ public class CenterService {
 	public Center create() {
 		Center res = new Center();
 		
-		Collection<Pet> pets = new ArrayList<Pet>();
-		Collection<Employee> employees = new ArrayList<Employee>();
-		Collection<Event> events = new ArrayList<Event>();
-		Boss boss = new Boss();
-		
-		res.setPets(pets);
-		res.setEmployees(employees);
-		res.setEvents(events);
-		res.setBoss(boss);
-
 		return res;
 
 	}
@@ -74,14 +75,34 @@ public class CenterService {
 	}
 
 	public void delete(Center center) {
+		this.administratorService.checkAuthority();
 		Assert.notNull(center);
 		Assert.isTrue(center.getId() != 0);
 		Assert.isTrue(centerRepository.exists(center.getId()));
+		
+		//Eliminamos sus relaciones
+		Collection<Employee> employees = new ArrayList<Employee>();
+		employees = this.employeeService.findByCenter(center.getId());
+		for(Employee employee: employees){
+			this.employeeService.delete(employee);
+		}
+		
+		Collection<Event> events = new ArrayList<Event>(); 
+		events = this.eventService.findEventByCenter(center.getId());
+		for(Event event: events){
+			this.eventService.delete(event);
+		}
+		
+		Collection<Pet> pets = new ArrayList<Pet>(); 
+		pets = this.petService.findPetsByCenter(center.getId());
+		for(Pet pet: pets){
+			this.petService.delete(pet);
+		}
+		
 		centerRepository.delete(center);
 	}
 
 	// Other business methods
-	
 	
 
 }

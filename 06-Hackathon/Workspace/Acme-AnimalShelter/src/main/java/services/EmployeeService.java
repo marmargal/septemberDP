@@ -17,6 +17,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Employee;
 import domain.Folder;
+import domain.Report;
 import forms.ActorForm;
 
 
@@ -30,6 +31,9 @@ public class EmployeeService {
 	private EmployeeRepository employeeRepository;
 	
 	// Supporting services
+	
+	@Autowired
+	private ReportService reportService;
 	
 	@Autowired
 	private Validator		validator;
@@ -94,6 +98,14 @@ public class EmployeeService {
 		Assert.notNull(employee);
 		Assert.isTrue(employee.getId() != 0);
 		Assert.isTrue(this.employeeRepository.exists(employee.getId()));
+		
+		//Eliminamos sus relaciones
+		Collection<Report> reports = new ArrayList<Report>();
+		reports = employee.getReports();
+		for(Report report: reports){
+			this.reportService.delete(report);
+		}
+		
 		this.employeeRepository.delete(employee);
 	}
 
@@ -154,6 +166,12 @@ public class EmployeeService {
 		this.validator.validate(res, binding);
 
 		return res;
+	}
+	
+	public Collection<Employee> findByCenter(int centerId){
+		Collection<Employee> employees = new ArrayList<Employee>();
+		employees = this.employeeRepository.findByCenter(centerId);
+		return employees;
 	}
 
 }

@@ -1,12 +1,9 @@
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -80,9 +77,6 @@ public class Center extends DomainEntity{
 	// Relationships
 	
 	private Warehouse warehouse;
-	private Collection<Pet> pets;
-	private Collection<Employee> employees;
-	private Collection<Event> events;
 	private Boss boss;
 	
 	@Valid
@@ -93,36 +87,6 @@ public class Center extends DomainEntity{
 
 	public void setWarehouse(Warehouse warehouse) {
 		this.warehouse = warehouse;
-	}
-
-	@Valid
-	@OneToMany(mappedBy = "center")
-	public Collection<Pet> getPets() {
-		return pets;
-	}
-
-	public void setPets(Collection<Pet> pets) {
-		this.pets = pets;
-	}
-
-	@Valid
-	@OneToMany(mappedBy = "center")
-	public Collection<Employee> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(Collection<Employee> employees) {
-		this.employees = employees;
-	}
-
-	@Valid
-	@OneToMany(mappedBy = "center")
-	public Collection<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(Collection<Event> events) {
-		this.events = events;
 	}
 
 	@Valid

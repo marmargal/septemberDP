@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ReportRepository;
+import domain.Application;
 import domain.Report;
 
 
@@ -21,6 +22,9 @@ public class ReportService {
 	private ReportRepository reportRepository;
 
 	// Suporting services
+	
+	@Autowired
+	private ApplicationService applicationService;
 
 	// Constructors
 
@@ -62,6 +66,11 @@ public class ReportService {
 		Assert.notNull(report);
 		Assert.isTrue(report.getId() != 0);
 		Assert.isTrue(reportRepository.exists(report.getId()));
+		
+		Application application = report.getApplication();
+		application.setReport(null);
+		this.applicationService.save(application);
+		
 		reportRepository.delete(report);
 	}
 

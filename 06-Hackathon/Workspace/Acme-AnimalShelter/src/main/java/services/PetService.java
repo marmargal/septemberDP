@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.PetRepository;
+import domain.Application;
+import domain.MedicalReport;
 import domain.Pet;
 
 
@@ -22,6 +24,12 @@ public class PetService {
 	private PetRepository petRepository;
 
 	// Suporting services
+	
+	@Autowired
+	private MedicalReportService medicalReportService;
+	
+	@Autowired
+	private ApplicationService applicationService;
 
 	// Constructors
 
@@ -63,6 +71,18 @@ public class PetService {
 		Assert.notNull(pet);
 		Assert.isTrue(pet.getId() != 0);
 		Assert.isTrue(petRepository.exists(pet.getId()));
+		
+		//Eliminamos sus relaciones
+		MedicalReport medicalReport = pet.getMedicalReport();
+		if(medicalReport != null){
+			this.medicalReportService.delete(medicalReport);
+		}
+		
+		Application application = pet.getApplication();
+		if(application != null){
+			this.applicationService.delete(application);
+		}
+				
 		petRepository.delete(pet);
 	}
 
@@ -80,6 +100,11 @@ public class PetService {
 		return pets;
 	}
 	
+	public Collection<Pet> findPetsByCenter(int centerId){
+		Collection<Pet> pets = new ArrayList<Pet>();
+		pets = this.petRepository.findPetsByCenter(centerId);
+		return pets;
+	}
 	
 
 }

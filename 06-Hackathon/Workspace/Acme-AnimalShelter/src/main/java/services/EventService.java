@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,10 @@ public class EventService {
 
 	// Other business methods
 	
-	
+	public Collection<Event> findEventByCenter(int centerId){
+		Collection<Event> events = new ArrayList<Event>();
+		events = this.eventRepository.findEventByCenter(centerId);
+		return events;
+	}
 
 }

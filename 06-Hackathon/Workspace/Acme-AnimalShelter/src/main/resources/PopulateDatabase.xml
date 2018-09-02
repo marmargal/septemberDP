@@ -677,25 +677,6 @@
 		<property name="picture" value="http://www.helpsavepets.org/wp-content/uploads/2015/11/Shorewood.jpg"/>
 		<property name="description" value="Animal Shelter center 1"/>
 		<property name="warehouse" ref="warehouse1"/>
-		<property name="pets">
-			<list>
-				<ref bean="pet1"/>
-				<ref bean="pet2"/>
-				<ref bean="pet3"/>
-				<ref bean="pet4"/>
-			</list>
-		</property>
-		<property name="employees">
-			<list>
-				<ref bean="employee1"/>
-				<ref bean="employee2"/>
-			</list>
-		</property>
-		<property name="events">
-			<list>
-				<ref bean="event1"/>
-			</list>
-		</property>
 		<property name="boss" ref="boss1"/>
 	</bean>
 	

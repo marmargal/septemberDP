@@ -15,6 +15,14 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="centers" requestURI="${requestURI }" id="row">
 
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<form name="submitForm" method="POST" action="center/administrator/delete.do?centerId=${row.id }">
+		    	<acme:submit name="delete" code="center.delete"/>
+			</form>
+		</display:column>
+	</security:authorize>
+
 	<spring:message code="center.picture" var="pictureHeader" />
 	<display:column title="${pictureHeader}" sortable="false" >
 		<img src="<jstl:out value="${row.picture}"/>" width="200" height="87">

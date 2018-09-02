@@ -16,4 +16,7 @@ public interface PetRepository extends JpaRepository<Pet, Integer>{
 	
 	@Query("select p from Pet p where p.status=true")
 	Collection<Pet> findPetsPermitAdoption();
+	
+	@Query("select p from Pet p join p.center c where c.id=?1")
+	Collection<Pet> findPetsByCenter(int centerId);
 }

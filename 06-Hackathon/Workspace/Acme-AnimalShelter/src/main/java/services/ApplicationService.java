@@ -72,7 +72,7 @@ public class ApplicationService {
 
 	public void delete(Application application) {
 		this.administratorService.checkAuthority();
-		Assert.isTrue(application.getClosed() == false || application.getClient().isBan());
+//		Assert.isTrue(application.getClosed() == false || application.getClient().isBan());
 		Assert.notNull(application);
 		Assert.isTrue(application.getId() != 0);
 		Assert.isTrue(applicationRepository.exists(application.getId()));
@@ -83,7 +83,9 @@ public class ApplicationService {
 		this.petService.save(pet);
 		
 		Report report = application.getReport();
-		this.reportService.delete(report);
+		if(report != null){
+			this.reportService.delete(report);
+		}
 		
 		applicationRepository.delete(application);
 	}

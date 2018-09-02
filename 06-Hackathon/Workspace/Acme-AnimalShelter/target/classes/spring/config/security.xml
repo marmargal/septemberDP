@@ -83,6 +83,7 @@
 		
 											<!-- 		CENTER 		-->
 		<security:intercept-url pattern="/center/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/center/administrator/**" access="hasRole('ADMIN')" />
 		
 											<!-- 		APPLICATION 		-->
 		<security:intercept-url pattern="/application/administrator/**" access="hasRole('ADMIN')" /> 

@@ -68,7 +68,7 @@ public class MedicalReportService {
 
 	public void delete(MedicalReport medicalReport) {
 		this.administratorService.checkAuthority();
-		Assert.isTrue(medicalReport.getVeterinary().isBan());
+//		Assert.isTrue(medicalReport.getVeterinary().isBan());
 		Assert.notNull(medicalReport);
 		Assert.isTrue(medicalReport.getId() != 0);
 		Assert.isTrue(medicalReportRepository.exists(medicalReport.getId()));
