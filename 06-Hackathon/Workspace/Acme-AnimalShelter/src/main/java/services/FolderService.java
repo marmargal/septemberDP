@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.FolderRepository;
 import domain.Folder;
+import domain.Message;
 
 
 @Service
@@ -32,6 +34,10 @@ public class FolderService {
 
 	public Folder create() {
 		Folder res = new Folder();
+		
+		Collection<Message> messages = new ArrayList<Message>();
+		res.setMessages(messages);
+		res.setPredefined(true);
 		
 		return res;
 

@@ -155,6 +155,11 @@
 				<ref bean="folder3"/>
 			</list>
 		</property>
+		<property name="received"><null/></property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	
@@ -176,6 +181,12 @@
 				<ref bean="folder4"/>
 				<ref bean="folder5"/>
 				<ref bean="folder6"/>
+			</list>
+		</property>
+		<property name="received"><null/></property>
+		<property name="sent">
+			<list>
+				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -204,6 +215,11 @@
 				<ref bean="folder9"/>
 			</list>
 		</property>
+		<property name="received" ref="message1"/>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="employee2" class="domain.Employee">
@@ -227,6 +243,11 @@
 				<ref bean="folder10"/>
 				<ref bean="folder11"/>
 				<ref bean="folder12"/>
+			</list>
+		</property>
+		<property name="received" ref="message1"/>
+		<property name="sent">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -253,6 +274,11 @@
 				<ref bean="folder15"/>
 			</list>
 		</property>
+		<property name="received" ref="message2"/>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="client2" class="domain.Client">
@@ -275,6 +301,11 @@
 				<ref bean="folder18"/>
 			</list>
 		</property>
+		<property name="received"><null/></property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	
@@ -294,6 +325,11 @@
 				<ref bean="folder21"/>
 			</list>
 		</property>
+		<property name="received"><null/></property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="voluntary2" class="domain.Voluntary">
@@ -309,6 +345,11 @@
 				<ref bean="folder22"/>
 				<ref bean="folder23"/>
 				<ref bean="folder24"/>
+			</list>
+		</property>
+		<property name="received"><null/></property>
+		<property name="sent">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -330,6 +371,12 @@
 				<ref bean="folder27"/>
 			</list>
 		</property>
+		<property name="received"><null/></property>
+		<property name="sent">
+			<list>
+				<ref bean="message2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="veterinary2" class="domain.Veterinary">
@@ -345,6 +392,11 @@
 				<ref bean="folder28"/>
 				<ref bean="folder29"/>
 				<ref bean="folder30"/>
+			</list>
+		</property>
+		<property name="received"><null/></property>
+		<property name="sent">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -393,6 +445,7 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
+				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -413,6 +466,7 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
+				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -441,6 +495,7 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
+				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -479,7 +534,6 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
-				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -586,7 +640,6 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
-				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -646,11 +699,13 @@
 		<property name="subject" value="Hola"/>
 		<property name="body" value="¿Cómo está Puppy?"/>
 		<property name="priority" value="LOW"/>
-		<property name="folders">
+		<property name="folder" ref="folder5"/>
+		<property name="sender" ref="boss1" />
+		<property name="recipient">
 			<list>
-				<ref bean="folder14"/>
-				<ref bean="folder26"/>
-			</list>
+				<ref bean="employee1"/>
+				<ref bean="employee2"/>
+			</list> 
 		</property>
 	</bean>
 	
@@ -659,11 +714,12 @@
 		<property name="subject" value="Hola"/>
 		<property name="body" value="Puppy está bien."/>
 		<property name="priority" value="LOW"/>
-		<property name="folders">
+		<property name="folder" ref="folder26"/>
+		<property name="sender" ref="veterinary1" />
+		<property name="recipient">
 			<list>
-				<ref bean="folder26"/>
-				<ref bean="folder13"/>
-			</list>
+				<ref bean="client1"/>
+			</list> 
 		</property>
 	</bean>
 	
@@ -1015,7 +1071,5 @@
 		<property name="spanishWelcome" value="¡¡Bienvenido a Acme Animal Shelter!!"/>
 		<property name="countryCode" value="ES"/>
 	</bean>
-	
-	
 	
 </beans>

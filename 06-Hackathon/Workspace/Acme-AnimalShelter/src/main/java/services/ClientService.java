@@ -18,6 +18,7 @@ import security.UserAccount;
 import domain.Application;
 import domain.Client;
 import domain.Folder;
+import domain.Message;
 import forms.ActorForm;
 
 
@@ -31,6 +32,9 @@ public class ClientService {
 	private ClientRepository clientRepository;
 	
 	// Supporting services
+	
+	@Autowired
+	private FolderService folderService;
 	
 	@Autowired
 	private Validator		validator;
@@ -47,19 +51,33 @@ public class ClientService {
 		Client res = new Client();
 		
 		Collection<Application> applications = new ArrayList<Application>();
+		Collection<Message> messages = new ArrayList<Message>();
 		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
-		
+		Folder inBox = this.folderService.create();
+		Folder outBox = this.folderService.create();
+		Folder trash = this.folderService.create();
 		
 		authority.setAuthority(Authority.CLIENT);
 		userAccount.addAuthority(authority);
 
+		inBox.setName("In Box");
+		outBox.setName("Out Box");
+		trash.setName("Trash");
+		this.folderService.save(inBox);
+		this.folderService.save(outBox);
+		this.folderService.save(trash);
+		folders.add(inBox);
+		folders.add(outBox);
+		folders.add(trash);
+		
 		res.setUserAccount(userAccount);
 		res.setApplications(applications);
 		res.setFolders(folders);
+		res.setSent(messages);
 		res.setBan(false);
-		
+
 		return res;
 	}
 

@@ -5,7 +5,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -43,11 +43,12 @@ public class Folder extends DomainEntity{
 	}
 	
 	// Relationships
-	
+
 	private Collection<Message> messages;
 	
 	@Valid
-	@ManyToMany(mappedBy = "folders")
+	@NotNull
+	@OneToMany(mappedBy = "folder")
 	public Collection<Message> getMessages() {
 		return messages;
 	}
@@ -55,5 +56,4 @@ public class Folder extends DomainEntity{
 	public void setMessages(Collection<Message> messages) {
 		this.messages = messages;
 	}
-	
 }
