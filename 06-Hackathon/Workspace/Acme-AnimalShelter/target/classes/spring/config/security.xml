@@ -80,6 +80,7 @@
 											<!-- 		PET 		-->
 		<security:intercept-url pattern="/pet/petsWaitingAdoption.do" access="permitAll" /> 
 		<security:intercept-url pattern="/pet/petsPermitAdoption.do" access="permitAll" /> 
+		<security:intercept-url pattern="/pet/administrator/**" access="hasRole('ADMIN')" />
 		
 											<!-- 		CENTER 		-->
 		<security:intercept-url pattern="/center/list.do" access="permitAll" /> 

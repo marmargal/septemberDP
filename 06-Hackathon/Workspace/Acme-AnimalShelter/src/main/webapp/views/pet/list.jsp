@@ -15,6 +15,16 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="pets" requestURI="${requestURI }" id="row">
 	
+	<security:authorize access="hasRole('ADMIN')">
+		<jstl:if test="${viewForDelete == true}">
+			<display:column>
+				<form name="submitForm" method="POST" action="pet/administrator/delete.do?petId=${row.id }">
+			    	<acme:submit name="delete" code="pet.delete"/>
+				</form>
+			</display:column>
+		</jstl:if>
+	</security:authorize>
+	
 	<acme:column property="name" code="pet.name" />
 	<acme:column property="type" code="pet.type" />
 	<acme:column property="foodExpense" code="pet.foodExpense" />
