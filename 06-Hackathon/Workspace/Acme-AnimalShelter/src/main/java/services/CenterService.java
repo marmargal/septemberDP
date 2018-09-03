@@ -104,5 +104,10 @@ public class CenterService {
 
 	// Other business methods
 	
-
+	public Center findByPet(int petId){
+		Center center = new Center();
+		center = this.centerRepository.findByPet(petId);
+		return center;
+	}
+	
 }

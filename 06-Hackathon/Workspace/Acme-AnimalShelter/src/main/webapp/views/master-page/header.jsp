@@ -95,10 +95,12 @@
 		
 		<security:authorize access="hasRole('EMPLOYEE')">
 			<li><a href="employee/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+			<li><a href="pet/employee/list.do"><spring:message code="master.page.allPets" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('VETERINARY')">
 			<li><a href="veterinary/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+			<li><a href="pet/veterinary/list.do"><spring:message code="master.page.allPets" /></a></li>
 		</security:authorize>
 	</ul>
 </div>

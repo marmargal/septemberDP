@@ -186,7 +186,6 @@
 		<property name="received"><null/></property>
 		<property name="sent">
 			<list>
-				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -215,7 +214,6 @@
 				<ref bean="folder9"/>
 			</list>
 		</property>
-		<property name="received" ref="message1"/>
 		<property name="sent">
 			<list>
 			</list>
@@ -245,7 +243,7 @@
 				<ref bean="folder12"/>
 			</list>
 		</property>
-		<property name="received" ref="message1"/>
+		<property name="received"> <null/></property>
 		<property name="sent">
 			<list>
 			</list>
@@ -274,7 +272,7 @@
 				<ref bean="folder15"/>
 			</list>
 		</property>
-		<property name="received" ref="message2"/>
+		<property name="received"><null/></property>
 		<property name="sent">
 			<list>
 			</list>
@@ -374,7 +372,6 @@
 		<property name="received"><null/></property>
 		<property name="sent">
 			<list>
-				<ref bean="message2"/>
 			</list>
 		</property>
 	</bean>
@@ -445,7 +442,6 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
-				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -466,7 +462,6 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
-				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -495,7 +490,6 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
-				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -524,7 +518,6 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
-				<ref bean="message2"/>
 			</list>
 		</property>
 	</bean>
@@ -649,7 +642,6 @@
 		<property name="predefined" value="true"/>
 		<property name="messages">
 			<list>
-				<ref bean="message2"/>
 			</list>
 		</property>
 	</bean>
@@ -694,34 +686,34 @@
 	
 	
 	<!-- MESSAGE -->
-	<bean id="message1" class="domain.Message">
-		<property name="moment" value="04/03/2017"/>
-		<property name="subject" value="Hola"/>
-		<property name="body" value="¿Cómo está Puppy?"/>
-		<property name="priority" value="LOW"/>
-		<property name="folder" ref="folder5"/>
-		<property name="sender" ref="boss1" />
-		<property name="recipient">
-			<list>
-				<ref bean="employee1"/>
-				<ref bean="employee2"/>
-			</list> 
-		</property>
-	</bean>
+<!-- 	<bean id="message1" class="domain.Message"> -->
+<!-- 		<property name="moment" value="04/03/2017"/> -->
+<!-- 		<property name="subject" value="Hola"/> -->
+<!-- 		<property name="body" value="¿Cómo está Puppy?"/> -->
+<!-- 		<property name="priority" value="LOW"/> -->
+<!-- 		<property name="folder" ref="folder5"/> -->
+<!-- 		<property name="sender" ref="boss1" /> -->
+<!-- 		<property name="recipient"> -->
+<!-- 			<list> -->
+<!-- 				<ref bean="employee1"/> -->
+<!-- 				<ref bean="employee2"/> -->
+<!-- 			</list>  -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 	
-	<bean id="message2" class="domain.Message">
-		<property name="moment" value="05/03/2017"/>
-		<property name="subject" value="Hola"/>
-		<property name="body" value="Puppy está bien."/>
-		<property name="priority" value="LOW"/>
-		<property name="folder" ref="folder26"/>
-		<property name="sender" ref="veterinary1" />
-		<property name="recipient">
-			<list>
-				<ref bean="client1"/>
-			</list> 
-		</property>
-	</bean>
+<!-- 	<bean id="message2" class="domain.Message"> -->
+<!-- 		<property name="moment" value="05/03/2017"/> -->
+<!-- 		<property name="subject" value="Hola"/> -->
+<!-- 		<property name="body" value="Puppy está bien."/> -->
+<!-- 		<property name="priority" value="LOW"/> -->
+<!-- 		<property name="folder" ref="folder26"/> -->
+<!-- 		<property name="sender" ref="veterinary1" /> -->
+<!-- 		<property name="recipient"> -->
+<!-- 			<list> -->
+<!-- 				<ref bean="client1"/> -->
+<!-- 			</list>  -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 	
 	
 	

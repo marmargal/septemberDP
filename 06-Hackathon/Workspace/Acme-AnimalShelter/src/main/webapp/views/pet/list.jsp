@@ -37,4 +37,10 @@
 	<acme:column property="age" code="pet.age" />
 	<acme:column property="chip" code="pet.chip" />
 	
+	<security:authorize access="hasRole('EMPLOYEE')">
+		<display:column>
+			<acme:links url="center/employee/list.do?petId=${row.id }" code="pet.center"/>
+		</display:column>
+	</security:authorize>
+	
 </display:table>

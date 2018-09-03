@@ -81,10 +81,13 @@
 		<security:intercept-url pattern="/pet/petsWaitingAdoption.do" access="permitAll" /> 
 		<security:intercept-url pattern="/pet/petsPermitAdoption.do" access="permitAll" /> 
 		<security:intercept-url pattern="/pet/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/pet/veterinary/**" access="hasRole('VETERINARY')" />
+		<security:intercept-url pattern="/pet/employee/**" access="hasRole('EMPLOYEE')" />
 		
 											<!-- 		CENTER 		-->
 		<security:intercept-url pattern="/center/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/center/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/center/employee/**" access="hasRole('EMPLOYEE')" />
 		
 											<!-- 		APPLICATION 		-->
 		<security:intercept-url pattern="/application/administrator/**" access="hasRole('ADMIN')" /> 
