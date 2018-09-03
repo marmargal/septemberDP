@@ -67,6 +67,7 @@
 											<!--    	VOLUNTARY 		-->
 		<security:intercept-url pattern="/voluntary/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/voluntary/edit.do" access="hasRole('VOLUNTARY')" /> 
+		<security:intercept-url pattern="/voluntary/employee/**" access="hasRole('EMPLOYEE')" /> 
 		
 											<!--    	BOSS 		-->
 		<security:intercept-url pattern="/boss/edit.do" access="hasRole('BOSS')" />

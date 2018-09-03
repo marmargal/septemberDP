@@ -67,6 +67,10 @@ public class StandService {
 
 	// Other business methods
 	
+	public Stand untieVoluntary(Stand stand){
+		stand.setVoluntary(null);
+		this.save(stand);
+		return stand;
+	}
 	
-
 }
