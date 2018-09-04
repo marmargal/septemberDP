@@ -91,6 +91,12 @@
 											<!-- 		CENTER 		-->
 		<security:intercept-url pattern="/center/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/center/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/center/boss/create.do" access="hasRole('BOSS')" />
+		<security:intercept-url pattern="/center/boss/edit.do" access="hasRole('BOSS')" />
+		<security:intercept-url pattern="/center/boss/delete.do" access="hasRole('BOSS')" />
+		
+		
+		
 		<security:intercept-url pattern="/center/employee/**" access="hasRole('EMPLOYEE')" />
 		
 											<!-- 		APPLICATION 		-->

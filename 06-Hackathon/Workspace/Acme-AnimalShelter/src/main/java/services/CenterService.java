@@ -38,6 +38,7 @@ public class CenterService {
 	@Autowired
 	private PetService petService;
 
+
 	// Constructors
 
 	public CenterService() {
@@ -70,7 +71,7 @@ public class CenterService {
 
 	public Center save(Center center) {
 		Center res;
-		res = centerRepository.save(center);
+		res = centerRepository.saveAndFlush(center);
 		return res;
 	}
 
