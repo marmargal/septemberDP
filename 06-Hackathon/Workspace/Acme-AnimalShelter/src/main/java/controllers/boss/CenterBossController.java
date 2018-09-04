@@ -110,6 +110,7 @@ public class CenterBossController extends AbstractController {
 			res = new ModelAndView("redirect:/center/list.do");
 
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			res = new ModelAndView("redirect:../../");
 		}
 
