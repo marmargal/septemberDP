@@ -14,11 +14,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="/Acme-AnimalShelter"><img src="images/logo.png" alt="Acme-AnimalShelter Co., Inc." /></a>
-</div>
-
-<div>
-	<ul id="jMenu">
+	<ul class="nav">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a href="configuration/administrator/edit.do"><spring:message code="master.page.editConfiguration" /></a></li>
@@ -62,7 +58,7 @@
 		
 		<security:authorize access="isAuthenticated()">
 			<li>
-				<a class="fNiv"> 
+				<a href="#" class="fNiv"> 
 					<spring:message code="master.page.profile" /> 
 			        (<security:authentication property="principal.username" />)
 				</a>
@@ -71,7 +67,7 @@
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv"><spring:message	code="master.page.pets" /></a>
+			<li><a href="#" class="fNiv"><spring:message	code="master.page.pets" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="pet/petsWaitingAdoption.do"><spring:message code="master.page.petsWaitingAdoption" /></a></li>
@@ -106,7 +102,7 @@
 	</ul>
 </div>
 
-<div>
+<div class="languaje">
 	<a href="?language=en">en</a> | <a href="?language=es">es</a>
 </div>
 
