@@ -7,5 +7,5 @@ import domain.Stand;
 
 @Repository
 public interface StandRepository extends JpaRepository<Stand, Integer>{
-
+	
 }

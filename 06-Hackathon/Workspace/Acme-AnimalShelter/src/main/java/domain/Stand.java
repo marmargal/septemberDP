@@ -57,7 +57,7 @@ public class Stand extends DomainEntity{
 	private Company company;
 	
 	@Valid
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=true)
 	public Voluntary getVoluntary() {
 		return voluntary;
 	}

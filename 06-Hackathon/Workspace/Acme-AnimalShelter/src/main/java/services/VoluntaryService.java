@@ -15,6 +15,7 @@ import repositories.VoluntaryRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Employee;
 import domain.Folder;
 import domain.Message;
 import domain.Voluntary;
@@ -34,6 +35,9 @@ public class VoluntaryService {
 	
 	@Autowired
 	private FolderService folderService;
+	
+	@Autowired
+	private EmployeeService employeeService;
 	
 	@Autowired
 	private Validator		validator;
@@ -174,5 +178,12 @@ public class VoluntaryService {
 
 		return res;
 	}
-
+	
+	public Collection<Voluntary> findByStandEmployee(){
+		Collection<Voluntary> voluntaries = new ArrayList<Voluntary>();
+		Employee employee = this.employeeService.findByPrincipal();
+		voluntaries = this.voluntaryRepository.findByStandEmployee(employee.getId());
+		return voluntaries;
+	}
+	
 }

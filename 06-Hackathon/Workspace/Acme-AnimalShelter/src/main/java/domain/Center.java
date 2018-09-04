@@ -21,6 +21,7 @@ public class Center extends DomainEntity{
 		super();
 	}
 
+	private String name;
 	private String address;
 	private Integer capacity;
 	private Integer stock;
@@ -97,6 +98,15 @@ public class Center extends DomainEntity{
 
 	public void setBoss(Boss boss) {
 		this.boss = boss;
+	}
+
+	@NotBlank
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

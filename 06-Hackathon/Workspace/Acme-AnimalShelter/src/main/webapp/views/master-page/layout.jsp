@@ -25,13 +25,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <link rel="shortcut icon" href="favicon.ico"/> 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 <script type="text/javascript" src="scripts/jmenu.js"></script>
 
 <link rel="stylesheet" href="styles/common.css" type="text/css">
-<link rel="stylesheet" href="styles/jmenu.css" media="screen" type="text/css" />
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
 
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
@@ -61,10 +61,17 @@
 
 <body>
 
-	<div>
+	<div id="header">
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div>
+	<div class="body">
+	</div>
+	<div class="logo">
+		<a href="/Acme-AnimalShelter"><img class="imagen" src="images/animalshelter-logo.jpg"
+			alt="Acme-AnimalShelter Co., Inc." /></a>
+		
+	</div>
+	<div class="content">
 		<h1>
 			<tiles:insertAttribute name="title" />
 		</h1>
@@ -72,9 +79,9 @@
 		<jstl:if test="${message != null}">
 			<br />
 			<span class="message"><spring:message code="${message}" /></span>
-		</jstl:if>	
-	</div>
-	<div>
+		</jstl:if>
+	</div>	
+	<div class="footer">
 		<tiles:insertAttribute name="footer" />
 	</div>
 

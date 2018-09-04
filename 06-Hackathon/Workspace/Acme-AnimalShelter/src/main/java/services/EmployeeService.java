@@ -36,6 +36,9 @@ public class EmployeeService {
 	private ReportService reportService;
 	
 	@Autowired
+	private FolderService folderService;
+	
+	@Autowired
 	private Validator		validator;
 	
 	// Constructors
@@ -50,14 +53,29 @@ public class EmployeeService {
 		Employee res = new Employee();
 		
 		Collection<Folder> folders = new ArrayList<Folder>();
+		Collection<Report> reports = new ArrayList<Report>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
+		Folder inBox = this.folderService.create();
+		Folder outBox = this.folderService.create();
+		Folder trash = this.folderService.create();
 		
 		authority.setAuthority(Authority.EMPLOYEE);
 		userAccount.addAuthority(authority);
+		
+		inBox.setName("In Box");
+		outBox.setName("Out Box");
+		trash.setName("Trash");
+		this.folderService.save(inBox);
+		this.folderService.save(outBox);
+		this.folderService.save(trash);
+		folders.add(inBox);
+		folders.add(outBox);
+		folders.add(trash);
 
 		res.setUserAccount(userAccount);
 		res.setFolders(folders);
+		res.setReports(reports);
 		res.setBan(false);
 		
 		return res;
@@ -139,6 +157,7 @@ public class EmployeeService {
 		res.setSurname(employee.getSurname());
 		res.setEmail(employee.getEmail());
 		res.setPhoneNumber(employee.getPhoneNumber());
+		res.setCenter(employee.getCenter());
 		res.setAddress(employee.getAddress());
 		res.setUsername(employee.getUserAccount().getUsername());
 		
@@ -155,6 +174,7 @@ public class EmployeeService {
 		else
 			res = this.create();
 		
+		res.setCenter(employeeForm.getCenter());
 		res.setName(employeeForm.getName());
 		res.setSurname(employeeForm.getSurname());
 		res.setEmail(employeeForm.getEmail());

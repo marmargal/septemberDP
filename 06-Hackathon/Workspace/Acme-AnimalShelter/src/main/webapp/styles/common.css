@@ -7,6 +7,114 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+#header {
+	background: #2b4353;
+	width: 100%;
+	position: fixed;
+	z-index: 100;
+	padding-top: 30px;
+}
+
+.languaje {
+	text-align: left;
+	float: right;
+	margin-right: 20px;
+}
+
+.languaje a {
+	color: #b6e1e0;
+}
+
+ul,ol {
+	list-style: none;
+	font-weight: bold;
+}
+
+.nav {
+	float: left;
+}
+
+}
+.nav ul {
+	list-style: none;
+	overflow: hidden; /* Limpiamos errores de float */
+}
+
+.nav ul li {
+	float: left;
+	font-size: 16px;
+}
+
+.nav ul li a {
+	display: block;
+	/* Convertimos los elementos a en elementos bloque para manipular el padding */
+	padding: 20px;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.nav>li {
+	float: left;
+}
+
+.nav li a {
+	background-color: #2b4353;
+	color: #fff;
+	text-decoration: none;
+	padding: 10px 12px;
+	display: block;
+}
+
+.nav li a:hover {
+	background-color: #b6e1e0;
+	color: #e8630a;
+}
+
+.nav li ul {
+	display: none;
+	position: absolute;
+	min-width: 140px;
+}
+
+.nav li:hover>ul {
+	display: block;
+}
+
+.nav li ul li {
+	position: relative;
+}
+
+.nav li ul li ul {
+	right: -140px;
+	top: 0px;
+}
+
+.body {
+	margin: auto;
+	display: table;
+	height: 100%;
+}
+
+.content {
+	margin-left: 30px;
+	margin-top:5px;
+}
+
+.logo {
+	display: table-cell;
+	vertical-align: middle;
+	padding-top: 100px;
+}
+
+.imagen {
+	max-height: 90px;
+}
 
 .error {
 	color: red;
@@ -14,6 +122,29 @@
 }
 
 .message {
-	color: red;
+	color: #e8630a;
 	font-weight: bolder;
+}
+
+.footer {
+	margin-top: 70px;
+	margin-left: 30px;
+	color: #2b4353;
+}
+
+form {
+    width: 600px;
+    font: normal bold 15px Verdana, Arial;
+}
+
+form label {
+    display: inline-block;
+    width: 150px;
+    font-weight: bold;
+}
+
+form input {
+    display: inline-block;
+    width: 400px;
+    margin-bottom: 10px;
 }
