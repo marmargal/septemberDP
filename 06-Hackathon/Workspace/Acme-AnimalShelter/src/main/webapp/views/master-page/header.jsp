@@ -83,6 +83,7 @@
 		
 		<security:authorize access="hasRole('VOLUNTARY')">
 			<li><a href="voluntary/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+			<li><a href="notice/voluntary/create.do"><spring:message code="master.page.notice.create" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BOSS')">
