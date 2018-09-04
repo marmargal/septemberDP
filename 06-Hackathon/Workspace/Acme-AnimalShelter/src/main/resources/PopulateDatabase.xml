@@ -719,6 +719,7 @@
 	
 	<!-- CENTER -->
 	<bean id="center1" class="domain.Center">
+		<property name="name" value="Center1"/>
 		<property name="address" value="C/Margarita n1"/>
 		<property name="capacity" value="30000"/>
 		<property name="stock" value="5000"/>

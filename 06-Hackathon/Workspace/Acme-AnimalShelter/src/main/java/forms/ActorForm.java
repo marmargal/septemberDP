@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
+import domain.Center;
+
 public class ActorForm {
 
 	private int		id;
@@ -16,6 +18,7 @@ public class ActorForm {
 	private String	address;
 	private String  password;
 	private String  repeatPassword;
+	private Center	 center;
 	private boolean termsAndConditions;
 	
 	public ActorForm(){
@@ -113,6 +116,14 @@ public class ActorForm {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public Center getCenter() {
+		return center;
+	}
+
+	public void setCenter(Center center) {
+		this.center = center;
 	}
 	
 }
