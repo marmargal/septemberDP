@@ -71,12 +71,15 @@
 		
 											<!--    	BOSS 		-->
 		<security:intercept-url pattern="/boss/edit.do" access="hasRole('BOSS')" />
+		<security:intercept-url pattern="/boss/boss/**" access="hasRole('BOSS')" />
 		
 											<!--    	EMPLOYEE 		-->
 		<security:intercept-url pattern="/employee/edit.do" access="hasRole('EMPLOYEE')" />
+		<security:intercept-url pattern="/employee/boss/**" access="hasRole('BOSS')" />
 		
 											<!--    	VETERINARY 		-->
 		<security:intercept-url pattern="/veterinary/edit.do" access="hasRole('VETERINARY')" />
+		<security:intercept-url pattern="/veterinary/boss/**" access="hasRole('BOSS')" />
 		
 											<!-- 		PET 		-->
 		<security:intercept-url pattern="/pet/petsWaitingAdoption.do" access="permitAll" /> 

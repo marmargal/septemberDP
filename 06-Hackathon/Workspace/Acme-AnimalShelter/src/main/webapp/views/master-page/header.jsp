@@ -91,6 +91,14 @@
 		
 		<security:authorize access="hasRole('BOSS')">
 			<li><a href="boss/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="employee/boss/register.do"><spring:message code="master.page.register.employee" /></a></li>
+					<li><a href="veterinary/boss/register.do"><spring:message code="master.page.register.veterinary" /></a></li>
+					<li><a href="boss/boss/register.do"><spring:message code="master.page.register.boss" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('EMPLOYEE')">
