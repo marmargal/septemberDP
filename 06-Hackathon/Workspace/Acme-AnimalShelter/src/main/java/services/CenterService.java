@@ -76,7 +76,12 @@ public class CenterService {
 	}
 
 	public void delete(Center center) {
-		this.administratorService.checkAuthority();
+		
+		try {
+			this.administratorService.checkAuthority();
+		} catch (Exception e) {
+			this.administratorService.checkAuthority();
+		}
 		Assert.notNull(center);
 		Assert.isTrue(center.getId() != 0);
 		Assert.isTrue(centerRepository.exists(center.getId()));

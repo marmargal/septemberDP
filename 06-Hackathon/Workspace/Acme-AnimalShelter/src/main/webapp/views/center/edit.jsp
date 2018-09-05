@@ -17,6 +17,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
+	<acme:textarea code="center.name" path="name" />
 
 	<acme:textarea code="center.address" path="address" />
 
@@ -43,7 +44,14 @@
 		path="warehouse.birdFood" type="number" />
 	<acme:textarea code="center.warehouse.catFood" path="warehouse.catFood"
 		type="number" />
-
+	
 	<acme:submit name="save" code="center.save" />
+	
+	
+	<jstl:if test="${center.id != 0}">
+			<input type="submit" name="delete"
+				value="<spring:message code="center.delete" />"
+				onclick="return confirm('<spring:message code="center.confirm.delete" />')" />&nbsp;
+	</jstl:if>
 
 </form:form>
