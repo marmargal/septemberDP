@@ -27,6 +27,7 @@
 		<form:hidden path="version" />
 		<form:hidden path="voluntary" />
 		<form:hidden path="client" />
+		<form:hidden path="event" />
 
 		<acme:textbox code="donation.cuantity" path="cuantity" />
 		<acme:textbox code="donation.name" path="name" />

@@ -1011,7 +1011,6 @@
 	<bean id="event1" class="domain.Event">
 		<property name="title" value="Event 1"/>
 		<property name="description" value="An event"/>
-		<property name="donation" value="150.90"/>
 		<property name="nameSite" value="Maria Luisa Park"/>
 		<property name="address" value="Maria Luisa Park"/>
 		<property name="placard" value="https://google.com"/>

@@ -7,11 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.DonationService;
+import services.EventService;
 import controllers.AbstractController;
 import domain.Donation;
+import domain.Event;
 
 @Controller
 @RequestMapping("/donation/voluntary")
@@ -22,6 +25,9 @@ public class DonationVoluntaryController extends AbstractController {
 	@Autowired
 	private DonationService donationService;
 
+	@Autowired
+	private EventService eventService;
+
 	// Constructors -----------------------------------------------------------
 
 	public DonationVoluntaryController() {
@@ -29,12 +35,20 @@ public class DonationVoluntaryController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam(defaultValue = "0") int eventId) {
 		ModelAndView res;
 		Donation donation;
-
-		donation = this.donationService.create();
-		res = this.createEditModelAndView(donation);
+		Event event;
+		
+		if (eventId == 0) {
+			res = new ModelAndView("redirect:../../");
+		} else if (this.eventService.findOne(eventId) == null) {
+			res = new ModelAndView("redirect:../../");
+		} else {
+			event = eventService.findOne(eventId);
+			donation = this.donationService.create(event);
+			res = this.createEditModelAndView(donation);
+		}
 
 		return res;
 	}
@@ -42,17 +56,26 @@ public class DonationVoluntaryController extends AbstractController {
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Donation donation, final BindingResult binding) {
+	public ModelAndView save(@Valid Donation donation,
+			final BindingResult binding) {
 		ModelAndView res;
+		Event event;
+		Donation savedDonation;
+
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(donation, "donation.params.error");
+			res = this
+					.createEditModelAndView(donation, "donation.params.error");
 		else
 			try {
-				this.donationService.save(donation);
+				savedDonation = this.donationService.save(donation);
+				event = donation.getEvent();
+				event.getDonation().add(savedDonation);
+				eventService.save(event);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				res = this
-						.createEditModelAndView(donation, "donation.commit.error");
+				System.out.println(oops.getMessage());
+				res = this.createEditModelAndView(donation,
+						"donation.commit.error");
 			}
 		return res;
 	}

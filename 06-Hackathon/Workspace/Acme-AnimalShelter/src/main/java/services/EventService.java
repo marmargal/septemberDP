@@ -77,5 +77,9 @@ public class EventService {
 		events = this.eventRepository.findEventByCenter(centerId);
 		return events;
 	}
+	
+	public Event saveAndFlush(Event event){
+		return eventRepository.saveAndFlush(event);
+	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 import repositories.DonationRepository;
 import domain.Client;
 import domain.Donation;
+import domain.Event;
 import domain.Voluntary;
 
 
@@ -38,7 +39,7 @@ public class DonationService {
 
 	// Simple CRUD methods
 
-	public Donation create() {
+	public Donation create(Event event) {
 		Donation res = new Donation();
 		
 		try {
@@ -54,6 +55,8 @@ public class DonationService {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
+		res.setEvent(event);
 		
 		return res;
 
