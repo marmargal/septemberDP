@@ -1,5 +1,5 @@
 /*
- * VeterinaryController.java
+ * AdministratorController.java
  * 
  * Copyright (C) 2017 Universidad de Sevilla
  * 
@@ -8,7 +8,7 @@
  * http://www.tdg-seville.info/License.html
  */
 
-package controllers.veterinary;
+package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,27 +18,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.PetService;
-import services.VeterinaryService;
-import controllers.AbstractController;
-import domain.Pet;
-import domain.Veterinary;
+import services.StandService;
+import domain.Stand;
 
 @Controller
-@RequestMapping("/pet/veterinary")
-public class PetVeterinaryController extends AbstractController {
+@RequestMapping("/stand")
+public class StandController extends AbstractController {
 
 	// Services -------------------------------------------------------------
 	
 	@Autowired
-	private PetService petService;
-	
-	@Autowired
-	private VeterinaryService veterinaryService;
+	private StandService petService;
 	
 	// Constructors -----------------------------------------------------------
 
-	public PetVeterinaryController() {
+	public StandController() {
 		super();
 	}
 
@@ -47,22 +41,16 @@ public class PetVeterinaryController extends AbstractController {
 	@RequestMapping("/list")
 	public ModelAndView list() {
 		ModelAndView result;
-	
-		Veterinary veterinary;
-		Collection<Pet> pets = new ArrayList<Pet>(); 
-		pets = this.petService.findAll();
+
+		Collection<Stand> stands = new ArrayList<Stand>(); 
+		stands = this.petService.findAll();
 		
-		result = new ModelAndView("pet/list");
-		try{
-			veterinary = this.veterinaryService.findByPrincipal();
-			result.addObject("veterinaryPrincipal", veterinary);
-		}catch (Exception e) {
-			result.addObject("veterinaryPrincipal", null);
-		}
-		result.addObject("pets", pets);
-		result.addObject("viewForDelete" , true);
-	
+		result = new ModelAndView("stand/list");
+		result.addObject("stands", stands);
+		result.addObject("requestURI", "stand/list.do");
+
 		return result;
 	}
-	
+
+
 }

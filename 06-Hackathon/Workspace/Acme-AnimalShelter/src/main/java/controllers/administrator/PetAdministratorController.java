@@ -50,6 +50,7 @@ public class PetAdministratorController extends AbstractController {
 		
 		result = new ModelAndView("pet/list");
 		result.addObject("pets", pets);
+		result.addObject("veterinaryPrincipal", null);
 		result.addObject("viewForDelete" , true);
 	
 		return result;

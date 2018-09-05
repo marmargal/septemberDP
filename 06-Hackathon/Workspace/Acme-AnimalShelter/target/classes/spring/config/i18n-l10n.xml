@@ -39,6 +39,7 @@
 		<value>/views/event/messages</value>
 		<value>/views/donation/messages</value>
 		<value>/views/stand/messages</value>
+		<value>/views/company/messages</value>
 		
 	</util:list>
 

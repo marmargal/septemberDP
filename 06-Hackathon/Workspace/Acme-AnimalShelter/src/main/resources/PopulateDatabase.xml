@@ -745,7 +745,11 @@
 		<property name="numMaxVoluntaries" value="20"/>
 		<property name="fliers" value="http://www.google.com"/>
 		<property name="isOfCompany" value="true"/>
-		<property name="voluntary" ref="voluntary1"/>
+		<property name="voluntaries">
+			<list>
+				<ref bean="voluntary1" />
+			</list>
+		</property>
 		<property name="company" ref="company1"/>
 	</bean>
 	
@@ -753,7 +757,11 @@
 		<property name="numMaxVoluntaries" value="20"/>
 		<property name="fliers" value="http://www.localhost.com"/>
 		<property name="isOfCompany" value="false"/>
-		<property name="voluntary" ref="voluntary2"/>
+		<property name="voluntaries">
+			<list>
+				<ref bean="voluntary2" />
+			</list>
+		</property>
 		<property name="company" ref="company1"/>
 	</bean>
 	

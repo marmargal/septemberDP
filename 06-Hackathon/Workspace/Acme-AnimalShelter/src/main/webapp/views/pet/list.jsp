@@ -43,4 +43,16 @@
 		</display:column>
 	</security:authorize>
 	
+	
+	<security:authorize access="hasRole('VETERINARY')">
+		<display:column>
+			<jstl:if test="${row.medicalReport == null}">
+				<acme:links url="medicalReport/veterinary/create.do?petId=${row.id}" code="pet.createMedicalReport"/>
+			</jstl:if>
+			<jstl:if test="${row.medicalReport.veterinary==veterinaryPrincipal}">
+				<acme:links url="medicalReport/veterinary/edit.do?medicalReportId=${row.medicalReport.id}" code="pet.editMedicalReport"/>
+			</jstl:if>
+		</display:column>
+	</security:authorize>
+	
 </display:table>

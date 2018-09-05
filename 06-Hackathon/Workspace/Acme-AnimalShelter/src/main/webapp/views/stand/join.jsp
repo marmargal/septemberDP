@@ -26,7 +26,7 @@
 	<form:hidden path="numMaxVoluntaries" />
 	<form:hidden path="fliers" />
 	<form:hidden path="isOfCompany" />
-	<form:hidden path="voluntary" />
+	<form:hidden path="voluntaries" />
 	<form:hidden path="company" />
 
 
