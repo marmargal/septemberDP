@@ -79,11 +79,13 @@
 		
 		<security:authorize access="hasRole('CLIENT')">
 			<li><a href="client/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+			<li><a href="donation/client/create.do"><spring:message code="master.page.donation.create" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('VOLUNTARY')">
 			<li><a href="voluntary/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 			<li><a href="notice/voluntary/create.do"><spring:message code="master.page.notice.create" /></a></li>
+			<li><a href="donation/voluntary/create.do"><spring:message code="master.page.donation.create" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BOSS')">

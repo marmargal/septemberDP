@@ -114,6 +114,13 @@
 		<security:intercept-url pattern="/event/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/event/boss/**" access="hasRole('BOSS')" />
 		
+											<!-- 		DONATION		-->
+		<security:intercept-url pattern="/donation/voluntary/**" access="hasRole('VOLUNTARY')" />
+		<security:intercept-url pattern="/donation/client/**" access="hasRole('CLIENT')" />
+		
+											<!-- 		STAND			-->
+		<security:intercept-url pattern="/stand/voluntary/**" access="hasRole('VOLUNTARY')" />
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

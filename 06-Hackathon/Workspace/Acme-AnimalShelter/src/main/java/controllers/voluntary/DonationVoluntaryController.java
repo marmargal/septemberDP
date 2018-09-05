@@ -9,32 +9,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.NoticeService;
+import services.DonationService;
 import controllers.AbstractController;
-import domain.Notice;
+import domain.Donation;
 
 @Controller
-@RequestMapping("/notice/voluntary")
-public class NoticeVoluntaryController extends AbstractController {
+@RequestMapping("/donation/voluntary")
+public class DonationVoluntaryController extends AbstractController {
 
 	// Services -------------------------------------------------------------
 
 	@Autowired
-	private NoticeService noticeService;
+	private DonationService donationService;
 
 	// Constructors -----------------------------------------------------------
 
-	public NoticeVoluntaryController() {
+	public DonationVoluntaryController() {
 		super();
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
-		Notice notice;
+		Donation donation;
 
-		notice = this.noticeService.create();
-		res = this.createEditModelAndView(notice);
+		donation = this.donationService.create();
+		res = this.createEditModelAndView(donation);
 
 		return res;
 	}
@@ -42,40 +42,40 @@ public class NoticeVoluntaryController extends AbstractController {
 	// Saving --------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Notice notice, final BindingResult binding) {
+	public ModelAndView save(@Valid Donation donation, final BindingResult binding) {
 		ModelAndView res;
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(notice, "notice.params.error");
+			res = this.createEditModelAndView(donation, "donation.params.error");
 		else
 			try {
-				this.noticeService.save(notice);
+				this.donationService.save(donation);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(notice, "notice.commit.error");
+				res = this
+						.createEditModelAndView(donation, "donation.commit.error");
 			}
 		return res;
 	}
 
 	// Ancillary methods --------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final Notice notice) {
+	protected ModelAndView createEditModelAndView(final Donation donation) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(notice, null);
+		result = this.createEditModelAndView(donation, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Notice notice,
+	protected ModelAndView createEditModelAndView(final Donation donation,
 			final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("notice/voluntary/edit");
-		result.addObject("notice", notice);
+		result = new ModelAndView("donation/voluntary/edit");
+		result.addObject("donation", donation);
 		result.addObject("message", message);
-		result.addObject("requestURI", "notice/voluntary/edit.do");
+		result.addObject("requestURI", "donation/voluntary/edit.do");
 
 		return result;
 	}
-
 }

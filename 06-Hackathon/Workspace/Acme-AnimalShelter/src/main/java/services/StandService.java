@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 
 import repositories.StandRepository;
 import domain.Stand;
+import domain.Voluntary;
 
 
 @Service
@@ -21,6 +22,9 @@ public class StandService {
 	private StandRepository standRepository;
 
 	// Suporting services
+	
+	@Autowired
+	private VoluntaryService voluntaryService;
 
 	// Constructors
 
@@ -71,6 +75,14 @@ public class StandService {
 		stand.setVoluntary(null);
 		this.save(stand);
 		return stand;
+	}
+	
+	public void joinVoluntary(Stand stand) {
+		if (stand.getVoluntary() == null) {
+			Voluntary voluntary = voluntaryService.findByPrincipal();
+			stand.setVoluntary(voluntary);
+			this.save(stand);
+		}
 	}
 	
 }
