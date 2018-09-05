@@ -96,6 +96,7 @@
 					<li><a href="boss/boss/register.do"><spring:message code="master.page.register.boss" /></a></li>
 				</ul>
 			</li>
+			<li><a href="event/list.do"><spring:message code="master.page.event.list" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('EMPLOYEE')">

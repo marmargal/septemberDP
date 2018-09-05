@@ -110,6 +110,10 @@
 											<!-- 		MESSAGE 		-->
 		<security:intercept-url pattern="/message/administrator/**" access="hasRole('ADMIN')" />  
 		
+											<!-- 		EVENT 		-->
+		<security:intercept-url pattern="/event/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/event/boss/**" access="hasRole('BOSS')" />
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

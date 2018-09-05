@@ -36,6 +36,8 @@
 		<value>/views/notice/messages</value>
 		<value>/views/medicalReport/messages</value>
 		<value>/views/message/messages</value>
+		<value>/views/event/messages</value>
+		
 	</util:list>
 
 </beans>
