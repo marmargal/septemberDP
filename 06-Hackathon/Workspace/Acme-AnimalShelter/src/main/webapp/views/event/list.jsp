@@ -31,6 +31,20 @@
 	<acme:column property="endDate" code="event.endDate" />
 	<acme:column property="publicationDate" code="event.publicationDate" />
 	
+	<security:authorize access="hasRole('VOLUNTARY')">
+		<display:column>
+			<acme:links url="donation/voluntary/create.do?eventId=${row.id }"
+				code="event.donation" />
+		</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('CLIENT')">
+		<display:column>
+			<acme:links url="donation/client/create.do?eventId=${row.id }"
+				code="event.donation" />
+		</display:column>
+	</security:authorize>
+	
 	<security:authorize access="hasRole('BOSS')">
 		<display:column>
 			<acme:links url="event/boss/edit.do?eventId=${row.id }"
