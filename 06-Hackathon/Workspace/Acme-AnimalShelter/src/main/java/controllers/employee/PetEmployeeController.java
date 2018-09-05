@@ -49,6 +49,7 @@ public class PetEmployeeController extends AbstractController {
 		pets = this.petService.findAll();
 		
 		result = new ModelAndView("pet/list");
+		result.addObject("veterinaryPrincipal", null);
 		result.addObject("pets", pets);
 		result.addObject("viewForDelete" , true);
 	

@@ -46,6 +46,8 @@ public class PetController extends AbstractController {
 		pets = this.petService.findPetsWaitingAdoption();
 		
 		result = new ModelAndView("pet/list");
+		
+		result.addObject("veterinaryPrincipal", null);
 		result.addObject("pets", pets);
 
 		return result;
@@ -59,6 +61,7 @@ public class PetController extends AbstractController {
 		pets = this.petService.findPetsPermitAdoption();
 		
 		result = new ModelAndView("pet/list");
+		result.addObject("veterinaryPrincipal", null);
 		result.addObject("pets", pets);
 
 		return result;
