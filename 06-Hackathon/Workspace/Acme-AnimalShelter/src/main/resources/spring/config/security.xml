@@ -120,6 +120,8 @@
 		
 											<!-- 		STAND			-->
 		<security:intercept-url pattern="/stand/voluntary/**" access="hasRole('VOLUNTARY')" />
+		<security:intercept-url pattern="/stand/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/stand/boss/**" access="hasRole('BOSS')" />
 		
 											<!-- 		COMPANY			-->
 		<security:intercept-url pattern="/company/list.do" access="permitAll" /> 

@@ -1,8 +1,11 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -53,16 +56,17 @@ public class Stand extends DomainEntity{
 	
 	// Relationships
 	
-	private Voluntary voluntary;
+	private Collection<Voluntary> voluntaries;
 	private Company company;
 	
 	@Valid
-	@ManyToOne(optional=true)
-	public Voluntary getVoluntary() {
-		return voluntary;
+	@ManyToMany
+	public Collection<Voluntary> getVoluntaries() {
+		return voluntaries;
 	}
-	public void setVoluntary(Voluntary voluntary) {
-		this.voluntary = voluntary;
+	
+	public void setVoluntaries(Collection<Voluntary> voluntaries) {
+		this.voluntaries = voluntaries;
 	}
 	
 	@Valid
@@ -73,4 +77,5 @@ public class Stand extends DomainEntity{
 	public void setCompany(Company company) {
 		this.company = company;
 	}
+	
 }

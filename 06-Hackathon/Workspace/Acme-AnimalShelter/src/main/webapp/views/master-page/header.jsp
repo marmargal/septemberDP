@@ -77,6 +77,7 @@
 			<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>	
 			<li><a href="event/list.do"><spring:message code="master.page.event.list" /></a></li>
 			<li><a href="company/list.do"><spring:message code="master.page.companies" /></a></li>	
+			<li><a href="stand/list.do"><spring:message code="master.page.stands" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CLIENT')">

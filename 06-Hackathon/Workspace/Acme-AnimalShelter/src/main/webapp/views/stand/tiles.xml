@@ -15,6 +15,20 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
        
 <tiles-definitions>
+
+	<definition name="stand/list" extends="master.page">
+		<put-attribute name="title" value="List stands" />
+		<put-attribute name="body" value="/views/stand/list.jsp" />
+	</definition>
+	<definition name="stand/boss/create" extends="master.page">
+		<put-attribute name="title" value="Create stand" />
+		<put-attribute name="body" value="/views/stand/edit.jsp" />
+	</definition>
+
+	<definition name="stand/boss/edit" extends="master.page">
+		<put-attribute name="title" value="Edit stand" />
+		<put-attribute name="body" value="/views/stand/edit.jsp" />
+	</definition>
 	
 	<definition name="stand/voluntary/join" extends="master.page">	
 		<put-attribute name="title" value="Join into a stand" />

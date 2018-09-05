@@ -72,17 +72,17 @@ public class StandService {
 	// Other business methods
 	
 	public Stand untieVoluntary(Stand stand){
-		stand.setVoluntary(null);
+		stand.setVoluntaries(null);
 		this.save(stand);
 		return stand;
 	}
 	
-	public void joinVoluntary(Stand stand) {
-		if (stand.getVoluntary() == null) {
-			Voluntary voluntary = voluntaryService.findByPrincipal();
-			stand.setVoluntary(voluntary);
-			this.save(stand);
-		}
-	}
+//	public void joinVoluntary(Stand stand) {
+//		if (stand.getVoluntary() == null) {
+//			Voluntary voluntary = voluntaryService.findByPrincipal();
+//			stand.setVoluntary(voluntary);
+//			this.save(stand);
+//		}
+//	}
 	
 }
