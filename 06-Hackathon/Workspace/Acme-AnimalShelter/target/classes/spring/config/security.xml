@@ -121,6 +121,10 @@
 											<!-- 		STAND			-->
 		<security:intercept-url pattern="/stand/voluntary/**" access="hasRole('VOLUNTARY')" />
 		
+											<!-- 		COMPANY			-->
+		<security:intercept-url pattern="/company/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/company/boss/**" access="hasRole('BOSS')" />
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

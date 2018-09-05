@@ -74,7 +74,9 @@
 					<li><a href="pet/petsPermitAdoption.do"><spring:message code="master.page.petsPermitAdoption" /></a></li>
 				</ul>
 			</li>
-			<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>		
+			<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>	
+			<li><a href="event/list.do"><spring:message code="master.page.event.list" /></a></li>
+			<li><a href="company/list.do"><spring:message code="master.page.companies" /></a></li>	
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CLIENT')">
@@ -98,7 +100,6 @@
 					<li><a href="boss/boss/register.do"><spring:message code="master.page.register.boss" /></a></li>
 				</ul>
 			</li>
-			<li><a href="event/list.do"><spring:message code="master.page.event.list" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('EMPLOYEE')">
