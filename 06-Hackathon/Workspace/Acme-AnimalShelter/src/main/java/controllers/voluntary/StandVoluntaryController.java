@@ -53,7 +53,7 @@ public class StandVoluntaryController extends AbstractController {
 			res = this.createEditModelAndView(stand, "stand.params.error");
 		else
 			try {
-//				standService.joinVoluntary(stand);
+				standService.joinVoluntary(stand);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(stand, "stand.commit.error");

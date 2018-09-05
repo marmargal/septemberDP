@@ -15,6 +15,13 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="stands" requestURI="${requestURI }" id="row">
+	
+	<security:authorize access="hasRole('VOLUNTARY')">
+		<display:column>
+			<acme:links url="stand/voluntary/join.do?standId=${row.id }"
+				code="stand.join" />
+		</display:column>
+	</security:authorize>
 
 	<acme:column property="numMaxVoluntaries" code="stand.numMaxVoluntaries" />
 	<acme:column property="fliers" code="stand.fliers" />

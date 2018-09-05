@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,12 +78,15 @@ public class StandService {
 		return stand;
 	}
 	
-//	public void joinVoluntary(Stand stand) {
-//		if (stand.getVoluntary() == null) {
-//			Voluntary voluntary = voluntaryService.findByPrincipal();
-//			stand.setVoluntary(voluntary);
-//			this.save(stand);
-//		}
-//	}
+	public void joinVoluntary(Stand stand) {
+		if (stand.getVoluntaries().size() < stand.getNumMaxVoluntaries()) {
+			Voluntary voluntary = voluntaryService.findByPrincipal();
+			Collection<Voluntary> voluntaries = new ArrayList<>();
+			voluntaries = stand.getVoluntaries();
+			voluntaries.add(voluntary);
+			stand.setVoluntaries(voluntaries);
+			this.save(stand);
+		}
+	}
 	
 }
