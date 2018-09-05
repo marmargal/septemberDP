@@ -101,6 +101,7 @@
 		
 											<!-- 		MEDICALREPORT 		-->
 		<security:intercept-url pattern="/medicalReport/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/medicalReport/veterinary/**" access="hasRole('VETERINARY')" />
 		
 											<!-- 		MESSAGE 		-->
 		<security:intercept-url pattern="/message/administrator/**" access="hasRole('ADMIN')" />  

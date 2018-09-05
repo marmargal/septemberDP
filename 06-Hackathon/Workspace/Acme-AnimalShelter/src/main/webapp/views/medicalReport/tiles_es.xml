@@ -21,9 +21,10 @@
 		<put-attribute name="body" value="/views/medicalReport/list.jsp" />
 	</definition>
 	
-	<definition name="notice/display" extends="master.page">	
-		<put-attribute name="title" value="Mostrar noticia" />
-		<put-attribute name="body" value="/views/notice/display.jsp" />
+	<definition name="medicalReport/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar Informe Médico" />
+		<put-attribute name="body" value="/views/medicalReport/edit.jsp" />
 	</definition>
+	
 	
 </tiles-definitions>

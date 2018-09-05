@@ -17,8 +17,13 @@
 <tiles-definitions>
 
 	<definition name="medicalReport/list" extends="master.page">	
-		<put-attribute name="title" value="List medicalReports" />
+		<put-attribute name="title" value="List Medical Reports" />
 		<put-attribute name="body" value="/views/medicalReport/list.jsp" />
+	</definition>
+	
+	<definition name="medicalReport/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit Medical Report" />
+		<put-attribute name="body" value="/views/medicalReport/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

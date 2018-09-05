@@ -25,9 +25,9 @@
 		</jstl:if>
 	</security:authorize>
 
-	<acme:column property="diagnosis" code="medicalReport.type" />
-	<acme:column property="initialState" code="medicalReport.level" />
-	<acme:column property="treatment" code="medicalReport.date" />
+	<acme:column property="diagnosis" code="medicalReport.diagnosis" />
+	<acme:column property="initialState" code="medicalReport.initialState" />
+	<acme:column property="treatment" code="medicalReport.treatment" />
 	<acme:column property="date" code="medicalReport.date" />
 	
 	<acme:column property="diseases" code="medicalReport.diseases" />
