@@ -17,6 +17,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="publicationDate" />
+	<form:hidden path="company" />
 
 	<acme:textarea code="event.title" path="title" />
 	<acme:textarea code="event.description" path="description" />

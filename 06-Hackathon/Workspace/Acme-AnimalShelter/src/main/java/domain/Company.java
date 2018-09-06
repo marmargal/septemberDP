@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -67,6 +68,7 @@ public class Company extends DomainEntity{
 	// Relationships
 
 	private Collection<Stand> stands;
+	private Event event;
 	
 	@Valid
 	@OneToMany(mappedBy = "company")
@@ -76,6 +78,16 @@ public class Company extends DomainEntity{
 
 	public void setStands(Collection<Stand> stands) {
 		this.stands = stands;
+	}
+
+	@Valid
+	@OneToOne
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 	
 	
