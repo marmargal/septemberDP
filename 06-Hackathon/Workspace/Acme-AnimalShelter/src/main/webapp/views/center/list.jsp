@@ -25,15 +25,8 @@
 		</display:column>
 
 	</security:authorize>
-	<security:authorize access="hasRole('BOSS')">
-		<display:column>
-			<form name="submitForm" method="POST"
-				action="center/boss/delete.do?centerId=${row.id }">
-				<acme:submit name="delete" code="center.delete" />
-			</form>
-		</display:column>
+	
 
-	</security:authorize>
 
 	<spring:message code="center.picture" var="pictureHeader" />
 	<display:column title="${pictureHeader}" sortable="false">
