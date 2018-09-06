@@ -27,7 +27,7 @@
 		<form:hidden path="version" />
 		<form:hidden path="voluntary" />
 		<form:hidden path="date" />
-		<form:hidden path="descarted" />
+		<form:hidden path="discarded" />
 
 
 		<acme:textbox code="notice.description" path="description" />

@@ -44,7 +44,7 @@ public class NoticeService {
 		Date date = new Date(System.currentTimeMillis() - 1000);
 		res.setDate(date);
 		
-		res.setDescarted(false);
+		res.setDiscarded(false);
 		
 		return res;
 
@@ -80,6 +80,18 @@ public class NoticeService {
 
 	// Other business methods
 	
+	public Collection<Notice> findNonDiscarded() {
+		Collection<Notice> res;
+		res = noticeRepository.findNonDiscarded();
+		Assert.notNull(res);
+		return res;
+	}
+
+	public Notice discardedTrue(int noticeId) {
+		Notice notice = noticeRepository.findOne(noticeId);
+		notice.setDiscarded(true);
+		return notice;
+	}
 	
 
 }
