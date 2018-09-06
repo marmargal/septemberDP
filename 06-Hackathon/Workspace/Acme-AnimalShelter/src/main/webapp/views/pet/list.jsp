@@ -55,4 +55,15 @@
 		</display:column>
 	</security:authorize>
 	
+	<security:authorize access="hasRole('EMPLOYEE')">
+		<display:column>
+			<acme:links url="pet/employee/edit.do?petId=${row.id }"
+				code="pet.edit" />
+		</display:column>
+	</security:authorize>
+	
 </display:table>
+
+<security:authorize access="hasRole('EMPLOYEE')">
+		<acme:links url="pet/employee/create.do" code="pet.create" />
+</security:authorize>

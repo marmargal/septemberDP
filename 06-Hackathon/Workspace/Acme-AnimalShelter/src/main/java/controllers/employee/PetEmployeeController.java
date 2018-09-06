@@ -13,15 +13,20 @@ package controllers.employee;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CenterService;
 import services.PetService;
 import controllers.AbstractController;
+import domain.Center;
 import domain.Pet;
 
 @Controller
@@ -32,6 +37,9 @@ public class PetEmployeeController extends AbstractController {
 	
 	@Autowired
 	private PetService petService;
+	
+	@Autowired
+	private CenterService centerService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -52,16 +60,17 @@ public class PetEmployeeController extends AbstractController {
 		result.addObject("veterinaryPrincipal", null);
 		result.addObject("pets", pets);
 		result.addObject("viewForDelete" , true);
+		result.addObject("requestURI", "pet/employee/list.do");
 	
 		return result;
 	}
 	
 	// Delete ---------------------------------------------------------------
-	@RequestMapping(value="/delete",method=RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@RequestParam(defaultValue = "0") int petId){
+	
+	@RequestMapping(value="/edit",method=RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@Valid Pet pet, final BindingResult binding){
 		ModelAndView res;
 		try{
-			Pet pet = this.petService.findOne(petId);
 			this.petService.delete(pet);
 			res = new ModelAndView("redirect:/pet/employee/list.do");
 
@@ -71,6 +80,82 @@ public class PetEmployeeController extends AbstractController {
 		
 		return res;
 	}
+	
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView res;
+		Pet pet;
 
+		pet = this.petService.create();
+		res = this.createEditModelAndView(pet);
+
+		return res;
+	}
+	
+	// Saving --------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(
+			@RequestParam(defaultValue = "0") final int petId) {
+		ModelAndView result;
+		Pet pet;
+		if (petId == 0) {
+			result = new ModelAndView("redirect:../../");
+
+		} else if (this.petService.findOne(petId) == null) {
+			result = new ModelAndView("redirect:../../");
+		} else {
+			pet = this.petService.findOne(petId);
+			result = this.createEditModelAndView(pet);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Pet pet, final BindingResult binding) {
+		ModelAndView res;
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(pet, "pet.params.error");
+			System.out.println(binding.getAllErrors());
+		} else
+			try {
+				this.petService.save(pet);
+				res = new ModelAndView("redirect:../../");
+			} catch (final Throwable oops) {
+				System.out.println(oops.getMessage());
+				res = this
+						.createEditModelAndView(pet, "pet.commit.error");
+			}
+		return res;
+	}
+	
+	// Ancillary methods --------------------------------------------------
+
+	protected ModelAndView createEditModelAndView(final Pet pet) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(pet, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Pet pet,
+			final String message) {
+		ModelAndView result;
+		Collection<Boolean> invalidate = new ArrayList<>();
+		invalidate.add(false);
+		invalidate.add(true);
+		Collection<Center> centers = new ArrayList<>();
+		centers = this.centerService.findAll();
+		
+		result = new ModelAndView("pet/employee/edit");
+		result.addObject("pet", pet);
+		result.addObject("message", message);
+		result.addObject("invalidate", invalidate);
+		result.addObject("centers", centers);
+		result.addObject("requestURI", "pet/employee/edit.do");
+		return result;
+
+	}
 
 }

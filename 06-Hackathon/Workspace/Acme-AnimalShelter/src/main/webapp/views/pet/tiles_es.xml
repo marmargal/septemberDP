@@ -21,4 +21,14 @@
 		<put-attribute name="body" value="/views/pet/list.jsp" />
 	</definition>
 	
+	<definition name="pet/employee/create" extends="master.page">
+		<put-attribute name="title" value="Crear animal" />
+		<put-attribute name="body" value="/views/pet/edit.jsp" />
+	</definition>
+
+	<definition name="pet/employee/edit" extends="master.page">
+		<put-attribute name="title" value="Editar animal" />
+		<put-attribute name="body" value="/views/pet/edit.jsp" />
+	</definition>
+	
 </tiles-definitions>
