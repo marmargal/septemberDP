@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CompanyService;
+import services.EmployeeService;
 import services.StandService;
 import controllers.AbstractController;
 import domain.Company;
+import domain.Employee;
 import domain.Stand;
 
 @Controller
@@ -30,6 +32,9 @@ public class StandBossController extends AbstractController {
 	
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private EmployeeService employeeService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -100,6 +105,41 @@ public class StandBossController extends AbstractController {
 		return res;
 	}
 	
+	// Affiliate ---------------------------------------------------------------
+	
+	@RequestMapping(value = "/affiliate")
+	public ModelAndView affiliate(@RequestParam(defaultValue = "0") final int standId) {
+		ModelAndView result;
+		Stand stand = null;
+
+		if (standId == 0) {
+			result = new ModelAndView("redirect:../../");
+		} else if (this.standService.findOne(standId) == null) {
+			result = new ModelAndView("redirect:../../");
+		} else {
+			stand = this.standService.findOne(standId);
+			result = this.createEditModelAndViewAffiliate(stand);
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/affiliate", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveAffiliate(@Valid Stand stand, final BindingResult binding) {
+		ModelAndView res;
+		if (binding.hasErrors())
+			res = this.createEditModelAndViewAffiliate(stand, "stand.params.error");
+		else
+			try {
+				standService.joinVoluntary(stand);
+				res = new ModelAndView("redirect:../../");
+			} catch (final Throwable oops) {
+				res = this.createEditModelAndViewAffiliate(stand, "stand.commit.error");
+			}
+		return res;
+	}
+	
+	// Ancillary methods --------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final Stand stand) {
 		ModelAndView result;
@@ -126,6 +166,29 @@ public class StandBossController extends AbstractController {
 		result.addObject("requestURI", "stand/boss/edit.do");
 		return result;
 
+	}
+	
+	protected ModelAndView createEditModelAndViewAffiliate(final Stand stand) {
+		ModelAndView result;
+
+		result = this.createEditModelAndViewAffiliate(stand, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewAffiliate(final Stand stand,
+			final String message) {
+		ModelAndView result;
+		Collection<Employee> employees = new ArrayList<>();
+		employees = this.employeeService.findAll();
+
+		result = new ModelAndView("stand/boss/affiliate");
+		result.addObject("stand", stand);
+		result.addObject("message", message);
+		result.addObject("employees", employees);
+		result.addObject("requestURI", "stand/boss/affiliate.do");
+
+		return result;
 	}
 
 }

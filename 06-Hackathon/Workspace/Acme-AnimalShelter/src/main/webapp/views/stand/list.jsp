@@ -22,10 +22,21 @@
 				code="stand.join" />
 		</display:column>
 	</security:authorize>
+	
+	
+	<security:authorize access="hasRole('BOSS')">
+		<display:column>
+			<jstl:if test="${row.employee == null}">
+				<acme:links url="stand/boss/affiliate.do?standId=${row.id }" code="stand.affiliate" />
+			</jstl:if>
+		</display:column>
+	</security:authorize>
+	
 
 	<acme:column property="numMaxVoluntaries" code="stand.numMaxVoluntaries" />
 	<acme:column property="fliers" code="stand.fliers" />
 	<acme:column property="isOfCompany" code="stand.isOfCompany" />
+	<acme:column property="employee.name" code="stand.employee" />
 	
 	<security:authorize access="hasRole('BOSS')">
 		<display:column>

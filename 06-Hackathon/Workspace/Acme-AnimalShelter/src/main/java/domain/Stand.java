@@ -7,6 +7,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -58,6 +59,7 @@ public class Stand extends DomainEntity{
 	
 	private Collection<Voluntary> voluntaries;
 	private Company company;
+	private Employee employee;
 	
 	@Valid
 	@ManyToMany
@@ -76,6 +78,16 @@ public class Stand extends DomainEntity{
 	}
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+	
+	@Valid
+	@OneToOne
+	public Employee getEmployee() {
+		return employee;
+	}
+	
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	
 }

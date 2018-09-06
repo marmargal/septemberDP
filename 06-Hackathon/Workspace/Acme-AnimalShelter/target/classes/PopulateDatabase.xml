@@ -751,6 +751,7 @@
 			</list>
 		</property>
 		<property name="company" ref="company1"/>
+		<property name="employee" ref="employee1"/>
 	</bean>
 	
 	<bean id="stand2" class="domain.Stand">
@@ -763,6 +764,7 @@
 			</list>
 		</property>
 		<property name="company" ref="company1"/>
+		<property name="employee" ref="employee2"/>
 	</bean>
 	
 	
