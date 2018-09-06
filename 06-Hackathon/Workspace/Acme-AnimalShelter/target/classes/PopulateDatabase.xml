@@ -328,6 +328,11 @@
 			<list>
 			</list>
 		</property>
+		<property name="notice">
+			<list>
+				<ref bean="notice1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="voluntary2" class="domain.Voluntary">
@@ -348,6 +353,13 @@
 		<property name="received"><null/></property>
 		<property name="sent">
 			<list>
+			</list>
+		</property>
+		<property name="notice">
+			<list>
+				<ref bean="notice2"/>
+				<ref bean="notice3"/>
+				<ref bean="notice4"/>
 			</list>
 		</property>
 	</bean>
@@ -374,6 +386,13 @@
 			<list>
 			</list>
 		</property>
+		<property name="medicalReport">
+			<list>
+				<ref bean="medicalReport1"/>
+				<ref bean="medicalReport2"/>
+				<ref bean="medicalReport5"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="veterinary2" class="domain.Veterinary">
@@ -394,6 +413,12 @@
 		<property name="received"><null/></property>
 		<property name="sent">
 			<list>
+			</list>
+		</property>
+		<property name="medicalReport">
+			<list>
+				<ref bean="medicalReport3"/>
+				<ref bean="medicalReport4"/>
 			</list>
 		</property>
 	</bean>
@@ -1050,7 +1075,7 @@
 		<property name="gpsCoordinates" ref="coordinates1"/>
 		<property name="level" value="3"/>
 		<property name="date" value="03/04/2017"/>
-		<property name="descarted" value="false"/>
+		<property name="discarded" value="false"/>
 		<property name="voluntary" ref="voluntary1"/>
 	</bean>
 	
@@ -1059,8 +1084,28 @@
 		<property name="type" value="CAT"/>
 		<property name="gpsCoordinates" ref="coordinates2"/>
 		<property name="level" value="2"/>
-		<property name="date" value="03/06/2017"/>
-		<property name="descarted" value="true"/>
+		<property name="date" value="03/01/2018"/>
+		<property name="discarded" value="false"/>
+		<property name="voluntary" ref="voluntary2"/>
+	</bean>
+	
+	<bean id="notice3" class="domain.Notice">
+		<property name="description" value="Perro abandonado."/>
+		<property name="type" value="DOG"/>
+		<property name="gpsCoordinates" ref="coordinates2"/>
+		<property name="level" value="2"/>
+		<property name="date" value="03/05/2017"/>
+		<property name="discarded" value="false"/>
+		<property name="voluntary" ref="voluntary2"/>
+	</bean>
+	
+	<bean id="notice4" class="domain.Notice">
+		<property name="description" value="Crias de gato abandonadas."/>
+		<property name="type" value="CAT"/>
+		<property name="gpsCoordinates" ref="coordinates2"/>
+		<property name="level" value="2"/>
+		<property name="date" value="12/12/2017"/>
+		<property name="discarded" value="false"/>
 		<property name="voluntary" ref="voluntary2"/>
 	</bean>
 	
