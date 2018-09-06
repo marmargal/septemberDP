@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -72,6 +73,8 @@ public class Pet extends DomainEntity{
 		this.status = status;
 	}
 
+	@Column(unique = true)
+	@Pattern(regexp = "[0-9]{6}-[0-9]{2}-[A-Z]{4}")
 	@NotBlank
 	public String getIdentifier() {
 		return identifier;

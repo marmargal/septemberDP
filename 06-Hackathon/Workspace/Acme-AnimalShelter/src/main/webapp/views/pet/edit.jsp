@@ -18,6 +18,7 @@
 	<form:hidden path="version" />
 	<form:hidden path="application" />
 	<form:hidden path="medicalReport" />
+	<form:hidden path="identifier" />
 
 	<acme:textarea code="pet.name" path="name" />
 	<form:label path="type">
@@ -30,7 +31,6 @@
 	</form:select>
 	<acme:textarea code="pet.foodExpense" path="foodExpense" type="number" />
 	<acme:selectBoolean items="${invalidate}" code="pet.status" path="status"/>
-	<acme:textarea code="pet.identifier" path="identifier" />
 	<acme:date code="pet.date" path="date" placeholder="dd/MM/yyyy"/>
 	<acme:textarea code="pet.age" path="age" type="number" />
 	<acme:selectBoolean items="${invalidate}" code="pet.chip" path="chip"/>
