@@ -252,11 +252,13 @@ public class AdministratorService {
 			return administratorRepository.dataApplicationPerClientLastWeek(fecha);
 		}
 		public Collection<Double> dataMedicalReportPerVeterinaryLastWeek() {
-			return administratorRepository.dataMedicalReportPerVeterinaryLastWeek();
+			Date fecha=  new Date(System.currentTimeMillis() - 604800000);
+			return administratorRepository.dataMedicalReportPerVeterinaryLastWeek(fecha);
 		}
 
 		public Collection<Double> dataReportPerEmployeeLastWeek() {
-			return administratorRepository.dataReportPerEmployeeLastWeek();
+			Date fecha=  new Date(System.currentTimeMillis() - 604800000);
+			return administratorRepository.dataReportPerEmployeeLastWeek(fecha);
 		}
 		
 		//-----------------------------------------------

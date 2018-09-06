@@ -43,20 +43,22 @@ public interface AdministratorRepository extends JpaRepository<Administrator, In
 	@Query("select avg(count(c)),min(count(c)), max(count(c)), stddev(count(c))  from MedicalReport c group by c.veterinary")
 	Collection<Double> dataMedicalReportPerVeterinary();
 	
+	//------------------------------------------------
+	
 	//Media, máximo, mínimo y desviación típica de número de solicitudes por cliente en la última semana.
 	@Query("select avg(c.applications.size),min(c.applications.size), max(c.applications.size), stddev(c.applications.size) from Client c where c.fecha>=fecha")
 	Collection<Double> dataApplicationPerClientLastWeek(Date fecha);
 	
 	
 	//Media, máximo, mínimo y desviación típica de número de informes por veterinario en la última semana.
-	@Query("select avg(c.applications.size),min(c.applications.size), max(c.applications.size), stddev(c.applications.size) from Client c")
-	Collection<Double> dataMedicalReportPerVeterinaryLastWeek();
+	@Query("select avg(c.applications.size),min(c.applications.size), max(c.applications.size), stddev(c.applications.size) from Client c where c.fecha>=fecha")
+	Collection<Double> dataMedicalReportPerVeterinaryLastWeek(Date fecha);
 	
 	
 	//Media, máximo, mínimo y desviación típica de número de reportes por empleado en la última semana.
 	
-	@Query("select avg(c.applications.size),min(c.applications.size), max(c.applications.size), stddev(c.applications.size) from Client c")
-	Collection<Double> dataReportPerEmployeeLastWeek();
+	@Query("select avg(c.applications.size),min(c.applications.size), max(c.applications.size), stddev(c.applications.size) from Client c where c.fecha>=fecha")
+	Collection<Double> dataReportPerEmployeeLastWeek(Date fecha);
 	
 	
 	//----------------------------------------------------------------------
