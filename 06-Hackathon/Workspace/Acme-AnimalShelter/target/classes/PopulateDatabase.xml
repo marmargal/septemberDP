@@ -1050,7 +1050,7 @@
 		<property name="gpsCoordinates" ref="coordinates1"/>
 		<property name="level" value="3"/>
 		<property name="date" value="03/04/2017"/>
-		<property name="descarted" value="false"/>
+		<property name="discarded" value="false"/>
 		<property name="voluntary" ref="voluntary1"/>
 	</bean>
 	
@@ -1059,8 +1059,28 @@
 		<property name="type" value="CAT"/>
 		<property name="gpsCoordinates" ref="coordinates2"/>
 		<property name="level" value="2"/>
-		<property name="date" value="03/06/2017"/>
-		<property name="descarted" value="true"/>
+		<property name="date" value="03/01/2018"/>
+		<property name="discarded" value="false"/>
+		<property name="voluntary" ref="voluntary2"/>
+	</bean>
+	
+	<bean id="notice3" class="domain.Notice">
+		<property name="description" value="Perro abandonado."/>
+		<property name="type" value="DOG"/>
+		<property name="gpsCoordinates" ref="coordinates2"/>
+		<property name="level" value="2"/>
+		<property name="date" value="03/05/2017"/>
+		<property name="discarded" value="false"/>
+		<property name="voluntary" ref="voluntary2"/>
+	</bean>
+	
+	<bean id="notice4" class="domain.Notice">
+		<property name="description" value="Crias de gato abandonadas."/>
+		<property name="type" value="CAT"/>
+		<property name="gpsCoordinates" ref="coordinates2"/>
+		<property name="level" value="2"/>
+		<property name="date" value="12/12/2017"/>
+		<property name="discarded" value="false"/>
 		<property name="voluntary" ref="voluntary2"/>
 	</bean>
 	

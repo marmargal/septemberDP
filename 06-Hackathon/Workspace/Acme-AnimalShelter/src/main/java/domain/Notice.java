@@ -31,7 +31,7 @@ public class Notice extends DomainEntity{
 	private GpsCoordinate gpsCoordinates;
 	private Integer level;
 	private Date date;
-	private Boolean descarted;
+	private Boolean discarded;
 	
 	@NotBlank
 	public String getDescription() {
@@ -83,12 +83,12 @@ public class Notice extends DomainEntity{
 	}
 
 	@NotNull
-	public Boolean getDescarted() {
-		return descarted;
+	public Boolean getDiscarded() {
+		return discarded;
 	}
 
-	public void setDescarted(Boolean descarted) {
-		this.descarted = descarted;
+	public void setDiscarded(Boolean discarded) {
+		this.discarded = discarded;
 	}
 	
 	// Relationships

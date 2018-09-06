@@ -24,10 +24,23 @@
 	</security:authorize>
 
 	<display:column>
-		<acme:links url="notice/administrator/display.do?noticeId=${row.id }" code="notice.display"/>
+		<security:authorize access="hasRole('ADMIN')">
+			<acme:links url="notice/administrator/display.do?noticeId=${row.id }" code="notice.display"/>
+		</security:authorize>
+		<security:authorize access="hasRole('EMPLOYEE')">
+			<acme:links url="notice/employee/display.do?noticeId=${row.id }" code="notice.display"/>
+		</security:authorize>
 	</display:column>
+	
+	<acme:column property="date" code="notice.date"/>
 	<acme:column property="type" code="notice.type" />
 	<acme:column property="level" code="notice.level" />
-	<acme:column property="date" code="notice.date" />
+	<security:authorize access="hasRole('EMPLOYEE')">	
+		<display:column>
+		<form name="submitForm" method="POST" action="notice/employee/discardNotice.do?noticeId=${row.id }">
+		    	<acme:submit name="discard" code="notice.discard"/>
+		</form>
+		</display:column>
+	</security:authorize>
 	
 </display:table>

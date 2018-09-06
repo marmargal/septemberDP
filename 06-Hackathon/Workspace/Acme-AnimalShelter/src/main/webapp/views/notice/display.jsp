@@ -12,7 +12,10 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<b><spring:message code="notice.type"/></b><jstl:out value="${notice.type}"/>
+<b><spring:message code="notice.type"/>:&nbsp;</b><jstl:out value="${notice.type}"/>
+<br/>
+
+<b><spring:message code="notice.description"/>:&nbsp;</b><jstl:out value="${notice.description}"/>
 <br/>
 
 <b><spring:message code="notice.gpsCoordinates.latitude"/>:&nbsp;</b><jstl:out value="${notice.gpsCoordinates.latitude}"/>
@@ -27,7 +30,12 @@
 <b><spring:message code="notice.date"/>:&nbsp;</b><jstl:out value="${notice.date}"/>
 <br/>
 
-<b><spring:message code="notice.descarted"/>:&nbsp;</b><jstl:out value="${notice.descarted}"/>
+<b><spring:message code="notice.discarded"/>:&nbsp;</b><jstl:out value="${notice.discarded}"/>
 <br/>
 
-<acme:cancel url="/notice/administrator/list.do" code="notice.back"/>
+<security:authorize access="hasRole('ADMIN')">
+	<acme:cancel url="/notice/administrator/list.do" code="notice.back"/>
+</security:authorize>
+<security:authorize access="hasRole('EMPLOYEE')">
+	<acme:cancel url="/notice/employee/list.do" code="notice.back"/>
+</security:authorize>
