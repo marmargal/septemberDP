@@ -41,6 +41,7 @@
 			<li><a href="medicalReport/administrator/list.do"><spring:message code="master.page.medicalReport" /></a></li>
 			<li><a href="pet/administrator/list.do"><spring:message code="master.page.allPets" /></a></li>
 			<li><a href="message/administrator/list.do"><spring:message code="master.page.allMessage" /></a></li>
+			<li><a href="dashboard/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AdministratorService;
 
 @Controller
-@RequestMapping("/administrator")
+@RequestMapping("/dashboard")
 public class DashboardAdministratorController {
 
 	@Autowired
@@ -50,8 +50,8 @@ public class DashboardAdministratorController {
 		result.addObject("clientsWithMoreApplications",
 				administratorService.clientsWithMoreApplications());
 
-		result.addObject("veterinariesWithMoreReports",
-				administratorService.veterinariesWithMoreReports());
+		result.addObject("veterinariesWithMoreMedicalReport",
+				administratorService.veterinariesWithMoreMedicalReport());
 
 		result.addObject("employeesWithMoreReports",
 				administratorService.employeesWithMoreReports());
@@ -59,8 +59,8 @@ public class DashboardAdministratorController {
 		result.addObject("employeesWithLessReports",
 				administratorService.employeesWithLessReports());
 
-		result.addObject("dataUserMore75Chirps",
-				administratorService.dataUserMore75Chirps());
+		result.addObject("dataVeterinaryMore50MedicalReport",
+				administratorService.dataVeterinaryMore50MedicalReport());
 
 		return result;
 	}

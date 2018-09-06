@@ -267,22 +267,22 @@ public class AdministratorService {
 			return administratorRepository.clientsWithMoreApplications();
 		}
 
-		public Collection<Veterinary> veterinariesWithMoreReports() {
-			return administratorRepository.veterinariesWithMoreReports();
+		public Collection<Veterinary> veterinariesWithMoreMedicalReport() {
+			return administratorRepository.veterinariesWithMoreMedicalReport();
 		}
 		
 		//una en dos
-		public Collection<Veterinary> employeesWithMoreReports() {
+		public Collection<Employee> employeesWithMoreReports() {
 			return administratorRepository.employeesWithMoreReports();
 		}
 
-		public Collection<Veterinary> employeesWithLessReports() {
+		public Collection<Employee> employeesWithLessReports() {
 			return administratorRepository.employeesWithLessReports();
 		}
 		//
 		
-		public Collection<Veterinary> dataUserMore75Chirps() {
-			return administratorRepository.dataUserMore75Chirps();
+		public Collection<Veterinary> dataVeterinaryMore50MedicalReport() {
+			return administratorRepository.dataVeterinaryMore50MedicalReport();
 		}
 	
 
