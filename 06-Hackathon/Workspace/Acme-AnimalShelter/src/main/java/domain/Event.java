@@ -1,11 +1,13 @@
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -27,7 +29,6 @@ public class Event extends DomainEntity{
 
 	private String title;
 	private String description;
-	private Double donation;
 	private String nameSite;
 	private String address;
 	private String placard;
@@ -63,15 +64,6 @@ public class Event extends DomainEntity{
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	@NotNull
-	public Double getDonation() {
-		return donation;
-	}
-
-	public void setDonation(Double donation) {
-		this.donation = donation;
 	}
 
 	@NotBlank
@@ -151,6 +143,7 @@ public class Event extends DomainEntity{
 	// Relationships
 	
 	private Center center;
+	private Collection<Donation> donation;
 	
 	@Valid
 	@ManyToOne(optional=false)
@@ -162,5 +155,13 @@ public class Event extends DomainEntity{
 		this.center = center;
 	}
 	
-	
+	@Valid
+	@OneToMany(mappedBy = "event")
+	public Collection<Donation> getDonation() {
+		return donation;
+	}
+
+	public void setDonation(Collection<Donation> donation) {
+		this.donation = donation;
+	}
 }

@@ -22,6 +22,12 @@
 	
 	<form:hidden path="id"/>
 	
+	<security:authorize access="hasRole('BOSS')">
+		<jstl:if test="${requestURI == 'employee/boss/register.do' }">
+			<acme:select items="${centers }" itemLabel="name" code="actor.center" path="center"/>
+		</jstl:if>
+	</security:authorize>
+	
 	<acme:textbox code="actor.name" path="name"/>
 	<br/>
 	<acme:textbox code="actor.surname" path="surname"/>
@@ -39,7 +45,7 @@
 	<acme:password code="actor.repeatPassword" path="repeatPassword"/>
 	<br/>
 	
-	<jstl:if test="${requestURI == 'client/register.do' or requestURI == 'voluntary/register.do'}">
+	<jstl:if test="${requestURI == 'client/register.do' or requestURI == 'voluntary/register.do' or requestURI == 'veterinary/boss/register.do' or requestURI == 'boss/boss/register.do' or requestURI == 'employee/boss/register.do'}">
 		<acme:checkbox code="actor.acceptTerms" path="termsAndConditions"/>
 		<a href="terms/list.do"><spring:message code="actor.acceptTermsLink"/></a>
 		<br />

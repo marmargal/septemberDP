@@ -8,7 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.DonationRepository;
+import domain.Client;
 import domain.Donation;
+import domain.Event;
+import domain.Voluntary;
 
 
 @Service
@@ -21,6 +24,12 @@ public class DonationService {
 	private DonationRepository donationRepository;
 
 	// Suporting services
+	
+	@Autowired
+	private VoluntaryService voluntaryService;
+	
+	@Autowired
+	private ClientService clientService;
 
 	// Constructors
 
@@ -30,8 +39,24 @@ public class DonationService {
 
 	// Simple CRUD methods
 
-	public Donation create() {
+	public Donation create(Event event) {
 		Donation res = new Donation();
+		
+		try {
+			Voluntary voluntary = voluntaryService.findByPrincipal();
+			res.setVoluntary(voluntary);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		try {
+			Client client = clientService.findByPrincipal();
+			res.setClient(client);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		res.setEvent(event);
 		
 		return res;
 

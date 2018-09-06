@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles_es.xml * * Copyright (C) 2017 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="stand/list" extends="master.page">
+		<put-attribute name="title" value="Listar stands" />
+		<put-attribute name="body" value="/views/stand/list.jsp" />
+	</definition>
+	<definition name="stand/boss/create" extends="master.page">
+		<put-attribute name="title" value="Crear stand" />
+		<put-attribute name="body" value="/views/stand/edit.jsp" />
+	</definition>
+
+	<definition name="stand/boss/edit" extends="master.page">
+		<put-attribute name="title" value="Editar stand" />
+		<put-attribute name="body" value="/views/stand/edit.jsp" />
+	</definition>
+
+	<definition name="stand/voluntary/join" extends="master.page">	
+		<put-attribute name="title" value="Apuntarse a un stand" />
+		<put-attribute name="body" value="/views/stand/join.jsp" />
+	</definition>
+	
+	<definition name="stand/boss/affiliate" extends="master.page">
+		<put-attribute name="title" value="Asociar empleado" />
+		<put-attribute name="body" value="/views/stand/affiliate.jsp" />
+	</definition>
+
+</tiles-definitions>

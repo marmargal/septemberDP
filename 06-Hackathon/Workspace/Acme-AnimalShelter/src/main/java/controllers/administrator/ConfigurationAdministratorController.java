@@ -78,7 +78,7 @@ public class ConfigurationAdministratorController extends AbstractController {
 		result = new ModelAndView("configuration/administrator/edit");
 		result.addObject("configuration", configuration);
 		result.addObject("message", message);
-		result.addObject("requestUri", "configuration/administrator/edit.do");
+		result.addObject("requestURI", "configuration/administrator/edit.do");
 		return result;
 
 	}

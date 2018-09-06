@@ -6,6 +6,9 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
@@ -18,7 +21,8 @@ import security.UserAccount;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Actor extends DomainEntity {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Actor extends DomainEntity {
 
 	// Constructors
 
@@ -82,6 +86,8 @@ public class Actor extends DomainEntity {
 
 	private UserAccount userAccount;
 	private Collection<Folder> folders;
+	private Message received;
+	private Collection<Message> sent;
 
 	@NotNull
 	@Valid
@@ -93,10 +99,10 @@ public class Actor extends DomainEntity {
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
-
+	
 	@Valid
 	@NotNull
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Folder> getFolders() {
 		return folders;
 	}
@@ -104,4 +110,25 @@ public class Actor extends DomainEntity {
 	public void setFolders(Collection<Folder> folders) {
 		this.folders = folders;
 	}
+	
+	@Valid
+	@ManyToOne
+	public Message getReceived() {
+		return received;
+	}
+
+	public void setReceived(Message received) {
+		this.received = received;
+	}
+	
+	@Valid
+	@OneToMany(mappedBy = "sender")
+	public Collection<Message> getSent() {
+		return sent;
+	}
+
+	public void setSent(Collection<Message> sent) {
+		this.sent = sent;
+	}
+
 }

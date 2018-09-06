@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class EventService {
 
 	public Event create() {
 		Event res = new Event();
+		
+		Date publicationDate = new Date(System.currentTimeMillis()-1000);
+		res.setPublicationDate(publicationDate);
 
 		return res;
 
@@ -72,6 +76,10 @@ public class EventService {
 		Collection<Event> events = new ArrayList<Event>();
 		events = this.eventRepository.findEventByCenter(centerId);
 		return events;
+	}
+	
+	public Event saveAndFlush(Event event){
+		return eventRepository.saveAndFlush(event);
 	}
 
 }

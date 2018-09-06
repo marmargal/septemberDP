@@ -38,6 +38,6 @@
 		</div>
 	</jstl:if>
 	
-	<input type="submit" value="<spring:message code="security.login" />" />
+	<input class="btn btn-primary" type="submit" value="<spring:message code="security.login" />" />
 	
 </form:form>

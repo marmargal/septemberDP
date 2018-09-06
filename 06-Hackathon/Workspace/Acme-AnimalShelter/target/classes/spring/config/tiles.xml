@@ -35,6 +35,12 @@
 		<value>/views/configuration/tiles.xml</value>
 		<value>/views/notice/tiles.xml</value>
 		<value>/views/medicalReport/tiles.xml</value>
+		<value>/views/message/tiles.xml</value>
+		<value>/views/event/tiles.xml</value>
+		<value>/views/donation/tiles.xml</value>
+		<value>/views/stand/tiles.xml</value>
+		<value>/views/company/tiles.xml</value>
+		
 	</util:list>
 
 </beans>

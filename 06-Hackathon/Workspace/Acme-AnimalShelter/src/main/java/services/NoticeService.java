@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.NoticeRepository;
 import domain.Notice;
+import domain.Voluntary;
 
 
 @Service
@@ -21,6 +23,9 @@ public class NoticeService {
 	private NoticeRepository noticeRepository;
 
 	// Suporting services
+	
+	@Autowired
+	private VoluntaryService voluntaryService;
 
 	// Constructors
 
@@ -32,6 +37,14 @@ public class NoticeService {
 
 	public Notice create() {
 		Notice res = new Notice();
+		
+		Voluntary voluntary = this.voluntaryService.findByPrincipal();
+		res.setVoluntary(voluntary);
+		
+		Date date = new Date(System.currentTimeMillis() - 1000);
+		res.setDate(date);
+		
+		res.setDescarted(false);
 		
 		return res;
 

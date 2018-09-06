@@ -26,10 +26,10 @@ import domain.Center;
 public class CenterAdministratorController extends AbstractController {
 
 	// Services -------------------------------------------------------------
-	
+
 	@Autowired
 	private CenterService centerService;
-	
+
 	// Constructors -----------------------------------------------------------
 
 	public CenterAdministratorController() {
@@ -37,20 +37,19 @@ public class CenterAdministratorController extends AbstractController {
 	}
 
 	// Delete ---------------------------------------------------------------
-	@RequestMapping(value="/delete",method=RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@RequestParam(defaultValue = "0") int centerId){
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@RequestParam(defaultValue = "0") int centerId) {
 		ModelAndView res;
-		try{
+		try {
 			Center center = this.centerService.findOne(centerId);
 			this.centerService.delete(center);
 			res = new ModelAndView("redirect:/center/list.do");
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			res = new ModelAndView("redirect:../../");
 		}
-		
+
 		return res;
 	}
-
 
 }

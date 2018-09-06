@@ -35,6 +35,12 @@
 		<value>/views/configuration/messages</value>
 		<value>/views/notice/messages</value>
 		<value>/views/medicalReport/messages</value>
+		<value>/views/message/messages</value>
+		<value>/views/event/messages</value>
+		<value>/views/donation/messages</value>
+		<value>/views/stand/messages</value>
+		<value>/views/company/messages</value>
+		
 	</util:list>
 
 </beans>

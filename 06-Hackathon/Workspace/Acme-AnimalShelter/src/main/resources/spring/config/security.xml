@@ -67,33 +67,66 @@
 											<!--    	VOLUNTARY 		-->
 		<security:intercept-url pattern="/voluntary/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/voluntary/edit.do" access="hasRole('VOLUNTARY')" /> 
+		<security:intercept-url pattern="/voluntary/employee/**" access="hasRole('EMPLOYEE')" /> 
 		
 											<!--    	BOSS 		-->
 		<security:intercept-url pattern="/boss/edit.do" access="hasRole('BOSS')" />
+		<security:intercept-url pattern="/boss/boss/**" access="hasRole('BOSS')" />
 		
 											<!--    	EMPLOYEE 		-->
 		<security:intercept-url pattern="/employee/edit.do" access="hasRole('EMPLOYEE')" />
+		<security:intercept-url pattern="/employee/boss/**" access="hasRole('BOSS')" />
 		
 											<!--    	VETERINARY 		-->
 		<security:intercept-url pattern="/veterinary/edit.do" access="hasRole('VETERINARY')" />
+		<security:intercept-url pattern="/veterinary/boss/**" access="hasRole('BOSS')" />
 		
 											<!-- 		PET 		-->
 		<security:intercept-url pattern="/pet/petsWaitingAdoption.do" access="permitAll" /> 
 		<security:intercept-url pattern="/pet/petsPermitAdoption.do" access="permitAll" /> 
 		<security:intercept-url pattern="/pet/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/pet/veterinary/**" access="hasRole('VETERINARY')" />
+		<security:intercept-url pattern="/pet/employee/**" access="hasRole('EMPLOYEE')" />
 		
 											<!-- 		CENTER 		-->
 		<security:intercept-url pattern="/center/list.do" access="permitAll" /> 
 		<security:intercept-url pattern="/center/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/center/boss/**" access="hasRole('BOSS')" />
+		
+		
+		
+		<security:intercept-url pattern="/center/employee/**" access="hasRole('EMPLOYEE')" />
 		
 											<!-- 		APPLICATION 		-->
 		<security:intercept-url pattern="/application/administrator/**" access="hasRole('ADMIN')" /> 
 		
 											<!-- 		NOTICE 		-->
 		<security:intercept-url pattern="/notice/administrator/**" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/notice/voluntary/**" access="hasRole('VOLUNTARY')" /> 
 		
 											<!-- 		MEDICALREPORT 		-->
-		<security:intercept-url pattern="/medicalReport/administrator/**" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/medicalReport/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/medicalReport/veterinary/**" access="hasRole('VETERINARY')" />
+		
+											<!-- 		MESSAGE 		-->
+		<security:intercept-url pattern="/message/administrator/**" access="hasRole('ADMIN')" />  
+		
+											<!-- 		EVENT 		-->
+		<security:intercept-url pattern="/event/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/event/boss/**" access="hasRole('BOSS')" />
+		
+											<!-- 		DONATION		-->
+		<security:intercept-url pattern="/donation/voluntary/**" access="hasRole('VOLUNTARY')" />
+		<security:intercept-url pattern="/donation/client/**" access="hasRole('CLIENT')" />
+		
+											<!-- 		STAND			-->
+		<security:intercept-url pattern="/stand/voluntary/**" access="hasRole('VOLUNTARY')" />
+		<security:intercept-url pattern="/stand/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/stand/boss/**" access="hasRole('BOSS')" />
+		
+											<!-- 		COMPANY			-->
+		<security:intercept-url pattern="/company/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/company/boss/**" access="hasRole('BOSS')" />
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

@@ -16,6 +16,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Boss;
+import domain.Center;
 import domain.Folder;
 import forms.ActorForm;
 
@@ -34,6 +35,9 @@ public class BossService {
 	@Autowired
 	private Validator		validator;
 	
+	@Autowired
+	private FolderService folderService;
+	
 	// Constructors
 
 	public BossService() {
@@ -46,14 +50,29 @@ public class BossService {
 		Boss res = new Boss();
 		
 		Collection<Folder> folders = new ArrayList<Folder>();
+		Collection<Center> centers = new ArrayList<Center>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
+		Folder inBox = this.folderService.create();
+		Folder outBox = this.folderService.create();
+		Folder trash = this.folderService.create();
 		
 		authority.setAuthority(Authority.BOSS);
 		userAccount.addAuthority(authority);
+		
+		inBox.setName("In Box");
+		outBox.setName("Out Box");
+		trash.setName("Trash");
+		this.folderService.save(inBox);
+		this.folderService.save(outBox);
+		this.folderService.save(trash);
+		folders.add(inBox);
+		folders.add(outBox);
+		folders.add(trash);
 
 		res.setUserAccount(userAccount);
 		res.setFolders(folders);
+		res.setCenters(centers);
 		
 		return res;
 	}

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.StandRepository;
 import domain.Stand;
+import domain.Voluntary;
 
 
 @Service
@@ -21,6 +23,9 @@ public class StandService {
 	private StandRepository standRepository;
 
 	// Suporting services
+	
+	@Autowired
+	private VoluntaryService voluntaryService;
 
 	// Constructors
 
@@ -67,6 +72,21 @@ public class StandService {
 
 	// Other business methods
 	
+	public Stand untieVoluntary(Stand stand){
+		stand.setVoluntaries(null);
+		this.save(stand);
+		return stand;
+	}
 	
-
+	public void joinVoluntary(Stand stand) {
+		if (stand.getVoluntaries().size() < stand.getNumMaxVoluntaries()) {
+			Voluntary voluntary = voluntaryService.findByPrincipal();
+			Collection<Voluntary> voluntaries = new ArrayList<>();
+			voluntaries = stand.getVoluntaries();
+			voluntaries.add(voluntary);
+			stand.setVoluntaries(voluntaries);
+			this.save(stand);
+		}
+	}
+	
 }

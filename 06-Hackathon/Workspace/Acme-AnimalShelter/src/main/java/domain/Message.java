@@ -6,7 +6,8 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -74,16 +75,39 @@ public class Message extends DomainEntity{
 	
 	// Relationships
 	
-	private Collection<Folder> folders;
-	
+	private Actor sender;
+	private Collection<Actor> recipient;
+	private Folder folder;
+
 	@Valid
-	@ManyToMany
-	public Collection<Folder> getFolders() {
-		return folders;
+	@NotNull
+	@ManyToOne(optional = false)
+	public Actor getSender() {
+		return sender;
 	}
 
-	public void setFolders(Collection<Folder> folders) {
-		this.folders = folders;
+	public void setSender(Actor sender) {
+		this.sender = sender;
+	}
+
+	@Valid
+	@OneToMany(mappedBy = "received")
+	public Collection<Actor> getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(Collection<Actor> recipient) {
+		this.recipient = recipient;
+	}
+
+	@Valid
+	@ManyToOne
+	public Folder getFolder() {
+		return folder;
+	}
+
+	public void setFolder(Folder folder) {
+		this.folder = folder;
 	}
 	
 	

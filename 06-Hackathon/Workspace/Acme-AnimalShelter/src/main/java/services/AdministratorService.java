@@ -128,6 +128,9 @@ public class AdministratorService {
 		Assert.notNull(authority);
 		Authority res = new Authority();
 		res.setAuthority("ADMIN");
+		if (!authority.contains(res)) {
+			res.setAuthority("BOSS");
+		}
 		Assert.isTrue(authority.contains(res));
 	}	
 	

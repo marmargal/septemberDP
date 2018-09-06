@@ -21,11 +21,11 @@ th,td {
 }
 
 thead tr {
-	background-color: #fc0;
+	background-color: #e8630a;
 }
 
 th.sorted {
-	background-color: orange;
+	background-color: #e8630a;
 }
 
 th a,th a:visited {
@@ -67,7 +67,7 @@ tr.odd {
 }
 
 tr.tableRowEven,tr.even {
-	background-color: #fea
+	background-color: #b6e1e0
 }
 
 div.exportlinks {

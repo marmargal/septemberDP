@@ -53,6 +53,7 @@ public class Donation extends DomainEntity{
 	
 	private Voluntary voluntary;
 	private Client client;
+	private Event event;
 	
 	@Valid
 	@ManyToOne(optional=true)
@@ -72,6 +73,16 @@ public class Donation extends DomainEntity{
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+	
+	@Valid
+	@ManyToOne
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 	
 }

@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.util.Assert;
 import repositories.MedicalReportRepository;
 import domain.MedicalReport;
 import domain.Pet;
+import domain.Veterinary;
 
 
 @Service
@@ -30,6 +32,9 @@ public class MedicalReportService {
 	@Autowired
 	private PetService petService;
 	
+	@Autowired
+	private VeterinaryService veterinaryService;
+	
 	// Constructors
 
 	public MedicalReportService() {
@@ -38,8 +43,15 @@ public class MedicalReportService {
 
 	// Simple CRUD methods
 
-	public MedicalReport create() {
+	public MedicalReport create(int petId) {
 		MedicalReport res = new MedicalReport();
+		
+		Pet pet = this.petService.findOne(petId);
+		Veterinary veterinary = this.veterinaryService.findByPrincipal();
+		
+		res.setDate(new Date(System.currentTimeMillis()-1));
+		res.setVeterinary(veterinary);
+		res.setPet(pet);
 		
 		return res;
 

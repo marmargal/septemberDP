@@ -38,6 +38,7 @@ public class CenterService {
 	@Autowired
 	private PetService petService;
 
+
 	// Constructors
 
 	public CenterService() {
@@ -70,12 +71,17 @@ public class CenterService {
 
 	public Center save(Center center) {
 		Center res;
-		res = centerRepository.save(center);
+		res = centerRepository.saveAndFlush(center);
 		return res;
 	}
 
 	public void delete(Center center) {
-		this.administratorService.checkAuthority();
+		
+		try {
+			this.administratorService.checkAuthority();
+		} catch (Exception e) {
+			this.administratorService.checkAuthority();
+		}
 		Assert.notNull(center);
 		Assert.isTrue(center.getId() != 0);
 		Assert.isTrue(centerRepository.exists(center.getId()));
@@ -104,5 +110,10 @@ public class CenterService {
 
 	// Other business methods
 	
-
+	public Center findByPet(int petId){
+		Center center = new Center();
+		center = this.centerRepository.findByPet(petId);
+		return center;
+	}
+	
 }

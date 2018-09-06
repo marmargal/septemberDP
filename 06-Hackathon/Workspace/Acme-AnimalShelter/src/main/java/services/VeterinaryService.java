@@ -34,6 +34,9 @@ public class VeterinaryService {
 	@Autowired
 	private Validator		validator;
 	
+	@Autowired
+	private FolderService folderService;
+	
 	// Constructors
 
 	public VeterinaryService() {
@@ -48,9 +51,22 @@ public class VeterinaryService {
 		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
+		Folder inBox = this.folderService.create();
+		Folder outBox = this.folderService.create();
+		Folder trash = this.folderService.create();
 		
 		authority.setAuthority(Authority.VETERINARY);
 		userAccount.addAuthority(authority);
+		
+		inBox.setName("In Box");
+		outBox.setName("Out Box");
+		trash.setName("Trash");
+		this.folderService.save(inBox);
+		this.folderService.save(outBox);
+		this.folderService.save(trash);
+		folders.add(inBox);
+		folders.add(outBox);
+		folders.add(trash);
 
 		res.setUserAccount(userAccount);
 		res.setFolders(folders);
