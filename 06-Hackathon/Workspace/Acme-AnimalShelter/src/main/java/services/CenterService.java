@@ -13,6 +13,7 @@ import domain.Center;
 import domain.Employee;
 import domain.Event;
 import domain.Pet;
+import domain.Stand;
 
 
 @Service
@@ -38,6 +39,8 @@ public class CenterService {
 	@Autowired
 	private PetService petService;
 
+	@Autowired
+	private StandService standService;
 
 	// Constructors
 
@@ -90,6 +93,9 @@ public class CenterService {
 		Collection<Employee> employees = new ArrayList<Employee>();
 		employees = this.employeeService.findByCenter(center.getId());
 		for(Employee employee: employees){
+			Stand stand=employee.getStand();
+			employee.setStand(null);
+			this.standService.delete(stand);
 			this.employeeService.delete(employee);
 		}
 		

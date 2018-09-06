@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -225,6 +226,64 @@ public class AdministratorService {
 
 		return res;
 	}
+	
+	
+	// dashboard
+		public Collection<Double> dataApplicationPerClient() {
+			return administratorRepository.dataApplicationPerClient();
+		}
+
+		public Collection<Double> dataNoticePerVoluntary() {
+			return administratorRepository.dataNoticePerVoluntary();
+		}
+		public Collection<Double> dataApplicationPerEmployee() {
+			return administratorRepository.dataApplicationPerEmployee();
+		}
+
+		public Collection<Double> dataReportPorEmpleado() {
+			return administratorRepository.dataReportPorEmpleado();
+		}
+		public Collection<Double> dataMedicalReportPerVeterinary() {
+			return administratorRepository.dataMedicalReportPerVeterinary();
+		}
+
+		public Collection<Double> dataApplicationPerClientLastWeek() {
+			Date fecha=  new Date(System.currentTimeMillis() - 604800000);
+			return administratorRepository.dataApplicationPerClientLastWeek(fecha);
+		}
+		public Collection<Double> dataMedicalReportPerVeterinaryLastWeek() {
+			Date fecha=  new Date(System.currentTimeMillis() - 604800000);
+			return administratorRepository.dataMedicalReportPerVeterinaryLastWeek(fecha);
+		}
+
+		public Collection<Double> dataReportPerEmployeeLastWeek() {
+			Date fecha=  new Date(System.currentTimeMillis() - 604800000);
+			return administratorRepository.dataReportPerEmployeeLastWeek(fecha);
+		}
+		
+		//-----------------------------------------------
+		
+		public Collection<Client> clientsWithMoreApplications() {
+			return administratorRepository.clientsWithMoreApplications();
+		}
+
+		public Collection<Veterinary> veterinariesWithMoreMedicalReport() {
+			return administratorRepository.veterinariesWithMoreMedicalReport();
+		}
+		
+		//una en dos
+		public Collection<Employee> employeesWithMoreReports() {
+			return administratorRepository.employeesWithMoreReports();
+		}
+
+		public Collection<Employee> employeesWithLessReports() {
+			return administratorRepository.employeesWithLessReports();
+		}
+		//
+		
+		public Collection<Veterinary> dataVeterinaryMore50MedicalReport() {
+			return administratorRepository.dataVeterinaryMore50MedicalReport();
+		}
 	
 
 }
