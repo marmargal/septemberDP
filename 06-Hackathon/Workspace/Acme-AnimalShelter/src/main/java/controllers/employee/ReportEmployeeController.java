@@ -10,24 +10,24 @@
 
 package controllers.employee;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
-import services.ReportService;
 import services.EmployeeService;
+import services.ReportService;
 import controllers.AbstractController;
-import domain.Application;
 import domain.Report;
-import domain.Report;
-import domain.Report;
-import domain.Warehouse;
 
 @Controller
 @RequestMapping("/report/employee")
@@ -62,12 +62,31 @@ public class ReportEmployeeController extends AbstractController {
 		if (applicationId == 0
 				|| this.applicationService.findOne(applicationId) == null) {
 			res = new ModelAndView("redirect:../../");
-		}else{
-			report.setApplication(this.applicationService.findOne(applicationId));
+		} else {
+			report.setApplication(this.applicationService
+					.findOne(applicationId));
 			res = this.createEditModelAndView(report);
 		}
-		
 
+		return res;
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Report report, final BindingResult binding) {
+		ModelAndView res;
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(report, "report.params.error");
+			System.out.println(binding.getAllErrors());
+		} else
+			try {
+				report.setEmployee(employeeService.findByPrincipal());
+				this.reportService.save(report);
+				res = new ModelAndView("redirect:../../");
+			} catch (final Throwable oops) {
+				System.out.println(oops.getMessage());
+				res = this
+						.createEditModelAndView(report, "report.commit.error");
+			}
 		return res;
 	}
 
@@ -84,7 +103,10 @@ public class ReportEmployeeController extends AbstractController {
 		ModelAndView result;
 		result = new ModelAndView("report/employee/create");
 		result.addObject("report", report);
-
+		Collection<Boolean> suitables = new ArrayList<>();
+		suitables.add(true);
+		suitables.add(false);
+		result.addObject("suitables", suitables);
 		result.addObject("message", message);
 		result.addObject("requestUri", "report/employee/create.do");
 		return result;

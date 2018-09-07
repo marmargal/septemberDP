@@ -16,19 +16,9 @@
        
 <tiles-definitions>
 
-	<definition name="notice/list" extends="master.page">	
-		<put-attribute name="title" value="List notices" />
-		<put-attribute name="body" value="/views/notice/list.jsp" />
-	</definition>
-	
-	<definition name="notice/display" extends="master.page">	
-		<put-attribute name="title" value="Display notice" />
-		<put-attribute name="body" value="/views/notice/display.jsp" />
-	</definition>
-	
-	<definition name="notice/voluntary/edit" extends="master.page">	
-		<put-attribute name="title" value="Create notice" />
-		<put-attribute name="body" value="/views/notice/create.jsp" />
+		<definition name="report/employee/create" extends="master.page">
+		<put-attribute name="title" value="Create report" />
+		<put-attribute name="body" value="/views/report/create.jsp" />
 	</definition>
 	
 </tiles-definitions>

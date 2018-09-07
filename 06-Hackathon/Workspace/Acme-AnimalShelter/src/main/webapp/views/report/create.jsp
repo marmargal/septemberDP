@@ -25,21 +25,18 @@
 		
 		<form:hidden path="id" />
 		<form:hidden path="version" />
-		<form:hidden path="voluntary" />
-		<form:hidden path="date" />
-		<form:hidden path="descarted" />
+		<form:hidden path="application" />
+		<form:hidden path="makeMoment" />
 
 
-		<acme:textbox code="notice.description" path="description" />
-		<acme:textbox code="notice.type" path="type" />
-		<acme:textbox code="notice.level" path="level" />
-		<acme:textbox code="notice.gpsCoordinates.latitude" path="gpsCoordinates.latitude" />
-		<acme:textbox code="notice.gpsCoordinates.longitude" path="gpsCoordinates.longitude" />
+		<acme:textbox code="report.description" path="description" />
+		<acme:selectBoolean code="report.suitable" path="suitable" items="${suitables }"/>
+		
 		
 		<!-- Buttons -->
 
-		<acme:submit name="save" code="notice.submit" />
-		<acme:cancel url="/" code="notice.cancel" />
+		<acme:submit name="save" code="report.submit" />
+		<acme:cancel url="../../" code="report.cancel" />
 	</security:authorize>
 
 </form:form>

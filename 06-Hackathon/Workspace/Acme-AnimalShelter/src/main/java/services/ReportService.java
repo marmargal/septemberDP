@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import org.springframework.util.Assert;
 import repositories.ReportRepository;
 import domain.Application;
 import domain.Report;
-
 
 @Service
 @Transactional
@@ -22,7 +22,7 @@ public class ReportService {
 	private ReportRepository reportRepository;
 
 	// Suporting services
-	
+
 	@Autowired
 	private ApplicationService applicationService;
 
@@ -36,7 +36,7 @@ public class ReportService {
 
 	public Report create() {
 		Report res = new Report();
-		
+		res.setMakeMoment(new Date(System.currentTimeMillis() - 1000));
 		return res;
 
 	}
@@ -58,6 +58,9 @@ public class ReportService {
 
 	public Report save(Report report) {
 		Report res;
+		Application application = report.getApplication();
+		application.setClosed(true);
+		applicationService.save(application);
 		res = reportRepository.save(report);
 		return res;
 	}
@@ -66,16 +69,14 @@ public class ReportService {
 		Assert.notNull(report);
 		Assert.isTrue(report.getId() != 0);
 		Assert.isTrue(reportRepository.exists(report.getId()));
-		
+
 		Application application = report.getApplication();
 		application.setReport(null);
 		this.applicationService.save(application);
-		
+
 		reportRepository.delete(report);
 	}
 
 	// Other business methods
-	
-	
 
 }
