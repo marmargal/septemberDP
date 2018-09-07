@@ -27,6 +27,7 @@ import services.ApplicationService;
 import services.EmployeeService;
 import services.ReportService;
 import controllers.AbstractController;
+import domain.Application;
 import domain.Report;
 
 @Controller
@@ -80,7 +81,12 @@ public class ReportEmployeeController extends AbstractController {
 		} else
 			try {
 				report.setEmployee(employeeService.findByPrincipal());
-				this.reportService.save(report);
+				Application application = report.getApplication();
+				Report saved = this.reportService.save(report);
+				application.setReport(saved);
+
+				applicationService.save(application);
+
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
 				System.out.println(oops.getMessage());

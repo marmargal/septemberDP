@@ -232,7 +232,6 @@
 		<property name="reports">
 			<list>
 				<ref bean="report2"/>
-				<ref bean="report3"/>
 			</list>
 		</property>
 		<property name="center" ref="center1"/>
@@ -831,10 +830,9 @@
 	<bean id="application3" class="domain.Application">
 		<property name="ticker" value="1234567SDFGH"/>
 		<property name="createMoment" value="12/07/2011"/>
-		<property name="closed" value="true"/>
+		<property name="closed" value="false"/>
 		<property name="pet" ref="pet3"/>
 		<property name="client" ref="client1"/>
-		<property name="report" ref="report3"/>
 	</bean>
 	
 	<!-- REPORT -->
@@ -854,13 +852,7 @@
 		<property name="application" ref="application2"/>
 	</bean>
 	
-	<bean id="report3" class="domain.Report">
-		<property name="description" value="Report 3"/>
-		<property name="suitable" value="false"/>
-		<property name="makeMoment" value="12/12/2017"/>
-		<property name="employee" ref="employee2"/>
-		<property name="application" ref="application3"/>
-	</bean>
+	
 	
 	
 	<!-- PET -->
