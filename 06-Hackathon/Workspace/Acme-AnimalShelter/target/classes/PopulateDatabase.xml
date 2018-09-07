@@ -830,7 +830,7 @@
 	<bean id="application3" class="domain.Application">
 		<property name="ticker" value="1234567SDFGH"/>
 		<property name="createMoment" value="12/07/2011"/>
-		<property name="closed" value="false"/>
+		<property name="closed" value="true"/>
 		<property name="pet" ref="pet3"/>
 		<property name="client" ref="client1"/>
 		<property name="report" ref="report3"/>
