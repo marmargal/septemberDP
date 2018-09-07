@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+
 import services.DonationService;
 import services.EventService;
 import domain.Donation;
@@ -17,7 +19,7 @@ import domain.Event;
 
 @Controller
 @RequestMapping("/donation/client")
-public class DonationClientController {
+public class DonationClientController extends AbstractController {
 	// Services -------------------------------------------------------------
 
 	@Autowired

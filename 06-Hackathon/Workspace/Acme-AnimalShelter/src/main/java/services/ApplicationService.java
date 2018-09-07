@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,11 @@ import org.springframework.util.Assert;
 
 import repositories.ApplicationRepository;
 import domain.Application;
+<<<<<<< HEAD
 import domain.Center;
+=======
+import domain.Client;
+>>>>>>> master
 import domain.Pet;
 import domain.Report;
 
@@ -33,6 +38,9 @@ public class ApplicationService {
 
 	@Autowired
 	private ReportService reportService;
+	
+	@Autowired
+	private ClientService clientService;
 
 	// Constructors
 
@@ -42,8 +50,27 @@ public class ApplicationService {
 
 	// Simple CRUD methods
 
-	public Application create() {
+	@SuppressWarnings("deprecation")
+	public Application create(Pet pet) {
 		Application res = new Application();
+
+		
+		Client client;
+		client = clientService.findByPrincipal();
+		res.setClient(client);
+		res.setPet(pet);
+		
+		String ticker;
+		Date date = new Date(System.currentTimeMillis() - 100);
+		
+		res.setCreateMoment(date);
+		
+		ticker = pet.getIdentifier() + date.getDay() + date.getMonth() + date.getYear();
+		
+		res.setClosed(false);
+		
+		res.setTicker(ticker);
+		
 
 		return res;
 

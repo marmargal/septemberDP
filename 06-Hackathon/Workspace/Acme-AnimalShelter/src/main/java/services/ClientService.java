@@ -112,6 +112,14 @@ public class ClientService {
 		return res;
 	}
 	
+	public Client saveForApplication(Client client) {
+		Client res;
+
+		res = this.clientRepository.save(client);
+		
+		return res;
+	}
+	
 	public void delete(Client client) {
 		Assert.notNull(client);
 		Assert.isTrue(client.getId() != 0);

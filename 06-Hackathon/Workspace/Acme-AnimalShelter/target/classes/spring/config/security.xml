@@ -105,11 +105,11 @@
 											<!-- 		REPORT 		-->
 		<security:intercept-url pattern="/report/administrator/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/report/employee/create.do" access="hasRole('EMPLOYEE')" /> 
+		<security:intercept-url pattern="/application/client/**" access="hasRole('CLIENT')" /> 
 		
 											<!-- 		NOTICE 		-->
 		<security:intercept-url pattern="/notice/administrator/**" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/notice/display.do" access="hasRole('ADMIN')" /> 
-		<security:intercept-url pattern="/notice/display.do" access="hasRole('EMPLOYEE')" /> 	
+		<security:intercept-url pattern="/notice/display.do" access="hasAnyRole('ADMIN','EMPLOYEE')" /> 
 		<security:intercept-url pattern="/notice/voluntary/**" access="hasRole('VOLUNTARY')" />
 		<security:intercept-url pattern="/notice/employee/**" access="hasRole('EMPLOYEE')" /> 
 		
