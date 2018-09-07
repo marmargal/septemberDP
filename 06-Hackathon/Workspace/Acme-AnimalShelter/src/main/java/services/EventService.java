@@ -82,4 +82,9 @@ public class EventService {
 		return eventRepository.saveAndFlush(event);
 	}
 
+	public Collection<Event> findEventNotEnd(){
+		Collection<Event> events = new ArrayList<Event>();
+		events = this.eventRepository.findEventNotEnd(new Date());
+		return events;
+	}
 }
