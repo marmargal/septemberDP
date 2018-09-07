@@ -61,12 +61,14 @@ public class ReportService {
 		Application application = report.getApplication();
 		application.setClosed(true);
 		applicationService.save(application);
-		
-		//TODO
-//		for (Application app : application.getPet().getApplications()) {
-//			app.setClosed(true);
-//		}
-		
+
+		// TODO
+		if (report.getSuitable()) {
+			for (Application app : application.getPet().getApplication()) {
+				app.setClosed(true);
+			}
+		}
+
 		res = reportRepository.save(report);
 		return res;
 	}

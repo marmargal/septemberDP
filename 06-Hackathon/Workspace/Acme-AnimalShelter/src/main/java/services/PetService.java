@@ -17,7 +17,6 @@ import domain.Application;
 import domain.MedicalReport;
 import domain.Pet;
 
-
 @Service
 @Transactional
 public class PetService {
@@ -28,10 +27,10 @@ public class PetService {
 	private PetRepository petRepository;
 
 	// Suporting services
-	
+
 	@Autowired
 	private MedicalReportService medicalReportService;
-	
+
 	@Autowired
 	private ApplicationService applicationService;
 
@@ -76,64 +75,90 @@ public class PetService {
 		Assert.notNull(pet);
 		Assert.isTrue(pet.getId() != 0);
 		Assert.isTrue(petRepository.exists(pet.getId()));
-		
-		//Eliminamos sus relaciones
+
+		// Eliminamos sus relaciones
 		MedicalReport medicalReport = pet.getMedicalReport();
-		if(medicalReport != null){
+		if (medicalReport != null) {
 			this.medicalReportService.delete(medicalReport);
 		}
-		
-		for(Application application: pet.getApplication()){
-			if(application != null){
+
+		for (Application application : pet.getApplication()) {
+			if (application != null) {
 				this.applicationService.delete(application);
 			}
 		}
-				
+
 		petRepository.delete(pet);
 	}
 
 	// Other business methods
-	
-	public Set<Pet> findPetsWaitingAdoption(){
+
+	public Set<Pet> findPetsWaitingAdoption() {
 		Set<Pet> pets = new HashSet<Pet>();
 		pets = this.petRepository.findPetsWaitingAdoption();
+		for (Pet pet : pets) {
+			if (!pet.getApplication().isEmpty()) {
+				for (Application app : pet.getApplication()) {
+					if (app.getReport() != null
+							&& app.getReport().getSuitable()) {
+						pets.remove(pet);
+					}
+				}
+			}
+		}
 		return pets;
 	}
-	
-	public Collection<Pet> findPetsPermitAdoption(){
+
+	public Collection<Pet> findPetsPermitAdoption() {
 		Collection<Pet> pets = new ArrayList<Pet>();
 		pets = this.petRepository.findPetsPermitAdoption();
+		ArrayList<Pet> pList = new ArrayList<>();
+		for (Pet pet : pets) {
+			if (!pet.getApplication().isEmpty()) {
+				for (Application app : pet.getApplication()) {
+					if (app.getReport() != null
+							&& app.getReport().getSuitable()) {
+						pList.add(pet);
+					}
+				}
+			}
+		}
+		pets.removeAll(pList);
 		return pets;
 	}
-	
-	public Collection<Pet> findPetsByCenter(int centerId){
+
+	public Collection<Pet> findPetsByCenter(int centerId) {
 		Collection<Pet> pets = new ArrayList<Pet>();
 		pets = this.petRepository.findPetsByCenter(centerId);
 		return pets;
 	}
-	
+
 	public String generatedIdentifier() {
 		String identifier;
 		LocalDate date;
 		String letters;
 		String numbers;
 		Random r;
-		
+
 		letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		numbers = "0123456789";
 		r = new Random();
 		date = new LocalDate();
-		
-		identifier = String.valueOf(date.getYear() % 100 < 10 ? "0" + date.getYear() : date.getYear() % 100) + 
-					String.valueOf(date.getMonthOfYear() < 10 ? "0" + date.getMonthOfYear() : date.getMonthOfYear())
-					+ String.valueOf(date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : date.getDayOfMonth()) + "-";
+
+		identifier = String.valueOf(date.getYear() % 100 < 10 ? "0"
+				+ date.getYear() : date.getYear() % 100)
+				+ String.valueOf(date.getMonthOfYear() < 10 ? "0"
+						+ date.getMonthOfYear() : date.getMonthOfYear())
+				+ String.valueOf(date.getDayOfMonth() < 10 ? "0"
+						+ date.getDayOfMonth() : date.getDayOfMonth()) + "-";
 		for (int i = 0; i < 2; i++)
-			identifier = identifier + numbers.charAt(r.nextInt(numbers.length()));
+			identifier = identifier
+					+ numbers.charAt(r.nextInt(numbers.length()));
 		identifier = identifier + "-";
 		for (int i = 0; i < 4; i++)
-			identifier = identifier + letters.charAt(r.nextInt(letters.length()));
-		
-		
+			identifier = identifier
+					+ letters.charAt(r.nextInt(letters.length()));
+
 		return identifier;
 	}
 }
