@@ -805,6 +805,7 @@
 				<ref bean="stand2"/>
 			</list>
 		</property>
+		<property name="event" ref="event1"/>
 	</bean>
 	
 	
@@ -868,7 +869,7 @@
 		<property name="type" value="DOG"/>
 		<property name="foodExpense" value="20"/>
 		<property name="status" value="false"/>
-		<property name="identifier" value="12345678"/>
+		<property name="identifier" value="170906-14-AHOM"/>
 		<property name="date" value="21/01/2011"/>
 		<property name="age" value="2"/>
 		<property name="chip" value="true"/>
@@ -882,7 +883,7 @@
 		<property name="type" value="CAT"/>
 		<property name="foodExpense" value="20"/>
 		<property name="status" value="false"/>
-		<property name="identifier" value="12345678"/>
+		<property name="identifier" value="180706-36-AHOM"/>
 		<property name="date" value="21/01/2012"/>
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
@@ -896,7 +897,7 @@
 		<property name="type" value="BIRD"/>
 		<property name="foodExpense" value="20"/>
 		<property name="status" value="false"/>
-		<property name="identifier" value="12345678"/>
+		<property name="identifier" value="180706-96-FRSM"/>
 		<property name="date" value="21/04/2013"/>
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
@@ -910,7 +911,7 @@
 		<property name="type" value="DOG"/>
 		<property name="foodExpense" value="10"/>
 		<property name="status" value="true"/>
-		<property name="identifier" value="985454"/>
+		<property name="identifier" value="180606-25-FRSM"/>
 		<property name="date" value="21/04/2014"/>
 		<property name="age" value="5"/>
 		<property name="chip" value="false"/>
@@ -924,7 +925,7 @@
 		<property name="type" value="CAT"/>
 		<property name="foodExpense" value="10"/>
 		<property name="status" value="true"/>
-		<property name="identifier" value="656161"/>
+		<property name="identifier" value="180206-28-FRSM"/>
 		<property name="date" value="21/04/2015"/>
 		<property name="age" value="8"/>
 		<property name="chip" value="true"/>
@@ -1053,6 +1054,7 @@
 		<property name="endDate" value="09/01/2019 17:00"/>
 		<property name="publicationDate" value="09/10/2018"/>
 		<property name="center" ref="center1"/>
+		<property name="company" ref="company1"/>
 	</bean>
 	
 	
