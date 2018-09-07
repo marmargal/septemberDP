@@ -1,12 +1,13 @@
 package services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -121,7 +122,6 @@ public class PetService {
 	
 	public String generatedIdentifier() {
 		String identifier;
-		LocalDate date;
 		String letters;
 		String numbers;
 		Random r;
@@ -129,11 +129,11 @@ public class PetService {
 		letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		numbers = "0123456789";
 		r = new Random();
-		date = new LocalDate();
 		
-		identifier = String.valueOf(date.getYear() % 100 < 10 ? "0" + date.getYear() : date.getYear() % 100) + 
-					String.valueOf(date.getMonthOfYear() < 10 ? "0" + date.getMonthOfYear() : date.getMonthOfYear())
-					+ String.valueOf(date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : date.getDayOfMonth()) + "-";
+		final Date date = new Date(System.currentTimeMillis() - 1);
+		final SimpleDateFormat dt = new SimpleDateFormat("ddMMyy");
+		
+		identifier = dt.format(date).toString() + "-";
 		for (int i = 0; i < 2; i++)
 			identifier = identifier + numbers.charAt(r.nextInt(numbers.length()));
 		identifier = identifier + "-";
