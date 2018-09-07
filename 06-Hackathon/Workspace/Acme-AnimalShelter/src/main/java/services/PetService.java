@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -151,15 +152,6 @@ public class PetService {
 		numbers = "0123456789";
 		r = new Random();
 
-		date = new LocalDate();
-
-		identifier = String.valueOf(date.getYear() % 100 < 10 ? "0"
-				+ date.getYear() : date.getYear() % 100)
-				+ String.valueOf(date.getMonthOfYear() < 10 ? "0"
-						+ date.getMonthOfYear() : date.getMonthOfYear())
-				+ String.valueOf(date.getDayOfMonth() < 10 ? "0"
-						+ date.getDayOfMonth() : date.getDayOfMonth()) + "-";
-		
 		final Date date = new Date(System.currentTimeMillis() - 1);
 		final SimpleDateFormat dt = new SimpleDateFormat("ddMMyy");
 		
