@@ -68,6 +68,13 @@ public class PetService {
 
 	public Pet save(Pet pet) {
 		Pet res;
+		String s = pet.getIdentifier();
+		String age = pet.getAge().toString();
+		if (pet.getAge() < 10) {
+			age = "0" + age;
+		}
+		s = s.replace(s.substring(7,9), age);
+		pet.setIdentifier(s);
 		res = petRepository.save(pet);
 		return res;
 	}

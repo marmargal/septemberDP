@@ -20,7 +20,6 @@ import domain.Folder;
 import domain.Report;
 import forms.ActorForm;
 
-
 @Service
 @Transactional
 public class EmployeeService {
@@ -29,29 +28,29 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
+
 	// Supporting services
-	
+
 	@Autowired
 	private ReportService reportService;
-	
+
 	@Autowired
 	private FolderService folderService;
-	
+
 	@Autowired
-	private Validator		validator;
-	
+	private Validator validator;
+
 	// Constructors
 
 	public EmployeeService() {
 		super();
 	}
-	
+
 	// Simple CRUD methods
 
 	public Employee create() {
 		Employee res = new Employee();
-		
+
 		Collection<Folder> folders = new ArrayList<Folder>();
 		Collection<Report> reports = new ArrayList<Report>();
 		UserAccount userAccount = new UserAccount();
@@ -59,10 +58,10 @@ public class EmployeeService {
 		Folder inBox = this.folderService.create();
 		Folder outBox = this.folderService.create();
 		Folder trash = this.folderService.create();
-		
+
 		authority.setAuthority(Authority.EMPLOYEE);
 		userAccount.addAuthority(authority);
-		
+
 		inBox.setName("In Box");
 		outBox.setName("Out Box");
 		trash.setName("Trash");
@@ -77,7 +76,7 @@ public class EmployeeService {
 		res.setFolders(folders);
 		res.setReports(reports);
 		res.setBan(false);
-		
+
 		return res;
 	}
 
@@ -98,32 +97,32 @@ public class EmployeeService {
 
 	public Employee save(Employee employee) {
 		Employee res;
-		
+
 		String pass = employee.getUserAccount().getPassword();
-		
+
 		final Md5PasswordEncoder code = new Md5PasswordEncoder();
-		
+
 		pass = code.encodePassword(pass, null);
-		
+
 		employee.getUserAccount().setPassword(pass);
 
 		res = this.employeeRepository.save(employee);
-		
+
 		return res;
 	}
-	
+
 	public void delete(Employee employee) {
 		Assert.notNull(employee);
 		Assert.isTrue(employee.getId() != 0);
 		Assert.isTrue(this.employeeRepository.exists(employee.getId()));
-		
-		//Eliminamos sus relaciones
+
+		// Eliminamos sus relaciones
 		Collection<Report> reports = new ArrayList<Report>();
 		reports = employee.getReports();
-		for(Report report: reports){
+		for (Report report : reports) {
 			this.reportService.delete(report);
 		}
-		
+
 		this.employeeRepository.delete(employee);
 	}
 
@@ -134,7 +133,10 @@ public class EmployeeService {
 		UserAccount userAccount;
 		userAccount = LoginService.getPrincipal();
 		Assert.notNull(userAccount);
-		res = this.employeeRepository.findEmployeeByPrincipal(userAccount.getId());
+		res = this.employeeRepository.findEmployeeByPrincipal(userAccount
+				.getId());
+		Assert.notNull(res);
+
 		return res;
 	}
 
@@ -147,11 +149,11 @@ public class EmployeeService {
 		Authority res = new Authority();
 		res.setAuthority("EMPLOYEE");
 		Assert.isTrue(authority.contains(res));
-	}	
-	
-	public ActorForm construct(Employee employee){
+	}
+
+	public ActorForm construct(Employee employee) {
 		ActorForm res = new ActorForm();
-		
+
 		res.setId(employee.getId());
 		res.setName(employee.getName());
 		res.setSurname(employee.getSurname());
@@ -160,20 +162,20 @@ public class EmployeeService {
 		res.setCenter(employee.getCenter());
 		res.setAddress(employee.getAddress());
 		res.setUsername(employee.getUserAccount().getUsername());
-		
+
 		return res;
 	}
-	
-	public Employee reconstruct(ActorForm employeeForm, BindingResult binding){
+
+	public Employee reconstruct(ActorForm employeeForm, BindingResult binding) {
 		Assert.notNull(employeeForm);
-		
+
 		Employee res = new Employee();
 
 		if (employeeForm.getId() != 0)
 			res = this.findOne(employeeForm.getId());
 		else
 			res = this.create();
-		
+
 		res.setCenter(employeeForm.getCenter());
 		res.setName(employeeForm.getName());
 		res.setSurname(employeeForm.getSurname());
@@ -187,8 +189,8 @@ public class EmployeeService {
 
 		return res;
 	}
-	
-	public Collection<Employee> findByCenter(int centerId){
+
+	public Collection<Employee> findByCenter(int centerId) {
 		Collection<Employee> employees = new ArrayList<Employee>();
 		employees = this.employeeRepository.findByCenter(centerId);
 		return employees;

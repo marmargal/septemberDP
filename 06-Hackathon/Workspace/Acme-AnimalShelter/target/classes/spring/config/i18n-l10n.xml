@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * i18n-l10n.xml
- *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * i18n-l10n.xml * * Copyright (C) 2017 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
@@ -20,13 +14,13 @@
 	<util:list id="messages">
 		<value>/views/master-page/messages</value>
 		<value>/views/misc/messages</value>
-		<value>/views/security/messages</value>		
+		<value>/views/security/messages</value>
 		<value>/views/welcome/messages</value>
-		
+
 		<value>/views/administrator/messages</value>
 		<value>/views/customer/messages</value>
 		<value>/views/profile/messages</value>
-		
+
 		<value>/views/actor/messages</value>
 		<value>/views/terms/messages</value>
 		<value>/views/pet/messages</value>
@@ -41,7 +35,8 @@
 		<value>/views/stand/messages</value>
 		<value>/views/company/messages</value>
 		<value>/views/dashboard/messages</value>
-		
+		<value>/views/report/messages</value>
+
 	</util:list>
 
 </beans>

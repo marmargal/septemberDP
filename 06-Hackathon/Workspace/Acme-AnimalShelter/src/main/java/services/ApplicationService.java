@@ -12,10 +12,10 @@ import org.springframework.util.Assert;
 
 import repositories.ApplicationRepository;
 import domain.Application;
+import domain.Center;
 import domain.Client;
 import domain.Pet;
 import domain.Report;
-
 
 @Service
 @Transactional
@@ -27,13 +27,13 @@ public class ApplicationService {
 	private ApplicationRepository applicationRepository;
 
 	// Suporting services
-	
+
 	@Autowired
 	private AdministratorService administratorService;
-	
+
 	@Autowired
 	private PetService petService;
-	
+
 	@Autowired
 	private ReportService reportService;
 	
@@ -50,6 +50,7 @@ public class ApplicationService {
 
 	public Application create(Pet pet) {
 		Application res = new Application();
+
 		
 		Client client;
 		client = clientService.findByPrincipal();
@@ -67,6 +68,7 @@ public class ApplicationService {
 		
 		res.setTicker(ticker);
 		
+
 		return res;
 
 	}
@@ -82,7 +84,6 @@ public class ApplicationService {
 		Assert.isTrue(applicationId != 0);
 		Application res;
 		res = applicationRepository.findOne(applicationId);
-		Assert.notNull(res);
 		return res;
 	}
 
@@ -94,33 +95,34 @@ public class ApplicationService {
 
 	public void delete(Application application) {
 		this.administratorService.checkAuthority();
-//		Assert.isTrue(application.getClosed() == false || application.getClient().isBan());
+		// Assert.isTrue(application.getClosed() == false ||
+		// application.getClient().isBan());
 		Assert.notNull(application);
 		Assert.isTrue(application.getId() != 0);
 		Assert.isTrue(applicationRepository.exists(application.getId()));
-		
-		//Borramos sus asociaciones
+
+		// Borramos sus asociaciones
 		Pet pet = application.getPet();
 		pet.setApplication(null);
 		this.petService.save(pet);
-		
+
 		Report report = application.getReport();
-		if(report != null){
+		if (report != null) {
 			this.reportService.delete(report);
 		}
-		
+
 		applicationRepository.delete(application);
 	}
 
 	// Other business methods
-	
-	public Collection<Application> findApplicationsPending(){
+
+	public Collection<Application> findApplicationsPending() {
 		Collection<Application> applications = new ArrayList<Application>();
 		applications = this.applicationRepository.findApplicationsPending();
 		return applications;
 	}
-	
-	public Collection<Application> findApplicationsClientBan(){
+
+	public Collection<Application> findApplicationsClientBan() {
 		Collection<Application> applications = new ArrayList<Application>();
 		applications = this.applicationRepository.findApplicationsClientBan();
 		return applications;
@@ -138,6 +140,13 @@ public class ApplicationService {
 		ticker = identifier + "-" + ticker;
 		
 		return ticker;
+	}
+
+	public Collection<Application> findApplicationsPendingPerCentre(Center c) {
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = this.applicationRepository
+				.findApplicationsPendingPerCentre(c);
+		return applications;
 	}
 
 }

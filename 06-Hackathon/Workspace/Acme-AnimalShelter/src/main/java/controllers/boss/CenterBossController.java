@@ -83,7 +83,6 @@ public class CenterBossController extends AbstractController {
 		ModelAndView res;
 		if (binding.hasErrors()) {
 			res = this.createEditModelAndView(center, "center.params.error");
-			System.out.println(binding.getAllErrors());
 		} else
 			try {
 				Warehouse warehouse = this.warehouseService.save(center
@@ -93,7 +92,6 @@ public class CenterBossController extends AbstractController {
 				this.centerService.save(center);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getMessage());
 				res = this
 						.createEditModelAndView(center, "center.commit.error");
 			}

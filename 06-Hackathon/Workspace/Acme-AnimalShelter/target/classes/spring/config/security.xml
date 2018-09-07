@@ -100,7 +100,13 @@
 		
 											<!-- 		APPLICATION 		-->
 		<security:intercept-url pattern="/application/administrator/**" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/application/employee/list.do" access="hasRole('EMPLOYEE')" /> 
+		
+											<!-- 		REPORT 		-->
+		<security:intercept-url pattern="/report/administrator/**" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/report/employee/create.do" access="hasRole('EMPLOYEE')" /> 
 		<security:intercept-url pattern="/application/client/**" access="hasRole('CLIENT')" /> 
+
 		
 											<!-- 		NOTICE 		-->
 		<security:intercept-url pattern="/notice/administrator/**" access="hasRole('ADMIN')" /> 

@@ -110,6 +110,8 @@
 		<security:authorize access="hasRole('EMPLOYEE')">
 			<li><a href="employee/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 			<li><a href="pet/employee/list.do"><spring:message code="master.page.allPets" /></a></li>
+			<li><a href="application/employee/list.do"><spring:message code="master.page.applicationsPending" /></a></li>
+			
 			<li><a href="voluntary/employee/listByStand.do"><spring:message code="master.page.voluntariesByStand" /></a></li>
 		</security:authorize>
 		
