@@ -811,7 +811,7 @@
 	
 	<!-- APPLICATION -->
 	<bean id="application1" class="domain.Application">
-		<property name="ticker" value="1234567SDFGH"/>
+		<property name="ticker" value="080616-02-FRSM-070918"/>
 		<property name="createMoment" value="12/06/2011"/>
 		<property name="closed" value="true"/>
 		<property name="pet" ref="pet1"/>
@@ -820,7 +820,7 @@
 	</bean>
 	
 	<bean id="application2" class="domain.Application">
-		<property name="ticker" value="1234567SDFGH"/>
+		<property name="ticker" value="060517-01-HGTM-080318"/>
 		<property name="createMoment" value="24/06/2011"/>
 		<property name="closed" value="true"/>
 		<property name="pet" ref="pet2"/>
@@ -829,7 +829,7 @@
 	</bean>
 	
 	<bean id="application3" class="domain.Application">
-		<property name="ticker" value="1234567SDFGH"/>
+		<property name="ticker" value="091216-01-QPTY-070917"/>
 		<property name="createMoment" value="12/07/2011"/>
 		<property name="closed" value="false"/>
 		<property name="pet" ref="pet3"/>
