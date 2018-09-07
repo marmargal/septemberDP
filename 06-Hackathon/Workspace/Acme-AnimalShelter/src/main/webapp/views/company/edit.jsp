@@ -16,6 +16,7 @@
 <form:form action="${requestURI }" modelAttribute="company" method="POST">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="event" />
 
 	<acme:textarea code="company.name" path="name" />
 	<acme:textarea code="company.description" path="description" />

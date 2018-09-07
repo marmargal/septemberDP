@@ -15,6 +15,14 @@
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="companys" requestURI="${requestURI }" id="row">
+	
+	<security:authorize access="hasRole('BOSS')">
+		<display:column>
+			<jstl:if test="${row.event == null}">
+				<acme:links url="company/boss/affiliate.do?companyId=${row.id }" code="company.affiliate" />
+			</jstl:if>
+		</display:column>
+	</security:authorize>
 
 	<acme:column property="name" code="company.name" />
 	<acme:column property="description" code="company.description" />

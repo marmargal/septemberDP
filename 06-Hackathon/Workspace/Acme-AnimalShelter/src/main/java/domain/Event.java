@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -144,6 +145,7 @@ public class Event extends DomainEntity{
 	
 	private Center center;
 	private Collection<Donation> donation;
+	private Company company;
 	
 	@Valid
 	@ManyToOne(optional=false)
@@ -163,5 +165,15 @@ public class Event extends DomainEntity{
 
 	public void setDonation(Collection<Donation> donation) {
 		this.donation = donation;
+	}
+
+	@Valid
+	@OneToOne(optional=true)
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
 	}
 }

@@ -2,7 +2,9 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +43,8 @@ public class PetService {
 
 	public Pet create() {
 		Pet res = new Pet();
-		
+		System.out.println(this.generatedIdentifier());
+		res.setIdentifier(this.generatedIdentifier());
 		return res;
 
 	}
@@ -106,5 +109,28 @@ public class PetService {
 		return pets;
 	}
 	
-
+	public String generatedIdentifier() {
+		String identifier;
+		LocalDate date;
+		String letters;
+		String numbers;
+		Random r;
+		
+		letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		numbers = "0123456789";
+		r = new Random();
+		date = new LocalDate();
+		
+		identifier = String.valueOf(date.getYear() % 100 < 10 ? "0" + date.getYear() : date.getYear() % 100) + 
+					String.valueOf(date.getMonthOfYear() < 10 ? "0" + date.getMonthOfYear() : date.getMonthOfYear())
+					+ String.valueOf(date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : date.getDayOfMonth()) + "-";
+		for (int i = 0; i < 2; i++)
+			identifier = identifier + numbers.charAt(r.nextInt(numbers.length()));
+		identifier = identifier + "-";
+		for (int i = 0; i < 4; i++)
+			identifier = identifier + letters.charAt(r.nextInt(letters.length()));
+		
+		
+		return identifier;
+	}
 }

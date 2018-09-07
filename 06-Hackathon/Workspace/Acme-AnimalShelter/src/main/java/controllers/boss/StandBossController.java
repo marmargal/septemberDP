@@ -131,7 +131,7 @@ public class StandBossController extends AbstractController {
 			res = this.createEditModelAndViewAffiliate(stand, "stand.params.error");
 		else
 			try {
-				standService.joinVoluntary(stand);
+				standService.save(stand);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndViewAffiliate(stand, "stand.commit.error");
