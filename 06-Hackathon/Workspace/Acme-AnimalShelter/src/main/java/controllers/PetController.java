@@ -12,6 +12,9 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,8 +45,11 @@ public class PetController extends AbstractController {
 	public ModelAndView listPetsWaitingAdoption() {
 		ModelAndView result;
 
-		Collection<Pet> pets = new ArrayList<Pet>(); 
-		pets = this.petService.findPetsWaitingAdoption();
+		Set<Pet> petSet = new HashSet<Pet>(); 
+		petSet = this.petService.findPetsWaitingAdoption();
+		
+		List<Pet> pets = new ArrayList<Pet>();
+		pets.addAll(petSet);
 		
 		result = new ModelAndView("pet/list");
 		

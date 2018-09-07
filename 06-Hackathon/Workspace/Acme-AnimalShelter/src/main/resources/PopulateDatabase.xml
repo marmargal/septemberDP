@@ -272,7 +272,6 @@
 		<property name="reports">
 			<list>
 				<ref bean="report2"/>
-				<ref bean="report3"/>
 			</list>
 		</property>
 		<property name="center" ref="center1"/>
@@ -936,7 +935,7 @@
 	
 	<!-- APPLICATION -->
 	<bean id="application1" class="domain.Application">
-		<property name="ticker" value="1234567SDFGH"/>
+		<property name="ticker" value="080616-02-FRSM-070918"/>
 		<property name="createMoment" value="12/06/2011"/>
 		<property name="closed" value="true"/>
 		<property name="pet" ref="pet1"/>
@@ -945,7 +944,7 @@
 	</bean>
 	
 	<bean id="application2" class="domain.Application">
-		<property name="ticker" value="1234567SDFGH"/>
+		<property name="ticker" value="060517-01-HGTM-080318"/>
 		<property name="createMoment" value="24/06/2011"/>
 		<property name="closed" value="true"/>
 		<property name="pet" ref="pet2"/>
@@ -954,12 +953,11 @@
 	</bean>
 	
 	<bean id="application3" class="domain.Application">
-		<property name="ticker" value="1234567SDFGH"/>
+		<property name="ticker" value="091216-01-QPTY-070917"/>
 		<property name="createMoment" value="12/07/2011"/>
 		<property name="closed" value="false"/>
 		<property name="pet" ref="pet3"/>
 		<property name="client" ref="client1"/>
-		<property name="report" ref="report3"/>
 	</bean>
 	
 	<!-- REPORT -->
@@ -979,13 +977,7 @@
 		<property name="application" ref="application2"/>
 	</bean>
 	
-	<bean id="report3" class="domain.Report">
-		<property name="description" value="Report 3"/>
-		<property name="suitable" value="false"/>
-		<property name="makeMoment" value="12/12/2017"/>
-		<property name="employee" ref="employee2"/>
-		<property name="application" ref="application3"/>
-	</bean>
+	
 	
 	
 	<!-- PET -->
@@ -999,7 +991,11 @@
 		<property name="age" value="2"/>
 		<property name="chip" value="true"/>
 		<property name="center" ref="center1"/>
-		<property name="application" ref="application1"/>
+		<property name="application">
+			<list>
+				<ref bean="application1"/>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport1"/>
 	</bean>
 	
@@ -1013,7 +1009,11 @@
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
-		<property name="application" ref="application2"/>
+		<property name="application">
+			<list>
+				<ref bean="application2"/>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport2"/>
 	</bean>
 	
@@ -1021,13 +1021,17 @@
 		<property name="name" value="Piolin"/>
 		<property name="type" value="BIRD"/>
 		<property name="foodExpense" value="20"/>
-		<property name="status" value="false"/>
+		<property name="status" value="true"/>
 		<property name="identifier" value="180706-96-FRSM"/>
 		<property name="date" value="21/04/2013"/>
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
-		<property name="application" ref="application3"/>
+		<property name="application">
+			<list>
+				<ref bean="application3"/>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport3"/>
 	</bean>
 	
@@ -1041,7 +1045,10 @@
 		<property name="age" value="5"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
-		<property name="application"><null/></property>
+		<property name="application">
+			<list>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport4"/>
 	</bean>
 	
@@ -1055,7 +1062,10 @@
 		<property name="age" value="8"/>
 		<property name="chip" value="true"/>
 		<property name="center" ref="center1"/>
-		<property name="application"><null/></property>
+		<property name="application">
+			<list>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport5"/>
 	</bean>
 	
