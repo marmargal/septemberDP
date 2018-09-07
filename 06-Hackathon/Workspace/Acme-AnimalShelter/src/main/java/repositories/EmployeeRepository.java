@@ -16,4 +16,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	
 	@Query("select e from Employee e join e.center c where c.id=?1")
 	Collection<Employee> findByCenter(int centerId);
+	
+	@Query("select e from Employee e join e.center c where c.id = ?1")
+	Collection<Employee> findEmployeesByCentersBoss(int centerId);
 }

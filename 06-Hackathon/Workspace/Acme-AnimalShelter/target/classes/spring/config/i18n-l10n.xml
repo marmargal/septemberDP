@@ -41,6 +41,7 @@
 		<value>/views/stand/messages</value>
 		<value>/views/company/messages</value>
 		<value>/views/dashboard/messages</value>
+		<value>/views/employee/messages</value>
 		
 	</util:list>
 

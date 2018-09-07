@@ -76,12 +76,12 @@
 			</display:column>
 	</security:authorize>
 	
-	<security:authorize access="hasRole('EMPLOYEE')">
-		<display:column>
-			<form name="submitForm" method="POST" action="voluntary/employee/untie.do?voluntaryId=${row.id }">
-		    	<acme:submit name="untie" code="actor.untie"/>
-			</form>
-		</display:column>
+	<security:authorize access="hasRole('BOSS')">
+		<jstl:if test="${viewForAssign == true}">
+			<display:column>
+			    <acme:links url="employee/boss/assign.do?employeeId=${row.id}" code="actor.assign"/>
+			</display:column>
+		</jstl:if>		
 	</security:authorize>
 
 	<acme:column property="name" code="actor.name" />

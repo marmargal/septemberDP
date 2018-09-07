@@ -92,6 +92,7 @@
 		
 		<security:authorize access="hasRole('BOSS')">
 			<li><a href="boss/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+			<li><a href="employee/boss/list.do"><spring:message code="master.page.employeesByCentersBoss" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.register" /></a>
 				<ul>
 					<li class="arrow"></li>
