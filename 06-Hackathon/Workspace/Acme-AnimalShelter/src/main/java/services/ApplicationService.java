@@ -36,7 +36,7 @@ public class ApplicationService {
 
 	@Autowired
 	private ReportService reportService;
-	
+
 	@Autowired
 	private ClientService clientService;
 
@@ -51,23 +51,21 @@ public class ApplicationService {
 	public Application create(Pet pet) {
 		Application res = new Application();
 
-		
 		Client client;
 		client = clientService.findByPrincipal();
 		res.setClient(client);
 		res.setPet(pet);
-		
+
 		String ticker;
 		Date date = new Date(System.currentTimeMillis() - 100);
-		
+
 		res.setCreateMoment(date);
-		
+
 		ticker = this.generateTicker(pet);
-		
+
 		res.setClosed(false);
-		
+
 		res.setTicker(ticker);
-		
 
 		return res;
 
@@ -127,18 +125,21 @@ public class ApplicationService {
 		applications = this.applicationRepository.findApplicationsClientBan();
 		return applications;
 	}
-	
-	public String generateTicker(Pet pet){
+
+	public String generateTicker(Pet pet) {
 		String ticker;
 		String identifier = pet.getIdentifier();
 		LocalDate date = new LocalDate();
-		
-		ticker = String.valueOf(date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : date.getDayOfMonth()) + 
-				String.valueOf(date.getMonthOfYear() < 10 ? "0" + date.getMonthOfYear() : date.getMonthOfYear()) +
-				String.valueOf(date.getYear() % 100 < 10 ? "0" + date.getYear() : date.getYear() % 100);
-		
+
+		ticker = String.valueOf(date.getDayOfMonth() < 10 ? "0"
+				+ date.getDayOfMonth() : date.getDayOfMonth())
+				+ String.valueOf(date.getMonthOfYear() < 10 ? "0"
+						+ date.getMonthOfYear() : date.getMonthOfYear())
+				+ String.valueOf(date.getYear() % 100 < 10 ? "0"
+						+ date.getYear() : date.getYear() % 100);
+
 		ticker = identifier + "-" + ticker;
-		
+
 		return ticker;
 	}
 
@@ -149,4 +150,7 @@ public class ApplicationService {
 		return applications;
 	}
 
+	public Collection<Application> findApplicationsAprobed() {
+		return this.applicationRepository.findApplicationsAprobed();
+	}
 }

@@ -101,6 +101,9 @@
 											<!-- 		APPLICATION 		-->
 		<security:intercept-url pattern="/application/administrator/**" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/application/employee/list.do" access="hasRole('EMPLOYEE')" /> 
+		<security:intercept-url pattern="/application/client/list.do" access="hasRole('CLIENT')" /> 
+		
+		
 		
 											<!-- 		REPORT 		-->
 		<security:intercept-url pattern="/report/administrator/**" access="hasRole('ADMIN')" /> 

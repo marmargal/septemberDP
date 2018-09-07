@@ -88,6 +88,9 @@
 		
 		<security:authorize access="hasRole('CLIENT')">
 			<li><a href="client/edit.do"><spring:message code="master.page.editProfile" /></a></li>
+			<li><a href="application/client/list.do"><spring:message code="master.page.applicationListAcept" /></a></li>
+			
+			
 		</security:authorize>
 		
 		<security:authorize access="hasRole('VOLUNTARY')">

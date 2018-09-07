@@ -1,5 +1,7 @@
 package controllers.client;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,18 @@ public class ApplicationClientController extends AbstractController {
 
 	public ApplicationClientController() {
 		super();
+	}
+	
+	@RequestMapping("/list")
+	public ModelAndView list() {
+		ModelAndView result;
+
+		Collection<Application> applications = this.applicationService.findApplicationsAprobed();
+
+		result = new ModelAndView("application/list");
+		result.addObject("applications", applications);
+		result.addObject("requestURI", "application/client/list.do");
+		return result;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)

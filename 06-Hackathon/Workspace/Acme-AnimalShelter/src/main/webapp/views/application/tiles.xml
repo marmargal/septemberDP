@@ -20,4 +20,8 @@
 		<put-attribute name="body" value="/views/application/edit.jsp" />
 	</definition>
 
+	<definition name="application/client/list" extends="master.page">
+		<put-attribute name="title" value="List of applications acepted" />
+		<put-attribute name="body" value="/views/application/list.jsp" />
+	</definition>
 </tiles-definitions>

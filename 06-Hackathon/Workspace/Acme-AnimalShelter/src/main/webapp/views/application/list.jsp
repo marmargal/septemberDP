@@ -30,6 +30,7 @@
 	<acme:column property="ticker" code="application.ticker" />
 	<acme:column property="createMoment" code="application.createMoment" />
 	<acme:column property="closed" code="application.closed" />
+	<acme:column property="pet.name" code="application.pet" />
 
 	<security:authorize access="hasRole('EMPLOYEE')">
 		<display:column>
