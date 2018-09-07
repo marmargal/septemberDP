@@ -80,7 +80,7 @@ public class ApplicationClientController extends AbstractController {
 				pet = savedApplication.getPet();
 				client = savedApplication.getClient();
 				
-				pet.setApplication(savedApplication);
+				pet.getApplication().add(savedApplication);
 				client.getApplications().add(savedApplication);
 				
 				petService.save(pet);

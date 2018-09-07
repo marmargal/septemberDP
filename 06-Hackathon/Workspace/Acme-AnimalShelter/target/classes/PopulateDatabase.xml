@@ -866,7 +866,11 @@
 		<property name="age" value="2"/>
 		<property name="chip" value="true"/>
 		<property name="center" ref="center1"/>
-		<property name="application" ref="application1"/>
+		<property name="application">
+			<list>
+				<ref bean="application1"/>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport1"/>
 	</bean>
 	
@@ -880,7 +884,11 @@
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
-		<property name="application" ref="application2"/>
+		<property name="application">
+			<list>
+				<ref bean="application2"/>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport2"/>
 	</bean>
 	
@@ -894,7 +902,11 @@
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
-		<property name="application" ref="application3"/>
+		<property name="application">
+			<list>
+				<ref bean="application3"/>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport3"/>
 	</bean>
 	
@@ -908,7 +920,10 @@
 		<property name="age" value="5"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
-		<property name="application"><null/></property>
+		<property name="application">
+			<list>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport4"/>
 	</bean>
 	
@@ -922,7 +937,10 @@
 		<property name="age" value="8"/>
 		<property name="chip" value="true"/>
 		<property name="center" ref="center1"/>
-		<property name="application"><null/></property>
+		<property name="application">
+			<list>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport5"/>
 	</bean>
 	
