@@ -11,11 +11,8 @@ import org.springframework.util.Assert;
 
 import repositories.ApplicationRepository;
 import domain.Application;
-<<<<<<< HEAD
 import domain.Center;
-=======
 import domain.Client;
->>>>>>> master
 import domain.Pet;
 import domain.Report;
 
