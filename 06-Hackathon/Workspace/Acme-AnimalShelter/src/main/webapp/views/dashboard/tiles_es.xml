@@ -15,6 +15,6 @@
 		<put-attribute name="body" value="/views/dashboard/list.jsp" />
 	</definition>
 
-<
+
 	
 </tiles-definitions>
