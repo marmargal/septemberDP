@@ -1,6 +1,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +13,7 @@ import domain.Pet;
 public interface PetRepository extends JpaRepository<Pet, Integer>{
 	
 	@Query("select p from Pet p join p.application a where a.closed=false")
-	Collection<Pet> findPetsWaitingAdoption();
+	Set<Pet> findPetsWaitingAdoption();
 	
 	@Query("select p from Pet p where p.status=true")
 	Collection<Pet> findPetsPermitAdoption();

@@ -2,7 +2,9 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,9 +83,10 @@ public class PetService {
 			this.medicalReportService.delete(medicalReport);
 		}
 		
-		Application application = pet.getApplication();
-		if(application != null){
-			this.applicationService.delete(application);
+		for(Application application: pet.getApplication()){
+			if(application != null){
+				this.applicationService.delete(application);
+			}
 		}
 				
 		petRepository.delete(pet);
@@ -91,8 +94,8 @@ public class PetService {
 
 	// Other business methods
 	
-	public Collection<Pet> findPetsWaitingAdoption(){
-		Collection<Pet> pets = new ArrayList<Pet>();
+	public Set<Pet> findPetsWaitingAdoption(){
+		Set<Pet> pets = new HashSet<Pet>();
 		pets = this.petRepository.findPetsWaitingAdoption();
 		return pets;
 	}
