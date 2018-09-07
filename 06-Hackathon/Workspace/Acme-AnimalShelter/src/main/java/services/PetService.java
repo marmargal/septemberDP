@@ -1,10 +1,13 @@
 package services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +17,6 @@ import repositories.PetRepository;
 import domain.Application;
 import domain.MedicalReport;
 import domain.Pet;
-
 
 @Service
 @Transactional
@@ -26,10 +28,10 @@ public class PetService {
 	private PetRepository petRepository;
 
 	// Suporting services
-	
+
 	@Autowired
 	private MedicalReportService medicalReportService;
-	
+
 	@Autowired
 	private ApplicationService applicationService;
 
@@ -66,6 +68,13 @@ public class PetService {
 
 	public Pet save(Pet pet) {
 		Pet res;
+		String s = pet.getIdentifier();
+		String age = pet.getAge().toString();
+		if (pet.getAge() < 10) {
+			age = "0" + age;
+		}
+		s = s.replace(s.substring(7,9), age);
+		pet.setIdentifier(s);
 		res = petRepository.save(pet);
 		return res;
 	}
@@ -74,63 +83,86 @@ public class PetService {
 		Assert.notNull(pet);
 		Assert.isTrue(pet.getId() != 0);
 		Assert.isTrue(petRepository.exists(pet.getId()));
-		
-		//Eliminamos sus relaciones
+
+		// Eliminamos sus relaciones
 		MedicalReport medicalReport = pet.getMedicalReport();
-		if(medicalReport != null){
+		if (medicalReport != null) {
 			this.medicalReportService.delete(medicalReport);
 		}
-		
-		Application application = pet.getApplication();
-		if(application != null){
-			this.applicationService.delete(application);
+
+		for (Application application : pet.getApplication()) {
+			if (application != null) {
+				this.applicationService.delete(application);
+			}
 		}
-				
+
 		petRepository.delete(pet);
 	}
 
 	// Other business methods
-	
-	public Collection<Pet> findPetsWaitingAdoption(){
-		Collection<Pet> pets = new ArrayList<Pet>();
+
+	public Set<Pet> findPetsWaitingAdoption() {
+		Set<Pet> pets = new HashSet<Pet>();
 		pets = this.petRepository.findPetsWaitingAdoption();
+		for (Pet pet : pets) {
+			if (!pet.getApplication().isEmpty()) {
+				for (Application app : pet.getApplication()) {
+					if (app.getReport() != null
+							&& app.getReport().getSuitable()) {
+						pets.remove(pet);
+					}
+				}
+			}
+		}
 		return pets;
 	}
-	
-	public Collection<Pet> findPetsPermitAdoption(){
+
+	public Collection<Pet> findPetsPermitAdoption() {
 		Collection<Pet> pets = new ArrayList<Pet>();
 		pets = this.petRepository.findPetsPermitAdoption();
+		ArrayList<Pet> pList = new ArrayList<>();
+		for (Pet pet : pets) {
+			if (!pet.getApplication().isEmpty()) {
+				for (Application app : pet.getApplication()) {
+					if (app.getReport() != null
+							&& app.getReport().getSuitable()) {
+						pList.add(pet);
+					}
+				}
+			}
+		}
+		pets.removeAll(pList);
 		return pets;
 	}
-	
-	public Collection<Pet> findPetsByCenter(int centerId){
+
+	public Collection<Pet> findPetsByCenter(int centerId) {
 		Collection<Pet> pets = new ArrayList<Pet>();
 		pets = this.petRepository.findPetsByCenter(centerId);
 		return pets;
 	}
-	
+
 	public String generatedIdentifier() {
 		String identifier;
-		LocalDate date;
 		String letters;
 		String numbers;
 		Random r;
-		
+
 		letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		numbers = "0123456789";
 		r = new Random();
-		date = new LocalDate();
+
+		final Date date = new Date(System.currentTimeMillis() - 1);
+		final SimpleDateFormat dt = new SimpleDateFormat("ddMMyy");
 		
-		identifier = String.valueOf(date.getYear() % 100 < 10 ? "0" + date.getYear() : date.getYear() % 100) + 
-					String.valueOf(date.getMonthOfYear() < 10 ? "0" + date.getMonthOfYear() : date.getMonthOfYear())
-					+ String.valueOf(date.getDayOfMonth() < 10 ? "0" + date.getDayOfMonth() : date.getDayOfMonth()) + "-";
+		identifier = dt.format(date).toString() + "-";
 		for (int i = 0; i < 2; i++)
-			identifier = identifier + numbers.charAt(r.nextInt(numbers.length()));
+			identifier = identifier
+					+ numbers.charAt(r.nextInt(numbers.length()));
 		identifier = identifier + "-";
 		for (int i = 0; i < 4; i++)
-			identifier = identifier + letters.charAt(r.nextInt(letters.length()));
-		
-		
+			identifier = identifier
+					+ letters.charAt(r.nextInt(letters.length()));
+
 		return identifier;
 	}
 }

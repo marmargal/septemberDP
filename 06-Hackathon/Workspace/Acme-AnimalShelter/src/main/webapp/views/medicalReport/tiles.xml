@@ -26,4 +26,9 @@
 		<put-attribute name="body" value="/views/medicalReport/edit.jsp" />
 	</definition>
 	
+	<definition name="medicalReport/display" extends="master.page">	
+		<put-attribute name="title" value="Display medical report" />
+		<put-attribute name="body" value="/views/medicalReport/display.jsp" />
+	</definition>
+	
 </tiles-definitions>
