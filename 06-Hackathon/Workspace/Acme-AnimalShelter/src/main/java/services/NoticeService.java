@@ -93,5 +93,10 @@ public class NoticeService {
 		return notice;
 	}
 	
+	
+	public void flush() {
+		this.noticeRepository.flush();
+
+	}
 
 }

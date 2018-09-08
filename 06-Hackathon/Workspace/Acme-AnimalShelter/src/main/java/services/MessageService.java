@@ -71,6 +71,9 @@ public class MessageService {
 
 	// Other business methods
 	
-	
+	public void flush() {
+		this.messageRepository.flush();
+
+	}
 
 }

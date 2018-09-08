@@ -183,4 +183,9 @@ public class ClientService {
 		return res;
 	}
 
+	public void flush() {
+		this.clientRepository.flush();
+
+	}
+	
 }

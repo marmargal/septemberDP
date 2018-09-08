@@ -171,5 +171,10 @@ public class VeterinaryService {
 
 		return res;
 	}
+	
+	public void flush() {
+		this.veterinaryRepository.flush();
+
+	}
 
 }

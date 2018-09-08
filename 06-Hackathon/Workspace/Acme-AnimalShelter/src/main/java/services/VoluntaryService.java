@@ -183,4 +183,9 @@ public class VoluntaryService {
 		return voluntaries;
 	}
 	
+	public void flush() {
+		this.voluntaryRepository.flush();
+
+	}
+	
 }

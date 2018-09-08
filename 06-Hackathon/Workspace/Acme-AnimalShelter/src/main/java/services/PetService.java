@@ -165,4 +165,9 @@ public class PetService {
 
 		return identifier;
 	}
+	
+	public void flush() {
+		this.petRepository.flush();
+
+	}
 }
