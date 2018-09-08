@@ -25,10 +25,16 @@
 		</jstl:if>
 	</security:authorize>
 	
-	<acme:column property="sender.name" code="message.sender" />
-	<acme:column property="recipient" code="message.recipient" />
+	<acme:column property="folder.actor.name" code="message.sender" />
 	
-	<spring:message code=message.moment" var="momentHeader" />
+	<spring:message code="message.recipient" var="recipientHeader" />
+	<display:column title="${recipientHeader }">
+		<jstl:forEach var="folder" items="${row.foldersRecipient}">
+			<jstl:out value="${folder.actor.name }"></jstl:out>
+		</jstl:forEach>
+	</display:column>
+	
+	<spring:message code="message.moment" var="momentHeader" />
 	<spring:message var="formatDate" code="format.date"/>
 	<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
 	

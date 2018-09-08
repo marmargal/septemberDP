@@ -167,11 +167,6 @@
 				<ref bean="folder3"/>
 			</list>
 		</property>
-		<property name="received"><null/></property>
-		<property name="sent">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	
@@ -196,11 +191,6 @@
 				<ref bean="folder6"/>
 			</list>
 		</property>
-		<property name="received"><null/></property>
-		<property name="sent">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="boss2" class="domain.Boss">
@@ -221,11 +211,6 @@
 				<ref bean="folder31"/>
 				<ref bean="folder32"/>
 				<ref bean="folder33"/>
-			</list>
-		</property>
-		<property name="received"><null/></property>
-		<property name="sent">
-			<list>
 			</list>
 		</property>
 	</bean>
@@ -254,10 +239,6 @@
 				<ref bean="folder9"/>
 			</list>
 		</property>
-		<property name="sent">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="employee2" class="domain.Employee">
@@ -280,11 +261,6 @@
 				<ref bean="folder10"/>
 				<ref bean="folder11"/>
 				<ref bean="folder12"/>
-			</list>
-		</property>
-		<property name="received"> <null/></property>
-		<property name="sent">
-			<list>
 			</list>
 		</property>
 	</bean>
@@ -311,11 +287,6 @@
 				<ref bean="folder15"/>
 			</list>
 		</property>
-		<property name="received"><null/></property>
-		<property name="sent">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="client2" class="domain.Client">
@@ -338,11 +309,6 @@
 				<ref bean="folder18"/>
 			</list>
 		</property>
-		<property name="received"><null/></property>
-		<property name="sent">
-			<list>
-			</list>
-		</property>
 	</bean>
 	
 	
@@ -360,11 +326,6 @@
 				<ref bean="folder19"/>
 				<ref bean="folder20"/>
 				<ref bean="folder21"/>
-			</list>
-		</property>
-		<property name="received"><null/></property>
-		<property name="sent">
-			<list>
 			</list>
 		</property>
 		<property name="notice">
@@ -387,11 +348,6 @@
 				<ref bean="folder22"/>
 				<ref bean="folder23"/>
 				<ref bean="folder24"/>
-			</list>
-		</property>
-		<property name="received"><null/></property>
-		<property name="sent">
-			<list>
 			</list>
 		</property>
 		<property name="notice">
@@ -420,11 +376,6 @@
 				<ref bean="folder27"/>
 			</list>
 		</property>
-		<property name="received"><null/></property>
-		<property name="sent">
-			<list>
-			</list>
-		</property>
 		<property name="medicalReport">
 			<list>
 				<ref bean="medicalReport1"/>
@@ -449,11 +400,6 @@
 				<ref bean="folder30"/>
 			</list>
 		</property>
-		<property name="received"><null/></property>
-		<property name="sent">
-			<list>
-			</list>
-		</property>
 		<property name="medicalReport">
 			<list>
 				<ref bean="medicalReport3"/>
@@ -467,6 +413,7 @@
 	<bean id="folder1" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="admin"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -476,6 +423,7 @@
 	<bean id="folder2" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="admin"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -485,6 +433,7 @@
 	<bean id="folder3" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="admin"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -495,6 +444,7 @@
 	<bean id="folder4" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="boss1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -504,8 +454,10 @@
 	<bean id="folder5" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="boss1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -513,6 +465,7 @@
 	<bean id="folder6" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="boss1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -524,8 +477,10 @@
 	<bean id="folder7" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="employee1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -533,6 +488,7 @@
 	<bean id="folder8" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="employee1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -542,6 +498,7 @@
 	<bean id="folder9" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="employee1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -552,8 +509,10 @@
 	<bean id="folder10" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="employee2"/>
 		<property name="messages">
 			<list>
+				<ref bean="message1"/>
 			</list>
 		</property>
 	</bean>
@@ -561,6 +520,7 @@
 	<bean id="folder11" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="employee2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -570,6 +530,7 @@
 	<bean id="folder12" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="employee2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -580,8 +541,10 @@
 	<bean id="folder13" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="client1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message2"/>
 			</list>
 		</property>
 	</bean>
@@ -589,6 +552,7 @@
 	<bean id="folder14" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="client1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -598,6 +562,7 @@
 	<bean id="folder15" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="client1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -609,6 +574,7 @@
 	<bean id="folder16" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="client2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -618,6 +584,7 @@
 	<bean id="folder17" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="client2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -627,6 +594,7 @@
 	<bean id="folder18" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="client2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -638,6 +606,7 @@
 	<bean id="folder19" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="voluntary1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -647,6 +616,7 @@
 	<bean id="folder20" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="voluntary1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -656,6 +626,7 @@
 	<bean id="folder21" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="voluntary1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -667,6 +638,7 @@
 	<bean id="folder22" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="voluntary2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -676,6 +648,7 @@
 	<bean id="folder23" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="voluntary2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -685,6 +658,7 @@
 	<bean id="folder24" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="voluntary2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -695,6 +669,7 @@
 	<bean id="folder25" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="veterinary1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -704,6 +679,7 @@
 	<bean id="folder26" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="veterinary1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -713,6 +689,7 @@
 	<bean id="folder27" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="veterinary1"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -724,6 +701,7 @@
 	<bean id="folder28" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="veterinary2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -733,6 +711,7 @@
 	<bean id="folder29" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="veterinary2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -742,6 +721,7 @@
 	<bean id="folder30" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="veterinary2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -752,6 +732,7 @@
 	<bean id="folder31" class="domain.Folder">
 		<property name="name" value="In Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="boss2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -761,6 +742,7 @@
 	<bean id="folder32" class="domain.Folder">
 		<property name="name" value="Out Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="boss2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -770,6 +752,7 @@
 	<bean id="folder33" class="domain.Folder">
 		<property name="name" value="Trash Box"/>
 		<property name="predefined" value="true"/>
+		<property name="actor" ref="boss2"/>
 		<property name="messages">
 			<list>
 			</list>
@@ -778,34 +761,32 @@
 	
 	
 	<!-- MESSAGE -->
-<!-- 	<bean id="message1" class="domain.Message"> -->
-<!-- 		<property name="moment" value="04/03/2017"/> -->
-<!-- 		<property name="subject" value="Hola"/> -->
-<!-- 		<property name="body" value="¿Cómo está Puppy?"/> -->
-<!-- 		<property name="priority" value="LOW"/> -->
-<!-- 		<property name="folder" ref="folder5"/> -->
-<!-- 		<property name="sender" ref="boss1" /> -->
-<!-- 		<property name="recipient"> -->
-<!-- 			<list> -->
-<!-- 				<ref bean="employee1"/> -->
-<!-- 				<ref bean="employee2"/> -->
-<!-- 			</list>  -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
+	<bean id="message1" class="domain.Message">
+		<property name="moment" value="04/03/2017"/>
+		<property name="subject" value="Hola"/>
+		<property name="body" value="¿Cómo está Puppy?"/>
+		<property name="priority" value="LOW"/>
+		<property name="folder" ref="folder5"/>
+		<property name="foldersRecipient">
+			<list>
+				<ref bean="folder7"/>
+				<ref bean="folder10"/>
+			</list> 
+		</property>
+	</bean>
 	
-<!-- 	<bean id="message2" class="domain.Message"> -->
-<!-- 		<property name="moment" value="05/03/2017"/> -->
-<!-- 		<property name="subject" value="Hola"/> -->
-<!-- 		<property name="body" value="Puppy está bien."/> -->
-<!-- 		<property name="priority" value="LOW"/> -->
-<!-- 		<property name="folder" ref="folder26"/> -->
-<!-- 		<property name="sender" ref="veterinary1" /> -->
-<!-- 		<property name="recipient"> -->
-<!-- 			<list> -->
-<!-- 				<ref bean="client1"/> -->
-<!-- 			</list>  -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
+	<bean id="message2" class="domain.Message">
+		<property name="moment" value="05/03/2017"/>
+		<property name="subject" value="Hola"/>
+		<property name="body" value="Puppy está bien."/>
+		<property name="priority" value="LOW"/>
+		<property name="folder" ref="folder26"/>
+		<property name="foldersRecipient">
+			<list>
+				<ref bean="folder13"/>
+			</list> 
+		</property>
+	</bean>
 	
 	
 	

@@ -38,7 +38,7 @@ public class EmployeeController extends AbstractController {
 		ActorForm employeeForm = this.employeeService.construct(employee);
 		
 		res = createEditModelAndViewEdit(employeeForm);
-		res.addObject("actrForm", employeeForm);
+		res.addObject("actorForm", employeeForm);
 		
 		return res;
 	}

@@ -57,7 +57,7 @@ public class MessageAdministratorController extends AbstractController {
 	
 	// Delete ---------------------------------------------------------------
 	@RequestMapping(value="/delete",method=RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@RequestParam(defaultValue = "0") int messageId, @RequestParam String method){
+	public ModelAndView delete(@RequestParam(defaultValue = "0") int messageId){
 		ModelAndView res;
 		try{
 			Message message = this.messageService.findOne(messageId);

@@ -22,6 +22,9 @@ public class MessageService {
 
 	// Suporting services
 
+	@Autowired
+	private AdministratorService administratorService;
+	
 	// Constructors
 
 	public MessageService() {
@@ -59,6 +62,7 @@ public class MessageService {
 	}
 
 	public void delete(Message message) {
+		this.administratorService.checkAuthority();
 		Assert.notNull(message);
 		Assert.isTrue(message.getId() != 0);
 		Assert.isTrue(messageRepository.exists(message.getId()));

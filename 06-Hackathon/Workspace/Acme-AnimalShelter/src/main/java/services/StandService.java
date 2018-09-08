@@ -12,7 +12,6 @@ import repositories.StandRepository;
 import domain.Stand;
 import domain.Voluntary;
 
-
 @Service
 @Transactional
 public class StandService {
@@ -23,7 +22,7 @@ public class StandService {
 	private StandRepository standRepository;
 
 	// Suporting services
-	
+
 	@Autowired
 	private VoluntaryService voluntaryService;
 
@@ -37,7 +36,7 @@ public class StandService {
 
 	public Stand create() {
 		Stand res = new Stand();
-		
+
 		return res;
 
 	}
@@ -71,22 +70,32 @@ public class StandService {
 	}
 
 	// Other business methods
-	
-	public Stand untieVoluntary(Stand stand){
+
+	public Stand untieVoluntary(Stand stand) {
 		stand.setVoluntaries(null);
 		this.save(stand);
 		return stand;
 	}
-	
+
 	public void joinVoluntary(Stand stand) {
-		if (stand.getVoluntaries().size() < stand.getNumMaxVoluntaries()) {
-			Voluntary voluntary = voluntaryService.findByPrincipal();
+		Voluntary voluntary = voluntaryService.findByPrincipal();
+
+		if (!stand.getVoluntaries().contains(voluntary)) {
 			Collection<Voluntary> voluntaries = new ArrayList<>();
 			voluntaries = stand.getVoluntaries();
 			voluntaries.add(voluntary);
 			stand.setVoluntaries(voluntaries);
 			this.save(stand);
+		} else {
+			if (stand.getVoluntaries().size() < stand.getNumMaxVoluntaries()) {
+				Collection<Voluntary> voluntaries = new ArrayList<>();
+				voluntaries = stand.getVoluntaries();
+				voluntaries.remove(voluntary);
+				stand.setVoluntaries(voluntaries);
+				this.save(stand);
+			}
 		}
+
 	}
-	
+
 }
