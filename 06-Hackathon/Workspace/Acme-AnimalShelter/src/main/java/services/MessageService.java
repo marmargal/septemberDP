@@ -2,17 +2,21 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.MessageRepository;
 import domain.Actor;
 import domain.Folder;
 import domain.Message;
+import forms.MessageForm;
 
 
 @Service
@@ -29,6 +33,15 @@ public class MessageService {
 	@Autowired
 	private AdministratorService administratorService;
 	
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private FolderService folderService;
+	
+	@Autowired
+	private Validator		validator;
+	
 	// Constructors
 
 	public MessageService() {
@@ -39,7 +52,12 @@ public class MessageService {
 
 	public Message create() {
 		Message res = new Message();
+		
+		Collection<Folder> foldersRecipient = new ArrayList<Folder>();
+		
+		res.setFoldersRecipient(foldersRecipient);
 		res.setIsDelete(false);
+		res.setMoment(new Date());
 		
 		return res;
 
@@ -89,22 +107,27 @@ public class MessageService {
 	}
 	
 	public void moveToTrash(Message message) {
-		this.administratorService.checkAuthority();
-		List<Folder> folders = (List<Folder>) message.getFoldersRecipient(); 
+		Collection<Message> messages = new ArrayList<Message>();
+		Actor actor = this.actorService.findByPrincipal();
+		List<Folder> folders = (List<Folder>) message.getFoldersRecipient();
+
 		for(int i=0; i<folders.size(); i++){
 			Folder folder = folders.get(i);
 			
-			//Eliminamos el mensaje de las carpeta In Box
-			Collection<Message> messages = folder.getMessages();
-			messages.remove(message);
-			folder.setMessages(messages);
+			//Eliminamos el mensaje de la carpeta In Box
+			if(folder.getActor() == actor){
+				messages = folder.getMessages();
+				messages.remove(message);
+				folder.setMessages(messages);
+			}
 			
 			//Añadimos el mensaje a la carpeta Trash
-			Actor actor = folder.getActor();
+
 			Collection<Folder> foldersByActor = actor.getFolders();
 			for(Folder f: foldersByActor){
 				if(f.getName().equals("Trash Box")){
-					Collection<Message> messagesInTrash = f.getMessages();
+					Collection<Message> messagesInTrash = new ArrayList<Message>();
+					messagesInTrash = f.getMessages();
 					messagesInTrash.add(message);
 					f.setMessages(messagesInTrash);
 					
@@ -119,7 +142,76 @@ public class MessageService {
 			message.setIsDelete(true);
 			messageRepository.save(message);
 		}
+	}
+	
+	public Message reconstruct(MessageForm messageForm, BindingResult binding){
+		Assert.notNull(messageForm);
 		
+		Message res = new Message();
+
+		if (messageForm.getId() != 0)
+			res = this.findOne(messageForm.getId());
+		else
+			res = this.create();
+		
+		Collection<Folder> foldersRecipient = new ArrayList<Folder>();
+		
+		res.setSubject(messageForm.getSubject());
+		res.setBody(messageForm.getBody());
+		res.setPriority(messageForm.getPriority());
+		
+		for(Actor actor: messageForm.getRecipients()){
+			Collection<Folder> folders = actor.getFolders();
+			for(Folder folder: folders){
+				if(folder.getName().equals("In Box")){
+					foldersRecipient.add(folder);
+				}
+			}
+		}
+		
+		Actor actor = this.actorService.findByPrincipal();
+		for(Folder folder: actor.getFolders()){
+			if(folder.getName().equals("Out Box")){
+				res.setFolder(folder);
+			}
+		}
+		
+		res.setFoldersRecipient(foldersRecipient);
+		
+		this.validator.validate(res, binding);
+
+		return res;
+	}
+	
+	public void loadFolders(Message message){
+		for(Folder folder: message.getFoldersRecipient()){
+			Collection<Message> messagesInFolder = new ArrayList<Message>();
+			
+			messagesInFolder = folder.getMessages();
+			messagesInFolder.add(message);
+			folder.setMessages(messagesInFolder);
+			this.folderService.save(folder);
+		}
+	}
+	
+	public void deleteOfTrash(Message message){
+		Collection<Folder> recipientFolders = new ArrayList<Folder>();
+		recipientFolders = message.getFoldersRecipient();
+		
+		for(Folder folder: recipientFolders){
+			if(folder.getName().equals("Trash Box")){
+				Collection<Message> messages = new ArrayList<Message>();
+				Collection<Folder> uploadFolders = new ArrayList<Folder>();
+				
+				messages = folder.getMessages();
+				messages.remove(message);
+				folder.setMessages(messages);
+				
+				uploadFolders = message.getFoldersRecipient();
+				uploadFolders.remove(folder);
+				message.setFoldersRecipient(uploadFolders);
+			}
+		}
 	}
 	
 

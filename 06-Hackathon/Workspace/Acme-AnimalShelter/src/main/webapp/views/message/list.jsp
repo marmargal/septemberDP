@@ -15,16 +15,24 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="messages" requestURI="${requestURI }" id="row">
 	
-	<security:authorize access="hasRole('ADMIN')">
-		<jstl:if test="${viewForDeleteToTrash == true}">
-			<display:column>
-				<form name="submitForm" method="POST" action="message/administrator/deleteToTrash.do?messageId=${row.id }">
-			    	<acme:submit name="deleteToTrash" code="message.delete"/>
-				</form>
-			</display:column>
-		</jstl:if>
+	<jstl:if test="${viewForDeleteToTrash == true}">
+		<display:column>
+			<form name="submitForm" method="POST" action="message/actor/deleteToTrash.do?messageId=${row.id }">
+		    	<acme:submit name="deleteToTrash" code="message.delete"/>
+			</form>
+		</display:column>
+	</jstl:if>
+
+	<jstl:if test="${viewForDelete == true}">
+		<display:column>
+			<form name="submitForm" method="POST" action="message/actor/deleteOfTrash.do?messageId=${row.id }">
+		    	<acme:submit name="delete" code="message.delete"/>
+			</form>
+		</display:column>
+	</jstl:if>
 	
-		<jstl:if test="${viewForDelete == true}">
+	<security:authorize access="hasRole('ADMIN')">
+		<jstl:if test="${viewForTrueDelete == true}">
 			<display:column>
 				<form name="submitForm" method="POST" action="message/administrator/delete.do?messageId=${row.id }">
 			    	<acme:submit name="delete" code="message.delete"/>
@@ -51,3 +59,5 @@
 	<acme:column property="priority" code="message.priority" />
 	
 </display:table>
+
+<acme:links url="message/actor/create.do" code="message.create"/>

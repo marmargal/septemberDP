@@ -80,7 +80,7 @@ public class Message extends DomainEntity{
 	private Folder folder;
 
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional=false)
 	public Folder getFolder() {
 		return folder;
 	}
