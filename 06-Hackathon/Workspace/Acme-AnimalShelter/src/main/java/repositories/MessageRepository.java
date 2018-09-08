@@ -7,5 +7,5 @@ import domain.Message;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Integer>{
-
+	
 }
