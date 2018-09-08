@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.StandService;
+import services.VoluntaryService;
 import controllers.AbstractController;
 import domain.Stand;
+import domain.Voluntary;
 
 @Controller
 @RequestMapping("stand/voluntary")
@@ -22,6 +24,9 @@ public class StandVoluntaryController extends AbstractController {
 
 	@Autowired
 	private StandService standService;
+	
+	@Autowired
+	private VoluntaryService voluntaryService;
 
 	// Constructors --------------------------------------
 
@@ -74,9 +79,16 @@ public class StandVoluntaryController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Stand stand,
 			final String message) {
 		ModelAndView result;
+		Boolean isntThere = false;
+		Voluntary voluntary = voluntaryService.findByPrincipal();
+		
+		if(!stand.getVoluntaries().contains(voluntary)){
+			isntThere = true;
+		}
 
 		result = new ModelAndView("stand/voluntary/join");
 		result.addObject("stand", stand);
+		result.addObject("isntThere", isntThere);
 		result.addObject("message", message);
 		result.addObject("requestURI", "stand/voluntary/join.do");
 
