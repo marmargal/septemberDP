@@ -15,10 +15,13 @@ import repositories.EmployeeRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Boss;
+import domain.Center;
 import domain.Employee;
 import domain.Folder;
 import domain.Report;
 import forms.ActorForm;
+import forms.AssignEmployeeForm;
 
 @Service
 @Transactional
@@ -38,7 +41,10 @@ public class EmployeeService {
 	private FolderService folderService;
 
 	@Autowired
-	private Validator validator;
+	private BossService bossService;
+	
+	@Autowired
+	private Validator		validator;
 
 	// Constructors
 
@@ -189,10 +195,26 @@ public class EmployeeService {
 
 		return res;
 	}
+	
+	public Employee reconstruct(AssignEmployeeForm assignEmployeeForm, BindingResult binding){
+		Employee employee = this.findOne(assignEmployeeForm.getEmployeeId());
+		employee.setCenter(assignEmployeeForm.getCenter());
+		return employee;
+	}
 
 	public Collection<Employee> findByCenter(int centerId) {
 		Collection<Employee> employees = new ArrayList<Employee>();
 		employees = this.employeeRepository.findByCenter(centerId);
+		return employees;
+	}
+	
+	public Collection<Employee> findEmployeesByCentersBoss(){
+		Boss boss = this.bossService.findByPrincipal();
+		Collection<Employee> employees = new ArrayList<Employee>();
+		for(Center center: boss.getCenters()){
+			if(this.employeeRepository.findEmployeesByCentersBoss(center.getId())!= null)
+					employees.addAll(this.employeeRepository.findEmployeesByCentersBoss(center.getId()));
+		}
 		return employees;
 	}
 

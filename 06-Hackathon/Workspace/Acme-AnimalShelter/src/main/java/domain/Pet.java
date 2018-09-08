@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
@@ -7,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -117,7 +119,7 @@ public class Pet extends DomainEntity{
 	// Relationships
 
 	private Center center;
-	private Application application;
+	private Collection<Application> application;
 	private MedicalReport medicalReport;
 	
 	@Valid
@@ -130,11 +132,11 @@ public class Pet extends DomainEntity{
 	}
 
 	@Valid
-	@OneToOne(optional=true)
-	public Application getApplication() {
+	@OneToMany
+	public Collection<Application> getApplication() {
 		return application;
 	}
-	public void setApplication(Application application) {
+	public void setApplication(Collection<Application> application) {
 		this.application = application;
 	}
 

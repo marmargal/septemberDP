@@ -20,4 +20,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	
 	@Query("select a from Application a join a.client c where c.ban=true")
 	Collection<Application> findApplicationsClientBan();
+	
+	@Query("select a from Application a where a.report.suitable=true")
+	Collection<Application> findApplicationsAprobed();
 }

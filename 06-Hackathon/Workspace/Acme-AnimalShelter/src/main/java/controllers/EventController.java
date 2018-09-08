@@ -43,7 +43,7 @@ public class EventController extends AbstractController {
 		ModelAndView result;
 
 		Collection<Event> events = new ArrayList<Event>(); 
-		events = this.petService.findAll();
+		events = this.petService.findEventNotEnd();
 		
 		result = new ModelAndView("event/list");
 		result.addObject("events", events);

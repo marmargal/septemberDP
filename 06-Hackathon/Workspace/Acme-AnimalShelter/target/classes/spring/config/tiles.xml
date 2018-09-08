@@ -35,8 +35,13 @@
 		<value>/views/stand/tiles.xml</value>
 		<value>/views/company/tiles.xml</value>
 		<value>/views/dashboard/tiles.xml</value>
+<<<<<<< HEAD
+		<value>/views/employee/tiles.xml</value>
+		
+=======
 		<value>/views/report/tiles.xml</value>
 
+>>>>>>> master
 	</util:list>
 
 </beans>

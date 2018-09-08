@@ -15,6 +15,7 @@ import services.PetService;
 import services.VeterinaryService;
 import controllers.AbstractController;
 import domain.MedicalReport;
+import domain.Notice;
 import domain.Veterinary;
 
 @Controller
@@ -84,6 +85,19 @@ public class MedicalReportVeterinaryController extends AbstractController{
 				res = this.createEditModelAndView(medicalReport, "medicalReport.commit.error");
 			}
 		return res;
+	}
+	
+	@RequestMapping("/display")
+	public ModelAndView display(@RequestParam(defaultValue = "0") int medicalReportId) {
+		ModelAndView result;
+
+		MedicalReport medicalReport = new MedicalReport(); 
+		medicalReport = this.medicalReportService.findOne(medicalReportId);
+		
+		result = new ModelAndView("medicalReport/display");
+		result.addObject("medicalReport", medicalReport);
+
+		return result;
 	}
 	
 	

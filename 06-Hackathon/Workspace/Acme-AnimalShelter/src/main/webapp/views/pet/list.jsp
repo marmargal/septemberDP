@@ -69,6 +69,13 @@
 					code="pet.editMedicalReport" />
 			</jstl:if>
 		</display:column>
+		<display:column>
+			<jstl:if test="${row.medicalReport.veterinary==veterinaryPrincipal}">
+				<acme:links
+					url="medicalReport/veterinary/display.do?medicalReportId=${row.medicalReport.id}"
+					code="pet.displayMedicalReport" />
+			</jstl:if>
+		</display:column>
 	</security:authorize>
 	
 	<security:authorize access="hasRole('EMPLOYEE')">

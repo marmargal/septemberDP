@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +36,7 @@ public class ApplicationService {
 
 	@Autowired
 	private ReportService reportService;
-	
+
 	@Autowired
 	private ClientService clientService;
 
@@ -47,27 +48,24 @@ public class ApplicationService {
 
 	// Simple CRUD methods
 
-	@SuppressWarnings("deprecation")
 	public Application create(Pet pet) {
 		Application res = new Application();
 
-		
 		Client client;
 		client = clientService.findByPrincipal();
 		res.setClient(client);
 		res.setPet(pet);
-		
+
 		String ticker;
 		Date date = new Date(System.currentTimeMillis() - 100);
-		
+
 		res.setCreateMoment(date);
-		
-		ticker = pet.getIdentifier() + date.getDay() + date.getMonth() + date.getYear();
-		
+
+		ticker = this.generateTicker(pet);
+
 		res.setClosed(false);
-		
+
 		res.setTicker(ticker);
-		
 
 		return res;
 
@@ -128,6 +126,23 @@ public class ApplicationService {
 		return applications;
 	}
 
+	public String generateTicker(Pet pet) {
+		String ticker;
+		String identifier = pet.getIdentifier();
+		LocalDate date = new LocalDate();
+
+		ticker = String.valueOf(date.getDayOfMonth() < 10 ? "0"
+				+ date.getDayOfMonth() : date.getDayOfMonth())
+				+ String.valueOf(date.getMonthOfYear() < 10 ? "0"
+						+ date.getMonthOfYear() : date.getMonthOfYear())
+				+ String.valueOf(date.getYear() % 100 < 10 ? "0"
+						+ date.getYear() : date.getYear() % 100);
+
+		ticker = identifier + "-" + ticker;
+
+		return ticker;
+	}
+
 	public Collection<Application> findApplicationsPendingPerCentre(Center c) {
 		Collection<Application> applications = new ArrayList<Application>();
 		applications = this.applicationRepository
@@ -135,4 +150,7 @@ public class ApplicationService {
 		return applications;
 	}
 
+	public Collection<Application> findApplicationsAprobed() {
+		return this.applicationRepository.findApplicationsAprobed();
+	}
 }

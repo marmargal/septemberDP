@@ -138,6 +138,18 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="boss2" />
+		<property name="password" value="3b7c32a613d841c8ee7694d36f083858" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BOSS" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Other domain beans come here -->	
 	
 	<!-- ADMIN -->
@@ -174,6 +186,7 @@
 		<property name="centers">
 		 	<list>
 		  		<ref bean="center1"/>
+		  		<ref bean="center2"/>
 		 	</list>
 		 </property>
 		<property name="folders">
@@ -181,6 +194,33 @@
 				<ref bean="folder4"/>
 				<ref bean="folder5"/>
 				<ref bean="folder6"/>
+			</list>
+		</property>
+		<property name="received"><null/></property>
+		<property name="sent">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="boss2" class="domain.Boss">
+		<property name="name" value="Boss" />
+		<property name="surname" value="Acme Animal Shelter" />
+		<property name="email" value="boss2@boss.com" />
+		<property name="phoneNumber" value="123456789" />
+		<property name="address" value="C/Boss2" />
+		<property name="userAccount" ref="userAccount11" />
+		<property name="centers">
+		 	<list>
+		 		<ref bean="center3"/>
+		  		<ref bean="center4"/>
+		 	</list>
+		 </property>
+		<property name="folders">
+			<list>
+				<ref bean="folder31"/>
+				<ref bean="folder32"/>
+				<ref bean="folder33"/>
 			</list>
 		</property>
 		<property name="received"><null/></property>
@@ -709,6 +749,34 @@
 	</bean>
 	
 	
+	<bean id="folder31" class="domain.Folder">
+		<property name="name" value="In Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder32" class="domain.Folder">
+		<property name="name" value="Out Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="folder33" class="domain.Folder">
+		<property name="name" value="Trash Box"/>
+		<property name="predefined" value="true"/>
+		<property name="messages">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	
 	<!-- MESSAGE -->
 <!-- 	<bean id="message1" class="domain.Message"> -->
 <!-- 		<property name="moment" value="04/03/2017"/> -->
@@ -753,6 +821,39 @@
 		<property name="boss" ref="boss1"/>
 	</bean>
 	
+	<bean id="center2" class="domain.Center">
+		<property name="name" value="Center2"/>
+		<property name="address" value="C/calle2 n2"/>
+		<property name="capacity" value="40000"/>
+		<property name="stock" value="6000"/>
+		<property name="picture" value="http://www.helpsavepets.org/wp-content/uploads/2015/11/Shorewood.jpg"/>
+		<property name="description" value="Animal Shelter center 2"/>
+		<property name="warehouse" ref="warehouse2"/>
+		<property name="boss" ref="boss1"/>
+	</bean>
+	
+	<bean id="center3" class="domain.Center">
+		<property name="name" value="Center3"/>
+		<property name="address" value="C/calle3 n3"/>
+		<property name="capacity" value="40000"/>
+		<property name="stock" value="6000"/>
+		<property name="picture" value="http://www.helpsavepets.org/wp-content/uploads/3015/11/Shorewood.jpg"/>
+		<property name="description" value="Animal Shelter center 3"/>
+		<property name="warehouse" ref="warehouse3"/>
+		<property name="boss" ref="boss2"/>
+	</bean>
+	
+	<bean id="center4" class="domain.Center">
+		<property name="name" value="Center4"/>
+		<property name="address" value="C/calle4 n4"/>
+		<property name="capacity" value="40000"/>
+		<property name="stock" value="6000"/>
+		<property name="picture" value="http://www.helpsavepets.org/wp-content/uploads/4015/11/Shorewood.jpg"/>
+		<property name="description" value="Animal Shelter center 4"/>
+		<property name="warehouse" ref="warehouse4"/>
+		<property name="boss" ref="boss2"/>
+	</bean>
+	
 	
 	<!-- WAREHOUSE -->
 	<bean id="warehouse1" class="domain.Warehouse">
@@ -761,6 +862,30 @@
 		<property name="dogFood" value="50"/>
 		<property name="catFood" value="70"/>
 		<property name="birdFood" value="60"/>
+	</bean>
+	
+	<bean id="warehouse2" class="domain.Warehouse">
+		<property name="capacity" value="400"/>
+		<property name="stock" value="200"/>
+		<property name="dogFood" value="60"/>
+		<property name="catFood" value="80"/>
+		<property name="birdFood" value="90"/>
+	</bean>
+	
+	<bean id="warehouse3" class="domain.Warehouse">
+		<property name="capacity" value="500"/>
+		<property name="stock" value="300"/>
+		<property name="dogFood" value="70"/>
+		<property name="catFood" value="90"/>
+		<property name="birdFood" value="10"/>
+	</bean>
+	
+	<bean id="warehouse4" class="domain.Warehouse">
+		<property name="capacity" value="600"/>
+		<property name="stock" value="700"/>
+		<property name="dogFood" value="80"/>
+		<property name="catFood" value="10"/>
+		<property name="birdFood" value="20"/>
 	</bean>
 	
 	
@@ -810,7 +935,7 @@
 	
 	<!-- APPLICATION -->
 	<bean id="application1" class="domain.Application">
-		<property name="ticker" value="1234567SDFGH"/>
+		<property name="ticker" value="080616-02-FRSM-070918"/>
 		<property name="createMoment" value="12/06/2011"/>
 		<property name="closed" value="true"/>
 		<property name="pet" ref="pet1"/>
@@ -819,7 +944,7 @@
 	</bean>
 	
 	<bean id="application2" class="domain.Application">
-		<property name="ticker" value="1234567SDFGH"/>
+		<property name="ticker" value="060517-01-HGTM-080318"/>
 		<property name="createMoment" value="24/06/2011"/>
 		<property name="closed" value="true"/>
 		<property name="pet" ref="pet2"/>
@@ -828,7 +953,7 @@
 	</bean>
 	
 	<bean id="application3" class="domain.Application">
-		<property name="ticker" value="1234567SDFGH"/>
+		<property name="ticker" value="091216-01-QPTY-070917"/>
 		<property name="createMoment" value="12/07/2011"/>
 		<property name="closed" value="false"/>
 		<property name="pet" ref="pet3"/>
@@ -866,7 +991,11 @@
 		<property name="age" value="2"/>
 		<property name="chip" value="true"/>
 		<property name="center" ref="center1"/>
-		<property name="application" ref="application1"/>
+		<property name="application">
+			<list>
+				<ref bean="application1"/>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport1"/>
 	</bean>
 	
@@ -880,7 +1009,11 @@
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
-		<property name="application" ref="application2"/>
+		<property name="application">
+			<list>
+				<ref bean="application2"/>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport2"/>
 	</bean>
 	
@@ -888,13 +1021,17 @@
 		<property name="name" value="Piolin"/>
 		<property name="type" value="BIRD"/>
 		<property name="foodExpense" value="20"/>
-		<property name="status" value="false"/>
+		<property name="status" value="true"/>
 		<property name="identifier" value="180706-96-FRSM"/>
 		<property name="date" value="21/04/2013"/>
 		<property name="age" value="1"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
-		<property name="application" ref="application3"/>
+		<property name="application">
+			<list>
+				<ref bean="application3"/>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport3"/>
 	</bean>
 	
@@ -908,7 +1045,10 @@
 		<property name="age" value="5"/>
 		<property name="chip" value="false"/>
 		<property name="center" ref="center1"/>
-		<property name="application"><null/></property>
+		<property name="application">
+			<list>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport4"/>
 	</bean>
 	
@@ -922,7 +1062,10 @@
 		<property name="age" value="8"/>
 		<property name="chip" value="true"/>
 		<property name="center" ref="center1"/>
-		<property name="application"><null/></property>
+		<property name="application">
+			<list>
+			</list>
+		</property>
 		<property name="medicalReport" ref="medicalReport5"/>
 	</bean>
 	
