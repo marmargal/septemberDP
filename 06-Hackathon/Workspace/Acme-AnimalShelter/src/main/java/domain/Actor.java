@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
@@ -86,8 +85,6 @@ public abstract class Actor extends DomainEntity {
 
 	private UserAccount userAccount;
 	private Collection<Folder> folders;
-	private Message received;
-	private Collection<Message> sent;
 
 	@NotNull
 	@Valid
@@ -102,7 +99,7 @@ public abstract class Actor extends DomainEntity {
 	
 	@Valid
 	@NotNull
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "actor")
 	public Collection<Folder> getFolders() {
 		return folders;
 	}
@@ -111,24 +108,4 @@ public abstract class Actor extends DomainEntity {
 		this.folders = folders;
 	}
 	
-	@Valid
-	@ManyToOne
-	public Message getReceived() {
-		return received;
-	}
-
-	public void setReceived(Message received) {
-		this.received = received;
-	}
-	
-	@Valid
-	@OneToMany(mappedBy = "sender")
-	public Collection<Message> getSent() {
-		return sent;
-	}
-
-	public void setSent(Collection<Message> sent) {
-		this.sent = sent;
-	}
-
 }

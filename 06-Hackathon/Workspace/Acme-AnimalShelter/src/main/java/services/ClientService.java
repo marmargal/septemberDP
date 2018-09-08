@@ -18,7 +18,6 @@ import security.UserAccount;
 import domain.Application;
 import domain.Client;
 import domain.Folder;
-import domain.Message;
 import forms.ActorForm;
 
 
@@ -51,7 +50,6 @@ public class ClientService {
 		Client res = new Client();
 		
 		Collection<Application> applications = new ArrayList<Application>();
-		Collection<Message> messages = new ArrayList<Message>();
 		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
@@ -75,7 +73,6 @@ public class ClientService {
 		res.setUserAccount(userAccount);
 		res.setApplications(applications);
 		res.setFolders(folders);
-		res.setSent(messages);
 		res.setBan(false);
 
 		return res;
