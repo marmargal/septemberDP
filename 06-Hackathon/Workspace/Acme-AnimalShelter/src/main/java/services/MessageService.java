@@ -1,6 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.MessageRepository;
+import domain.Actor;
+import domain.Folder;
 import domain.Message;
 
 
@@ -35,6 +39,7 @@ public class MessageService {
 
 	public Message create() {
 		Message res = new Message();
+		res.setIsDelete(false);
 		
 		return res;
 
@@ -71,6 +76,51 @@ public class MessageService {
 
 	// Other business methods
 	
+	public Collection<Message> findMessagesNotDeleted() {
+		Collection<Message> messages = new ArrayList<Message>();
+		messages = this.messageRepository.findMessagesNotDeleted();
+		return messages;
+	}
+	
+	public Collection<Message> findMessagesDeleted() {
+		Collection<Message> messages = new ArrayList<Message>();
+		messages = this.messageRepository.findMessagesDeleted();
+		return messages;
+	}
+	
+	public void moveToTrash(Message message) {
+		this.administratorService.checkAuthority();
+		List<Folder> folders = (List<Folder>) message.getFoldersRecipient(); 
+		for(int i=0; i<folders.size(); i++){
+			Folder folder = folders.get(i);
+			
+			//Eliminamos el mensaje de las carpeta In Box
+			Collection<Message> messages = folder.getMessages();
+			messages.remove(message);
+			folder.setMessages(messages);
+			
+			//Añadimos el mensaje a la carpeta Trash
+			Actor actor = folder.getActor();
+			Collection<Folder> foldersByActor = actor.getFolders();
+			for(Folder f: foldersByActor){
+				if(f.getName().equals("Trash Box")){
+					Collection<Message> messagesInTrash = f.getMessages();
+					messagesInTrash.add(message);
+					f.setMessages(messagesInTrash);
+					
+					//Actualizamos el recipient del mensaje (InBox por Trash)
+					Collection<Folder> foldersRecipient = new ArrayList<Folder>();
+					foldersRecipient = message.getFoldersRecipient();
+					foldersRecipient.remove(folder);
+					foldersRecipient.add(f);
+					message.setFoldersRecipient(foldersRecipient);
+				}
+			}
+			message.setIsDelete(true);
+			messageRepository.save(message);
+		}
+		
+	}
 	
 
 }

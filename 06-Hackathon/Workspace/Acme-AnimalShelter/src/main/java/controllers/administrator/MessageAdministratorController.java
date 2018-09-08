@@ -46,7 +46,21 @@ public class MessageAdministratorController extends AbstractController {
 		ModelAndView result;
 
 		Collection<Message> messages = new ArrayList<Message>(); 
-		messages = this.messageService.findAll();
+		messages = this.messageService.findMessagesNotDeleted();
+		
+		result = new ModelAndView("message/list");
+		result.addObject("messages", messages);
+		result.addObject("viewForDeleteToTrash" , true);
+
+		return result;
+	}
+	
+	@RequestMapping("/listDeleted")
+	public ModelAndView listDeleted() {
+		ModelAndView result;
+
+		Collection<Message> messages = new ArrayList<Message>(); 
+		messages = this.messageService.findMessagesDeleted();
 		
 		result = new ModelAndView("message/list");
 		result.addObject("messages", messages);
@@ -56,13 +70,28 @@ public class MessageAdministratorController extends AbstractController {
 	}
 	
 	// Delete ---------------------------------------------------------------
+	@RequestMapping(value="/deleteToTrash",method=RequestMethod.POST, params = "deleteToTrash")
+	public ModelAndView deleteToTrash(@RequestParam(defaultValue = "0") int messageId){
+		ModelAndView res;
+		try{
+			Message message = this.messageService.findOne(messageId);
+			this.messageService.moveToTrash(message);
+			res = new ModelAndView("redirect:/message/administrator/list.do");
+
+		}catch (Exception e) {
+			res = new ModelAndView("redirect:../../");
+		}
+		
+		return res;
+	}
+	
 	@RequestMapping(value="/delete",method=RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@RequestParam(defaultValue = "0") int messageId){
 		ModelAndView res;
 		try{
 			Message message = this.messageService.findOne(messageId);
 			this.messageService.delete(message);
-			res = new ModelAndView("redirect:/message/administrator/list.do");
+			res = new ModelAndView("redirect:/message/administrator/listDeleted.do");
 
 		}catch (Exception e) {
 			res = new ModelAndView("redirect:../../");

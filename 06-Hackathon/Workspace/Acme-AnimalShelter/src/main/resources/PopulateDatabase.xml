@@ -682,6 +682,7 @@
 		<property name="actor" ref="veterinary1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message2"/>
 			</list>
 		</property>
 	</bean>
@@ -766,6 +767,7 @@
 		<property name="subject" value="Hola"/>
 		<property name="body" value="¿Cómo está Puppy?"/>
 		<property name="priority" value="LOW"/>
+		<property name="isDelete" value="false"/>
 		<property name="folder" ref="folder5"/>
 		<property name="foldersRecipient">
 			<list>
@@ -780,6 +782,7 @@
 		<property name="subject" value="Hola"/>
 		<property name="body" value="Puppy está bien."/>
 		<property name="priority" value="LOW"/>
+		<property name="isDelete" value="false"/>
 		<property name="folder" ref="folder26"/>
 		<property name="foldersRecipient">
 			<list>

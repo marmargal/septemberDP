@@ -81,8 +81,13 @@
 			<li><a href="notice/administrator/list.do"><spring:message code="master.page.notices" /></a></li>
 			<li><a href="medicalReport/administrator/list.do"><spring:message code="master.page.medicalReport" /></a></li>
 			<li><a href="pet/administrator/list.do"><spring:message code="master.page.allPets" /></a></li>
-			<li><a href="message/administrator/list.do"><spring:message code="master.page.allMessage" /></a></li>
-			
+			<li><a href="" class="fNiv"><spring:message	code="master.page.messages" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="message/administrator/list.do"><spring:message code="master.page.allMessage" /></a></li>
+					<li><a href="message/administrator/listDeleted.do"><spring:message code="master.page.messagesInTrash" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		
