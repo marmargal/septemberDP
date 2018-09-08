@@ -46,11 +46,27 @@ public class MessageAdministratorController extends AbstractController {
 		ModelAndView result;
 
 		Collection<Message> messages = new ArrayList<Message>(); 
-		messages = this.messageService.findAll();
+		messages = this.messageService.findMessagesNotDeleted();
 		
 		result = new ModelAndView("message/list");
 		result.addObject("messages", messages);
 		result.addObject("viewForTrueDelete" , true);
+		result.addObject("requestURI", "message/administrator/list.do");
+
+		return result;
+	}
+	
+	@RequestMapping("/listAllInTrash")
+	public ModelAndView listAllInInTrash() {
+		ModelAndView result;
+
+		Collection<Message> messages = new ArrayList<Message>(); 
+		messages = this.messageService.findMessagesDeleted();
+		
+		result = new ModelAndView("message/list");
+		result.addObject("messages", messages);
+		result.addObject("viewForTrueDelete" , true);
+		result.addObject("requestURI", "message/administrator/listAllInTrash.do");
 
 		return result;
 	}
@@ -63,7 +79,7 @@ public class MessageAdministratorController extends AbstractController {
 		try{
 			Message message = this.messageService.findOne(messageId);
 			this.messageService.delete(message);
-			res = new ModelAndView("redirect:/message/administrator/list.do");
+			res = new ModelAndView("redirect:/message/administrator/listAllInTrash.do");
 
 		}catch (Exception e) {
 			res = new ModelAndView("redirect:../../");

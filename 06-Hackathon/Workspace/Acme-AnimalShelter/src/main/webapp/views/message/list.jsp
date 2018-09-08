@@ -23,14 +23,6 @@
 		</display:column>
 	</jstl:if>
 
-	<jstl:if test="${viewForDelete == true}">
-		<display:column>
-			<form name="submitForm" method="POST" action="message/actor/deleteOfTrash.do?messageId=${row.id }">
-		    	<acme:submit name="delete" code="message.delete"/>
-			</form>
-		</display:column>
-	</jstl:if>
-	
 	<security:authorize access="hasRole('ADMIN')">
 		<jstl:if test="${viewForTrueDelete == true}">
 			<display:column>

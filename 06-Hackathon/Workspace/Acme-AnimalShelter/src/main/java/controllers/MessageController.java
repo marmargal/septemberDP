@@ -111,7 +111,6 @@ public class MessageController extends AbstractController {
 		result = new ModelAndView("message/list");
 		result.addObject("messages", messages);
 		result.addObject("requestURI", "message/actor/listTrashBox.do");
-		result.addObject("viewForDelete" , true);
 
 		return result;
 	}
@@ -133,20 +132,6 @@ public class MessageController extends AbstractController {
 		return res;
 	}
 	
-	@RequestMapping(value="/deleteOfTrash",method=RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@RequestParam(defaultValue = "0") int messageId){
-		ModelAndView res;
-		try{
-			Message message = this.messageService.findOne(messageId);
-			this.messageService.deleteOfTrash(message);
-			res = new ModelAndView("redirect:/message/actor/listTrashBox.do");
-
-		}catch (Exception e) {
-			res = new ModelAndView("redirect:../../");
-		}
-		
-		return res;
-	}
 	
 	// Creating ----------------------------------------------------------
 	@RequestMapping(value = "/create", method = RequestMethod.GET)

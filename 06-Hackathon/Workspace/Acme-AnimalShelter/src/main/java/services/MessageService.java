@@ -122,7 +122,6 @@ public class MessageService {
 			}
 			
 			//Añadimos el mensaje a la carpeta Trash
-
 			Collection<Folder> foldersByActor = actor.getFolders();
 			for(Folder f: foldersByActor){
 				if(f.getName().equals("Trash Box")){
@@ -193,26 +192,5 @@ public class MessageService {
 			this.folderService.save(folder);
 		}
 	}
-	
-	public void deleteOfTrash(Message message){
-		Collection<Folder> recipientFolders = new ArrayList<Folder>();
-		recipientFolders = message.getFoldersRecipient();
-		
-		for(Folder folder: recipientFolders){
-			if(folder.getName().equals("Trash Box")){
-				Collection<Message> messages = new ArrayList<Message>();
-				Collection<Folder> uploadFolders = new ArrayList<Folder>();
-				
-				messages = folder.getMessages();
-				messages.remove(message);
-				folder.setMessages(messages);
-				
-				uploadFolders = message.getFoldersRecipient();
-				uploadFolders.remove(folder);
-				message.setFoldersRecipient(uploadFolders);
-			}
-		}
-	}
-	
 
 }
