@@ -32,7 +32,13 @@
 
 	<!-- Buttons -->
 
-			<acme:submit name="save" code="stand.join" />
-		<acme:cancel url="/" code="stand.cancel" />
+	<jstl:if test="${isntThere == true }">
+		<acme:submit name="save" code="stand.join" />
+	</jstl:if>
+	<jstl:if test="${isntThere == false }">
+		<acme:submit name="save" code="stand.takeOff" />
+	</jstl:if>
+			
+	<acme:cancel url="/" code="stand.cancel" />
 
 </form:form>
