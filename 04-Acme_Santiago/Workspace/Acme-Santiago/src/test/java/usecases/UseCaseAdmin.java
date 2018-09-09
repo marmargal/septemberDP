@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import services.AdministratorService;
 import services.ChirpService;
 import services.CommentService;
 import services.ConfigurationService;
@@ -29,8 +28,6 @@ import domain.Route;
 @Transactional
 public class UseCaseAdmin extends AbstractTest {
 
-	@Autowired
-	private AdministratorService administratorService;
 
 	@Autowired
 	private RouteService routeService;
