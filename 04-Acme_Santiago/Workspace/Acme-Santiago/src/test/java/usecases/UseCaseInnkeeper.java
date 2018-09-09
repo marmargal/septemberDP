@@ -36,7 +36,7 @@ public class UseCaseInnkeeper extends AbstractTest {
 	 */
 
 	@Test
-	public void RouteAdminTest() {
+	public void RegistryInnkeeperTest() {
 		final Object testingData[][] = {
 				// positivo, el innkeeper1 hace un registro en un inn suyo
 				{ "innkeeper1", "02/02/2010", "inn1", null },
