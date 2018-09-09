@@ -45,6 +45,7 @@ public class ReportService {
 	// Simple CRUD methods
 	
 	public Report create(Integer immigrantId) {
+		investigatorService.checkAuthority();
 		Report res = new Report();
 		Immigrant immigrant = new Immigrant();
 		
@@ -53,6 +54,8 @@ public class ReportService {
 		
 		res.setImmigrant(immigrant);
 		res.setWriter(investigator);
+		
+		Assert.isTrue(immigrant.getInvestigator().equals(investigator));
 		
 		return res;
 	}
@@ -75,6 +78,7 @@ public class ReportService {
 	public Report save(Report report) {
 		Assert.notNull(report);
 		investigatorService.checkAuthority();
+		
 		Report res;
 		
 		res = this.reportRepository.save(report);
@@ -128,6 +132,10 @@ public class ReportService {
 			validator.validate(res, binding);
 		
 		return res;
+	}
+	
+	public void flush() {
+		this.reportRepository.flush();
 	}
 
 }
