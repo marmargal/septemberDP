@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 import services.AntennaService;
 import services.PlatformService;
 import services.SatelliteService;
+import services.UserService;
 import utilities.AbstractTest;
 import domain.Antenna;
 import domain.Platform;
@@ -33,6 +34,9 @@ public class AuthenticatedTest extends AbstractTest {
 	
 	@Autowired
 	private AntennaService antennaService;
+	
+	@Autowired
+	private UserService userService;
 	
 	// En los tests de esta clase se han añadido en conjunto tanto los que puede hacer un autenticado, ya pudiera hacerlo un no autenticado como la
 	// comprobación con cualquiera de los roles posibles.
@@ -178,6 +182,11 @@ public class AuthenticatedTest extends AbstractTest {
 		super.checkExceptions(expected, caught);
 	}
 	
+	// 6.2 Manage his or her antennas, which includes registering them, editing them, deleting them, and listing them. 
+	// The information about an antenna is private to the actor who registers it
+	
+			// REGISTERING THEM
+	
 	@Test
 	public void registerAntennasTest() {
 
@@ -204,8 +213,109 @@ public class AuthenticatedTest extends AbstractTest {
 			
 			Antenna antenna = this.antennaService.create();
 			
+			antenna.setSerialNumber(serialNumber);
+			antenna.setModel(model);
+			antenna.setAzimuth(azimuth);
+			antenna.setElevation(elevation);
+			antenna.setQuality(quality);
+			
+			int satelliteId = this.getEntityId("satellite1");
+			Satellite satellite = this.satelliteService.findOne(satelliteId);
+			
+			antenna.setSatellite(satellite);
+			
+			Antenna savedAntenna = this.antennaService.save(antenna);
+			
 			this.unauthenticate();
+			
+			Assert.notNull(savedAntenna);
 
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+				// EDITING THEM
+	
+	@Test
+	public void editingAntennasTest() {
+
+		final Object testingData[][] = {
+				{ // Positivo con user
+					"user1", "model-A", null
+				}, { // Negativo con user distinto a quien creó la antenna
+					"user2", "model-A", IllegalArgumentException.class
+				} , { // Negativo con usuario sin autenticar
+					null, "model-A", IllegalArgumentException.class
+				}
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateEditingAntennasTest((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	
+	protected void templateEditingAntennasTest(final String actor, final String model, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			if(actor != null){
+				super.authenticate(actor);
+			}
+			
+			int antennaId = this.getEntityId("antenna1");
+			Antenna antenna = this.antennaService.findOne(antennaId);
+			antenna.setModel(model);
+			
+			Antenna savedAntenna = this.antennaService.save(antenna);
+			
+			this.unauthenticate();
+			
+			Assert.notNull(savedAntenna);
+
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+				// LISTING THEM
+	//TODO: FALTA POR VER QUE EL QUE ESTÉ LOGADO SEA EL QUE PUEDA VER SU PROPIA LISTA Y NO LA DE OTRO
+	
+	@Test
+	public void listAntennaTest() {
+
+		final Object testingData[][] = {
+				{ // Positivo con user
+					"user1", null
+				}, { // Negativo con user que no corresponde a esas antennas
+					"user2", IllegalArgumentException.class
+				}
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListAntennaTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void templateListAntennaTest(final String actor, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			String userLogado = "user1";
+			
+			super.authenticate(userLogado);
+			
+			int actorId = this.getEntityId(actor);
+
+			final Collection<Antenna> antennas = this.antennaService.findAntennasByUser(actorId);
+
+			this.unauthenticate();
+			
+			Assert.notNull(antennas);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
