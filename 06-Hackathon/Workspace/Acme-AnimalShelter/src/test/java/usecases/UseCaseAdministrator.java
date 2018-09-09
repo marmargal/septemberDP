@@ -150,12 +150,13 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Test
 	public void listBossTest() {
 
-		final Object testingData[][] = { {// Positive
-				"admin", null }, {// Negative: with admin that not exists
-				"admin1", IllegalArgumentException.class }, {// Negative: with
-																// anonymous
-																// user
-						"", IllegalArgumentException.class }, };
+		final Object testingData[][] = { {
+				// Positive
+				"admin", null }, {
+				// Negative: with admin that not exists
+				"admin1", IllegalArgumentException.class }, {
+				// Negative: with anonymous user
+				"", IllegalArgumentException.class }, };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateListBossTest(i, (String) testingData[i][0],
@@ -188,12 +189,13 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Test
 	public void listClientTest() {
 
-		final Object testingData[][] = { {// Positive
-				"admin", null }, {// Negative: with admin that not exists
-				"admin1", IllegalArgumentException.class }, {// Negative: with
-																// anonymous
-																// user
-						"", IllegalArgumentException.class }, };
+		final Object testingData[][] = { {
+				// Positive
+				"admin", null }, {
+				// Negative: with admin that not exists
+				"admin1", IllegalArgumentException.class }, {
+				// Negative: with anonymous user
+				"", IllegalArgumentException.class }, };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateListClientTest(i, (String) testingData[i][0],
@@ -225,12 +227,13 @@ public class UseCaseAdministrator extends AbstractTest {
 
 	@Test
 	public void listEmployeeTest() {
-		final Object testingData[][] = { {// Positive
-				"admin", null }, {// Negative: with admin that not exists
-				"admin1", IllegalArgumentException.class }, {// Negative: with
-																// anonymous
-																// user
-						"", IllegalArgumentException.class }, };
+		final Object testingData[][] = { {
+				// Positive
+				"admin", null }, {
+				// Negative: with admin that not exists
+				"admin1", IllegalArgumentException.class }, {
+				// Negative: with anonymous user
+				"", IllegalArgumentException.class }, };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateListEmployeeTest(i, (String) testingData[i][0],
@@ -264,12 +267,13 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Test
 	public void listVeterinaryTest() {
 
-		final Object testingData[][] = { {// Positive
-				"admin", null }, {// Negative: with admin that not exists
-				"admin1", IllegalArgumentException.class }, {// Negative: with
-																// anonymous
-																// user
-						"", IllegalArgumentException.class }, };
+		final Object testingData[][] = { {
+				// Positive
+				"admin", null }, {
+				// Negative: with admin that not exists
+				"admin1", IllegalArgumentException.class }, {
+				// Negative: with anonymous user
+				"", IllegalArgumentException.class }, };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateListVeterinaryTest(i, (String) testingData[i][0],
@@ -303,12 +307,13 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Test
 	public void listVoluntaryTest() {
 
-		final Object testingData[][] = { {// Positive
-				"admin", null }, {// Negative: with admin that not exists
-				"admin1", IllegalArgumentException.class }, {// Negative: with
-																// anonymous
-																// user
-						"", IllegalArgumentException.class }, };
+		final Object testingData[][] = { {
+				// Positive
+				"admin", null }, {
+				// Negative: with admin that not exists
+				"admin1", IllegalArgumentException.class }, {
+				// Negative: with anonymous user
+				"", IllegalArgumentException.class }, };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateListVoluntaryTest(i, (String) testingData[i][0],
@@ -392,17 +397,14 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Test
 	public void deleteNoticeTest() {
 
-		final Object testingData[][] = {
-				{// Positive
-				"admin", "notice1", null },
-				{// Negative: with voluntary like
-					// principal
-						"voluntary1", "notice1", IllegalArgumentException.class },
-				{// Negative:
-					// notice
-					// dont
-					// exists
-						"admin", "0", IllegalArgumentException.class }
+		final Object testingData[][] = { {// Positive
+				"admin", "notice1", null }, {// Negative: with voluntary like
+												// principal
+				"voluntary1", "notice1", IllegalArgumentException.class }, {// Negative:
+																			// notice
+																			// dont
+																			// exists
+				"admin", "0", IllegalArgumentException.class }
 
 		};
 
@@ -655,15 +657,11 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Test
 	public void editBannerTest() {
 
-		final Object testingData[][] = {
-				{
-						// Positive
-						"admin", "employee2", true, null },
-				{
-							//Negative
-							"admin", "", true, NullPointerException.class
-				}		
-		};
+		final Object testingData[][] = { {
+				// Positive
+				"admin", "employee2", true, null }, {
+				// Negative
+				"admin", "", true, NullPointerException.class } };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateEditBannerTest(i, (String) testingData[i][0],
@@ -699,7 +697,7 @@ public class UseCaseAdministrator extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
-	
+
 	/*
 	 * Caso de uso: Admin-> Banear los empleados, veterinarios, voluntarios y
 	 * clientes(veterinarios). 13c
@@ -708,20 +706,16 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Test
 	public void editBannerVeterinaryTest() {
 
-		final Object testingData[][] = {
-				{
-						// Positive
-						"admin", "veterinary2", true, null },
-				{
-							//Negative
-							"admin", "", true, NullPointerException.class
-				}		
-		};
+		final Object testingData[][] = { {
+				// Positive
+				"admin", "veterinary2", true, null }, {
+				// Negative
+				"admin", "", true, NullPointerException.class } };
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateEditBannerVeterinaryTest(i, (String) testingData[i][0],
-					(String) testingData[i][1], (boolean) testingData[i][2],
-					(Class<?>) testingData[i][3]);
+			this.templateEditBannerVeterinaryTest(i,
+					(String) testingData[i][0], (String) testingData[i][1],
+					(boolean) testingData[i][2], (Class<?>) testingData[i][3]);
 	}
 
 	protected void templateEditBannerVeterinaryTest(final Integer i,
@@ -752,8 +746,7 @@ public class UseCaseAdministrator extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
-	
-	
+
 	/*
 	 * Caso de uso: Admin-> Banear los empleados, veterinarios, voluntarios y
 	 * clientes(voluntarios). 13c
@@ -762,15 +755,11 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Test
 	public void editBannerVoluntaryTest() {
 
-		final Object testingData[][] = {
-				{
-						// Positive
-						"admin", "voluntary1", true, null },
-				{
-							//Negative
-							"admin", "", true, NullPointerException.class
-				}		
-		};
+		final Object testingData[][] = { {
+				// Positive
+				"admin", "voluntary1", true, null }, {
+				// Negative
+				"admin", "", true, NullPointerException.class } };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateEditBannerVoluntaryTest(i, (String) testingData[i][0],
@@ -806,7 +795,7 @@ public class UseCaseAdministrator extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
-	
+
 	/*
 	 * Caso de uso: Admin-> Banear los empleados, veterinarios, voluntarios y
 	 * clientes(clientes). 13c
@@ -815,15 +804,11 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Test
 	public void editBannerClientTest() {
 
-		final Object testingData[][] = {
-				{
-						// Positive
-						"admin", "client1", true, null },
-				{
-							//Negative
-							"admin", "", true, NullPointerException.class
-				}		
-		};
+		final Object testingData[][] = { {
+				// Positive
+				"admin", "client1", true, null }, {
+				// Negative
+				"admin", "", true, NullPointerException.class } };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateEditBannerClientTest(i, (String) testingData[i][0],
@@ -832,8 +817,8 @@ public class UseCaseAdministrator extends AbstractTest {
 	}
 
 	protected void templateEditBannerClientTest(final Integer i,
-			final String principal, final String client,
-			final boolean banner, final Class<?> expected) {
+			final String principal, final String client, final boolean banner,
+			final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
