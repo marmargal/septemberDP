@@ -84,5 +84,12 @@
 		<acme:links url="visa/display.do?visaId=${row.visa.id }"
 			code="application.visa" />
 	</display:column>
+	
+	<security:authorize access="hasRole('IMMIGRANT')">
+	<display:column>
+		<acme:links url="question/immigrant/list.do?applicationId=${row.id }"
+			code="application.questions" />
+	</display:column>
+	</security:authorize>
 
 </display:table>
