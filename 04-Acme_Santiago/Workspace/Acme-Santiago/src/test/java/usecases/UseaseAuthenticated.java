@@ -24,7 +24,7 @@ import domain.User;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
 @Transactional
-public class UseaseAnonymous extends AbstractTest {
+public class UseaseAuthenticated extends AbstractTest {
 
 	@Autowired
 	private UserService userService;
@@ -274,11 +274,15 @@ public class UseaseAnonymous extends AbstractTest {
 			System.out.println(inns);
 			for (Inn inn : inns) {
 				if ((inn.getCreditCard().getExpirationYear() > ano)) {
-					
+					System.out
+							.println(inn.getCreditCard().getExpirationMonth());
+					System.out.println(inn.getCreditCard().getExpirationYear());
 					Assert.isTrue(false);
 				} else if ((inn.getCreditCard().getExpirationYear() == ano && inn
 						.getCreditCard().getExpirationMonth() > mes)) {
-					
+					System.out
+							.println(inn.getCreditCard().getExpirationMonth());
+					System.out.println(inn.getCreditCard().getExpirationYear());
 
 					Assert.isTrue(false);
 
