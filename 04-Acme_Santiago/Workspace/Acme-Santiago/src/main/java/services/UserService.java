@@ -79,6 +79,7 @@ public class UserService {
 			try {
 				LoginService.getPrincipal();
 			} catch (final Throwable oops) {
+
 				caught = oops.getClass();
 			}
 			this.checkExceptions(IllegalArgumentException.class, caught);

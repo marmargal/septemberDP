@@ -119,8 +119,13 @@ public class RouteService {
 
 	public Collection<Route> searchRoute(String criteria) {
 		Collection<Route> routes = new ArrayList<>();
-		routes.addAll(this.routeRepository.searchRoute(criteria));
-		routes.addAll(this.routeRepository.searchRoute2(criteria));
+		if (criteria.isEmpty()) {
+			routes.addAll(this.routeRepository.findAll());
+		} else {
+
+			routes.addAll(this.routeRepository.searchRoute(criteria));
+			routes.addAll(this.routeRepository.searchRoute2(criteria));
+		}
 		return routes;
 	}
 
