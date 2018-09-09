@@ -49,7 +49,6 @@
 					<li><a href="application/immigrant/listClosed.do"><spring:message code="master.page.register.closedApplication" /></a></li>
 					<li><a href="application/immigrant/listAccepted.do"><spring:message code="master.page.register.acceptedApplication" /></a></li>
 					<li><a href="application/immigrant/listRejected.do"><spring:message code="master.page.register.rejectedApplication" /></a></li>
-					<li><a href="question/immigrant/list.do"><spring:message code="master.page.register.assignApplication" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
