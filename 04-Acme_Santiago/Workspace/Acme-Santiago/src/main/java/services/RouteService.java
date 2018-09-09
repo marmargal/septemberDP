@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.RouteRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Comment;
 import domain.Hike;
 import domain.Route;
@@ -32,6 +34,7 @@ public class RouteService {
 	
 	@Autowired
 	private CommentService commentService;
+	
 
 	// Constructors
 
@@ -67,6 +70,7 @@ public class RouteService {
 	public Route save(final Route route) {
 		Assert.notNull(route);
 		Route res;
+			this.userService.checkAuthority();
 		for (Hike hike : route.getHikes()) {
 			hike.setRoute(route);
 			this.hikeService.save(hike);
@@ -79,7 +83,13 @@ public class RouteService {
 		Assert.notNull(route);
 		Assert.isTrue(route.getId() != 0);
 		Assert.isTrue(this.routeRepository.exists(route.getId()));
-		
+		Collection<Authority> authority = LoginService.getPrincipal().getAuthorities();
+		Assert.notNull(authority);
+		Authority user = new Authority();
+		user.setAuthority("USER");
+		Authority admin = new Authority();
+		admin.setAuthority("ADMIN");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin));
 		Collection<Hike> hikes = new ArrayList<Hike>();
 		hikes = new ArrayList<Hike>(this.hikeService.findHikeByRoute(route.getId()));
 		for (Hike hike : hikes) {
