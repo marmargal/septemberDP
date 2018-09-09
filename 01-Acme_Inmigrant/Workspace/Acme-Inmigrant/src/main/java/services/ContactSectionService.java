@@ -37,6 +37,7 @@ public class ContactSectionService {
 	// Simple CRUD methods ----------------------------------------------------
 	
 	public ContactSection create() {
+		this.immigrantService.checkAuthority();
 		final Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Assert.notNull(immigrant);
 		ContactSection res = new ContactSection();
@@ -59,6 +60,8 @@ public class ContactSectionService {
 	}
 
 	public ContactSection save(ContactSection contactSection) {
+		this.immigrantService.checkAuthority();
+		Assert.isTrue(immigrantService.findByPrincipal() == contactSection.getApplication().getImmigrant());
 		ContactSection res;
 		
 		Application a = contactSection.getApplication();
@@ -92,6 +95,10 @@ public class ContactSectionService {
 		res = contactSectionRepository.findApplicationbyContactSection(id);
 		
 		return res;
+	}
+	
+	public void flush() {
+		this.contactSectionRepository.flush();
 	}
 
 }
