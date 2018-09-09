@@ -192,5 +192,9 @@ public class OfficerService {
 
 		return res;
 	}
+	
+	public void flush() {
+		this.officerRepository.flush();
+	}
 
 }

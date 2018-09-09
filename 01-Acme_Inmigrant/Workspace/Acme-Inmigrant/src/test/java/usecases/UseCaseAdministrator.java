@@ -1,19 +1,29 @@
 package usecases;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import security.Authority;
+import security.UserAccount;
 import services.CategoryService;
 import services.CountryService;
+import services.InvestigatorService;
+import services.OfficerService;
 import utilities.AbstractTest;
 import domain.Category;
 import domain.Country;
+import domain.Investigator;
+import domain.Officer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -27,6 +37,12 @@ public class UseCaseAdministrator extends AbstractTest {
 	
 	@Autowired
 	private CountryService countryService;
+	
+	@Autowired
+	private InvestigatorService investigatorService;
+	
+	@Autowired
+	private OfficerService officerService;
 	
 	@Test
 	public void CreateCategoryTest() {
@@ -223,13 +239,13 @@ public class UseCaseAdministrator extends AbstractTest {
 		
 		final Object testingData[][] = {
 				{ // Positive
-					"admin", "country1", null
+					"admin", "country3", null
 				}
-//				, { //Negative: wrong isoCode
-//					"investigator1", "country1", IllegalArgumentException.class
-//				}, { // Negative: wrong roll
-//					"immigrant1", "country1", IllegalArgumentException.class
-//				}
+				, { //Negative: wrong country
+					"admin", "country1", DataIntegrityViolationException.class
+				}, { // Negative: wrong roll
+					"immigrant1", "country3", IllegalArgumentException.class
+				}
 			};
 
 			for (int i = 0; i < testingData.length; i++)
@@ -254,6 +270,134 @@ public class UseCaseAdministrator extends AbstractTest {
 			this.countryService.delete(countryFinal);
 			this.unauthenticate();
 			this.countryService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void RegisterInvestigatorTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "name", "surname", "email@gmail.com", "321654987", "address", null
+				}
+				, { // Negative: wrong email
+					"admin", "name", "surname", "email", "321654987", "address", DataIntegrityViolationException.class
+				}, { // Negative: wrong surname
+					"admin", "name", "", "email@gmail.com", "321654987", "address", DataIntegrityViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateRegisterInvestigator((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // name
+					(String) testingData[i][2], // surname
+					(String) testingData[i][3], // email
+					(String) testingData[i][4], // phoneNumber
+					(String) testingData[i][5], // address
+					(Class<?>) testingData[i][6]);
+		
+	}
+	
+	protected void templateRegisterInvestigator(final String principal,
+			final String name, final String surname, 
+			final String email, final String phoneNumber, final String address, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final Investigator investigator = this.investigatorService.create();
+			
+			final UserAccount userAccount = new UserAccount();
+			userAccount.setUsername("userTest");
+			userAccount.setPassword("userTest");
+			final List<Authority> authorities = new ArrayList<>();
+			final Authority aut = new Authority();
+			aut.setAuthority("INVESTIGATOR");
+			authorities.add(aut);
+			userAccount.setAuthorities(authorities);
+			
+			investigator.setName(name);
+			investigator.setSurname(surname);
+			investigator.setEmail(email);
+			investigator.setPhoneNumber(phoneNumber);
+			investigator.setAddress(address);
+			investigator.setUserAccount(userAccount);
+			
+			this.investigatorService.save(investigator);
+			this.unauthenticate();
+			this.investigatorService.flush();
+			this.authenticate(investigator.getUserAccount().getUsername());
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void RegisterOfficerTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "name", "surname", "email@gmail.com", "321654987", "address", null
+				}
+				, { // Negative: wrong email
+					"admin", "name", "surname", "email", "321654987", "address", DataIntegrityViolationException.class
+				}, { // Negative: wrong surname
+					"admin", "name", "", "email@gmail.com", "321654987", "address", DataIntegrityViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateRegisterOfficer((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // name
+					(String) testingData[i][2], // surname
+					(String) testingData[i][3], // email
+					(String) testingData[i][4], // phoneNumber
+					(String) testingData[i][5], // address
+					(Class<?>) testingData[i][6]);
+		
+	}
+	
+	protected void templateRegisterOfficer(final String principal,
+			final String name, final String surname, 
+			final String email, final String phoneNumber, final String address, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final Officer officer = this.officerService.create();
+			
+			final UserAccount userAccount = new UserAccount();
+			userAccount.setUsername("userTest");
+			userAccount.setPassword("userTest");
+			final List<Authority> authorities = new ArrayList<>();
+			final Authority aut = new Authority();
+			aut.setAuthority("OFFICER");
+			authorities.add(aut);
+			userAccount.setAuthorities(authorities);
+			
+			officer.setName(name);
+			officer.setSurname(surname);
+			officer.setEmail(email);
+			officer.setPhoneNumber(phoneNumber);
+			officer.setAddress(address);
+			officer.setUserAccount(userAccount);
+			
+			this.officerService.save(officer);
+			this.unauthenticate();
+			this.officerService.flush();
+			this.authenticate(officer.getUserAccount().getUsername());
+			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}

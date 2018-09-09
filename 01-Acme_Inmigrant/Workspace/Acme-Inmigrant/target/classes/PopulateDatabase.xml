@@ -621,6 +621,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="country3" class="domain.Country">
+		<property name="name" value="Spain" />
+		<property name="isoCode" value="ESP" />
+		<property name="flag"
+			value="https://laendercode.net/img/flag-icon-css/flags/4x3/es.svg" />
+		<property name="link" value="https://es.wikipedia.org/wiki/Espa%C3%B1a" />
+		<property name="law">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Law -->
 	<!-- Law 1 -->
