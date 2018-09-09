@@ -80,7 +80,7 @@ public class AdministratorTest extends AbstractTest {
 				"admin", "comment1", null
 			}, {// Negativo (comentario que no existe)
 				"administrator1", "comment8", IllegalArgumentException.class
-			}, {// Negativo (comentario que no existe)
+			}, {// Negativo (admin que no existe)
 				"administrator1", "comment1", IllegalArgumentException.class
 			}
 			

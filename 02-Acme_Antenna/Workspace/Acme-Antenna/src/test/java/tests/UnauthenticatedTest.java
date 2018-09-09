@@ -1,6 +1,7 @@
 package tests;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,11 +11,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import security.Authority;
 import security.UserAccount;
+import services.TutorialService;
 import services.UserService;
 import utilities.AbstractTest;
+import domain.Tutorial;
 import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,6 +28,9 @@ public class UnauthenticatedTest extends AbstractTest {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TutorialService tutorialService;
 
 	// 5.1 Register to the system as a user
 	
@@ -75,5 +82,40 @@ public class UnauthenticatedTest extends AbstractTest {
 		this.checkExceptions(expected, caught);
 	}
 	
+	// 14.1 List the tutorials in the system and display them
+	
+	@Test
+	public void listTutorialTest() {
+
+		final Object testingData[][] = {
+				{ // Positivo con user
+					null, null
+				}
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListTutorialTest((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void templateListTutorialTest(final String actor, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			if(actor != null){
+				super.authenticate(actor);
+			}
+			
+			final Collection<Tutorial> tutorials = this.tutorialService
+					.findAll();
+
+			this.unauthenticate();
+			Assert.notNull(tutorials);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
 	
 }
