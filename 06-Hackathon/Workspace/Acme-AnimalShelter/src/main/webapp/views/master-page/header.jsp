@@ -56,6 +56,14 @@
 			<li><a href="event/list.do"><spring:message code="master.page.event.list" /></a></li>
 			<li><a href="company/list.do"><spring:message code="master.page.companies" /></a></li>	
 			<li><a href="stand/list.do"><spring:message code="master.page.stands" /></a></li>
+			<li><a href="" class="fNiv"><spring:message	code="master.page.myMessages" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="message/actor/listInBox.do"><spring:message code="master.page.message.inBox" /></a></li>
+					<li><a href="message/actor/listOutBox.do"><spring:message code="master.page.message.outBox" /></a></li>
+					<li><a href="message/actor/listTrashBox.do"><spring:message code="master.page.message.trashBox" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 				<security:authorize access="hasRole('ADMIN')">
@@ -81,8 +89,13 @@
 			<li><a href="notice/administrator/list.do"><spring:message code="master.page.notices" /></a></li>
 			<li><a href="medicalReport/administrator/list.do"><spring:message code="master.page.medicalReport" /></a></li>
 			<li><a href="pet/administrator/list.do"><spring:message code="master.page.allPets" /></a></li>
-			<li><a href="message/administrator/list.do"><spring:message code="master.page.allMessage" /></a></li>
-			
+			<li><a href="" class="fNiv"><spring:message	code="master.page.messages" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="message/administrator/list.do"><spring:message code="master.page.allMessage" /></a></li>
+					<li><a href="message/administrator/listAllInTrash.do"><spring:message code="master.page.messagesInTrash" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		

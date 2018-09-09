@@ -32,6 +32,7 @@ public class Message extends DomainEntity{
 	private String subject;
 	private String body;
 	private String priority;
+	private Boolean isDelete;
 	
 	@Past
 	@NotNull
@@ -79,7 +80,7 @@ public class Message extends DomainEntity{
 	private Folder folder;
 
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional=false)
 	public Folder getFolder() {
 		return folder;
 	}
@@ -96,6 +97,15 @@ public class Message extends DomainEntity{
 
 	public void setFoldersRecipient(Collection<Folder> foldersRecipient) {
 		this.foldersRecipient = foldersRecipient;
+	}
+
+	@NotNull
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 	
 	

@@ -70,7 +70,7 @@ public class EmployeeService {
 
 		inBox.setName("In Box");
 		outBox.setName("Out Box");
-		trash.setName("Trash");
+		trash.setName("Trash Box");
 		this.folderService.save(inBox);
 		this.folderService.save(outBox);
 		this.folderService.save(trash);

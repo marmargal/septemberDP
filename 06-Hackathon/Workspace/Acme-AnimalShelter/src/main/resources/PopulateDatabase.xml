@@ -172,7 +172,7 @@
 	
 	<!-- BOSS -->
 	<bean id="boss1" class="domain.Boss">
-		<property name="name" value="Boss" />
+		<property name="name" value="Boss1" />
 		<property name="surname" value="Acme Animal Shelter" />
 		<property name="email" value="boss@boss.com" />
 		<property name="phoneNumber" value="654565656" />
@@ -194,7 +194,7 @@
 	</bean>
 	
 	<bean id="boss2" class="domain.Boss">
-		<property name="name" value="Boss" />
+		<property name="name" value="Boss2" />
 		<property name="surname" value="Acme Animal Shelter" />
 		<property name="email" value="boss2@boss.com" />
 		<property name="phoneNumber" value="123456789" />
@@ -682,6 +682,7 @@
 		<property name="actor" ref="veterinary1"/>
 		<property name="messages">
 			<list>
+				<ref bean="message2"/>
 			</list>
 		</property>
 	</bean>
@@ -766,6 +767,7 @@
 		<property name="subject" value="Hola"/>
 		<property name="body" value="¿Cómo está Puppy?"/>
 		<property name="priority" value="LOW"/>
+		<property name="isDelete" value="false"/>
 		<property name="folder" ref="folder5"/>
 		<property name="foldersRecipient">
 			<list>
@@ -780,6 +782,7 @@
 		<property name="subject" value="Hola"/>
 		<property name="body" value="Puppy está bien."/>
 		<property name="priority" value="LOW"/>
+		<property name="isDelete" value="false"/>
 		<property name="folder" ref="folder26"/>
 		<property name="foldersRecipient">
 			<list>

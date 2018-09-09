@@ -1,5 +1,65 @@
 #./src/main/resources/Entities.map
-#Fri Sep 07 18:10:20 CEST 2018
+<<<<<<< HEAD
+#Sun Sep 09 13:46:46 CEST 2018
+question1=180
+application5=179
+application4=178
+application3=177
+application2=176
+application1=175
+officer2=158
+personalSection5=146
+officer1=157
+personalSection4=145
+personalSection3=144
+personalSection2=143
+personalSection1=142
+visa2=184
+category5=168
+decision2=163
+visa1=183
+category4=167
+decision1=162
+category3=166
+category2=165
+category1=164
+investigator2=160
+investigator1=159
+contactSection1=141
+admin=140
+immigrant4=156
+immigrant3=155
+immigrant2=154
+userAccount9=137
+immigrant1=153
+userAccount8=136
+country2=170
+userAccount7=135
+country1=169
+userAccount6=134
+userAccount5=133
+userAccount4=132
+law2=172
+userAccount3=131
+law1=171
+report1=161
+userAccount2=130
+userAccount1=129
+socialSection6=152
+socialSection5=151
+userAccount11=139
+socialSection4=150
+userAccount10=138
+socialSection3=149
+socialSection2=148
+socialSection1=147
+answer1=182
+requirement2=174
+question2=181
+requirement1=173
+=======
+
+#Sun Sep 09 12:46:31 CEST 2018
 question1=176
 application5=175
 application4=174
@@ -55,3 +115,5 @@ answer1=178
 requirement2=170
 question2=177
 requirement1=169
+
+>>>>>>> 980b57acd1a436769d5af778232222f224b08651

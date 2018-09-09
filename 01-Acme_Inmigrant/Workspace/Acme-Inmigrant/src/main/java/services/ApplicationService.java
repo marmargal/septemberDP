@@ -60,6 +60,7 @@ public class ApplicationService {
 	// Simple CRUD methods ------------------------------------------------------
 	
 	public Application create(){
+		this.immigrantService.checkAuthority();
 		final Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Assert.notNull(immigrant);
 		Application res;
@@ -114,7 +115,9 @@ public class ApplicationService {
 		if(application.getCreditCard() != null){
 			Assert.isTrue(this.checkCreditCard(application.getCreditCard()));
 		}
-		
+		this.immigrantService.checkAuthority();
+		Immigrant immigrantTest = immigrantService.findByPrincipal();
+		Assert.isTrue(immigrantTest.getId() == application.getImmigrant().getId());
 		Visa visa = new Visa();
 		Application res = new Application();
 		Immigrant immigrant = new Immigrant();
@@ -381,6 +384,7 @@ public class ApplicationService {
 	}
 	
 	public Collection<Application> findApplicationClosed(){
+		this.immigrantService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		Immigrant immigrant = this.immigrantService.findByPrincipal();
 		res = this.applicationRepository.findApplicationClosed(immigrant.getId());
@@ -388,6 +392,7 @@ public class ApplicationService {
 	}
 	
 	public Collection<Application> findApplicationAccepted(){
+		this.immigrantService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		Immigrant immigrant = this.immigrantService.findByPrincipal();
 		res = this.applicationRepository.findApplicationAccepted(immigrant.getId());
@@ -395,6 +400,7 @@ public class ApplicationService {
 	}
 	
 	public Collection<Application> findApplicationRejectedbyImmigrant(){
+		this.immigrantService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		Immigrant immigrant = this.immigrantService.findByPrincipal();
 		res = this.applicationRepository.findApplicationRejectedbyImmigrant(immigrant.getId());
