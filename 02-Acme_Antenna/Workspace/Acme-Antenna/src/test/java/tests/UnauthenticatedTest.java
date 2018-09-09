@@ -39,20 +39,22 @@ public class UnauthenticatedTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{	// Positivo
-				"al@mail.com", "perez alarcón", "http://www.google.com", null
-			}, {	// Negativo (mail mal escrito y apellidos vacíos)
-				"almail", "", "pictures", IllegalArgumentException.class
+				null, "al@mail.com", "perez alarcón", "http://www.google.com", null
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.templateRegisterUser((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
+			this.templateRegisterUser((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Class<?>) testingData[i][4]);
 	}
 	
-	protected void templateRegisterUser(final String mail, final String surname, final String pictures, final Class<?> expected) {
+	protected void templateRegisterUser(final String user, final String mail, final String surname, final String pictures, final Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 		try {
+			if(user != null){
+				this.authenticate(user);
+			}
+			
 			final UserAccount userAccount = new UserAccount();
 			userAccount.setUsername("userTest");
 			userAccount.setPassword("userTest");
@@ -63,12 +65,14 @@ public class UnauthenticatedTest extends AbstractTest {
 			userAccount.setAuthorities(authorities);
 
 			final User userTest = this.userService.create();
-			userTest.setEmail(mail);
+			
 			userTest.setName("user");
-			userTest.setPhoneNumber("666666666");
-			userTest.setPostalAddress("41009");
 			userTest.setSurname(surname);
 			userTest.setPictures(pictures);
+			userTest.setPostalAddress("41009");
+			userTest.setPhoneNumber("666666666");
+			userTest.setEmail(mail);
+			
 			userTest.setUserAccount(userAccount);
 
 			this.userService.save(userTest);

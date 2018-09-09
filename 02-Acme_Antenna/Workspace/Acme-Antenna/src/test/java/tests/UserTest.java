@@ -289,7 +289,6 @@ public class UserTest extends AbstractTest{
 	}
 	
 				// LISTING THEM
-	//TODO: FALTA POR VER QUE EL QUE ESTÉ LOGADO SEA EL QUE PUEDA VER SU PROPIA LISTA Y NO LA DE OTRO
 	
 	@Test
 	public void listAntennaTest() {
