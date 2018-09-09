@@ -190,6 +190,15 @@
 		<property name="expirationYear" value="22" />
 		<property name="cvv" value="612" />
 	</bean>
+	
+	<!-- ContactSection -->
+	<!-- ContactSection 1 -->
+	<bean id="contactSection1" class="domain.ContactSection">
+		<property name="email" value="email@gmail.com" />
+		<property name="phoneNumber" value="89765431" />
+		<property name="pageNumber" value="12" />
+		<property name="application" ref="application1" />
+	</bean>
 
 
 	<!-- PersonalSection -->
@@ -683,6 +692,7 @@
 		<property name="personalSection" ref="personalSection1" />
 		<property name="contactSection">
 			<list>
+				<ref bean="contactSection1" />
 			</list>
 		</property>
 		<property name="workSection">
