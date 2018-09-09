@@ -28,6 +28,9 @@ public class CommentService {
 	@Autowired
 	private ConfigurationService configurationService;
 
+	@Autowired
+	private AdministratorService administratorService;
+
 	// Constructors
 
 	public CommentService() {
@@ -78,6 +81,8 @@ public class CommentService {
 	public void delete(Comment comment) {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
+		this.administratorService.checkAuthority();
+
 		Assert.isTrue(this.commentRepository.exists(comment.getId()));
 		this.userService.findOne(comment.getUser().getId()).getComments()
 				.remove(comment);
@@ -91,6 +96,7 @@ public class CommentService {
 	}
 
 	public Collection<Comment> findCommentTaboo() {
+		this.administratorService.checkAuthority();
 		return commentRepository.findCommentTaboo();
 	}
 

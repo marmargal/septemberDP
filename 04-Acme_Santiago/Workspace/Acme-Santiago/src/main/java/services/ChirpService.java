@@ -27,13 +27,13 @@ public class ChirpService {
 	@Autowired
 	private AdministratorService administratorService;
 	// Supporting services ----------------------------------------------------
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ConfigurationService configurationService;
-	
+
 	@Autowired
 	private Validator validator;
 
@@ -50,13 +50,13 @@ public class ChirpService {
 		User user;
 		Chirp result;
 		Date moment;
-		
+
 		result = new Chirp();
 		moment = new Date(System.currentTimeMillis() - 1000);
 		user = userService.findByPrincipal();
 		result.setMoment(moment);
 		result.setUser(user);
-		
+
 		return result;
 	}
 
@@ -91,13 +91,13 @@ public class ChirpService {
 	}
 
 	// Other business method --------------------------------------------------
-	
+
 	public Collection<Chirp> findChirpByUser(int id) {
 		Collection<Chirp> res;
 		res = this.chirpRepository.findChirpByUser(id);
 		return res;
 	}
-	
+
 	public void checkTabooWords() {
 		Collection<String> tabooWords = new ArrayList<String>();
 		tabooWords = configurationService.findTabooWords();
@@ -107,14 +107,17 @@ public class ChirpService {
 
 		for (String s : tabooWords) {
 			for (Chirp c : chirps) {
-				if (c.getTitle().toLowerCase().contains(s.toLowerCase()) || c.getText().toLowerCase().contains(s.toLowerCase())) {
+				if (c.getTitle().toLowerCase().contains(s.toLowerCase())
+						|| c.getText().toLowerCase().contains(s.toLowerCase())) {
 					c.setTaboo(true);
 				}
 			}
 		}
 	}
-	
-	public Collection<Chirp> findChirpTaboo(){
+
+	public Collection<Chirp> findChirpTaboo() {
+		this.administratorService.checkAuthority();
+
 		Collection<Chirp> res = new ArrayList<Chirp>();
 		res.addAll(chirpRepository.findChirpTaboo());
 		return res;
@@ -123,7 +126,7 @@ public class ChirpService {
 	public void flush() {
 		this.chirpRepository.flush();
 	}
-	
+
 	public Chirp reconstruct(final Chirp chirp, final BindingResult binding) {
 		Chirp res;
 		Chirp chirpFinal;
@@ -132,11 +135,11 @@ public class ChirpService {
 
 			userPrincipal = this.userService.findByPrincipal();
 			chirp.setUser(userPrincipal);
-			
+
 			res = chirp;
 		} else {
 			chirpFinal = this.chirpRepository.findOne(chirp.getId());
-			
+
 			chirp.setId(chirpFinal.getId());
 			chirp.setVersion(chirpFinal.getVersion());
 			chirp.setMoment(chirpFinal.getMoment());

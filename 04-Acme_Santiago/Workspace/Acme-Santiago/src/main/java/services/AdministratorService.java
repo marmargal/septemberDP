@@ -201,4 +201,8 @@ public class AdministratorService {
 		return this.administratorRepository.dataOutlierOfRoutes();
 	}
 
+	public void flush() {
+		this.administratorRepository.flush();
+	}
+
 }
