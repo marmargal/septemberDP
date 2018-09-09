@@ -137,5 +137,9 @@ public class CountryService {
 
 		return res;
 	}
+	
+	public void flush() {
+		this.countryRepository.flush();
+	}
 
 }

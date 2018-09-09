@@ -175,4 +175,8 @@ public class InvestigatorService {
 		return investigator;
 	}
 
+	public void flush() {
+		this.investigatorRepository.flush();
+	}
+	
 }
