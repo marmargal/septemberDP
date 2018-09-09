@@ -15,8 +15,16 @@
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="messages" requestURI="${requestURI }" id="row">
 	
+	<jstl:if test="${viewForDeleteToTrash == true}">
+		<display:column>
+			<form name="submitForm" method="POST" action="message/actor/deleteToTrash.do?messageId=${row.id }">
+		    	<acme:submit name="deleteToTrash" code="message.delete"/>
+			</form>
+		</display:column>
+	</jstl:if>
+
 	<security:authorize access="hasRole('ADMIN')">
-		<jstl:if test="${viewForDelete == true}">
+		<jstl:if test="${viewForTrueDelete == true}">
 			<display:column>
 				<form name="submitForm" method="POST" action="message/administrator/delete.do?messageId=${row.id }">
 			    	<acme:submit name="delete" code="message.delete"/>
@@ -25,10 +33,16 @@
 		</jstl:if>
 	</security:authorize>
 	
-	<acme:column property="sender.name" code="message.sender" />
-	<acme:column property="recipient" code="message.recipient" />
+	<acme:column property="folder.actor.name" code="message.sender" />
 	
-	<spring:message code=message.moment" var="momentHeader" />
+	<spring:message code="message.recipient" var="recipientHeader" />
+	<display:column title="${recipientHeader }">
+		<jstl:forEach var="folder" items="${row.foldersRecipient}">
+			<jstl:out value="${folder.actor.name }"></jstl:out>
+		</jstl:forEach>
+	</display:column>
+	
+	<spring:message code="message.moment" var="momentHeader" />
 	<spring:message var="formatDate" code="format.date"/>
 	<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
 	
@@ -37,3 +51,5 @@
 	<acme:column property="priority" code="message.priority" />
 	
 </display:table>
+
+<acme:links url="message/actor/create.do" code="message.create"/>

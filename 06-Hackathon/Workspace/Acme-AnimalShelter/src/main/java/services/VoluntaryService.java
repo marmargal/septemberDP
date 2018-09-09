@@ -17,7 +17,6 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Employee;
 import domain.Folder;
-import domain.Message;
 import domain.Voluntary;
 import forms.ActorForm;
 
@@ -54,7 +53,6 @@ public class VoluntaryService {
 		Voluntary res = new Voluntary();
 		
 		Collection<Folder> folders = new ArrayList<Folder>();
-		Collection<Message> messages = new ArrayList<Message>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
 		Folder inBox = this.folderService.create();
@@ -66,7 +64,7 @@ public class VoluntaryService {
 
 		inBox.setName("In Box");
 		outBox.setName("Out Box");
-		trash.setName("Trash");
+		trash.setName("Trash Box");
 		this.folderService.save(inBox);
 		this.folderService.save(outBox);
 		this.folderService.save(trash);
@@ -76,7 +74,6 @@ public class VoluntaryService {
 		
 		res.setUserAccount(userAccount);
 		res.setFolders(folders);
-		res.setSent(messages);
 		res.setBan(false);
 		
 		return res;

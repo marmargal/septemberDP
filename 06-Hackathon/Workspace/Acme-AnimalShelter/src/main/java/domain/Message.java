@@ -6,8 +6,8 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -32,6 +32,7 @@ public class Message extends DomainEntity{
 	private String subject;
 	private String body;
 	private String priority;
+	private Boolean isDelete;
 	
 	@Past
 	@NotNull
@@ -75,39 +76,36 @@ public class Message extends DomainEntity{
 	
 	// Relationships
 	
-	private Actor sender;
-	private Collection<Actor> recipient;
+	private Collection<Folder> foldersRecipient;
 	private Folder folder;
 
 	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
-	public Actor getSender() {
-		return sender;
-	}
-
-	public void setSender(Actor sender) {
-		this.sender = sender;
-	}
-
-	@Valid
-	@OneToMany(mappedBy = "received")
-	public Collection<Actor> getRecipient() {
-		return recipient;
-	}
-
-	public void setRecipient(Collection<Actor> recipient) {
-		this.recipient = recipient;
-	}
-
-	@Valid
-	@ManyToOne
+	@ManyToOne(optional=false)
 	public Folder getFolder() {
 		return folder;
 	}
 
 	public void setFolder(Folder folder) {
 		this.folder = folder;
+	}
+
+	@Valid
+	@ManyToMany
+	public Collection<Folder> getFoldersRecipient() {
+		return foldersRecipient;
+	}
+
+	public void setFoldersRecipient(Collection<Folder> foldersRecipient) {
+		this.foldersRecipient = foldersRecipient;
+	}
+
+	@NotNull
+	public Boolean getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
 	}
 	
 	
