@@ -384,6 +384,7 @@ public class ApplicationService {
 	}
 	
 	public Collection<Application> findApplicationClosed(){
+		this.immigrantService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		Immigrant immigrant = this.immigrantService.findByPrincipal();
 		res = this.applicationRepository.findApplicationClosed(immigrant.getId());
@@ -391,6 +392,7 @@ public class ApplicationService {
 	}
 	
 	public Collection<Application> findApplicationAccepted(){
+		this.immigrantService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		Immigrant immigrant = this.immigrantService.findByPrincipal();
 		res = this.applicationRepository.findApplicationAccepted(immigrant.getId());
@@ -398,6 +400,7 @@ public class ApplicationService {
 	}
 	
 	public Collection<Application> findApplicationRejectedbyImmigrant(){
+		this.immigrantService.checkAuthority();
 		Collection<Application> res = new ArrayList<Application>();
 		Immigrant immigrant = this.immigrantService.findByPrincipal();
 		res = this.applicationRepository.findApplicationRejectedbyImmigrant(immigrant.getId());
