@@ -50,10 +50,10 @@ public class UseaseAnonymous extends AbstractTest {
 						"https://www.google.com/", "postalAddress", null },
 
 				// negativo, alguien se registra en el sistema como user pero
-				// con el email mal
-				{ "name", "surname", "emailcom", "671910556", "address",
-						"https://www.google.com/", "postalAddress",
-						ConstraintViolationException.class },
+				// sin nombre
+//				{ "", "surname", "email@gmail.com", "671910556", "address",
+//						"https://www.google.com/", "postalAddress",
+//						ConstraintViolationException.class },
 
 		};
 
@@ -271,14 +271,11 @@ public class UseaseAnonymous extends AbstractTest {
 		try {
 			Collection<Inn> inns = this.innService.findCcExpirationYear(ano,
 					mes);
-			System.out.println(inns);
 			for (Inn inn : inns) {
 				if ((inn.getCreditCard().getExpirationYear() > ano)) {
-					
 					Assert.isTrue(false);
 				} else if ((inn.getCreditCard().getExpirationYear() == ano && inn
 						.getCreditCard().getExpirationMonth() > mes)) {
-					
 
 					Assert.isTrue(false);
 
