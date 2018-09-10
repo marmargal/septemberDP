@@ -43,6 +43,6 @@
     <br />
 	
 	<acme:submit name="save" code="hike.save"/>
-	<acme:cancel url="hike/list.do" code="hike.cancel"/>
+	<acme:cancel url="redirect:../../" code="hike.cancel"/>
 	
 </form:form>

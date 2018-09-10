@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.HikeRepository;
-import domain.Comment;
+import domain.Advertisement;
 import domain.Hike;
+import domain.Registry;
 
 @Service
 @Transactional
@@ -22,13 +23,20 @@ public class HikeService {
 	private HikeRepository hikeRepository;
 
 	// Suporting services
-	
+
 	@Autowired
 	private UserService userService;
+
+	
+
+	@Autowired
+	private AdvertisementService advertisementService;
 	
 	@Autowired
-	private CommentService commentService;
+	private RegistrytService registryService;
 	
+	
+
 	// Constructors
 
 	public HikeService() {
@@ -40,7 +48,7 @@ public class HikeService {
 	public Hike create() {
 		Hike res;
 		res = new Hike();
-		
+
 		userService.findByPrincipal();
 
 		return res;
@@ -71,18 +79,25 @@ public class HikeService {
 		Assert.notNull(hike);
 		Assert.isTrue(hike.getId() != 0);
 		Assert.isTrue(this.hikeRepository.exists(hike.getId()));
+
 		
-		Collection<Comment> comments = new ArrayList<Comment>();
-		comments = hike.getComments();
-		for (Comment comment : comments) {
-			this.commentService.delete(comment);
+		Collection<Advertisement> advertisements = this.advertisementService
+				.findAdvertisementByHike(hike.getId());
+		for (Advertisement advertisement : advertisements) {
+			this.advertisementService.delete(advertisement);
 		}
-		this.hikeRepository.delete(hike);
+		Collection<Registry> registries=new ArrayList<>();	
+		registries.addAll(this.registryService.findByHike(hike));
+		for (Registry registry : registries) {
+			this.registryService.delete(registry);
+		}
 		
+		this.hikeRepository.delete(hike);
+
 	}
 
 	// Other business methods
-	
+
 	public Collection<Hike> findHikeByRoute(int id) {
 		Collection<Hike> res;
 		res = this.hikeRepository.findHikeByRoute(id);
@@ -92,8 +107,8 @@ public class HikeService {
 	public void flush() {
 		this.hikeRepository.flush();
 	}
-	
-	public Collection<Hike> findHikeByAdvertisement(int id){
+
+	public Collection<Hike> findHikeByAdvertisement(int id) {
 		return this.hikeRepository.findHikeByAdvertisement(id);
 	}
 

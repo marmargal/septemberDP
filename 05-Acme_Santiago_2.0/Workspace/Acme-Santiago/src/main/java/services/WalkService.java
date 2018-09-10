@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.WalkRepository;
-import domain.Comment;
+import domain.Compostela;
 import domain.Hike;
 import domain.Route;
 import domain.Walk;
@@ -22,65 +22,76 @@ public class WalkService {
 	// Managed repository
 	@Autowired
 	private WalkRepository walkRepository;
-	
+
+	@Autowired
+	private CompostelaService compostelaService;
+
 	// Supporting services
-	
-	
+
 	// Constructors
-	public WalkService(){
+	public WalkService() {
 		super();
 	}
-	
+
 	// Simple CRUD methods
-	
-	public Walk create(Route route){
+
+	public Walk create(Route route) {
 		Walk res = new Walk();
-		
+
 		Collection<Date> daysOfEachHike = new ArrayList<Date>();
-		Collection<Comment> comments = new ArrayList<Comment>();
-		
-//		comments.addAll(route.getComments());
-		
+
+		// comments.addAll(route.getComments());
+
 		Collection<Hike> hikes = new ArrayList<>();
 		hikes.addAll(route.getHikes());
-		
+
 		res.setRoute(route);
-		
-		//TODO: Ver como se hace lo de meter cada día de cada Hike
+
 		res.setDaysOfEachHike(daysOfEachHike);
-		res.setComments(comments);
-		
+
 		return res;
 	}
-	
-	public Collection<Walk> findAll(){
+
+	public Collection<Walk> findAll() {
 		Collection<Walk> res;
 		res = this.walkRepository.findAll();
 		return res;
 	}
-	
-	public Walk findOne(final int id){
-		Assert.isTrue(id!=0);
+
+	public Walk findOne(final int id) {
+		Assert.isTrue(id != 0);
 		Walk res;
 		res = this.walkRepository.findOne(id);
 		return res;
 	}
-	
-	public Walk save(Walk walk){
+
+	public Walk save(Walk walk) {
 		Assert.notNull(walk);
 		Walk res;
 		res = this.walkRepository.save(walk);
 		return res;
 	}
-	
-	public void delete(Walk walk){
+
+	public void delete(Walk walk) {
 		Assert.notNull(walk);
 		Assert.isTrue(walk.getId() != 0);
 		Assert.isTrue(this.walkRepository.exists(walk.getId()));
+		Collection<Compostela> compostelas = this.compostelaService
+				.findCompostelaByWalk(walk);
+			
+		
+		for (Compostela compostela : compostelas) {
+			compostelaService.delete(compostela);
+		}
+		
 		this.walkRepository.delete(walk);
 	}
-	
-	public Collection<Walk> findWalkByUser(int userId){
+
+	public Collection<Walk> findWalkByUser(int userId) {
 		return this.walkRepository.findWalkByUser(userId);
+	}
+
+	public Collection<Walk> findWalkByRoute(Route route) {
+		return this.walkRepository.findWalkByRoute(route);
 	}
 }

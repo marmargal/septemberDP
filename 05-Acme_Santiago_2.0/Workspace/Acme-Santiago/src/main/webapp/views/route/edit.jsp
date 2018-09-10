@@ -40,6 +40,13 @@
 				onclick="return confirm('<spring:message code="route.confirm.delete" />')" />&nbsp;
 	</jstl:if>
 	</security:authorize>
+	<security:authorize access="hasRole('USER')">
+	<jstl:if test="${route.id != 0}">
+			<input type="submit" name="delete"
+				value="<spring:message code="route.delete" />"
+				onclick="return confirm('<spring:message code="route.confirm.delete" />')" />&nbsp;
+	</jstl:if>
+	</security:authorize>
 	<acme:cancel url="route/list.do" code="route.cancel"/>
 	
 </form:form>

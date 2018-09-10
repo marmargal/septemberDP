@@ -116,8 +116,14 @@ public class ChirpService {
 	}
 
 	public Collection<Chirp> findChirpTaboo() {
-		this.administratorService.checkAuthority();
-
+Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority user = new Authority();
+		user.setAuthority("USER");
+		Authority admin = new Authority();
+		admin.setAuthority("ADMIN");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin));
 		Collection<Chirp> res = new ArrayList<Chirp>();
 		res.addAll(chirpRepository.findChirpTaboo());
 		return res;

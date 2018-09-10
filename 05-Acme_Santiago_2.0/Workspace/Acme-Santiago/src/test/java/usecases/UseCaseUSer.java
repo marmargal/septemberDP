@@ -59,53 +59,53 @@ public class UseCaseUSer extends AbstractTest {
 
 				// Positivo(sin observaciones de interés)
 
-				 { "user1", "routeeeee", 300.0, "description",
-				 "http://www.google.es", "hike1", "", "", "", null,
-				 null, null },
-				//
-				// // positivo con comentario
-				//
-				 { "user1", "route", 300.0, "description",
-				 "http://www.google.es", "hike1", "01/05/2018",
-				 "comment", "text", 1, false, null },
-				// // negativo autenticado como innkeeper
-				 { "innkeeper1", "route", 300.0, "description",
-				 "http://www.google.es", "hike1", "", "", "", null,
-				 null, IllegalArgumentException.class },
-				// // negativo crear una ruta sin hikes
-				 { "user1", "route", 300.0, "description",
-				 "http://www.google.es", "", "", "", "", null, null,
-				 NullPointerException.class },
-				// // positivo editar una ruta cambiando el nombre
-				 { "user1", "edit", 300.0, "description",
-				 "http://www.google.es", "hike1", "01/05/2018",
-				 "comment", "text", 1, false, null },
-				//
-				// // negativo editar una ruta sin ser user
-				 { "innkeeper1", "edit", 300.0, "description",
-				 "http://www.google.es", "hike1", "01/05/2018",
-				 "comment", "text", 1, false,
-				// IllegalArgumentException.class },
+				{ "user1", "routeeeee", 300.0, "description",
+						"http://www.google.es", "hike1", "", "", "", null,
+						null, null },
+
+				// positivo con comentario
+
+				{ "user1", "route", 300.0, "description",
+						"http://www.google.es", "hike1", "01/05/2018",
+						"comment", "text", 1, false, null },
+				// negativo autenticado como innkeeper
+				{ "innkeeper1", "route", 300.0, "description",
+						"http://www.google.es", "hike1", "", "", "", null,
+						null, IllegalArgumentException.class },
+				// negativo crear una ruta sin hikes
+				{ "user1", "route", 300.0, "description",
+						"http://www.google.es", "", "", "", "", null, null,
+						NullPointerException.class },
+				// positivo editar una ruta cambiando el nombre
+				{ "user1", "edit", 300.0, "description",
+						"http://www.google.es", "hike1", "01/05/2018",
+						"comment", "text", 1, false, null },
+
+				// negativo editar una ruta sin ser user
+				{ "innkeeper1", "edit", 300.0, "description",
+						"http://www.google.es", "hike1", "01/05/2018",
+						"comment", "text", 1, false,
+						IllegalArgumentException.class },
 				// negativo borrar una ruta sin ser user ni admin
 				{ "innkeeper1", "delete", 300.0, "description",
 						"http://www.google.es", "hike1", "01/05/2018",
-					"comment", "text", 1, false,
+						"comment", "text", 1, false,
 						IllegalArgumentException.class },
 				// positivo borrar una ruta
 
 				{ "user1", "delete", 300.0, "description",
 						"http://www.google.es", "hike1", "01/05/2018",
 						"comment", "text", 1, false, null },
-				/*
-				 * positivo listar todas las rutas (lo puede hacer cualquira
-				 * registrado o no)
-				 */
-				{ "user1", "list", 300.0, "description",
-						"http://www.google.es", "hike1", "01/05/2018",
-						"comment", "text", 1, false, null },
-//				// negativo crear una ruta sin fotos ni descripción
-				{ "user1", "route", 300.0, "", "", "hike1", "", "", "", null,
-						null, ConstraintViolationException.class },
+		/*
+		 * positivo listar todas las rutas (lo puede hacer cualquira registrado
+		 * o no)
+		 */
+		 { "user1", "list", 300.0, "description",
+		 "http://www.google.es", "hike1", "01/05/2018",
+		 "comment", "text", 1, false, null },
+		 // negativo crear una ruta sin fotos ni descripción
+		 { "user1", "route", 300.0, "", "", "hike1", "", "", "", null,
+		 null, ConstraintViolationException.class },
 
 		};
 
