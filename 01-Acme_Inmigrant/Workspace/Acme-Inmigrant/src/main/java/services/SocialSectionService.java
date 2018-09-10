@@ -37,6 +37,7 @@ public class SocialSectionService {
 	// Simple CRUD methods ----------------------------------------------------
 	
 	public SocialSection create() {
+		this.immigrantService.checkAuthority();
 		final Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Assert.notNull(immigrant);
 		SocialSection res = new SocialSection();
@@ -60,6 +61,7 @@ public class SocialSectionService {
 	}
 
 	public SocialSection save(SocialSection socialSection) {
+		this.immigrantService.checkAuthority();
 		SocialSection res;
 		
 		if(socialSection.getId() != 0){
@@ -98,6 +100,10 @@ public class SocialSectionService {
 		res = socialSectionRepository.findApplicationbySocialSection(id);
 		
 		return res;
+	}
+	
+	public void flush() {
+		this.socialSectionRepository.flush();
 	}
 
 }

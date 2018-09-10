@@ -37,6 +37,7 @@ public class WorkSectionService {
 	// Simple CRUD methods ----------------------------------------------------
 	
 	public WorkSection create() {
+		this.immigrantService.checkAuthority();
 		final Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Assert.notNull(immigrant);
 		WorkSection res = new WorkSection();
@@ -59,6 +60,7 @@ public class WorkSectionService {
 	}
 
 	public WorkSection save(WorkSection workSection) {
+		this.immigrantService.checkAuthority();
 		WorkSection res;
 		
 		if(workSection.getId() != 0){
@@ -97,6 +99,10 @@ public class WorkSectionService {
 		res = workSectionRepository.findApplicationbyWorkSection(id);
 		
 		return res;
+	}
+	
+	public void flush() {
+		this.workSectionRepository.flush();
 	}
 
 }

@@ -11,7 +11,6 @@ import javax.validation.ConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 import services.AnswerService;
 import services.ApplicationService;
 import services.ContactSectionService;
+import services.EducationSectionService;
 import utilities.AbstractTest;
 import domain.Answer;
 import domain.Application;
 import domain.ContactSection;
 import domain.CreditCard;
+import domain.EducationSection;
 import domain.PersonalSection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -41,6 +42,9 @@ public class UseCaseImmigrant extends AbstractTest {
 	
 	@Autowired
 	private ContactSectionService contactSectionService;
+	
+	@Autowired
+	private EducationSectionService educationSectionService;
 	
 	/*
 	 * 12. An actor who is authenticated as an immigrant must be able to:
@@ -393,7 +397,7 @@ public class UseCaseImmigrant extends AbstractTest {
 
 		final Object testingData[][] = {
 			{ // Positive
-				"immigrant1", "contactSection1", "dani@gmail.com", DataIntegrityViolationException.class
+				"immigrant1", "contactSection1", "dani@gmail.com", null
 			}
 			, { // Negative: wrong roll
 				"officer1", "contactSection1", "dani@gmail.com", IllegalArgumentException.class }
@@ -431,5 +435,106 @@ public class UseCaseImmigrant extends AbstractTest {
 		}
 		super.checkExceptions(expected, caught);
 	}
+	
+	@Test
+	public void CreateEducationSectionTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"immigrant1", "nameDegree", "institution", "10/10/2015", "PRIMARY", "application1", null
+				}, { // Negative: wrong roll
+					"officer1", "nameDegree", "institution", "10/10/2015", "PRIMARY", "application1", IllegalArgumentException.class
+				}, { // Negative: wrong email
+					"immigrant1", "", "institution", "10/10/2015", "PRIMARY", "application1", ConstraintViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateCreateEducationSection((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // nameDegree
+					(String) testingData[i][2], // institution
+					(String) testingData[i][3], // dateAwarded
+					(String) testingData[i][4], // level
+					(String) testingData[i][5], // Application
+					(Class<?>) testingData[i][6]);
+		
+	}
+	
+	protected void templateCreateEducationSection(final String principal,
+			final String nameDegree, final String institution, 
+			final String dateAwarded, final String level, 
+			final String application, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final int applicationId = this.getEntityId(application);
+			final Application applicationFinal = this.applicationService.findOne(applicationId);
+			final EducationSection educationSection = this.educationSectionService.create();
+			
+			final SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+			educationSection.setDateAwarded(format.parse(dateAwarded));
+			educationSection.setNameDegree(nameDegree);
+			educationSection.setInstitution(institution);
+			educationSection.setLevel(level);
+			educationSection.setApplication(applicationFinal);
+			
+			this.educationSectionService.save(educationSection);
+			this.unauthenticate();
+			this.educationSectionService.flush();
+			
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void EditEducationSectionTest() {
+
+		final Object testingData[][] = {
+			{ // Positive
+				"immigrant1", "educationSection1", "nameDegree", null
+			}
+			, { // Negative: wrong roll
+				"officer1", "educationSection1", "nameDegree", IllegalArgumentException.class }
+			, { // Negative: wrong roll
+				"immigrant2", "educationSection1", "", ConstraintViolationException.class }
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateEditEducationSection((String) testingData[i][0], // Username
+				(String) testingData[i][1], // educationSection
+				(String) testingData[i][2], // nameDegree
+				(Class<?>) testingData[i][3]);
+	}
+	
+	protected void templateEditEducationSection(final String immigrant, final String educationSection, final String nameDegree, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+			
+			super.authenticate(immigrant);
+			
+			final int educationSectionId = this.getEntityId(educationSection);
+			final EducationSection educationSectionFinal = this.educationSectionService.findOne(educationSectionId);
+			
+			educationSectionFinal.setNameDegree(nameDegree);
+			
+			this.educationSectionService.save(educationSectionFinal);
+			this.unauthenticate();
+			this.educationSectionService.flush();
+			
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
 
 }

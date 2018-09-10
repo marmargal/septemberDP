@@ -199,6 +199,16 @@
 		<property name="pageNumber" value="12" />
 		<property name="application" ref="application1" />
 	</bean>
+	
+	<!-- EducationSection -->
+	<!-- EducationSection 1 -->
+	<bean id="educationSection1" class="domain.EducationSection">
+		<property name="nameDegree" value="nameDegree" />
+		<property name="institution" value="institution" />
+		<property name="dateAwarded" value="01/01/2000" />
+		<property name="level" value="PRIMARY" />
+		<property name="application" ref="application1" />
+	</bean>
 
 
 	<!-- PersonalSection -->
