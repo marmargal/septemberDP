@@ -51,9 +51,9 @@ public class UseaseAnonymous extends AbstractTest {
 
 				// negativo, alguien se registra en el sistema como user pero
 				// sin nombre
-//				{ "", "surname", "email@gmail.com", "671910556", "address",
-//						"https://www.google.com/", "postalAddress",
-//						ConstraintViolationException.class },
+				{ "", "surname", "email@gmail.com", "671910556", "address",
+						"https://www.google.com/", "postalAddress",
+						ConstraintViolationException.class },
 
 		};
 
@@ -75,7 +75,10 @@ public class UseaseAnonymous extends AbstractTest {
 		try {
 			if (name.equals("user1")) {
 				this.authenticate("user1");
+			}else{
+				super.unauthenticate();
 			}
+			
 			User user = this.userService.create();
 			user.setAddress(address);
 			user.setEmail(email);
@@ -87,6 +90,9 @@ public class UseaseAnonymous extends AbstractTest {
 
 			User saved = this.userService.save(user);
 			Assert.isTrue(userService.findAll().contains(saved));
+			if (name.equals("user1")) {
+				this.unauthenticate();
+			}
 			this.userService.flush();
 
 		} catch (final Throwable oops) {

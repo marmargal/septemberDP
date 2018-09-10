@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import services.AdministratorService;
 import services.ChirpService;
 import services.CommentService;
 import services.ConfigurationService;
@@ -44,6 +45,8 @@ public class UseCaseAdmin extends AbstractTest {
 	@Autowired
 	private CommentService commentService;
 
+	@Autowired
+	private AdministratorService administratorService;
 	/*
 	 * 6. An actor who is authenticated as an administrator must be able to: 1.
 	 * Remove a route that he or she thinks is inappropriate. Removing a route
@@ -85,6 +88,7 @@ public class UseCaseAdmin extends AbstractTest {
 			Assert.isTrue(!routes.contains(routeBeforeDelete)
 					&& !hikes.containsAll(hikesRoute1));
 			routeService.flush();
+			hikeService.flush();
 			this.unauthenticate();
 
 		} catch (final Throwable oops) {
@@ -204,7 +208,7 @@ public class UseCaseAdmin extends AbstractTest {
 					Assert.isTrue(comment.isTaboo());
 				}
 			}
-
+			this.chirpService.flush();
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -264,6 +268,7 @@ public class UseCaseAdmin extends AbstractTest {
 
 			this.chirpService.flush();
 			this.commentService.flush();
+			this.administratorService.flush();
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

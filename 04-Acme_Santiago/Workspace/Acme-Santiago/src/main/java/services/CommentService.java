@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Comment;
 import domain.User;
 
@@ -81,8 +83,14 @@ public class CommentService {
 	public void delete(Comment comment) {
 		Assert.notNull(comment);
 		Assert.isTrue(comment.getId() != 0);
-		this.administratorService.checkAuthority();
-
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority user = new Authority();
+		user.setAuthority("USER");
+		Authority admin = new Authority();
+		admin.setAuthority("ADMIN");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin));
 		Assert.isTrue(this.commentRepository.exists(comment.getId()));
 		this.userService.findOne(comment.getUser().getId()).getComments()
 				.remove(comment);
