@@ -156,4 +156,8 @@ public class QuestionService {
 		Assert.isTrue(applications.contains(application));
 	}
 
+	public void flush() {
+		this.questionRepository.flush();
+	}
+
 }
