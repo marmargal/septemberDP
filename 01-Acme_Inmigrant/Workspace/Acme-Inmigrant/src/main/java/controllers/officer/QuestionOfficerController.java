@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
+import services.OfficerService;
 import services.QuestionService;
 import controllers.AbstractController;
 import domain.Application;
+import domain.Officer;
 import domain.Question;
 import forms.QuestionForm;
 
@@ -31,8 +33,8 @@ public class QuestionOfficerController extends AbstractController{
 	
 	// Supporting services
 	
-//	@Autowired
-//	private OfficerService officerService;
+	@Autowired
+	private OfficerService officerService;
 
 	// Constructors
 	
@@ -44,19 +46,24 @@ public class QuestionOfficerController extends AbstractController{
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public ModelAndView list(@RequestParam int applicationId){
 		ModelAndView res;
+		Officer officer = this.officerService.findByPrincipal();
+		
 		Application application = new Application();
 		Collection<Question> questions = new ArrayList<Question>();
 		
 		application = this.applicationService.findOne(applicationId);
 		
 		if(application != null){
-			questions = application.getQuestion();
-		
-			res = new ModelAndView("question/list");
-			res.addObject("question", questions);
-			res.addObject("requestURI", "question/officer/list.do");
-			res.addObject("application", application);
-			res.addObject("applicationId", application.getId());
+			if(officer.equals(application.getOfficer())){
+				questions = application.getQuestion();
+			
+				res = new ModelAndView("question/list");
+				res.addObject("question", questions);
+				res.addObject("requestURI", "question/officer/list.do");
+				res.addObject("application", application);
+				res.addObject("applicationId", application.getId());
+			}else 
+				res = new ModelAndView("redirect:../");
 			
 		}else{
 			res = new ModelAndView("question/list");
@@ -72,9 +79,9 @@ public class QuestionOfficerController extends AbstractController{
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
 	public ModelAndView create(@RequestParam int applicationId){
 		ModelAndView res;
-		QuestionForm questionForm = new QuestionForm();
 		
-		questionForm.setApplicationId(applicationId);
+		Question question = this.questionService.create(applicationId);
+		QuestionForm questionForm = this.questionService.construct(question);
 		
 		res = this.createEditModelAndView(questionForm);
 		
