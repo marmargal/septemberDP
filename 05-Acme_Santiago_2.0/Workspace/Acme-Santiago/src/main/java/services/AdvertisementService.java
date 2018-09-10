@@ -12,6 +12,7 @@ import repositories.AdvertisementRepository;
 import security.Authority;
 import security.LoginService;
 import domain.Advertisement;
+import domain.Agent;
 
 @Service
 @Transactional
@@ -29,6 +30,9 @@ public class AdvertisementService {
 
 	@Autowired
 	private ConfigurationService configurationService;
+
+	@Autowired
+	private AgentService agentService;
 
 	// Constructors
 
@@ -67,7 +71,17 @@ public class AdvertisementService {
 				advertisement.setTaboo(true);
 			}
 		}
+
 		res = this.advertisementRepository.save(advertisement);
+		if (advertisement.getId() == 0) {
+			Agent agent = this.agentService.findByPrincipal();
+			Collection<Advertisement> advertisements = new ArrayList<>();
+			advertisements.addAll(agent.getAdvertisements());
+			advertisements.add(res);
+
+			agent.setAdvertisements(advertisements);
+			this.agentService.save(agent);
+		}
 		return res;
 	}
 

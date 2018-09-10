@@ -69,8 +69,19 @@ public class RouteService {
 
 	public Route save(final Route route) {
 		Assert.notNull(route);
-		this.userService.checkAuthority();
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority user = new Authority();
+		user.setAuthority("USER");
+		Authority admin = new Authority();
+		admin.setAuthority("AGENT");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin));
+		if (authority.contains(user)) {
+			Assert.isTrue(route.getUser().equals(
+					this.userService.findByPrincipal()));
 
+		}
 		Route res;
 		for (Hike hike : route.getHikes()) {
 			hike.setRoute(route);

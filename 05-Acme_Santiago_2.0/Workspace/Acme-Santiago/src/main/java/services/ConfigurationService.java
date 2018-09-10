@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ConfigurationRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Configuration;
 
 @Service
@@ -59,7 +61,14 @@ public class ConfigurationService {
 	// Other business method --------------------------------------------------
 
 	public Collection<String> findTabooWords() {
-		this.administratorService.checkAuthority();
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority user = new Authority();
+		user.setAuthority("USER");
+		Authority admin = new Authority();
+		admin.setAuthority("AGENT");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin));
 		Collection<String> res = new ArrayList<String>();
 		res.addAll(this.configurationRepository.findTabooWords());
 		return res;

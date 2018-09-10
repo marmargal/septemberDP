@@ -47,7 +47,10 @@
 	</jstl:if>
 	</security:authorize>
 	
+		<security:authorize access="hasRole('AGENT')">
+	
 	<acme:submit name="save" code="advertisement.save"/>
+	</security:authorize>
 	<acme:cancel url="advertisement/list.do" code="advertisement.cancel"/>
 	
 </form:form>
