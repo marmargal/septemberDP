@@ -471,14 +471,11 @@ public class UserTest extends AbstractTest{
 				super.authenticate(actor);
 			}
 			
-			Collection<String> picturesCollection = new ArrayList<>();
-			picturesCollection.add(pictures);
-			
 			Tutorial tutorial = this.tutorialService.create();
 			
 			tutorial.setTitle(title);
 			tutorial.setText(text);
-			tutorial.setPictures(picturesCollection);
+			tutorial.setPictures(pictures);
 			
 			Tutorial savedTutorial = this.tutorialService.save(tutorial);
 			
@@ -566,9 +563,6 @@ public class UserTest extends AbstractTest{
 				super.authenticate(actor);
 			}
 			
-			Collection<String> picturesCollection = new ArrayList<>();
-			picturesCollection.add(pictures);
-			
 			int tutorialId = this.getEntityId("tutorial1");
 		
 			Tutorial tutorial = this.tutorialService.findOne(tutorialId);
@@ -577,7 +571,7 @@ public class UserTest extends AbstractTest{
 			
 			comment.setTitle(title);
 			comment.setText(text);
-			comment.setPictures(picturesCollection);
+			comment.setPictures(pictures);
 			comment.setTutorial(tutorial);
 			
 			Comment savedComment = this.commentService.save(comment);
@@ -621,9 +615,6 @@ public class UserTest extends AbstractTest{
 				super.authenticate(actor);
 			}
 			
-			Collection<String> picturesCollection = new ArrayList<>();
-			picturesCollection.add(pictures);
-			
 			int commentId = this.getEntityId("comment1");
 			int tutorialId = this.getEntityId("tutorial1");
 		
@@ -634,7 +625,7 @@ public class UserTest extends AbstractTest{
 			
 			reply.setTitle(title);
 			reply.setText(text);
-			reply.setPictures(picturesCollection);
+			reply.setPictures(pictures);
 			reply.setTutorial(tutorial);
 			reply.setCommentParent(comment);
 			

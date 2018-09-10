@@ -211,13 +211,15 @@ public class AdministratorService {
 
 	}
 
-	public Collection<Double> dataNumPicturesPerTutorial() {
-		return administratorRepository.dataNumPicturesPerTutorial();
+	// TODO: Query por descomentar
+//	public Collection<Double> dataNumPicturesPerTutorial() {
+//		return administratorRepository.dataNumPicturesPerTutorial();
+//
+//	}
 
-	}
-
-	public Collection<Double> dataNumPicturesPerComment() {
-		return administratorRepository.dataNumPicturesPerComment();
-
-	}
+	// TODO: Query por descomentar
+//	public Collection<Double> dataNumPicturesPerComment() {
+//		return administratorRepository.dataNumPicturesPerComment();
+//
+//	}
 }

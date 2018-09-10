@@ -56,8 +56,17 @@ public class TutorialController extends AbstractController{
 		
 		tutorial = this.tutorialService.findOne(tutorialId);
 		
-		Collection<String> pictures = new ArrayList<String>();
-		pictures = tutorial.getPictures();
+		Collection<String> pictures = new ArrayList<>();
+		
+		if(tutorial.getPictures().contains(",")){
+			String[] parts = tutorial.getPictures().split(",");
+			for(int i=0; i<parts.length; i++){
+				pictures.add(parts[i]);
+			}
+		} else {
+			pictures.add(tutorial.getPictures());
+		}
+		
 		
 		Collection<Comment> comments = new ArrayList<Comment>();
 		
