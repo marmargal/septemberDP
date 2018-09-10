@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ChirpRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Chirp;
 import domain.User;
 
@@ -116,7 +118,7 @@ public class ChirpService {
 	}
 
 	public Collection<Chirp> findChirpTaboo() {
-Collection<Authority> authority = LoginService.getPrincipal()
+		Collection<Authority> authority = LoginService.getPrincipal()
 				.getAuthorities();
 		Assert.notNull(authority);
 		Authority user = new Authority();

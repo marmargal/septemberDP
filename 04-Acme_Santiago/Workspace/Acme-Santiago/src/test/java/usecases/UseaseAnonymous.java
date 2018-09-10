@@ -260,7 +260,7 @@ public class UseaseAnonymous extends AbstractTest {
 	public void innTest() {
 		final Object testingData[][] = {
 		// listar inn con fecha de expiración
-		{ 10, 20, null },
+		{ 10, 25, null },
 
 		};
 
@@ -278,10 +278,10 @@ public class UseaseAnonymous extends AbstractTest {
 			Collection<Inn> inns = this.innService.findCcExpirationYear(ano,
 					mes);
 			for (Inn inn : inns) {
-				if ((inn.getCreditCard().getExpirationYear() > ano)) {
+				if ((inn.getCreditCard().getExpirationYear() < ano)) {
 					Assert.isTrue(false);
 				} else if ((inn.getCreditCard().getExpirationYear() == ano && inn
-						.getCreditCard().getExpirationMonth() > mes)) {
+						.getCreditCard().getExpirationMonth() < mes)) {
 
 					Assert.isTrue(false);
 
