@@ -39,6 +39,7 @@ public class CategoryService {
 
 	// Simple CRUD methods
 	public Category create() {
+		this.administratorService.checkAuthority();
 		Category res = new Category();
 
 		String name = "nombre";
@@ -148,6 +149,10 @@ public class CategoryService {
 		categories = c.getCategories();
 		Assert.notNull(categories);
 		return categories;
+	}
+	
+	public void flush() {
+		this.categoryRepository.flush();
 	}
 
 }

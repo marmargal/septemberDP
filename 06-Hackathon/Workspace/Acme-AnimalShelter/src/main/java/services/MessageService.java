@@ -94,6 +94,10 @@ public class MessageService {
 
 	// Other business methods
 	
+	public void flush() {
+		this.messageRepository.flush();
+	}
+
 	public Collection<Message> findMessagesNotDeleted() {
 		Collection<Message> messages = new ArrayList<Message>();
 		messages = this.messageRepository.findMessagesNotDeleted();

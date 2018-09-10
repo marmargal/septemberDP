@@ -153,4 +153,8 @@ public class ApplicationService {
 	public Collection<Application> findApplicationsAprobed() {
 		return this.applicationRepository.findApplicationsAprobed();
 	}
+	public void flush() {
+		this.applicationRepository.flush();
+
+	}
 }

@@ -77,6 +77,13 @@
 			</jstl:if>
 		</jstl:forEach>
 	</display:column>
+	
+	<security:authorize access="hasRole('IMMIGRANT')">
+	<display:column>
+		<acme:links url="question/immigrant/list.do?applicationId=${row.id }"
+			code="application.questions" />
+	</display:column>
+	</security:authorize>
 
 </display:table>
 

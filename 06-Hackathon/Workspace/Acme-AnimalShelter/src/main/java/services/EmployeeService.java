@@ -218,4 +218,9 @@ public class EmployeeService {
 		return employees;
 	}
 
+	public void flush() {
+		this.employeeRepository.flush();
+
+	}
+	
 }

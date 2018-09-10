@@ -168,6 +168,10 @@ public class ImmigrantService {
 		return res;
 	}
 	
+	public void flush() {
+		this.immigrantRepository.flush();
+	}
+	
 	public Collection<Immigrant> findImmigrantsByInvestigator(int investigatorId){
 		return this.immigrantRepository.findImmigrantsByInvestigator(investigatorId);
 	}

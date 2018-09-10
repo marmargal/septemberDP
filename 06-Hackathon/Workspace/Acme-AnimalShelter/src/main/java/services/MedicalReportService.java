@@ -99,5 +99,10 @@ public class MedicalReportService {
 		medicalReports = this.medicalReportRepository.findMedicalReportsVeterinaryBanned();
 		return medicalReports;
 	}
+	
+	public void flush() {
+		this.medicalReportRepository.flush();
+
+	}
 
 }

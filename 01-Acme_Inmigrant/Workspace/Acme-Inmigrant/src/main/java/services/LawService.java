@@ -188,5 +188,9 @@ public class LawService {
 		this.validator.validate(res, binding);
 		return res;
 	}
+	
+	public void flush() {
+		this.lawRepository.flush();
+	}
 
 }

@@ -28,7 +28,7 @@ public class AnswerService {
 
 	// Suporting services
 	@Autowired
-	private ImmigrantService immmigrantService;
+	private ImmigrantService immigrantService;
 	
 	@Autowired
 	private QuestionService questionService;
@@ -45,12 +45,13 @@ public class AnswerService {
 	// Simple CRUD methods
 
 	public Answer create(int questionId) {
+		this.immigrantService.checkAuthority();
 		Answer res = new Answer();
 		
 		Question question = this.questionService.findOne(questionId);
 		Date moment = new Date(System.currentTimeMillis() - 1000);
 
-		Immigrant immigrant = immmigrantService.findByPrincipal();
+		Immigrant immigrant = immigrantService.findByPrincipal();
 
 		res.setMoment(moment);
 		res.setImmigrant(immigrant);
@@ -75,7 +76,7 @@ public class AnswerService {
 	}
 
 	public Answer save(Answer answer) {
-		this.immmigrantService.checkAuthority();
+		this.immigrantService.checkAuthority();
 		this.questionService.checkAplicationNotApply(answer.getQuestion().getApplication().getId());
 		Answer res;
 		Question question = answer.getQuestion();
@@ -124,6 +125,10 @@ public class AnswerService {
 		this.validator.validate(res, binding);
 
 		return res;
+	}
+	
+	public void flush() {
+		this.answerRepository.flush();
 	}
 
 }

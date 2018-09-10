@@ -122,4 +122,9 @@ public class CenterService {
 		return center;
 	}
 	
+	public void flush() {
+		this.centerRepository.flush();
+
+	}
+	
 }

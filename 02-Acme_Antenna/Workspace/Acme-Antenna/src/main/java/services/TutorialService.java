@@ -38,6 +38,9 @@ public class TutorialService {
 	private AdministratorService administratorService;
 	
 	@Autowired
+	private UserService userService;
+	
+	@Autowired
 	private Validator validator;
 
 	// Constructors
@@ -49,6 +52,7 @@ public class TutorialService {
 	// Simple CRUD methods
 
 	public Tutorial create() {
+		userService.checkAuthority();
 		Tutorial res;
 		res = new Tutorial();
 

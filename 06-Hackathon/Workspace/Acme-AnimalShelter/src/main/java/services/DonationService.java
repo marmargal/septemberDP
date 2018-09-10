@@ -93,5 +93,8 @@ public class DonationService {
 	// Other business methods
 	
 	
+	public void flush() {
+		this.donationRepository.flush();
 
+	}
 }

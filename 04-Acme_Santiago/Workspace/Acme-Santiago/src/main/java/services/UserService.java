@@ -79,6 +79,7 @@ public class UserService {
 			try {
 				LoginService.getPrincipal();
 			} catch (final Throwable oops) {
+
 				caught = oops.getClass();
 			}
 			this.checkExceptions(IllegalArgumentException.class, caught);
@@ -120,51 +121,53 @@ public class UserService {
 	}
 
 	// Other business methods
-	
-	public void follow(int userId){
+
+	public void follow(int userId) {
 		User actual;
+		this.checkAuthority();
 		actual = this.findByPrincipal();
-		
+
 		User follow;
 		follow = this.findOne(userId);
-		
+
 		if (actual != follow) {
 			Collection<User> following;
 			following = actual.getFollowing();
-			
+
 			Collection<User> followers;
 			followers = follow.getFollowers();
-			
+
 			if (followers.contains(actual)) {
 				follow.setFollowers(followers);
 				actual.setFollowing(following);
-				
+
 			} else {
 				following.add(follow);
 				followers.add(actual);
-				
+
 				follow.setFollowers(followers);
 				actual.setFollowing(following);
 			}
 		}
 	}
-	
-	public void unfollow(int userId){
+
+	public void unfollow(int userId) {
 		User actual;
+		this.checkAuthority();
 		actual = this.findByPrincipal();
-		
+
 		User unfollow;
 		unfollow = this.findOne(userId);
-		
+
 		Collection<User> following;
 		following = actual.getFollowing();
-		
+
 		Collection<User> followers;
 		followers = unfollow.getFollowers();
-		
+
 		following.remove(unfollow);
 		followers.remove(actual);
-		
+
 		unfollow.setFollowers(followers);
 		actual.setFollowing(following);
 	}
@@ -266,14 +269,16 @@ public class UserService {
 	public void flush() {
 		this.userRepository.flush();
 	}
-	
-	protected void checkExceptions(final Class<?> expected, final Class<?> caught) {
+
+	protected void checkExceptions(final Class<?> expected,
+			final Class<?> caught) {
 		if (expected != null && caught == null)
 			throw new RuntimeException(expected.getName() + " was expected");
 		else if (expected == null && caught != null)
 			throw new RuntimeException(caught.getName() + " was unexpected");
 		else if (expected != null && caught != null && !expected.equals(caught))
-			throw new RuntimeException(expected.getName() + " was expected, but " + caught.getName() + " was thrown");
+			throw new RuntimeException(expected.getName()
+					+ " was expected, but " + caught.getName() + " was thrown");
 	}
-	
+
 }

@@ -57,6 +57,7 @@ public class Route extends DomainEntity {
 	}
 
 	@ElementCollection
+	@NotNull
 	public Collection<String> getPictures() {
 		return pictures;
 	}

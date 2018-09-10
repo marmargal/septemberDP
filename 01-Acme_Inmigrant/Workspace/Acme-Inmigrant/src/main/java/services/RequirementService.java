@@ -116,5 +116,8 @@ public class RequirementService {
 		return res;
 	}
 
+	public void flush() {
+		this.requirementRepository.flush();
+	}
 	
 }

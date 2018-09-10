@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -200,6 +199,10 @@ public class AdministratorService {
 	public Collection<Route> dataOutlierOfRoutes() {
 
 		return this.administratorRepository.dataOutlierOfRoutes();
+	}
+
+	public void flush() {
+		this.administratorRepository.flush();
 	}
 
 }

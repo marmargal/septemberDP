@@ -56,5 +56,8 @@ public class ConfigurationService {
 		}
 
 		// Other business method --------------------------------------------------
+		public void flush() {
+			this.configurationRepository.flush();
 
+		}
 }
