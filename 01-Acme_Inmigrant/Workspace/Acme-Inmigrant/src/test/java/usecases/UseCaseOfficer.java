@@ -11,13 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import domain.Application;
 import domain.Decision;
+import domain.Immigrant;
+import domain.Investigator;
 import domain.Officer;
 import domain.Question;
 
 import services.ApplicationService;
 import services.DecisionService;
+import services.ImmigrantService;
+import services.InvestigatorService;
 import services.OfficerService;
 import services.QuestionService;
+import services.ReportService;
 import utilities.AbstractTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,7 +44,14 @@ public class UseCaseOfficer extends AbstractTest {
 	@Autowired
 	private DecisionService decisionService;
 	
+	@Autowired
+	private ImmigrantService immigrantService;
 	
+	@Autowired
+	private InvestigatorService investigatorService;
+	
+	@Autowired
+	private ReportService reportService;
 	
 	/*
 	 * 13. An actor who is authenticated as an officer must be able to:
@@ -95,7 +107,7 @@ public class UseCaseOfficer extends AbstractTest {
 				// Positive
 				{"officer1", "application1", null },
 				// Negative //TODO: Negative assign
-//				{"officer2", "application1", null}
+				{"officer2", "application1", null}
 				};
 		for (int i =0; i<testingData.length; i++)
 			this.assignTemplate((String) testingData[i][0], // Username
@@ -282,21 +294,20 @@ public class UseCaseOfficer extends AbstractTest {
 	public void assignInvestigator(){
 		final Object testingData[][] = {
 				// Positive
-				{"officer1", "application1", "decisionComment", true, null },
+				{"officer2", "immigrant3", "investigator1", null },
 				// Negative
-				{"officer1", "application2", "decisionComment", true, IllegalArgumentException.class }, // decision en application de otro officer
-				{"officer1", "application1", "", false, IllegalArgumentException.class } // si es rechazada debe incluir un comentario
+				{"officer1", "immigrant3", "investigator1", IllegalArgumentException.class }, // el immigrant no pertenece a las applications del officer
+				{"admin", "immigrant2", "investigator2", IllegalArgumentException.class } // rol no válido
 				};
 		for (int i =0; i<testingData.length; i++)
 			this.assignInvestigatorTemplate((String) testingData[i][0], // Username
-					(String) testingData[i][1], // Application
-					(String) testingData[i][2], // decisionComment
-					(Boolean) testingData[i][3], // decisionAccepted
-					(Class<?>) testingData[i][4]);
+					(String) testingData[i][1], // Immigrant
+					(String) testingData[i][2], // Investigator
+					(Class<?>) testingData[i][3]);
 	}
 
-	private void assignInvestigatorTemplate(String officer, String application,
-			String comment, Boolean accepted, Class<?> expected) {
+	private void assignInvestigatorTemplate(String officer, String immigrant,
+			String investigator, Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
@@ -305,15 +316,57 @@ public class UseCaseOfficer extends AbstractTest {
 			
 			super.authenticate(officer);
 			
-			final int applicationId = this.getEntityId(application);
-			final Decision decisionFinal;
+			final int immigrantId = this.getEntityId(immigrant);
+			final int investigatorId = this.getEntityId(investigator);
 			
-			decisionFinal = this.decisionService.create(applicationId);
-			decisionFinal.setComment(comment);
-			this.decisionService.save(decisionFinal);
+			final Investigator investigatorFinal = this.investigatorService.findOne(investigatorId);
+			final Immigrant immigrantFinal = this.immigrantService.findOne(immigrantId);
+			
+			immigrantFinal.setInvestigator(investigatorFinal);
+			this.immigrantService.assignNewInvestigator(immigrantFinal);
+			this.immigrantService.save(immigrantFinal);
 			
 			this.unauthenticate();
-			this.decisionService.flush();
+			this.immigrantService.flush();
+			
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	// reads reports 13.6
+	@Test
+	public void readsReports(){
+		final Object testingData[][] = {
+				// Positive
+				{"officer1", "investigator1", null },
+				// Negative
+				{"", "investigator1", IllegalArgumentException.class }, // sin autenticar
+				{"admin", "investigator1", IllegalArgumentException.class }, // roll no válido
+				};
+		for (int i =0; i<testingData.length; i++)
+			this.readsReportsTemplate((String) testingData[i][0], // Username
+					(String) testingData[i][1], // Investigator
+					(Class<?>) testingData[i][2]);
+	}
+
+	private void readsReportsTemplate(String officer,
+			String investigator, Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+			
+			super.authenticate(officer);
+			final int investigatorId = this.getEntityId(investigator);
+			
+			
+			this.reportService.findReportsByInvestigatorId(investigatorId);
+			
+			
+			this.unauthenticate();
 			
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

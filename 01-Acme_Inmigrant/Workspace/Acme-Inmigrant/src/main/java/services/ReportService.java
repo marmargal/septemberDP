@@ -34,6 +34,9 @@ public class ReportService {
 	private ImmigrantService immigrantService;
 	
 	@Autowired
+	private OfficerService officerService;
+	
+	@Autowired
 	private Validator validator;
 	
 	// Constructors
@@ -93,6 +96,7 @@ public class ReportService {
 	// Other business methods
 
 	public Collection<Report> findReportsByInvestigatorId(int investigatorId) {
+		this.officerService.checkAuthority();
 		Collection<Report> res = new ArrayList<Report>();
 
 		res.addAll(reportRepository.findReportsByInvestigatorId(investigatorId));
