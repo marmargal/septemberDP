@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -255,6 +256,8 @@ public class UserTest extends AbstractTest{
 					"user2", "model-A", IllegalArgumentException.class
 				} , { // Negativo con usuario sin autenticar
 					null, "model-A", IllegalArgumentException.class
+				} , { // Negativo con admin
+					"admin", "model-A", IllegalArgumentException.class
 				}
 		};
 
@@ -278,7 +281,7 @@ public class UserTest extends AbstractTest{
 			Antenna savedAntenna = this.antennaService.save(antenna);
 			
 			this.unauthenticate();
-			
+			this.antennaService.flush();
 			Assert.notNull(savedAntenna);
 
 
@@ -388,6 +391,7 @@ public class UserTest extends AbstractTest{
 			Subscription savedSubscription = this.subscriptionService.save(subscription);
 			
 			this.unauthenticate();
+			this.subscriptionService.flush();
 			
 			Assert.notNull(savedSubscription);
 
@@ -451,10 +455,14 @@ public class UserTest extends AbstractTest{
 		final Object testingData[][] = {
 				{ // Positivo con user
 					"user1", "Titulo 1", "Texto 1", "http://www.google.es", null
-				} , { // Negativo con Admin
+				}  , { // Negativo con Admin
 					"admin", "Titulo 1", "Texto 1", "http://www.google.es", IllegalArgumentException.class
 				} , { // Negativo con no autenticado
 					null, "Titulo 1", "Texto 1", "http://www.google.es", IllegalArgumentException.class
+				} , { // Negativo con usuario no existente
+					"user80", "Titulo 1", "Texto 1", "http://www.google.es", IllegalArgumentException.class
+				} , { // Negativo con pictures sin URL
+					"user80", "Titulo 1", "Texto 1", "google", IllegalArgumentException.class
 				}
 		};
 
@@ -471,14 +479,11 @@ public class UserTest extends AbstractTest{
 				super.authenticate(actor);
 			}
 			
-			Collection<String> picturesCollection = new ArrayList<>();
-			picturesCollection.add(pictures);
-			
 			Tutorial tutorial = this.tutorialService.create();
 			
 			tutorial.setTitle(title);
 			tutorial.setText(text);
-			tutorial.setPictures(picturesCollection);
+			tutorial.setPictures(pictures);
 			
 			Tutorial savedTutorial = this.tutorialService.save(tutorial);
 			
@@ -505,6 +510,10 @@ public class UserTest extends AbstractTest{
 					"user2", "new title", IllegalArgumentException.class
 				} , { // Negativo con usuario sin autenticar
 					null, "new title", IllegalArgumentException.class
+				} , { // Negativo con usuario no existente
+					"user80", "new title", IllegalArgumentException.class
+				} , { // Negativo con admin
+					"admin", "new title", IllegalArgumentException.class
 				}
 		};
 
@@ -528,6 +537,7 @@ public class UserTest extends AbstractTest{
 			Tutorial savedTutorial = this.tutorialService.save(tutorial);
 			
 			this.unauthenticate();
+			this.tutorialService.flush();
 			
 			Assert.notNull(savedTutorial);
 
@@ -566,9 +576,6 @@ public class UserTest extends AbstractTest{
 				super.authenticate(actor);
 			}
 			
-			Collection<String> picturesCollection = new ArrayList<>();
-			picturesCollection.add(pictures);
-			
 			int tutorialId = this.getEntityId("tutorial1");
 		
 			Tutorial tutorial = this.tutorialService.findOne(tutorialId);
@@ -577,12 +584,13 @@ public class UserTest extends AbstractTest{
 			
 			comment.setTitle(title);
 			comment.setText(text);
-			comment.setPictures(picturesCollection);
+			comment.setPictures(pictures);
 			comment.setTutorial(tutorial);
 			
 			Comment savedComment = this.commentService.save(comment);
 			
 			this.unauthenticate();
+			this.commentService.flush();
 			
 			Assert.notNull(savedComment);
 
@@ -621,9 +629,6 @@ public class UserTest extends AbstractTest{
 				super.authenticate(actor);
 			}
 			
-			Collection<String> picturesCollection = new ArrayList<>();
-			picturesCollection.add(pictures);
-			
 			int commentId = this.getEntityId("comment1");
 			int tutorialId = this.getEntityId("tutorial1");
 		
@@ -634,7 +639,7 @@ public class UserTest extends AbstractTest{
 			
 			reply.setTitle(title);
 			reply.setText(text);
-			reply.setPictures(picturesCollection);
+			reply.setPictures(pictures);
 			reply.setTutorial(tutorial);
 			reply.setCommentParent(comment);
 			
@@ -644,6 +649,7 @@ public class UserTest extends AbstractTest{
 			Comment savedComment = this.commentService.save(comment);
 			
 			this.unauthenticate();
+			this.commentService.flush();
 			
 			Assert.notNull(savedReply);
 			Assert.notNull(savedComment);

@@ -160,4 +160,7 @@ public class CommentService {
 			this.commentRepository.delete(c);
 	}
 	
+	public void flush(){
+		this.commentRepository.flush();
+	}
 }
