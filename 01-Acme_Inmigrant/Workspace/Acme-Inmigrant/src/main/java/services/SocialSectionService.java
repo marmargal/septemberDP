@@ -62,13 +62,18 @@ public class SocialSectionService {
 	public SocialSection save(SocialSection socialSection) {
 		SocialSection res;
 		
-		Application a = socialSection.getApplication();
-		List<SocialSection> socialSections = new ArrayList<SocialSection>();
-		socialSections = a.getSocialSection();
-		socialSections.add(socialSection);
-		a.setSocialSection(socialSections);
+		if(socialSection.getId() != 0){
+			res = socialSectionRepository.save(socialSection);
+		}else{
+			Application a = socialSection.getApplication();
+			List<SocialSection> socialSections = new ArrayList<SocialSection>();
+			socialSections = a.getSocialSection();
+			socialSections.add(socialSection);
+			a.setSocialSection(socialSections);
+			
+			res = socialSectionRepository.save(socialSection);
+		}
 		
-		res = socialSectionRepository.save(socialSection);
 		return res;
 	}
 

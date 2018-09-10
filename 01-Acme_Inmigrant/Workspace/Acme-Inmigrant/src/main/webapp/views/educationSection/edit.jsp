@@ -22,6 +22,9 @@
 	<security:authorize access="hasRole('IMMIGRANT')">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
+		<jstl:if test="${educationSection.id != 0}">
+			<form:hidden path="application" />
+		</jstl:if>
 
 		<acme:textbox path="nameDegree" code="educationSection.nameDegree" />
 		<acme:textbox path="institution" code="educationSection.institution" />
@@ -41,7 +44,10 @@
               <form:option value="DOCTORATE"/>
     	</form:select>
     	<br>
-    	<acme:select items="${application}" itemLabel="ticker" code="educationSection.application" path="application" />
+    	
+    	<jstl:if test="${educationSection.id == 0}">
+    		<acme:select items="${application}" itemLabel="ticker" code="educationSection.application" path="application" />
+		</jstl:if>
 		
 		<acme:submit name="save" code="educationSection.submit" />
 		<jstl:if test="${educationSection.id != 0}">

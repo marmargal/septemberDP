@@ -22,11 +22,17 @@
 	<security:authorize access="hasRole('IMMIGRANT')">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
+		<jstl:if test="${socialSection.id != 0}">
+			<form:hidden path="application" />
+		</jstl:if>
 
 		<acme:textbox path="nickName" code="socialSection.nickName" />
 		<acme:textbox path="socialNetwork" code="socialSection.socialNetwork" />
 		<acme:textbox path="profileLink" code="socialSection.profileLink" />
-		<acme:select items="${application}" itemLabel="ticker" code="socialSection.application" path="application" />
+		
+		<jstl:if test="${socialSection.id == 0}">
+			<acme:select items="${application}" itemLabel="ticker" code="socialSection.application" path="application" />
+		</jstl:if>
 		
 		<acme:submit name="save" code="socialSection.submit" />
 		<jstl:if test="${socialSection.id != 0}">

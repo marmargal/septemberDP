@@ -61,13 +61,18 @@ public class WorkSectionService {
 	public WorkSection save(WorkSection workSection) {
 		WorkSection res;
 		
-		Application a = workSection.getApplication();
-		List<WorkSection> workSections = new ArrayList<WorkSection>();
-		workSections = a.getWorkSection();
-		workSections.add(workSection);
-		a.setWorkSection(workSections);
-		
-		res = workSectionRepository.save(workSection);
+		if(workSection.getId() != 0){
+			res = workSectionRepository.save(workSection);
+		}else{
+			Application a = workSection.getApplication();
+			List<WorkSection> workSections = new ArrayList<WorkSection>();
+			workSections = a.getWorkSection();
+			workSections.add(workSection);
+			a.setWorkSection(workSections);
+			
+			res = workSectionRepository.save(workSection);
+		}
+			
 		return res;
 	}
 

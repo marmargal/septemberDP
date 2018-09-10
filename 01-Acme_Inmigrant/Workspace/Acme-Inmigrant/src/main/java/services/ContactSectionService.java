@@ -61,13 +61,18 @@ public class ContactSectionService {
 	public ContactSection save(ContactSection contactSection) {
 		ContactSection res;
 		
-		Application a = contactSection.getApplication();
-		List<ContactSection> contactSections = new ArrayList<ContactSection>();
-		contactSections = a.getContactSection();
-		contactSections.add(contactSection);
-		a.setContactSection(contactSections);
+		if(contactSection.getId() != 0){
+			res = contactSectionRepository.save(contactSection);
+		}else{
+			Application a = contactSection.getApplication();
+			List<ContactSection> contactSections = new ArrayList<ContactSection>();
+			contactSections = a.getContactSection();
+			contactSections.add(contactSection);
+			a.setContactSection(contactSections);
+			
+			res = contactSectionRepository.save(contactSection);
+		}
 		
-		res = contactSectionRepository.save(contactSection);
 		return res;
 	}
 

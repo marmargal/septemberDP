@@ -22,11 +22,17 @@
 	<security:authorize access="hasRole('IMMIGRANT')">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
+		<jstl:if test="${contactSection.id != 0}">
+			<form:hidden path="application" />
+		</jstl:if>
 
 		<acme:textbox path="email" code="contactSection.email" />
 		<acme:textbox path="phoneNumber" code="contactSection.phoneNumber" />
 		<acme:textbox path="pageNumber" code="contactSection.pageNumber" />
-		<acme:select items="${application}" itemLabel="ticker" code="contactSection.application" path="application" />
+		
+		<jstl:if test="${contactSection.id == 0}">
+			<acme:select items="${application}" itemLabel="ticker" code="contactSection.application" path="application" />
+		</jstl:if>
 
 		<acme:submit name="save" code="contactSection.submit" />
 		<jstl:if test="${contactSection.id != 0}">
