@@ -1,5 +1,6 @@
 package usecases;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +19,18 @@ import security.UserAccount;
 import services.CategoryService;
 import services.CountryService;
 import services.InvestigatorService;
+import services.LawService;
 import services.OfficerService;
+import services.RequirementService;
+import services.VisaService;
 import utilities.AbstractTest;
 import domain.Category;
 import domain.Country;
 import domain.Investigator;
+import domain.Law;
 import domain.Officer;
+import domain.Requirement;
+import domain.Visa;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -43,6 +50,15 @@ public class UseCaseAdministrator extends AbstractTest {
 	
 	@Autowired
 	private OfficerService officerService;
+	
+	@Autowired
+	private LawService lawService;
+	
+	@Autowired
+	private RequirementService requirementService;
+	
+	@Autowired
+	private VisaService visaService;
 	
 	@Test
 	public void CreateCategoryTest() {
@@ -398,6 +414,388 @@ public class UseCaseAdministrator extends AbstractTest {
 			this.officerService.flush();
 			this.authenticate(officer.getUserAccount().getUsername());
 			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void CreateLawTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "example", "example", "01/01/1993", "02/02/1993", null
+				}
+				, { //Negative: wrong roll
+					"immigrant1", "example", "example", "01/01/1993", "02/02/2000", IllegalArgumentException.class
+				}, { // Negative: wrong text
+					"admin", "", "example", "01/01/1993", "02/02/2000", ConstraintViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateCreateLaw((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // title
+					(String) testingData[i][2], // text
+					(String) testingData[i][3], // enactmentDate
+					(String) testingData[i][4], // abrogationTime
+					(Class<?>) testingData[i][5]);
+		
+	}
+	
+	protected void templateCreateLaw(final String principal,
+			final String title, final String text, 
+			final String enactmentDate, final String abrogationTime, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final Law law = this.lawService.create();
+			
+			law.setTitle(title);
+			law.setText(text);
+			final SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+			law.setEnactmentDate(format.parse(enactmentDate));
+			law.setAbrogationTime(format.parse(abrogationTime));
+			law.setCountry(this.countryService.findOne(this.getEntityId("country1")));
+
+			this.lawService.save(law);
+			this.unauthenticate();
+			this.lawService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void EditLawTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "law1", "example", null
+				}
+				, { //Negative: wrong roll
+					"immigrant1", "law1", "example", IllegalArgumentException.class
+				}, { // Negative: wrong text
+					"admin", "law1", "", ConstraintViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateEditLaw((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // law
+					(String) testingData[i][2], // title
+					(Class<?>) testingData[i][3]);
+		
+	}
+	
+	protected void templateEditLaw(final String principal,
+			final String law, final String title, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final int lawId = this.getEntityId(law);
+			final Law lawFinal = this.lawService.findOne(lawId);
+			
+			lawFinal.setTitle(title);
+
+			this.lawService.save(lawFinal);
+			this.unauthenticate();
+			this.lawService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void DeleteLawTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "law1", null
+				}
+				, { //Negative: wrong roll
+					"immigrant1", "law1", IllegalArgumentException.class
+				}, { // Negative: wrong text
+					"investigator1", "law1", IllegalArgumentException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateDeleteLaw((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // law
+					(Class<?>) testingData[i][2]);
+		
+	}
+	
+	protected void templateDeleteLaw(final String principal,
+			final String law, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final int lawId = this.getEntityId(law);
+			final Law lawFinal = this.lawService.findOne(lawId);
+			
+			this.lawService.delete(lawFinal);
+			this.unauthenticate();
+			this.lawService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void CreateRequirementTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "title", "description", false, "law1", null
+				}
+				, { //Negative: wrong roll
+					"immigrant1", "title", "description", false, "law1", IllegalArgumentException.class
+				}, { // Negative: wrong text
+					"admin", "", "description", false, "law1", ConstraintViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateCreateRequirement((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // title
+					(String) testingData[i][2], // description
+					(Boolean) testingData[i][3], // abrogated
+					(String) testingData[i][4], // law
+					(Class<?>) testingData[i][5]);
+		
+	}
+	
+	protected void templateCreateRequirement(final String principal,
+			final String title, final String description, 
+			final Boolean abrogated, final String law, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final Requirement requirement = this.requirementService.create();
+			
+			final int lawId = this.getEntityId(law);
+			final Law lawFinal = this.lawService.findOne(lawId);
+			
+			requirement.setTitle(title);
+			requirement.setDescription(description);
+			requirement.setAbrogated(abrogated);
+			requirement.setLaw(lawFinal);
+			
+			this.requirementService.save(requirement);
+			this.unauthenticate();
+			this.requirementService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void EditRequirementTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "requirement1", "description", null
+				}
+				, { //Negative: wrong roll
+					"immigrant1", "requirement1", "something", IllegalArgumentException.class
+				}, { // Negative: wrong description
+					"admin", "requirement1", "", ConstraintViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateEditRequirement((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // requirement
+					(String) testingData[i][2], // description
+					(Class<?>) testingData[i][3]);
+		
+	}
+	
+	protected void templateEditRequirement(final String principal,
+			final String requirement, final String description, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final int requirementId = this.getEntityId(requirement);
+			final Requirement requirementFinal = this.requirementService.findOne(requirementId);
+			
+			requirementFinal.setDescription(description);
+			
+			this.requirementService.save(requirementFinal);
+			this.unauthenticate();
+			this.requirementService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void DeleteRequirementTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "requirement1", null
+				}
+				, { //Negative: wrong roll
+					"immigrant1", "requirement1", IllegalArgumentException.class
+				}, { // Negative: wrong roll
+					"investigator1", "requirement1", IllegalArgumentException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateDeleteRequirement((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // requirement
+					(Class<?>) testingData[i][2]);
+		
+	}
+	
+	protected void templateDeleteRequirement(final String principal,
+			final String requirement, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final int requirementId = this.getEntityId(requirement);
+			final Requirement requirementFinal = this.requirementService.findOne(requirementId);
+			
+			this.requirementService.delete(requirementFinal);
+			this.unauthenticate();
+			this.requirementService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void CreateVisaTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "classes", "description", "23", "category1", "country1", null
+				}
+//				, { //Negative: wrong roll
+//					"immigrant1", "classes", "description", "23", "category1", "country1", IllegalArgumentException.class
+//				}, { // Negative: wrong text
+//					"admin", "", "description", "23", "category1", "country1", ConstraintViolationException.class
+//				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateCreateVisa((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // classes
+					(String) testingData[i][2], // description
+					(Integer) Integer.parseInt((String) testingData[i][3]), // price
+					(String) testingData[i][4], // category
+					(String) testingData[i][5], // country
+					(Class<?>) testingData[i][6]);
+		
+	}
+	
+	protected void templateCreateVisa(final String principal,
+			final String classes, final String description, 
+			final Integer price, final String category, final String country, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final Visa visa = this.visaService.create();
+			
+			final int categoryId = this.getEntityId(category);
+			final Category categoryFinal = this.categoryService.findOne(categoryId);
+			
+			final int countryId = this.getEntityId(country);
+			final Country countryFinal = this.countryService.findOne(countryId);
+			
+			visa.setClasses(classes);
+			visa.setDescription(description);
+			visa.setPrice(price);
+			visa.setCategory(categoryFinal);
+			visa.setCountry(countryFinal);
+			
+			this.visaService.save(visa);
+			this.unauthenticate();
+			this.visaService.flush();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void EditVisaTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"admin", "visa1", "description", null
+				}
+				, { //Negative: wrong roll
+					"immigrant1", "visa1", "something", IllegalArgumentException.class
+				}, { // Negative: wrong description
+					"admin", "visa1", "", ConstraintViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateEditVisa((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // visa
+					(String) testingData[i][2], // description
+					(Class<?>) testingData[i][3]);
+		
+	}
+	
+	protected void templateEditVisa(final String principal,
+			final String visa, final String description, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final int visaId = this.getEntityId(visa);
+			final Visa visaFinal = this.visaService.findOne(visaId);
+			
+			visaFinal.setDescription(description);
+			
+			this.visaService.save(visaFinal);
+			this.unauthenticate();
+			this.visaService.flush();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}

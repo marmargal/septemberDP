@@ -156,6 +156,7 @@ public class AntennaService {
 	}
 	
 	public Collection<Antenna> findAntennasByUser(int userId){
+		Assert.isTrue(userService.findByPrincipal().getId() == userId);
 		Collection<Antenna> antennas = new ArrayList<Antenna>();
 		antennas = this.antennaRepository.findAntennasByUser(userId);
 		return antennas;

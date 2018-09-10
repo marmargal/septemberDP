@@ -23,6 +23,8 @@ public class VisaService {
 	@Autowired
 	private VisaRepository visaRepository;
 	
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Suporting services
 
@@ -35,6 +37,7 @@ public class VisaService {
 	// Simple CRUD methods
 
 	public Visa create() {
+		this.administratorService.checkAuthority();
 		Visa res;
 		res = new Visa();
 
@@ -66,6 +69,7 @@ public class VisaService {
 	}
 
 	public Visa save(Visa visa) {
+		this.administratorService.checkAuthority();
 		Visa res;
 		res = visaRepository.save(visa);
 		return res;
@@ -102,6 +106,10 @@ public class VisaService {
 		res.addAll(visaRepository.findVisasByCountry(countryId));
 
 		return res;
+	}
+	
+	public void flush() {
+		this.visaRepository.flush();
 	}
 
 }
