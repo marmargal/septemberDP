@@ -67,8 +67,12 @@ public class ConfigurationService {
 		Authority user = new Authority();
 		user.setAuthority("USER");
 		Authority admin = new Authority();
-		admin.setAuthority("AGENT");
-		Assert.isTrue(authority.contains(user) || authority.contains(admin));
+		admin.setAuthority("ADMIN");
+		Authority agent = new Authority();
+		agent.setAuthority("AGENT");
+		
+		Assert.isTrue(authority.contains(user) || authority.contains(admin)
+				|| authority.contains(agent));
 		Collection<String> res = new ArrayList<String>();
 		res.addAll(this.configurationRepository.findTabooWords());
 		return res;
