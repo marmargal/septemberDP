@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -201,6 +202,10 @@ public class UserTest extends AbstractTest{
 		final Object testingData[][] = {
 				{ // Positivo con user
 					"user1", 123456, "model-A", 20.5, 30.5, 90.0, null
+				} , { // Negativo con modelo vacío
+					"user1", 123456, "", 20.5, 30.5, 90.0, null
+				} , { // Negativo con azimuth fuera de rango
+					"user1", 123456, "", 1000.0, 30.5, 90.0, null
 				}
 		};
 
