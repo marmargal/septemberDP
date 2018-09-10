@@ -115,6 +115,7 @@ public class ChirpService {
 	}
 	
 	public Collection<Chirp> findChirpTaboo(){
+		this.administratorService.checkAuthority();
 		Collection<Chirp> res = new ArrayList<Chirp>();
 		res.addAll(chirpRepository.findChirpTaboo());
 		return res;

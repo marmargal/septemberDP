@@ -17,50 +17,55 @@ import domain.Configuration;
 public class ConfigurationService {
 	// Managed repository -----------------------------------------------------
 
-		@Autowired
-		private ConfigurationRepository configurationRepository;
-		
-		// Supporting services ----------------------------------------------------
-		
-		@Autowired
-		private AdministratorService administratorService;
+	@Autowired
+	private ConfigurationRepository configurationRepository;
 
-		// Constructor ------------------------------------------------------------
+	// Supporting services ----------------------------------------------------
 
-		public ConfigurationService() {
-			super();
-		}
+	@Autowired
+	private AdministratorService administratorService;
 
-		// Simple CRUD methods ----------------------------------------------------
+	// Constructor ------------------------------------------------------------
 
-		public Collection<Configuration> findAll() {
-			Collection<Configuration> res;
-			res = this.configurationRepository.findAll();
-			Assert.notNull(res);
-			return res;
-		}
+	public ConfigurationService() {
+		super();
+	}
 
-		public Configuration findOne(int id) {
-			Assert.isTrue(id != 0);
-			Configuration res;
-			res = this.configurationRepository.findOne(id);
-			Assert.notNull(res);
-			return res;
-		}
+	// Simple CRUD methods ----------------------------------------------------
 
-		public Configuration save(Configuration configuration) {
-			this.administratorService.checkAuthority();
-			Assert.notNull(configuration);
-			Configuration res;
-			res = this.configurationRepository.save(configuration);
-			return res;
-		}
+	public Collection<Configuration> findAll() {
+		Collection<Configuration> res;
+		res = this.configurationRepository.findAll();
+		Assert.notNull(res);
+		return res;
+	}
 
-		// Other business method --------------------------------------------------
+	public Configuration findOne(int id) {
+		Assert.isTrue(id != 0);
+		Configuration res;
+		res = this.configurationRepository.findOne(id);
+		Assert.notNull(res);
+		return res;
+	}
 
-		public Collection<String> findTabooWords(){
-			Collection<String> res = new ArrayList<String>();
-			res.addAll(this.configurationRepository.findTabooWords());
-			return res;
-		}
+	public Configuration save(Configuration configuration) {
+		this.administratorService.checkAuthority();
+		Assert.notNull(configuration);
+		Configuration res;
+		res = this.configurationRepository.save(configuration);
+		return res;
+	}
+
+	// Other business method --------------------------------------------------
+
+	public Collection<String> findTabooWords() {
+		this.administratorService.checkAuthority();
+		Collection<String> res = new ArrayList<String>();
+		res.addAll(this.configurationRepository.findTabooWords());
+		return res;
+	}
+
+	public void flush() {
+		this.configurationRepository.flush();
+	}
 }
