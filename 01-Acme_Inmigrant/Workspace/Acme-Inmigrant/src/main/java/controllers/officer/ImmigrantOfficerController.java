@@ -81,11 +81,23 @@ public class ImmigrantOfficerController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int immigrantId) {
 		ModelAndView res;
-		Immigrant immigrant;
-
-		immigrant = immigrantService.findOne(immigrantId);
-		res = createEditModelAndView(immigrant);
-		res.addObject("immigrant", immigrant);
+		Immigrant immigrant = immigrantService.findOne(immigrantId);
+		Officer officer = officerService.findByPrincipal();
+		
+		// si el immigrant pertenece a alguna application del officer
+		int count = 0;
+		for(Application application : immigrant.getApplications()){
+			if(officer.getApplications().contains(application)){
+				count ++;
+			}
+		}
+		
+		if((immigrant.getInvestigator()==null) && (count!=0)){
+			res = createEditModelAndView(immigrant);
+			res.addObject("immigrant", immigrant);
+		}else{
+			res = new ModelAndView("redirect:../../");
+		}
 
 		return res;
 	}
@@ -99,36 +111,16 @@ public class ImmigrantOfficerController extends AbstractController {
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(immigrant,
 					"immigrant.params.error");
-		else
+		else{
 			try {
-				Immigrant old = immigrantService.findOne(immigrant.getId());
-				this.immigrantService.save(immigrant);
-				if (immigrant.getInvestigator() != null) {
-					// actualizo el nuevo
-					Investigator investigator = immigrant.getInvestigator();
-					Collection<Immigrant> immigrants = new ArrayList<>();
-					// actulizo el viejo
-					Investigator oldInvestigator = old.getInvestigator();
-					Collection<Immigrant> oldImmigrants = oldInvestigator
-							.getImmigrants();
-
-					oldImmigrants.remove(immigrant);
-
-					oldInvestigator.setImmigrants(oldImmigrants);
-
-					this.investigatorService.save(oldInvestigator);
-					immigrants.add(immigrant);
-					investigator.setImmigrants(immigrants);
-
-					this.investigatorService.save(investigator);
-
-				} 
+				this.immigrantService.assignNewInvestigator(immigrant);
 				res = new ModelAndView("redirect:../officer/list.do");
 
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(immigrant,
 						"immigrant.commit.error");
 			}
+		}
 		return res;
 	}
 
