@@ -67,7 +67,7 @@ public class UseCaseUSer extends AbstractTest {
 
 				{ "user1", "route", 300.0, "description",
 						"http://www.google.es", "hike1", "01/05/2018",
-						"comment", "text", 1, false, null },
+				"comment", "text", 1, false, null },
 				// negativo autenticado como innkeeper
 				{ "innkeeper1", "route", 300.0, "description",
 						"http://www.google.es", "hike1", "", "", "", null,
@@ -96,16 +96,16 @@ public class UseCaseUSer extends AbstractTest {
 				{ "user1", "delete", 300.0, "description",
 						"http://www.google.es", "hike1", "01/05/2018",
 						"comment", "text", 1, false, null },
-		/*
-		 * positivo listar todas las rutas (lo puede hacer cualquira registrado
-		 * o no)
-		 */
-		 { "user1", "list", 300.0, "description",
-		 "http://www.google.es", "hike1", "01/05/2018",
-		 "comment", "text", 1, false, null },
-		 // negativo crear una ruta sin fotos ni descripción
-		 { "user1", "route", 300.0, "", "", "hike1", "", "", "", null,
-		 null, ConstraintViolationException.class },
+				/*
+				 * positivo listar todas las rutas (lo puede hacer cualquira
+				 * registrado o no)
+				 */
+				{ "user1", "list", 300.0, "description",
+						"http://www.google.es", "hike1", "01/05/2018",
+						"comment", "text", 1, false, null },
+				// negativo crear una ruta sin fotos ni descripción
+				{ "user1", "route", 300.0, "", "", "hike1", "", "", "", null,
+						null, ConstraintViolationException.class },
 
 		};
 

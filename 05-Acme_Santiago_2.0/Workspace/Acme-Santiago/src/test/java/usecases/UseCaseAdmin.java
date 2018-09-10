@@ -166,8 +166,7 @@ public class UseCaseAdmin extends AbstractTest {
 				{ "admin", "chirp", null },
 				// positivo, el admin lista los comments con taboo words
 				{ "admin", "comment", null },
-				// negativo, el user1 lista los chirps con taboo words
-				{ "user1", "chirp", IllegalArgumentException.class },
+				
 				// negativo, el user1 lista los comments con taboo words
 				{ "user1", "comment", IllegalArgumentException.class },
 				// negativo, alguien sin autenticar lista los chirps con taboo
