@@ -19,6 +19,8 @@ import services.AnswerService;
 import services.ApplicationService;
 import services.ContactSectionService;
 import services.EducationSectionService;
+import services.SocialSectionService;
+import services.WorkSectionService;
 import utilities.AbstractTest;
 import domain.Answer;
 import domain.Application;
@@ -26,6 +28,8 @@ import domain.ContactSection;
 import domain.CreditCard;
 import domain.EducationSection;
 import domain.PersonalSection;
+import domain.SocialSection;
+import domain.WorkSection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -45,6 +49,12 @@ public class UseCaseImmigrant extends AbstractTest {
 	
 	@Autowired
 	private EducationSectionService educationSectionService;
+	
+	@Autowired
+	private SocialSectionService socialSectionService;
+	
+	@Autowired
+	private WorkSectionService workSectionService;
 	
 	/*
 	 * 12. An actor who is authenticated as an immigrant must be able to:
@@ -529,6 +539,203 @@ public class UseCaseImmigrant extends AbstractTest {
 			this.educationSectionService.save(educationSectionFinal);
 			this.unauthenticate();
 			this.educationSectionService.flush();
+			
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void CreateSocialSectionTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"immigrant1", "nickName", "socialNetwork", "http://www.profile.com", "application1", null
+				}, { // Negative: wrong roll
+					"officer1", "nickName", "socialNetwork", "http://www.profile.com", "application1", IllegalArgumentException.class
+				}, { // Negative: wrong nickName
+					"immigrant1", "", "socialNetwork", "http://www.profile.com", "application1", ConstraintViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateCreateSocialSection((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // nickName
+					(String) testingData[i][2], // socialNetwork
+					(String) testingData[i][3], // profileLink
+					(String) testingData[i][4], // Application
+					(Class<?>) testingData[i][5]);
+		
+	}
+	
+	protected void templateCreateSocialSection(final String principal,
+			final String nickName, final String socialNetwork, 
+			final String profileLink, 
+			final String application, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final int applicationId = this.getEntityId(application);
+			final Application applicationFinal = this.applicationService.findOne(applicationId);
+			final SocialSection socialSection = this.socialSectionService.create();
+			
+			socialSection.setNickName(nickName);
+			socialSection.setSocialNetwork(socialNetwork);
+			socialSection.setProfileLink(profileLink);
+			socialSection.setApplication(applicationFinal);
+			
+			this.socialSectionService.save(socialSection);
+			this.unauthenticate();
+			this.socialSectionService.flush();
+			
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void EditSocialSectionTest() {
+
+		final Object testingData[][] = {
+			{ // Positive
+				"immigrant1", "socialSection1", "nickName", null
+			}
+			, { // Negative: wrong roll
+				"officer1", "socialSection1", "nickName", IllegalArgumentException.class }
+			, { // Negative: wrong nickName
+				"immigrant2", "socialSection1", "", ConstraintViolationException.class }
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateEditSocialSection((String) testingData[i][0], // Username
+				(String) testingData[i][1], // educationSection
+				(String) testingData[i][2], // nameDegree
+				(Class<?>) testingData[i][3]);
+	}
+	
+	protected void templateEditSocialSection(final String immigrant, final String socialSection, final String nickName, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+			
+			super.authenticate(immigrant);
+			
+			final int socialSectionId = this.getEntityId(socialSection);
+			final SocialSection socialSectionFinal = this.socialSectionService.findOne(socialSectionId);
+			
+			socialSectionFinal.setNickName(nickName);
+			
+			this.socialSectionService.save(socialSectionFinal);
+			this.unauthenticate();
+			this.socialSectionService.flush();
+			
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void CreateWorkSectionTest() {
+		
+		final Object testingData[][] = {
+				{ // Positive
+					"immigrant1", "nameCompany", "position", "01/01/2000", "01/01/2001", "application1", null
+				}, { // Negative: wrong roll
+					"officer1", "nameCompany", "position", "01/01/2000", "01/01/2001", "application1", IllegalArgumentException.class
+				}, { // Negative: wrong nameCompany
+					"immigrant1", "", "position", "01/01/2000", "01/01/2001", "application1", ConstraintViolationException.class
+				}
+			};
+
+			for (int i = 0; i < testingData.length; i++)
+				this.templateCreateWorkSection((String) testingData[i][0], // Username login
+					(String) testingData[i][1], // nameCompany
+					(String) testingData[i][2], // position
+					(String) testingData[i][3], // startDate
+					(String) testingData[i][4], // endDate
+					(String) testingData[i][5], // Application
+					(Class<?>) testingData[i][6]);
+		
+	}
+	
+	protected void templateCreateWorkSection(final String principal,
+			final String nameCompany, final String position, 
+			final String startDate, final String endDate, 
+			final String application, final Class<?> expected) {
+
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(principal);
+			
+			final int applicationId = this.getEntityId(application);
+			final Application applicationFinal = this.applicationService.findOne(applicationId);
+			final WorkSection workSection = this.workSectionService.create();
+			
+			workSection.setNameCompany(nameCompany);
+			workSection.setPosition(position);
+			workSection.setApplication(applicationFinal);
+			final SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+			workSection.setStartDate(format.parse(startDate));
+			workSection.setEndDate(format.parse(endDate));
+			
+			this.workSectionService.save(workSection);
+			this.unauthenticate();
+			this.workSectionService.flush();
+			
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+	
+	@Test
+	public void EditWorkSectionTest() {
+
+		final Object testingData[][] = {
+			{ // Positive
+				"immigrant1", "workSection1", "nameCompany", null
+			}
+			, { // Negative: wrong roll
+				"officer1", "workSection1", "nameCompany", IllegalArgumentException.class }
+			, { // Negative: wrong nameCompany
+				"immigrant2", "workSection1", "", ConstraintViolationException.class }
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateEditWorkSection((String) testingData[i][0], // Username
+				(String) testingData[i][1], // workSection
+				(String) testingData[i][2], // nameCompany
+				(Class<?>) testingData[i][3]);
+	}
+	
+	protected void templateEditWorkSection(final String immigrant, final String workSection, final String nameCompany, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+
+		try {
+			
+			super.authenticate(immigrant);
+			
+			final int workSectionId = this.getEntityId(workSection);
+			final WorkSection workSectionFinal = this.workSectionService.findOne(workSectionId);
+			
+			workSectionFinal.setNameCompany(nameCompany);
+			
+			this.workSectionService.save(workSectionFinal);
+			this.unauthenticate();
+			this.workSectionService.flush();
 			
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

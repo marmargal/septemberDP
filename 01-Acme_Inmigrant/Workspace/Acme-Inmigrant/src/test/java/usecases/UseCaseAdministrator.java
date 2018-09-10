@@ -60,6 +60,25 @@ public class UseCaseAdministrator extends AbstractTest {
 	@Autowired
 	private VisaService visaService;
 	
+	/*
+	 * 14. An actor who is authenticated as an administrator must be able to:
+			1. Create user accounts for new officers and investigators.
+			2. Manage the catalogue of visas, which includes creating them, editing them, listing
+			them, and abrogating them.
+	 */
+	
+	/*
+	 * 26. An actor who is authenticated as an administrator must be able to:4
+			1. Manage the catalogue of countries, which includes creating them, editing them, deleting them, 
+			listing them, and registering the visas that they offer.
+			2. Manage the hierarchy of visas, which includes creating, editing, deleting, and listing
+			them, as well as assigning visas to categories.
+			3. Manage the catalogue of laws, which includes creating, editing, deleting, and listing
+			them, as well as assigning them to countries and requirements.
+			4. Manage the catalogue of requirements, which includes creating, editing, deleting,
+			and listing them, as well as assigning them to visas and laws
+	 */
+	
 	@Test
 	public void CreateCategoryTest() {
 		

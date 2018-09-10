@@ -32,6 +32,13 @@ public class UseCaseAnonymous extends AbstractTest {
 	@Autowired
 	private ImmigrantService immigrantService;
 	
+	/*
+	 * 10. An actor who is not authenticated must be able to:
+			1. Register to the system as an immigrant.
+			2. Search for visas using a single key word that must be contained either in their classes
+			or descriptions. If no key word is indicated, then all of the visas must be listed.
+	 */
+	
 	@Test
 	public void RegisterOfficerTest() {
 		
