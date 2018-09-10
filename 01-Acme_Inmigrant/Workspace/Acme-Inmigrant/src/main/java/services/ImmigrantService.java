@@ -39,10 +39,6 @@ public class ImmigrantService {
 	private OfficerService officerService;
 	
 	@Autowired
-	private ApplicationService applicationService;
-	//
-
-	@Autowired
 	private Validator validator;
 
 	// Constructors
@@ -175,10 +171,6 @@ public class ImmigrantService {
 		this.validator.validate(res, binding);
 		
 		return res;
-	}
-	
-	public void flush() {
-		this.immigrantRepository.flush();
 	}
 	
 	public Collection<Immigrant> findImmigrantsByInvestigator(int investigatorId){
