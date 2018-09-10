@@ -150,4 +150,7 @@ public class TutorialService {
 		return res;
 	}
 	
+	public void flush(){
+		this.tutorialRepository.flush();
+	}
 }

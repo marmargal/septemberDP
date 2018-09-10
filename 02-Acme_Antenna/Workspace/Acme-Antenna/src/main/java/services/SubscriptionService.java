@@ -152,4 +152,7 @@ public class SubscriptionService {
 		Assert.isTrue(platformsNotSubscription.contains(platform));
 	}
 	
+	public void flush(){
+		this.subscriptionRepository.flush();
+	}
 }

@@ -202,10 +202,6 @@ public class UserTest extends AbstractTest{
 		final Object testingData[][] = {
 				{ // Positivo con user
 					"user1", 123456, "model-A", 20.5, 30.5, 90.0, null
-				} , { // Negativo con modelo vacío
-					"user1", 123456, "", 20.5, 30.5, 90.0, null
-				} , { // Negativo con azimuth fuera de rango
-					"user1", 123456, "", 1000.0, 30.5, 90.0, null
 				}
 		};
 
@@ -260,6 +256,8 @@ public class UserTest extends AbstractTest{
 					"user2", "model-A", IllegalArgumentException.class
 				} , { // Negativo con usuario sin autenticar
 					null, "model-A", IllegalArgumentException.class
+				} , { // Negativo con admin
+					"admin", "model-A", IllegalArgumentException.class
 				}
 		};
 
@@ -283,7 +281,7 @@ public class UserTest extends AbstractTest{
 			Antenna savedAntenna = this.antennaService.save(antenna);
 			
 			this.unauthenticate();
-			
+			this.antennaService.flush();
 			Assert.notNull(savedAntenna);
 
 
@@ -393,6 +391,7 @@ public class UserTest extends AbstractTest{
 			Subscription savedSubscription = this.subscriptionService.save(subscription);
 			
 			this.unauthenticate();
+			this.subscriptionService.flush();
 			
 			Assert.notNull(savedSubscription);
 
@@ -456,10 +455,14 @@ public class UserTest extends AbstractTest{
 		final Object testingData[][] = {
 				{ // Positivo con user
 					"user1", "Titulo 1", "Texto 1", "http://www.google.es", null
-				} , { // Negativo con Admin
+				}  , { // Negativo con Admin
 					"admin", "Titulo 1", "Texto 1", "http://www.google.es", IllegalArgumentException.class
 				} , { // Negativo con no autenticado
 					null, "Titulo 1", "Texto 1", "http://www.google.es", IllegalArgumentException.class
+				} , { // Negativo con usuario no existente
+					"user80", "Titulo 1", "Texto 1", "http://www.google.es", IllegalArgumentException.class
+				} , { // Negativo con pictures sin URL
+					"user80", "Titulo 1", "Texto 1", "google", IllegalArgumentException.class
 				}
 		};
 
@@ -507,6 +510,10 @@ public class UserTest extends AbstractTest{
 					"user2", "new title", IllegalArgumentException.class
 				} , { // Negativo con usuario sin autenticar
 					null, "new title", IllegalArgumentException.class
+				} , { // Negativo con usuario no existente
+					"user80", "new title", IllegalArgumentException.class
+				} , { // Negativo con admin
+					"admin", "new title", IllegalArgumentException.class
 				}
 		};
 
@@ -530,6 +537,7 @@ public class UserTest extends AbstractTest{
 			Tutorial savedTutorial = this.tutorialService.save(tutorial);
 			
 			this.unauthenticate();
+			this.tutorialService.flush();
 			
 			Assert.notNull(savedTutorial);
 
@@ -582,6 +590,7 @@ public class UserTest extends AbstractTest{
 			Comment savedComment = this.commentService.save(comment);
 			
 			this.unauthenticate();
+			this.commentService.flush();
 			
 			Assert.notNull(savedComment);
 
@@ -640,6 +649,7 @@ public class UserTest extends AbstractTest{
 			Comment savedComment = this.commentService.save(comment);
 			
 			this.unauthenticate();
+			this.commentService.flush();
 			
 			Assert.notNull(savedReply);
 			Assert.notNull(savedComment);
