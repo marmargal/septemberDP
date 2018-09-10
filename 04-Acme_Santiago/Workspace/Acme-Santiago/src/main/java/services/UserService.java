@@ -77,7 +77,6 @@ public class UserService {
 			Class<?> caught;
 			caught = null;
 			try {
-				System.out.println(LoginService.getPrincipal());
 				LoginService.getPrincipal();
 			} catch (final Throwable oops) {
 
