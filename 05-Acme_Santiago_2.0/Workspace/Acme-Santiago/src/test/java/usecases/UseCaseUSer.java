@@ -48,6 +48,7 @@ public class UseCaseUSer extends AbstractTest {
 	@Autowired
 	private ChirpService chirpService;
 
+	//TODO esto es del santiago 1.0 hay que borrarlo y hacer nuevos
 	// suit de test funcionales
 	// 5. An actor who is authenticated as a user must be able to:
 	// 1. Manage his or her routes, which includes creating, editing, deleting,
