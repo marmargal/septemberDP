@@ -10,6 +10,9 @@
 
 package controllers.boss;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.BossService;
+import services.FolderService;
 import controllers.AbstractController;
 import domain.Boss;
+import domain.Folder;
 import forms.ActorForm;
 
 @Controller
@@ -36,7 +41,9 @@ public class BossBossController extends AbstractController {
 	
 	@Autowired
 	private ActorService actorService;
-	
+
+	@Autowired
+	private FolderService folderService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -76,6 +83,23 @@ public class BossBossController extends AbstractController {
 			try {
 				boss = bossService.reconstruct(bossForm, binding);
 				this.bossService.save(boss);
+				
+				Collection<Folder> folders = new ArrayList<Folder>();
+				Folder inBox = this.folderService.create();
+				Folder outBox = this.folderService.create();
+				Folder trash = this.folderService.create();
+				inBox.setName("In Box");
+				outBox.setName("Out Box");
+				trash.setName("Trash Box");
+				inBox.setActor(boss);
+				outBox.setActor(boss);
+				trash.setActor(boss);
+				
+				folders.add(inBox);
+				folders.add(outBox);
+				folders.add(trash);
+				boss.setFolders(folders);
+				
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(bossForm, "actor.commit.error");
