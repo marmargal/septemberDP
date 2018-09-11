@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -16,6 +17,8 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Handyworker;
+import domain.Request;
+import domain.Tutorial;
 import forms.ActorForm;
 
 @Service
@@ -43,11 +46,15 @@ public class HandyworkerService {
 
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
+		Collection<Request> requests = new ArrayList<Request>();
+		Collection<Tutorial> tutorials = new ArrayList<Tutorial>();
 
 		authority.setAuthority("HANDYWORKER");
 		userAccount.addAuthority(authority);
 
 		res.setUserAccount(userAccount);
+		res.setRequests(requests);
+		res.setTutorials(tutorials);
 		return res;
 	}
 
@@ -159,6 +166,10 @@ public class HandyworkerService {
 		this.validator.validate(res, binding);
 
 		return res;
+	}
+	
+	public void flush() {
+		this.handyworkerRepository.flush();
 	}
 
 }

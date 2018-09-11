@@ -41,6 +41,7 @@ public class RequestHandyworkerController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
+		this.handyworkerService.checkAuthority();
 		Collection<Request> lista = new ArrayList<>();
 		Collection<Request> requests = new ArrayList<>();
 

@@ -47,6 +47,8 @@ public class RequestService {
 	// Simple CRUD methods
 
 	public Request create() {
+		this.userService.checkAuthority();
+		
 		Request res;
 		res = new Request();
 
@@ -200,4 +202,7 @@ public class RequestService {
 		return requests;
 	}
 
+	public void flush() {
+		this.requestRepository.flush();
+	}
 }
