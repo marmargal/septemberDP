@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.RouteRepository;
-import domain.Comment;
+import security.Authority;
+import security.LoginService;
 import domain.Hike;
 import domain.Route;
 import domain.User;
+import domain.Walk;
 
 @Service
 @Transactional
@@ -30,8 +32,9 @@ public class RouteService {
 	@Autowired
 	private HikeService hikeService;
 
+
 	@Autowired
-	private CommentService commentService;
+	private WalkService walkService;
 
 	// Constructors
 
@@ -66,6 +69,19 @@ public class RouteService {
 
 	public Route save(final Route route) {
 		Assert.notNull(route);
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority user = new Authority();
+		user.setAuthority("USER");
+		Authority admin = new Authority();
+		admin.setAuthority("AGENT");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin));
+		if (authority.contains(user)) {
+			Assert.isTrue(route.getUser().equals(
+					this.userService.findByPrincipal()));
+
+		}
 		Route res;
 		for (Hike hike : route.getHikes()) {
 			hike.setRoute(route);
@@ -76,21 +92,33 @@ public class RouteService {
 	}
 
 	public void delete(Route route) {
+
 		Assert.notNull(route);
 		Assert.isTrue(route.getId() != 0);
 		Assert.isTrue(this.routeRepository.exists(route.getId()));
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority user = new Authority();
+		user.setAuthority("USER");
+		Authority admin = new Authority();
+		admin.setAuthority("ADMIN");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin));
+		if (authority.contains(user)) {
+			Assert.isTrue(route.getUser().equals(
+					this.userService.findByPrincipal()));
 
+		}
 		Collection<Hike> hikes = new ArrayList<Hike>();
 		hikes = new ArrayList<Hike>(this.hikeService.findHikeByRoute(route
 				.getId()));
 		for (Hike hike : hikes) {
 			this.hikeService.delete(hike);
 		}
+		Collection<Walk> walks = this.walkService.findWalkByRoute(route);
 
-		Collection<Comment> comments = new ArrayList<Comment>();
-		comments = route.getComments();
-		for (Comment comment : comments) {
-			this.commentService.delete(comment);
+		for (Walk walk : walks) {
+			this.walkService.delete(walk);
 		}
 
 		this.routeRepository.delete(route);
@@ -104,8 +132,13 @@ public class RouteService {
 
 	public Collection<Route> searchRoute(String criteria) {
 		Collection<Route> routes = new ArrayList<>();
-		routes.addAll(this.routeRepository.searchRoute(criteria));
-		routes.addAll(this.routeRepository.searchRoute2(criteria));
+		if (criteria.isEmpty()) {
+			routes.addAll(this.routeRepository.findAll());
+		} else {
+
+			routes.addAll(this.routeRepository.searchRoute(criteria));
+			routes.addAll(this.routeRepository.searchRoute2(criteria));
+		}
 		return routes;
 	}
 

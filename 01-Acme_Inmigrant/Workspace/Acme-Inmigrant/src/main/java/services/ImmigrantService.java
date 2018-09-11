@@ -18,6 +18,8 @@ import security.UserAccount;
 import domain.Answer;
 import domain.Application;
 import domain.Immigrant;
+import domain.Investigator;
+import domain.Officer;
 import forms.ActorForm;
 
 @Service
@@ -30,9 +32,12 @@ public class ImmigrantService {
 	private ImmigrantRepository immigrantRepository;
 
 	// Supporting services
-
-	//
-
+	@Autowired
+	private InvestigatorService investigatorService;
+	
+	@Autowired
+	private OfficerService officerService;
+	
 	@Autowired
 	private Validator validator;
 
@@ -168,11 +173,46 @@ public class ImmigrantService {
 		return res;
 	}
 	
-	public void flush() {
-		this.immigrantRepository.flush();
-	}
-	
 	public Collection<Immigrant> findImmigrantsByInvestigator(int investigatorId){
 		return this.immigrantRepository.findImmigrantsByInvestigator(investigatorId);
+	}
+	
+	public Immigrant assignNewInvestigator(Immigrant immigrant){
+		this.officerService.checkAuthority();
+		Officer officerPrincipal = this.officerService.findByPrincipal();
+		int count = 0;
+		for(Application application : immigrant.getApplications()){
+			if(officerPrincipal.getApplications().contains(application)){
+				count ++;
+			}
+		}
+		Assert.isTrue(count!=0); // si es igual a 0, el immigrant no pertenece a ninguna application del officer
+		
+		Immigrant old = this.findOne(immigrant.getId());
+		this.save(immigrant);
+		if (immigrant.getInvestigator() != null) {
+			// actualizo el nuevo
+			Investigator investigator = immigrant.getInvestigator();
+			Collection<Immigrant> immigrants = new ArrayList<>();
+			// actulizo el viejo
+			Investigator oldInvestigator = old.getInvestigator();
+			Collection<Immigrant> oldImmigrants = oldInvestigator
+					.getImmigrants();
+
+			oldImmigrants.remove(immigrant);
+
+			oldInvestigator.setImmigrants(oldImmigrants);
+
+			this.investigatorService.save(oldInvestigator);
+			immigrants.add(immigrant);
+			investigator.setImmigrants(immigrants);
+
+			this.investigatorService.save(investigator);
+		}
+		return immigrant;
+	}
+
+	public void flush() {
+		this.immigrantRepository.flush();
 	}
 }

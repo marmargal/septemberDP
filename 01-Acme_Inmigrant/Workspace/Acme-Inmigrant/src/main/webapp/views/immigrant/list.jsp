@@ -31,8 +31,10 @@
 		<acme:column property="investigator.name" code="immigrant.investigator" />
 
 		<display:column>
+		<jstl:if test="${row.investigator==null}">
 			<acme:links url="immigrant/officer/edit.do?immigrantId=${row.id }"
 				code="immigrant.investigate" />
+		</jstl:if>
 		</display:column>
 
 

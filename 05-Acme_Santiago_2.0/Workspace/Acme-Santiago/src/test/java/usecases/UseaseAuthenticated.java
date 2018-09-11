@@ -205,7 +205,7 @@ public class UseaseAuthenticated extends AbstractTest {
 		final Object testingData[][] = {
 		// logueado con el user1
 		// listar inn con fecha de expiración
-		{ 10, 25, null },
+		{ 10, 22, null },
 
 		};
 

@@ -229,4 +229,7 @@ public class AdministratorService {
 		return this.administratorRepository.dataRatioRequestApproved();
 	}
 
+	public void flush() {
+		this.administratorRepository.flush();
+	}
 }

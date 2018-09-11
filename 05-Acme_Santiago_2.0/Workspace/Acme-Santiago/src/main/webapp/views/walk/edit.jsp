@@ -24,7 +24,6 @@
 	<form:hidden path="id"/>
 	<form:hidden path="version"/>
 	<form:hidden path="route"/>
-	<form:hidden path="comments"/>
 	
 	<acme:textbox code="walk.title" path="title"/>
 <%-- 	<acme:textbox code="walk.comments" path="comments"/> --%>

@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
@@ -40,6 +41,10 @@ public class UnauthenticatedTest extends AbstractTest {
 		final Object testingData[][] = {
 			{	// Positivo
 				null, "al@mail.com", "perez alarcón", "http://www.google.com", null
+			} , { // Negativo con email incorrecto
+				null, "al", "perez alarcón", "http://www.google.com", DataIntegrityViolationException.class
+			} , { // Negativo con apellido vacío
+				null, "al@mail.com", "", "http://www.google.com", DataIntegrityViolationException.class
 			}
 		};
 
@@ -92,7 +97,7 @@ public class UnauthenticatedTest extends AbstractTest {
 	public void listTutorialTest() {
 
 		final Object testingData[][] = {
-				{ // Positivo con user
+				{ // Positivo
 					null, null
 				}
 		};

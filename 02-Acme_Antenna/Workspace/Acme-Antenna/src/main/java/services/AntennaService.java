@@ -173,4 +173,8 @@ public class AntennaService {
 		Assert.isTrue(antennasOfUser.contains(antenna));
 	}
 	
+	public void flush(){
+		this.antennaRepository.flush();
+	}
+	
 }

@@ -52,10 +52,11 @@ public class QuestionService {
 
 	public Question create(Integer applicationId) {
 		this.officerService.checkAuthority();
+		Officer officer = this.officerService.findByPrincipal();
+		Application application = this.applicationService.findOne(applicationId);
+		Assert.isTrue(application.getOfficer().equals(officer));
 		
 		Question res = new Question();
-		Officer officer = this.officerService.findByPrincipal();
-		Application application = new Application();
 
 		Date moment = new Date(System.currentTimeMillis() - 1000);
 		application = this.applicationService.findOne(applicationId);
@@ -153,6 +154,10 @@ public class QuestionService {
 		Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Collection<Application> applications = immigrant.getApplications();
 		Assert.isTrue(applications.contains(application));
+	}
+
+	public void flush() {
+		this.questionRepository.flush();
 	}
 
 }

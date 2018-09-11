@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -28,6 +29,9 @@ public class RegistrytService {
 
 	@Autowired
 	private InnkeeperService innkeeperService;
+
+	@Autowired
+	private InnService innService;
 
 	// Constructor ------------------------------------------------------------
 
@@ -74,16 +78,30 @@ public class RegistrytService {
 		return res;
 	}
 
-	
+	public void delete(Registry registry) {
+		Assert.notNull(registry);
+		Assert.isTrue(registry.getId() != 0);
+		Assert.isTrue(this.registytRepositoty.exists(registry.getId()));
+		Collection<Registry> registries = new ArrayList<>();
+		registries.addAll(registry.getInn().getRegistries());
+		registries.remove(registry);
+		Inn inn = registry.getInn();
+		inn.setRegistries(registries);
+		this.innService.save(inn);
+		this.registytRepositoty.delete(registry);
+	}
 
-	public Registry findRegistry(Date date, Inn inn, User user,Hike hike) {
-		return this.registytRepositoty.findRegistry(date, inn, user,hike);
+	public Registry findRegistry(Date date, Inn inn, User user, Hike hike) {
+		return this.registytRepositoty.findRegistry(date, inn, user, hike);
 	}
 
 	public Collection<Registry> findByUser(User user) {
 		return this.registytRepositoty.findByUser(user);
 	}
 
+	public Collection<Registry> findByHike(Hike hike) {
+		return this.registytRepositoty.findByHike(hike);
+	}
 	// Other business method --------------------------------------------------
 
 }

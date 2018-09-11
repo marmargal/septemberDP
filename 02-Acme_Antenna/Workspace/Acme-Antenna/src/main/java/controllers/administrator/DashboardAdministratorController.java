@@ -49,11 +49,13 @@ public class DashboardAdministratorController {
 		result.addObject("dataNumLengthOfComments",
 				administratorService.dataNumLengthOfComments());
 
-		result.addObject("dataNumPicturesPerTutorial",
-				administratorService.dataNumPicturesPerTutorial());
+		// TODO: Por descomentar
+//		result.addObject("dataNumPicturesPerTutorial",
+//				administratorService.dataNumPicturesPerTutorial());
 
-		result.addObject("dataNumPicturesPerComment",
-				administratorService.dataNumPicturesPerComment());
+		// TODO: Por descomentar
+//		result.addObject("dataNumPicturesPerComment",
+//				administratorService.dataNumPicturesPerComment());
 
 		return result;
 	}

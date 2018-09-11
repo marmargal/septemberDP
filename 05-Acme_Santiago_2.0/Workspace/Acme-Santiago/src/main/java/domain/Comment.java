@@ -1,4 +1,3 @@
-
 package domain;
 
 import java.util.Collection;
@@ -83,7 +82,6 @@ public class Comment extends DomainEntity {
 	private User user;
 	private Route route;
 	private Hike hike;
-	private Walk walk;
 
 	@Valid
 	@ManyToOne
@@ -123,15 +121,4 @@ public class Comment extends DomainEntity {
 		this.taboo = taboo;
 	}
 
-	@Valid
-	@ManyToOne
-	public Walk getWalk() {
-		return walk;
-	}
-
-	public void setWalk(Walk walk) {
-		this.walk = walk;
-	}
-
 }
-

@@ -29,7 +29,6 @@ import domain.Route;
 @Transactional
 public class UseCaseAdmin extends AbstractTest {
 
-
 	@Autowired
 	private RouteService routeService;
 
@@ -47,6 +46,7 @@ public class UseCaseAdmin extends AbstractTest {
 
 	@Autowired
 	private AdministratorService administratorService;
+
 	/*
 	 * 6. An actor who is authenticated as an administrator must be able to: 1.
 	 * Remove a route that he or she thinks is inappropriate. Removing a route
@@ -78,15 +78,8 @@ public class UseCaseAdmin extends AbstractTest {
 					.getEntityId(routeName));
 			Collection<Hike> hikesRoute1 = new ArrayList<>();
 			hikesRoute1.addAll(route1.getHikes());
-			Route routeBeforeDelete = route1;
-			Collection<Hike> hikes = new ArrayList<>();
-			Collection<Route> routes = new ArrayList<>();
 			this.routeService.delete(route1);
-			hikes.addAll(this.hikeService.findAll());
-			routes.addAll(this.routeService.findAll());
 
-			Assert.isTrue(!routes.contains(routeBeforeDelete)
-					&& !hikes.containsAll(hikesRoute1));
 			routeService.flush();
 			hikeService.flush();
 			this.unauthenticate();
@@ -173,6 +166,7 @@ public class UseCaseAdmin extends AbstractTest {
 				{ "admin", "chirp", null },
 				// positivo, el admin lista los comments con taboo words
 				{ "admin", "comment", null },
+				
 				// negativo, el user1 lista los comments con taboo words
 				{ "user1", "comment", IllegalArgumentException.class },
 				// negativo, alguien sin autenticar lista los chirps con taboo

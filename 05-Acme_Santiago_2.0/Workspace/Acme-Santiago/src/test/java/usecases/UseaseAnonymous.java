@@ -24,7 +24,7 @@ import domain.User;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
 @Transactional
-public class UseaseAuthenticated extends AbstractTest {
+public class UseaseAnonymous extends AbstractTest {
 
 	@Autowired
 	private UserService userService;
@@ -36,17 +36,81 @@ public class UseaseAuthenticated extends AbstractTest {
 	private InnService innService;
 
 	/*
-	 * 4. An actor who is authenticated must be able to: 1. Do the same as an
-	 * actor who is not authenticated, but register to the system.
+	 * 3. An actor who is not authenticated must be able to: 1. Register to the
+	 * system as a user.
 	 */
 
+	@Test
+	public void RegisterAsUserTest() {
+		final Object testingData[][] = {
+
+				// positivo,alguien se registra en el sistema como user
+
+				{ "name", "surname", "email@email.com", "671910556", "address",
+						"https://www.google.com/", "postalAddress", null },
+
+				// negativo, alguien se registra en el sistema como user pero
+				// sin nombre
+				{ "", "surname", "email@gmail.com", "671910556", "address",
+						"https://www.google.com/", "postalAddress",
+						ConstraintViolationException.class },
+
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			this.templateRegisterAsUser((String) testingData[i][0],
+					(String) testingData[i][1], (String) testingData[i][2],
+					(String) testingData[i][3], (String) testingData[i][4],
+					(String) testingData[i][5], (String) testingData[i][6],
+					(Class<?>) testingData[i][7]);
+		}
+	}
+
+	private void templateRegisterAsUser(String name, String surname,
+			String email, String phoneNumber, String address, String picture,
+			String postalAddress, Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+
+		try {
+			if (name.equals("user1")) {
+				this.authenticate("user1");
+			}else{
+				super.unauthenticate();
+			}
+			
+			User user = this.userService.create();
+			user.setAddress(address);
+			user.setEmail(email);
+			user.setName(name);
+			user.setPhoneNumber(phoneNumber);
+			user.setSurname(surname);
+			user.setPictures(picture);
+			user.getUserAccount().setPassword(name);
+
+			User saved = this.userService.save(user);
+			Assert.isTrue(userService.findAll().contains(saved));
+			if (name.equals("user1")) {
+				this.unauthenticate();
+			}
+			this.userService.flush();
+
+		} catch (final Throwable oops) {
+
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+
+	}
+
 	/*
-	 * 2. Browse the routes.
+	 * 3. An actor who is not authenticated must be able to: 2. Browse the
+	 * routes.
 	 */
 	@Test
 	public void BrowseRoutesTest() {
 		final Object testingData[][] = {
-		// caso positivo, user1 accede a lista de rutas
+		// caso positivo, alguien sin loguear accede a lista de rutas
 		{ null }
 		// no hay más casos, todo el mundo en cualquier momento puede listar las
 		// rutas
@@ -59,10 +123,8 @@ public class UseaseAuthenticated extends AbstractTest {
 		Class<?> caught;
 		caught = null;
 		try {
-			super.authenticate("user1");
-
 			this.routeService.findAll();
-			super.unauthenticate();
+
 		} catch (final Throwable oops) {
 
 			caught = oops.getClass();
@@ -71,15 +133,15 @@ public class UseaseAuthenticated extends AbstractTest {
 	}
 
 	/*
-	 * 3. Search for routes using a single key word that must appear somewhere
-	 * in their names, their descriptions, or their hikes. 4. Search for routes
-	 * whose length is in a user-provided range.5. Search for routes that have a
-	 * minimum or a maximum number of hikes.
+	 * 3. An actor who is not authenticated must be able to: 3. Search for
+	 * routes using a single key word that must appear somewhere in their names,
+	 * their descriptions, or their hikes. 4. Search for routes whose length is
+	 * in a user-provided range.5. Search for routes that have a minimum or a
+	 * maximum number of hikes.
 	 */
 	@Test
 	public void searchTest() {
 		final Object testingData[][] = {
-				// todo logueado con el user1
 				// busqueda con criterio route1
 				{ "route1", null },
 				// busqueda con criterio description1
@@ -109,8 +171,6 @@ public class UseaseAuthenticated extends AbstractTest {
 		Class<?> caught;
 		caught = null;
 		try {
-			super.authenticate("user1");
-
 			if (criteria.equals("hike")) {
 				Collection<Route> routes = this.routeService
 						.numHikesRoute(3, 1);
@@ -145,7 +205,6 @@ public class UseaseAuthenticated extends AbstractTest {
 					}
 				}
 			}
-			super.unauthenticate();
 
 		} catch (final Throwable oops) {
 
@@ -155,8 +214,9 @@ public class UseaseAuthenticated extends AbstractTest {
 	}
 
 	/*
-	 * 6. Browse the users of the system and their profiles, which must include
-	 * their personal data and the list of routes that they have registered.
+	 * 3. An actor who is not authenticated must be able to: 6. Browse the users
+	 * of the system and their profiles, which must include their personal data
+	 * and the list of routes that they have registered.
 	 */
 	@Test
 	public void BrowseUsersTest() {
@@ -178,16 +238,12 @@ public class UseaseAuthenticated extends AbstractTest {
 		Class<?> caught;
 		caught = null;
 		try {
-			super.authenticate("user1");
-
 			Collection<User> users = this.userService.findAll();
 			if (!userBrowse.isEmpty()) {
 				User user = this.userService.findOne(super
 						.getEntityId(userBrowse));
 				Assert.isTrue(this.userService.findAll().contains(user));
 			}
-			super.unauthenticate();
-
 		} catch (final Throwable oops) {
 
 			caught = oops.getClass();
@@ -203,9 +259,8 @@ public class UseaseAuthenticated extends AbstractTest {
 	@Test
 	public void innTest() {
 		final Object testingData[][] = {
-		// logueado con el user1
 		// listar inn con fecha de expiración
-		{ 10, 25, null },
+		{ 10, 22, null },
 
 		};
 
@@ -220,12 +275,10 @@ public class UseaseAuthenticated extends AbstractTest {
 		Class<?> caught;
 		caught = null;
 		try {
-			super.authenticate("user1");
 			Collection<Inn> inns = this.innService.findCcExpirationYear(ano,
 					mes);
 			for (Inn inn : inns) {
 				if ((inn.getCreditCard().getExpirationYear() < ano)) {
-
 					Assert.isTrue(false);
 				} else if ((inn.getCreditCard().getExpirationYear() == ano && inn
 						.getCreditCard().getExpirationMonth() < mes)) {
@@ -236,8 +289,6 @@ public class UseaseAuthenticated extends AbstractTest {
 
 			}
 			Assert.isTrue(this.innService.findAll().containsAll(inns));
-			super.unauthenticate();
-
 		} catch (final Throwable oops) {
 
 			caught = oops.getClass();
