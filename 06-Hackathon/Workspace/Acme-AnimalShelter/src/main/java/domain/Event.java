@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -158,7 +159,7 @@ public class Event extends DomainEntity{
 	}
 	
 	@Valid
-	@OneToMany(mappedBy = "event")
+	@OneToMany(mappedBy = "event",cascade = CascadeType.ALL)
 	public Collection<Donation> getDonation() {
 		return donation;
 	}
