@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.ClientService;
+import services.FolderService;
 import domain.Client;
+import domain.Folder;
 import forms.ActorForm;
 
 @Controller
@@ -25,6 +30,9 @@ public class RegisterClientController extends AbstractController {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private FolderService folderService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -64,6 +72,23 @@ public class RegisterClientController extends AbstractController {
 			try {
 				client = clientService.reconstruct(clientForm, binding);
 				this.clientService.save(client);
+				
+				Collection<Folder> folders = new ArrayList<Folder>();
+				Folder inBox = this.folderService.create();
+				Folder outBox = this.folderService.create();
+				Folder trash = this.folderService.create();
+				inBox.setName("In Box");
+				outBox.setName("Out Box");
+				trash.setName("Trash Box");
+				inBox.setActor(client);
+				outBox.setActor(client);
+				trash.setActor(client);
+				
+				folders.add(inBox);
+				folders.add(outBox);
+				folders.add(trash);
+				client.setFolders(folders);
+				
 				res = new ModelAndView("redirect:../");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(clientForm, "actor.commit.error");

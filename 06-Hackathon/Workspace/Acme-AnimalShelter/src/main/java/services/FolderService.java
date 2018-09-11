@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.FolderRepository;
+import domain.Actor;
 import domain.Folder;
 import domain.Message;
 
@@ -23,6 +24,8 @@ public class FolderService {
 	private FolderRepository folderRepository;
 
 	// Suporting services
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors
 
@@ -38,6 +41,7 @@ public class FolderService {
 		Collection<Message> messages = new ArrayList<Message>();
 		res.setMessages(messages);
 		res.setPredefined(true);
+		
 		
 		return res;
 

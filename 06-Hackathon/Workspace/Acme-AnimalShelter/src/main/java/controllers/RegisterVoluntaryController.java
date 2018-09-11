@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.FolderService;
 import services.VoluntaryService;
+import domain.Folder;
 import domain.Voluntary;
 import forms.ActorForm;
 
@@ -26,6 +31,9 @@ public class RegisterVoluntaryController extends AbstractController {
 	@Autowired
 	private ActorService actorService;
 
+
+	@Autowired
+	private FolderService folderService;
 	// Constructors ---------------------------------------------------------
 
 	public RegisterVoluntaryController() {
@@ -104,6 +112,23 @@ public class RegisterVoluntaryController extends AbstractController {
 			try {
 				voluntary = voluntaryService.reconstruct(voluntaryForm, binding);
 				this.voluntaryService.save(voluntary);
+				
+				Collection<Folder> folders = new ArrayList<Folder>();
+				Folder inBox = this.folderService.create();
+				Folder outBox = this.folderService.create();
+				Folder trash = this.folderService.create();
+				inBox.setName("In Box");
+				outBox.setName("Out Box");
+				trash.setName("Trash Box");
+				inBox.setActor(voluntary);
+				outBox.setActor(voluntary);
+				trash.setActor(voluntary);
+				
+				folders.add(inBox);
+				folders.add(outBox);
+				folders.add(trash);
+				voluntary.setFolders(folders);
+				
 				res = new ModelAndView("redirect:/j_spring_security_logout");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndViewEdit(voluntaryForm, "actor.commit.error");
