@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -77,7 +78,7 @@ public abstract class Actor extends DomainEntity {
 		this.postalAddress = postalAddress;
 	}
 	
-	// TODO: pattern?
+	@Pattern(regexp = "^\\+?\\d+")
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

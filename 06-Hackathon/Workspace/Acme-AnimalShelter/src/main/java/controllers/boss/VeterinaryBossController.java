@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.VeterinaryService;
 import controllers.AbstractController;
 import domain.Veterinary;
@@ -32,6 +33,9 @@ public class VeterinaryBossController extends AbstractController {
 	
 	@Autowired
 	private VeterinaryService veterinaryService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	
 	// Constructors -----------------------------------------------------------
@@ -57,13 +61,17 @@ public class VeterinaryBossController extends AbstractController {
 	public ModelAndView save(@Valid final ActorForm veterinaryForm, final BindingResult binding) {
 		ModelAndView res;
 		Veterinary veterinary;
+		boolean validPhone = this.actorService.validPhoneNumber(veterinaryForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(veterinaryForm, "actor.params.error");
 		else if (!veterinaryForm.getRepeatPassword().equals(veterinaryForm.getPassword()))
 			res = this.createEditModelAndView(veterinaryForm, "actor.commit.errorPassword");
-		else if (veterinaryForm.getTermsAndConditions() == false) {
+		else if (veterinaryForm.getTermsAndConditions() == false) 
 			res = this.createEditModelAndView(veterinaryForm, "actor.params.errorTerms");
+		else if (!validPhone && (veterinaryForm.getAceptPhoneNumberConditions() == null || veterinaryForm.getAceptPhoneNumberConditions() == false)) {
+			veterinaryForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndView(veterinaryForm, "actor.params.mustAcceptPhoneNumber");
 		} else
 			try {
 				veterinary = veterinaryService.reconstruct(veterinaryForm, binding);

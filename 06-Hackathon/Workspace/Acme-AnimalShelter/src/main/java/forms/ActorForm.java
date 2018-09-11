@@ -20,6 +20,7 @@ public class ActorForm {
 	private String  repeatPassword;
 	private Center	 center;
 	private boolean termsAndConditions;
+	private Boolean aceptPhoneNumberConditions;
 	
 	public ActorForm(){
 		super();
@@ -124,6 +125,14 @@ public class ActorForm {
 
 	public void setCenter(Center center) {
 		this.center = center;
+	}
+
+	public Boolean getAceptPhoneNumberConditions() {
+		return aceptPhoneNumberConditions;
+	}
+
+	public void setAceptPhoneNumberConditions(Boolean aceptPhoneNumberConditions) {
+		this.aceptPhoneNumberConditions = aceptPhoneNumberConditions;
 	}
 	
 }
