@@ -127,7 +127,7 @@ public class CompostelaAdministratorController extends AbstractController {
 				map.put(registry.getHike(), registry);
 			}
 		}
-		if (!hikesWithoutRegistry.isEmpty()) {
+		if (hikesWithoutRegistry.isEmpty()) {
 			for (Hike hike : hikesWithoutRegistry) {
 				map.put(hike, null);
 			}
@@ -160,7 +160,7 @@ public class CompostelaAdministratorController extends AbstractController {
 		result.addObject("compostela", compostela);
 		Route route = compostela.getWalk().getRoute();
 		result.addObject("route", route);
-
+System.out.println(map);
 		result.addObject("map", map);
 		result.addObject("days", days);
 		result.addObject("test", test);

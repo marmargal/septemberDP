@@ -75,7 +75,13 @@ public class AgentService {
 		pass = code.encodePassword(pass, null);
 
 		agent.getUserAccount().setPassword(pass);
+		if (agent.getId() == 0) {
 
+			for (Agent ag : this.agentRepository.findAll()) {
+				Assert.isTrue(!ag.getUserAccount().getUsername()
+						.equals(agent.getUserAccount().getUsername()));
+			}
+		}
 		res = this.agentRepository.save(agent);
 
 		return res;
@@ -189,6 +195,10 @@ public class AgentService {
 		}
 		this.validator.validate(agentFinal, binding);
 		return agentFinal;
+	}
+
+	public void flush() {
+		this.agentRepository.flush();
 	}
 
 }
