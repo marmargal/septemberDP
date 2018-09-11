@@ -12,6 +12,9 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,15 +56,15 @@ public class UserController extends AbstractController {
 		} else {
 
 			user = this.userService.findOne(userId);
-			ArrayList<Route> routes = new ArrayList<>();
+			Set<Route> routes = new HashSet<>();
 			for (Compostela com : user.getCompostelas()) {
 				if (com.isDecision() && com.isfinallyDecision()) {
-					routes.add(com.getWalk().getRoute());
+					routes.add((com.getWalk().getRoute()));
 				}
 			}
 			res = new ModelAndView("user/display");
 			res.addObject("user", user);
-			res.addObject("routes",routes);
+			res.addObject("routes", routes);
 			res.addObject("followTable", user);
 			try {
 

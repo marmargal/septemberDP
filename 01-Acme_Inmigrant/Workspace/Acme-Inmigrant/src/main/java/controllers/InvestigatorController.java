@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.InvestigatorService;
 import domain.Investigator;
 import forms.ActorForm;
@@ -21,6 +22,9 @@ public class InvestigatorController extends AbstractController {
 
 	@Autowired
 	private InvestigatorService investigatorService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -47,12 +51,16 @@ public class InvestigatorController extends AbstractController {
 	public ModelAndView saveEdit(@Valid final ActorForm investigatorForm, final BindingResult binding) {
 		ModelAndView res;
 		Investigator investigator;
+		boolean validPhone = this.actorService.validPhoneNumber(investigatorForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndViewEdit(investigatorForm, "actor.params.error");
 		else if (!investigatorForm.getRepeatPassword().equals(investigatorForm.getPassword()))
 			res = this.createEditModelAndViewEdit(investigatorForm, "actor.commit.errorPassword");
-		else
+		else if (!validPhone && (investigatorForm.getAceptPhoneNumberConditions() == null || investigatorForm.getAceptPhoneNumberConditions() == false)) {
+			investigatorForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndViewEdit(investigatorForm, "actor.params.mustAcceptPhoneNumber");
+		} else
 			try {
 				investigator = investigatorService.reconstruct(investigatorForm, binding);
 				this.investigatorService.save(investigator);

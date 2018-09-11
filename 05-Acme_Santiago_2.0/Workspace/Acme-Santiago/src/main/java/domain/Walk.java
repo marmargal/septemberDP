@@ -1,4 +1,3 @@
-
 package domain;
 
 import java.util.Collection;
@@ -8,14 +7,16 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {@Index(columnList = "route_id") })
 public class Walk extends DomainEntity {
 
 	// Constructor
@@ -49,22 +50,13 @@ public class Walk extends DomainEntity {
 
 	// Relationships
 
-	private Collection<Comment> comments;
 	private Route route;
 	private Inn inn;
 
-	@Valid
-	@OneToMany(mappedBy = "walk")
-	public Collection<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Collection<Comment> comments) {
-		this.comments = comments;
-	}
+	
 
 	@Valid
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	public Route getRoute() {
 		return route;
 	}

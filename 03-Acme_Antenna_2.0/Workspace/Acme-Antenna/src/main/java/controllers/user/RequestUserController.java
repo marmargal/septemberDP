@@ -100,6 +100,7 @@ public class RequestUserController extends AbstractController{
 	@RequestMapping(value="/listAlreadyServicedRequest", method=RequestMethod.GET)
 	public ModelAndView listServicedRequest(){
 		ModelAndView res;
+		this.userService.checkAuthority();
 		User user = this.userService.findByPrincipal();
 		
 		Collection<Request> requests = this.requestService.alreadyServicedRequest(user.getId());

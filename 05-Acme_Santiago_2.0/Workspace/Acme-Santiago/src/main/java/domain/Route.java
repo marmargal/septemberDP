@@ -7,8 +7,10 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +18,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {@Index(columnList = "name,description,user_id") })
 public class Route extends DomainEntity {
 
 	// Constructors
@@ -81,7 +84,7 @@ public class Route extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "route")
+	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
 	public Collection<Comment> getComments() {
 		return comments;
 	}

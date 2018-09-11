@@ -4,12 +4,15 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +20,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(indexes = {@Index(columnList = "route_id,name,destinationCity") })
 public class Hike extends DomainEntity {
 
 	// Constructors
@@ -113,7 +117,7 @@ public class Hike extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "hike")
+	@OneToMany(mappedBy = "hike",cascade = CascadeType.ALL)
 	public Collection<Comment> getComments() {
 		return comments;
 	}

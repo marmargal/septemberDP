@@ -82,5 +82,9 @@ public class BannerService {
 		res.addAll(this.bannerRepository.allPictures());
 		return res;
 	}
+	
+	public void flush() {
+		this.bannerRepository.flush();
+	}
 
 }

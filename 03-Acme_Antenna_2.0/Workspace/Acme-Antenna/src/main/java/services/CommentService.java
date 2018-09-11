@@ -190,4 +190,8 @@ public class CommentService {
 		
 		return res;
 	}
+	
+	public void flush() {
+		this.commentRepository.flush();
+	}
 }

@@ -151,4 +151,8 @@ public class AgentService {
 		return res;
 	}
 
+	public void flush() {
+		this.agentRepository.flush();
+	}
+	
 }

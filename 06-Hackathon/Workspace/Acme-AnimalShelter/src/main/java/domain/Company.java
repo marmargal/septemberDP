@@ -4,11 +4,13 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
+import org.hibernate.engine.internal.Cascade;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
@@ -71,7 +73,7 @@ public class Company extends DomainEntity{
 	private Event event;
 	
 	@Valid
-	@OneToMany(mappedBy = "company")
+	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL )
 	public Collection<Stand> getStands() {
 		return stands;
 	}

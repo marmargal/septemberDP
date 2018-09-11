@@ -37,6 +37,7 @@ public class EducationSectionService {
 	// Simple CRUD methods ----------------------------------------------------
 	
 	public EducationSection create() {
+		this.immigrantService.checkAuthority();
 		final Immigrant immigrant = this.immigrantService.findByPrincipal();
 		Assert.notNull(immigrant);
 		EducationSection res = new EducationSection();
@@ -60,15 +61,21 @@ public class EducationSectionService {
 	}
 
 	public EducationSection save(EducationSection educationSection) {
+		this.immigrantService.checkAuthority();
 		EducationSection res;
 		
-		Application a = educationSection.getApplication();
-		List<EducationSection> educationSections = new ArrayList<EducationSection>();
-		educationSections = a.getEducationSection();
-		educationSections.add(educationSection);
-		a.setEducationSection(educationSections);
+		if(educationSection.getId() != 0){
+			res = educationSectionRepository.save(educationSection);
+		}else{
+			Application a = educationSection.getApplication();
+			List<EducationSection> educationSections = new ArrayList<EducationSection>();
+			educationSections = a.getEducationSection();
+			educationSections.add(educationSection);
+			a.setEducationSection(educationSections);
+			
+			res = educationSectionRepository.save(educationSection);
+		}
 		
-		res = educationSectionRepository.save(educationSection);
 		return res;
 	}
 
@@ -93,6 +100,10 @@ public class EducationSectionService {
 		res = educationSectionRepository.findApplicationbyEducationSection(id);
 		
 		return res;
+	}
+	
+	public void flush() {
+		this.educationSectionRepository.flush();
 	}
 
 }

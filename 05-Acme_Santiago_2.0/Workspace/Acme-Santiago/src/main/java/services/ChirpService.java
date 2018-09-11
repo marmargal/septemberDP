@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.ChirpRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Chirp;
 import domain.User;
 
@@ -27,13 +29,13 @@ public class ChirpService {
 	@Autowired
 	private AdministratorService administratorService;
 	// Supporting services ----------------------------------------------------
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ConfigurationService configurationService;
-	
+
 	@Autowired
 	private Validator validator;
 
@@ -50,13 +52,13 @@ public class ChirpService {
 		User user;
 		Chirp result;
 		Date moment;
-		
+
 		result = new Chirp();
 		moment = new Date(System.currentTimeMillis() - 1000);
 		user = userService.findByPrincipal();
 		result.setMoment(moment);
 		result.setUser(user);
-		
+
 		return result;
 	}
 
@@ -91,13 +93,13 @@ public class ChirpService {
 	}
 
 	// Other business method --------------------------------------------------
-	
+
 	public Collection<Chirp> findChirpByUser(int id) {
 		Collection<Chirp> res;
 		res = this.chirpRepository.findChirpByUser(id);
 		return res;
 	}
-	
+
 	public void checkTabooWords() {
 		Collection<String> tabooWords = new ArrayList<String>();
 		tabooWords = configurationService.findTabooWords();
@@ -107,14 +109,23 @@ public class ChirpService {
 
 		for (String s : tabooWords) {
 			for (Chirp c : chirps) {
-				if (c.getTitle().toLowerCase().contains(s.toLowerCase()) || c.getText().toLowerCase().contains(s.toLowerCase())) {
+				if (c.getTitle().toLowerCase().contains(s.toLowerCase())
+						|| c.getText().toLowerCase().contains(s.toLowerCase())) {
 					c.setTaboo(true);
 				}
 			}
 		}
 	}
-	
-	public Collection<Chirp> findChirpTaboo(){
+
+	public Collection<Chirp> findChirpTaboo() {
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority user = new Authority();
+		user.setAuthority("USER");
+		Authority admin = new Authority();
+		admin.setAuthority("ADMIN");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin));
 		Collection<Chirp> res = new ArrayList<Chirp>();
 		res.addAll(chirpRepository.findChirpTaboo());
 		return res;
@@ -123,7 +134,7 @@ public class ChirpService {
 	public void flush() {
 		this.chirpRepository.flush();
 	}
-	
+
 	public Chirp reconstruct(final Chirp chirp, final BindingResult binding) {
 		Chirp res;
 		Chirp chirpFinal;
@@ -132,11 +143,11 @@ public class ChirpService {
 
 			userPrincipal = this.userService.findByPrincipal();
 			chirp.setUser(userPrincipal);
-			
+
 			res = chirp;
 		} else {
 			chirpFinal = this.chirpRepository.findOne(chirp.getId());
-			
+
 			chirp.setId(chirpFinal.getId());
 			chirp.setVersion(chirpFinal.getVersion());
 			chirp.setMoment(chirpFinal.getMoment());

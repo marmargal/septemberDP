@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.OfficerService;
 import domain.Officer;
 import forms.ActorForm;
@@ -21,6 +22,9 @@ public class RegisterOfficerController extends AbstractController {
 
 	@Autowired
 	private OfficerService officerService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -45,13 +49,17 @@ public class RegisterOfficerController extends AbstractController {
 	public ModelAndView save(@Valid final ActorForm officerForm, final BindingResult binding) {
 		ModelAndView res;
 		Officer officer;
+		boolean validPhone = this.actorService.validPhoneNumber(officerForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(officerForm, "actor.params.error");
 		else if (!officerForm.getRepeatPassword().equals(officerForm.getPassword()))
 			res = this.createEditModelAndView(officerForm, "actor.commit.errorPassword");
-		else if (officerForm.getTermsAndConditions() == false) {
+		else if (officerForm.getTermsAndConditions() == false)
 			res = this.createEditModelAndView(officerForm, "actor.params.errorTerms");
+		else if (!validPhone && (officerForm.getAceptPhoneNumberConditions() == null || officerForm.getAceptPhoneNumberConditions() == false)) {
+			officerForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndView(officerForm, "actor.params.mustAcceptPhoneNumber");
 		} else
 			try {
 				officer = officerService.reconstruct(officerForm, binding);
@@ -83,12 +91,16 @@ public class RegisterOfficerController extends AbstractController {
 	public ModelAndView saveEdit(@Valid final ActorForm officerForm, final BindingResult binding) {
 		ModelAndView res;
 		Officer officer;
+		boolean validPhone = this.actorService.validPhoneNumber(officerForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndViewEdit(officerForm, "actor.params.error");
 		else if (!officerForm.getRepeatPassword().equals(officerForm.getPassword()))
 			res = this.createEditModelAndViewEdit(officerForm, "actor.commit.errorPassword");
-		else
+		else if (!validPhone && (officerForm.getAceptPhoneNumberConditions() == null || officerForm.getAceptPhoneNumberConditions() == false)) {
+			officerForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndViewEdit(officerForm, "actor.params.mustAcceptPhoneNumber");
+		} else
 			try {
 				officer = officerService.reconstruct(officerForm, binding);
 				this.officerService.save(officer);

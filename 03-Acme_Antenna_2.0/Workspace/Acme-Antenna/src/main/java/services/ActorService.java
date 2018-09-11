@@ -124,4 +124,8 @@ public class ActorService {
 			result = actor.getUserAccount().getBanned();
 			return result;
 		}
+		
+		public void flush() {
+			this.actorRepository.flush();
+		}
 }

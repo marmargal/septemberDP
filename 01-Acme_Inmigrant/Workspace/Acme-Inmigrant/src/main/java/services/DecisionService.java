@@ -151,4 +151,8 @@ public class DecisionService {
 		}
 	}
 
+	public void flush() {
+		this.decisionRepository.flush();
+	}
+
 }

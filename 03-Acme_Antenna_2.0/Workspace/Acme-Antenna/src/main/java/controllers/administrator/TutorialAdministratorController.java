@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AdministratorService;
 import services.TutorialService;
 import controllers.AbstractController;
 import domain.Tutorial;
@@ -25,6 +26,9 @@ public class TutorialAdministratorController extends AbstractController{
 	
 	@Autowired 
 	private TutorialService tutorialService;
+	
+	@Autowired 
+	private AdministratorService administratorService;
 	
 	// Constructors ------------------------
 	
@@ -72,6 +76,7 @@ public class TutorialAdministratorController extends AbstractController{
 	
 	@RequestMapping(value="/tutorialsTabooList", method=RequestMethod.GET)
 	public ModelAndView tutorialsTabooList(){
+		this.administratorService.checkAuthority();
 		ModelAndView res;
 		Collection<Tutorial> tutorials = this.tutorialService.tutorialsTaboo();
 		

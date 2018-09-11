@@ -165,7 +165,7 @@
 		<property name="name" value="Administrator" />
 		<property name="surname" value="Acme Immigrant" />
 		<property name="email" value="admin@admin.com" />
-		<property name="phoneNumber" value="654565656" />
+		<property name="phoneNumber" value="+123456789" />
 		<property name="address" value="C/Admin" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
@@ -199,7 +199,25 @@
 		<property name="pageNumber" value="12" />
 		<property name="application" ref="application1" />
 	</bean>
-
+	
+	<!-- EducationSection -->
+	<!-- EducationSection 1 -->
+	<bean id="educationSection1" class="domain.EducationSection">
+		<property name="nameDegree" value="nameDegree" />
+		<property name="institution" value="institution" />
+		<property name="dateAwarded" value="01/01/2000" />
+		<property name="level" value="PRIMARY" />
+		<property name="application" ref="application1" />
+	</bean>
+	<!-- WorkSection -->
+	<!-- WorkSection 1 -->
+	<bean id="workSection1" class="domain.WorkSection">
+		<property name="nameCompany" value="nameCompany" />
+		<property name="position" value="position" />
+		<property name="startDate" value="01/01/2000" />
+		<property name="endDate" value="01/01/2001" />
+		<property name="application" ref="application1" />
+	</bean>
 
 	<!-- PersonalSection -->
 	<!-- PersonalSection 1 -->
@@ -311,7 +329,7 @@
 		<property name="name" value="Maya" />
 		<property name="surname" value="Sanz" />
 		<property name="email" value="mayas@gmail.com" />
-		<property name="phoneNumber" value="654565556" />
+		<property name="phoneNumber" value="(6)54565556" />
 		<property name="address" value="C/Margarita nº4" />
 		<property name="userAccount" ref="userAccount4" />
 		<property name="applications">
@@ -334,7 +352,7 @@
 		<property name="name" value="Lucas" />
 		<property name="surname" value="Osuna" />
 		<property name="email" value="lucasosuna@gmail.com" />
-		<property name="phoneNumber" value="652365556" />
+		<property name="phoneNumber" value="(65)2365556" />
 		<property name="address" value="C/Sol nº10" />
 		<property name="userAccount" ref="userAccount5" />
 		<property name="applications">
@@ -356,7 +374,7 @@
 		<property name="name" value="Marcos" />
 		<property name="surname" value="Fernandez" />
 		<property name="email" value="marcosfdz@gmail.com" />
-		<property name="phoneNumber" value="652365456" />
+		<property name="phoneNumber" value="(652)365456" />
 		<property name="address" value="C/Sol nº10" />
 		<property name="userAccount" ref="userAccount6" />
 		<property name="applications">
@@ -618,6 +636,18 @@
 		<property name="law">
 			<list>
 				<ref bean="law2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="country3" class="domain.Country">
+		<property name="name" value="Spain" />
+		<property name="isoCode" value="ESP" />
+		<property name="flag"
+			value="https://laendercode.net/img/flag-icon-css/flags/4x3/es.svg" />
+		<property name="link" value="https://es.wikipedia.org/wiki/Espa%C3%B1a" />
+		<property name="law">
+			<list>
 			</list>
 		</property>
 	</bean>

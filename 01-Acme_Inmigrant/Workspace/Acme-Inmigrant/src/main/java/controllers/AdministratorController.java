@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.AdministratorService;
 import domain.Administrator;
 import forms.ActorForm;
@@ -21,6 +22,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private AdministratorService administratorService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -47,12 +51,16 @@ public class AdministratorController extends AbstractController {
 	public ModelAndView saveEdit(@Valid final ActorForm administratorForm, final BindingResult binding) {
 		ModelAndView res;
 		Administrator administrator;
+		boolean validPhone = this.actorService.validPhoneNumber(administratorForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(administratorForm, "actor.params.error");
 		else if (!administratorForm.getRepeatPassword().equals(administratorForm.getPassword()))
 			res = this.createEditModelAndView(administratorForm, "actor.commit.errorPassword");
-		else
+		else if (!validPhone && (administratorForm.getAceptPhoneNumberConditions() == null || administratorForm.getAceptPhoneNumberConditions() == false)) {
+			administratorForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndViewEdit(administratorForm, "actor.params.mustAcceptPhoneNumber");
+		} else
 			try {
 				administrator = administratorService.reconstruct(administratorForm, binding);
 				this.administratorService.save(administrator);

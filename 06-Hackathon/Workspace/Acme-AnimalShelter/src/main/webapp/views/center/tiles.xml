@@ -23,4 +23,9 @@
 		<put-attribute name="title" value="Edit center" />
 		<put-attribute name="body" value="/views/center/edit.jsp" />
 	</definition>
+	
+	<definition name="center/boss/list" extends="master.page">
+		<put-attribute name="title" value="List centers" />
+		<put-attribute name="body" value="/views/center/list.jsp" />
+	</definition>
 </tiles-definitions>

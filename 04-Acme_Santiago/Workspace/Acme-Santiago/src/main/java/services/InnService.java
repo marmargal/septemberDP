@@ -57,6 +57,8 @@ public class InnService {
 
 	public Inn save(final Inn inn) {
 		Assert.notNull(inn);
+		this.innkeeperService.checkAuthority();
+
 		Inn res;
 
 		res = this.innRepository.save(inn);
@@ -76,7 +78,7 @@ public class InnService {
 		this.innRepository.flush();
 	}
 
-	public Collection<Inn> findCcExpirationYear(int a, int b) {
-		return innRepository.findCcExpirationYear(a,b);
+	public Collection<Inn> findCcExpirationYear(int ano, int mes) {
+		return innRepository.findCcExpirationYear(ano, mes);
 	}
 }

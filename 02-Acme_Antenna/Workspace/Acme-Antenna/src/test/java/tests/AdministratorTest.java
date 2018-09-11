@@ -60,6 +60,7 @@ public class AdministratorTest extends AbstractTest {
 
 			this.tutorialService.delete(tutorial);
 
+			this.tutorialService.flush();
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -80,7 +81,7 @@ public class AdministratorTest extends AbstractTest {
 				"admin", "comment1", null
 			}, {// Negativo (comentario que no existe)
 				"administrator1", "comment8", IllegalArgumentException.class
-			}, {// Negativo (comentario que no existe)
+			}, {// Negativo (admin que no existe)
 				"administrator1", "comment1", IllegalArgumentException.class
 			}
 			
@@ -100,7 +101,7 @@ public class AdministratorTest extends AbstractTest {
 			final Comment comment = this.commentService.findOne(commentId);
 
 			this.commentService.delete(comment);
-
+			this.commentService.flush();
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

@@ -156,6 +156,7 @@ public class AntennaService {
 	}
 	
 	public Collection<Antenna> findAntennasByUser(int userId){
+		Assert.isTrue(userService.findByPrincipal().getId() == userId);
 		Collection<Antenna> antennas = new ArrayList<Antenna>();
 		antennas = this.antennaRepository.findAntennasByUser(userId);
 		return antennas;
@@ -170,6 +171,10 @@ public class AntennaService {
 		
 		antennasOfUser = user.getAntennas();
 		Assert.isTrue(antennasOfUser.contains(antenna));
+	}
+	
+	public void flush(){
+		this.antennaRepository.flush();
 	}
 	
 }

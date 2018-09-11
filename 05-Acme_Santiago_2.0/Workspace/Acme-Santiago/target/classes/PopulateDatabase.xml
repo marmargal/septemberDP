@@ -122,7 +122,7 @@
 		<property name="email" value="edferve@gmail.com" />
 		<property name="pictures"
 			value="http://www.repuestosparamotos.co/page/images/user.png" />
-		<property name="phoneNumber" value="654565656" />
+		<property name="phoneNumber" value="+64565656" />
 		<property name="postalAddress" value="C/Edu" />
 		<property name="userAccount" ref="userAccount2" />
 		<property name="chirps">
@@ -972,7 +972,6 @@
 			</list>
 		</property>
 		<property name="rating" value="1" />
-		<property name="walk" ref="walk1" />
 		<property name="user" ref="user1" />
 		<property name="route" ref="route1" />
 		<property name="taboo" value="true" />
@@ -994,7 +993,6 @@
 
 		<property name="user" ref="user2" />
 		<property name="route" ref="route2" />
-		<property name="walk" ref="walk2" />
 		<property name="taboo" value="false" />
 
 	</bean>
@@ -1218,11 +1216,6 @@
 				<value>2011/05/20</value>
 			</list>
 		</property>
-		<property name="comments">
-			<list>
-				<ref bean="comment1" />
-			</list>
-		</property>
 		<property name="route" ref="route1" />
 		<property name="inn" ref="inn1" />
 	</bean>
@@ -1232,11 +1225,6 @@
 		<property name="daysOfEachHike">
 			<list>
 				<value>2011/05/20</value>
-			</list>
-		</property>
-		<property name="comments">
-			<list>
-				<ref bean="comment2" />
 			</list>
 		</property>
 		<property name="route" ref="route2" />

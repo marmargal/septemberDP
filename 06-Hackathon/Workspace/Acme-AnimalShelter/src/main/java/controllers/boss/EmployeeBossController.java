@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.BossService;
 import services.EmployeeService;
 import controllers.AbstractController;
@@ -43,6 +44,9 @@ public class EmployeeBossController extends AbstractController {
 	
 	@Autowired
 	private BossService bossService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	
 	// Constructors -----------------------------------------------------------
@@ -68,13 +72,17 @@ public class EmployeeBossController extends AbstractController {
 	public ModelAndView save(@Valid final ActorForm employeeForm, final BindingResult binding) {
 		ModelAndView res;
 		Employee employee;
+		boolean validPhone = this.actorService.validPhoneNumber(employeeForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(employeeForm, "actor.params.error");
 		else if (!employeeForm.getRepeatPassword().equals(employeeForm.getPassword()))
 			res = this.createEditModelAndView(employeeForm, "actor.commit.errorPassword");
-		else if (employeeForm.getTermsAndConditions() == false) {
+		else if (employeeForm.getTermsAndConditions() == false)
 			res = this.createEditModelAndView(employeeForm, "actor.params.errorTerms");
+		else if (!validPhone && (employeeForm.getAceptPhoneNumberConditions() == null || employeeForm.getAceptPhoneNumberConditions() == false)) {
+			employeeForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndView(employeeForm, "actor.params.mustAcceptPhoneNumber");
 		} else
 			try {
 				employee = employeeService.reconstruct(employeeForm, binding);

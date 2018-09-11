@@ -20,4 +20,8 @@ public interface RegistryRepository extends JpaRepository<Registry, Integer> {
 	
 	@Query("select r from Registry r where r.user = ?1")
 	Collection<Registry> findByUser(User user);
+	
+	@Query("select r from Registry r where r.hike = ?1")
+	Collection<Registry> findByHike(Hike hike);
+	
 }
