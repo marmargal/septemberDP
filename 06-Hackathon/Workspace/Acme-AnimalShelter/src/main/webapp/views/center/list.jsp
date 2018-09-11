@@ -25,7 +25,7 @@
 		</display:column>
 
 	</security:authorize>
-	
+
 
 
 	<spring:message code="center.picture" var="pictureHeader" />
@@ -34,12 +34,14 @@
 	</display:column>
 
 	<acme:column property="description" code="center.description" />
-	<security:authorize access="hasRole('BOSS')">
-		<display:column>
-			<acme:links url="center/boss/edit.do?centerId=${row.id }"
-				code="center.edit" />
-		</display:column>
-	</security:authorize>
+	<jstl:if test="${boss==true }">
+		<security:authorize access="hasRole('BOSS')">
+			<display:column>
+				<acme:links url="center/boss/edit.do?centerId=${row.id }"
+					code="center.edit" />
+			</display:column>
+		</security:authorize>
+	</jstl:if>
 </display:table>
 <br>
 <security:authorize access="hasRole('BOSS')">

@@ -10,6 +10,9 @@
 
 package controllers.boss;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +51,20 @@ public class CenterBossController extends AbstractController {
 		super();
 	}
 
+	
+	@RequestMapping("/list")
+	public ModelAndView list() {
+		ModelAndView result;
+
+		Collection<Center> centers = new ArrayList<Center>(); 
+		centers = this.bossService.findByPrincipal().getCenters();
+		
+		result = new ModelAndView("center/boss/list");
+		result.addObject("centers", centers);
+		result.addObject("boss", true);
+
+		return result;
+	}
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
@@ -73,7 +90,13 @@ public class CenterBossController extends AbstractController {
 			result = new ModelAndView("redirect:../../");
 		} else {
 			center = this.centerService.findOne(centerId);
-			result = this.createEditModelAndView(center);
+			if (!this.bossService.findByPrincipal().getCenters()
+					.contains(center)) {
+				result = new ModelAndView("redirect:../../");
+
+			} else {
+				result = this.createEditModelAndView(center);
+			}
 		}
 		return result;
 	}
@@ -113,7 +136,6 @@ public class CenterBossController extends AbstractController {
 
 		return res;
 	}
-	
 
 	protected ModelAndView createEditModelAndView(final Center center) {
 		ModelAndView result;
