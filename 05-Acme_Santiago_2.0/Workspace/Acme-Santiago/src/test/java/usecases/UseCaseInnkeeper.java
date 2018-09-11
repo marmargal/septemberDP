@@ -2,6 +2,7 @@ package usecases;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -13,9 +14,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import services.AmenityService;
+import services.HikeService;
 import services.InnService;
 import services.RegistrytService;
+import services.UserService;
 import utilities.AbstractTest;
+import domain.Amenity;
 import domain.Inn;
 import domain.Registry;
 
@@ -28,11 +33,25 @@ public class UseCaseInnkeeper extends AbstractTest {
 	private InnService innService;
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private HikeService hikeService;
+
+	@Autowired
 	private RegistrytService registrytService;
 
+	@Autowired
+	private AmenityService amenityService;
+
 	/*
-	 * 21. An actor who is authenticated as an innkeeper must be able to: 1.
-	 * Register the day when a user stayed at his or her inn.
+	 * 10. An actor who is authenticated as an innkeeper must be able to: 1.
+	 * Certify that a user has stayed in an inn that he or she manages in the
+	 * destination city of a particular hike on a particular day.
+	 * 
+	 * como el registro tiene la fecha, el usuario y el hike cada vez que este
+	 * hace un registro certifica que el usuario ha estado en esa fecha, lugar y
+	 * para ese hike
 	 */
 
 	@Test
@@ -45,7 +64,7 @@ public class UseCaseInnkeeper extends AbstractTest {
 				{ "innkeeper1", "02/02/2019", "inn1",
 						IllegalArgumentException.class },
 				// negativo, el user1 hace un registro en un inn
-				{ "innkeeper1", "02/02/2010", "inn1",
+				{ "user1", "02/02/2010", "inn1",
 						IllegalArgumentException.class } };
 
 		for (int i = 0; i < testingData.length; i++) {
@@ -66,6 +85,8 @@ public class UseCaseInnkeeper extends AbstractTest {
 			final DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 			final Date date = format.parse(dateName);
 			registry.setDate(date);
+			registry.setUser(userService.findOne(super.getEntityId("user1")));
+			registry.setHike(hikeService.findOne(super.getEntityId("hike1")));
 			Inn inn = this.innService.findOne(super.getEntityId(innName));
 			Collection<Registry> registries = inn.getRegistries();
 			registries.add(registry);
@@ -81,4 +102,50 @@ public class UseCaseInnkeeper extends AbstractTest {
 
 	}
 
+	// suit de test funcionales
+	/*
+	 * 17. An actor who is authenticated as an innkeeper must be able to: 1.
+	 * Manage the amenities that are offered by the inns that he or she manages,
+	 * which includes creating them, editing them, deleting them, and listing
+	 * them.
+	 */
+
+	@Test
+	public void amenitiesTest() {
+		final Object testingData[][] = { { "innkeeper1", "name",
+				"description", "https://www.google.es", "inn1", null }
+
+		};
+		for (int i = 0; i < testingData.length; i++) {
+			this.templateAmenities((String) testingData[i][0],
+					(String) testingData[i][1], (String) testingData[i][2],
+					(String) testingData[i][3], (String) testingData[i][4],
+					(Class<?>) testingData[i][5]);
+		}
+
+	}
+
+	private void templateAmenities(String innkeeperName, String amenityName,
+			String description, String picture, String innName,
+			Class<?> expected) {
+		Class<?> caught;
+		caught = null;
+
+		try {
+			super.authenticate(innkeeperName);
+			Amenity amenity = this.amenityService.create();
+			amenity.setDescription(description);
+			amenity.setInn(this.innService.findOne(super.getEntityId(innName)));
+			amenity.setName(amenityName);
+			Collection<String> pictures=new ArrayList<>();
+			pictures.add(picture);
+			amenity.setPictures(pictures);
+			Amenity saved =this.amenityService.save(amenity);
+			Assert.isTrue(this.amenityService.findAll().contains(saved));
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
 }
