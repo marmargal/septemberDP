@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import repositories.CenterRepository;
 import domain.Boss;
 import domain.Center;
+import domain.Company;
 import domain.Employee;
 import domain.Event;
 import domain.Pet;
@@ -27,6 +28,8 @@ public class CenterService {
 	@Autowired
 	private CenterRepository centerRepository;
 	
+	@Autowired
+	 private CompanyService companyService;
 	// Suporting services
 	
 	@Autowired
@@ -101,7 +104,9 @@ public class CenterService {
 		try {
 			this.administratorService.checkAuthority();
 		} catch (Exception e) {
-			this.administratorService.checkAuthority();
+			
+			this.bossService.checkAuthority();
+			Assert.isTrue(center.getBoss().equals(this.bossService.findByPrincipal()));	
 		}
 		Assert.notNull(center);
 		Assert.isTrue(center.getId() != 0);
@@ -120,6 +125,9 @@ public class CenterService {
 		Collection<Event> events = new ArrayList<Event>(); 
 		events = this.eventService.findEventByCenter(center.getId());
 		for(Event event: events){
+			Company company=event.getCompany();
+			company.setEvent(null);
+			this.companyService.save(company);
 			this.eventService.delete(event);
 		}
 		

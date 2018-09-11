@@ -11,7 +11,7 @@
 <tiles-definitions>
 
 	<definition name="center/list" extends="master.page">
-		<put-attribute name="title" value="Listado de animales" />
+		<put-attribute name="title" value="Listado de centros" />
 		<put-attribute name="body" value="/views/center/list.jsp" />
 	</definition>
 	
@@ -23,5 +23,9 @@
 	<definition name="center/boss/edit" extends="master.page">
 		<put-attribute name="title" value="Editar centro" />
 		<put-attribute name="body" value="/views/center/edit.jsp" />
+	</definition>
+	<definition name="center/boss/list" extends="master.page">
+		<put-attribute name="title" value="Listado de centros" />
+		<put-attribute name="body" value="/views/center/list.jsp" />
 	</definition>
 </tiles-definitions>
