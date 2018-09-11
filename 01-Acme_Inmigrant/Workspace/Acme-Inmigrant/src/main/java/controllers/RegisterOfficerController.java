@@ -99,7 +99,7 @@ public class RegisterOfficerController extends AbstractController {
 			res = this.createEditModelAndViewEdit(officerForm, "actor.commit.errorPassword");
 		else if (!validPhone && (officerForm.getAceptPhoneNumberConditions() == null || officerForm.getAceptPhoneNumberConditions() == false)) {
 			officerForm.setAceptPhoneNumberConditions(false);
-			res = this.createEditModelAndView(officerForm, "actor.params.mustAcceptPhoneNumber");
+			res = this.createEditModelAndViewEdit(officerForm, "actor.params.mustAcceptPhoneNumber");
 		} else
 			try {
 				officer = officerService.reconstruct(officerForm, binding);

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.EmployeeService;
 import domain.Employee;
 import forms.ActorForm;
@@ -21,6 +22,9 @@ public class EmployeeController extends AbstractController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -47,12 +51,16 @@ public class EmployeeController extends AbstractController {
 	public ModelAndView saveEdit(@Valid final ActorForm employeeForm, final BindingResult binding) {
 		ModelAndView res;
 		Employee employee;
+		boolean validPhone = this.actorService.validPhoneNumber(employeeForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndViewEdit(employeeForm, "actor.params.error");
 		else if (!employeeForm.getRepeatPassword().equals(employeeForm.getPassword()))
 			res = this.createEditModelAndViewEdit(employeeForm, "actor.commit.errorPassword");
-		else
+		else if (!validPhone && (employeeForm.getAceptPhoneNumberConditions() == null || employeeForm.getAceptPhoneNumberConditions() == false)) {
+			employeeForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndViewEdit(employeeForm, "actor.params.mustAcceptPhoneNumber");
+		} else
 			try {
 				employee = employeeService.reconstruct(employeeForm, binding);
 				this.employeeService.save(employee);

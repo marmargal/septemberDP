@@ -98,7 +98,7 @@ public class RegisterImmigrantController extends AbstractController {
 			res = this.createEditModelAndViewEdit(actorForm, "actor.commit.errorPassword");
 		else if (!validPhone && (actorForm.getAceptPhoneNumberConditions() == null || actorForm.getAceptPhoneNumberConditions() == false)) {
 			actorForm.setAceptPhoneNumberConditions(false);
-			res = this.createEditModelAndView(actorForm, "actor.params.mustAcceptPhoneNumber");
+			res = this.createEditModelAndViewEdit(actorForm, "actor.params.mustAcceptPhoneNumber");
 		} else
 			try{
 				Immigrant immigrant = this.immigrantService.reconstruct(actorForm, binding);
