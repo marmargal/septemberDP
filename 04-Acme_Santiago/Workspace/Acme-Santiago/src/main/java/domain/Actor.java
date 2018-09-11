@@ -67,7 +67,7 @@ public abstract class Actor extends DomainEntity {
 		this.email = email;
 	}
 
-	// TODO: Pattern phoneNumber
+	@Pattern(regexp = "^\\+?\\d+")
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}

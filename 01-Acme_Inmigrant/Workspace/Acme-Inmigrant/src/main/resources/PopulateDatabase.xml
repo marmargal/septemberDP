@@ -165,7 +165,7 @@
 		<property name="name" value="Administrator" />
 		<property name="surname" value="Acme Immigrant" />
 		<property name="email" value="admin@admin.com" />
-		<property name="phoneNumber" value="654565656" />
+		<property name="phoneNumber" value="+123456789" />
 		<property name="address" value="C/Admin" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
@@ -329,7 +329,7 @@
 		<property name="name" value="Maya" />
 		<property name="surname" value="Sanz" />
 		<property name="email" value="mayas@gmail.com" />
-		<property name="phoneNumber" value="654565556" />
+		<property name="phoneNumber" value="(6)54565556" />
 		<property name="address" value="C/Margarita nº4" />
 		<property name="userAccount" ref="userAccount4" />
 		<property name="applications">
@@ -352,7 +352,7 @@
 		<property name="name" value="Lucas" />
 		<property name="surname" value="Osuna" />
 		<property name="email" value="lucasosuna@gmail.com" />
-		<property name="phoneNumber" value="652365556" />
+		<property name="phoneNumber" value="(65)2365556" />
 		<property name="address" value="C/Sol nº10" />
 		<property name="userAccount" ref="userAccount5" />
 		<property name="applications">
@@ -374,7 +374,7 @@
 		<property name="name" value="Marcos" />
 		<property name="surname" value="Fernandez" />
 		<property name="email" value="marcosfdz@gmail.com" />
-		<property name="phoneNumber" value="652365456" />
+		<property name="phoneNumber" value="(652)365456" />
 		<property name="address" value="C/Sol nº10" />
 		<property name="userAccount" ref="userAccount6" />
 		<property name="applications">

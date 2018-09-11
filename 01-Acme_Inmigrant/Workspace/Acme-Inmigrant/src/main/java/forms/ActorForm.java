@@ -17,6 +17,7 @@ public class ActorForm {
 	private String  password;
 	private String  repeatPassword;
 	private boolean termsAndConditions;
+	private Boolean aceptPhoneNumberConditions;
 	
 	public ActorForm(){
 		super();
@@ -114,6 +115,15 @@ public class ActorForm {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public Boolean getAceptPhoneNumberConditions() {
+		return aceptPhoneNumberConditions;
+	}
+
+	public void setAceptPhoneNumberConditions(Boolean aceptPhoneNumberConditions) {
+		this.aceptPhoneNumberConditions = aceptPhoneNumberConditions;
+	}
+
 
 	
 }

@@ -122,7 +122,7 @@
 		<property name="email" value="edferve@gmail.com" />
 		<property name="pictures"
 			value="http://www.repuestosparamotos.co/page/images/user.png" />
-		<property name="phoneNumber" value="654565656" />
+		<property name="phoneNumber" value="+64565656" />
 		<property name="postalAddress" value="C/Edu" />
 		<property name="userAccount" ref="userAccount2" />
 		<property name="chirps">

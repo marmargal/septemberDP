@@ -30,6 +30,12 @@
 	<br/>
 	<acme:textbox code="actor.phoneNumber" path="phoneNumber"/>
 	<br/>
+	
+	<jstl:if test="${actorForm.aceptPhoneNumberConditions == false }">
+		<acme:checkbox code="actor.acceptPhone" path="aceptPhoneNumberConditions"/>
+		<br />
+	</jstl:if>
+	
 	<acme:textbox code="actor.address" path="address"/>
 	<br/>
 	<acme:textbox code="actor.userName" path="username"/>

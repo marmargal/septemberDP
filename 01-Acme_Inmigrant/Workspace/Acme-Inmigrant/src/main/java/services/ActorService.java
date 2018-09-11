@@ -1,6 +1,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -108,5 +110,12 @@ public class ActorService {
 
 		return result;
 	}
-
+	
+	public boolean validPhoneNumber(String phoneNumber){
+		Pattern pattern = Pattern.compile("(^\\+(\\d{3}|\\d{2}|\\d{1})\\d+)|(^\\((\\d{3}|\\d{2}|\\d{1})\\)\\d+)|(^\\d{4}\\d+)");
+		Matcher m = pattern.matcher(phoneNumber);
+		return m.find();
+	}
+	
+	
 }
