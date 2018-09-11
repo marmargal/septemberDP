@@ -37,6 +37,7 @@ public class NoticeService {
 
 	public Notice create() {
 		Notice res = new Notice();
+		this.voluntaryService.checkAuthority();
 		
 		Voluntary voluntary = this.voluntaryService.findByPrincipal();
 		res.setVoluntary(voluntary);
