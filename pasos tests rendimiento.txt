@@ -1,0 +1,40 @@
+COSAS QUE HACEN FALTA PARA LOS TESTS DE RENDIMIENTO:
+
+2 Scripts por cada caso de uso
+		-> 1 Soportando usuarios al límite
+		-> 1 Fallando al límite contra el número de usuarios
+
+Cápturas de pantalla por cada Script:
+		-> Aggregate Report
+		-> Graph Results
+		-> Performance
+		-> Thread Group
+
+========================================================================================
+ORDEN DE CARPETAS
+========================================================================================
+
+-> Capturas de pantalla
+		-> Rol que actúa
+				-> Carpeta con los nombres de los casos de uso
+						-> With errors
+								-> Aggregate report.png
+								-> Graph Results.png
+								-> Performance.png
+								-> Thread Group.png
+						-> Without errors
+								-> Aggregate report.png
+								-> Graph Results.png
+								-> Performance.png
+								-> Thread Group.png
+
+
+-> Jmeter Results with errors
+		-> Rol que actúa
+				-> Scripts.jmx con el nombre del caso de uso
+
+-> Jmeter Results without errors
+		-> Rol que actúa
+				-> Scripts.jmx con el nombre del caso de uso
+
+-> Análisis general.pdf
