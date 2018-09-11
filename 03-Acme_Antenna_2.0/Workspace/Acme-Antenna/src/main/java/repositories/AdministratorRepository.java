@@ -39,6 +39,7 @@ public interface AdministratorRepository extends
 	@Query("select avg(u.tutorials.size), stddev(u.tutorials.size) from User u")
 	Collection<Double> dataTutorialPerUser();
 
+	
 	// The average and the standard deviation of the number of comments per
 	// tutorial.
 	@Query("select avg(u.comments.size), stddev(u.comments.size) from Tutorial u")
@@ -58,15 +59,17 @@ public interface AdministratorRepository extends
 	@Query("select avg(LENGTH(c.text)), stddev(LENGTH(c.text)) from Comment c")
 	Collection<Double> dataNumLengthOfComments();
 
+	//TODO: Queries por hacer
 	// The average and the standard deviation of the number of pictures per
 	// tutorial.
-	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Tutorial u")
-	Collection<Double> dataNumPicturesPerTutorial();
+//	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Tutorial u")
+//	Collection<Double> dataNumPicturesPerTutorial();
 
+	//TODO: Queries por hacer
 	// The average and the standard deviation of the number of pictures per
 	// comment.
-	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Comment u")
-	Collection<Double> dataNumPicturesPerComment();
+//	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Comment u")
+//	Collection<Double> dataNumPicturesPerComment();
 
 	//
 
