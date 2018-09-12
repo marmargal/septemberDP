@@ -72,6 +72,7 @@ public class AntennaUserController extends AbstractController {
 	
 		res = new ModelAndView("antenna/list");
 		res.addObject("antenna", antennas);
+		res.addObject("requestURI","antenna/user/list.do");
 
 		return res;
 	}

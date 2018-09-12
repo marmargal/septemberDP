@@ -42,6 +42,7 @@ public class BannerAgentController extends AbstractController {
 	
 		res = new ModelAndView("banner/agent/list");
 		res.addObject("banners", banners);
+		res.addObject("requestURI","user/register.do");
 
 		return res;
 	}
@@ -102,7 +103,7 @@ public class BannerAgentController extends AbstractController {
 		result = new ModelAndView("banner/agent/edit");
 		result.addObject("banner", banner);
 		result.addObject("message", message);
-		result.addObject("requestURI", "banner/agent/edit.do");
+		result.addObject("requestUri", "banner/agent/edit.do");
 
 		return result;
 	}

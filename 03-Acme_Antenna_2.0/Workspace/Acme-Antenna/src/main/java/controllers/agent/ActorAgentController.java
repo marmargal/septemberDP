@@ -72,7 +72,7 @@ public class ActorAgentController extends AbstractController {
 		result = new ModelAndView("actor/agent/edit");
 		result.addObject("actor", agent);
 		result.addObject("message", message);
-		result.addObject("requestUri", "actor/agent/edit.do");
+		result.addObject("requestURI", "actor/agent/edit.do");
 		return result;
 
 	}

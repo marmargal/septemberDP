@@ -83,6 +83,7 @@ public class ActorAdministratorController extends AbstractController {
 		result = new ModelAndView("administrator/ban");
 		result.addObject("actor", actor);
 		result.addObject("message", message);
+		result.addObject("requestURI","actor/administrator/ban.do");
 		return result;
 	}
 }

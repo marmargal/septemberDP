@@ -90,6 +90,7 @@ public class RegisterUserController extends AbstractController {
 			result = new ModelAndView("user/register");
 			result.addObject("user", userForm);
 			result.addObject("message", message);
+			result.addObject("requestURI","user/register.do");
 			
 			return result;
 		}
