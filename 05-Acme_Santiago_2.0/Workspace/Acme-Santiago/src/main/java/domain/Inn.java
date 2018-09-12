@@ -13,9 +13,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -38,6 +40,7 @@ public class Inn extends DomainEntity {
 	private CreditCard creditCard;
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -48,6 +51,7 @@ public class Inn extends DomainEntity {
 
 	@NotBlank
 	@URL
+	@SafeHtml
 	public String getBadge() {
 		return badge;
 	}
@@ -66,7 +70,8 @@ public class Inn extends DomainEntity {
 		this.address = address;
 	}
 
-	// falta pattern
+	@Pattern(regexp = "^\\+?\\d+")
+	@SafeHtml
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -76,6 +81,7 @@ public class Inn extends DomainEntity {
 	}
 
 	@Email
+	@SafeHtml
 	public String getEmail() {
 		return email;
 	}
@@ -85,6 +91,7 @@ public class Inn extends DomainEntity {
 	}
 
 	@URL
+	@SafeHtml
 	public String getWebSite() {
 		return webSite;
 	}

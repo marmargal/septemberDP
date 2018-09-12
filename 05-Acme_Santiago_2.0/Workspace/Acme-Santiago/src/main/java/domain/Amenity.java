@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -32,6 +33,7 @@ public class Amenity extends DomainEntity {
 	private Collection<String> pictures;
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -41,6 +43,7 @@ public class Amenity extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}
