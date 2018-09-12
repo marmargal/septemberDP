@@ -27,7 +27,8 @@ public class HikeService {
 	@Autowired
 	private UserService userService;
 
-	
+	@Autowired
+	private AgentService agentService;
 
 	@Autowired
 	private AdvertisementService advertisementService;
@@ -109,6 +110,7 @@ public class HikeService {
 	}
 
 	public Collection<Hike> findHikeByAdvertisement(int id) {
+		this.agentService.checkAuthority();
 		return this.hikeRepository.findHikeByAdvertisement(id);
 	}
 

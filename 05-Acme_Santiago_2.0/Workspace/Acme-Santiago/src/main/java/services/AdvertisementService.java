@@ -63,6 +63,9 @@ public class AdvertisementService {
 	public Advertisement save(final Advertisement advertisement) {
 		Assert.notNull(advertisement);
 		Advertisement res;
+		if (advertisement.getId() == 0) {
+			this.agentService.checkAuthority();
+		}
 		Collection<String> tabooWords = new ArrayList<String>();
 		tabooWords = configurationService.findTabooWords();
 		for (String s : tabooWords) {
@@ -127,5 +130,9 @@ public class AdvertisementService {
 	public Collection<Advertisement> findAdvertisementTaboo() {
 		this.administratorService.checkAuthority();
 		return advertisementRepository.findAdvertisementTaboo();
+	}
+
+	public void flush() {
+		this.advertisementRepository.flush();
 	}
 }
