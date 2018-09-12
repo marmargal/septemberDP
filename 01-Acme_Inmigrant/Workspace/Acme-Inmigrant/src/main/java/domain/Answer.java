@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -33,6 +34,7 @@ public class Answer extends DomainEntity {
 	private Date moment;
 
 	@NotBlank
+	@SafeHtml
 	public String getReply() {
 		return reply;
 	}

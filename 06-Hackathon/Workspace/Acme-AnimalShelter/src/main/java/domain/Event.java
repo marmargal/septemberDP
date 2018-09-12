@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,6 +46,7 @@ public class Event extends DomainEntity{
 	
 	
 	@NotBlank
+	@SafeHtml
 	public String getAddress() {
 		return address;
 	}
@@ -54,6 +56,7 @@ public class Event extends DomainEntity{
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}
@@ -63,6 +66,7 @@ public class Event extends DomainEntity{
 	}
 	
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return title;
 	}
@@ -72,6 +76,7 @@ public class Event extends DomainEntity{
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getNameSite() {
 		return nameSite;
 	}
@@ -82,6 +87,7 @@ public class Event extends DomainEntity{
 
 	@NotBlank
 	@URL
+	@SafeHtml
 	public String getPlacard() {
 		return placard;
 	}

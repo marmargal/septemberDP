@@ -14,6 +14,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -33,6 +34,7 @@ public class EducationSection extends DomainEntity {
 	private String level;
 	
 	@NotBlank
+	@SafeHtml
 	public String getNameDegree() {
 		return nameDegree;
 	}
@@ -41,6 +43,7 @@ public class EducationSection extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getInstitution() {
 		return institution;
 	}
@@ -63,6 +66,7 @@ public class EducationSection extends DomainEntity {
 	@Valid
 	@NotNull
 	@Pattern(regexp = "^((NONE)|(ELEMENTARY)|(PRIMARY)|(SECONDARY)|(HIGH)|(BACHELOR)|(UNIVERSITY_DEGREE)|(MASTER)|(DOCTORATE))$")
+	@SafeHtml
 	public String getLevel() {
 		return level;
 	}

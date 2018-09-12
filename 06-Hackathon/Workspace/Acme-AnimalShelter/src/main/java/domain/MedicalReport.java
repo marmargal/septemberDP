@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -35,6 +36,7 @@ public class MedicalReport extends DomainEntity{
 	private Date date;
 	
 	@NotBlank
+	@SafeHtml
 	public String getDiagnosis() {
 		return diagnosis;
 	}
@@ -43,6 +45,7 @@ public class MedicalReport extends DomainEntity{
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getInitialState() {
 		return initialState;
 	}
@@ -52,6 +55,7 @@ public class MedicalReport extends DomainEntity{
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getTreatment() {
 		return treatment;
 	}

@@ -18,6 +18,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -50,6 +51,7 @@ public class Message extends DomainEntity{
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getSubject() {
 		return subject;
 	}
@@ -59,6 +61,7 @@ public class Message extends DomainEntity{
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getBody() {
 		return body;
 	}
@@ -69,6 +72,7 @@ public class Message extends DomainEntity{
 
 	@NotBlank
 	@Pattern(regexp = "^((LOW)|(HIGH)|(NEUTRAL))$")
+	@SafeHtml
 	public String getPriority() {
 		return priority;
 	}

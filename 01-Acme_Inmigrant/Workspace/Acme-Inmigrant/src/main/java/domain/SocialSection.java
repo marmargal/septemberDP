@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -26,6 +27,7 @@ public class SocialSection extends DomainEntity {
 	private String profileLink;
 	
 	@NotBlank
+	@SafeHtml
 	public String getNickName() {
 		return nickName;
 	}
@@ -34,6 +36,7 @@ public class SocialSection extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getSocialNetwork() {
 		return socialNetwork;
 	}
@@ -44,6 +47,7 @@ public class SocialSection extends DomainEntity {
 
 	@URL
 	@NotBlank
+	@SafeHtml
 	public String getProfileLink() {
 		return profileLink;
 	}
