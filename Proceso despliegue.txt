@@ -1,0 +1,67 @@
+
+EJECUTAR EL POPULATE VACÍO
+
+-----------------------------------------------------------------------
+
+DESPLIEGUE CON BOSS:
+
+cd "c:\Program Files\MySQL"
+cd "MySQL Server 5.5"
+cd "bin"
+
+mysqldump -uroot -pV3rY=$tR0nG=P@$$w0rd$ Acme-Newspaper > C:\Temp\Create-Acme-Newspaper.sql
+
+-----------------------------------------------------------------------
+
+En el Script generado meter la cabecera que hay en el que tenemos ya y revisarla.
+
+Introducir al final del script -------->	commit;
+
+-----------------------------------------------------------------------
+
+EJECUTAR EL SCRIPT
+
+mysql -uroot -pV3rY=$tR0nG=P@$$w0rd$ < C:\Temp\Create-Acme-Newspaper.sql
+
+-----------------------------------------------------------------------
+
+EXPORTAR EL WAR. FILE
+
+Check en:
+
+	-Optimize for a specific server runtime
+	-Overwrite existing file
+
+-----------------------------------------------------------------------
+
+PREPARACIÓN MÁQUINA PRE-PRODUCTION:
+
+cd %windir%\system32\drivers\etc
+
+notepad hosts
+
+	Añadir la línea: 127.0.0.1	www.acme.com
+
+
+	Refrescar la DNS:
+
+ipconfig /flushdns
+
+-----------------------------------------------------------------------
+
+CONFIGURAR EL SERVIDOR EN LA MÁQUINA DE PRE-PRODUCCIÓN
+
+http://localhost/manager
+
+	Datos de acceso:
+		admin
+		T0mC@t=Adm1n1$trat0R
+
+Borrar todos los Path excepto /manager
+
+-----------------------------------------------------------------------
+
+DEPLOY 
+
+Context Path: ------------------->		/
+WAR or directory URL: ----------->		Donde esté el archivo WAR
