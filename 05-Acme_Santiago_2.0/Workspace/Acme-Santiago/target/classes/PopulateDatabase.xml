@@ -244,6 +244,11 @@
 				<ref bean="inn1" />
 			</list>
 		</property>
+		<property name="amenities">
+			<list>
+				<ref bean="amenity1" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="innkeeper2" class="domain.Innkeeper">
@@ -257,6 +262,11 @@
 		<property name="inns">
 			<list>
 				<ref bean="inn2" />
+			</list>
+		</property>
+		<property name="amenities">
+			<list>
+				<ref bean="amenity2" />
 			</list>
 		</property>
 	</bean>
