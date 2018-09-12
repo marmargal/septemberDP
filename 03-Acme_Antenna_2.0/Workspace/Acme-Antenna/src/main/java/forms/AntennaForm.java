@@ -3,6 +3,7 @@ package forms;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
@@ -49,7 +50,7 @@ public class AntennaForm {
 		this.model = model;
 	}
 	
-	@NotBlank
+	@Range(min=-90,max=90)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getLatitude() {
 		return latitude;
@@ -58,7 +59,7 @@ public class AntennaForm {
 		this.latitude = latitude;
 	}
 	
-	@NotBlank
+	@Range(min=-180,max=180)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getLongitude() {
 		return longitude;
@@ -67,7 +68,7 @@ public class AntennaForm {
 		this.longitude = longitude;
 	}
 	
-	@NotBlank
+	@Range(min=0,max=360)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAzimuth() {
 		return azimuth;
@@ -76,7 +77,7 @@ public class AntennaForm {
 		this.azimuth = azimuth;
 	}
 	
-	@NotBlank
+	@Range(min=0,max=90)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getElevation() {
 		return elevation;
@@ -85,7 +86,7 @@ public class AntennaForm {
 		this.elevation = elevation;
 	}
 	
-	@NotBlank
+	@Range(min=0,max=100)
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getQuality() {
 		return quality;

@@ -63,6 +63,9 @@ public class AdvertisementService {
 	public Advertisement save(final Advertisement advertisement) {
 		Assert.notNull(advertisement);
 		Advertisement res;
+		if (advertisement.getId() == 0) {
+			this.agentService.checkAuthority();
+		}
 		Collection<String> tabooWords = new ArrayList<String>();
 		tabooWords = configurationService.findTabooWords();
 		for (String s : tabooWords) {
@@ -89,11 +92,6 @@ public class AdvertisementService {
 		Assert.notNull(advertisement);
 		Assert.isTrue(advertisement.getId() != 0);
 		Assert.isTrue(this.advertisementRepository.exists(advertisement.getId()));
-		domain.Agent agent = this.findAgentByAdvertisement(advertisement
-				.getId());
-		Collection<Advertisement> advertisements = new ArrayList<>();
-		advertisements = agent.getAdvertisements();
-		advertisements.remove(advertisement);
 		Collection<Authority> authority = LoginService.getPrincipal()
 				.getAuthorities();
 		Assert.notNull(authority);
@@ -101,7 +99,16 @@ public class AdvertisementService {
 		user.setAuthority("USER");
 		Authority admin = new Authority();
 		admin.setAuthority("ADMIN");
-		Assert.isTrue(authority.contains(user) || authority.contains(admin));
+		Authority agentAux = new Authority();
+		agentAux.setAuthority("AGENT");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin)
+				|| authority.contains(agentAux));
+		domain.Agent agent = this.findAgentByAdvertisement(advertisement
+				.getId());
+		Collection<Advertisement> advertisements = new ArrayList<>();
+		advertisements = agent.getAdvertisements();
+		advertisements.remove(advertisement);
+
 		this.advertisementRepository.delete(advertisement);
 	}
 
@@ -121,6 +128,11 @@ public class AdvertisementService {
 	}
 
 	public Collection<Advertisement> findAdvertisementTaboo() {
+		this.administratorService.checkAuthority();
 		return advertisementRepository.findAdvertisementTaboo();
+	}
+
+	public void flush() {
+		this.advertisementRepository.flush();
 	}
 }

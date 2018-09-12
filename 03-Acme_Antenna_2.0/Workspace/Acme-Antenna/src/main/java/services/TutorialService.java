@@ -44,6 +44,9 @@ public class TutorialService {
 	@Autowired
 	private ConfigurationService configurationService;
 
+	@Autowired
+	private UserService userService;
+	
 	// Constructors
 
 	public TutorialService() {
@@ -53,6 +56,7 @@ public class TutorialService {
 	// Simple CRUD methods
 
 	public Tutorial create() {
+		userService.checkAuthority();
 		Tutorial res;
 		res = new Tutorial();
 
@@ -117,31 +121,24 @@ public class TutorialService {
 	
 	// Other business method --------------------------------------------------
 	
+
 	public TutorialForm construct(Tutorial tutorial) {
 		Assert.notNull(tutorial);
 		TutorialForm res = new TutorialForm();
 		
-		StringBuilder csvBuilder = new StringBuilder();
-		for(String url : tutorial.getPictures()){
-		    csvBuilder.append(url);
-		    csvBuilder.append(",");
-		}
-		String pictures = csvBuilder.toString();
-		
+		res.setPictures(tutorial.getPictures());
 		res.setId(tutorial.getId());
 		res.setTitle(tutorial.getTitle());
 		res.setText(tutorial.getText());
-		res.setPictures(pictures);
 		res.setActorId(tutorial.getActor().getId());
 		
 		return res;
 	}
-
+	
 	public Tutorial reconstruct(TutorialForm tutorialForm,
 			BindingResult binding){
 		Assert.notNull(tutorialForm);
 		Tutorial res;
-		Collection<String> pictures = new ArrayList<String>();
 //		Date moment = new Date(System.currentTimeMillis() - 1000);
 		
 		if(tutorialForm.getId()!=0)
@@ -149,14 +146,9 @@ public class TutorialService {
 		else
 			res = this.create();
 		
-		String[] parts = tutorialForm.getPictures().split(",");
-		for(String url: parts){
-			pictures.add(url);
-		}
-		
 		res.setTitle(tutorialForm.getTitle());
 		res.setText(tutorialForm.getText());
-		res.setPictures(pictures);
+		res.setPictures(tutorialForm.getPictures());
 		
 		if(binding!=null)
 			this.validator.validate(res,binding);

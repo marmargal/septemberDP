@@ -44,6 +44,7 @@ public class MedicalReportService {
 	// Simple CRUD methods
 
 	public MedicalReport create(int petId) {
+		this.veterinaryService.checkAuthority();
 		MedicalReport res = new MedicalReport();
 		
 		Pet pet = this.petService.findOne(petId);

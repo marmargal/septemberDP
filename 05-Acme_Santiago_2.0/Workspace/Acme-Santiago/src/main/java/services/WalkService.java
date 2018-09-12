@@ -24,6 +24,9 @@ public class WalkService {
 	private WalkRepository walkRepository;
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private CompostelaService compostelaService;
 
 	// Supporting services
@@ -67,6 +70,7 @@ public class WalkService {
 
 	public Walk save(Walk walk) {
 		Assert.notNull(walk);
+		this.userService.checkAuthority();
 		Walk res;
 		res = this.walkRepository.save(walk);
 		return res;
@@ -78,16 +82,16 @@ public class WalkService {
 		Assert.isTrue(this.walkRepository.exists(walk.getId()));
 		Collection<Compostela> compostelas = this.compostelaService
 				.findCompostelaByWalk(walk);
-			
-		
+
 		for (Compostela compostela : compostelas) {
 			compostelaService.delete(compostela);
 		}
-		
+
 		this.walkRepository.delete(walk);
 	}
 
 	public Collection<Walk> findWalkByUser(int userId) {
+		this.userService.checkAuthority();
 		return this.walkRepository.findWalkByUser(userId);
 	}
 

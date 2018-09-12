@@ -101,8 +101,7 @@
 							code="master.page.route.search" /></a></li>
 				<li><a href="user/list.do"><spring:message
 							code="master.page.user.list" /></a></li>
-				<li><a href="inn/list.do"><spring:message
-							code="master.page.inn.list" /></a></li>
+
 			</security:authorize>
 
 			<security:authorize access="isAuthenticated()">
@@ -110,6 +109,8 @@
 							code="master.page.route.search" /></a></li>
 				<li><a href="user/list.do"><spring:message
 							code="master.page.user.list" /></a></li>
+				<li><a href="inn/list.do"><spring:message
+							code="master.page.inn.list" /></a></li>
 				<li><a href="inn/list.do"><spring:message
 							code="master.page.inn.list" /></a></li>
 			</security:authorize>

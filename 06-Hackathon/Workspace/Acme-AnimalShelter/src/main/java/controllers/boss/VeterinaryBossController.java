@@ -10,6 +10,9 @@
 
 package controllers.boss;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.FolderService;
 import services.VeterinaryService;
 import controllers.AbstractController;
+import domain.Folder;
 import domain.Veterinary;
 import forms.ActorForm;
 
@@ -36,6 +41,10 @@ public class VeterinaryBossController extends AbstractController {
 	
 	@Autowired
 	private ActorService actorService;
+	
+
+	@Autowired
+	private FolderService folderService;
 	
 	
 	// Constructors -----------------------------------------------------------
@@ -76,6 +85,23 @@ public class VeterinaryBossController extends AbstractController {
 			try {
 				veterinary = veterinaryService.reconstruct(veterinaryForm, binding);
 				this.veterinaryService.save(veterinary);
+				
+				
+				Collection<Folder> folders = new ArrayList<Folder>();
+				Folder inBox = this.folderService.create();
+				Folder outBox = this.folderService.create();
+				Folder trash = this.folderService.create();
+				inBox.setName("In Box");
+				outBox.setName("Out Box");
+				trash.setName("Trash Box");
+				inBox.setActor(veterinary);
+				outBox.setActor(veterinary);
+				trash.setActor(veterinary);
+				
+				folders.add(inBox);
+				folders.add(outBox);
+				folders.add(trash);
+				veterinary.setFolders(folders);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(veterinaryForm, "actor.commit.error");

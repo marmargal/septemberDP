@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -53,7 +54,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
-	// TODO: hacer pattern.
+	@Pattern(regexp = "(^\\d{4}\\d+)")
 	public String getCountryCode() {
 		return countryCode;
 	}

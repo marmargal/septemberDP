@@ -26,6 +26,9 @@ public class CompostelaService {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private AdministratorService administratorService;
+
 	// Constructors
 	public CompostelaService() {
 		super();
@@ -58,7 +61,11 @@ public class CompostelaService {
 	public Compostela save(Compostela compostela) {
 		Assert.notNull(compostela);
 		Compostela res;
-
+		if (compostela.getId() == 0) {
+			this.userService.checkAuthority();
+		} else {
+			this.administratorService.checkAuthority();
+		}
 		if (compostela.isfinallyDecision() == true
 				&& compostela.isDecision() == true) {
 			compostela.setDate(new Date(System.currentTimeMillis() - 100));
@@ -83,11 +90,16 @@ public class CompostelaService {
 
 	public Collection<Compostela> findCompostelaByFinallyDecision(
 			boolean decision) {
+		this.administratorService.checkAuthority();
 		return this.compostelaRepository
 				.findCompostelaByFinallyDecision(decision);
 	}
 
 	public Collection<Compostela> findCompostelaByWalk(Walk walk) {
 		return this.compostelaRepository.findCompostelaByWalk(walk);
+	}
+
+	public void flush() {
+		this.compostelaRepository.flush();
 	}
 }
