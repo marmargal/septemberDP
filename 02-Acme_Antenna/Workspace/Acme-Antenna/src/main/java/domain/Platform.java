@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -25,6 +26,7 @@ public class Platform extends DomainEntity{
 	private String description;
 	
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -34,6 +36,7 @@ public class Platform extends DomainEntity{
 	}
 	
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}
