@@ -24,6 +24,9 @@ public class CompanyService {
 
 	// Suporting services
 
+	@Autowired
+	private BossService bossService;
+	
 	// Constructors
 
 	public CompanyService() {
@@ -33,6 +36,7 @@ public class CompanyService {
 	// Simple CRUD methods
 
 	public Company create() {
+		bossService.checkAuthority();
 		Company res = new Company();
 		
 		Collection<Stand> stands = new ArrayList<Stand>();
@@ -65,14 +69,19 @@ public class CompanyService {
 	}
 
 	public void delete(Company company) {
+		this.bossService.checkAuthority();
 		Assert.notNull(company);
 		Assert.isTrue(company.getId() != 0);
 		Assert.isTrue(companyRepository.exists(company.getId()));
 		companyRepository.delete(company);
 	}
 
+	
+
 	// Other business methods
 	
-	
+	public void flush() {
+		this.companyRepository.flush();
+	}
 
 }

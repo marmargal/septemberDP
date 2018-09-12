@@ -74,6 +74,10 @@ public class WarehouseService {
 		warehouseRepository.delete(warehouse);
 	}
 
+	public void flush() {
+		this.warehouseRepository.flush();
+	}
+
 	// Other business methods
 	
 	
