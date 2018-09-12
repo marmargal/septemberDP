@@ -132,6 +132,7 @@ public class EmployeeBossController extends AbstractController {
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", employees);
 		result.addObject("viewForAssign", true);
+		result.addObject("requestURI", "employee/boss/list.do");
 
 		return result;
 	}

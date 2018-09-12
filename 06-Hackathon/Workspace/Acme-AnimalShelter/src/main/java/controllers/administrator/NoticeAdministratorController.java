@@ -50,6 +50,7 @@ public class NoticeAdministratorController extends AbstractController {
 		
 		result = new ModelAndView("notice/list");
 		result.addObject("notices", notices);
+		result.addObject("requestURI", "notice/administrator/list.do");
 
 		return result;
 	}

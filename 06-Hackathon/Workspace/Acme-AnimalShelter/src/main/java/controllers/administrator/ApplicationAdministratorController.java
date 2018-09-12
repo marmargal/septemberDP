@@ -52,6 +52,7 @@ public class ApplicationAdministratorController extends AbstractController {
 		result.addObject("applications", applications);
 		result.addObject("method", "listPending");
 		result.addObject("viewForDelete" , true);
+		result.addObject("requestURI", "application/administrator/listPending.do");
 
 		return result;
 	}
@@ -67,6 +68,7 @@ public class ApplicationAdministratorController extends AbstractController {
 		result.addObject("applications", applications);
 		result.addObject("method", "listClientBan");
 		result.addObject("viewForDelete" , true);
+		result.addObject("requestURI", "application/administrator/listClientBan.do");
 
 		return result;
 	}

@@ -61,6 +61,7 @@ public class PetVeterinaryController extends AbstractController {
 		}
 		result.addObject("pets", pets);
 		result.addObject("viewForDelete" , true);
+		result.addObject("requestURI", "pet/veterinary/list.do");
 	
 		return result;
 	}
