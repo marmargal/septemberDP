@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -28,6 +29,7 @@ public class Country extends DomainEntity {
 	private String link;
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -37,6 +39,7 @@ public class Country extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getIsoCode() {
 		return isoCode;
 	}
@@ -46,6 +49,7 @@ public class Country extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getFlag() {
 		return flag;
 	}
@@ -55,6 +59,7 @@ public class Country extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getLink() {
 		return link;
 	}

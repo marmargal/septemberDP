@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -30,6 +31,7 @@ public class Report extends DomainEntity {
 	private String picture;
 
 	@NotBlank
+	@SafeHtml
 	public String getText() {
 		return text;
 	}
@@ -39,6 +41,7 @@ public class Report extends DomainEntity {
 	}
 
 	@URL
+	@SafeHtml
 	public String getPicture() {
 		return picture;
 	}
