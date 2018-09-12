@@ -29,7 +29,11 @@
 
 	<security:authorize access="hasRole('USER')">
 		<acme:column property="title" code="comment.title" />
-		<acme:column property="moment" code="comment.moment" />
+		
+		<spring:message var="formatDate" code="comment.format.date"/>
+		<spring:message code="comment.moment" var="momentHeader" />
+		<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
+		
 		<acme:column property="text" code="comment.text" />
 		<display:column>
 			<jstl:forEach var="p" items="${row.pictures }">
@@ -46,7 +50,11 @@
 				code="chirp.edit" />
 		</display:column>
 		<acme:column property="title" code="comment.title" />
-		<acme:column property="moment" code="comment.moment" />
+		
+		<spring:message var="formatDate" code="comment.format.date"/>
+		<spring:message code="comment.moment" var="momentHeader" />
+		<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
+		
 		<acme:column property="text" code="comment.text" />
 		<acme:column code="comment.rating" property="rating" />
 		<acme:column property="taboo" code="comment.taboo" />

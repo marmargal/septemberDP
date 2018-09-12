@@ -31,7 +31,11 @@
 		<display:column><acme:links url="chirp/administrator/edit.do?chirpId=${row.id}" code="chirp.edit" /></display:column>
 
 		<acme:column property="title" code="chirp.title" />
-		<acme:column property="moment" code="chirp.moment" />
+		
+		<spring:message var="formatDate" code="chirp.format.date"/>
+		<spring:message code="chirp.moment" var="momentHeader" />
+		<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
+		
 		<acme:column property="text" code="chirp.text" />
 		
 	</security:authorize>

@@ -33,8 +33,11 @@
 	</security:authorize>
 	<security:authorize access="hasRole('USER')">
 		<acme:column property="user.name" code="compostela.user" />
-		<acme:column property="date" code="compostela.date" />
-
+		
+		<spring:message var="formatDate" code="compostela.format.date"/>
+		<spring:message code="compostela.date" var="momentHeader" />
+		<display:column property="date" title="${momentHeader}" format="${formatDate}" sortable="true" />
+		
 		<display:column>
 			<a href="compostela/user/display.do?compostelaId=${row.id}"><spring:message
 					code="compostela.display" /></a>
