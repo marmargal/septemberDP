@@ -424,9 +424,9 @@ public class UseCaseBoss extends AbstractTest {
 	// por lo que no existe un caso de uso negativo para listar eventos.
 	@Test
 	public void listarYEliminarEventos(){
-		final Object testingData [][] = {
+		final Object testingData [][] = { //TODO
 				// Positive
-				{"boss1", "event1", null},
+//				{"boss1", "event1", null},
 				// Negative
 //				{"boss1", "event2", IllegalArgumentException.class}, // no se puede eliminar un evento que no sea suyo
 //				{"employee1", "event1", IllegalArgumentException.class}, // usuario no válido para eliminar
@@ -451,7 +451,7 @@ public class UseCaseBoss extends AbstractTest {
 			
 			// eliminar:
 			final int eventId = this.getEntityId(event);
-			final Event eventFinal = this.eventService.findOne(eventId);
+			Event eventFinal = this.eventService.findOne(eventId);
 			
 			this.eventService.delete(eventFinal);
 			
@@ -459,6 +459,8 @@ public class UseCaseBoss extends AbstractTest {
 			this.eventService.flush();
 		}catch (final Throwable oops) {
 			caught = oops.getClass();
+			System.out.println(oops.getMessage());
+			System.out.println(oops);
 		}
 		super.checkExceptions(expected, caught);
 		
@@ -469,40 +471,30 @@ public class UseCaseBoss extends AbstractTest {
 	public void crearYEditarEmpresas(){
 		final Object testingData [][] = {
 				// Positive
-//				{"boss1", "name", "description", "articles", "https://logo.com", "event1", null},
+				{"boss1", "company1", null},
 				// Negative
-//				{"boss1", "name", "description", "articles", "logo", "event1", IllegalArgumentException.class}, // atributo mal
-//				{"employee", "name", "description", "articles", "logo", "event1", IllegalArgumentException.class} // usuario no válido
+				{"admin", "company1", IllegalArgumentException.class}, // usuario no valido
+				{"employee", "company1", IllegalArgumentException.class} // usuario no válido
 		};
 		for (int i = 0; i < testingData.length; i++){
 			this.crearYEditarEmpresasTemplate((String) testingData[i][0], // Username login
-					(String) testingData[i][1], // name
-					(String) testingData[i][2], // description
-					(String) testingData[i][3], // articles
-					(String) testingData[i][4], // logo
-					(String) testingData[i][5], // event
-					(Class<?>) testingData[i][6]);
+					(String) testingData[i][1], // company
+					(Class<?>) testingData[i][2]);
 		}
 	}
 
-	private void crearYEditarEmpresasTemplate(String boss, String event,
-			String name, String description, String articles, String logo, Class<?> expected) {
+	private void crearYEditarEmpresasTemplate(String boss, String company, Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 
 		try {
 			super.authenticate(boss);
+
+			final int companyId = this.getEntityId(company);
+			final Company companyFinal = this.companyService.findOne(companyId);
 			
-			final int eventId = this.getEntityId(event);
-			final Event eventFinal = this.eventService.findOne(eventId);
-			
-			Company company = this.companyService.create();
-			company.setName(name);
-			company.setDescription(description);
-			company.setArticles(articles);
-			company.setLogo(logo);
-			company.setEvent(eventFinal);
-			this.companyService.save(company);
+			companyFinal.setName("new name");
+			this.companyService.save(companyFinal);
 			
 			super.unauthenticate();
 			this.companyService.flush();
@@ -515,7 +507,7 @@ public class UseCaseBoss extends AbstractTest {
 	
 	//f. listar y eliminar empresas
 	@Test
-	public void listarYEliminarEmpresas(){
+	public void listarYEliminarEmpresas(){ // TODO
 		final Object testingData [][] = {
 				// Positive
 //				{"boss1", "company1", null},
@@ -539,16 +531,17 @@ public class UseCaseBoss extends AbstractTest {
 			super.authenticate(boss);
 			
 			// listar:
-			this.companyService.findAll();
+//			this.companyService.findAll();
 			
 			// eliminar:
 			final int companyId = this.getEntityId(company);
-			final Event companyFinal = this.eventService.findOne(companyId);
+			final Company companyFinal = this.companyService.findOne(companyId);
 			
-			this.eventService.delete(companyFinal);
+			this.companyService.delete(companyFinal);
 			
-			super.unauthenticate();
+			
 			this.companyService.flush();
+			super.unauthenticate();
 		}catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
@@ -561,42 +554,31 @@ public class UseCaseBoss extends AbstractTest {
 	public void crearYEditarStands(){
 		final Object testingData [][] = {
 				// Positive
-//				{"boss1", "234", "fliers", "true", "company1", "employee1", null},
+				{"boss1", "stand1", null},
 				// Negative
-//				{"boss1", "234", "fliers", "true", "", "employee1", IllegalArgumentException.class}, // company null
-//				{"boss1", "", "fliers", "true", "company1", "employee1", null}, // atributo vacío 
+				{"admin", "stand1", IllegalArgumentException.class}, // usuario no valido
+				{"veterinary1", "stand1", IllegalArgumentException.class}, // usuario no valido
 		};
 		for (int i = 0; i < testingData.length; i++){
 			this.crearYEditarStandsTemplate((String) testingData[i][0], // Username login
-					(Integer)Integer.parseInt((String) testingData[i][1]), // numMaxVoluntaries
-					(String) testingData[i][2], // fliers
-					(Boolean)Boolean.parseBoolean((String) testingData[i][3]), // isOfCompany
-					(String) testingData[i][4], // company
-					(String) testingData[i][5], // employee
-					(Class<?>) testingData[i][6]);
+					(String) testingData[i][1], // stand
+					(Class<?>) testingData[i][2]);
 		}
 	}
 
-	private void crearYEditarStandsTemplate(String boss, Integer numMaxVoluntaries,
-			String fliers, Boolean isOfCompany, String company, String employee, Class<?> expected) {
+	private void crearYEditarStandsTemplate(String boss, 
+			String stand, Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 
 		try {
 			super.authenticate(boss);
 			
-			final int companyId = this.getEntityId(company);
-			final int employeeId = this.getEntityId(employee);
-			final Company companyFinal = this.companyService.findOne(companyId);
-			final Employee employeeFinal = this.employeeService.findOne(employeeId);
-			
-			Stand stand = this.standService.create();
-			stand.setNumMaxVoluntaries(numMaxVoluntaries);
-			stand.setFliers(fliers);
-			stand.setIsOfCompany(isOfCompany);
-			stand.setCompany(companyFinal);
-			stand.setEmployee(employeeFinal);
-			this.standService.save(stand);
+			this.standService.create();
+			final int standId = this.getEntityId(stand);
+			final Stand standFinal = this.standService.findOne(standId);
+			standFinal.setNumMaxVoluntaries(123456);
+			this.standService.save(standFinal);
 			
 			
 			super.unauthenticate();
@@ -612,7 +594,7 @@ public class UseCaseBoss extends AbstractTest {
 	public void listarYEliminarStands(){
 		final Object testingData [][] = {
 				// Positive
-//				{"boss1", "stand1", null},
+				{"boss1", "stand1", null},
 				// Negative
 //				{"admin", "stand1", IllegalArgumentException.class}, // usuario no valido
 //				{"employee", "stand1", IllegalArgumentException.class}, // usuario no valido 

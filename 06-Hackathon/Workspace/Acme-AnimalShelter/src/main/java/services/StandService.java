@@ -71,6 +71,7 @@ public class StandService {
 		Assert.notNull(stand);
 		Assert.isTrue(stand.getId() != 0);
 		Assert.isTrue(standRepository.exists(stand.getId()));
+		stand.getEmployee().setStand(null);
 		standRepository.delete(stand);
 	}
 

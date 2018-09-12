@@ -63,6 +63,7 @@ public class CompanyService {
 	}
 
 	public Company save(Company company) {
+		this.bossService.checkAuthority();
 		Company res;
 		res = companyRepository.save(company);
 		return res;

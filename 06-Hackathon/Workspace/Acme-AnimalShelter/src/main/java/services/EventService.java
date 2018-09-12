@@ -81,7 +81,8 @@ public class EventService {
 		Boss boss = this.bossService.findByPrincipal();
 		Assert.isTrue(boss.getCenters().contains(event.getCenter()));
 		
-		eventRepository.delete(event);
+		
+		this.eventRepository.delete(event);
 	}
 
 	// Other business methods
