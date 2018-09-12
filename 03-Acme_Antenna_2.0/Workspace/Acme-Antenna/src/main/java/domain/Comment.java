@@ -28,6 +28,7 @@ public class Comment extends DomainEntity{
 	private String title;
 	private String text;
 	private String pictures;
+	private int numberOfPictures;
 	
 	@Past
 	public Date getMoment() {
@@ -111,6 +112,14 @@ public class Comment extends DomainEntity{
 
 	public void setReplies(Collection<Comment> replies) {
 		this.replies = replies;
+	}
+
+	public int getNumberOfPictures() {
+		return numberOfPictures;
+	}
+
+	public void setNumberOfPictures(int numberOfPictures) {
+		this.numberOfPictures = numberOfPictures;
 	}
 	
 	

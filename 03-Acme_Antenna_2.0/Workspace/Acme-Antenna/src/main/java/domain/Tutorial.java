@@ -30,6 +30,7 @@ public class Tutorial extends DomainEntity{
 	private String title;
 	private String text;
 	private String pictures;
+	private int numberOfPictures;
 	
 	@Past
 	@NotNull
@@ -90,5 +91,13 @@ public class Tutorial extends DomainEntity{
 
 	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public int getNumberOfPictures() {
+		return numberOfPictures;
+	}
+
+	public void setNumberOfPictures(int numberOfPictures) {
+		this.numberOfPictures = numberOfPictures;
 	}
 }

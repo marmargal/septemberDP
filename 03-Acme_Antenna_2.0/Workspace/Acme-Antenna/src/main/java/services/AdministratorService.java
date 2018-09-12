@@ -210,18 +210,16 @@ public class AdministratorService {
 
 	}
 
-	//TODO: Descomentar
-//	public Collection<Double> dataNumPicturesPerTutorial() {
-//		return administratorRepository.dataNumPicturesPerTutorial();
-//
-//	}
+	public Collection<Double> dataNumPicturesPerTutorial() {
+		return administratorRepository.dataNumPicturesPerTutorial();
+
+	}
 
 	
-	//TODO: Descomentar
-//	public Collection<Double> dataNumPicturesPerComment() {
-//		return administratorRepository.dataNumPicturesPerComment();
-//
-//	}
+	public Collection<Double> dataNumPicturesPerComment() {
+		return administratorRepository.dataNumPicturesPerComment();
+
+	}
 
 	public Collection<Double> dataNumRequestPerUser() {
 		return administratorRepository.dataNumRequestPerUser();
