@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.FolderService;
 import services.VoluntaryService;
+import domain.Folder;
 import domain.Voluntary;
 import forms.ActorForm;
 
@@ -21,7 +27,13 @@ public class RegisterVoluntaryController extends AbstractController {
 
 	@Autowired
 	private VoluntaryService voluntaryService;
+	
+	@Autowired
+	private ActorService actorService;
 
+
+	@Autowired
+	private FolderService folderService;
 	// Constructors ---------------------------------------------------------
 
 	public RegisterVoluntaryController() {
@@ -45,13 +57,17 @@ public class RegisterVoluntaryController extends AbstractController {
 	public ModelAndView save(@Valid final ActorForm voluntaryForm, final BindingResult binding) {
 		ModelAndView res;
 		Voluntary voluntary;
+		boolean validPhone = this.actorService.validPhoneNumber(voluntaryForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(voluntaryForm, "actor.params.error");
 		else if (!voluntaryForm.getRepeatPassword().equals(voluntaryForm.getPassword()))
 			res = this.createEditModelAndView(voluntaryForm, "actor.commit.errorPassword");
-		else if (voluntaryForm.getTermsAndConditions() == false) {
+		else if (voluntaryForm.getTermsAndConditions() == false) 
 			res = this.createEditModelAndView(voluntaryForm, "actor.params.errorTerms");
+		else if (!validPhone && (voluntaryForm.getAceptPhoneNumberConditions() == null || voluntaryForm.getAceptPhoneNumberConditions() == false)) {
+			voluntaryForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndView(voluntaryForm, "actor.params.mustAcceptPhoneNumber");
 		} else
 			try {
 				voluntary = voluntaryService.reconstruct(voluntaryForm, binding);
@@ -83,15 +99,36 @@ public class RegisterVoluntaryController extends AbstractController {
 	public ModelAndView saveEdit(@Valid final ActorForm voluntaryForm, final BindingResult binding) {
 		ModelAndView res;
 		Voluntary voluntary;
+		boolean validPhone = this.actorService.validPhoneNumber(voluntaryForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndViewEdit(voluntaryForm, "actor.params.error");
 		else if (!voluntaryForm.getRepeatPassword().equals(voluntaryForm.getPassword()))
 			res = this.createEditModelAndViewEdit(voluntaryForm, "actor.commit.errorPassword");
-		else
+		else if (!validPhone && (voluntaryForm.getAceptPhoneNumberConditions() == null || voluntaryForm.getAceptPhoneNumberConditions() == false)) {
+			voluntaryForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndViewEdit(voluntaryForm, "actor.params.mustAcceptPhoneNumber");
+		} else
 			try {
 				voluntary = voluntaryService.reconstruct(voluntaryForm, binding);
 				this.voluntaryService.save(voluntary);
+				
+				Collection<Folder> folders = new ArrayList<Folder>();
+				Folder inBox = this.folderService.create();
+				Folder outBox = this.folderService.create();
+				Folder trash = this.folderService.create();
+				inBox.setName("In Box");
+				outBox.setName("Out Box");
+				trash.setName("Trash Box");
+				inBox.setActor(voluntary);
+				outBox.setActor(voluntary);
+				trash.setActor(voluntary);
+				
+				folders.add(inBox);
+				folders.add(outBox);
+				folders.add(trash);
+				voluntary.setFolders(folders);
+				
 				res = new ModelAndView("redirect:/j_spring_security_logout");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndViewEdit(voluntaryForm, "actor.commit.error");

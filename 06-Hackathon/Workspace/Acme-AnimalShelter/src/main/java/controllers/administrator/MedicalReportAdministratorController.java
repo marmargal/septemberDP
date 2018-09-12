@@ -51,6 +51,7 @@ public class MedicalReportAdministratorController extends AbstractController {
 		result = new ModelAndView("medicalReport/list");
 		result.addObject("medicalReports", medicalReports);
 		result.addObject("viewForDelete" , true);
+		result.addObject("requestURI", "medicalReport/administrator/list.do");
 
 		return result;
 	}

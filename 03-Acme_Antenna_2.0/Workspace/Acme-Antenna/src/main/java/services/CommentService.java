@@ -80,12 +80,14 @@ public class CommentService {
 		this.userService.checkAuthority();
 		Assert.notNull(comment);
 		
+		
+		String[] pictures = comment.getPictures().split(",");
+		comment.setNumberOfPictures(pictures.length);
+		
 		if(comment.getId() == 0){
 			Date moment = new Date(System.currentTimeMillis()-1000);
 			comment.setMoment(moment);
 		}
-		
-		
 		
 		User user;
 		user = this.userService.findByPrincipal();

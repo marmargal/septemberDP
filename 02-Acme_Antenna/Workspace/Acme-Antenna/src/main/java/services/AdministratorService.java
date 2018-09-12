@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.transaction.Transactional;
@@ -211,15 +210,13 @@ public class AdministratorService {
 
 	}
 
-	// TODO: Query por descomentar
-//	public Collection<Double> dataNumPicturesPerTutorial() {
-//		return administratorRepository.dataNumPicturesPerTutorial();
-//
-//	}
+	public Collection<Double> dataNumPicturesPerTutorial() {
+		return administratorRepository.dataNumPicturesPerTutorial();
 
-	// TODO: Query por descomentar
-//	public Collection<Double> dataNumPicturesPerComment() {
-//		return administratorRepository.dataNumPicturesPerComment();
-//
-//	}
+	}
+
+	public Collection<Double> dataNumPicturesPerComment() {
+		return administratorRepository.dataNumPicturesPerComment();
+
+	}
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.VeterinaryService;
 import domain.Veterinary;
 import forms.ActorForm;
@@ -21,6 +22,9 @@ public class VeterinaryController extends AbstractController {
 
 	@Autowired
 	private VeterinaryService veterinaryService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -47,12 +51,16 @@ public class VeterinaryController extends AbstractController {
 	public ModelAndView saveEdit(@Valid final ActorForm veterinaryForm, final BindingResult binding) {
 		ModelAndView res;
 		Veterinary veterinary;
+		boolean validPhone = this.actorService.validPhoneNumber(veterinaryForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndViewEdit(veterinaryForm, "actor.params.error");
 		else if (!veterinaryForm.getRepeatPassword().equals(veterinaryForm.getPassword()))
 			res = this.createEditModelAndViewEdit(veterinaryForm, "actor.commit.errorPassword");
-		else
+		else if (!validPhone && (veterinaryForm.getAceptPhoneNumberConditions() == null || veterinaryForm.getAceptPhoneNumberConditions() == false)) {
+			veterinaryForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndViewEdit(veterinaryForm, "actor.params.mustAcceptPhoneNumber");
+		} else
 			try {
 				veterinary = veterinaryService.reconstruct(veterinaryForm, binding);
 				this.veterinaryService.save(veterinary);

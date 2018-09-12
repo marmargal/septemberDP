@@ -46,6 +46,7 @@ public class CenterEmployeeController extends AbstractController {
 		
 		result = new ModelAndView("center/list");
 		result.addObject("centers", center);
+		result.addObject("requestURI", "center/employee/list.do");
 	
 		return result;
 	}

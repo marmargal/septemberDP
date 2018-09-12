@@ -10,6 +10,9 @@
 
 package controllers.boss;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.BossService;
+import services.FolderService;
 import controllers.AbstractController;
 import domain.Boss;
+import domain.Folder;
 import forms.ActorForm;
 
 @Controller
@@ -33,6 +39,11 @@ public class BossBossController extends AbstractController {
 	@Autowired
 	private BossService bossService;
 	
+	@Autowired
+	private ActorService actorService;
+
+	@Autowired
+	private FolderService folderService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -57,17 +68,38 @@ public class BossBossController extends AbstractController {
 	public ModelAndView save(@Valid final ActorForm bossForm, final BindingResult binding) {
 		ModelAndView res;
 		Boss boss;
+		boolean validPhone = this.actorService.validPhoneNumber(bossForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(bossForm, "actor.params.error");
 		else if (!bossForm.getRepeatPassword().equals(bossForm.getPassword()))
 			res = this.createEditModelAndView(bossForm, "actor.commit.errorPassword");
-		else if (bossForm.getTermsAndConditions() == false) {
+		else if (bossForm.getTermsAndConditions() == false) 
 			res = this.createEditModelAndView(bossForm, "actor.params.errorTerms");
+		else if (!validPhone && (bossForm.getAceptPhoneNumberConditions() == null || bossForm.getAceptPhoneNumberConditions() == false)) {
+			bossForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndView(bossForm, "actor.params.mustAcceptPhoneNumber");
 		} else
 			try {
 				boss = bossService.reconstruct(bossForm, binding);
 				this.bossService.save(boss);
+				
+				Collection<Folder> folders = new ArrayList<Folder>();
+				Folder inBox = this.folderService.create();
+				Folder outBox = this.folderService.create();
+				Folder trash = this.folderService.create();
+				inBox.setName("In Box");
+				outBox.setName("Out Box");
+				trash.setName("Trash Box");
+				inBox.setActor(boss);
+				outBox.setActor(boss);
+				trash.setActor(boss);
+				
+				folders.add(inBox);
+				folders.add(outBox);
+				folders.add(trash);
+				boss.setFolders(folders);
+				
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(bossForm, "actor.commit.error");

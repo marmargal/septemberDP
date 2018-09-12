@@ -18,6 +18,9 @@ public class InnService {
 
 	// Managed repository
 	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
 	private InnRepository innRepository;
 
 	// Suporting services
@@ -43,6 +46,7 @@ public class InnService {
 	}
 
 	public Collection<Inn> findAll() {
+		this.actorService.findByPrincipal();
 		Collection<Inn> res;
 		res = this.innRepository.findAll();
 		return res;

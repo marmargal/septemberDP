@@ -62,6 +62,7 @@ public class CenterBossController extends AbstractController {
 		result = new ModelAndView("center/boss/list");
 		result.addObject("centers", centers);
 		result.addObject("boss", true);
+		result.addObject("requestURI", "center/boss/list.do");
 
 		return result;
 	}

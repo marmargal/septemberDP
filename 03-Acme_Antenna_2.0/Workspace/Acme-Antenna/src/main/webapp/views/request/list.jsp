@@ -22,9 +22,15 @@
 <display:table pagesize="5" class="requests" keepStatus="true"
 	name="requests" requestURI="${requestURI }" id="row">
 
-	<acme:column property="moment" code="request.moment" />
+	<spring:message var="formatDate" code="request.format.date"/>
+	<spring:message code="request.moment" var="momentHeader" />
+	<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
+	
 	<acme:column property="description" code="request.description" />
-	<acme:column property="finishMoment" code="request.finishMoment" />
+	
+	<spring:message code="request.finishMoment" var="finishMomentHeader" />
+	<display:column property="finishMoment" title="${finishMomentHeader}" format="${formatDate}" sortable="true" />
+	
 	<acme:column property="result" code="request.result" />
 	<acme:column property="antenna.model" code="request.antenna" />
 

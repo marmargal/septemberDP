@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.ClientService;
+import services.FolderService;
 import domain.Client;
+import domain.Folder;
 import forms.ActorForm;
 
 @Controller
@@ -21,6 +27,12 @@ public class RegisterClientController extends AbstractController {
 
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private FolderService folderService;
 
 	// Constructors ---------------------------------------------------------
 
@@ -45,17 +57,38 @@ public class RegisterClientController extends AbstractController {
 	public ModelAndView save(@Valid final ActorForm clientForm, final BindingResult binding) {
 		ModelAndView res;
 		Client client;
-
+		boolean validPhone = this.actorService.validPhoneNumber(clientForm.getPhoneNumber());
+		
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(clientForm, "actor.params.error");
 		else if (!clientForm.getRepeatPassword().equals(clientForm.getPassword()))
 			res = this.createEditModelAndView(clientForm, "actor.commit.errorPassword");
-		else if (clientForm.getTermsAndConditions() == false) {
+		else if (clientForm.getTermsAndConditions() == false) 
 			res = this.createEditModelAndView(clientForm, "actor.params.errorTerms");
+		else if (!validPhone && (clientForm.getAceptPhoneNumberConditions() == null || clientForm.getAceptPhoneNumberConditions() == false)) {
+			clientForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndView(clientForm, "actor.params.mustAcceptPhoneNumber");
 		} else
 			try {
 				client = clientService.reconstruct(clientForm, binding);
 				this.clientService.save(client);
+				
+				Collection<Folder> folders = new ArrayList<Folder>();
+				Folder inBox = this.folderService.create();
+				Folder outBox = this.folderService.create();
+				Folder trash = this.folderService.create();
+				inBox.setName("In Box");
+				outBox.setName("Out Box");
+				trash.setName("Trash Box");
+				inBox.setActor(client);
+				outBox.setActor(client);
+				trash.setActor(client);
+				
+				folders.add(inBox);
+				folders.add(outBox);
+				folders.add(trash);
+				client.setFolders(folders);
+				
 				res = new ModelAndView("redirect:../");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(clientForm, "actor.commit.error");
@@ -83,12 +116,16 @@ public class RegisterClientController extends AbstractController {
 	public ModelAndView saveEdit(@Valid final ActorForm clientForm, final BindingResult binding) {
 		ModelAndView res;
 		Client client;
+		boolean validPhone = this.actorService.validPhoneNumber(clientForm.getPhoneNumber());
 
 		if (binding.hasErrors())
 			res = this.createEditModelAndViewEdit(clientForm, "actor.params.error");
 		else if (!clientForm.getRepeatPassword().equals(clientForm.getPassword()))
 			res = this.createEditModelAndViewEdit(clientForm, "actor.commit.errorPassword");
-		else
+		else if (!validPhone && (clientForm.getAceptPhoneNumberConditions() == null || clientForm.getAceptPhoneNumberConditions() == false)) {
+			clientForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndViewEdit(clientForm, "actor.params.mustAcceptPhoneNumber");
+		} else
 			try {
 				client = clientService.reconstruct(clientForm, binding);
 				this.clientService.save(client);

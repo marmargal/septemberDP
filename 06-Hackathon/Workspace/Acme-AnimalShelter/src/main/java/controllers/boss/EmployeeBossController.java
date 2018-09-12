@@ -23,12 +23,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.BossService;
 import services.EmployeeService;
+import services.FolderService;
 import controllers.AbstractController;
 import domain.Boss;
 import domain.Center;
 import domain.Employee;
+import domain.Folder;
 import forms.ActorForm;
 import forms.AssignEmployeeForm;
 
@@ -37,14 +40,19 @@ import forms.AssignEmployeeForm;
 public class EmployeeBossController extends AbstractController {
 
 	// Services -------------------------------------------------------------
-	
+
 	@Autowired
 	private EmployeeService employeeService;
-	
+
 	@Autowired
 	private BossService bossService;
-	
-	
+
+	@Autowired
+	private ActorService actorService;
+
+	@Autowired
+	private FolderService folderService;
+
 	// Constructors -----------------------------------------------------------
 
 	public EmployeeBossController() {
@@ -56,37 +64,68 @@ public class EmployeeBossController extends AbstractController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
-		
+
 		ActorForm clientForm = new ActorForm();
-		
+
 		res = this.createEditModelAndView(clientForm);
 
 		return res;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final ActorForm employeeForm, final BindingResult binding) {
+	public ModelAndView save(@Valid final ActorForm employeeForm,
+			final BindingResult binding) {
 		ModelAndView res;
 		Employee employee;
+		boolean validPhone = this.actorService.validPhoneNumber(employeeForm
+				.getPhoneNumber());
 
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(employeeForm, "actor.params.error");
-		else if (!employeeForm.getRepeatPassword().equals(employeeForm.getPassword()))
-			res = this.createEditModelAndView(employeeForm, "actor.commit.errorPassword");
-		else if (employeeForm.getTermsAndConditions() == false) {
-			res = this.createEditModelAndView(employeeForm, "actor.params.errorTerms");
+			res = this.createEditModelAndView(employeeForm,
+					"actor.params.error");
+		else if (!employeeForm.getRepeatPassword().equals(
+				employeeForm.getPassword()))
+			res = this.createEditModelAndView(employeeForm,
+					"actor.commit.errorPassword");
+		else if (employeeForm.getTermsAndConditions() == false)
+			res = this.createEditModelAndView(employeeForm,
+					"actor.params.errorTerms");
+		else if (!validPhone
+				&& (employeeForm.getAceptPhoneNumberConditions() == null || employeeForm
+						.getAceptPhoneNumberConditions() == false)) {
+			employeeForm.setAceptPhoneNumberConditions(false);
+			res = this.createEditModelAndView(employeeForm,
+					"actor.params.mustAcceptPhoneNumber");
 		} else
 			try {
 				employee = employeeService.reconstruct(employeeForm, binding);
 				this.employeeService.save(employee);
+				
+				Collection<Folder> folders = new ArrayList<Folder>();
+				Folder inBox = this.folderService.create();
+				Folder outBox = this.folderService.create();
+				Folder trash = this.folderService.create();
+				inBox.setName("In Box");
+				outBox.setName("Out Box");
+				trash.setName("Trash Box");
+				inBox.setActor(employee);
+				outBox.setActor(employee);
+				trash.setActor(employee);
+				
+				folders.add(inBox);
+				folders.add(outBox);
+				folders.add(trash);
+				employee.setFolders(folders);
+
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(employeeForm, "actor.commit.error");
+				res = this.createEditModelAndView(employeeForm,
+						"actor.commit.error");
 			}
 
 		return res;
 	}
-	
+
 	protected ModelAndView createEditModelAndView(final ActorForm employeeForm) {
 		ModelAndView result;
 
@@ -98,7 +137,7 @@ public class EmployeeBossController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final ActorForm employeeForm,
 			final String message) {
 		ModelAndView result;
-		
+
 		Boss boss = this.bossService.findByPrincipal();
 		Collection<Center> centers = new ArrayList<Center>();
 		centers = boss.getCenters();
@@ -107,60 +146,68 @@ public class EmployeeBossController extends AbstractController {
 		result.addObject("actorForm", employeeForm);
 		result.addObject("centers", centers);
 		result.addObject("message", message);
-		result.addObject("requestURI","employee/boss/register.do");
+		result.addObject("requestURI", "employee/boss/register.do");
 
 		return result;
 	}
-	
+
 	// Assign ----------------------------------------------------------
-	
+
 	@RequestMapping("/list")
 	public ModelAndView listNonDescarted() {
 		ModelAndView result;
 
-		Collection<Employee> employees = new ArrayList<Employee>(); 
+		Collection<Employee> employees = new ArrayList<Employee>();
 		employees = this.employeeService.findEmployeesByCentersBoss();
-					
+
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", employees);
 		result.addObject("viewForAssign", true);
+		result.addObject("requestURI", "employee/boss/list.do");
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/assign", method = RequestMethod.GET)
-	public ModelAndView assign(@RequestParam(defaultValue = "0") final int employeeId) {
+	public ModelAndView assign(
+			@RequestParam(defaultValue = "0") final int employeeId) {
 		ModelAndView res;
 
 		Employee employee = this.employeeService.findOne(employeeId);
 		AssignEmployeeForm assignEmployeeForm = new AssignEmployeeForm();
 		assignEmployeeForm.setEmployeeId(employeeId);
 		assignEmployeeForm.setCenter(employee.getCenter());
-		
+
 		res = this.createEditModelAndView(assignEmployeeForm);
 
 		return res;
 	}
-	
+
 	@RequestMapping(value = "/assign", method = RequestMethod.POST, params = "save")
-	public ModelAndView assign(@Valid final AssignEmployeeForm assignEmployeeForm, final BindingResult binding) {
+	public ModelAndView assign(
+			@Valid final AssignEmployeeForm assignEmployeeForm,
+			final BindingResult binding) {
 		ModelAndView res;
 		Employee employee;
 
-		if (binding.hasErrors()){
-			res = this.createEditModelAndView(assignEmployeeForm, "employee.params.error");
+		if (binding.hasErrors()) {
+			res = this.createEditModelAndView(assignEmployeeForm,
+					"employee.params.error");
 		} else
 			try {
-				employee = employeeService.reconstruct(assignEmployeeForm, binding);
+				employee = employeeService.reconstruct(assignEmployeeForm,
+						binding);
 				this.employeeService.save(employee);
 				res = new ModelAndView("redirect:/employee/boss/list.do");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(assignEmployeeForm, "employee.commit.error");
+				res = this.createEditModelAndView(assignEmployeeForm,
+						"employee.commit.error");
 			}
 		return res;
 	}
-	
-	protected ModelAndView createEditModelAndView(final AssignEmployeeForm assignEmployeeForm) {
+
+	protected ModelAndView createEditModelAndView(
+			final AssignEmployeeForm assignEmployeeForm) {
 		ModelAndView result;
 
 		result = this.createEditModelAndView(assignEmployeeForm, null);
@@ -168,8 +215,8 @@ public class EmployeeBossController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final AssignEmployeeForm assignEmployeeForm,
-			final String message) {
+	protected ModelAndView createEditModelAndView(
+			final AssignEmployeeForm assignEmployeeForm, final String message) {
 		ModelAndView result;
 		Boss boss = this.bossService.findByPrincipal();
 		Collection<Center> centers = boss.getCenters();
@@ -178,7 +225,7 @@ public class EmployeeBossController extends AbstractController {
 		result.addObject("assignEmployeeForm", assignEmployeeForm);
 		result.addObject("centers", centers);
 		result.addObject("message", message);
-		result.addObject("requestURI","employee/boss/assign.do");
+		result.addObject("requestURI", "employee/boss/assign.do");
 
 		return result;
 	}

@@ -215,6 +215,7 @@ public class AdministratorService {
 
 	}
 
+	
 	public Collection<Double> dataNumPicturesPerComment() {
 		return administratorRepository.dataNumPicturesPerComment();
 

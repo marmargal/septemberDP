@@ -39,15 +39,12 @@
 	<display:column property="ticker" title="${tickerHeader}"
 		sortable="true" />
 
-	<spring:message code="application.openedMoment"
-		var="openedMomentHeader" />
-	<display:column property="openedMoment" title="${openedMomentHeader}"
-		sortable="true" />
+	<spring:message var="formatDate" code="application.format.date"/>
+	<spring:message code="application.openedMoment" var="openedMomentHeader" />
+	<display:column property="openedMoment" title="${openedMomentHeader}" format="${formatDate}" sortable="true" />
 
-	<spring:message code="application.closedMoment"
-		var="closedMomentHeader" />
-	<display:column property="closedMoment" title="${closedMomentHeader}"
-		sortable="true" />
+	<spring:message code="application.closedMoment" var="closedMomentHeader" />
+	<display:column property="closedMoment" title="${closedMomentHeader}" format="${formatDate}" sortable="true" />
 
 	<spring:message code="application.creditCard" var="creditCardHeader" />
 	<display:column property="creditCard.number"

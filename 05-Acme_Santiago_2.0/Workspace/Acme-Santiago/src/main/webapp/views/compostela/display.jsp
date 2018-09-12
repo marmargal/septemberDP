@@ -18,7 +18,8 @@
 			<jstl:out value="${user.name }" />
 		</h1>
 		<h5>
-			<jstl:out value="${compostela.date }" />
+			<spring:message var="patternDate" code="compostela.pattern.date"/>
+			<b><spring:message code="compostela.date"/>:&nbsp;</b><fmt:formatDate value="${compostela.date}" pattern="${patternDate}"/>
 		</h5>
 
 		<hr />

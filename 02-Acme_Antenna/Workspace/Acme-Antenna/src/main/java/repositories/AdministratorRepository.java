@@ -60,13 +60,11 @@ public interface AdministratorRepository extends
 
 	// The average and the standard deviation of the number of pictures per
 	// tutorial.
-	//TODO: Query por hacer
-//	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Tutorial u")
-//	Collection<Double> dataNumPicturesPerTutorial();
+	@Query("select avg(u.numberOfPictures), stddev(u.numberOfPictures) from Tutorial u")
+	Collection<Double> dataNumPicturesPerTutorial();
 
 	// The average and the standard deviation of the number of pictures per
 	// comment.
-	//TODO: Query por hacer
-//	@Query("select avg(u.pictures.size), stddev(u.pictures.size) from Comment u")
-//	Collection<Double> dataNumPicturesPerComment();
+	@Query("select avg(u.numberOfPictures), stddev(u.numberOfPictures) from Comment u")
+	Collection<Double> dataNumPicturesPerComment();
 }

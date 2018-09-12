@@ -87,6 +87,10 @@ public class TutorialService {
 				.equals(tutorial.getActor()));
 		
 		Tutorial res;
+		
+		String[] pictures = tutorial.getPictures().split(",");
+		tutorial.setNumberOfPictures(pictures.length);
+		
 		res = this.tutorialRepository.save(tutorial);
 		return res;
 	}

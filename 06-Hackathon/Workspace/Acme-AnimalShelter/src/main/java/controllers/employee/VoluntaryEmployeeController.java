@@ -60,6 +60,7 @@ public class VoluntaryEmployeeController extends AbstractController {
 		
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", voluntaries);
+		result.addObject("requestURI", "voluntary/employee/listByStand.do");
 	
 		return result;
 	}

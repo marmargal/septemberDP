@@ -330,13 +330,8 @@
 		<property name="title" value="Tutorial muy bueno" />
 		<property name="text"
 			value="Me ha encantado, me ha sido de verdadera ayuda." />
-		<property name="pictures">
-			<list>
-				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
-				</value>
-				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
-			</list>
-		</property>
+		<property name="pictures" value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png"/>
+		<property name="numberOfPictures" value="1" />
 		<property name="tutorial" ref="tutorial1" />
 		<property name="commentParent">
 			<null />
@@ -352,13 +347,8 @@
 		<property name="moment" value="01/07/2018" />
 		<property name="title" value="Tutorial muy malo" />
 		<property name="text" value="Este tutorial no sirve para nada." />
-		<property name="pictures">
-			<list>
-				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
-				</value>
-				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
-			</list>
-		</property>
+		<property name="pictures" value="http://www.imagen.com.mx/assets/img/imagen_share.png,http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png,http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png"/>
+		<property name="numberOfPictures" value="3" />
 		<property name="tutorial" ref="tutorial2" />
 		<property name="commentParent">
 			<null />
@@ -375,13 +365,8 @@
 		<property name="title" value="Sex" />
 		<property name="text"
 			value="Me ha encantado." />
-		<property name="pictures">
-			<list>
-				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
-				</value>
-				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
-			</list>
-		</property>
+		<property name="pictures" value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png, http://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="numberOfPictures" value="2" />
 		<property name="tutorial" ref="tutorial1" />
 		<property name="commentParent">
 			<null />
@@ -518,13 +503,8 @@
 		<property name="moment" value="02/28/2018" />
 		<property name="title" value="How to fix an antenna" />
 		<property name="text" value="First, you need an antenna to fix it." />
-		<property name="pictures">
-			<list>
-				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
-				</value>
-				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
-			</list>
-		</property>
+		<property name="pictures" value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png, http://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="numberOfPictures" value="2" />
 		<property name="actor" ref="user1" />
 		<property name="comments">
 			<list>
@@ -537,13 +517,8 @@
 		<property name="moment" value="05/04/2018" />
 		<property name="title" value="How to fix a satellite" />
 		<property name="text" value="First, you need a satellite to fix it." />
-		<property name="pictures">
-			<list>
-				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
-				</value>
-				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
-			</list>
-		</property>
+		<property name="pictures" value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png"/>
+		<property name="numberOfPictures" value="1" />
 		<property name="actor" ref="user2" />
 		<property name="comments">
 			<list>
@@ -556,13 +531,8 @@
 		<property name="moment" value="05/04/2018" />
 		<property name="title" value="How to fix a satellite (taboo)" />
 		<property name="text" value="First, you need a viagra to fix it." />
-		<property name="pictures">
-			<list>
-				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
-				</value>
-				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
-			</list>
-		</property>
+		<property name="pictures" value="http://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="numberOfPictures" value="1" />
 		<property name="actor" ref="user2" />
 		<property name="comments">
 			<list>
@@ -575,13 +545,8 @@
 		<property name="moment" value="05/04/2018" />
 		<property name="title" value="How to fix a satellite" />
 		<property name="text" value="First, you need a satellite to fix it." />
-		<property name="pictures">
-			<list>
-				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
-				</value>
-				<value>http://www.imagen.com.mx/assets/img/imagen_share.png</value>
-			</list>
-		</property>
+		<property name="pictures" value="http://www.imagen.com.mx/assets/img/imagen_share.png, http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png"/>
+		<property name="numberOfPictures" value="2" />
 		<property name="actor" ref="user2" />
 		<property name="comments">
 			<list>

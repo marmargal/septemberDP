@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.MedicalReportService;
-import services.PetService;
 import services.VeterinaryService;
 import controllers.AbstractController;
 import domain.MedicalReport;
-import domain.Notice;
 import domain.Veterinary;
 
 @Controller
@@ -29,10 +27,6 @@ public class MedicalReportVeterinaryController extends AbstractController{
 	
 	@Autowired
 	private VeterinaryService veterinaryService;
-	
-	@Autowired
-	private PetService petService;
-	
 	
 	// Constructors ----------------------------------------
 	

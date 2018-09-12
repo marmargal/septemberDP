@@ -64,7 +64,6 @@ public abstract class Actor extends DomainEntity {
 		this.email = email;
 	}
 
-	// TODO: Pattern phoneNumber
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}

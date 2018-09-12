@@ -79,6 +79,7 @@ public class FranchiseAdministratorController extends AbstractController {
 		result = new ModelAndView("administrator/franchise");
 		result.addObject("franchise", franchise);
 		result.addObject("message", message);
+		result.addObject("requestURI","administrator/franchise.do");
 		return result;
 	}
 }

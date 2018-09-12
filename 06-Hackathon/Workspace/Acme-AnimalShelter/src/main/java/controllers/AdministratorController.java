@@ -85,6 +85,7 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", employees);
 		result.addObject("role", "employee");
+		result.addObject("requestURI", "administrator/listEmployees.do");
 
 		return result;
 	}
@@ -99,6 +100,7 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", clients);
 		result.addObject("role", "client");
+		result.addObject("requestURI", "administrator/listClients.do");
 
 		return result;
 	}
@@ -113,6 +115,7 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", voluntaries);
 		result.addObject("role", "voluntary");
+		result.addObject("requestURI", "administrator/listVoluntaries.do");
 
 		return result;
 	}
@@ -127,6 +130,7 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", veterinaries);
 		result.addObject("role", "veterinary");
+		result.addObject("requestURI", "administrator/listVeterinaries.do");
 
 		return result;
 	}
@@ -141,6 +145,7 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("actor/list");
 		result.addObject("actors", boss);
 		result.addObject("role", "boss");
+		result.addObject("requestURI", "administrator/listBoss.do");
 
 		return result;
 	}
@@ -330,6 +335,7 @@ public class AdministratorController extends AbstractController {
 		
 		result = new ModelAndView("administrator/list");
 		result.addObject("actors", actors);
+		result.addObject("requestURI", "administrator/list.do");
 
 		return result;
 	}

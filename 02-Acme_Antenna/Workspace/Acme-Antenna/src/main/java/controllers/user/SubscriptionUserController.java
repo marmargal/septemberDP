@@ -54,6 +54,7 @@ public class SubscriptionUserController extends AbstractController {
 	
 		res = new ModelAndView("subscription/list");
 		res.addObject("subscription", subscriptions);
+		res.addObject("requestURI", "subscription/user/list.do");
 
 		return res;
 	}

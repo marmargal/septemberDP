@@ -55,6 +55,7 @@ public class PetController extends AbstractController {
 		
 		result.addObject("veterinaryPrincipal", null);
 		result.addObject("pets", pets);
+		result.addObject("requestURI", "pet/petsWaitingAdoption.do");
 
 		return result;
 	}
@@ -69,6 +70,7 @@ public class PetController extends AbstractController {
 		result = new ModelAndView("pet/list");
 		result.addObject("veterinaryPrincipal", null);
 		result.addObject("pets", pets);
+		result.addObject("requestURI", "pet/petsPermitAdoption.do");
 
 		return result;
 	}

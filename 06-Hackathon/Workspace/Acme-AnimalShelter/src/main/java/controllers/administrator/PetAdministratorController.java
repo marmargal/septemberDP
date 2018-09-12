@@ -52,6 +52,7 @@ public class PetAdministratorController extends AbstractController {
 		result.addObject("pets", pets);
 		result.addObject("veterinaryPrincipal", null);
 		result.addObject("viewForDelete" , true);
+		result.addObject("requestURI", "pet/administrator/list.do");
 	
 		return result;
 	}

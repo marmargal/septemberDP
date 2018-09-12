@@ -32,7 +32,10 @@
 		</security:authorize>
 	</display:column>
 	
-	<acme:column property="date" code="notice.date"/>
+	<spring:message var="formatDate" code="notice.format.date"/>
+	<spring:message code="notice.date" var="momentHeader" />
+	<display:column property="date" title="${momentHeader}" format="${formatDate}" sortable="true" />
+	
 	<acme:column property="type" code="notice.type" />
 	<acme:column property="level" code="notice.level" />
 	<security:authorize access="hasRole('EMPLOYEE')">	

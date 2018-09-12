@@ -40,6 +40,7 @@ public class NoticeEmployeeController extends AbstractController {
 					
 		result = new ModelAndView("notice/list");
 		result.addObject("notices", notices);
+		result.addObject("requestURI", "notice/employee/list.do");
 
 		return result;
 	}

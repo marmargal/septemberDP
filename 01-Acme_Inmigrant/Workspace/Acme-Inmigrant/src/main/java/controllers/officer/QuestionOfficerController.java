@@ -67,6 +67,7 @@ public class QuestionOfficerController extends AbstractController{
 			
 		}else{
 			res = new ModelAndView("question/list");
+			res.addObject("requestURI", "question/list.do");
 			res.addObject("question", questions);
 			res.addObject("application", null);
 		}

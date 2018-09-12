@@ -11,6 +11,7 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -29,8 +30,8 @@
 </jstl:forEach>
 
 <p>
-	<b><spring:message code="tutorial.moment"/>:&nbsp;</b>
-	<jstl:out value="${tutorial.moment }"/>
+	<spring:message var="patternDate" code="tutorial.pattern.date"/>
+	<b><spring:message code="tutorial.moment"/>:&nbsp;</b><fmt:formatDate value="${tutorial.moment}" pattern="${patternDate}"/>
 </p>
 
 <p>

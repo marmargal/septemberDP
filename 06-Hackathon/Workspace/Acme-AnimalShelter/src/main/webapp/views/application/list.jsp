@@ -28,7 +28,11 @@
 	</security:authorize>
 
 	<acme:column property="ticker" code="application.ticker" />
-	<acme:column property="createMoment" code="application.createMoment" />
+	
+	<spring:message var="formatDate" code="application.format.date"/>
+	<spring:message code="application.createMoment" var="momentHeader" />
+	<display:column property="createMoment" title="${momentHeader}" format="${formatDate}" sortable="true" />
+	
 	<acme:column property="closed" code="application.closed" />
 	<acme:column property="pet.name" code="application.pet" />
 
