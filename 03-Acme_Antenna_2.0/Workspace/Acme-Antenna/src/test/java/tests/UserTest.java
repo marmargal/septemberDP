@@ -40,7 +40,6 @@ public class UserTest extends AbstractTest {
 	private HandyworkerService handyworkerService;
 	
 	//4.1 Make a request for maintenance to a handyworker.
-	
 	@Test
 	public void makeRequestTest() {
 		final Object testingData[][] = {

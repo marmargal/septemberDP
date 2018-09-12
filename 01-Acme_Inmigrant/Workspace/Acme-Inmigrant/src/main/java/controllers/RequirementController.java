@@ -35,6 +35,7 @@ public class RequirementController extends AbstractController {
 		
 		res = new ModelAndView("requirement/list");
 		res.addObject("requirement",requirements);
+		res.addObject("requestURI", "requirement/list.do");
 		
 		return res;
 	}

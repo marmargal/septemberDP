@@ -45,6 +45,7 @@ public class RequirementAdministratorController extends AbstractController{
 		
 		res = new ModelAndView("requirement/list");
 		res.addObject("requirement",requirements);
+		res.addObject("requestURI", "requirement/administrator/list.do");
 		
 		return res;
 	}
