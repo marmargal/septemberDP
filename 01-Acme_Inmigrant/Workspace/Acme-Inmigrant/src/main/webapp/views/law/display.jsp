@@ -17,10 +17,11 @@
 <b><spring:message code="law.text"/>:&nbsp;</b><jstl:out value="${law.text}"/>
 <br/>
 
-<b><spring:message code="law.enactmentDate"/>:&nbsp;</b><jstl:out value="${law.enactmentDate}"/>
-<br/>
+<spring:message var="patternDate" code="law.pattern.date"/>
 
-<b><spring:message code="law.abrogationTime"/>:&nbsp;</b><jstl:out value="${law.abrogationTime}"/>
+<b><spring:message code="law.enactmentDate"/>:&nbsp;</b><fmt:formatDate value="${law.enactmentDate}" pattern="${patternDate}"/>
+<br/>
+<b><spring:message code="law.abrogationTime"/>:&nbsp;</b><fmt:formatDate value="${law.abrogationTime}" pattern="${patternDate}"/>
 <br/>
 
 <acme:cancel url="law/list.do" code="law.cancel"/>

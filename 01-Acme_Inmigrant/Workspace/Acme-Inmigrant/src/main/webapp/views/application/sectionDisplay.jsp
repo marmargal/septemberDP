@@ -11,6 +11,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<spring:message var="formatDate" code="application.format.date"/>
+
 <spring:message code="application.personalSection" var="personalSectionHeader" />
 <h1>
 	<jstl:out value="${personalSectionHeader}"></jstl:out>
@@ -28,7 +30,7 @@
 	<display:column property="birthPlace" title="${birthPlaceHeader}" sortable="true" />
 	
 	<spring:message code="application.personalSection.birthDate" var="birthDateHeader" />
-	<display:column property="birthDate" title="${birthDateHeader}" sortable="true" />
+	<display:column property="birthDate" title="${birthDateHeader}" format="${formatDate}" sortable="true" />
 	
 	<spring:message code="application.personalSection.picture" var="pictureHeader" />
 	<display:column property="picture" title="${pictureHeader}" sortable="true" />
@@ -93,10 +95,10 @@
 	<display:column property="position" title="${position}" sortable="true" />
 	
 	<spring:message code="workSection.startDate" var="startDate" />
-	<display:column property="startDate" title="${startDate}" sortable="true" />
+	<display:column property="startDate" title="${startDate}" format="${formatDate}" sortable="true" />
 	
 	<spring:message code="workSection.endDate" var="endDate" />
-	<display:column property="endDate" title="${endDate}" sortable="true" />
+	<display:column property="endDate" title="${endDate}" format="${formatDate}" sortable="true" />
 	
 	<security:authorize access="hasRole('IMMIGRANT')">
 		<spring:message code="application.edit" />
@@ -166,7 +168,7 @@
 	<display:column property="institution" title="${institution}" sortable="true" />
 	
 	<spring:message code="educationSection.dateAwarded" var="dateAwarded" />
-	<display:column property="dateAwarded" title="${dateAwarded}" sortable="true" />
+	<display:column property="dateAwarded" title="${dateAwarded}" format="${formatDate}" sortable="true" />
 	
 	<spring:message code="educationSection.level" var="level" />
 	<display:column property="level" title="${level}" sortable="true" />

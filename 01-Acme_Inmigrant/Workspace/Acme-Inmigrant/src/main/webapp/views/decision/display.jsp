@@ -20,7 +20,9 @@
 	<spring:message code="decision.false"/>
 </jstl:if>
 <br/>
-<b><spring:message code="decision.moment"/>:&nbsp;</b><jstl:out value="${decision.moment}"/>
+
+<spring:message var="patternDate" code="decision.pattern.date"/>
+<b><spring:message code="decision.moment"/>:&nbsp;</b><fmt:formatDate value="${decision.moment}" pattern="${patternDate}"/>
 <br/>
 <b><spring:message code="decision.comment"/>:&nbsp;</b><jstl:out value="${decision.comment}"/>
 <br/>
