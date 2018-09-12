@@ -27,9 +27,15 @@
 		<img src="<jstl:out value="${row.placard}"/>" width="200" height="87">
 	</display:column>
 	
-	<acme:column property="startDate" code="event.startDate" />
-	<acme:column property="endDate" code="event.endDate" />
-	<acme:column property="publicationDate" code="event.publicationDate" />
+	<spring:message var="formatDate" code="event.format.date"/>
+	<spring:message code="event.startDate" var="startDateHeader" />
+	<display:column property="startDate" title="${startDateHeader}" format="${formatDate}" sortable="true" />
+	
+	<spring:message code="event.endDate" var="endDateHeader" />
+	<display:column property="endDate" title="${endDateHeader}" format="${formatDate}" sortable="true" />
+
+	<spring:message code="event.publicationDate" var="publicationDateHeader" />
+	<display:column property="publicationDate" title="${publicationDateHeader}" format="${formatDate}" sortable="true" />
 	
 	<security:authorize access="hasRole('VOLUNTARY')">
 		<display:column>

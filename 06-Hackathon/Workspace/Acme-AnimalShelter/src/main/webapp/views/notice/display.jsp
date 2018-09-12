@@ -27,7 +27,8 @@
 <b><spring:message code="notice.level"/>:&nbsp;</b><jstl:out value="${notice.level}"/>
 <br/>
 
-<b><spring:message code="notice.date"/>:&nbsp;</b><jstl:out value="${notice.date}"/>
+<spring:message var="patternDate" code="notice.pattern.date"/>
+<b><spring:message code="notice.date"/>:&nbsp;</b><fmt:formatDate value="${notice.date}" pattern="${patternDate}"/>
 <br/>
 
 <b><spring:message code="notice.discarded"/>:&nbsp;</b><jstl:out value="${notice.discarded}"/>

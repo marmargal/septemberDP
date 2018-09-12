@@ -28,7 +28,10 @@
 	<acme:column property="diagnosis" code="medicalReport.diagnosis" />
 	<acme:column property="initialState" code="medicalReport.initialState" />
 	<acme:column property="treatment" code="medicalReport.treatment" />
-	<acme:column property="date" code="medicalReport.date" />
+	
+	<spring:message var="formatDate" code="medicalReport.format.date"/>
+	<spring:message code="medicalReport.date" var="momentHeader" />
+	<display:column property="date" title="${momentHeader}" format="${formatDate}" sortable="true" />
 	
 	<acme:column property="diseases" code="medicalReport.diseases" />
 	
