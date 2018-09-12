@@ -89,11 +89,6 @@ public class AdvertisementService {
 		Assert.notNull(advertisement);
 		Assert.isTrue(advertisement.getId() != 0);
 		Assert.isTrue(this.advertisementRepository.exists(advertisement.getId()));
-		domain.Agent agent = this.findAgentByAdvertisement(advertisement
-				.getId());
-		Collection<Advertisement> advertisements = new ArrayList<>();
-		advertisements = agent.getAdvertisements();
-		advertisements.remove(advertisement);
 		Collection<Authority> authority = LoginService.getPrincipal()
 				.getAuthorities();
 		Assert.notNull(authority);
@@ -101,7 +96,16 @@ public class AdvertisementService {
 		user.setAuthority("USER");
 		Authority admin = new Authority();
 		admin.setAuthority("ADMIN");
-		Assert.isTrue(authority.contains(user) || authority.contains(admin));
+		Authority agentAux = new Authority();
+		agentAux.setAuthority("AGENT");
+		Assert.isTrue(authority.contains(user) || authority.contains(admin)
+				|| authority.contains(agentAux));
+		domain.Agent agent = this.findAgentByAdvertisement(advertisement
+				.getId());
+		Collection<Advertisement> advertisements = new ArrayList<>();
+		advertisements = agent.getAdvertisements();
+		advertisements.remove(advertisement);
+
 		this.advertisementRepository.delete(advertisement);
 	}
 
@@ -121,6 +125,7 @@ public class AdvertisementService {
 	}
 
 	public Collection<Advertisement> findAdvertisementTaboo() {
+		this.administratorService.checkAuthority();
 		return advertisementRepository.findAdvertisementTaboo();
 	}
 }
