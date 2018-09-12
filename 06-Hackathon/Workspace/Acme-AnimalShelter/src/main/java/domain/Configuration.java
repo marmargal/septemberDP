@@ -3,9 +3,9 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -27,6 +27,7 @@ public class Configuration extends DomainEntity {
 
 	@URL
 	@NotBlank
+	@SafeHtml
 	public String getBanner() {
 		return banner;
 	}
@@ -36,6 +37,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getEnglishWelcome() {
 		return englishWelcome;
 	}
@@ -45,6 +47,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getSpanishWelcome() {
 		return spanishWelcome;
 	}
@@ -54,7 +57,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
-	@Pattern(regexp = "(^\\d{4}\\d+)")
+	@SafeHtml
 	public String getCountryCode() {
 		return countryCode;
 	}

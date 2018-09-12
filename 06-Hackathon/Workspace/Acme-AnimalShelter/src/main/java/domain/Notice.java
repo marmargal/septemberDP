@@ -16,6 +16,7 @@ import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -37,6 +38,7 @@ public class Notice extends DomainEntity{
 	private Boolean discarded;
 	
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}
@@ -46,6 +48,7 @@ public class Notice extends DomainEntity{
 	}
 	
 	@NotBlank
+	@SafeHtml
 	public String getType() {
 		return type;
 	}
