@@ -24,8 +24,9 @@
 	<spring:message code="comment.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}"	sortable="true" />
 		
+	<spring:message var="formatDate" code="comment.format.date"/>
 	<spring:message code="comment.moment" var="momentHeader" />
-	<display:column property="moment" title="${momentHeader}"	sortable="true" />
+	<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" />
 
 	<spring:message code="comment.text" var="textHeader" />
 	<display:column property="text" title="${textHeader}"	sortable="true" />
