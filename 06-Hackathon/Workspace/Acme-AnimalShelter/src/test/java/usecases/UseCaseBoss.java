@@ -22,6 +22,7 @@ import services.StandService;
 import services.VeterinaryService;
 import services.WarehouseService;
 import utilities.AbstractTest;
+import domain.Boss;
 import domain.Center;
 import domain.Company;
 import domain.Employee;
@@ -242,13 +243,13 @@ public class UseCaseBoss extends AbstractTest {
 	//17.c. Asociar empleados a su centro siempre que este no esté asociado a otro y desligarlo de sus centros.
 	// 17.d 
 	@Test
-	public void crearYAsociarEmpleados(){ //TODO
+	public void crearYAsociarEmpleados(){ 
 		final Object testingData [][] = {
 				// Positive
-//				{"boss1", "center1", "name", "surname", "email@email.com", "678989898", "address", null},
+				{"boss1", "center1", "name", "surname", "email@email.com", "678989898", "address", null},
 				// Negative
-//				{"boss1", "", "name", "surname", "email@email.com", "678989898", "address", IllegalArgumentException.class}, // centro vacío
-//				{"boss1", "center1", "name", "surname", "email@email.com", "", "address", null}, //teléfono mal
+				{"admin", "center1", "name", "surname", "email@email.com", "678989898", "address", IllegalArgumentException.class}, // usuario no válido
+				{"boss1", "center1", "name", " ", "email@email.com", "678989898", "address", ConstraintViolationException.class}, // atributo mal
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.crearYAsociarEmpleadosTemplate((String) testingData[i][0], // Username login
@@ -293,12 +294,11 @@ public class UseCaseBoss extends AbstractTest {
 	// 17.d Crear veterinarios
 	@Test
 	public void crearVeterinarios(){
-		final Object testingData [][] = { //TODO
+		final Object testingData [][] = { // TODO:
 				// Positive
-//				{"boss1", "center1", "name", "surname", "email@email.com", "678989898", "address", null},
+//				{"boss1", "name", "surname", "email@email.com", "678989898", "address", null},
 				// Negative
-//				{"boss1", "name", "surname", "email", "678989898", "address", IllegalArgumentException.class}, // email mal
-//				{"boss1", "name", "surname", "email@email.com", "", "address", null}, //teléfono mal
+//				{"admin", "name", "surname", "email@email.com", "678989898", "address", IllegalArgumentException.class}, // usuario no válido
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.crearVeterinariosTemplate((String) testingData[i][0], // Username login
@@ -339,12 +339,11 @@ public class UseCaseBoss extends AbstractTest {
 	// 17.d Crear otros directores.
 	@Test
 	public void crearDirectores(){
-		final Object testingData [][] = { //TODO
+		final Object testingData [][] = {
 				// Positive
-//				{"boss1", "center1", "name", "surname", "email@email.com", "678989898", "address", null},
+				{"boss1", "name", "surname", "email@email.com", "678989898", "address", null},
 				// Negative
-//				{"boss1", "name", "surname", "email", "678989898", "address", IllegalArgumentException.class}, // email mal
-//				{"boss1", "name", "surname", "email@email.com", "", "address", null}, //teléfono mal
+				{"boss1", " ", "surname", "email", "678989898", "address", ConstraintViolationException.class}, // atributo vacío
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.crearDirectoresTemplate((String) testingData[i][0], // Username login
@@ -365,13 +364,13 @@ public class UseCaseBoss extends AbstractTest {
 		try {
 			super.authenticate(boss);
 			
-			final Veterinary veterinary = this.veterinaryService.create();
-			veterinary.setName(name);
-			veterinary.setSurname(surname);
-			veterinary.setEmail(email);
-			veterinary.setPhoneNumber(phone);
-			veterinary.setAddress(address);
-			this.veterinaryService.save(veterinary);
+			final Boss newBoss = this.bossService.create();
+			newBoss.setName(name);
+			newBoss.setSurname(surname);
+			newBoss.setEmail(email);
+			newBoss.setPhoneNumber(phone);
+			newBoss.setAddress(address);
+			this.bossService.save(newBoss);
 			
 			
 			super.unauthenticate();
@@ -387,52 +386,29 @@ public class UseCaseBoss extends AbstractTest {
 	public void crearYEditarEventos(){
 		final Object testingData [][] = {
 				// Positive
-//				{"boss1", "center1", "title", "description", "nameSite", "address", "placard", "10/10/2020 11:00", "10/10/2020 11:00", null},
-				// Negative: campos vacíos (address)
-//				{"boss1", "center1", "title", "description", "nameSite", " ", "placard", "10/10/2020 11:00", "10/10/2020 11:00", IllegalArgumentException.class},
-				// Negative: usuario no válido
-//				{"admin", "center1", "title", "description", "nameSite", "address", "placard", "10/10/2020 11:00", "10/10/2020 11:00", IllegalArgumentException.class},
+				{"boss1", "event1", null},
+				// Negative
+				{"admin", "event1", IllegalArgumentException.class},
+				{"employee1", "event1", IllegalArgumentException.class},
 		};
 		for (int i = 0; i < testingData.length; i++){
 			this.crearYEditarEventosTemplate((String) testingData[i][0], // Username login
-				(String) testingData[i][1], // center
-				(String) testingData[i][2], // title
-				(String) testingData[i][3], // description
-				(String)testingData[i][4], // nameSite
-				(String)testingData[i][5], // address
-				(String) testingData[i][6], // placard
-				((String)testingData[i][7]), // start
-				((String)testingData[i][8]), // end
-				(Class<?>) testingData[i][9]);
+				(String) testingData[i][1], // event
+				(Class<?>) testingData[i][2]);
 		}
 	}
 
-	private void crearYEditarEventosTemplate(String boss, String center, String title,
-			String description, String nameSite, String address, String placard,
-			String start, String end, Class<?> expected) {
+	private void crearYEditarEventosTemplate(String boss, String event, Class<?> expected) {
 		Class<?> caught;
 		caught = null;
 
 		try {
 			super.authenticate(boss);
 			
-			final int centerId = this.getEntityId(center);
-			final Center centerFinal = this.centerService.findOne(centerId);
-			
-			DateFormat df = new SimpleDateFormat("dd/MM/aa hh:mm");
-			Date startDate = df.parse(start);
-			Date endDate = df.parse(end);
-			
-			Event event = this.eventService.create();
-			event.setTitle(title);
-			event.setDescription(description);
-			event.setNameSite(nameSite);
-			event.setAddress(address);
-			event.setPlacard(placard);
-			event.setStartDate(startDate);
-			event.setEndDate(endDate);
-			event.setCenter(centerFinal);
-			this.eventService.save(event);
+			final int eventId = this.getEntityId(event);
+			final Event eventFinal = this.eventService.findOne(eventId);
+			eventFinal.setDescription("new description");
+			this.eventService.save(eventFinal);
 			
 			super.unauthenticate();
 			this.eventService.flush();
@@ -450,10 +426,10 @@ public class UseCaseBoss extends AbstractTest {
 	public void listarYEliminarEventos(){
 		final Object testingData [][] = {
 				// Positive
-//				{"boss1", "event1", null},
+				{"boss1", "event1", null},
 				// Negative
 //				{"boss1", "event2", IllegalArgumentException.class}, // no se puede eliminar un evento que no sea suyo
-//				{"employee", "event1", IllegalArgumentException.class}, // usuario no válido para eliminar
+//				{"employee1", "event1", IllegalArgumentException.class}, // usuario no válido para eliminar
 		};
 		for (int i = 0; i < testingData.length; i++){
 			this.listarYEliminarEventosTemplate((String) testingData[i][0], // Username login

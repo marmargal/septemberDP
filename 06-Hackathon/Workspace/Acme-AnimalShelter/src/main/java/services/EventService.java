@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.EventRepository;
 import domain.Boss;
+import domain.Donation;
 import domain.Event;
 
 
@@ -39,8 +40,11 @@ public class EventService {
 		this.bossService.checkAuthority();
 		Event res = new Event();
 		
+		Collection<Donation> donations = new ArrayList<Donation>();
+		
 		Date publicationDate = new Date(System.currentTimeMillis()-1000);
 		res.setPublicationDate(publicationDate);
+		res.setDonation(donations);
 
 		return res;
 
@@ -62,6 +66,7 @@ public class EventService {
 	}
 
 	public Event save(Event event) {
+		this.bossService.checkAuthority();
 		Event res;
 		res = eventRepository.save(event);
 		return res;
