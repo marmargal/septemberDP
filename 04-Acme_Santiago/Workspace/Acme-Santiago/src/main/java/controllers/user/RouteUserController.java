@@ -2,7 +2,6 @@ package controllers.user;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.HikeService;
 import services.RouteService;
 import controllers.AbstractController;
 import domain.Hike;
