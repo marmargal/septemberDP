@@ -33,7 +33,7 @@
 	<acme:select items="${hikes }" itemLabel="name" code="route.hikes" path="hikes"/>
 	
 	<acme:submit name="save" code="route.save"/>
-	<security:authorize access="hasRole('ADMIN')">
+	<security:authorize access="hasAnyRole('ADMIN', 'USER')">
 	<jstl:if test="${route.id != 0}">
 			<input type="submit" name="delete"
 				value="<spring:message code="route.delete" />"
