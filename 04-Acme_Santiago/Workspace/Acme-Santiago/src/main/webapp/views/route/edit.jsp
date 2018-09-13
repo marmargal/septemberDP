@@ -30,7 +30,7 @@
 	<acme:textbox type="number" code="route.length" path="length"/>
 	<acme:textbox code="route.description" path="description"/>
 	<acme:textbox type ="url" code="route.pictures" path="pictures"/>
-	<acme:select items="${hikes }" itemLabel="name" code="route.hikes" path="hikes"/>
+	<acme:selectHike items="${hikes }" itemLabel="name" code="route.hikes" path="hikes"/>
 	
 	<acme:submit name="save" code="route.save"/>
 	<security:authorize access="hasAnyRole('ADMIN', 'USER')">

@@ -88,7 +88,7 @@ public class Route extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "route")
+	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
 	public Collection<Comment> getComments() {
 		return comments;
 	}
