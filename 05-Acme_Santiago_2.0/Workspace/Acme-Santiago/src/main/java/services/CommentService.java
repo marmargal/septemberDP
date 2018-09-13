@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -45,8 +46,10 @@ public class CommentService {
 		Comment res;
 		res = new Comment();
 
+		Date moment = new Date(System.currentTimeMillis() - 1000);
 		User user = userService.findByPrincipal();
 		res.setUser(user);
+		res.setMoment(moment);
 
 		return res;
 	}

@@ -107,7 +107,8 @@
 		<property name="email" value="admin@admin.com" />
 		<property name="pictures" value="http://www.google.es" />
 		<property name="phoneNumber" value="654565656" />
-		<property name="postalAddress" value="C/Admin" />
+		<property name="address" value="C/Admin" />
+		<property name="postalAddress" value="1234" />
 		<property name="userAccount" ref="userAccount1" />
 
 	</bean>
@@ -123,7 +124,8 @@
 		<property name="pictures"
 			value="http://www.repuestosparamotos.co/page/images/user.png" />
 		<property name="phoneNumber" value="+64565656" />
-		<property name="postalAddress" value="C/Edu" />
+		<property name="address" value="C/Edu" />
+		<property name="postalAddress" value="1234" />
 		<property name="userAccount" ref="userAccount2" />
 		<property name="chirps">
 			<list>
@@ -193,7 +195,8 @@
 		<property name="pictures"
 			value="http://www.repuestosparamotos.co/page/images/user.png" />
 		<property name="phoneNumber" value="666666666" />
-		<property name="postalAddress" value="C/María" />
+		<property name="address" value="C/María" />
+		<property name="postalAddress" value="1234" />
 		<property name="userAccount" ref="userAccount3" />
 		<property name="chirps">
 			<list>
@@ -237,7 +240,8 @@
 		<property name="email" value="edferve@gmail.com" />
 		<property name="pictures" value="http://www.google.es" />
 		<property name="phoneNumber" value="654565656" />
-		<property name="postalAddress" value="C/Edu" />
+		<property name="address" value="C/Edu" />
+		<property name="postalAddress" value="1234" />
 		<property name="userAccount" ref="userAccount4" />
 		<property name="inns">
 			<list>
@@ -257,7 +261,8 @@
 		<property name="email" value="magarve@gmail.com" />
 		<property name="pictures" value="http://www.google.es" />
 		<property name="phoneNumber" value="666666666" />
-		<property name="postalAddress" value="C/María" />
+		<property name="address" value="C/María" />
+		<property name="postalAddress" value="1234" />
 		<property name="userAccount" ref="userAccount5" />
 		<property name="inns">
 			<list>

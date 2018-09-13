@@ -31,7 +31,9 @@
 	<br/>
 	<acme:textbox code="actor.phoneNumber" path="user.phoneNumber"/>
 	<br/>
-	<acme:textbox code="actor.address" path="user.postalAddress"/>
+	<acme:textbox code="actor.address" path="user.address"/>
+	<br/>
+	<acme:textbox code="actor.postalAddress" path="user.postalAddress"/>
 	<br/>
 	<acme:textbox code="actor.pictures" path="user.pictures"/>
 	<br/>
@@ -51,7 +53,8 @@
    </jstl:if>
 	
 	<acme:submit name="save" code="actor.save"/>
-	<acme:submit name="cancel" code="actor.cancel"/>
+	<!--<acme:submit name="cancel" code="actor.cancel"/>-->
+	<acme:cancel url="/Acme-Santiago" code="actor.cancel"/>
 	
 </form:form>
 	
