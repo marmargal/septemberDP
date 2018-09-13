@@ -106,8 +106,8 @@ public class UseCaseOfficer extends AbstractTest {
 		final Object testingData[][] = {
 				// Positive
 				{"officer1", "application1", null },
-				// Negative //TODO: Negative assign
-				{"officer2", "application1", null}
+				// Negative:  wrong roll
+				{"immigrant1", "application1", IllegalArgumentException.class}
 				};
 		for (int i =0; i<testingData.length; i++)
 			this.assignTemplate((String) testingData[i][0], // Username
