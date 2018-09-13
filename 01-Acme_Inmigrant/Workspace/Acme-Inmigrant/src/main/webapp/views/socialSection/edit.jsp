@@ -35,7 +35,7 @@
 		</jstl:if>
 		
 		<acme:submit name="save" code="socialSection.submit" />
-		<jstl:if test="${socialSection.id != 0}">
+		<jstl:if test="${socialSection.id != 0 && socialSection.application.socialSection.size() > 1}">
 			<acme:delete confirmationCode="socialSection.confirm.delete" buttonCode="socialSection.delete" id="${socialSection.id}" />
 		</jstl:if>
 		<acme:cancel url="application/immigrant/display.do" code="socialSection.cancel" />
