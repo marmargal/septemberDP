@@ -44,6 +44,7 @@
 						<li><a href="j_spring_security_logout"><spring:message
 									code="master.page.logout" /> </a></li>
 					</ul></li>
+				<li><a href="administrator/list.do"><spring:message code="master.page.admin.dashboard" /></a></li>
 			</security:authorize>
 
 			<security:authorize access="hasRole('USER')">
