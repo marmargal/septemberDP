@@ -31,7 +31,9 @@
 	<br/>
 	<acme:textbox code="actor.phoneNumber" path="user.phoneNumber"/>
 	<br/>
-	<acme:textbox code="actor.address" path="user.postalAddress"/>
+	<acme:textbox code="actor.address" path="user.address"/>
+	<br/>
+	<acme:textbox code="actor.postalAddress" path="user.postalAddress"/>
 	<br/>
 	<acme:textbox code="actor.pictures" path="user.pictures"/>
 	<br/>
