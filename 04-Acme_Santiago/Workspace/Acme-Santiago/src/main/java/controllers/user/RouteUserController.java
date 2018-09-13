@@ -79,8 +79,10 @@ public class RouteUserController extends AbstractController {
 			res = this.createEditModelAndView(route, "route.params.error");
 		else
 			try {
+
 				this.routeService.save(route);
 				res = new ModelAndView("redirect:../../");
+
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(route, "route.commit.error");
 			}

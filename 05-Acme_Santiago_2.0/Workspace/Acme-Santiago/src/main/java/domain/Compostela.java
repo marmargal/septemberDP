@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Past;
 
+import org.hibernate.validator.constraints.SafeHtml;
+
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(indexes = {@Index(columnList = "finallyDecision,walk_id") })
@@ -45,7 +47,7 @@ public class Compostela extends DomainEntity {
 		this.finallyDecision = finallyDecision;
 	}
 
-
+	@SafeHtml
 	public String getJustification() {
 		return justification;
 	}

@@ -124,15 +124,14 @@ public class CenterBossController extends AbstractController {
 
 	// Delete ---------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid Center center, final BindingResult binding) {
+	public ModelAndView delete(@Valid final Center center, final BindingResult binding) {
 		ModelAndView res;
 		try {
 			this.centerService.delete(center);
 			res = new ModelAndView("redirect:/center/list.do");
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			res = new ModelAndView("redirect:../../");
+			res = this.createEditModelAndView(center, "center.commit.error");
 		}
 
 		return res;

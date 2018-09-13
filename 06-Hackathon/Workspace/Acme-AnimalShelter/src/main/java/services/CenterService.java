@@ -9,12 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CenterRepository;
+import domain.Boss;
 import domain.Center;
 import domain.Company;
 import domain.Employee;
 import domain.Event;
 import domain.Pet;
 import domain.Stand;
+import domain.Warehouse;
 
 
 @Service
@@ -47,6 +49,9 @@ public class CenterService {
 	
 	@Autowired
 	private BossService bossService;
+	
+	@Autowired
+	private WarehouseService warehouseService;
 
 	// Constructors
 
@@ -57,7 +62,15 @@ public class CenterService {
 	// Simple CRUD methods
 
 	public Center create() {
+		this.bossService.checkAuthority();
 		Center res = new Center();
+		
+		Boss boss = this.bossService.findByPrincipal();
+		Warehouse warehouse = this.warehouseService.save(
+				this.warehouseService.create());
+		
+		res.setBoss(boss);
+		res.setWarehouse(warehouse);
 		
 		return res;
 
@@ -79,6 +92,8 @@ public class CenterService {
 	}
 
 	public Center save(Center center) {
+		this.bossService.checkAuthority();
+		Assert.isTrue(center.getBoss().equals(this.bossService.findByPrincipal()));
 		Center res;
 		res = centerRepository.saveAndFlush(center);
 		return res;

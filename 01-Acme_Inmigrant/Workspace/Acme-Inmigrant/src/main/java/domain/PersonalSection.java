@@ -14,6 +14,7 @@ import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -43,6 +44,7 @@ public class PersonalSection extends DomainEntity {
 	}
 	
 	@NotBlank
+	@SafeHtml
 	public String getBirthPlace() {
 		return birthPlace;
 	}

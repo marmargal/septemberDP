@@ -9,6 +9,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Embeddable
 @Access(AccessType.PROPERTY)
@@ -30,6 +31,7 @@ public class CreditCard {
 	private Integer cvv;
 
 	@NotBlank
+	@SafeHtml
 	public String getHolderName() {
 		return holderName;
 	}
@@ -39,6 +41,7 @@ public class CreditCard {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getBrandName() {
 		return brandName;
 	}
@@ -49,6 +52,7 @@ public class CreditCard {
 
 	@CreditCardNumber
 	@Pattern(regexp = "^\\d{4}\\s?\\d{4}\\s?\\d{4}\\s?\\d{4}$")
+	@SafeHtml
 	public String getNumber() {
 		return number;
 	}

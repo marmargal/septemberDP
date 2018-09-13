@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.EventRepository;
+import domain.Boss;
+import domain.Donation;
 import domain.Event;
 
 
@@ -23,7 +25,9 @@ public class EventService {
 	private EventRepository eventRepository;
 
 	// Suporting services
-
+	@Autowired
+	private BossService bossService;
+	
 	// Constructors
 
 	public EventService() {
@@ -33,10 +37,14 @@ public class EventService {
 	// Simple CRUD methods
 
 	public Event create() {
+		this.bossService.checkAuthority();
 		Event res = new Event();
+		
+		Collection<Donation> donations = new ArrayList<Donation>();
 		
 		Date publicationDate = new Date(System.currentTimeMillis()-1000);
 		res.setPublicationDate(publicationDate);
+		res.setDonation(donations);
 
 		return res;
 
@@ -58,16 +66,23 @@ public class EventService {
 	}
 
 	public Event save(Event event) {
+		this.bossService.checkAuthority();
 		Event res;
 		res = eventRepository.save(event);
 		return res;
 	}
 
 	public void delete(Event event) {
+		this.bossService.checkAuthority();
 		Assert.notNull(event);
 		Assert.isTrue(event.getId() != 0);
 		Assert.isTrue(eventRepository.exists(event.getId()));
-		eventRepository.delete(event);
+		
+		Boss boss = this.bossService.findByPrincipal();
+		Assert.isTrue(boss.getCenters().contains(event.getCenter()));
+		
+		
+		this.eventRepository.delete(event);
 	}
 
 	// Other business methods
@@ -86,5 +101,9 @@ public class EventService {
 		Collection<Event> events = new ArrayList<Event>();
 		events = this.eventRepository.findEventNotEnd(new Date());
 		return events;
+	}
+
+	public void flush() {
+		this.eventRepository.flush();
 	}
 }

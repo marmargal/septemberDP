@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -31,6 +32,7 @@ public class Walk extends DomainEntity {
 	private Collection<Date> daysOfEachHike;
 
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return title;
 	}

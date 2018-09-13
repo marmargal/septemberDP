@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -33,6 +34,7 @@ public class Advertisement extends DomainEntity{
 	private boolean taboo;
 	
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return title;
 	}
@@ -42,6 +44,7 @@ public class Advertisement extends DomainEntity{
 	}
 
 	@URL
+	@SafeHtml
 	public String getBanner() {
 		return banner;
 	}
@@ -51,6 +54,7 @@ public class Advertisement extends DomainEntity{
 	}
 
 	@URL
+	@SafeHtml
 	public String getTargetPage() {
 		return targetPage;
 	}

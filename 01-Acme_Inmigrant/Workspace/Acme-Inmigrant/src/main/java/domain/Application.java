@@ -21,6 +21,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -47,6 +48,7 @@ public class Application extends DomainEntity{
 	@Column(unique = true)
 	@Pattern(regexp = "[0-9]{6}-[A-Z]{4}[0-9]{2}")
 	@NotBlank
+	@SafeHtml
 	public String getTicker() {
 		return ticker;
 	}
