@@ -106,7 +106,7 @@ public class CommentUserController extends AbstractController {
 		ModelAndView res;
 		Comment comment;
 		Route route;
-
+		System.out.println("1111");
 		if (routeId == 0) {
 			res = new ModelAndView("redirect:../../");
 
@@ -119,10 +119,7 @@ public class CommentUserController extends AbstractController {
 			route = routeService.findOne(routeId);
 			comment.setRoute(route);
 
-			Collection<Comment> comments = new ArrayList<Comment>();
-			comments.addAll(route.getComments());
-			comments.add(comment);
-			route.setComments(comments);
+			
 
 			res = this.createEditModelAndViewRoute(comment);
 		}
@@ -147,10 +144,7 @@ public class CommentUserController extends AbstractController {
 		hike = hikeService.findOne(hikeId);
 		comment.setHike(hike);
 
-		Collection<Comment> comments = new ArrayList<Comment>();
-		comments.addAll(hike.getComments());
-		comments.add(comment);
-		hike.setComments(comments);
+		
 
 		res = this.createEditModelAndViewHike(comment);
 		}

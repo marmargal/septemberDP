@@ -935,7 +935,7 @@
 	<bean id="comment1" class="domain.Comment">
 		<property name="moment" value="06/01/2017" />
 		<property name="title" value="title1" />
-		<property name="text" value="text1" />
+		<property name="text" value="sex" />
 		<property name="pictures">
 			<list>
 				<value>http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png
