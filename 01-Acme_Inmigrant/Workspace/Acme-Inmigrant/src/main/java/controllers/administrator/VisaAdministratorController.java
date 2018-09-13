@@ -126,6 +126,26 @@ public class VisaAdministratorController extends AbstractController {
 
 		return result;
 	}
+	
+	
+	// Deleting -------------------------------------------------------------
+
+	// Delete ---------------------------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@RequestParam(defaultValue = "0") int visaId) {
+		ModelAndView res;
+		try {
+			Visa visa = this.visaService.findOne(visaId);
+			this.visaService.delete(visa);
+			res = new ModelAndView("redirect:/visa/list.do");
+
+		} catch (Exception e) {
+			res = new ModelAndView("redirect:../../");
+		}
+
+		return res;
+	}
+	
 
 	protected ModelAndView createEditModelAndView(final Visa visa) {
 		final ModelAndView result;

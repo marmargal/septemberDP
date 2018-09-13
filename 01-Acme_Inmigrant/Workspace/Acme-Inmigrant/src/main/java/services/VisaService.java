@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.VisaRepository;
+import domain.Application;
 import domain.Category;
 import domain.Country;
 import domain.Visa;
@@ -25,6 +26,9 @@ public class VisaService {
 	
 	@Autowired
 	private AdministratorService administratorService;
+	
+	@Autowired
+	private ApplicationService applicationService;
 
 	// Suporting services
 
@@ -79,6 +83,11 @@ public class VisaService {
 		Assert.notNull(visa);
 		Assert.isTrue(visa.getId() != 0);
 		Assert.isTrue(visaRepository.exists(visa.getId()));
+		
+		Collection<Application> applications = this.applicationService.findApplicationsByVisa(visa.getId());
+		for(Application application: applications){
+			application.setVisa(null);
+		}
 		visaRepository.delete(visa);
 	}
 	

@@ -18,7 +18,6 @@ public class RequirementForm {
 	private Boolean abrogated;
 	private Integer lawId;
 	
-	@NotBlank
 	public int getId() {
 		return id;
 	}

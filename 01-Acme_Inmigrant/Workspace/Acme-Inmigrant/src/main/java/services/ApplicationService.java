@@ -425,6 +425,12 @@ public class ApplicationService {
 		return application;
 	}
 	
+	public Collection<Application> findApplicationsByVisa(int visaId){
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = this.applicationRepository.findApplicationsByVisa(visaId);
+		return applications;
+	}
+	
 	public List<Application> findApplicationsLinked(Application application){
 		List<Application> applicationLinked = new ArrayList<Application>();
 		Application son = new Application();

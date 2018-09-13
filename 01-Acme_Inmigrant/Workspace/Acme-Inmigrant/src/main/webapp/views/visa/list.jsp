@@ -74,6 +74,16 @@
 		</jstl:if>
 
 	</display:column>
+	
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<form name="submitForm" method="POST"
+				action="visa/administrator/delete.do?visaId=${row.id }">
+				<acme:submit name="delete" code="visa.delete" />
+			</form>
+		</display:column>
+	</security:authorize>
+	
 </display:table>
 
 <security:authorize access="hasRole('ADMIN')">
@@ -82,4 +92,6 @@
 				code="visa.create" />
 		</a>
 	</div>
+	
+	
 </security:authorize>

@@ -114,6 +114,7 @@ public class LawForm {
 	}
 
 	@Valid
+	@NotNull
 	public Country getCountry() {
 		return country;
 	}

@@ -29,6 +29,9 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	@Query("select a from Application a join a.visa v where (a.closed=false and v.id = ?1)")
 	Collection<Application> findApplicationClosedFalseByVisa(int visaId);
 	
+	@Query("select a from Application a join a.visa v where v.id = ?1")
+	Collection<Application> findApplicationsByVisa(int visaId);
+	
 	@Query("select o.applications from Officer o")
 	Collection<Application> findApplicationsSelfAssigning();
 	
