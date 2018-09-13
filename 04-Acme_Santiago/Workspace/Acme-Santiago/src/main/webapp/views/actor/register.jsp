@@ -53,7 +53,8 @@
    </jstl:if>
 	
 	<acme:submit name="save" code="actor.save"/>
-	<acme:submit name="cancel" code="actor.cancel"/>
+	<!--<acme:submit name="cancel" code="actor.cancel"/>-->
+	<acme:cancel url="/Acme-Santiago" code="actor.cancel"/>
 	
 </form:form>
 	
