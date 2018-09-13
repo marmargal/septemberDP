@@ -1176,6 +1176,19 @@
 		<property name="company" ref="company1"/>
 	</bean>
 	
+	<bean id="event2" class="domain.Event">
+		<property name="title" value="Event 2"/>
+		<property name="description" value="An event"/>
+		<property name="nameSite" value="Maria Luisa Park"/>
+		<property name="address" value="Maria Luisa Park"/>
+		<property name="placard" value="https://google.com"/>
+		<property name="startDate" value="09/01/2019 12:00"/>
+		<property name="endDate" value="09/01/2019 17:00"/>
+		<property name="publicationDate" value="09/10/2018"/>
+		<property name="center" ref="center3"/>
+		<property name="company" ref="company1"/>
+	</bean>
+	
 	
 	<!-- GPS COORDINATE -->
 	<bean id="coordinates1" class="domain.GpsCoordinate">

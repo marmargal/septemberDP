@@ -25,6 +25,9 @@ public class StandService {
 
 	@Autowired
 	private VoluntaryService voluntaryService;
+	
+	@Autowired
+	private BossService bossService;
 
 	// Constructors
 
@@ -35,6 +38,7 @@ public class StandService {
 	// Simple CRUD methods
 
 	public Stand create() {
+		this.bossService.checkAuthority();
 		Stand res = new Stand();
 
 		return res;
@@ -63,9 +67,11 @@ public class StandService {
 	}
 
 	public void delete(Stand stand) {
+		this.bossService.checkAuthority();
 		Assert.notNull(stand);
 		Assert.isTrue(stand.getId() != 0);
 		Assert.isTrue(standRepository.exists(stand.getId()));
+		stand.getEmployee().setStand(null);
 		standRepository.delete(stand);
 	}
 
@@ -96,6 +102,10 @@ public class StandService {
 			}
 		}
 
+	}
+
+	public void flush() {
+		this.standRepository.flush();
 	}
 
 }

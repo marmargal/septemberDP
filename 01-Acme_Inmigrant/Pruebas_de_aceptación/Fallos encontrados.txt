@@ -1,5 +1,6 @@
-3.1 (Revisar si falta algún list)
+3.1 (Revisar)
 13.5 (NO FUNCIONA)
 26.2 (DELETE NO ESTÁ HECHO)
 26.3 (CREATE SIN NINGÚN DATO SALTA UN PANIC)
 26.4 (CREATE Y EDIT SI SE DEJA EL CAMPO DESCRIPTION VACÍO SALTA UN PANIC)
+En los register solo sale el error "Errors in the inputs"
