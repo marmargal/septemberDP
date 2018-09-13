@@ -1,5 +1,7 @@
 package forms;
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
@@ -13,11 +15,10 @@ public class RequirementForm {
 	private int id;
 	private String title;
 	private String description;
-	private boolean abrogated;
-	private int lawId;
+	private Boolean abrogated;
+	private Integer lawId;
 	
 	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public int getId() {
 		return id;
 	}
@@ -43,23 +44,22 @@ public class RequirementForm {
 		this.title = title;
 	}
 	
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public boolean getAbrogated() {
+	@NotNull
+	public Boolean getAbrogated() {
 		return abrogated;
 	}
-	public void setAbrogated(boolean abrogated) {
+	public void setAbrogated(Boolean abrogated) {
 		this.abrogated = abrogated;
 	}
 	
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public int getLawId() {
+	@NotNull
+	public Integer getLawId() {
 		return lawId;
 	}
-	public void setLawId(int lawId) {
+	public void setLawId(Integer lawId) {
 		this.lawId = lawId;
 	}
+	
 	
 	
 }
