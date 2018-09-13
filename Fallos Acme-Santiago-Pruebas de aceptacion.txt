@@ -1,0 +1,24 @@
+(CORREGIDO) - Cuando nos registramos, nos piden el address. El address se guarda en postal address (que no aparece en el login) y el address se queda vacío
+(CORREGIDO) - No message found under code 'actor.password.check' for locale 'en'.
+(CORREGIDO) - En el registro de usuario no funciona el cancel. Te obliga a pulsar los terminos y si los aceptas y luego le das otra vez a cancel:
+	type Status report
+	message
+	description The request sent by the client was syntactically incorrect.
+
+
+- Delete de route en user!!! Le he añadido el botón en la vista pero no funciona.
+
+- Si se crea una ruta sin hike (---) salta panic 
+
+- En chirp no se guarda el moment --> cambiar el create en el servicio
+
+- En comment no se guarda el moment --> cambiar el create en el servicio
+
+- no se puede borrar un comentario que contenga una palabra tabú real 
+
+
+Tonterias:
+- Save de route que redirija a list de routes
+- Cambiar mensaje de unfollow
+- Añadir al populate al menos un chirp y un coment con palabras taboo
+- cambiar en el populate el comentario 1 --> cambiar boolean taboo = false (no tiene palabra tabú)
