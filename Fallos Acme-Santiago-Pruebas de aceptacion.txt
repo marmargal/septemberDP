@@ -9,8 +9,8 @@
 
 (CORREGIDO) - Si se crea una ruta sin hike (---) salta panic 
 
-- En chirp no se guarda el moment --> cambiar el create en el servicio
 
+(CORREGIDO) - En chirp no se guarda el moment
 - En comment no se guarda el moment --> cambiar el create en el servicio
 
 - no se puede borrar un comentario que contenga una palabra tabú real 

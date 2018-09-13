@@ -14,7 +14,8 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
@@ -23,20 +24,24 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="user" />
-	
+	<form:hidden path="moment" />
+	<form:hidden path="taboo" />
+
+
 	<security:authorize access="hasRole('USER')">
-	<acme:textbox code="chirp.title" path="title" />
-	<acme:textbox code="chirp.text" path="text" />
-	
-	<!-- Buttons -->
-	
-	<acme:submit name="save" code="chirp.submit" />
-	<acme:cancel url="/" code="chirp.cancel" />
+		<acme:textbox code="chirp.title" path="title" />
+		<acme:textbox code="chirp.text" path="text" />
+
+		<!-- Buttons -->
+
+		<acme:submit name="save" code="chirp.submit" />
+		<acme:cancel url="/" code="chirp.cancel" />
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('ADMIN')">
-	<acme:delete confirmationCode="chirp.confirm.delete" buttonCode="chirp.delete" id="${chirp.id}" />
-	<acme:cancel url="/" code="chirp.cancel" />
+		<acme:delete confirmationCode="chirp.confirm.delete"
+			buttonCode="chirp.delete" id="${chirp.id}" />
+		<acme:cancel url="/" code="chirp.cancel" />
 	</security:authorize>
-	
+
 </form:form>
