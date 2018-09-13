@@ -918,9 +918,9 @@
 	<bean id="chirp1" class="domain.Chirp">
 		<property name="moment" value="06/01/2017" />
 		<property name="title" value="title1" />
-		<property name="text" value="text1" />
+		<property name="text" value="sex" />
 		<property name="user" ref="user1" />
-		<property name="taboo" value="false" />
+		<property name="taboo" value="true" />
 	</bean>
 
 	<bean id="chirp2" class="domain.Chirp">

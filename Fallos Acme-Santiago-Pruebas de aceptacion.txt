@@ -11,13 +11,13 @@
 
 
 (CORREGIDO) - En chirp no se guarda el moment
-- En comment no se guarda el moment --> cambiar el create en el servicio
+(CORREGIDO) -En comment no se guarda el moment 
 
-- no se puede borrar un comentario que contenga una palabra tabú real 
+(CORREGIDO) - no se puede borrar un comentario que contenga una palabra tabú real 
 
 
 Tonterias:
 - Save de route que redirija a list de routes
 - Cambiar mensaje de unfollow
-- Añadir al populate al menos un chirp y un coment con palabras taboo
-- cambiar en el populate el comentario 1 --> cambiar boolean taboo = false (no tiene palabra tabú)
+(CORREGIDO) - Añadir al populate al menos un chirp y un coment con palabras taboo
+(CORREGIDO) - cambiar en el populate el comentario 1 --> cambiar boolean taboo = false (no tiene palabra tabú)
