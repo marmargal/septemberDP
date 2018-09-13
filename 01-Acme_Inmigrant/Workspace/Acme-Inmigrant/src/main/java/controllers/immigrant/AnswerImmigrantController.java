@@ -1,5 +1,7 @@
 package controllers.immigrant;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -42,7 +44,7 @@ public class AnswerImmigrantController extends AbstractController {
 	}
 	
 	@RequestMapping(value="/edit",method=RequestMethod.POST, params = "save")
-	public ModelAndView save( final AnswerForm answerForm,
+	public ModelAndView save(@Valid final AnswerForm answerForm,
 			final BindingResult binding){
 		ModelAndView res;
 		

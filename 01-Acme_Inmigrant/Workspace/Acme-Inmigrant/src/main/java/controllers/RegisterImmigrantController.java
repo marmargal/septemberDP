@@ -1,5 +1,7 @@
 package controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -45,7 +47,7 @@ public class RegisterImmigrantController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("actorForm") ActorForm actorForm,
+	public ModelAndView save(@Valid @ModelAttribute("actorForm") ActorForm actorForm,
 			final BindingResult binding) {
 		ModelAndView res;
 		boolean validPhone = this.actorService.validPhoneNumber(actorForm.getPhoneNumber());
@@ -87,7 +89,7 @@ public class RegisterImmigrantController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveEdit(@ModelAttribute("actorForm") ActorForm actorForm,
+	public ModelAndView saveEdit(@Valid @ModelAttribute("actorForm") ActorForm actorForm,
 			final BindingResult binding) {
 		ModelAndView res;
 		boolean validPhone = this.actorService.validPhoneNumber(actorForm.getPhoneNumber());

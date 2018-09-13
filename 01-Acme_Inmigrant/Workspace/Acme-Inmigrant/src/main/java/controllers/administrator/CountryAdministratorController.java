@@ -1,5 +1,7 @@
 package controllers.administrator;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -54,7 +56,7 @@ public class CountryAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final CountryForm countryForm,
+	public ModelAndView save(@Valid final CountryForm countryForm,
 			final BindingResult binding) {
 		ModelAndView res;
 
