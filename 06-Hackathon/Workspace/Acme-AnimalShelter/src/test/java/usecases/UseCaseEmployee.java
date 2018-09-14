@@ -16,15 +16,17 @@ import org.springframework.util.Assert;
 import services.ApplicationService;
 import services.CenterService;
 import services.EmployeeService;
+import services.NoticeService;
 import services.PetService;
 import services.ReportService;
+import services.StandService;
 import services.VeterinaryService;
 import utilities.AbstractTest;
 import domain.Application;
 import domain.Employee;
+import domain.Notice;
 import domain.Pet;
 import domain.Report;
-import domain.Veterinary;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })
@@ -49,12 +51,11 @@ public class UseCaseEmployee extends AbstractTest {
 	@Autowired
 	private PetService petService;
 
-	/*
-	 * 14. Un usuario autentificado como empleado podrá: e. Listar los avisos
-	 * ordenados por fecha, siendo los primeros los más recientes. f. Desligar
-	 * voluntarios de su stand. g. Listar los avisos y descartarlos, bien porque
-	 * no se pueden atender o bien porque ya han sido atendidos.
-	 */
+	@Autowired
+	private NoticeService noticeService;
+
+	@Autowired
+	private StandService StandService;
 
 	/*
 	 * 14. Un usuario autentificado como empleado podrá: a. Listar las
@@ -311,4 +312,131 @@ public class UseCaseEmployee extends AbstractTest {
 	 * 14. Un usuario autentificado como empleado podrá: e. Listar los avisos
 	 * ordenados por fecha, siendo los primeros los más recientes.
 	 */
+
+	@Test
+	public void lisNoticeTest() {
+
+		final Object testingData[][] = {
+				// Positive, employee1 lista las todas las mascotas
+				{ "employee1", null },
+				// negativo, client1 accede a la ficha de una mascota
+				{ "client1", IllegalArgumentException.class },
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateLisNoticeTest((String) testingData[i][0],
+					(Class<?>) testingData[i][1]);
+	}
+
+	private void templateLisNoticeTest(String actor, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			if (actor.equals("employee1")) {
+				super.authenticate("employee1");
+
+				Collection<Notice> notices = this.noticeService.findAll();
+				Assert.notNull(notices);
+			} else if (actor.equals("client1")) {
+				super.authenticate(actor);
+				Collection<Notice> notices = this.noticeService.findAll();
+			}
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
+	/*
+	 * 14. Un usuario autentificado como empleado podrá: f. Desligar voluntarios
+	 * de su stand.
+	 */
+	@Test
+	public void standTest() {
+
+		final Object testingData[][] = {
+				// Positive, employee1 quita a un voluntario de un stand
+				{ "employee1", null },
+				// negativo, client1 quita a un voluntario de un stand
+				{ "client1", IllegalArgumentException.class },
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateStandTest((String) testingData[i][0],
+					(Class<?>) testingData[i][1]);
+	}
+
+	private void templateStandTest(String actor, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			if (actor.equals("employee1")) {
+				super.authenticate("employee1");
+
+				this.StandService.untieVoluntary(this.StandService
+						.findOne(super.getEntityId("stand1")));
+			} else if (actor.equals("client1")) {
+				this.StandService.untieVoluntary(this.StandService
+						.findOne(super.getEntityId("stand1")));
+			}
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
+	/*
+	 * 14. Un usuario autentificado como empleado podrá: g. Listar los avisos y
+	 * descartarlos, bien porque no se pueden atender o bien porque ya han sido
+	 * atendidos.
+	 */
+	@Test
+	public void lisNoticeDiscardTest() {
+
+		final Object testingData[][] = {
+				// Positive, employee1 descarta un aviso
+				{ "employee1", null },
+				// negativo, client1 descarta un aviso
+				{ "client1", IllegalArgumentException.class },
+				// Positive, employee1 descarta un aviso que no existe
+				{ "exist", IllegalArgumentException.class },
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateLisNoticeDiscardTest((String) testingData[i][0],
+					(Class<?>) testingData[i][1]);
+	}
+
+	private void templateLisNoticeDiscardTest(String actor,
+			final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			if (actor.equals("employee1")) {
+				super.authenticate("employee1");
+
+				this.noticeService.discardedTrue(super.getEntityId("notice1"));
+			} else if (actor.equals("client1")) {
+				super.authenticate(actor);
+				this.noticeService.discardedTrue(super.getEntityId("notice1"));
+			}else if (actor.equals("exist")) {
+				super.authenticate("employee1");
+
+				this.noticeService.discardedTrue(9999999);
+			}
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
 }

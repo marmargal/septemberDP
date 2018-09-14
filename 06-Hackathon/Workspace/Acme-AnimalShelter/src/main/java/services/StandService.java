@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.StandRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Stand;
 import domain.Voluntary;
 
@@ -28,6 +30,9 @@ public class StandService {
 	
 	@Autowired
 	private BossService bossService;
+	
+	@Autowired
+	private EmployeeService employeeService;
 
 	// Constructors
 
@@ -78,6 +83,22 @@ public class StandService {
 	// Other business methods
 
 	public Stand untieVoluntary(Stand stand) {
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority employee = new Authority();
+		employee.setAuthority("EMPLOYEE");
+		Authority admin = new Authority();
+		admin.setAuthority("ADMIN");
+		Authority boss = new Authority();
+		boss.setAuthority("BOSS");
+		Authority voluntary = new Authority();
+		voluntary.setAuthority("VOLUNTARY");
+		Assert.isTrue(authority.contains(employee) || authority.contains(admin)
+				|| authority.contains(boss)|| authority.contains(voluntary));
+
+		
+		
 		stand.setVoluntaries(null);
 		this.save(stand);
 		return stand;
