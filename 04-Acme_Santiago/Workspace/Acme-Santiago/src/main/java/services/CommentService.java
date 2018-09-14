@@ -87,6 +87,8 @@ public class CommentService {
 			}
 		}
 
+		if(comment.getId()==0)
+			comment.setUser(this.userService.findByPrincipal());
 		res = this.commentRepository.save(comment);
 		if (comment.getId() == 0 && comment.getRoute() != null) {
 			Route route = comment.getRoute();
@@ -103,6 +105,7 @@ public class CommentService {
 			hike.setComments(comments);
 			this.hikeService.save(hike);
 		}
+	
 		return res;
 	}
 

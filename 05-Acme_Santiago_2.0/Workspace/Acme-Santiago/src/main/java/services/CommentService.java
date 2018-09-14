@@ -92,7 +92,8 @@ public class CommentService {
 				comment.setTaboo(true);
 			}
 		}
-
+		if(comment.getId()==0)
+			comment.setUser(this.userService.findByPrincipal());
 		res = this.commentRepository.save(comment);
 		if (comment.getId() == 0 && comment.getRoute() != null) {
 			Route route = comment.getRoute();

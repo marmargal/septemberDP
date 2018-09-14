@@ -6,15 +6,15 @@
 	description The request sent by the client was syntactically incorrect.
 
 
-- Delete de route en user!!! Le he añadido el botón en la vista pero no funciona.
+x- Delete de route en user!!! Le he añadido el botón en la vista pero no funciona.
 
-- Si se crea una ruta sin hike (---) salta panic 
+(CORREGIDO)- Si se crea una ruta sin hike (---) salta panic 
 
-- En chirp no se guarda el moment --> cambiar el create en el servicio
+x- En chirp no se guarda el moment --> cambiar el create en el servicio
 
-- En comment no se guarda el moment --> cambiar el create en el servicio
+x- En comment no se guarda el moment --> cambiar el create en el servicio
 
-- no se puede borrar un comentario que contenga una palabra tabú real 
+x- no se puede borrar un comentario que contenga una palabra tabú real 
 
 
 Tonterias:
