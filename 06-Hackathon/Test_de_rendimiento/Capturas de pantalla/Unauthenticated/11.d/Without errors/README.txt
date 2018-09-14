@@ -1,0 +1,1 @@
+Aparecen errores al cargar tantas veces la misma imagen.

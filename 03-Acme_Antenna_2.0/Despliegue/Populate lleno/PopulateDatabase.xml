@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="USER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="agent1" />
+		<property name="password" value="83a87fd756ab57199c0bb6d5e11168cb" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AGENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="agent2" />
+		<property name="password" value="b1a4a6b01cc297d4677c4ca6656e14d7" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AGENT" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="handyworker1" />
+		<property name="password" value="3d0e201c52a6e13f27d22b6777711541" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="HANDYWORKER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="handyworker2" />
+		<property name="password" value="549dbd77d30ecab6ca4c047cd795333f" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="HANDYWORKER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- Other domain beans come here -->
+
+	<!-- ADMIN -->
+
+	<bean id="admin" class="domain.Administrator">
+		<property name="name" value="Administrator" />
+		<property name="surname" value="Acme Antenna" />
+		<property name="email" value="admin@admin.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Admin" />
+		<property name="userAccount" ref="userAccount1" />
+		<property name="tutorials">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- USER -->
+
+	<bean id="user1" class="domain.User">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount2" />
+		<property name="tutorials">
+			<list>
+				<ref bean="tutorial1" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment1" />
+			</list>
+		</property>
+		<property name="antennas">
+			<list>
+				<ref bean="antenna1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="user2" class="domain.User">
+		<property name="name" value="María" />
+		<property name="surname" value="García Velázquez" />
+		<property name="email" value="magarve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="666666666" />
+		<property name="postalAddress" value="C/María" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="tutorials">
+			<list>
+				<ref bean="tutorial2" />
+			</list>
+		</property>
+		<property name="comments">
+			<list>
+				<ref bean="comment2" />
+			</list>
+		</property>
+		<property name="antennas">
+			<list>
+				<ref bean="antenna2" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- AGENT -->
+
+
+	<bean id="agent1" class="domain.Agent">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="banners">
+			<list>
+				<ref bean="banner1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="agent2" class="domain.Agent">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount5" />
+		<property name="banners">
+			<list>
+				<ref bean="banner2" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- HANDYWORKER -->
+
+	<bean id="handyworker1" class="domain.Handyworker">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount6" />
+		<property name="requests">
+			<list>
+				<ref bean="request1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="handyworker2" class="domain.Handyworker">
+		<property name="name" value="Eduardo" />
+		<property name="surname" value="Fernández Velázquez" />
+		<property name="email" value="edferve@gmail.com" />
+		<property name="pictures" value="http://www.google.es" />
+		<property name="phoneNumber" value="654565656" />
+		<property name="postalAddress" value="C/Edu" />
+		<property name="userAccount" ref="userAccount7" />
+		<property name="requests">
+			<list>
+				<ref bean="request2" />
+			</list>
+		</property>
+	</bean>
+	<!-- BANNER -->
+	<bean id="banner1" class="domain.Banner">
+		<property name="picture"
+			value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" />
+		<property name="targetPage"
+			value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="agent" ref="agent1" />
+	</bean>
+
+	<bean id="banner2" class="domain.Banner">
+		<property name="picture"
+			value="http://www.imagen.com.mx/assets/img/imagen_share.png" />
+		<property name="targetPage"
+			value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="agent" ref="agent2" />
+	</bean>
+
+	<!-- REQUEST -->
+
+	<bean id="request1" class="domain.Request">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="moment" value="02/06/2010" />
+		<property name="description" value="description" />
+		<property name="finishMoment" value="02/06/2018" />
+		<property name="result" value="result" />
+		<property name="handyworker" ref="handyworker1" />
+		<property name="user" ref="user1" />
+		<property name="antenna" ref="antenna1"/>
+		<property name="requestHandyworker" ref="handyworker1" />
+	</bean>
+
+	<bean id="request2" class="domain.Request">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="moment" value="02/06/2010" />
+		<property name="description" value="description" />
+		<property name="finishMoment" value="02/06/2017" />
+		<property name="result" value="result" />
+		<property name="handyworker" ref="handyworker2" />
+		<property name="user" ref="user2" />
+		<property name="antenna" ref="antenna2"/>
+		<property name="requestHandyworker" ref="handyworker2" />
+	</bean>
+	<bean id="request3" class="domain.Request">
+		<property name="creditCard" ref="creditCard1" />
+		<property name="moment" value="02/06/2010" />
+		<property name="description" value="description" />
+		<property name="result" value="" />
+		<property name="user" ref="user1" />
+		<property name="antenna" ref="antenna1"/>
+		<property name="requestHandyworker" ref="handyworker1" />
+	</bean>
+
+	<!-- ANTENNA -->
+
+	<bean id="antenna1" class="domain.Antenna">
+		<property name="serialNumber" value="1234" />
+		<property name="model" value="Modelo V-112" />
+		<property name="coordinates" ref="coordinates1" />
+		<property name="azimuth" value="100." />
+		<property name="elevation" value="20." />
+		<property name="quality" value="90." />
+		<property name="user" ref="user1" />
+		<property name="satellite" ref="satellite1" />
+	</bean>
+
+	<bean id="antenna2" class="domain.Antenna">
+		<property name="serialNumber" value="4321" />
+		<property name="model" value="Modelo H-113" />
+		<property name="coordinates" ref="coordinates2" />
+		<property name="azimuth" value="160." />
+		<property name="elevation" value="34." />
+		<property name="quality" value="85.2" />
+		<property name="user" ref="user2" />
+		<property name="satellite" ref="satellite2" />
+	</bean>
+	<bean id="antenna3" class="domain.Antenna">
+		<property name="serialNumber" value="4388" />
+		<property name="model" value="Modelo H-113" />
+		<property name="coordinates" ref="coordinates2" />
+		<property name="azimuth" value="160." />
+		<property name="elevation" value="34." />
+		<property name="quality" value="85.2" />
+		<property name="user" ref="user2" />
+		<property name="satellite" ref="satellite2" />
+	</bean>
+	<bean id="antenna4" class="domain.Antenna">
+		<property name="serialNumber" value="4312" />
+		<property name="model" value="Modelo G-238" />
+		<property name="coordinates" ref="coordinates2" />
+		<property name="azimuth" value="160." />
+		<property name="elevation" value="34." />
+		<property name="quality" value="85.2" />
+		<property name="user" ref="user2" />
+		<property name="satellite" ref="satellite2" />
+	</bean>
+
+	<!-- COMMENT -->
+
+	<bean id="comment1" class="domain.Comment">
+		<property name="moment" value="02/06/2018" />
+		<property name="title" value="Tutorial muy bueno" />
+		<property name="text"
+			value="Me ha encantado, me ha sido de verdadera ayuda." />
+		<property name="pictures" value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png"/>
+		<property name="numberOfPictures" value="1" />
+		<property name="tutorial" ref="tutorial1" />
+		<property name="commentParent">
+			<null />
+		</property>
+		<property name="user" ref="user1" />
+		<property name="replies">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="comment2" class="domain.Comment">
+		<property name="moment" value="01/07/2018" />
+		<property name="title" value="Tutorial muy malo" />
+		<property name="text" value="Este tutorial no sirve para nada." />
+		<property name="pictures" value="http://www.imagen.com.mx/assets/img/imagen_share.png,http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png,http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png"/>
+		<property name="numberOfPictures" value="3" />
+		<property name="tutorial" ref="tutorial2" />
+		<property name="commentParent">
+			<null />
+		</property>
+		<property name="user" ref="user2" />
+		<property name="replies">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="comment3" class="domain.Comment">
+		<property name="moment" value="02/02/2018" />
+		<property name="title" value="Sex" />
+		<property name="text"
+			value="Me ha encantado." />
+		<property name="pictures" value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png, http://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="numberOfPictures" value="2" />
+		<property name="tutorial" ref="tutorial1" />
+		<property name="commentParent">
+			<null />
+		</property>
+		<property name="user" ref="user1" />
+		<property name="replies">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<!-- CREDIT CARD -->
+
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="BBVA" />
+		<property name="brandName" value="MasterCard" />
+		<property name="number" value="4024007146545768" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="19" />
+		<property name="cvv" value="123" />
+	</bean>
+
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Name creditCard1" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4150902751004463" />
+		<property name="expirationMonth" value="3" />
+		<property name="expirationYear" value="22" />
+		<property name="cvv" value="612" />
+	</bean>
+
+	<!-- GPSCOORDINATE -->
+
+	<bean id="coordinates1" class="domain.GpsCoordinate">
+		<property name="latitude" value="45." />
+		<property name="longitude" value="45." />
+	</bean>
+
+	<bean id="coordinates2" class="domain.GpsCoordinate">
+		<property name="latitude" value="60." />
+		<property name="longitude" value="13.4" />
+	</bean>
+
+	<!-- PLATFORM -->
+
+	<bean id="platform1" class="domain.Platform">
+		<property name="name" value="Platform E-800" />
+		<property name="description" value="Nasa platform" />
+		<property name="satellite" ref="satellite1" />
+	</bean>
+
+	<bean id="platform2" class="domain.Platform">
+		<property name="name" value="Platform MMB" />
+		<property name="description" value="Russian Platform" />
+		<property name="satellite" ref="satellite2" />
+	</bean>
+
+	<bean id="platform3" class="domain.Platform">
+		<property name="name" value="Platform C17" />
+		<property name="description" value="Japan Platform" />
+		<property name="satellite" ref="satellite3" />
+	</bean>
+
+	<!-- SATELLITE -->
+
+	<bean id="satellite1" class="domain.Satellite">
+		<property name="name" value="Satellite M-723" />
+		<property name="description" value="Nasa Satellite" />
+		<property name="antennas">
+			<list>
+				<ref bean="antenna1" />
+			</list>
+		</property>
+		<property name="platforms">
+			<list>
+				<ref bean="platform1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="satellite2" class="domain.Satellite">
+		<property name="name" value="Satellite RR-221" />
+		<property name="description" value="Russian Satellite" />
+		<property name="antennas">
+			<list>
+				<ref bean="antenna2" />
+			</list>
+		</property>
+		<property name="platforms">
+			<list>
+				<ref bean="platform2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="satellite3" class="domain.Satellite">
+		<property name="name" value="Satellite R2D2" />
+		<property name="description" value="American Satellite" />
+		<property name="antennas">
+			<list>
+				<ref bean="antenna2" />
+			</list>
+		</property>
+		<property name="platforms">
+			<list>
+				<ref bean="platform3" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- SUBSCRIPTION -->
+
+	<bean id="subscription1" class="domain.Subscription">
+		<property name="startDate" value="06/01/2018" />
+		<property name="endDate" value="12/11/2018" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="user" ref="user1" />
+		<property name="platform" ref="platform1" />
+		<property name="keyCode" value="6GS102XGJCGTXA6NV71JS74BANMN395" />
+	</bean>
+
+	<bean id="subscription2" class="domain.Subscription">
+		<property name="startDate" value="07/06/2018" />
+		<property name="endDate" value="11/24/2018" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="user" ref="user2" />
+		<property name="platform" ref="platform2" />
+		<property name="keyCode" value="AJYR1000X1XVRXA6NV7LPE96JKNMVVBG" />
+	</bean>
+
+	<!-- TUTORIAL -->
+
+	<bean id="tutorial1" class="domain.Tutorial">
+		<property name="moment" value="02/28/2018" />
+		<property name="title" value="How to fix an antenna" />
+		<property name="text" value="First, you need an antenna to fix it." />
+		<property name="pictures" value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png, http://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="numberOfPictures" value="2" />
+		<property name="actor" ref="user1" />
+		<property name="comments">
+			<list>
+				<ref bean="comment1" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="tutorial2" class="domain.Tutorial">
+		<property name="moment" value="05/04/2018" />
+		<property name="title" value="How to fix a satellite" />
+		<property name="text" value="First, you need a satellite to fix it." />
+		<property name="pictures" value="http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png"/>
+		<property name="numberOfPictures" value="1" />
+		<property name="actor" ref="user2" />
+		<property name="comments">
+			<list>
+				<ref bean="comment2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="tutorial3" class="domain.Tutorial">
+		<property name="moment" value="05/04/2018" />
+		<property name="title" value="How to fix a satellite (taboo)" />
+		<property name="text" value="First, you need a viagra to fix it." />
+		<property name="pictures" value="http://www.imagen.com.mx/assets/img/imagen_share.png"/>
+		<property name="numberOfPictures" value="1" />
+		<property name="actor" ref="user2" />
+		<property name="comments">
+			<list>
+				<ref bean="comment2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="tutorial4" class="domain.Tutorial">
+		<property name="moment" value="05/04/2018" />
+		<property name="title" value="How to fix a satellite" />
+		<property name="text" value="First, you need a satellite to fix it." />
+		<property name="pictures" value="http://www.imagen.com.mx/assets/img/imagen_share.png, http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png"/>
+		<property name="numberOfPictures" value="2" />
+		<property name="actor" ref="user2" />
+		<property name="comments">
+			<list>
+				<ref bean="comment2" />
+			</list>
+		</property>
+	</bean>
+	
+		<!-- CONFIGURATION -->
+	
+	<bean id="configuration" class="domain.Configuration">
+	<property name="tabooWords">
+		<list>
+			<value>sex</value>
+			<value>viagra</value>
+			<value>cialis</value>
+		</list>
+	</property>
+	</bean>
+	
+	<!-- FRANCHISE -->
+
+	<bean id="franchise1" class="domain.Franchise">
+		<property name="businessName" value="Crazy antenna" />
+		<property name="banner" value="http://indyfree.tv/wp-content/uploads/2015/08/long-range-hdr-antenna-method.jpg" />
+		<property name="welcomeEnglishMessage"
+			value="Cha wanna get crazy 'bout your rabbit ears?" />
+		<property name="welcomeSpanishMessage" value="¿Te quieres antenizar con nosotros?" />
+	</bean>
+
+</beans>
