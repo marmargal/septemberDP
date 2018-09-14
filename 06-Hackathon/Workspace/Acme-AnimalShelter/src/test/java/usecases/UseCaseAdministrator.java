@@ -5,13 +5,12 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import services.ApplicationService;
 import services.BossService;
@@ -28,7 +27,6 @@ import services.VoluntaryService;
 import utilities.AbstractTest;
 import domain.Application;
 import domain.Boss;
-import domain.Center;
 import domain.Client;
 import domain.Configuration;
 import domain.Employee;
@@ -173,7 +171,7 @@ public class UseCaseAdministrator extends AbstractTest {
 
 			final Collection<Boss> listBoss = this.bossService.findAll();
 
-			Assert.assertNotNull(listBoss);
+			Assert.notNull(listBoss);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -212,7 +210,7 @@ public class UseCaseAdministrator extends AbstractTest {
 
 			final Collection<Client> listClient = this.clientService.findAll();
 
-			Assert.assertNotNull(listClient);
+			Assert.notNull(listClient);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -251,7 +249,7 @@ public class UseCaseAdministrator extends AbstractTest {
 
 			final Collection<Employee> listEmployee = this.employeeService
 					.findAll();
-			Assert.assertNotNull(listEmployee);
+			Assert.notNull(listEmployee);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -291,7 +289,7 @@ public class UseCaseAdministrator extends AbstractTest {
 			final Collection<Veterinary> listBoss = this.veterinaryService
 					.findAll();
 
-			Assert.assertNotNull(listBoss);
+			Assert.notNull(listBoss);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -331,7 +329,7 @@ public class UseCaseAdministrator extends AbstractTest {
 			final Collection<Voluntary> listClient = this.voluntaryService
 					.findAll();
 
-			Assert.assertNotNull(listClient);
+			Assert.notNull(listClient);
 
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
@@ -490,58 +488,7 @@ public class UseCaseAdministrator extends AbstractTest {
 		super.checkExceptions(expected, caught);
 	}
 
-	/*
-	 * Caso de uso: Admin-> Eliminar un centro por cierre del mismo. 13g
-	 */
-	@Test
-	public void deleteCenterTest() {
-
-		final Object testingData[][] = {
-				{// Positive
-				"admin", "center2", null },
-				{// Negative: with voluntary like
-					// principal
-						"voluntary1", "center1", IllegalArgumentException.class },
-				{// Negative:
-					// medical
-					// center
-					// dont
-					// exists
-						"admin", "0", IllegalArgumentException.class }
-
-		};
-
-		for (int i = 0; i < testingData.length; i++)
-			this.templateDeleteCenterTest(i, (String) testingData[i][0],
-					(String) testingData[i][1], (Class<?>) testingData[i][2]);
-	}
-
-	protected void templateDeleteCenterTest(final Integer i,
-			final String principal, final String center, final Class<?> expected) {
-		Class<?> caught;
-
-		caught = null;
-		try {
-			super.authenticate(principal);
-			Integer centerId = 0;
-			if (!center.equals("0")) {
-				if (center == "" || center == null)
-					centerId = null;
-				else
-					centerId = super.getEntityId(center);
-
-			}
-
-			final Center categoryBD = this.centerService.findOne(centerId);
-
-			this.centerService.delete(categoryBD);
-			this.centerService.flush();
-
-		} catch (final Throwable oops) {
-			caught = oops.getClass();
-		}
-		super.checkExceptions(expected, caught);
-	}
+	
 
 	/*
 	 * Caso de uso: Admin-> Eliminar un animal por fallecimiento.. 13h
