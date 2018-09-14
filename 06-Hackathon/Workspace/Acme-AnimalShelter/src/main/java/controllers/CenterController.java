@@ -62,13 +62,11 @@ public class CenterController extends AbstractController {
 					.iterator().next().getId())) {
 				centers.remove(employee.getCenter());
 			}
-			System.out.println(centers);
 			result = new ModelAndView("center/list");
 			result.addObject("centers", centers);
 			result.addObject("boss", false);
 			result.addObject("requestURI", "center/list.do");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			centers = this.petService.findAll();
 
 			result = new ModelAndView("center/list");
