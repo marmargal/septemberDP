@@ -30,13 +30,13 @@
 	<acme:textbox code="law.abrogationTime" path="abrogationTime"/>
 	<br />
 
-	<acme:select items="${countries}" itemLabel="name" code="law.country"
+	<acme:selectlaw items="${countries}" itemLabel="name" code="law.country"
 		path="country" />
 
-	<acme:select items="${lawParent}" itemLabel="title"
+	<acme:selectlaw items="${lawParent}" itemLabel="title"
 		code="law.lawParent" path="lawParent" />
 
-	<acme:select items="${requirement}" itemLabel="title"
+	<acme:selectlaw items="${requirement}" itemLabel="title"
 		code="law.requirement" path="requirement" />
 
 
