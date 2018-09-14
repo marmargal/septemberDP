@@ -98,6 +98,9 @@ public class AmenityService {
 		Assert.notNull(amenity);
 		Assert.isTrue(amenity.getId() != 0);
 		Assert.isTrue(this.amenityRepository.exists(amenity.getId()));
+		
+		this.innkeeperService.findByPrincipal().getAmenities().remove(amenity);
+		
 		this.amenityRepository.delete(amenity);
 	}
 
