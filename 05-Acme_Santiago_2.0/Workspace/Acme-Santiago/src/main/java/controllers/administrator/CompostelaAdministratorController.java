@@ -93,7 +93,7 @@ public class CompostelaAdministratorController extends AbstractController {
 			try {
 				if ((compostela.getJustification() == null || compostela
 						.getJustification().isEmpty())
-						&& compostela.isDecision() == true
+						&& compostela.isDecision() == false
 						&& compostela.isfinallyDecision() == true) {
 					res = this.createEditModelAndView(compostela,
 							"compostela.justificationblank");
