@@ -101,7 +101,7 @@ public abstract class Actor extends DomainEntity {
 	public void setUserAccount(UserAccount userAccount) {
 		this.userAccount = userAccount;
 	}
-	
+
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy = "actor")
@@ -112,5 +112,5 @@ public abstract class Actor extends DomainEntity {
 	public void setFolders(Collection<Folder> folders) {
 		this.folders = folders;
 	}
-	
+
 }
