@@ -8,11 +8,12 @@
 	Se pueden listar los eventos por la url.
 	Página de promoción???
 
-- Los mensajes de bienvenida no son los que aparecen en la página principal, si cambiamos el mensaje principal no se cambia en la página de inicio.
+(CORREGIDO)- Los mensajes de bienvenida no son los que aparecen en la página principal, si cambiamos el mensaje principal no se cambia en la página de inicio.
 
-- Falta /notice/employee/list.do en el menú de employee
+(CORREGIDO)- Falta /notice/employee/list.do en el menú de employee
 
-- El admin no puede eliminar el centro 1 y 3
+
+(CORREGIDO)- El admin no puede eliminar el centro 1 y 3
 
 - Al eliminar un mensaje se ha borrado el otro (se han eliminado dos mensajes)
 
