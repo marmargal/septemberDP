@@ -41,14 +41,28 @@
 		path="warehouse.birdFood" type="number" />
 	<acme:textarea code="center.warehouse.catFood" path="warehouse.catFood"
 		type="number" />
-	
+
 	<acme:submit name="save" code="center.save" />
-	
-	
-	<jstl:if test="${center.id != 0}">
+
+	<security:authorize access="hasRole('ADMIN')">
+		<jstl:if test="${center.id != 0}">
+			<jstl:if test="${employee==true }">
 			<input type="submit" name="delete"
 				value="<spring:message code="center.delete" />"
 				onclick="return confirm('<spring:message code="center.confirm.delete" />')" />&nbsp;
+				</jstl:if>
 	</jstl:if>
+	</security:authorize>
+	<security:authorize access="hasRole('BOSS')">
+		<jstl:if test="${center.id != 0}">
 
+			<jstl:if test="${employee==true }">
+				<input type="submit" name="delete"
+					value="<spring:message code="center.delete" />"
+					onclick="return confirm('<spring:message code="center.confirm.delete" />')" />&nbsp;
+				</jstl:if>
+		</jstl:if>
+	</security:authorize>
+	<br>
+	<spring:message code="center.employees" />
 </form:form>
