@@ -34,7 +34,7 @@
 (CORREGIDO)- En el create de notice especificar el tipo de animal. Poner un desplegable o un mensaje con las opciones.
 Lo mismo para Level (1-3)
 
-- Las donaciones se guardan siempre pero sale "Cannot commit this operation" sea válida o no.
+(CORREGIDO)- Las donaciones se guardan siempre pero sale "Cannot commit this operation" sea válida o no.
 Si no se aporta datos de la tarjeta se guarda pero sale el mensaje de error
 
 - En el list de event, poner bonita las donaciones
