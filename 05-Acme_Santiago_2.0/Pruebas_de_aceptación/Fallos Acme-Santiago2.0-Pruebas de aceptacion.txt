@@ -1,4 +1,4 @@
-- List advertisement con taboo words no esta hecho!! (5.1)
+(NO HACE FALTA)- List advertisement con taboo words no esta hecho!! (5.1)
 
 (CORREGIDO)- En el menú superior de user está duplicado "List of inns"
 
