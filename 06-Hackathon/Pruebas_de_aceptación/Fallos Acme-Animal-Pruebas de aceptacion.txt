@@ -1,60 +1,60 @@
 
-(CORREGIDO)- AÒadir al men˙ Events.
+(CORREGIDO)- A√±adir al men√∫ Events.
 
 
 
 
-(CORREGIDO) - Falta 11.e --> Un usuario que no estÈ autenticado podr·: Listar los eventos que se han publicado y no hayan finalizado y ver su p·gina de promociÛn.
+(CORREGIDO) - Falta 11.e --> Un usuario que no est√© autenticado podr√°: Listar los eventos que se han publicado y no hayan finalizado y ver su p√°gina de promoci√≥n.
 	Se pueden listar los eventos por la url.
-	P·gina de promociÛn???
+	P√°gina de promoci√≥n???
 
-(CORREGIDO)- Los mensajes de bienvenida no son los que aparecen en la p·gina principal, si cambiamos el mensaje principal no se cambia en la p·gina de inicio.
+(CORREGIDO)- Los mensajes de bienvenida no son los que aparecen en la p√°gina principal, si cambiamos el mensaje principal no se cambia en la p√°gina de inicio.
 
-(CORREGIDO)- Falta /notice/employee/list.do en el men˙ de employee
+(CORREGIDO)- Falta /notice/employee/list.do en el men√∫ de employee
 
 
 (CORREGIDO)- El admin no puede eliminar el centro 1 y 3
 
 (CORREGIDO)- Al eliminar un mensaje se ha borrado el otro (se han eliminado dos mensajes)
 
-(CORREGIDO)- Al admin se le pueden mandar mensajes, pero el admin no tiene en el men˙ "My messages"
+(CORREGIDO)- Al admin se le pueden mandar mensajes, pero el admin no tiene en el men√∫ "My messages"
 
 (CORREGIDO)- Al crear un report, si dejamos suitable=---, se guarda como false
 
-(CORREGIDO)- En el formulario de pet, explicar quÈ signica status, puede ser true o false
+(CORREGIDO)- En el formulario de pet, explicar qu√© signica status, puede ser true o false
 	En el formulario de pet, en la lista de centros, solo pueden aparecer los centros del empleado y aparecen todos.
 
 (CORREGIDO)- Delete animal de employee no funciona
 
-(CORREGIDO)- Falta notice/employee/list.do en el men˙ de employee
+(CORREGIDO)- Falta notice/employee/list.do en el men√∫ de employee
 
-(CORREGIDO)- 14.f --> Desligar voluntarios de su stand (employee). --> falta algun botÛn de editar. 
+(CORREGIDO)- 14.f --> Desligar voluntarios de su stand (employee). --> falta algun bot√≥n de editar. 
 	Controlador: VountaryEmployeeCont.
 
 (CORREGIDO)- En el create de notice especificar el tipo de animal. Poner un desplegable o un mensaje con las opciones.
 Lo mismo para Level (1-3)
 
-- Las donaciones se guardan siempre pero sale "Cannot commit this operation" sea v·lida o no.
+- Las donaciones se guardan siempre pero sale "Cannot commit this operation" sea v√°lida o no.
 Si no se aporta datos de la tarjeta se guarda pero sale el mensaje de error
 
 - En el list de event, poner bonita las donaciones
 
 - Cuando nos quitamos de un stand como un voluntario se quita el empleado, no el voluntario.
 
-(CORREGIDO)- En el edit de center est· duplicado capacity warehouse.
+(CORREGIDO)- En el edit de center est√° duplicado capacity warehouse.
 
 (CORREGIDO)- Almacen se puede crear en negativo
 
-(CORREGIDO)- AÒadir un list EventBossController que sea findAll
+(CORREGIDO)- A√±adir un list EventBossController que sea findAll
 
-- En el formulario de event --> center deberÌa de ser boss.centers
+(CORREGIDO)- En el formulario de event --> center deber√≠a de ser boss.centers
 			--> quitar donation (es un collection de donaciones, se crea en blanco)
 
-- Al eliminar empresas, se eliminan las nuevas que se creen pero no las que ya estaban
+(CORREGIDO)- Al eliminar empresas, se eliminan las nuevas que se creen pero no las que ya estaban
 
-- No funciona delete stand (boss).
+(CORREGIDO)- No funciona delete stand (boss).
 
-- Realizar una ˙nica solicitud por animal --> cuando volvemmos al list sigue saliendo la opciÛn de Apply
+(CORREGIDO)- Realizar una √∫nica solicitud por animal --> cuando volvemmos al list sigue saliendo la opci√≥n de Apply
 
 
 

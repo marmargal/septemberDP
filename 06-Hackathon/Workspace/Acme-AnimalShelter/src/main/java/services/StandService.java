@@ -81,12 +81,12 @@ public class StandService {
 		} catch (Exception e) {
 			
 			this.bossService.checkAuthority();
-//			Assert.isTrue(stand.getCompany().getEvent().getCenter().getBoss().equals(this.bossService.findByPrincipal()));	
+			Assert.isTrue(stand.getCompany().getEvent().getCenter().getBoss().equals(this.bossService.findByPrincipal()));	
 		}
 		Assert.notNull(stand);
 		Assert.isTrue(stand.getId() != 0);
 		Assert.isTrue(standRepository.exists(stand.getId()));
-		stand.getEmployee().setStand(null);
+//		stand.getEmployee().setStand(null);
 		standRepository.delete(stand);
 	}
 
