@@ -269,9 +269,9 @@ public class ApplicationService {
 		if(cc != null){
 			
 			String brandName = cc.getBrandName();
-			String cvv = String.valueOf(cc.getCvv());
-			String expirationMonth = String.valueOf(cc.getExpirationMonth());
-			String expirationYear = String.valueOf(cc.getExpirationYear());
+			Integer cvv = cc.getCvv();
+			Integer expirationMonth = cc.getExpirationMonth();
+			Integer expirationYear = cc.getExpirationYear();
 			String holderName = cc.getHolderName();
 			String number = cc.getNumber();
 			
@@ -324,19 +324,21 @@ public class ApplicationService {
 			res = this.create();
 		
 		//CREDIT CARD
-		if(!applicationForm.getBrandName().isEmpty() || !applicationForm.getCvv().isEmpty() || !applicationForm.getExpirationMonth().isEmpty() || 
-				!applicationForm.getExpirationYear().isEmpty() || !applicationForm.getHolderName().isEmpty() || !applicationForm.getNumber().isEmpty()){
-			Integer cvv = Integer.parseInt(applicationForm.getCvv());
-			Integer expirationMonth = Integer.parseInt(applicationForm.getExpirationMonth());
-			Integer expirationYear = Integer.parseInt(applicationForm.getExpirationYear());
+		if(!applicationForm.getBrandName().isEmpty() || applicationForm.getCvv() != null || applicationForm.getExpirationMonth() != null || 
+				applicationForm.getExpirationYear() != null || !applicationForm.getHolderName().isEmpty() || !applicationForm.getNumber().isEmpty()){
+//			Integer cvv = Integer.parseInt(applicationForm.getCvv());
+//			Integer expirationMonth = Integer.parseInt(applicationForm.getExpirationMonth());
+//			Integer expirationYear = Integer.parseInt(applicationForm.getExpirationYear());
 			
 			cc.setBrandName(applicationForm.getBrandName());
-			cc.setCvv(cvv);
-			cc.setExpirationMonth(expirationMonth);
-			cc.setExpirationYear(expirationYear);
+			cc.setCvv(applicationForm.getCvv());
+			cc.setExpirationMonth(applicationForm.getExpirationMonth());
+			cc.setExpirationYear(applicationForm.getExpirationYear());
 			cc.setHolderName(applicationForm.getHolderName());
 			cc.setNumber(applicationForm.getNumber());
 			res.setCreditCard(cc);
+		}else{
+			res.setCreditCard(null);
 		}
 		
 		//PERSONAL SECTION
