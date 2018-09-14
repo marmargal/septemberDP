@@ -76,6 +76,7 @@ public class Event extends DomainEntity{
 	}
 
 	@NotBlank
+	@URL
 	@SafeHtml
 	public String getNameSite() {
 		return nameSite;

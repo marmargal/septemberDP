@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.transaction.Transactional;
 
@@ -223,6 +225,37 @@ public class ApplicationService {
 				res = true;
 			} 
 		} 
+		return res;
+	}
+	
+	
+	
+	public boolean checkCreditCardCvvAndDate(final CreditCard creditCard) {
+		boolean res = true;
+		if(creditCard.getCvv() > 999 || creditCard.getCvv() < 100){
+			res = false;
+		}
+		if(creditCard.getExpirationMonth() > 12 || creditCard.getExpirationMonth() < 1){
+			res = false;
+		}
+		if(creditCard.getExpirationYear() > 99 || creditCard.getExpirationYear() < 1){
+			res = false;
+		}else{
+			Calendar calendar = new GregorianCalendar();
+			int actualYear = calendar.get(Calendar.YEAR) % 100;
+			if(creditCard.getExpirationYear() < actualYear){
+				res = false;
+			}else if(creditCard.getExpirationYear() == actualYear && creditCard.getExpirationMonth() < calendar.get(Calendar.MONTH)){
+				res = false;
+			}
+		}
+		
+		Pattern pattern = Pattern.compile("^\\d{4}\\s?\\d{4}\\s?\\d{4}\\s?\\d{4}$");
+		Matcher m = pattern.matcher(creditCard.getNumber());
+		if(!m.find()){
+			res = false;
+		}
+		
 		return res;
 	}
 	

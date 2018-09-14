@@ -33,6 +33,9 @@ public class StandService {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Constructors
 
@@ -72,7 +75,14 @@ public class StandService {
 	}
 
 	public void delete(Stand stand) {
-		this.bossService.checkAuthority();
+		
+		try {
+			this.administratorService.checkAuthority();
+		} catch (Exception e) {
+			
+			this.bossService.checkAuthority();
+			Assert.isTrue(stand.getCompany().getEvent().getCenter().getBoss().equals(this.bossService.findByPrincipal()));	
+		}
 		Assert.notNull(stand);
 		Assert.isTrue(stand.getId() != 0);
 		Assert.isTrue(standRepository.exists(stand.getId()));

@@ -541,6 +541,7 @@
 		<property name="price" value="200" />
 		<property name="country" ref="country1" />
 		<property name="category" ref="category2" />
+		<property name="creditCard" ref="creditCard1" />
 	</bean>
 
 	<bean id="visa2" class="domain.Visa">
@@ -549,6 +550,7 @@
 		<property name="price" value="0" />
 		<property name="country" ref="country2" />
 		<property name="category" ref="category3" />
+		<property name="creditCard"><null /></property>
 	</bean>
 
 	<!-- Category -->

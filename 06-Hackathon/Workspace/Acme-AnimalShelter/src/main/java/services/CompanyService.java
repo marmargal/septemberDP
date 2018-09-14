@@ -12,7 +12,6 @@ import repositories.CompanyRepository;
 import domain.Company;
 import domain.Stand;
 
-
 @Service
 @Transactional
 public class CompanyService {
@@ -27,6 +26,9 @@ public class CompanyService {
 	@Autowired
 	private BossService bossService;
 	
+	@Autowired
+	private AdministratorService administratorService;
+
 	// Constructors
 
 	public CompanyService() {
@@ -38,11 +40,11 @@ public class CompanyService {
 	public Company create() {
 		bossService.checkAuthority();
 		Company res = new Company();
-		
+
 		Collection<Stand> stands = new ArrayList<Stand>();
-		
+
 		res.setStands(stands);
-		
+
 		return res;
 
 	}
@@ -63,7 +65,12 @@ public class CompanyService {
 	}
 
 	public Company save(Company company) {
-		this.bossService.checkAuthority();
+		try {
+			this.administratorService.checkAuthority();
+		} catch (Exception e) {
+
+			this.bossService.checkAuthority();
+		}
 		Company res;
 		res = companyRepository.save(company);
 		return res;
@@ -77,10 +84,8 @@ public class CompanyService {
 		companyRepository.delete(company);
 	}
 
-	
-
 	// Other business methods
-	
+
 	public void flush() {
 		this.companyRepository.flush();
 	}
