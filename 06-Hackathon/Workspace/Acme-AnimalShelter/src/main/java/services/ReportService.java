@@ -57,7 +57,10 @@ public class ReportService {
 	}
 
 	public Report save(Report report) {
+		Assert.notNull(report);
 		Report res;
+
+		Assert.notNull(report.getApplication());
 		Application application = report.getApplication();
 		application.setClosed(true);
 		applicationService.save(application);
