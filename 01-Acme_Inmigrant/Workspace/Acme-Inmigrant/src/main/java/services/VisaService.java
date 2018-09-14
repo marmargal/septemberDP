@@ -53,6 +53,7 @@ public class VisaService {
 
 		res.setCountry(country);
 		res.setCategory(category);
+		res.setCreditCard(null);
 
 		return res;
 	}
@@ -115,6 +116,23 @@ public class VisaService {
 		res.addAll(visaRepository.findVisasByCountry(countryId));
 
 		return res;
+	}
+	
+	public boolean checkCreditCard(Visa visa) {
+		boolean isValid = true;
+		if(visa.getPrice() > 0){
+			if(visa.getCreditCard().getBrandName().isEmpty() ||
+			   visa.getCreditCard().getCvv() == null ||
+			   visa.getCreditCard().getExpirationMonth() == null ||
+			   visa.getCreditCard().getExpirationYear() == null ||
+			   visa.getCreditCard().getHolderName().isEmpty() ||
+			   visa.getCreditCard().getNumber().isEmpty()){
+				
+					isValid = false;
+			}
+		}
+
+		return isValid;
 	}
 	
 	public void flush() {

@@ -29,6 +29,7 @@ public class Visa extends DomainEntity {
 	private String description;
 	private Integer price;
 	private Boolean invalidate;
+	private CreditCard creditCard;
 
 	@NotBlank
 	@SafeHtml
@@ -91,6 +92,15 @@ public class Visa extends DomainEntity {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+//	@Valid
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 
 }

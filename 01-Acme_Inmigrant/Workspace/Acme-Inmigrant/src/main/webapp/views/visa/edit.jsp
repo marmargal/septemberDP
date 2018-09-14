@@ -17,7 +17,24 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
+	<acme:textbox path="creditCard.holderName" code="visa.creditCard.holderName" />
 
+	<form:label path="creditCard.brandName">
+		<spring:message code="visa.creditCard.brandName" />
+	</form:label>
+	<form:select path="creditCard.brandName">
+		<form:option value="" />
+		<form:option value="VISA" />
+		<form:option value="MASTER-CARD" />
+		<form:option value="DINNERS" />
+		<form:option value="AMEX" />
+	</form:select>
+	<form:errors cssClass="error" path="creditCard.brandName" />
+	
+	<acme:textbox path="creditCard.number" code="visa.creditCard.number" />
+	<acme:textbox path="creditCard.expirationMonth" code="visa.creditCard.expirationMonth"/>
+	<acme:textbox path="creditCard.expirationYear" code="visa.creditCard.expirationYear"/>
+	<acme:textbox path="creditCard.cvv" code="visa.creditCard.Cvv"/>
 
 
 	<spring:message var="visaClasses" code="visa.classes" />
