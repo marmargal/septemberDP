@@ -18,6 +18,8 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
+
+
 			<form name="submitForm" method="POST"
 				action="center/administrator/delete.do?centerId=${row.id }">
 				<acme:submit name="delete" code="center.delete" />
