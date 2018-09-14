@@ -31,7 +31,7 @@
 (CORREGIDO)- 14.f --> Desligar voluntarios de su stand (employee). --> falta algun botón de editar. 
 	Controlador: VountaryEmployeeCont.
 
-- En el create de notice especificar el tipo de animal. Poner un desplegable o un mensaje con las opciones.
+(CORREGIDO)- En el create de notice especificar el tipo de animal. Poner un desplegable o un mensaje con las opciones.
 Lo mismo para Level (1-3)
 
 - Las donaciones se guardan siempre pero sale "Cannot commit this operation" sea válida o no.
