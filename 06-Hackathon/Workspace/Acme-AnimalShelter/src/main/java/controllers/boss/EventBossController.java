@@ -17,6 +17,7 @@ import services.BossService;
 import services.CenterService;
 import services.EventService;
 import controllers.AbstractController;
+import domain.Boss;
 import domain.Center;
 import domain.Event;
 
@@ -52,6 +53,22 @@ public class EventBossController extends AbstractController {
 		return res;
 	}
 
+	// List ---------------------------------------------------------------		
+
+	@RequestMapping("/list")
+	public ModelAndView list() {
+		ModelAndView result;
+
+		Collection<Event> events = new ArrayList<Event>(); 
+		events = this.eventService.findAll();
+		
+		result = new ModelAndView("event/list");
+		result.addObject("events", events);
+		result.addObject("requestURI", "event/boss/list.do");
+
+		return result;
+	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(
 			@RequestParam(defaultValue = "0") final int eventId) {

@@ -35,9 +35,6 @@
 	<acme:textarea code="center.warehouse.stock" path="warehouse.stock"
 		type="number" />
 
-	<acme:textarea code="center.warehouse.capacity"
-		path="warehouse.capacity" type="number" />
-
 	<acme:textarea code="center.warehouse.dogFood" path="warehouse.dogFood"
 		type="number" />
 	<acme:textarea code="center.warehouse.birdFood"

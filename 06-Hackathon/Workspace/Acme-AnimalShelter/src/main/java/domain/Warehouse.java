@@ -5,6 +5,8 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Warehouse extends DomainEntity{
@@ -22,6 +24,7 @@ public class Warehouse extends DomainEntity{
 	private Integer birdFood;
 	
 	@NotNull
+	@Range(min=1, max=1000000000)
 	public Integer getCapacity() {
 		return capacity;
 	}
@@ -30,6 +33,7 @@ public class Warehouse extends DomainEntity{
 	}
 
 	@NotNull
+	@Range(min=1, max=1000000000)
 	public Integer getStock() {
 		return stock;
 	}
@@ -39,6 +43,7 @@ public class Warehouse extends DomainEntity{
 	}
 
 	@NotNull
+	@Range(min=1, max=1000000000)
 	public Integer getDogFood() {
 		return dogFood;
 	}
@@ -48,6 +53,7 @@ public class Warehouse extends DomainEntity{
 	}
 
 	@NotNull
+	@Range(min=1, max=1000000000)
 	public Integer getCatFood() {
 		return catFood;
 	}
@@ -57,6 +63,7 @@ public class Warehouse extends DomainEntity{
 	}
 
 	@NotNull
+	@Range(min=1, max=1000000000)
 	public Integer getBirdFood() {
 		return birdFood;
 	}

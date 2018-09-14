@@ -34,7 +34,7 @@
 	<acme:date code="pet.date" path="date" placeholder="dd/MM/yyyy"/>
 	<acme:textarea code="pet.age" path="age" type="number" />
 	<acme:selectBoolean items="${invalidate}" code="pet.chip" path="chip"/>
-	<acme:select items="${centers}" itemLabel="name" code="pet.center" path="center"/>
+	<acme:selectObligatory items="${centers}" itemLabel="name" code="pet.center" path="center"/>
 	
 	<acme:submit name="save" code="pet.save" />
 	<jstl:if test="${pet.id != 0}">

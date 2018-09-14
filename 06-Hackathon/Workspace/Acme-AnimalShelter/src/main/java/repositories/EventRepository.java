@@ -17,4 +17,7 @@ public interface EventRepository extends JpaRepository<Event, Integer>{
 	
 	@Query("select e from Event e where e.endDate>?1")
 	Collection<Event> findEventNotEnd(Date today);
+	
+	@Query("select e from Event e join e.center c join c.boss b where b.id=?1")
+	Collection<Event> findEventbyBoss(int bossId);
 }

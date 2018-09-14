@@ -15,20 +15,20 @@
 
 (CORREGIDO)- El admin no puede eliminar el centro 1 y 3
 
-- Al eliminar un mensaje se ha borrado el otro (se han eliminado dos mensajes)
+(CORREGIDO)- Al eliminar un mensaje se ha borrado el otro (se han eliminado dos mensajes)
 
-- Al admin se le pueden mandar mensajes, pero el admin no tiene en el menú "My messages"
+(CORREGIDO)- Al admin se le pueden mandar mensajes, pero el admin no tiene en el menú "My messages"
 
-- Al crear un report, si dejamos suitable=---, se guarda como false
+(CORREGIDO)- Al crear un report, si dejamos suitable=---, se guarda como false
 
-- En el formulario de pet, explicar qué signica status, puede ser true o false
+(CORREGIDO)- En el formulario de pet, explicar qué signica status, puede ser true o false
 	En el formulario de pet, en la lista de centros, solo pueden aparecer los centros del empleado y aparecen todos.
 
-- Delete animal de employee no funciona
+(CORREGIDO)- Delete animal de employee no funciona
 
-- Falta notice/employee/list.do en el menú de employee
+(CORREGIDO)- Falta notice/employee/list.do en el menú de employee
 
-- 14.f --> Desligar voluntarios de su stand (employee). --> falta algun botón de editar. 
+(CORREGIDO)- 14.f --> Desligar voluntarios de su stand (employee). --> falta algun botón de editar. 
 	Controlador: VountaryEmployeeCont.
 
 - En el create de notice especificar el tipo de animal. Poner un desplegable o un mensaje con las opciones.
@@ -41,11 +41,11 @@ Si no se aporta datos de la tarjeta se guarda pero sale el mensaje de error
 
 - Cuando nos quitamos de un stand como un voluntario se quita el empleado, no el voluntario.
 
-- En el edit de center está duplicado capacity warehouse.
+(CORREGIDO)- En el edit de center está duplicado capacity warehouse.
 
-- Almacen se puede crear en negativo
+(CORREGIDO)- Almacen se puede crear en negativo
 
-- Añadir un list EventBossController que sea findAll
+(CORREGIDO)- Añadir un list EventBossController que sea findAll
 
 - En el formulario de event --> center debería de ser boss.centers
 			--> quitar donation (es un collection de donaciones, se crea en blanco)
