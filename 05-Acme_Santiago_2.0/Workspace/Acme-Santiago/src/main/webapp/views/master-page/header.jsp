@@ -111,8 +111,6 @@
 							code="master.page.user.list" /></a></li>
 				<li><a href="inn/list.do"><spring:message
 							code="master.page.inn.list" /></a></li>
-				<li><a href="inn/list.do"><spring:message
-							code="master.page.inn.list" /></a></li>
 			</security:authorize>
 
 		</ul>

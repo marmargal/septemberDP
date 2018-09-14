@@ -91,8 +91,16 @@ public class CompostelaAdministratorController extends AbstractController {
 					"compostela.params.error");
 		else
 			try {
-				this.compostelaService.save(compostela);
-				res = new ModelAndView("redirect:../../");
+				if ((compostela.getJustification() == null || compostela
+						.getJustification().isEmpty())
+						&& compostela.isDecision() == true
+						&& compostela.isfinallyDecision() == true) {
+					res = this.createEditModelAndView(compostela,
+							"compostela.justificationblank");
+				} else {
+					this.compostelaService.save(compostela);
+					res = new ModelAndView("redirect:../../");
+				}
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(compostela,
 						"compostela.commit.error");
@@ -160,7 +168,7 @@ public class CompostelaAdministratorController extends AbstractController {
 		result.addObject("compostela", compostela);
 		Route route = compostela.getWalk().getRoute();
 		result.addObject("route", route);
-System.out.println(map);
+		System.out.println(map);
 		result.addObject("map", map);
 		result.addObject("days", days);
 		result.addObject("test", test);
