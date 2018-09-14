@@ -17,6 +17,8 @@
 	<form:hidden path="description"/>
 	<form:hidden path="antenna"/>
 	<form:hidden path="creditCard"/>
+	<form:hidden path="antenna"/>
+	<form:hidden path="requestHandyworker"/>
 	
 	<acme:textbox code="request.result" path="result" />
 	<br/>
