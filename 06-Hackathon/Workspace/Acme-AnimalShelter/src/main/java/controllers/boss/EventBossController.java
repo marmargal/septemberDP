@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BossService;
 import services.CenterService;
 import services.EventService;
 import controllers.AbstractController;
@@ -30,6 +31,9 @@ public class EventBossController extends AbstractController {
 	
 	@Autowired
 	private CenterService centerService;
+	
+	@Autowired
+	private BossService bossService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -113,7 +117,7 @@ public class EventBossController extends AbstractController {
 			final String message) {
 		ModelAndView result;
 		Collection<Center> centers = new ArrayList<>();
-		centers = this.centerService.findAll();
+		centers = this.bossService.findByPrincipal().getCenters();
 		
 		result = new ModelAndView("event/boss/edit");
 		result.addObject("event", event);
