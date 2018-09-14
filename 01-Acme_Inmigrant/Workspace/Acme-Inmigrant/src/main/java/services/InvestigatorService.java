@@ -90,6 +90,14 @@ public class InvestigatorService {
 		
 		return res;
 	}
+	
+	public Investigator saveAlternative(Investigator investigator) {
+		Investigator res;
+
+		res = this.investigatorRepository.save(investigator);
+		
+		return res;
+	}
 
 	public void delete(Investigator investigator) {
 		Assert.notNull(investigator);
