@@ -93,6 +93,8 @@ public class ApplicationService {
 		res.setQuestion(question);
 		res.setImmigrant(immigrant);
 		
+		res.setCreditCard(null);
+		
 		return res;
 	}
 	
@@ -335,8 +337,6 @@ public class ApplicationService {
 			cc.setHolderName(applicationForm.getHolderName());
 			cc.setNumber(applicationForm.getNumber());
 			res.setCreditCard(cc);
-		}else{
-//			res.setCreditCard(null);
 		}
 		
 		//PERSONAL SECTION

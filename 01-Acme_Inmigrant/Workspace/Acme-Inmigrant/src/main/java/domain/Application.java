@@ -79,6 +79,7 @@ public class Application extends DomainEntity{
 		this.closedMoment = closedMoment;
 	}
 
+	@Valid
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}

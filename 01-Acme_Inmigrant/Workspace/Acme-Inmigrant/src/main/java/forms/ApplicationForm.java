@@ -11,6 +11,7 @@ import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
@@ -42,7 +43,7 @@ public class ApplicationForm {
 		super();
 	}
 	
-	@NotNull
+	@NotEmpty
 	@ElementCollection
 	public Collection<String> getNames() {
 		return this.names;
@@ -105,6 +106,7 @@ public class ApplicationForm {
 		this.cvv = cvv;
 	}
 
+	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBithPlace() {
 		return bithPlace;
@@ -123,6 +125,8 @@ public class ApplicationForm {
 		this.tickerApplicationLinked = tickerApplicationLinked;
 	}
 
+	@URL
+	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPicture() {
 		return picture;

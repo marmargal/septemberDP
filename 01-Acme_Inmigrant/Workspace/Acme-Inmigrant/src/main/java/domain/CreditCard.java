@@ -84,7 +84,7 @@ public class CreditCard {
 	
 
 	@Range(min = 100, max = 999)
-//	@NotNull
+	@NotNull
 	public Integer getCvv() {
 		return cvv;
 	}
