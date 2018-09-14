@@ -42,6 +42,7 @@ public class CreditCard {
 
 	@NotBlank
 	@SafeHtml
+	@Pattern(regexp = "^((VISA)|(MASTER-CARD)|(DINNERS)|(AMEX))$")
 	public String getBrandName() {
 		return brandName;
 	}

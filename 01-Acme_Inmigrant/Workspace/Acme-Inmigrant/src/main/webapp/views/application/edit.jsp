@@ -23,7 +23,19 @@
 		
 	<acme:select items="${visa}" itemLabel="classes" code="application.visa" path="visa" />
 	<acme:textbox path="holderName" code="application.creditCard.holderName" />
-	<acme:textbox path="brandName" code="application.creditCard.brandName" />
+	
+	<form:label path="brandName">
+		<spring:message code="application.creditCard.brandName" />
+	</form:label>
+	<form:select path="brandName">
+		<form:option value="" />
+		<form:option value="VISA" />
+		<form:option value="MASTER-CARD" />
+		<form:option value="DINNERS" />
+		<form:option value="AMEX" />
+	</form:select>
+	<form:errors cssClass="error" path="brandName" />
+	
 	<acme:textbox path="number" code="application.creditCard.number" />
 	
 	<acme:textbox path="expirationMonth" code="application.creditCard.expirationMonth"/>
