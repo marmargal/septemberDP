@@ -125,6 +125,7 @@
 				</ul>
 			</li>
 			<li><a href="center/boss/list.do"><spring:message code="master.page.mycenters" /></a></li>
+			<li><a href="event/boss/list.do"><spring:message code="master.page.events" /></a></li>
 			
 		</security:authorize>
 		

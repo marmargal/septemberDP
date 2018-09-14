@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Other domain beans come here -->
+
+	<!-- Admin -->
+	<bean id="admin" class="domain.Administrator">
+		<property name="name" value="Administrator" />
+		<property name="surname" value="Acme Immigrant" />
+		<property name="email" value="admin@admin.com" />
+		<property name="phoneNumber" value="+123456789" />
+		<property name="address" value="C/Admin" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+
+	<!-- Category -->
+	<!-- Category 1 -->
+	<bean id="category1" class="domain.Category">
+		<property name="name" value="root" />
+		<property name="rootCategory" value="true" />
+		<property name="categoryParent">
+			<null />
+		</property>
+		<property name="categories">
+			<list>
+				<ref bean="category2" />
+				<ref bean="category3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="category2" class="domain.Category">
+		<property name="name" value="Gratuitas" />
+		<property name="rootCategory" value="false" />
+		<property name="categoryParent" ref="category1" />
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+		
+	</bean>
+
+	<bean id="category3" class="domain.Category">
+		<property name="name" value="De pago" />
+		<property name="rootCategory" value="false" />
+		<property name="categoryParent" ref="category1" />
+		<property name="categories">
+			<list>
+				<ref bean="category4" />
+				<ref bean="category5" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="category4" class="domain.Category">
+		<property name="name" value="Un solo pago" />
+		<property name="rootCategory" value="false" />
+		<property name="categoryParent" ref="category3" />
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="category5" class="domain.Category">
+		<property name="name" value="Pago fraccionado" />
+		<property name="rootCategory" value="false" />
+		<property name="categoryParent" ref="category3" />
+		<property name="categories">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+</beans>

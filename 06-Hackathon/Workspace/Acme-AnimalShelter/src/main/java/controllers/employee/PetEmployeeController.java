@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CenterService;
+import services.EmployeeService;
 import services.PetService;
 import controllers.AbstractController;
 import domain.Center;
+import domain.Employee;
 import domain.Pet;
 
 @Controller
@@ -40,6 +42,9 @@ public class PetEmployeeController extends AbstractController {
 	
 	@Autowired
 	private CenterService centerService;
+	
+	@Autowired
+	private EmployeeService employeeService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -145,8 +150,11 @@ public class PetEmployeeController extends AbstractController {
 		Collection<Boolean> invalidate = new ArrayList<>();
 		invalidate.add(false);
 		invalidate.add(true);
-		Collection<Center> centers = new ArrayList<>();
-		centers = this.centerService.findAll();
+		Center center = new Center();
+		Collection<Center> centers= new ArrayList<Center>();
+		Employee employee = this.employeeService.findByPrincipal();
+		center = employee.getCenter();
+		centers.add(center);
 		
 		result = new ModelAndView("pet/employee/edit");
 		result.addObject("pet", pet);

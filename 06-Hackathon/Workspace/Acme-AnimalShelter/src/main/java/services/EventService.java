@@ -113,6 +113,12 @@ public class EventService {
 		events = this.eventRepository.findEventNotEnd(new Date());
 		return events;
 	}
+	
+	public Collection<Event> findEventbyBoss(int bossId) {
+		Collection<Event> events = new ArrayList<Event>();
+		events = this.eventRepository.findEventbyBoss(bossId);
+		return events;
+	}
 
 	public void flush() {
 		this.eventRepository.flush();
