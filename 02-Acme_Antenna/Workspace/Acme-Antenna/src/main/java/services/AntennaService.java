@@ -100,22 +100,17 @@ public class AntennaService {
 		
 		GpsCoordinate gpsCoordinate = new GpsCoordinate();
 		gpsCoordinate = antenna.getCoordinates();
-		double latitude = gpsCoordinate.getLatitude();
-		double longitude = gpsCoordinate.getLongitude();
-		
-		String serialNumber = String.valueOf(antenna.getSerialNumber());
-		String azimuth = String.valueOf(antenna.getAzimuth());
-		String elevation = String.valueOf(antenna.getElevation()); 
-		String quality = String.valueOf(antenna.getQuality()); 
+		Double latitude = gpsCoordinate.getLatitude();
+		Double longitude = gpsCoordinate.getLongitude();
 		
 		res.setId(antenna.getId());
-		res.setSerialNumber(serialNumber);
+		res.setSerialNumber(antenna.getSerialNumber());
 		res.setModel(antenna.getModel());
-		gpsCoordinate.setLatitude(latitude);
-		gpsCoordinate.setLongitude(longitude);
-		res.setAzimuth(azimuth);
-		res.setElevation(elevation);antenna.getQuality();
-		res.setQuality(quality);
+		res.setLatitude(latitude);
+		res.setLongitude(longitude);
+		res.setAzimuth(antenna.getAzimuth());
+		res.setElevation(antenna.getElevation());;
+		res.setQuality(antenna.getQuality());
 		res.setSatellite(antenna.getSatellite());
 		
 		return res;
@@ -132,22 +127,15 @@ public class AntennaService {
 			res = this.create();
 		
 		GpsCoordinate gpsCoordinate = new GpsCoordinate();
-		Double latitude = Double.parseDouble(antennaForm.getLatitude());
-		Double longitude = Double.parseDouble(antennaForm.getLongitude());
-		gpsCoordinate.setLatitude(latitude);
-		gpsCoordinate.setLongitude(longitude);
+		gpsCoordinate.setLatitude(antennaForm.getLatitude());
+		gpsCoordinate.setLongitude(antennaForm.getLongitude());
 		
-		Integer serialNumber = Integer.parseInt(antennaForm.getSerialNumber());
-		Double azimuth = Double.parseDouble(antennaForm.getAzimuth());
-		Double elevation = Double.parseDouble(antennaForm.getElevation()); 
-		Double quallity = Double.parseDouble(antennaForm.getQuality()); 
-		
-		res.setSerialNumber(serialNumber);
+		res.setSerialNumber(antennaForm.getSerialNumber());
 		res.setModel(antennaForm.getModel());
 		res.setCoordinates(gpsCoordinate);
-		res.setAzimuth(azimuth);
-		res.setElevation(elevation);
-		res.setQuality(quallity);
+		res.setAzimuth(antennaForm.getAzimuth());
+		res.setElevation(antennaForm.getElevation());
+		res.setQuality(antennaForm.getQuality());
 		res.setSatellite(antennaForm.getSatellite());
 
 		this.validator.validate(res, binding);

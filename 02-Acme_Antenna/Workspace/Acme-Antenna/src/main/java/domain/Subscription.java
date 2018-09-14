@@ -60,6 +60,7 @@ public class Subscription extends DomainEntity{
 	}
 	
 	@NotNull
+	@Valid
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}

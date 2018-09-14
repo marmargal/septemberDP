@@ -12,13 +12,13 @@ import domain.Satellite;
 public class AntennaForm {
 
 	private int id;
-	private String serialNumber;
+	private Integer serialNumber;
 	private String model;
-	private String latitude;
-	private String longitude;
-	private String azimuth;
-	private String elevation;
-	private String quality;
+	private Double latitude;
+	private Double longitude;
+	private Double azimuth;
+	private Double elevation;
+	private Double quality;
 	private Satellite satellite;
 	
 	public AntennaForm(){
@@ -32,12 +32,11 @@ public class AntennaForm {
 		this.id = id;
 	}
 	
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getSerialNumber() {
+	@NotNull
+	public Integer getSerialNumber() {
 		return serialNumber;
 	}
-	public void setSerialNumber(String serialNumber) {
+	public void setSerialNumber(Integer serialNumber) {
 		this.serialNumber = serialNumber;
 	}
 	
@@ -50,48 +49,48 @@ public class AntennaForm {
 		this.model = model;
 	}
 	
+	@NotNull
 	@Range(min=-90,max=90)
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(String latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 	
+	@NotNull
 	@Range(min=-180,max=180)
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(String longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 	
+	@NotNull
 	@Range(min=0,max=360)
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getAzimuth() {
+	public Double getAzimuth() {
 		return azimuth;
 	}
-	public void setAzimuth(String azimuth) {
+	public void setAzimuth(Double azimuth) {
 		this.azimuth = azimuth;
 	}
 	
+	@NotNull
 	@Range(min=0,max=90)
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getElevation() {
+	public Double getElevation() {
 		return elevation;
 	}
-	public void setElevation(String elevation) {
+	public void setElevation(Double elevation) {
 		this.elevation = elevation;
 	}
 	
+	@NotNull
 	@Range(min=0,max=100)
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	public String getQuality() {
+	public Double getQuality() {
 		return quality;
 	}
-	public void setQuality(String quality) {
+	public void setQuality(Double quality) {
 		this.quality = quality;
 	}
 

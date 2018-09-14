@@ -50,6 +50,7 @@ public class Antenna extends DomainEntity {
 	}
 	
 	@NotNull
+	@Valid
 	public GpsCoordinate getCoordinates() {
 		return coordinates;
 	}
