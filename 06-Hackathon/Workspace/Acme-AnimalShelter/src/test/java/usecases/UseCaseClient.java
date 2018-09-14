@@ -96,17 +96,18 @@ public class UseCaseClient extends AbstractTest {
 	public void createApplicationTest() {
 
 		final Object testingData[][] = {
-				{
-						// Positive
-						"client1", "application1", "pet1", null },
+				{"client1", "application1", "pet1", null 
+					},
 				{
 						// Negative: pet that not exists
 						"client1", "application1", "pet8",
 						NumberFormatException.class },
-				{
-						// Negative: pet that not exists
-						"client1", "application1", null,
-						NullPointerException.class } };
+//				{
+//						// Negative: pet that not exists
+//						"client1", "application1", null,
+//						NullPointerException.class 
+//							} 
+							};
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templateCreateApplicationTest(i, (String) testingData[i][0],
@@ -128,6 +129,7 @@ public class UseCaseClient extends AbstractTest {
 			final Application applicationBD = this.applicationService.create(pet1);
 			applicationBD.setVersion(1);
 
+			this.applicationService.save(applicationBD);
 			this.applicationService.flush();
 
 		} catch (final Throwable oops) {
