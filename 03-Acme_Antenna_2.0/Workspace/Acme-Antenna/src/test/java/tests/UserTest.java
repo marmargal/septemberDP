@@ -45,7 +45,7 @@ public class UserTest extends AbstractTest {
 		final Object testingData[][] = {
 		// caso positivo, un user crea un request.
 				{
-					"holderName", "brandName","number", 10, 19, 123,
+					"holderName", "brandName","5105105105105100", 10, 19, 123,
 					"Description", new Date(System.currentTimeMillis() + 1000), "Result", "user1", "antenna1", "handyworker1", null 
 				},
 				
@@ -54,6 +54,13 @@ public class UserTest extends AbstractTest {
 					"holderName", "brandName","number", 10, 19, 123,
 					"Description", new Date(System.currentTimeMillis() + 1000), "Result", "agent1", "antenna1", "handyworker1", IllegalArgumentException.class 
 				}
+				,
+				
+				// caso negativo, un handyworker crea un request.
+						{ 
+							"holderName", "brandName","5105105105105100", 10, 19, 123,
+							"Description", new Date(System.currentTimeMillis() + 1000), "Result", "handyworker1", "antenna1", "handyworker1", IllegalArgumentException.class 
+						}
 		};
 		
 		

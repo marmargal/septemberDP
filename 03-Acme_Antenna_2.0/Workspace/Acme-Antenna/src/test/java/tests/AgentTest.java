@@ -32,14 +32,22 @@ public class AgentTest extends AbstractTest {
 				// Positivo, un agent logeado registra un nuevo banner.
 				"agent1", "http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png",
 				"http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png", 
-				"holderName", "brandName","number", 10, 19, 123, null
+				"holderName", "brandName","5105105105105100", 10, 19, 123, null
 			},
 			
 			{
 				// Negativo, un agent logeado intenta registrar un nuevo banner con una imagen que no es una URL.
 				"user1", "url",
 				"http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png", 
-				"holderName", "brandName","number", 10, 19, 123, ConstraintViolationException.class
+				"holderName", "brandName","5105105105105100", 10, 19, 123, ConstraintViolationException.class
+			}
+,
+			
+			{
+				// Negativo, un agent logeado intenta registrar un nuevo banner con un link que no es una URL.
+				"user1", "http://www.coordinadora.com/wp-content/uploads/sidebar_usuario-corporativo.png",
+				"url", 
+				"holderName", "brandName","5105105105105100", 10, 19, 123, ConstraintViolationException.class
 			}
 
 		};
