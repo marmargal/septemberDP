@@ -1,6 +1,5 @@
 package usecases;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -21,7 +20,6 @@ import services.VoluntaryService;
 import utilities.AbstractTest;
 import domain.Center;
 import domain.Client;
-import domain.Folder;
 import domain.Pet;
 import domain.Voluntary;
 

@@ -30,6 +30,9 @@ public class PetService {
 	// Suporting services
 
 	@Autowired
+	private EmployeeService employeeService;
+
+	@Autowired
 	private MedicalReportService medicalReportService;
 
 	@Autowired
@@ -45,7 +48,6 @@ public class PetService {
 
 	public Pet create() {
 		Pet res = new Pet();
-		System.out.println(this.generatedIdentifier());
 		res.setIdentifier(this.generatedIdentifier());
 		return res;
 
@@ -70,10 +72,13 @@ public class PetService {
 		Pet res;
 		String s = pet.getIdentifier();
 		String age = pet.getAge().toString();
+		if (pet.getId() == 0) {
+			this.employeeService.checkAuthority();
+		}
 		if (pet.getAge() < 10) {
 			age = "0" + age;
 		}
-		s = s.replace(s.substring(7,9), age);
+		s = s.replace(s.substring(7, 9), age);
 		pet.setIdentifier(s);
 		res = petRepository.save(pet);
 		return res;
@@ -153,7 +158,7 @@ public class PetService {
 
 		final Date date = new Date(System.currentTimeMillis() - 1);
 		final SimpleDateFormat dt = new SimpleDateFormat("ddMMyy");
-		
+
 		identifier = dt.format(date).toString() + "-";
 		for (int i = 0; i < 2; i++)
 			identifier = identifier
@@ -165,7 +170,7 @@ public class PetService {
 
 		return identifier;
 	}
-	
+
 	public void flush() {
 		this.petRepository.flush();
 

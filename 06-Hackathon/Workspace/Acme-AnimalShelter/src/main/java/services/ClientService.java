@@ -20,7 +20,6 @@ import domain.Client;
 import domain.Folder;
 import forms.ActorForm;
 
-
 @Service
 @Transactional
 public class ClientService {
@@ -29,47 +28,47 @@ public class ClientService {
 
 	@Autowired
 	private ClientRepository clientRepository;
-	
+
 	// Supporting services
-	
+
 	@Autowired
 	private FolderService folderService;
-	
+
 	@Autowired
-	private Validator		validator;
-	
+	private Validator validator;
+
 	// Constructors
 
 	public ClientService() {
 		super();
 	}
-	
+
 	// Simple CRUD methods
 
 	public Client create() {
 		Client res = new Client();
-		
+
 		Collection<Application> applications = new ArrayList<Application>();
 		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
-//		Folder inBox = this.folderService.create();
-//		Folder outBox = this.folderService.create();
-//		Folder trash = this.folderService.create();
-		
+		// Folder inBox = this.folderService.create();
+		// Folder outBox = this.folderService.create();
+		// Folder trash = this.folderService.create();
+
 		authority.setAuthority(Authority.CLIENT);
 		userAccount.addAuthority(authority);
 
-//		inBox.setName("In Box");
-//		outBox.setName("Out Box");
-//		trash.setName("Trash Box");
-//		this.folderService.save(inBox);
-//		this.folderService.save(outBox);
-//		this.folderService.save(trash);
-//		folders.add(inBox);
-//		folders.add(outBox);
-//		folders.add(trash);
-		
+		// inBox.setName("In Box");
+		// outBox.setName("Out Box");
+		// trash.setName("Trash Box");
+		// this.folderService.save(inBox);
+		// this.folderService.save(outBox);
+		// this.folderService.save(trash);
+		// folders.add(inBox);
+		// folders.add(outBox);
+		// folders.add(trash);
+
 		res.setUserAccount(userAccount);
 		res.setApplications(applications);
 		res.setFolders(folders);
@@ -95,28 +94,28 @@ public class ClientService {
 
 	public Client save(Client client) {
 		Client res;
-		
+
 		String pass = client.getUserAccount().getPassword();
-		
+
 		final Md5PasswordEncoder code = new Md5PasswordEncoder();
-		
+
 		pass = code.encodePassword(pass, null);
-		
+
 		client.getUserAccount().setPassword(pass);
 
 		res = this.clientRepository.save(client);
-		
+
 		return res;
 	}
-	
+
 	public Client saveForApplication(Client client) {
 		Client res;
 
 		res = this.clientRepository.save(client);
-		
+
 		return res;
 	}
-	
+
 	public void delete(Client client) {
 		Assert.notNull(client);
 		Assert.isTrue(client.getId() != 0);
@@ -144,11 +143,11 @@ public class ClientService {
 		Authority res = new Authority();
 		res.setAuthority("CLIENT");
 		Assert.isTrue(authority.contains(res));
-	}	
-	
-	public ActorForm construct(Client client){
+	}
+
+	public ActorForm construct(Client client) {
 		ActorForm res = new ActorForm();
-		
+
 		res.setId(client.getId());
 		res.setName(client.getName());
 		res.setSurname(client.getSurname());
@@ -156,20 +155,20 @@ public class ClientService {
 		res.setPhoneNumber(client.getPhoneNumber());
 		res.setAddress(client.getAddress());
 		res.setUsername(client.getUserAccount().getUsername());
-		
+
 		return res;
 	}
-	
-	public Client reconstruct(ActorForm clientForm, BindingResult binding){
+
+	public Client reconstruct(ActorForm clientForm, BindingResult binding) {
 		Assert.notNull(clientForm);
-		
+
 		Client res = new Client();
 
 		if (clientForm.getId() != 0)
 			res = this.findOne(clientForm.getId());
 		else
 			res = this.create();
-		
+
 		res.setName(clientForm.getName());
 		res.setSurname(clientForm.getSurname());
 		res.setEmail(clientForm.getEmail());
@@ -187,5 +186,5 @@ public class ClientService {
 		this.clientRepository.flush();
 
 	}
-	
+
 }

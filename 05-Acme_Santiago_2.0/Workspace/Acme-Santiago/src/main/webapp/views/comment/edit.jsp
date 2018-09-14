@@ -20,17 +20,18 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="${requestURI}" modelAttribute="comment">
-
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="route" />
+	<form:hidden path="hike" />
+	<form:hidden path="moment" />
 	<form:hidden path="user" />
-	<form:hidden path="taboo" />
 
 	<security:authorize access="hasRole('USER')">
 		<acme:textbox code="comment.title" path="title" />
 		<acme:textbox code="comment.text" path="text" />
 		<acme:textbox code="comment.pictures" path="pictures" />
-		<acme:textbox  code="comment.rating" path="rating" type="number" />
+		<acme:textbox code="comment.rating" path="rating" type="number" />
 
 
 
