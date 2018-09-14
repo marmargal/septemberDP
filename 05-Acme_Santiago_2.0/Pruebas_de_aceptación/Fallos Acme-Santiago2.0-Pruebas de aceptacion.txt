@@ -1,11 +1,11 @@
-- List advertisement con taboo words no esta hecho!! (5.1)
+(NO HACE FALTA)- List advertisement con taboo words no esta hecho!! (5.1)
 
-- En el menú superior de user está duplicado "List of inns"
+(CORREGIDO)- En el menú superior de user está duplicado "List of inns"
 
-- Se crea un walk sin un inn (---)
-- Se crea un walk sin fechas
+(CORREGIDO)- Se crea un walk sin un inn (---)
+(CORREGIDO)- Se crea un walk sin fechas
 
-- Certify that a user has stayed in an inn that he or she manages in the destination city of a particular hike on a particular day. 
-	¿Cómo se certifica?
+(CORREGIDO)- Certify that a user has stayed in an inn that he or she manages in the destination city of a particular hike on a particular day. 
+	¿Cómo se certifica?// creando un registro ya se certifica, te logueas como innkeeper y en my inns le das a registry de un inn y ya haces el regstro
 
-- Edit compostela (admin) --> Si no está aprobado, debe proporcionar una justificación. Se guarda si dejamos la justificación en blanco.
+(CORREGIDO)- Edit compostela (admin) --> Si no está aprobado, debe proporcionar una justificación. Se guarda si dejamos la justificación en blanco.
