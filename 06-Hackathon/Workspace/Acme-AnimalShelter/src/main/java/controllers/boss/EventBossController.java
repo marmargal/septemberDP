@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.BossService;
 import services.CenterService;
 import services.EventService;
 import controllers.AbstractController;
+import domain.Boss;
 import domain.Center;
 import domain.Event;
 
@@ -30,6 +32,9 @@ public class EventBossController extends AbstractController {
 	
 	@Autowired
 	private CenterService centerService;
+	
+	@Autowired
+	private BossService bossService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -48,6 +53,22 @@ public class EventBossController extends AbstractController {
 		return res;
 	}
 
+	// List ---------------------------------------------------------------		
+
+	@RequestMapping("/list")
+	public ModelAndView list() {
+		ModelAndView result;
+
+		Collection<Event> events = new ArrayList<Event>(); 
+		events = this.eventService.findAll();
+		
+		result = new ModelAndView("event/list");
+		result.addObject("events", events);
+		result.addObject("requestURI", "event/boss/list.do");
+
+		return result;
+	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(
 			@RequestParam(defaultValue = "0") final int eventId) {
@@ -113,7 +134,7 @@ public class EventBossController extends AbstractController {
 			final String message) {
 		ModelAndView result;
 		Collection<Center> centers = new ArrayList<>();
-		centers = this.centerService.findAll();
+		centers = this.bossService.findByPrincipal().getCenters();
 		
 		result = new ModelAndView("event/boss/edit");
 		result.addObject("event", event);
