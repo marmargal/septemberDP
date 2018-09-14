@@ -21,7 +21,6 @@
 
 	<acme:textarea code="event.title" path="title" />
 	<acme:textarea code="event.description" path="description" />
-	<acme:textarea code="event.donation" path="donation" type="number" />
 	<acme:textarea code="event.nameSite" path="nameSite" />
 	<acme:textarea code="event.placard" path="placard" />
 	<acme:textarea code="event.address" path="address" />

@@ -16,48 +16,54 @@ import domain.Configuration;
 public class ConfigurationService {
 	// Managed repository -----------------------------------------------------
 
-		@Autowired
-		private ConfigurationRepository configurationRepository;
-		
-		// Supporting services ----------------------------------------------------
-		
-		@Autowired
-		private AdministratorService administratorService;
+	@Autowired
+	private ConfigurationRepository configurationRepository;
 
-		// Constructor ------------------------------------------------------------
+	// Supporting services ----------------------------------------------------
 
-		public ConfigurationService() {
-			super();
-		}
+	@Autowired
+	private AdministratorService administratorService;
 
-		// Simple CRUD methods ----------------------------------------------------
+	// Constructor ------------------------------------------------------------
 
-		public Collection<Configuration> findAll() {
-			Collection<Configuration> res;
-			res = this.configurationRepository.findAll();
-			Assert.notNull(res);
-			return res;
-		}
+	public ConfigurationService() {
+		super();
+	}
 
-		public Configuration findOne(int id) {
-			Assert.isTrue(id != 0);
-			Configuration res;
-			res = this.configurationRepository.findOne(id);
-			Assert.notNull(res);
-			return res;
-		}
+	// Simple CRUD methods ----------------------------------------------------
 
-		public Configuration save(Configuration configuration) {
-			this.administratorService.checkAuthority();
-			Assert.notNull(configuration);
-			Configuration res;
-			res = this.configurationRepository.save(configuration);
-			return res;
-		}
+	public Collection<Configuration> findAll() {
+		Collection<Configuration> res;
+		res = this.configurationRepository.findAll();
+		Assert.notNull(res);
+		return res;
+	}
 
-		// Other business method --------------------------------------------------
-		public void flush() {
-			this.configurationRepository.flush();
+	public Configuration findOne(int id) {
+		Assert.isTrue(id != 0);
+		Configuration res;
+		res = this.configurationRepository.findOne(id);
+		Assert.notNull(res);
+		return res;
+	}
 
-		}
+	public Configuration save(Configuration configuration) {
+		this.administratorService.checkAuthority();
+
+		Assert.notNull(configuration);
+		Configuration res = this.configurationRepository.findAll().iterator()
+				.next();
+		res.setBanner(configuration.getBanner());
+		res.setCountryCode(configuration.getCountryCode());
+		res.setEnglishWelcome(configuration.getEnglishWelcome());
+		res.setSpanishWelcome(configuration.getSpanishWelcome());
+		res = this.configurationRepository.save(res);
+		return res;
+	}
+
+	// Other business method --------------------------------------------------
+	public void flush() {
+		this.configurationRepository.flush();
+
+	}
 }
