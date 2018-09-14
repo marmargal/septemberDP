@@ -14,7 +14,6 @@ import domain.Boss;
 import domain.Donation;
 import domain.Event;
 
-
 @Service
 @Transactional
 public class EventService {
@@ -27,7 +26,10 @@ public class EventService {
 	// Suporting services
 	@Autowired
 	private BossService bossService;
-	
+
+	@Autowired
+	private AdministratorService administratorService;
+
 	// Constructors
 
 	public EventService() {
@@ -39,10 +41,10 @@ public class EventService {
 	public Event create() {
 		this.bossService.checkAuthority();
 		Event res = new Event();
-		
+
 		Collection<Donation> donations = new ArrayList<Donation>();
-		
-		Date publicationDate = new Date(System.currentTimeMillis()-1000);
+
+		Date publicationDate = new Date(System.currentTimeMillis() - 1000);
 		res.setPublicationDate(publicationDate);
 		res.setDonation(donations);
 
@@ -66,38 +68,47 @@ public class EventService {
 	}
 
 	public Event save(Event event) {
-		this.bossService.checkAuthority();
-		Event res;
+		try {
+			this.administratorService.checkAuthority();
+		} catch (Exception e) {
+
+			this.bossService.checkAuthority();
+		}		Event res;
 		res = eventRepository.save(event);
 		return res;
 	}
 
 	public void delete(Event event) {
-		this.bossService.checkAuthority();
+		try {
+			this.administratorService.checkAuthority();
+		} catch (Exception e) {
+
+			this.bossService.checkAuthority();
+			Boss boss = this.bossService.findByPrincipal();
+			Assert.isTrue(boss.getCenters().contains(event.getCenter()));
+		}
 		Assert.notNull(event);
 		Assert.isTrue(event.getId() != 0);
 		Assert.isTrue(eventRepository.exists(event.getId()));
 		
-		Boss boss = this.bossService.findByPrincipal();
-		Assert.isTrue(boss.getCenters().contains(event.getCenter()));
 		
-		
+
 		this.eventRepository.delete(event);
 	}
 
 	// Other business methods
-	
-	public Collection<Event> findEventByCenter(int centerId){
+
+	public Collection<Event> findEventByCenter(int centerId) {
 		Collection<Event> events = new ArrayList<Event>();
 		events = this.eventRepository.findEventByCenter(centerId);
 		return events;
 	}
-	
-	public Event saveAndFlush(Event event){
+
+	public Event saveAndFlush(Event event) {
 		return eventRepository.saveAndFlush(event);
 	}
 
-	public Collection<Event> findEventNotEnd(){
+	public Collection<Event> findEventNotEnd() {
 		Collection<Event> events = new ArrayList<Event>();
 		events = this.eventRepository.findEventNotEnd(new Date());
 		return events;

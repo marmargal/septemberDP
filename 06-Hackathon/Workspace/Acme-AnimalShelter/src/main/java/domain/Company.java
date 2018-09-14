@@ -88,7 +88,7 @@ public class Company extends DomainEntity{
 	}
 
 	@Valid
-	@OneToOne
+	@OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
 	public Event getEvent() {
 		return event;
 	}
