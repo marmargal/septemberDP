@@ -324,9 +324,9 @@ public class ApplicationService {
 		//CREDIT CARD
 		if(!applicationForm.getBrandName().isEmpty() || !applicationForm.getCvv().isEmpty() || !applicationForm.getExpirationMonth().isEmpty() || 
 				!applicationForm.getExpirationYear().isEmpty() || !applicationForm.getHolderName().isEmpty() || !applicationForm.getNumber().isEmpty()){
-			int cvv = Integer.parseInt(applicationForm.getCvv());
-			int expirationMonth = Integer.parseInt(applicationForm.getExpirationMonth());
-			int expirationYear = Integer.parseInt(applicationForm.getExpirationYear());
+			Integer cvv = Integer.parseInt(applicationForm.getCvv());
+			Integer expirationMonth = Integer.parseInt(applicationForm.getExpirationMonth());
+			Integer expirationYear = Integer.parseInt(applicationForm.getExpirationYear());
 			
 			cc.setBrandName(applicationForm.getBrandName());
 			cc.setCvv(cvv);
@@ -336,7 +336,7 @@ public class ApplicationService {
 			cc.setNumber(applicationForm.getNumber());
 			res.setCreditCard(cc);
 		}else{
-			res.setCreditCard(null);
+//			res.setCreditCard(null);
 		}
 		
 		//PERSONAL SECTION
@@ -361,7 +361,7 @@ public class ApplicationService {
 		if(applicationForm.isClosed()){
 			res.setClosedMoment(new Date());
 		}
-		if(applicationForm.getTickerApplicationLinked() != null){
+		if(applicationForm.getTickerApplicationLinked().isEmpty()){
 			Application application = new Application();
 			application = this.findApplicationByTicker(applicationForm.getTickerApplicationLinked());
 			res.setApplication(application);

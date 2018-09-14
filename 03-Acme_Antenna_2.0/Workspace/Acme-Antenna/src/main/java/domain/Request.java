@@ -35,6 +35,7 @@ public class Request extends DomainEntity {
 	private String result;
 
 	@NotNull
+	@Valid
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}

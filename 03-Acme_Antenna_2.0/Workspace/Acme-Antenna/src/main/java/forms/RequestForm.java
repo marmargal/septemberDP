@@ -2,6 +2,9 @@ package forms;
 
 
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
@@ -64,6 +67,8 @@ public class RequestForm {
 		this.result = result;
 	}
 	
+	@NotNull
+	@Valid
 	public Antenna getAntenna() {
 		return antenna;
 	}
@@ -72,6 +77,8 @@ public class RequestForm {
 		this.antenna = antenna;
 	}
 	
+	@NotNull
+	@Valid
 	public Handyworker getRequestHandyworker() {
 		return requestHandyworker;
 	}

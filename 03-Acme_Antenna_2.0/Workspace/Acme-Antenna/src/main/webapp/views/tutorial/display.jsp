@@ -39,23 +39,25 @@
 	<jstl:out value="${tutorial.text }"/>
 </p>
 
-<table style="width:100%">
-<jstl:forEach var="comment" items="${comments }" varStatus="status">
-<tr>
-<td><b>${status.index + 1 }</b></td>
-<td>${comment.title}</td>
-<td>${comment.text}</td>
-<td>${comment.moment}</td>
-<td>
-<jstl:forEach var="p" items="${comment.pictures }">
-	<img class="imagen" src="${p }"/>	
-</jstl:forEach>
-</td>
-</tr>
-<hr/>
-</jstl:forEach>
-</table>
-<br/>
+<security:authorize access="hasRole('USER')">
+	<table style="width:100%">
+	<jstl:forEach var="comment" items="${comments }" varStatus="status">
+	<tr>
+	<td><b>${status.index + 1 }</b></td>
+	<td>${comment.title}</td>
+	<td>${comment.text}</td>
+	<td>${comment.moment}</td>
+	<td>
+	<jstl:forEach var="p" items="${comment.pictures }">
+		<img class="imagen" src="${p }"/>	
+	</jstl:forEach>
+	</td>
+	</tr>
+	<hr/>
+	</jstl:forEach>
+	</table>
+	<br/>
+</security:authorize>
 
 <security:authorize access="hasRole('USER')">
 	<b><acme:links url="comment/user/list.do?tutorialId=${tutorial.id }" code="tutorial.comments"/></b>
