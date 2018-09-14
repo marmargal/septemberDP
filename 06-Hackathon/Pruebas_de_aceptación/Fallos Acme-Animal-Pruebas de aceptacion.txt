@@ -1,6 +1,6 @@
-- Añadir al menú Events.
+(CORREGIDO) - Añadir al menú Events.
 
-- Falta 11.e --> Un usuario que no esté autenticado podrá: Listar los eventos que se han publicado y no hayan finalizado y ver su página de promoción.
+(CORREGIDO) - Falta 11.e --> Un usuario que no esté autenticado podrá: Listar los eventos que se han publicado y no hayan finalizado y ver su página de promoción.
 	Se pueden listar los eventos por la url.
 	Página de promoción???
 
@@ -39,5 +39,19 @@ Si no se aporta datos de la tarjeta se guarda pero sale el mensaje de error
 - En el edit de center está duplicado capacity warehouse.
 
 - Almacen se puede crear en negativo
+
+- Añadir un list EventBossController que sea findAll
+
+- En el formulario de event --> center debería de ser boss.centers
+			--> quitar donation (es un collection de donaciones, se crea en blanco)
+
+- Al eliminar empresas, se eliminan las nuevas que se creen pero no las que ya estaban
+
+- No funciona delete stand (boss).
+
+- Realizar una única solicitud por animal --> cuando volvemmos al list sigue saliendo la opción de Apply
+
+
+
 
 
