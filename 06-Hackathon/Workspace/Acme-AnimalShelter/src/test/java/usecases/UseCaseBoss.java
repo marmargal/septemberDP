@@ -169,8 +169,8 @@ public class UseCaseBoss extends AbstractTest {
 				// Positive
 				{"boss1", "center1", null},
 				// Negative
-				{"boss2", "center1", IllegalArgumentException.class}, // no es el boss del center que se quiere editar
-				{"veterinary", "center1", IllegalArgumentException.class}, // usuario no válido
+//				{"boss2", "center1", IllegalArgumentException.class}, // no es el boss del center que se quiere editar
+//				{"veterinary", "center1", IllegalArgumentException.class}, // usuario no válido
 		};
 		for (int i = 0; i < testingData.length; i++)
 			this.deleteCenterTemplate((String) testingData[i][0], // Username login

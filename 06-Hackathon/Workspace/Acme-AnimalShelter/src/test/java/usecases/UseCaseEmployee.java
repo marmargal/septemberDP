@@ -50,11 +50,10 @@ public class UseCaseEmployee extends AbstractTest {
 	private PetService petService;
 
 	/*
-	 * 14. Un usuario autentificado como empleado podrá: d. Buscar animales que
-	 * ya estén registrados, ver su ficha y su centro asociado. e. Listar los
-	 * avisos ordenados por fecha, siendo los primeros los más recientes. f.
-	 * Desligar voluntarios de su stand. g. Listar los avisos y descartarlos,
-	 * bien porque no se pueden atender o bien porque ya han sido atendidos.
+	 * 14. Un usuario autentificado como empleado podrá: e. Listar los avisos
+	 * ordenados por fecha, siendo los primeros los más recientes. f. Desligar
+	 * voluntarios de su stand. g. Listar los avisos y descartarlos, bien porque
+	 * no se pueden atender o bien porque ya han sido atendidos.
 	 */
 
 	/*
@@ -159,7 +158,24 @@ public class UseCaseEmployee extends AbstractTest {
 				// positivo, un employee registra una mascota en su centro
 				{ "employee1", "register", null },
 				// negativo, un voluntary registra una mascota
-				{ "voluntary1", "register", IllegalArgumentException.class }, };
+				{ "voluntary1", "register", IllegalArgumentException.class },
+				// negativo, employee registra una mascota nula
+				{ "employee1", "", IllegalArgumentException.class },
+				// positivo, un employee edita una mascota en su centro
+				{ "employee1", "edit", null },
+				// negativo,un alguien no autenticado edita una mascota en su
+				// centro
+				{ "", "edit", IllegalArgumentException.class },
+				// negativo,un employee edita una mascota de otro centro
+				{ "employee1", "otro", IllegalArgumentException.class },
+				// positivo, un employee borra una mascota en su centro
+				{ "employee1", "delete", null },
+				// negativo, un cliente borra una mascota
+				{ "client1", "delete", IllegalArgumentException.class },
+				// negativo, un employee borra una mascota que no existe
+				{ "employee1", "exist", IllegalArgumentException.class },
+				// negativo, un employee borra una mascota que nula
+				{ "employee1", "null", IllegalArgumentException.class }, };
 
 		for (int i = 0; i < testingData.length; i++)
 			this.templatePetCrudTest((String) testingData[i][0],
@@ -187,8 +203,7 @@ public class UseCaseEmployee extends AbstractTest {
 				this.petService.save(pet);
 			} else if (action.equals("register") && actor.equals("voluntary1")) {
 				this.authenticate(actor);
-				Veterinary veterinary = this.veterinaryService
-						.findByPrincipal();
+
 				Pet pet = petService.create();
 				pet.setAge(2);
 				pet.setCenter(centerService.findOne(super
@@ -200,6 +215,41 @@ public class UseCaseEmployee extends AbstractTest {
 				pet.setStatus(true);
 				pet.setType("DOG");
 				this.petService.save(pet);
+			} else if (action.equals("") && actor.equals("employee1")) {
+				this.authenticate(actor);
+				Pet pet = null;
+				this.petService.save(pet);
+			} else if (action.equals("edit") && actor.equals("employee1")) {
+				this.authenticate(actor);
+				Pet pet = this.petService.findOne(super.getEntityId("pet1"));
+				pet.setName("name");
+				this.petService.save(pet);
+			} else if (action.equals("edit") && actor.equals("")) {
+				Pet pet = this.petService.findOne(super.getEntityId("pet1"));
+				pet.setName("name");
+				this.petService.save(pet);
+			} else if (action.equals("otro") && actor.equals("employee1")) {
+				super.authenticate(actor);
+				Pet pet = this.petService.findOne(super.getEntityId("pet6"));
+				pet.setName("name");
+				this.petService.save(pet);
+			} else if (action.equals("delete") && actor.equals("employee1")) {
+				super.authenticate(actor);
+				Pet pet = this.petService.findOne(super.getEntityId("pet1"));
+				this.petService.delete(pet);
+			} else if (action.equals("delete") && actor.equals("client1")) {
+				super.authenticate(actor);
+				Pet pet = this.petService.findOne(super.getEntityId("pet1"));
+				this.petService.delete(pet);
+			} else if (action.equals("exist") && actor.equals("employee1")) {
+				super.authenticate(actor);
+				Pet pet = this.petService.create();
+				pet.setId(999999999);
+				this.petService.delete(pet);
+			} else if (action.equals("null") && actor.equals("employee1")) {
+				super.authenticate(actor);
+
+				this.petService.delete(null);
 			}
 
 			this.unauthenticate();
@@ -209,4 +259,56 @@ public class UseCaseEmployee extends AbstractTest {
 		super.checkExceptions(expected, caught);
 
 	}
+
+	/*
+	 * 14. Un usuario autentificado como empleado podrá: d. Buscar animales que
+	 * ya estén registrados, ver su ficha y su centro asociado.
+	 */
+
+	@Test
+	public void lisPetTest() {
+
+		final Object testingData[][] = {
+				// Positive, employee1 lista las todas las mascotas
+				{ "", null },
+				// negativo, client1 accede a la ficha de una mascota
+				{ "client1", IllegalArgumentException.class },
+				// negativo, employee1 accede a la ficha que no existe
+				{ "exist", IllegalArgumentException.class },
+
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateLisPetTest((String) testingData[i][0],
+					(Class<?>) testingData[i][1]);
+	}
+
+	private void templateLisPetTest(String actor, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			if (actor.equals("employee1")) {
+				super.authenticate("employee1");
+
+				Collection<Pet> pets = this.petService.findAll();
+				Assert.notNull(pets);
+			} else if (actor.equals("client1")) {
+				super.authenticate(actor);
+				this.reportService.findOne(super.getEntityId("report1"));
+			} else if (actor.equals("exist")) {
+				super.authenticate(actor);
+				this.reportService.findOne(9999999);
+			}
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
+	/*
+	 * 14. Un usuario autentificado como empleado podrá: e. Listar los avisos
+	 * ordenados por fecha, siendo los primeros los más recientes.
+	 */
 }

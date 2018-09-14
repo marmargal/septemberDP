@@ -1054,6 +1054,22 @@
 	</bean>
 	
 	
+	<bean id="pet6" class="domain.Pet">
+		<property name="name" value="Piolin2"/>
+		<property name="type" value="BIRD"/>
+		<property name="foodExpense" value="20"/>
+		<property name="status" value="false"/>
+		<property name="identifier" value="180506-96-FRSM"/>
+		<property name="date" value="21/04/2013"/>
+		<property name="age" value="1"/>
+		<property name="chip" value="false"/>
+		<property name="center" ref="center2"/>
+		<property name="application">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- MEDICAL REPORT -->
 	<bean id="medicalReport1" class="domain.MedicalReport">
 		<property name="diagnosis" value="Herida en pata delantera derecha."/>

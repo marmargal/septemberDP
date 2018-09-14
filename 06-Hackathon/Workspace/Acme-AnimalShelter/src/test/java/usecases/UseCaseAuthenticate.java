@@ -71,6 +71,41 @@ public class UseCaseAuthenticate extends AbstractTest {
 	}
 
 	/*
+	 * Caso de uso: authenticate->Ver la lista de animales en espera de
+	 * adopción. 11b
+	 */
+	@Test
+	public void listPetAdoptionTest() {
+
+		final Object testingData[][] = { {
+		// Positive
+		null }
+		// Negative: negative case
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.templateListAdoptionPetTest(i, (Class<?>) testingData[i][0]);
+	}
+
+	private void templateListAdoptionPetTest(final Integer i,
+			final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			super.authenticate("client1");
+			final Collection<Pet> listPet = this.petService
+					.findPetsPermitAdoption();
+
+			Assert.notNull(listPet);
+			super.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		super.checkExceptions(expected, caught);
+	}
+
+	/*
 	 * Caso de uso: authenticate->Ver la lista de centros con su foto y
 	 * descripción.. 11d
 	 */
