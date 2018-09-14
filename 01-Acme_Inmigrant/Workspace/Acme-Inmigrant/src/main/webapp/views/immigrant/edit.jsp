@@ -29,7 +29,7 @@
 	<form:hidden path="phoneNumber" />
 	<form:hidden path="address" />
 	<form:hidden path="answers" />
-
+	<form:hidden path="applications"/>
 
 		<form:label path="investigator">
 		<spring:message code="immigrant.investigator" />

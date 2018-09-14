@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2017 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -65,7 +59,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="client1" />
 		<property name="password" value="a165dd3c2e98d5d607181d0b87a4c66b" />
@@ -77,7 +71,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="client2" />
 		<property name="password" value="2c66045d4e4a90814ce9280272e510ec" />
@@ -89,7 +83,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="voluntary1" />
 		<property name="password" value="289d55daa57d68a5201fda6648d11881" />
@@ -101,7 +95,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount8" class="security.UserAccount">
 		<property name="username" value="voluntary2" />
 		<property name="password" value="cecd5649f4ef9dabb84c930ea7e5d79c" />
@@ -113,7 +107,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="veterinary1" />
 		<property name="password" value="5c2ccb960ff6491b69c4f9e9187f2cf8" />
@@ -125,7 +119,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount10" class="security.UserAccount">
 		<property name="username" value="veterinary2" />
 		<property name="password" value="6027817087f7027fa9d9d6c20988a53f" />
@@ -137,7 +131,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount11" class="security.UserAccount">
 		<property name="username" value="boss2" />
 		<property name="password" value="3b7c32a613d841c8ee7694d36f083858" />
@@ -149,9 +143,9 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- Other domain beans come here -->	
-	
+
+	<!-- Other domain beans come here -->
+
 	<!-- ADMIN -->
 	<bean id="admin" class="domain.Administrator">
 		<property name="name" value="Administrator" />
@@ -162,14 +156,14 @@
 		<property name="userAccount" ref="userAccount1" />
 		<property name="folders">
 			<list>
-				<ref bean="folder1"/>
-				<ref bean="folder2"/>
-				<ref bean="folder3"/>
+				<ref bean="folder1" />
+				<ref bean="folder2" />
+				<ref bean="folder3" />
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<!-- BOSS -->
 	<bean id="boss1" class="domain.Boss">
 		<property name="name" value="Boss1" />
@@ -179,20 +173,20 @@
 		<property name="address" value="C/Boss" />
 		<property name="userAccount" ref="userAccount2" />
 		<property name="centers">
-		 	<list>
-		  		<ref bean="center1"/>
-		  		<ref bean="center2"/>
-		 	</list>
-		 </property>
+			<list>
+				<ref bean="center1" />
+				<ref bean="center2" />
+			</list>
+		</property>
 		<property name="folders">
 			<list>
-				<ref bean="folder4"/>
-				<ref bean="folder5"/>
-				<ref bean="folder6"/>
+				<ref bean="folder4" />
+				<ref bean="folder5" />
+				<ref bean="folder6" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="boss2" class="domain.Boss">
 		<property name="name" value="Boss2" />
 		<property name="surname" value="Acme Animal Shelter" />
@@ -201,21 +195,21 @@
 		<property name="address" value="C/Boss2" />
 		<property name="userAccount" ref="userAccount11" />
 		<property name="centers">
-		 	<list>
-		 		<ref bean="center3"/>
-		  		<ref bean="center4"/>
-		 	</list>
-		 </property>
+			<list>
+				<ref bean="center3" />
+				<ref bean="center4" />
+			</list>
+		</property>
 		<property name="folders">
 			<list>
-				<ref bean="folder31"/>
-				<ref bean="folder32"/>
-				<ref bean="folder33"/>
+				<ref bean="folder31" />
+				<ref bean="folder32" />
+				<ref bean="folder33" />
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<!-- EMPLOYEE -->
 	<bean id="employee1" class="domain.Employee">
 		<property name="ban" value="false" />
@@ -225,22 +219,22 @@
 		<property name="phoneNumber" value="654323232" />
 		<property name="address" value="C/Antonio" />
 		<property name="userAccount" ref="userAccount3" />
-		<property name="stand" ref="stand1"/>
+		<property name="stand" ref="stand1" />
 		<property name="reports">
 			<list>
-				<ref bean="report1"/>
+				<ref bean="report1" />
 			</list>
 		</property>
-		<property name="center" ref="center1"/>
+		<property name="center" ref="center1" />
 		<property name="folders">
 			<list>
-				<ref bean="folder7"/>
-				<ref bean="folder8"/>
-				<ref bean="folder9"/>
+				<ref bean="folder7" />
+				<ref bean="folder8" />
+				<ref bean="folder9" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="employee2" class="domain.Employee">
 		<property name="ban" value="true" />
 		<property name="name" value="Manuela" />
@@ -249,23 +243,23 @@
 		<property name="phoneNumber" value="654323287" />
 		<property name="address" value="C/Manuela" />
 		<property name="userAccount" ref="userAccount4" />
-		<property name="stand" ref="stand2"/>
+		<property name="stand" ref="stand2" />
 		<property name="reports">
 			<list>
-				<ref bean="report2"/>
+				<ref bean="report2" />
 			</list>
 		</property>
-		<property name="center" ref="center1"/>
+		<property name="center" ref="center1" />
 		<property name="folders">
 			<list>
-				<ref bean="folder10"/>
-				<ref bean="folder11"/>
-				<ref bean="folder12"/>
+				<ref bean="folder10" />
+				<ref bean="folder11" />
+				<ref bean="folder12" />
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<!-- CLIENT -->
 	<bean id="client1" class="domain.Client">
 		<property name="ban" value="false" />
@@ -277,18 +271,18 @@
 		<property name="userAccount" ref="userAccount5" />
 		<property name="applications">
 			<list>
-				<ref bean="application1"/>
+				<ref bean="application1" />
 			</list>
 		</property>
 		<property name="folders">
 			<list>
-				<ref bean="folder13"/>
-				<ref bean="folder14"/>
-				<ref bean="folder15"/>
+				<ref bean="folder13" />
+				<ref bean="folder14" />
+				<ref bean="folder15" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="client2" class="domain.Client">
 		<property name="ban" value="true" />
 		<property name="name" value="Ana" />
@@ -299,19 +293,19 @@
 		<property name="userAccount" ref="userAccount6" />
 		<property name="applications">
 			<list>
-				<ref bean="application2"/>
+				<ref bean="application2" />
 			</list>
 		</property>
 		<property name="folders">
 			<list>
-				<ref bean="folder16"/>
-				<ref bean="folder17"/>
-				<ref bean="folder18"/>
+				<ref bean="folder16" />
+				<ref bean="folder17" />
+				<ref bean="folder18" />
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<!-- VOLUNTARY -->
 	<bean id="voluntary1" class="domain.Voluntary">
 		<property name="ban" value="false" />
@@ -323,18 +317,18 @@
 		<property name="userAccount" ref="userAccount7" />
 		<property name="folders">
 			<list>
-				<ref bean="folder19"/>
-				<ref bean="folder20"/>
-				<ref bean="folder21"/>
+				<ref bean="folder19" />
+				<ref bean="folder20" />
+				<ref bean="folder21" />
 			</list>
 		</property>
 		<property name="notice">
 			<list>
-				<ref bean="notice1"/>
+				<ref bean="notice1" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="voluntary2" class="domain.Voluntary">
 		<property name="ban" value="true" />
 		<property name="name" value="Marta" />
@@ -345,21 +339,21 @@
 		<property name="userAccount" ref="userAccount8" />
 		<property name="folders">
 			<list>
-				<ref bean="folder22"/>
-				<ref bean="folder23"/>
-				<ref bean="folder24"/>
+				<ref bean="folder22" />
+				<ref bean="folder23" />
+				<ref bean="folder24" />
 			</list>
 		</property>
 		<property name="notice">
 			<list>
-				<ref bean="notice2"/>
-				<ref bean="notice3"/>
-				<ref bean="notice4"/>
+				<ref bean="notice2" />
+				<ref bean="notice3" />
+				<ref bean="notice4" />
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<!-- VETERINARY -->
 	<bean id="veterinary1" class="domain.Veterinary">
 		<property name="ban" value="false" />
@@ -371,20 +365,20 @@
 		<property name="userAccount" ref="userAccount9" />
 		<property name="folders">
 			<list>
-				<ref bean="folder25"/>
-				<ref bean="folder26"/>
-				<ref bean="folder27"/>
+				<ref bean="folder25" />
+				<ref bean="folder26" />
+				<ref bean="folder27" />
 			</list>
 		</property>
 		<property name="medicalReport">
 			<list>
-				<ref bean="medicalReport1"/>
-				<ref bean="medicalReport2"/>
-				<ref bean="medicalReport5"/>
+				<ref bean="medicalReport1" />
+				<ref bean="medicalReport2" />
+				<ref bean="medicalReport5" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="veterinary2" class="domain.Veterinary">
 		<property name="ban" value="true" />
 		<property name="name" value="Carla" />
@@ -395,753 +389,757 @@
 		<property name="userAccount" ref="userAccount10" />
 		<property name="folders">
 			<list>
-				<ref bean="folder28"/>
-				<ref bean="folder29"/>
-				<ref bean="folder30"/>
+				<ref bean="folder28" />
+				<ref bean="folder29" />
+				<ref bean="folder30" />
 			</list>
 		</property>
 		<property name="medicalReport">
 			<list>
-				<ref bean="medicalReport3"/>
-				<ref bean="medicalReport4"/>
+				<ref bean="medicalReport3" />
+				<ref bean="medicalReport4" />
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<!-- FOLDER -->
 	<bean id="folder1" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="admin"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="admin" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder2" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="admin"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="admin" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder3" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="admin"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="admin" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<bean id="folder4" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="boss1"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="boss1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder5" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="boss1"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="boss1" />
 		<property name="messages">
 			<list>
-				<ref bean="message1"/>
+				<ref bean="message1" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder6" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="boss1"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="boss1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
-	
+
+
+
 	<bean id="folder7" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="employee1"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="employee1" />
 		<property name="messages">
 			<list>
-				<ref bean="message1"/>
+				<ref bean="message1" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder8" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="employee1"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="employee1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder9" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="employee1"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="employee1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<bean id="folder10" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="employee2"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="employee2" />
 		<property name="messages">
 			<list>
-				<ref bean="message1"/>
+				<ref bean="message1" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder11" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="employee2"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="employee2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder12" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="employee2"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="employee2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<bean id="folder13" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="client1"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="client1" />
 		<property name="messages">
 			<list>
-				<ref bean="message2"/>
+				<ref bean="message2" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder14" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="client1"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="client1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder15" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="client1"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="client1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
-	
+
+
+
 	<bean id="folder16" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="client2"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="client2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder17" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="client2"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="client2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder18" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="client2"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="client2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
-	
+
+
+
 	<bean id="folder19" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="voluntary1"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="voluntary1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder20" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="voluntary1"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="voluntary1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder21" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="voluntary1"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="voluntary1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
-	
+
+
+
 	<bean id="folder22" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="voluntary2"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="voluntary2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder23" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="voluntary2"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="voluntary2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder24" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="voluntary2"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="voluntary2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<bean id="folder25" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="veterinary1"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="veterinary1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder26" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="veterinary1"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="veterinary1" />
 		<property name="messages">
 			<list>
-				<ref bean="message2"/>
+				<ref bean="message2" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder27" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="veterinary1"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="veterinary1" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
-	
+
+
+
 	<bean id="folder28" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="veterinary2"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="veterinary2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder29" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="veterinary2"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="veterinary2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder30" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="veterinary2"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="veterinary2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<bean id="folder31" class="domain.Folder">
-		<property name="name" value="In Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="boss2"/>
+		<property name="name" value="In Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="boss2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder32" class="domain.Folder">
-		<property name="name" value="Out Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="boss2"/>
+		<property name="name" value="Out Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="boss2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="folder33" class="domain.Folder">
-		<property name="name" value="Trash Box"/>
-		<property name="predefined" value="true"/>
-		<property name="actor" ref="boss2"/>
+		<property name="name" value="Trash Box" />
+		<property name="predefined" value="true" />
+		<property name="actor" ref="boss2" />
 		<property name="messages">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
-	
+
+
 	<!-- MESSAGE -->
 	<bean id="message1" class="domain.Message">
-		<property name="moment" value="04/03/2017"/>
-		<property name="subject" value="Hola"/>
-		<property name="body" value="¿Cómo está Puppy?"/>
-		<property name="priority" value="LOW"/>
-		<property name="isDelete" value="false"/>
-		<property name="folder" ref="folder5"/>
+		<property name="moment" value="04/03/2017" />
+		<property name="subject" value="Hola" />
+		<property name="body" value="¿Cómo está Puppy?" />
+		<property name="priority" value="LOW" />
+		<property name="isDelete" value="false" />
+		<property name="folder" ref="folder5" />
 		<property name="foldersRecipient">
 			<list>
-				<ref bean="folder7"/>
-				<ref bean="folder10"/>
-			</list> 
+				<ref bean="folder7" />
+				<ref bean="folder10" />
+			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="message2" class="domain.Message">
-		<property name="moment" value="05/03/2017"/>
-		<property name="subject" value="Hola"/>
-		<property name="body" value="Puppy está bien."/>
-		<property name="priority" value="LOW"/>
-		<property name="isDelete" value="false"/>
-		<property name="folder" ref="folder26"/>
+		<property name="moment" value="05/03/2017" />
+		<property name="subject" value="Hola" />
+		<property name="body" value="Puppy está bien." />
+		<property name="priority" value="LOW" />
+		<property name="isDelete" value="false" />
+		<property name="folder" ref="folder26" />
 		<property name="foldersRecipient">
 			<list>
-				<ref bean="folder13"/>
-			</list> 
+				<ref bean="folder13" />
+			</list>
 		</property>
 	</bean>
-	
-	
-	
+
+
+
 	<!-- CENTER -->
 	<bean id="center1" class="domain.Center">
-		<property name="name" value="Center1"/>
-		<property name="address" value="C/Margarita n1"/>
-		<property name="capacity" value="30000"/>
-		<property name="stock" value="5000"/>
-		<property name="picture" value="http://www.helpsavepets.org/wp-content/uploads/2015/11/Shorewood.jpg"/>
-		<property name="description" value="Animal Shelter center 1"/>
-		<property name="warehouse" ref="warehouse1"/>
-		<property name="boss" ref="boss1"/>
+		<property name="name" value="Center1" />
+		<property name="address" value="C/Margarita n1" />
+		<property name="capacity" value="30000" />
+		<property name="stock" value="5000" />
+		<property name="picture"
+			value="http://www.helpsavepets.org/wp-content/uploads/2015/11/Shorewood.jpg" />
+		<property name="description" value="Animal Shelter center 1" />
+		<property name="warehouse" ref="warehouse1" />
+		<property name="boss" ref="boss1" />
 	</bean>
-	
+
 	<bean id="center2" class="domain.Center">
-		<property name="name" value="Center2"/>
-		<property name="address" value="C/calle2 n2"/>
-		<property name="capacity" value="40000"/>
-		<property name="stock" value="6000"/>
-		<property name="picture" value="http://www.helpsavepets.org/wp-content/uploads/2015/11/Shorewood.jpg"/>
-		<property name="description" value="Animal Shelter center 2"/>
-		<property name="warehouse" ref="warehouse2"/>
-		<property name="boss" ref="boss1"/>
+		<property name="name" value="Center2" />
+		<property name="address" value="C/calle2 n2" />
+		<property name="capacity" value="40000" />
+		<property name="stock" value="6000" />
+		<property name="picture"
+			value="http://www.helpsavepets.org/wp-content/uploads/2015/11/Shorewood.jpg" />
+		<property name="description" value="Animal Shelter center 2" />
+		<property name="warehouse" ref="warehouse2" />
+		<property name="boss" ref="boss1" />
 	</bean>
-	
+
 	<bean id="center3" class="domain.Center">
-		<property name="name" value="Center3"/>
-		<property name="address" value="C/calle3 n3"/>
-		<property name="capacity" value="40000"/>
-		<property name="stock" value="6000"/>
-		<property name="picture" value="http://www.helpsavepets.org/wp-content/uploads/3015/11/Shorewood.jpg"/>
-		<property name="description" value="Animal Shelter center 3"/>
-		<property name="warehouse" ref="warehouse3"/>
-		<property name="boss" ref="boss2"/>
+		<property name="name" value="Center3" />
+		<property name="address" value="C/calle3 n3" />
+		<property name="capacity" value="40000" />
+		<property name="stock" value="6000" />
+		<property name="picture"
+			value="http://www.helpsavepets.org/wp-content/uploads/3015/11/Shorewood.jpg" />
+		<property name="description" value="Animal Shelter center 3" />
+		<property name="warehouse" ref="warehouse3" />
+		<property name="boss" ref="boss2" />
 	</bean>
-	
+
 	<bean id="center4" class="domain.Center">
-		<property name="name" value="Center4"/>
-		<property name="address" value="C/calle4 n4"/>
-		<property name="capacity" value="40000"/>
-		<property name="stock" value="6000"/>
-		<property name="picture" value="http://www.helpsavepets.org/wp-content/uploads/4015/11/Shorewood.jpg"/>
-		<property name="description" value="Animal Shelter center 4"/>
-		<property name="warehouse" ref="warehouse4"/>
-		<property name="boss" ref="boss2"/>
+		<property name="name" value="Center4" />
+		<property name="address" value="C/calle4 n4" />
+		<property name="capacity" value="40000" />
+		<property name="stock" value="6000" />
+		<property name="picture"
+			value="http://www.helpsavepets.org/wp-content/uploads/4015/11/Shorewood.jpg" />
+		<property name="description" value="Animal Shelter center 4" />
+		<property name="warehouse" ref="warehouse4" />
+		<property name="boss" ref="boss2" />
 	</bean>
-	
-	
+
+
 	<!-- WAREHOUSE -->
 	<bean id="warehouse1" class="domain.Warehouse">
-		<property name="capacity" value="300"/>
-		<property name="stock" value="100"/>
-		<property name="dogFood" value="50"/>
-		<property name="catFood" value="70"/>
-		<property name="birdFood" value="60"/>
+		<property name="capacity" value="300" />
+		<property name="stock" value="100" />
+		<property name="dogFood" value="50" />
+		<property name="catFood" value="70" />
+		<property name="birdFood" value="60" />
 	</bean>
-	
+
 	<bean id="warehouse2" class="domain.Warehouse">
-		<property name="capacity" value="400"/>
-		<property name="stock" value="200"/>
-		<property name="dogFood" value="60"/>
-		<property name="catFood" value="80"/>
-		<property name="birdFood" value="90"/>
+		<property name="capacity" value="400" />
+		<property name="stock" value="200" />
+		<property name="dogFood" value="60" />
+		<property name="catFood" value="80" />
+		<property name="birdFood" value="90" />
 	</bean>
-	
+
 	<bean id="warehouse3" class="domain.Warehouse">
-		<property name="capacity" value="500"/>
-		<property name="stock" value="300"/>
-		<property name="dogFood" value="70"/>
-		<property name="catFood" value="90"/>
-		<property name="birdFood" value="10"/>
+		<property name="capacity" value="500" />
+		<property name="stock" value="300" />
+		<property name="dogFood" value="70" />
+		<property name="catFood" value="90" />
+		<property name="birdFood" value="10" />
 	</bean>
-	
+
 	<bean id="warehouse4" class="domain.Warehouse">
-		<property name="capacity" value="600"/>
-		<property name="stock" value="700"/>
-		<property name="dogFood" value="80"/>
-		<property name="catFood" value="10"/>
-		<property name="birdFood" value="20"/>
+		<property name="capacity" value="600" />
+		<property name="stock" value="700" />
+		<property name="dogFood" value="80" />
+		<property name="catFood" value="10" />
+		<property name="birdFood" value="20" />
 	</bean>
-	
-	
+
+
 	<!-- Stand -->
 	<bean id="stand1" class="domain.Stand">
-		<property name="numMaxVoluntaries" value="20"/>
-		<property name="fliers" value="http://www.google.com"/>
-		<property name="isOfCompany" value="true"/>
+		<property name="numMaxVoluntaries" value="20" />
+		<property name="fliers" value="http://www.google.com" />
+		<property name="isOfCompany" value="true" />
 		<property name="voluntaries">
 			<list>
 				<ref bean="voluntary1" />
 			</list>
 		</property>
-		<property name="company" ref="company1"/>
-		<property name="employee" ref="employee1"/>
+		<property name="company" ref="company1" />
+		<property name="employee" ref="employee1" />
 	</bean>
-	
+
 	<bean id="stand2" class="domain.Stand">
-		<property name="numMaxVoluntaries" value="20"/>
-		<property name="fliers" value="http://www.localhost.com"/>
-		<property name="isOfCompany" value="false"/>
+		<property name="numMaxVoluntaries" value="20" />
+		<property name="fliers" value="http://www.localhost.com" />
+		<property name="isOfCompany" value="false" />
 		<property name="voluntaries">
 			<list>
 				<ref bean="voluntary2" />
 			</list>
 		</property>
-		<property name="company" ref="company1"/>
-		<property name="employee" ref="employee2"/>
+		<property name="company" ref="company1" />
+		<property name="employee" ref="employee2" />
 	</bean>
-	
-	
+
+
 	<!-- COMPANY -->
 	<bean id="company1" class="domain.Company">
-		<property name="name" value="Company 1 SA"/>
-		<property name="description" value="This is Company 1 SA"/>
-		<property name="articles" value="Article of Company 1 SA"/>
-		<property name="logo" value="https://google.com"/>
+		<property name="name" value="Company 1 SA" />
+		<property name="description" value="This is Company 1 SA" />
+		<property name="articles" value="Article of Company 1 SA" />
+		<property name="logo" value="https://google.com" />
 		<property name="stands">
 			<list>
-				<ref bean="stand1"/>
-				<ref bean="stand2"/>
+				<ref bean="stand1" />
+				<ref bean="stand2" />
 			</list>
 		</property>
-		<property name="event" ref="event1"/>
+		<property name="event" ref="event1" />
 	</bean>
-	
-	
+
+
 	<!-- APPLICATION -->
 	<bean id="application1" class="domain.Application">
-		<property name="ticker" value="080616-02-FRSM-070918"/>
-		<property name="createMoment" value="12/06/2011"/>
-		<property name="closed" value="true"/>
-		<property name="pet" ref="pet1"/>
-		<property name="client" ref="client1"/>
-		<property name="report" ref="report1"/>
+		<property name="ticker" value="080616-02-FRSM-070918" />
+		<property name="createMoment" value="12/06/2011" />
+		<property name="closed" value="true" />
+		<property name="pet" ref="pet1" />
+		<property name="client" ref="client1" />
+		<property name="report" ref="report1" />
 	</bean>
-	
+
 	<bean id="application2" class="domain.Application">
-		<property name="ticker" value="060517-01-HGTM-080318"/>
-		<property name="createMoment" value="24/06/2011"/>
-		<property name="closed" value="true"/>
-		<property name="pet" ref="pet2"/>
-		<property name="client" ref="client2"/>
-		<property name="report" ref="report2"/>
+		<property name="ticker" value="060517-01-HGTM-080318" />
+		<property name="createMoment" value="24/06/2011" />
+		<property name="closed" value="true" />
+		<property name="pet" ref="pet2" />
+		<property name="client" ref="client2" />
+		<property name="report" ref="report2" />
 	</bean>
-	
+
 	<bean id="application3" class="domain.Application">
-		<property name="ticker" value="091216-01-QPTY-070917"/>
-		<property name="createMoment" value="12/07/2011"/>
-		<property name="closed" value="false"/>
-		<property name="pet" ref="pet3"/>
-		<property name="client" ref="client1"/>
+		<property name="ticker" value="091216-01-QPTY-070917" />
+		<property name="createMoment" value="12/07/2011" />
+		<property name="closed" value="false" />
+		<property name="pet" ref="pet3" />
+		<property name="client" ref="client1" />
 	</bean>
-	
+
 	<!-- REPORT -->
 	<bean id="report1" class="domain.Report">
-		<property name="description" value="Report 1"/>
-		<property name="suitable" value="false"/>
-		<property name="makeMoment" value="12/12/2017"/>
-		<property name="employee" ref="employee1"/>
-		<property name="application" ref="application1"/>
+		<property name="description" value="Report 1" />
+		<property name="suitable" value="false" />
+		<property name="makeMoment" value="12/12/2017" />
+		<property name="employee" ref="employee1" />
+		<property name="application" ref="application1" />
 	</bean>
-	
+
 	<bean id="report2" class="domain.Report">
-		<property name="description" value="Report 2"/>
-		<property name="suitable" value="false"/>
-		<property name="makeMoment" value="12/12/2017"/>
-		<property name="employee" ref="employee2"/>
-		<property name="application" ref="application2"/>
+		<property name="description" value="Report 2" />
+		<property name="suitable" value="false" />
+		<property name="makeMoment" value="12/12/2017" />
+		<property name="employee" ref="employee2" />
+		<property name="application" ref="application2" />
 	</bean>
-	
-	
-	
-	
+
+
+
+
 	<!-- PET -->
 	<bean id="pet1" class="domain.Pet">
-		<property name="name" value="Puppy"/>
-		<property name="type" value="DOG"/>
-		<property name="foodExpense" value="20"/>
-		<property name="status" value="false"/>
-		<property name="identifier" value="170906-14-AHOM"/>
-		<property name="date" value="21/01/2011"/>
-		<property name="age" value="2"/>
-		<property name="chip" value="true"/>
-		<property name="center" ref="center1"/>
+		<property name="name" value="Puppy" />
+		<property name="type" value="DOG" />
+		<property name="foodExpense" value="20" />
+		<property name="status" value="false" />
+		<property name="identifier" value="170906-14-AHOM" />
+		<property name="date" value="21/01/2011" />
+		<property name="age" value="2" />
+		<property name="chip" value="true" />
+		<property name="center" ref="center1" />
 		<property name="application">
 			<list>
-				<ref bean="application1"/>
+				<ref bean="application1" />
 			</list>
 		</property>
-		<property name="medicalReport" ref="medicalReport1"/>
+		<property name="medicalReport" ref="medicalReport1" />
 	</bean>
-	
+
 	<bean id="pet2" class="domain.Pet">
-		<property name="name" value="Kitty"/>
-		<property name="type" value="CAT"/>
-		<property name="foodExpense" value="20"/>
-		<property name="status" value="false"/>
-		<property name="identifier" value="180706-36-AHOM"/>
-		<property name="date" value="21/01/2012"/>
-		<property name="age" value="1"/>
-		<property name="chip" value="false"/>
-		<property name="center" ref="center1"/>
+		<property name="name" value="Kitty" />
+		<property name="type" value="CAT" />
+		<property name="foodExpense" value="20" />
+		<property name="status" value="false" />
+		<property name="identifier" value="180706-36-AHOM" />
+		<property name="date" value="21/01/2012" />
+		<property name="age" value="1" />
+		<property name="chip" value="false" />
+		<property name="center" ref="center1" />
 		<property name="application">
 			<list>
-				<ref bean="application2"/>
+				<ref bean="application2" />
 			</list>
 		</property>
-		<property name="medicalReport" ref="medicalReport2"/>
+		<property name="medicalReport" ref="medicalReport2" />
 	</bean>
-	
+
 	<bean id="pet3" class="domain.Pet">
-		<property name="name" value="Piolin"/>
-		<property name="type" value="BIRD"/>
-		<property name="foodExpense" value="20"/>
-		<property name="status" value="true"/>
-		<property name="identifier" value="180706-96-FRSM"/>
-		<property name="date" value="21/04/2013"/>
-		<property name="age" value="1"/>
-		<property name="chip" value="false"/>
-		<property name="center" ref="center1"/>
+		<property name="name" value="Piolin" />
+		<property name="type" value="BIRD" />
+		<property name="foodExpense" value="20" />
+		<property name="status" value="true" />
+		<property name="identifier" value="180706-96-FRSM" />
+		<property name="date" value="21/04/2013" />
+		<property name="age" value="1" />
+		<property name="chip" value="false" />
+		<property name="center" ref="center1" />
 		<property name="application">
 			<list>
-				<ref bean="application3"/>
+				<ref bean="application3" />
 			</list>
 		</property>
-		<property name="medicalReport" ref="medicalReport3"/>
+		<property name="medicalReport" ref="medicalReport3" />
 	</bean>
-	
+
 	<bean id="pet4" class="domain.Pet">
-		<property name="name" value="Jara"/>
-		<property name="type" value="DOG"/>
-		<property name="foodExpense" value="10"/>
-		<property name="status" value="true"/>
-		<property name="identifier" value="180606-25-FRSM"/>
-		<property name="date" value="21/04/2014"/>
-		<property name="age" value="5"/>
-		<property name="chip" value="false"/>
-		<property name="center" ref="center1"/>
+		<property name="name" value="Jara" />
+		<property name="type" value="DOG" />
+		<property name="foodExpense" value="10" />
+		<property name="status" value="true" />
+		<property name="identifier" value="180606-25-FRSM" />
+		<property name="date" value="21/04/2014" />
+		<property name="age" value="5" />
+		<property name="chip" value="false" />
+		<property name="center" ref="center1" />
 		<property name="application">
 			<list>
 			</list>
 		</property>
-		<property name="medicalReport" ref="medicalReport4"/>
+		<property name="medicalReport" ref="medicalReport4" />
 	</bean>
-	
+
 	<bean id="pet5" class="domain.Pet">
-		<property name="name" value="Turka"/>
-		<property name="type" value="CAT"/>
-		<property name="foodExpense" value="10"/>
-		<property name="status" value="true"/>
-		<property name="identifier" value="180206-28-FRSM"/>
-		<property name="date" value="21/04/2015"/>
-		<property name="age" value="8"/>
-		<property name="chip" value="true"/>
-		<property name="center" ref="center1"/>
+		<property name="name" value="Turka" />
+		<property name="type" value="CAT" />
+		<property name="foodExpense" value="10" />
+		<property name="status" value="true" />
+		<property name="identifier" value="180206-28-FRSM" />
+		<property name="date" value="21/04/2015" />
+		<property name="age" value="8" />
+		<property name="chip" value="true" />
+		<property name="center" ref="center1" />
 		<property name="application">
 			<list>
 			</list>
 		</property>
-		<property name="medicalReport" ref="medicalReport5"/>
+		<property name="medicalReport" ref="medicalReport5" />
 	</bean>
-	
-	
+
+
 	<bean id="pet6" class="domain.Pet">
-		<property name="name" value="Piolin2"/>
-		<property name="type" value="BIRD"/>
-		<property name="foodExpense" value="20"/>
-		<property name="status" value="false"/>
-		<property name="identifier" value="180506-96-FRSM"/>
-		<property name="date" value="21/04/2013"/>
-		<property name="age" value="1"/>
-		<property name="chip" value="false"/>
-		<property name="center" ref="center2"/>
+		<property name="name" value="Piolin2" />
+		<property name="type" value="BIRD" />
+		<property name="foodExpense" value="20" />
+		<property name="status" value="false" />
+		<property name="identifier" value="180506-96-FRSM" />
+		<property name="date" value="21/04/2013" />
+		<property name="age" value="1" />
+		<property name="chip" value="false" />
+		<property name="center" ref="center2" />
 		<property name="application">
 			<list>
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- MEDICAL REPORT -->
 	<bean id="medicalReport1" class="domain.MedicalReport">
-		<property name="diagnosis" value="Herida en pata delantera derecha."/>
-		<property name="initialState" value="Herido"/>
-		<property name="treatment" value="Venda en la pata herida y collar isabelino."/>
+		<property name="diagnosis" value="Herida en pata delantera derecha." />
+		<property name="initialState" value="Herido" />
+		<property name="treatment" value="Venda en la pata herida y collar isabelino." />
 		<property name="diseases">
 			<list>
 				<value>Enfermedad 1</value>
 				<value>Enfermedad 2</value>
 			</list>
 		</property>
-		<property name="date" value="12/12/2011"/>
-		<property name="pet" ref="pet1"/>
-		<property name="veterinary" ref="veterinary1"/>
+		<property name="date" value="12/12/2011" />
+		<property name="pet" ref="pet1" />
+		<property name="veterinary" ref="veterinary1" />
 	</bean>
-	
+
 	<bean id="medicalReport2" class="domain.MedicalReport">
-		<property name="diagnosis" value="Corte en cola."/>
-		<property name="initialState" value="Herido"/>
-		<property name="treatment" value="Coser herida y collar isabelino."/>
+		<property name="diagnosis" value="Corte en cola." />
+		<property name="initialState" value="Herido" />
+		<property name="treatment" value="Coser herida y collar isabelino." />
 		<property name="diseases">
 			<list>
 				<value>Ceguera en ojo derecho.</value>
 			</list>
 		</property>
-		<property name="date" value="12/12/2011"/>
-		<property name="pet" ref="pet2"/>
-		<property name="veterinary" ref="veterinary1"/>
+		<property name="date" value="12/12/2011" />
+		<property name="pet" ref="pet2" />
+		<property name="veterinary" ref="veterinary1" />
 	</bean>
-	
+
 	<bean id="medicalReport3" class="domain.MedicalReport">
-		<property name="diagnosis" value="Pata rota."/>
-		<property name="initialState" value="Herido"/>
-		<property name="treatment" value="Vendar pata."/>
+		<property name="diagnosis" value="Pata rota." />
+		<property name="initialState" value="Herido" />
+		<property name="treatment" value="Vendar pata." />
 		<property name="diseases">
 			<list>
 				<value>Enfermedad 3</value>
 				<value>Enfermedad 4</value>
 			</list>
 		</property>
-		<property name="date" value="12/12/2011"/>
-		<property name="pet" ref="pet3"/>
-		<property name="veterinary" ref="veterinary2"/>
+		<property name="date" value="12/12/2011" />
+		<property name="pet" ref="pet3" />
+		<property name="veterinary" ref="veterinary2" />
 	</bean>
-	
+
 	<bean id="medicalReport4" class="domain.MedicalReport">
-		<property name="diagnosis" value="Parásito."/>
-		<property name="initialState" value="Enfermo"/>
-		<property name="treatment" value="Medicamnetos."/>
+		<property name="diagnosis" value="Parásito." />
+		<property name="initialState" value="Enfermo" />
+		<property name="treatment" value="Medicamnetos." />
 		<property name="diseases">
 			<list>
 			</list>
 		</property>
-		<property name="date" value="09/11/2011"/>
-		<property name="pet" ref="pet4"/>
-		<property name="veterinary" ref="veterinary2"/>
+		<property name="date" value="09/11/2011" />
+		<property name="pet" ref="pet4" />
+		<property name="veterinary" ref="veterinary2" />
 	</bean>
-	
+
 	<bean id="medicalReport5" class="domain.MedicalReport">
-		<property name="diagnosis" value="Virus."/>
-		<property name="initialState" value="Enfermo"/>
-		<property name="treatment" value="Medicamnetos."/>
+		<property name="diagnosis" value="Virus." />
+		<property name="initialState" value="Enfermo" />
+		<property name="treatment" value="Medicamnetos." />
 		<property name="diseases">
 			<list>
 			</list>
 		</property>
-		<property name="date" value="08/10/2012"/>
-		<property name="pet" ref="pet5"/>
-		<property name="veterinary" ref="veterinary1"/>
+		<property name="date" value="08/10/2012" />
+		<property name="pet" ref="pet5" />
+		<property name="veterinary" ref="veterinary1" />
 	</bean>
-	
-	
+
+
 	<!-- CREDIT CARD -->
 	<bean id="creditCard1" class="domain.CreditCard">
 		<property name="holderName" value="BBVA" />
@@ -1160,52 +1158,56 @@
 		<property name="expirationYear" value="21" />
 		<property name="cvv" value="612" />
 	</bean>
-	
+
 	<!-- DONATION -->
 	<bean id="donation1" class="domain.Donation">
-		<property name="cuantity" value="200.50"/>
-		<property name="name" value="Donation 1"/>
-		<property name="creditCard" ref="creditCard1"/>
-		<property name="voluntary"><null/></property>
-		<property name="client" ref="client1"/>
+		<property name="cuantity" value="200.50" />
+		<property name="name" value="Donation 1" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="voluntary">
+			<null />
+		</property>
+		<property name="client" ref="client1" />
 	</bean>
-	
+
 	<bean id="donation2" class="domain.Donation">
-		<property name="cuantity" value="200.50"/>
-		<property name="name" value="Donation 2"/>
-		<property name="creditCard" ref="creditCard2"/>
-		<property name="voluntary" ref="voluntary2"/>
-		<property name="client"><null/></property>
+		<property name="cuantity" value="200.50" />
+		<property name="name" value="Donation 2" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="voluntary" ref="voluntary2" />
+		<property name="client">
+			<null />
+		</property>
 	</bean>
-	
+
 	<!-- EVENT -->
 	<bean id="event1" class="domain.Event">
-		<property name="title" value="Event 1"/>
-		<property name="description" value="An event"/>
-		<property name="nameSite" value="Maria Luisa Park"/>
-		<property name="address" value="Maria Luisa Park"/>
-		<property name="placard" value="https://google.com"/>
-		<property name="startDate" value="09/01/2019 12:00"/>
-		<property name="endDate" value="09/01/2019 17:00"/>
-		<property name="publicationDate" value="09/10/2018"/>
-		<property name="center" ref="center1"/>
-		<property name="company" ref="company1"/>
+		<property name="title" value="Event 1" />
+		<property name="description" value="An event" />
+		<property name="nameSite" value="https://www.google.es/" />
+		<property name="address" value="Maria Luisa Park" />
+		<property name="placard" value="https://google.com" />
+		<property name="startDate" value="09/01/2019 12:00" />
+		<property name="endDate" value="09/01/2019 17:00" />
+		<property name="publicationDate" value="09/10/2018" />
+		<property name="center" ref="center1" />
+		<property name="company" ref="company1" />
 	</bean>
-	
+
 	<bean id="event2" class="domain.Event">
-		<property name="title" value="Event 2"/>
-		<property name="description" value="An event"/>
-		<property name="nameSite" value="Maria Luisa Park"/>
-		<property name="address" value="Maria Luisa Park"/>
-		<property name="placard" value="https://google.com"/>
-		<property name="startDate" value="09/01/2019 12:00"/>
-		<property name="endDate" value="09/01/2019 17:00"/>
-		<property name="publicationDate" value="09/10/2018"/>
-		<property name="center" ref="center3"/>
-		<property name="company" ref="company1"/>
+		<property name="title" value="Event 2" />
+		<property name="description" value="An event" />
+		<property name="nameSite" value="https://www.google.es/" />
+		<property name="address" value="Maria Luisa Park" />
+		<property name="placard" value="https://google.com" />
+		<property name="startDate" value="09/01/2019 12:00" />
+		<property name="endDate" value="09/01/2019 17:00" />
+		<property name="publicationDate" value="09/10/2018" />
+		<property name="center" ref="center3" />
+		<property name="company" ref="company1" />
 	</bean>
-	
-	
+
+
 	<!-- GPS COORDINATE -->
 	<bean id="coordinates1" class="domain.GpsCoordinate">
 		<property name="latitude" value="45." />
@@ -1216,57 +1218,58 @@
 		<property name="latitude" value="60." />
 		<property name="longitude" value="13.4" />
 	</bean>
-	
-	
+
+
 	<!-- NOTICE -->
 	<bean id="notice1" class="domain.Notice">
-		<property name="description" value="Perro herido en la carretera."/>
-		<property name="type" value="DOG"/>
-		<property name="gpsCoordinates" ref="coordinates1"/>
-		<property name="level" value="3"/>
-		<property name="date" value="03/04/2017"/>
-		<property name="discarded" value="false"/>
-		<property name="voluntary" ref="voluntary1"/>
+		<property name="description" value="Perro herido en la carretera." />
+		<property name="type" value="DOG" />
+		<property name="gpsCoordinates" ref="coordinates1" />
+		<property name="level" value="3" />
+		<property name="date" value="03/04/2017" />
+		<property name="discarded" value="false" />
+		<property name="voluntary" ref="voluntary1" />
 	</bean>
-	
+
 	<bean id="notice2" class="domain.Notice">
-		<property name="description" value="Gato herido en el parque."/>
-		<property name="type" value="CAT"/>
-		<property name="gpsCoordinates" ref="coordinates2"/>
-		<property name="level" value="2"/>
-		<property name="date" value="03/01/2018"/>
-		<property name="discarded" value="false"/>
-		<property name="voluntary" ref="voluntary2"/>
+		<property name="description" value="Gato herido en el parque." />
+		<property name="type" value="CAT" />
+		<property name="gpsCoordinates" ref="coordinates2" />
+		<property name="level" value="2" />
+		<property name="date" value="03/01/2018" />
+		<property name="discarded" value="false" />
+		<property name="voluntary" ref="voluntary2" />
 	</bean>
-	
+
 	<bean id="notice3" class="domain.Notice">
-		<property name="description" value="Perro abandonado."/>
-		<property name="type" value="DOG"/>
-		<property name="gpsCoordinates" ref="coordinates2"/>
-		<property name="level" value="2"/>
-		<property name="date" value="03/05/2017"/>
-		<property name="discarded" value="false"/>
-		<property name="voluntary" ref="voluntary2"/>
+		<property name="description" value="Perro abandonado." />
+		<property name="type" value="DOG" />
+		<property name="gpsCoordinates" ref="coordinates2" />
+		<property name="level" value="2" />
+		<property name="date" value="03/05/2017" />
+		<property name="discarded" value="false" />
+		<property name="voluntary" ref="voluntary2" />
 	</bean>
-	
+
 	<bean id="notice4" class="domain.Notice">
-		<property name="description" value="Crias de gato abandonadas."/>
-		<property name="type" value="CAT"/>
-		<property name="gpsCoordinates" ref="coordinates2"/>
-		<property name="level" value="2"/>
-		<property name="date" value="12/12/2017"/>
-		<property name="discarded" value="false"/>
-		<property name="voluntary" ref="voluntary2"/>
+		<property name="description" value="Crias de gato abandonadas." />
+		<property name="type" value="CAT" />
+		<property name="gpsCoordinates" ref="coordinates2" />
+		<property name="level" value="2" />
+		<property name="date" value="12/12/2017" />
+		<property name="discarded" value="false" />
+		<property name="voluntary" ref="voluntary2" />
 	</bean>
-	
-	
-	
+
+
+
 	<!-- CONFIGURATION -->
 	<bean id="configuration" class="domain.Configuration">
-		<property name="banner" value="https://google.com"/>
-		<property name="englishWelcome" value="Welcome to Acme Animal Shelter!!"/>
-		<property name="spanishWelcome" value="¡¡Bienvenido a Acme Animal Shelter!!"/>
-		<property name="countryCode" value="ES"/>
+		<property name="banner"
+			value="https://static.vecteezy.com/system/resources/previews/000/082/710/non_2x/siberian-husky-vector-dog.jpg" />
+		<property name="englishWelcome" value="Welcome to Acme Animal Shelter!!" />
+		<property name="spanishWelcome" value="¡¡Bienvenido a Acme Animal Shelter!!" />
+		<property name="countryCode" value="ES" />
 	</bean>
-	
+
 </beans>

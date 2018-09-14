@@ -1,4 +1,4 @@
-- Añadir al menú Events.
+(CORREGIDO)- Añadir al menú Events.
 
 - Falta 11.e --> Un usuario que no esté autenticado podrá: Listar los eventos que se han publicado y no hayan finalizado y ver su página de promoción.
 	Se pueden listar los eventos por la url.

@@ -189,7 +189,7 @@ public class ImmigrantService {
 		Assert.isTrue(count!=0); // si es igual a 0, el immigrant no pertenece a ninguna application del officer
 		
 		Immigrant old = this.findOne(immigrant.getId());
-		this.save(immigrant);
+		this.saveImmigrant(immigrant);
 		if (immigrant.getInvestigator() != null) {
 			// actualizo el nuevo
 			Investigator investigator = immigrant.getInvestigator();
@@ -203,11 +203,11 @@ public class ImmigrantService {
 
 			oldInvestigator.setImmigrants(oldImmigrants);
 
-			this.investigatorService.save(oldInvestigator);
+			this.investigatorService.saveAlternative(oldInvestigator);
 			immigrants.add(immigrant);
 			investigator.setImmigrants(immigrants);
 
-			this.investigatorService.save(investigator);
+			this.investigatorService.saveAlternative(investigator);
 		}
 		return immigrant;
 	}

@@ -28,6 +28,8 @@
 			<li><a href="pet/petsWaitingAdoption.do"><spring:message code="master.page.petsWaitingAdoption" /></a></li>
 			<li><a href="pet/petsPermitAdoption.do"><spring:message code="master.page.petsPermitAdoption" /></a></li>
 			<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>
+			<li><a href="event/list.do"><spring:message code="master.page.events" /></a></li>
+			
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
