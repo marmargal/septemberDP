@@ -10,6 +10,8 @@
 
 package controllers.administrator;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CenterService;
+import services.EmployeeService;
 import controllers.AbstractController;
 import domain.Center;
+import domain.Employee;
 
 @Controller
 @RequestMapping("/center/administrator")
@@ -29,6 +33,9 @@ public class CenterAdministratorController extends AbstractController {
 
 	@Autowired
 	private CenterService centerService;
+
+	@Autowired
+	private EmployeeService employeeService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -42,6 +49,15 @@ public class CenterAdministratorController extends AbstractController {
 		ModelAndView res;
 		try {
 			Center center = this.centerService.findOne(centerId);
+			Boolean employee = false;
+			Collection<Employee> employees = this.employeeService
+					.findByCenter(center.getId());
+			if (employees == null || employees.isEmpty()) {
+				employee = true;
+			}
+			if (employee) {
+				res = new ModelAndView("redirect:../../");
+			}
 			this.centerService.delete(center);
 			res = new ModelAndView("redirect:/center/list.do");
 

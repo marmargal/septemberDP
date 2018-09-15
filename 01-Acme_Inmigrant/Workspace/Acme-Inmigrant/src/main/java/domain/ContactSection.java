@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -27,6 +28,7 @@ public class ContactSection extends DomainEntity {
 	
 	@Email
 	@NotBlank
+	@SafeHtml
 	public String getEmail() {
 		return email;
 	}
@@ -34,6 +36,7 @@ public class ContactSection extends DomainEntity {
 		this.email = email;
 	}
 
+	@SafeHtml
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

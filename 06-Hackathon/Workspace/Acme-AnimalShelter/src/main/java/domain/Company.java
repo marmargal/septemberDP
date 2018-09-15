@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import org.hibernate.engine.internal.Cascade;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -31,6 +32,7 @@ public class Company extends DomainEntity{
 	
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}
@@ -40,6 +42,7 @@ public class Company extends DomainEntity{
 	}
 	
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -49,6 +52,7 @@ public class Company extends DomainEntity{
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getArticles() {
 		return articles;
 	}
@@ -59,6 +63,7 @@ public class Company extends DomainEntity{
 
 	@URL
 	@NotBlank
+	@SafeHtml
 	public String getLogo() {
 		return logo;
 	}
@@ -83,7 +88,7 @@ public class Company extends DomainEntity{
 	}
 
 	@Valid
-	@OneToOne
+	@OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
 	public Event getEvent() {
 		return event;
 	}

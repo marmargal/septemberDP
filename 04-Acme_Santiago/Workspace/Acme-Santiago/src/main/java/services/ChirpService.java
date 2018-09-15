@@ -79,6 +79,18 @@ public class ChirpService {
 
 	public Chirp save(Chirp chirp) {
 		Assert.notNull(chirp);
+		Collection<String> tabooWords = new ArrayList<String>();
+		tabooWords = configurationService.findTabooWords();
+		for (String s : tabooWords) {
+
+			if (chirp.getTitle().toLowerCase().contains(s.toLowerCase())
+					|| chirp.getText().toLowerCase().contains(s.toLowerCase())) {
+				chirp.setTaboo(true);
+			} else {
+				chirp.setTaboo(false);
+
+			}
+		}
 		Chirp res;
 		res = this.chirpRepository.save(chirp);
 		return res;

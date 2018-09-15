@@ -22,6 +22,9 @@ public class WarehouseService {
 
 	// Suporting services
 
+	@Autowired
+	private BossService bossService;
+	
 	// Constructors
 
 	public WarehouseService() {
@@ -32,6 +35,12 @@ public class WarehouseService {
 
 	public Warehouse create() {
 		Warehouse res = new Warehouse();
+		
+		res.setCapacity(0);
+		res.setStock(0);
+		res.setDogFood(0);
+		res.setCatFood(0);
+		res.setBirdFood(0);
 		
 		return res;
 
@@ -52,6 +61,7 @@ public class WarehouseService {
 	}
 
 	public Warehouse save(Warehouse warehouse) {
+		this.bossService.checkAuthority();
 		Warehouse res;
 		res = warehouseRepository.saveAndFlush(warehouse);
 		return res;
@@ -62,6 +72,10 @@ public class WarehouseService {
 		Assert.isTrue(warehouse.getId() != 0);
 		Assert.isTrue(warehouseRepository.exists(warehouse.getId()));
 		warehouseRepository.delete(warehouse);
+	}
+
+	public void flush() {
+		this.warehouseRepository.flush();
 	}
 
 	// Other business methods

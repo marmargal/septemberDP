@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -30,6 +31,7 @@ public class Center extends DomainEntity{
 	
 	
 	@NotBlank
+	@SafeHtml
 	public String getAddress() {
 		return address;
 	}
@@ -58,6 +60,7 @@ public class Center extends DomainEntity{
 	
 	@URL
 	@NotBlank
+	@SafeHtml
 	public String getPicture() {
 		return picture;
 	}
@@ -67,6 +70,7 @@ public class Center extends DomainEntity{
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}

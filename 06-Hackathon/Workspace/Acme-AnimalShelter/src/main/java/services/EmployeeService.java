@@ -55,6 +55,7 @@ public class EmployeeService {
 	// Simple CRUD methods
 
 	public Employee create() {
+		this.bossService.checkAuthority();
 		Employee res = new Employee();
 
 		Collection<Folder> folders = new ArrayList<Folder>();

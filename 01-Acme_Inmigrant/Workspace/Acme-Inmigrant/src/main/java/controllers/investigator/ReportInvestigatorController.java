@@ -2,6 +2,8 @@ package controllers.investigator;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -60,7 +62,7 @@ public class ReportInvestigatorController extends AbstractController {
 	}
 	
 	@RequestMapping(value="/edit",method=RequestMethod.POST, params = "save")
-	public ModelAndView save( final ReportForm reportForm, final BindingResult binding){
+	public ModelAndView save(@Valid final ReportForm reportForm, final BindingResult binding){
 		
 		ModelAndView res;
 		

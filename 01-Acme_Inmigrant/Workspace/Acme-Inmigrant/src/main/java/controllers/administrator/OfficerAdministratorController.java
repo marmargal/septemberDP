@@ -58,7 +58,7 @@ public class OfficerAdministratorController extends AbstractController{
 				res = new ModelAndView("redirect:../..");
 				
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(officerForm, "officer.commit.error");
+				res = this.createEditModelAndView(officerForm, "actor.commit.error");
 			}
 		return res;
 	}

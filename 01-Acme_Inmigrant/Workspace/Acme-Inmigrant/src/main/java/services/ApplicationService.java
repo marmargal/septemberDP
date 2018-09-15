@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.transaction.Transactional;
 
@@ -92,6 +94,8 @@ public class ApplicationService {
 		res.setEducationSection(educationSection);
 		res.setQuestion(question);
 		res.setImmigrant(immigrant);
+		
+		res.setCreditCard(null);
 		
 		return res;
 	}
@@ -224,6 +228,37 @@ public class ApplicationService {
 		return res;
 	}
 	
+	
+	
+	public boolean checkCreditCardCvvAndDate(final CreditCard creditCard) {
+		boolean res = true;
+		if(creditCard.getCvv() > 999 || creditCard.getCvv() < 100){
+			res = false;
+		}
+		if(creditCard.getExpirationMonth() > 12 || creditCard.getExpirationMonth() < 1){
+			res = false;
+		}
+		if(creditCard.getExpirationYear() > 99 || creditCard.getExpirationYear() < 1){
+			res = false;
+		}else{
+			Calendar calendar = new GregorianCalendar();
+			int actualYear = calendar.get(Calendar.YEAR) % 100;
+			if(creditCard.getExpirationYear() < actualYear){
+				res = false;
+			}else if(creditCard.getExpirationYear() == actualYear && creditCard.getExpirationMonth() < calendar.get(Calendar.MONTH)){
+				res = false;
+			}
+		}
+		
+		Pattern pattern = Pattern.compile("^\\d{4}\\s?\\d{4}\\s?\\d{4}\\s?\\d{4}$");
+		Matcher m = pattern.matcher(creditCard.getNumber());
+		if(!m.find()){
+			res = false;
+		}
+		
+		return res;
+	}
+	
 	public Application reconstruct(final Application application, final BindingResult binding) {
 		Application res;
 		Application applicationFinal;
@@ -267,9 +302,9 @@ public class ApplicationService {
 		if(cc != null){
 			
 			String brandName = cc.getBrandName();
-			String cvv = String.valueOf(cc.getCvv());
-			String expirationMonth = String.valueOf(cc.getExpirationMonth());
-			String expirationYear = String.valueOf(cc.getExpirationYear());
+			Integer cvv = cc.getCvv();
+			Integer expirationMonth = cc.getExpirationMonth();
+			Integer expirationYear = cc.getExpirationYear();
 			String holderName = cc.getHolderName();
 			String number = cc.getNumber();
 			
@@ -322,16 +357,16 @@ public class ApplicationService {
 			res = this.create();
 		
 		//CREDIT CARD
-		if(!applicationForm.getBrandName().isEmpty() || !applicationForm.getCvv().isEmpty() || !applicationForm.getExpirationMonth().isEmpty() || 
-				!applicationForm.getExpirationYear().isEmpty() || !applicationForm.getHolderName().isEmpty() || !applicationForm.getNumber().isEmpty()){
-			int cvv = Integer.parseInt(applicationForm.getCvv());
-			int expirationMonth = Integer.parseInt(applicationForm.getExpirationMonth());
-			int expirationYear = Integer.parseInt(applicationForm.getExpirationYear());
+		if(!applicationForm.getBrandName().isEmpty() || applicationForm.getCvv() != null || applicationForm.getExpirationMonth() != null || 
+				applicationForm.getExpirationYear() != null || !applicationForm.getHolderName().isEmpty() || !applicationForm.getNumber().isEmpty()){
+//			Integer cvv = Integer.parseInt(applicationForm.getCvv());
+//			Integer expirationMonth = Integer.parseInt(applicationForm.getExpirationMonth());
+//			Integer expirationYear = Integer.parseInt(applicationForm.getExpirationYear());
 			
 			cc.setBrandName(applicationForm.getBrandName());
-			cc.setCvv(cvv);
-			cc.setExpirationMonth(expirationMonth);
-			cc.setExpirationYear(expirationYear);
+			cc.setCvv(applicationForm.getCvv());
+			cc.setExpirationMonth(applicationForm.getExpirationMonth());
+			cc.setExpirationYear(applicationForm.getExpirationYear());
 			cc.setHolderName(applicationForm.getHolderName());
 			cc.setNumber(applicationForm.getNumber());
 			res.setCreditCard(cc);
@@ -361,7 +396,7 @@ public class ApplicationService {
 		if(applicationForm.isClosed()){
 			res.setClosedMoment(new Date());
 		}
-		if(applicationForm.getTickerApplicationLinked() != null){
+		if(applicationForm.getTickerApplicationLinked().isEmpty()){
 			Application application = new Application();
 			application = this.findApplicationByTicker(applicationForm.getTickerApplicationLinked());
 			res.setApplication(application);
@@ -423,6 +458,12 @@ public class ApplicationService {
 		Application application = new Application();
 		application = this.applicationRepository.findApplicationByTicker(tickerValue);
 		return application;
+	}
+	
+	public Collection<Application> findApplicationsByVisa(int visaId){
+		Collection<Application> applications = new ArrayList<Application>();
+		applications = this.applicationRepository.findApplicationsByVisa(visaId);
+		return applications;
 	}
 	
 	public List<Application> findApplicationsLinked(Application application){

@@ -47,6 +47,8 @@ public class RouteAdministratorController extends AbstractController {
 			route = this.routeService.findOne(routeId);
 			result = this.createEditModelAndView(route);
 			result.addObject("route", route);
+			result.addObject("hikes", route.getHikes());
+
 		}
 		return result;
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ApplicationService;
 import services.CategoryService;
 import services.CountryService;
 import services.VisaService;
@@ -34,6 +35,9 @@ public class VisaAdministratorController extends AbstractController {
 
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private ApplicationService applicationService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -78,10 +82,17 @@ public class VisaAdministratorController extends AbstractController {
 		} else {
 			try {
 				Assert.notNull(visa.getCountry());
-
-				visaService.save(visa);
-
-				result = new ModelAndView("redirect:list.do");
+				if(!this.visaService.checkCreditCard(visa)){
+					result = this.createEditModelAndView(visa,"visa.commit.error.cc");
+				}else{
+					if(this.applicationService.checkCreditCardCvvAndDate(visa.getCreditCard())){
+						visaService.save(visa);
+						result = new ModelAndView("redirect:list.do");
+					}else{
+						result = this.createEditModelAndView(visa,"visa.commit.error.inputs.cc");
+					}
+					
+				}
 			} catch (Throwable ooops) {
 				if (visa.getCountry() == null) {
 					result = this.createEditModelAndView(visa,
@@ -126,6 +137,26 @@ public class VisaAdministratorController extends AbstractController {
 
 		return result;
 	}
+	
+	
+	// Deleting -------------------------------------------------------------
+
+	// Delete ---------------------------------------------------------------
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@RequestParam(defaultValue = "0") int visaId) {
+		ModelAndView res;
+		try {
+			Visa visa = this.visaService.findOne(visaId);
+			this.visaService.delete(visa);
+			res = new ModelAndView("redirect:/visa/list.do");
+
+		} catch (Exception e) {
+			res = new ModelAndView("redirect:../../");
+		}
+
+		return res;
+	}
+	
 
 	protected ModelAndView createEditModelAndView(final Visa visa) {
 		final ModelAndView result;

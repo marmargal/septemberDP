@@ -31,8 +31,24 @@
 
 
 		<acme:textbox code="notice.description" path="description" />
-		<acme:textbox code="notice.type" path="type" />
-		<acme:textbox code="notice.level" path="level" />
+		<form:label path="type">
+		<spring:message code="notice.type" />:
+		</form:label>
+		<form:select path="type">
+		<form:option value="DOG" />
+		<form:option value="CAT" />
+		<form:option value="BIRD" />
+		</form:select>
+		
+		<br/>
+		<form:label path="level">
+		<spring:message code="notice.level" />:
+		</form:label>
+		<form:select path="level">
+		<form:option value="1" />
+		<form:option value="2" />
+		<form:option value="3" />
+		</form:select>
 		<acme:textbox code="notice.gpsCoordinates.latitude" path="gpsCoordinates.latitude" />
 		<acme:textbox code="notice.gpsCoordinates.longitude" path="gpsCoordinates.longitude" />
 		

@@ -67,7 +67,7 @@
 	<div class="body">
 	</div>
 	<div class="logo">
-		<a href="/Acme-AnimalShelter"><img class="imagen" src="images/animalshelter-logo.jpg"
+		<a href="/Acme-AnimalShelter"><img class="imagen" src="${banner }"
 			alt="Acme-AnimalShelter Co., Inc." /></a>
 		
 	</div>

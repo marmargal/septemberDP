@@ -14,7 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.PetRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Application;
+import domain.Center;
 import domain.MedicalReport;
 import domain.Pet;
 
@@ -28,6 +31,9 @@ public class PetService {
 	private PetRepository petRepository;
 
 	// Suporting services
+
+	@Autowired
+	private EmployeeService employeeService;
 
 	@Autowired
 	private MedicalReportService medicalReportService;
@@ -45,7 +51,6 @@ public class PetService {
 
 	public Pet create() {
 		Pet res = new Pet();
-		System.out.println(this.generatedIdentifier());
 		res.setIdentifier(this.generatedIdentifier());
 		return res;
 
@@ -67,13 +72,42 @@ public class PetService {
 	}
 
 	public Pet save(Pet pet) {
+		Assert.notNull(pet);
+		Assert.notNull( LoginService.getPrincipal()
+				.getAuthorities());
 		Pet res;
 		String s = pet.getIdentifier();
 		String age = pet.getAge().toString();
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority employee = new Authority();
+		employee.setAuthority("EMPLOYEE");
+		Authority admin = new Authority();
+		admin.setAuthority("ADMIN");
+		Authority veterinary = new Authority();
+		veterinary.setAuthority("VETERINARY");
+		Authority client = new Authority();
+		client.setAuthority("CLIENT");
+		Authority boss = new Authority();
+		boss.setAuthority("BOSS");
+		if (pet.getId() == 0) {
+			this.employeeService.checkAuthority();
+		} else {
+
+			Assert.isTrue(authority.contains(employee)
+					|| authority.contains(admin)
+					|| authority.contains(veterinary)
+					|| authority.contains(client)|| authority.contains(boss));
+		}
+		if (authority.contains(employee)) {
+			Assert.isTrue(pet.getCenter().equals(
+					this.employeeService.findByPrincipal().getCenter()));
+		}
 		if (pet.getAge() < 10) {
 			age = "0" + age;
 		}
-		s = s.replace(s.substring(7,9), age);
+		s = s.replace(s.substring(7, 9), age);
 		pet.setIdentifier(s);
 		res = petRepository.save(pet);
 		return res;
@@ -83,7 +117,22 @@ public class PetService {
 		Assert.notNull(pet);
 		Assert.isTrue(pet.getId() != 0);
 		Assert.isTrue(petRepository.exists(pet.getId()));
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority employee = new Authority();
+		employee.setAuthority("EMPLOYEE");
+		Authority admin = new Authority();
+		admin.setAuthority("ADMIN");
+		Authority boss = new Authority();
+		boss.setAuthority("BOSS");
+		Assert.isTrue(authority.contains(employee) || authority.contains(admin)
+				|| authority.contains(boss));
 
+		if (authority.contains(employee)) {
+			Center c = this.employeeService.findByPrincipal().getCenter();
+			Assert.isTrue(pet.getCenter().equals(c));
+		}
 		// Eliminamos sus relaciones
 		MedicalReport medicalReport = pet.getMedicalReport();
 		if (medicalReport != null) {
@@ -153,7 +202,7 @@ public class PetService {
 
 		final Date date = new Date(System.currentTimeMillis() - 1);
 		final SimpleDateFormat dt = new SimpleDateFormat("ddMMyy");
-		
+
 		identifier = dt.format(date).toString() + "-";
 		for (int i = 0; i < 2; i++)
 			identifier = identifier
@@ -165,7 +214,7 @@ public class PetService {
 
 		return identifier;
 	}
-	
+
 	public void flush() {
 		this.petRepository.flush();
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.VisaRepository;
+import domain.Application;
 import domain.Category;
 import domain.Country;
 import domain.Visa;
@@ -25,6 +26,9 @@ public class VisaService {
 	
 	@Autowired
 	private AdministratorService administratorService;
+	
+	@Autowired
+	private ApplicationService applicationService;
 
 	// Suporting services
 
@@ -49,6 +53,7 @@ public class VisaService {
 
 		res.setCountry(country);
 		res.setCategory(category);
+		res.setCreditCard(null);
 
 		return res;
 	}
@@ -79,6 +84,11 @@ public class VisaService {
 		Assert.notNull(visa);
 		Assert.isTrue(visa.getId() != 0);
 		Assert.isTrue(visaRepository.exists(visa.getId()));
+		
+		Collection<Application> applications = this.applicationService.findApplicationsByVisa(visa.getId());
+		for(Application application: applications){
+			application.setVisa(null);
+		}
 		visaRepository.delete(visa);
 	}
 	
@@ -106,6 +116,23 @@ public class VisaService {
 		res.addAll(visaRepository.findVisasByCountry(countryId));
 
 		return res;
+	}
+	
+	public boolean checkCreditCard(Visa visa) {
+		boolean isValid = true;
+		if(visa.getPrice() > 0){
+			if(visa.getCreditCard().getBrandName().isEmpty() ||
+			   visa.getCreditCard().getCvv() == null ||
+			   visa.getCreditCard().getExpirationMonth() == null ||
+			   visa.getCreditCard().getExpirationYear() == null ||
+			   visa.getCreditCard().getHolderName().isEmpty() ||
+			   visa.getCreditCard().getNumber().isEmpty()){
+				
+					isValid = false;
+			}
+		}
+
+		return isValid;
 	}
 	
 	public void flush() {

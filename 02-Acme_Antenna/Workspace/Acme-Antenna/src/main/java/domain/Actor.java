@@ -18,6 +18,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
@@ -43,6 +44,7 @@ public abstract class Actor extends DomainEntity {
 	private String email;
 	
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -52,6 +54,7 @@ public abstract class Actor extends DomainEntity {
 	}
 	
 	@NotBlank
+	@SafeHtml
 	public String getSurname() {
 		return surname;
 	}
@@ -61,6 +64,7 @@ public abstract class Actor extends DomainEntity {
 	}
 	
 	@URL
+	@SafeHtml
 	public String getPictures() {
 		return pictures;
 	}
@@ -69,7 +73,7 @@ public abstract class Actor extends DomainEntity {
 		this.pictures = pictures;
 	}
 	
-	
+	@SafeHtml
 	public String getPostalAddress() {
 		return postalAddress;
 	}
@@ -79,6 +83,7 @@ public abstract class Actor extends DomainEntity {
 	}
 	
 	@Pattern(regexp = "^\\+?\\d+")
+	@SafeHtml
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -89,6 +94,7 @@ public abstract class Actor extends DomainEntity {
 	
 	@NotBlank
 	@Email
+	@SafeHtml
 	public String getEmail() {
 		return email;
 	}

@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -37,6 +39,7 @@ public class Hike extends DomainEntity {
 	private DificultLevel dificultLevel;
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -46,6 +49,7 @@ public class Hike extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}
@@ -55,6 +59,7 @@ public class Hike extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getOriginCity() {
 		return originCity;
 	}
@@ -64,6 +69,7 @@ public class Hike extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDestinationCity() {
 		return destinationCity;
 	}
@@ -116,7 +122,7 @@ public class Hike extends DomainEntity {
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "hike")
+	@OneToMany(mappedBy = "hike", cascade = CascadeType.ALL)
 	public Collection<Comment> getComments() {
 		return comments;
 	}

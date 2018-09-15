@@ -79,36 +79,31 @@ public class RouteService {
 	}
 
 	public void delete(Route route) {
-		Assert.notNull(route);
-		Assert.isTrue(route.getId() != 0);
-		Assert.isTrue(this.routeRepository.exists(route.getId()));
-		Collection<Authority> authority = LoginService.getPrincipal()
-				.getAuthorities();
-		Assert.notNull(authority);
-		Authority user = new Authority();
-		user.setAuthority("USER");
-		Authority admin = new Authority();
-		admin.setAuthority("ADMIN");
-		Assert.isTrue(authority.contains(user) || authority.contains(admin));
-		if (authority.contains(user)) {
-			Assert.isTrue(route.getUser().equals(
-					this.userService.findByPrincipal()));
+		try {
 
-		}
-		Collection<Hike> hikes = new ArrayList<Hike>();
-		hikes = new ArrayList<Hike>(this.hikeService.findHikeByRoute(route
-				.getId()));
-		for (Hike hike : hikes) {
-			this.hikeService.delete(hike);
-		}
+			Assert.notNull(route);
+			Assert.isTrue(route.getId() != 0);
+			Assert.isTrue(this.routeRepository.exists(route.getId()));
+			Collection<Authority> authority = LoginService.getPrincipal()
+					.getAuthorities();
+			Assert.notNull(authority);
+			Authority user = new Authority();
+			user.setAuthority("USER");
+			Authority admin = new Authority();
+			admin.setAuthority("ADMIN");
+			Assert.isTrue(authority.contains(user) || authority.contains(admin));
+			if (authority.contains(user)) {
+				Assert.isTrue(route.getUser().equals(
+						this.userService.findByPrincipal()));
 
-		Collection<Comment> comments = new ArrayList<Comment>();
-		comments = route.getComments();
-		for (Comment comment : comments) {
-			this.commentService.delete(comment);
-		}
+			}
+			
 
-		this.routeRepository.delete(route);
+			
+			this.routeRepository.delete(route);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	// Other business methods

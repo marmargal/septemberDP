@@ -25,9 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BossService;
 import services.CenterService;
+import services.EmployeeService;
 import services.WarehouseService;
 import controllers.AbstractController;
 import domain.Center;
+import domain.Employee;
 import domain.Warehouse;
 
 @Controller
@@ -43,6 +45,9 @@ public class CenterBossController extends AbstractController {
 	private BossService bossService;
 
 	@Autowired
+	private EmployeeService employeeService;
+
+	@Autowired
 	private WarehouseService warehouseService;
 
 	// Constructors -----------------------------------------------------------
@@ -51,14 +56,13 @@ public class CenterBossController extends AbstractController {
 		super();
 	}
 
-	
 	@RequestMapping("/list")
 	public ModelAndView list() {
 		ModelAndView result;
 
-		Collection<Center> centers = new ArrayList<Center>(); 
+		Collection<Center> centers = new ArrayList<Center>();
 		centers = this.bossService.findByPrincipal().getCenters();
-		
+
 		result = new ModelAndView("center/boss/list");
 		result.addObject("centers", centers);
 		result.addObject("boss", true);
@@ -66,6 +70,7 @@ public class CenterBossController extends AbstractController {
 
 		return result;
 	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
@@ -124,15 +129,15 @@ public class CenterBossController extends AbstractController {
 
 	// Delete ---------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid Center center, final BindingResult binding) {
+	public ModelAndView delete(@Valid final Center center,
+			final BindingResult binding) {
 		ModelAndView res;
 		try {
 			this.centerService.delete(center);
 			res = new ModelAndView("redirect:/center/list.do");
 
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			res = new ModelAndView("redirect:../../");
+			res = this.createEditModelAndView(center, "center.commit.error");
 		}
 
 		return res;
@@ -151,11 +156,17 @@ public class CenterBossController extends AbstractController {
 		ModelAndView result;
 		result = new ModelAndView("center/boss/edit");
 		result.addObject("center", center);
+		Boolean employee = false;
+		Collection<Employee> employees = this.employeeService
+				.findByCenter(center.getId());
+		if (employees == null || employees.isEmpty()) {
+			employee=true;
+		}
+		result.addObject("employee", employee);
 
 		result.addObject("message", message);
 		result.addObject("requestURI", "center/boss/edit.do");
 		return result;
 
 	}
-
 }

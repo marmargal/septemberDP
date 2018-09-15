@@ -11,6 +11,8 @@ import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
@@ -23,9 +25,9 @@ public class ApplicationForm {
 	private int	id;
 	private String holderName;
 	private String brandName;
-	private String	expirationMonth;
-	private String	expirationYear;
-	private String	cvv;
+	private Integer	expirationMonth;
+	private Integer	expirationYear;
+	private Integer	cvv;
 	private String number;
 	private Collection<String> names;
 	private String bithPlace;
@@ -42,7 +44,7 @@ public class ApplicationForm {
 		super();
 	}
 	
-	@NotNull
+	@NotEmpty
 	@ElementCollection
 	public Collection<String> getNames() {
 		return this.names;
@@ -78,33 +80,34 @@ public class ApplicationForm {
 		this.brandName = brandName;
 	}
 
-//	@Range(min = 18, max = 99)
-	public String getExpirationYear() {
+	@Range(min = 18, max = 99)
+	public Integer getExpirationYear() {
 		return expirationYear;
 	}
 
-	public void setExpirationYear(String expirationYear) {
+	public void setExpirationYear(Integer expirationYear) {
 		this.expirationYear = expirationYear;
 	}
 
-//	@Range(min = 1, max = 12)
-	public String getExpirationMonth() {
+	@Range(min = 1, max = 12)
+	public Integer getExpirationMonth() {
 		return expirationMonth;
 	}
 
-	public void setExpirationMonth(String expirationMonth) {
+	public void setExpirationMonth(Integer expirationMonth) {
 		this.expirationMonth = expirationMonth;
 	}
 
-//	@Range(min = 100, max = 999)
-	public String getCvv() {
+	@Range(min = 100, max = 999)
+	public Integer getCvv() {
 		return cvv;
 	}
 
-	public void setCvv(String cvv) {
+	public void setCvv(Integer cvv) {
 		this.cvv = cvv;
 	}
 
+	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBithPlace() {
 		return bithPlace;
@@ -123,6 +126,8 @@ public class ApplicationForm {
 		this.tickerApplicationLinked = tickerApplicationLinked;
 	}
 
+	@URL
+	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPicture() {
 		return picture;

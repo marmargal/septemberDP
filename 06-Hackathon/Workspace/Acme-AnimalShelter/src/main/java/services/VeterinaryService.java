@@ -16,6 +16,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Folder;
+import domain.MedicalReport;
 import domain.Veterinary;
 import forms.ActorForm;
 
@@ -37,6 +38,9 @@ public class VeterinaryService {
 	@Autowired
 	private FolderService folderService;
 	
+	@Autowired
+	private BossService bossService;
+	
 	// Constructors
 
 	public VeterinaryService() {
@@ -46,31 +50,21 @@ public class VeterinaryService {
 	// Simple CRUD methods
 
 	public Veterinary create() {
+		this.bossService.checkAuthority();
 		Veterinary res = new Veterinary();
 		
+		Collection<MedicalReport> medicalReports = new ArrayList<MedicalReport>();
 		Collection<Folder> folders = new ArrayList<Folder>();
 		UserAccount userAccount = new UserAccount();
 		Authority authority = new Authority();
-		Folder inBox = this.folderService.create();
-		Folder outBox = this.folderService.create();
-		Folder trash = this.folderService.create();
 		
 		authority.setAuthority(Authority.VETERINARY);
 		userAccount.addAuthority(authority);
 		
-		inBox.setName("In Box");
-		outBox.setName("Out Box");
-		trash.setName("Trash Box");
-		this.folderService.save(inBox);
-		this.folderService.save(outBox);
-		this.folderService.save(trash);
-		folders.add(inBox);
-		folders.add(outBox);
-		folders.add(trash);
-
 		res.setUserAccount(userAccount);
 		res.setFolders(folders);
 		res.setBan(false);
+		res.setMedicalReport(medicalReports);
 		
 		return res;
 	}

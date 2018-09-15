@@ -42,7 +42,7 @@ public class BannerAgentController extends AbstractController {
 	
 		res = new ModelAndView("banner/agent/list");
 		res.addObject("banners", banners);
-		res.addObject("requestURI","user/register.do");
+		res.addObject("requestURI","banner/agent/list.do");
 
 		return res;
 	}
@@ -66,11 +66,9 @@ public class BannerAgentController extends AbstractController {
 	public ModelAndView save(@Valid final Banner banner,
 			final BindingResult binding) {
 		ModelAndView res;
-		System.out.println(binding.getFieldError());
 		
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(banner,
-					"banner.params.error");
+			res = this.createEditModelAndView(banner,"banner.params.error");
 		else
 			try {
 				this.bannerService.save(banner);
@@ -103,7 +101,7 @@ public class BannerAgentController extends AbstractController {
 		result = new ModelAndView("banner/agent/edit");
 		result.addObject("banner", banner);
 		result.addObject("message", message);
-		result.addObject("requestUri", "banner/agent/edit.do");
+		result.addObject("requestURI", "banner/agent/edit.do");
 
 		return result;
 	}

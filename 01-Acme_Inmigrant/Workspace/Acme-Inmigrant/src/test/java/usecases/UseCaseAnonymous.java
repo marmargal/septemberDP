@@ -108,10 +108,24 @@ public class UseCaseAnonymous extends AbstractTest {
 				{ // Positive
 					"name", "surname", "email@gmail.com", "321654987", "address", null
 				}
-				, { // Negative: wrong email
+				, { // Negative: empty email
 					"name", "surname", "email", "321654987", "address", DataIntegrityViolationException.class
-				}, { // Negative: wrong surname
+				}, { // Negative: empty surname
 					"name", "", "email@gmail.com", "321654987", "address", DataIntegrityViolationException.class
+				} , { // Negative: empty phoneNumber
+					"name", "surname", "email@gmail.com", "", "address", DataIntegrityViolationException.class
+				}, { // Negative: wrong phoneNumber
+					"name", "surname", "email@gmail.com", "AAA", "address", DataIntegrityViolationException.class
+				}, { // Negative: wrong name
+					"", "surname", "email@gmail.com", "321654987", "address", DataIntegrityViolationException.class
+				} , { // Negative: null surname
+					"name", null, "email@gmail.com", "321654987", "address", DataIntegrityViolationException.class
+				}, { // Negative: null mail
+					"name", "surname", null, "321654987", "address", DataIntegrityViolationException.class
+				}, { // Negative: null name
+					null, "surname", "email@gmail.com", "321654987", "address", DataIntegrityViolationException.class
+				}, { // Negative: null phoneNumber
+					"name", "surname", "email@gmail.com", null, "address", DataIntegrityViolationException.class
 				}
 			};
 

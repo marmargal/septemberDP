@@ -14,8 +14,6 @@ public class QuestionForm {
 	private int applicationId;
 	private String text;
 	
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public int getId() {
 		return id;
 	}

@@ -2,6 +2,8 @@ package controllers.administrator;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -76,7 +78,7 @@ public class RequirementAdministratorController extends AbstractController{
 	}
 	
 	@RequestMapping(value="/edit",method=RequestMethod.POST, params = "save")
-	public ModelAndView save( final RequirementForm requirementForm,
+	public ModelAndView save(@Valid final RequirementForm requirementForm,
 			final BindingResult binding){
 		ModelAndView res;
 		

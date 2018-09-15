@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -59,6 +60,7 @@ public class Subscription extends DomainEntity{
 	}
 	
 	@NotNull
+	@Valid
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}
@@ -93,6 +95,7 @@ public class Subscription extends DomainEntity{
 
 	@Column(unique = true)
 	@NotBlank
+	@SafeHtml
 	public String getKeyCode() {
 		return keyCode;
 	}

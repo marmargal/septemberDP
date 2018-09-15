@@ -34,10 +34,6 @@
 	<acme:column property="result" code="request.result" />
 	<acme:column property="antenna.model" code="request.antenna" />
 
-	<display:column>
-		<a href="antenna/handyworker/display.do?antennaId=${row.antenna.id }"><spring:message
-				code="antenna.display" /></a>
-	</display:column>
 	<security:authorize access="hasRole('HANDYWORKER')">
 		<display:column>
 			<jstl:if test="${row.result=='' && row.handyworker != null}">

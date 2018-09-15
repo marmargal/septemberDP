@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +14,8 @@ import repositories.CommentRepository;
 import security.Authority;
 import security.LoginService;
 import domain.Comment;
+import domain.Hike;
+import domain.Route;
 import domain.User;
 
 @Service
@@ -23,7 +26,12 @@ public class CommentService {
 	@Autowired
 	private CommentRepository commentRepository;
 
+	@Autowired
+	private RouteService routeService;
 	// Suporting services
+
+	@Autowired
+	private HikeService hikeService;
 	@Autowired
 	private UserService userService;
 
@@ -45,8 +53,10 @@ public class CommentService {
 		Comment res;
 		res = new Comment();
 
+		Date moment = new Date(System.currentTimeMillis() - 1000);
 		User user = userService.findByPrincipal();
 		res.setUser(user);
+		res.setMoment(moment);
 
 		return res;
 	}
@@ -76,7 +86,26 @@ public class CommentService {
 				comment.setTaboo(true);
 			}
 		}
+
+		if(comment.getId()==0)
+			comment.setUser(this.userService.findByPrincipal());
 		res = this.commentRepository.save(comment);
+		if (comment.getId() == 0 && comment.getRoute() != null) {
+			Route route = comment.getRoute();
+			Collection<Comment> comments = new ArrayList();
+			comments.addAll(route.getComments());
+			comments.add(res);
+			route.setComments(comments);
+			// this.routeService.save(route);
+		} else if (comment.getId() == 0 && comment.getHike() != null) {
+			Hike hike = comment.getHike();
+			Collection<Comment> comments = new ArrayList<Comment>();
+			comments.addAll(hike.getComments());
+			comments.add(res);
+			hike.setComments(comments);
+			this.hikeService.save(hike);
+		}
+	
 		return res;
 	}
 

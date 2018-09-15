@@ -70,10 +70,9 @@ public class DonationVoluntaryController extends AbstractController {
 				savedDonation = this.donationService.save(donation);
 				event = donation.getEvent();
 				event.getDonation().add(savedDonation);
-				eventService.save(event);
+//				eventService.save(event);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {
-				System.out.println(oops.getMessage());
 				res = this.createEditModelAndView(donation,
 						"donation.commit.error");
 			}

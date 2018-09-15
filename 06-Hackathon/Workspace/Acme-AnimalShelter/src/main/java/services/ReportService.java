@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ReportRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Application;
 import domain.Report;
 
@@ -50,6 +52,18 @@ public class ReportService {
 
 	public Report findOne(int reportId) {
 		Assert.isTrue(reportId != 0);
+		Assert.isTrue(reportRepository.exists(reportId));
+		Collection<Authority> authority = LoginService.getPrincipal()
+				.getAuthorities();
+		Assert.notNull(authority);
+		Authority employee = new Authority();
+		employee.setAuthority("EMPLOYEE");
+		Authority admin = new Authority();
+		admin.setAuthority("ADMIN");
+		Authority veterinary = new Authority();
+		veterinary.setAuthority("VETERINARY");
+		Assert.isTrue(authority.contains(employee) || authority.contains(admin)
+				|| authority.contains(veterinary));
 		Report res;
 		res = reportRepository.findOne(reportId);
 		Assert.notNull(res);
@@ -57,7 +71,10 @@ public class ReportService {
 	}
 
 	public Report save(Report report) {
+		Assert.notNull(report);
 		Report res;
+
+		Assert.notNull(report.getApplication());
 		Application application = report.getApplication();
 		application.setClosed(true);
 		applicationService.save(application);

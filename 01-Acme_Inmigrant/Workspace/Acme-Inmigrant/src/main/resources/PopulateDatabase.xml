@@ -173,8 +173,8 @@
 	<!-- CreditCard -->
 	<!-- CreditCard 1 -->
 	<bean id="creditCard1" class="domain.CreditCard">
-		<property name="holderName" value="BBVA" />
-		<property name="brandName" value="MasterCard" />
+		<property name="holderName" value="Name creditCard1" />
+		<property name="brandName" value="MASTER-CARD" />
 		<property name="number" value="4024007146545768" />
 		<property name="expirationMonth" value="5" />
 		<property name="expirationYear" value="19" />
@@ -183,7 +183,7 @@
 
 	<!-- CreditCard 2 -->
 	<bean id="creditCard2" class="domain.CreditCard">
-		<property name="holderName" value="Name creditCard1" />
+		<property name="holderName" value="Name creditCard2" />
 		<property name="brandName" value="VISA" />
 		<property name="number" value="4150902751004463" />
 		<property name="expirationMonth" value="3" />
@@ -541,6 +541,7 @@
 		<property name="price" value="200" />
 		<property name="country" ref="country1" />
 		<property name="category" ref="category2" />
+		<property name="creditCard" ref="creditCard1" />
 	</bean>
 
 	<bean id="visa2" class="domain.Visa">
@@ -549,6 +550,7 @@
 		<property name="price" value="0" />
 		<property name="country" ref="country2" />
 		<property name="category" ref="category3" />
+		<property name="creditCard"><null /></property>
 	</bean>
 
 	<!-- Category -->

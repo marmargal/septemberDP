@@ -27,8 +27,8 @@
 	<acme:textarea code="request.description" path="description"/>
 	<br/>
 	
-	<acme:select items="${antennas }" itemLabel="model" code="request.antenna" path="antenna.id"/>
-	<acme:select items="${handyworkers }" itemLabel="userAccount.username" code="request.handyworker" path="requestHandyworker.id"/>
+	<acme:select items="${antennas }" itemLabel="model" code="request.antenna" path="antenna"/>
+	<acme:select items="${handyworkers }" itemLabel="userAccount.username" code="request.handyworker" path="requestHandyworker"/>
 	<br/>
 	
 	

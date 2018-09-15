@@ -3,6 +3,8 @@ package controllers.administrator;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -66,7 +68,7 @@ public class LawAdministratorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final LawForm lawForm, final BindingResult binding) {
+	public ModelAndView save(@Valid final LawForm lawForm, final BindingResult binding) {
 		ModelAndView res;
 		
 		if (binding.hasErrors()) {

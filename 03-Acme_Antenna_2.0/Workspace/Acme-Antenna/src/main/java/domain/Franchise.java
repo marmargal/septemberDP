@@ -5,6 +5,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -19,6 +20,7 @@ public class Franchise extends DomainEntity {
 	private String welcomeSpanishMessage;
 	
 	@NotBlank
+	@SafeHtml
 	public String getBusinessName() {
 		return businessName;
 	}
@@ -29,6 +31,7 @@ public class Franchise extends DomainEntity {
 	
 	@URL
 	@NotBlank
+	@SafeHtml
 	public String getBanner() {
 		return banner;
 	}
@@ -38,6 +41,7 @@ public class Franchise extends DomainEntity {
 	}
 	
 	@NotBlank
+	@SafeHtml
 	public String getWelcomeEnglishMessage() {
 		return welcomeEnglishMessage;
 	}
@@ -47,6 +51,7 @@ public class Franchise extends DomainEntity {
 	}
 	
 	@NotBlank
+	@SafeHtml
 	public String getWelcomeSpanishMessage() {
 		return welcomeSpanishMessage;
 	}

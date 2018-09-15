@@ -20,6 +20,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -44,6 +45,7 @@ public class Pet extends DomainEntity{
 	
 	@NotBlank
 	@Pattern(regexp = "^((DOG)|(CAT)|(BIRD))$")
+	@SafeHtml
 	public String getType() {
 		return type;
 	}
@@ -52,6 +54,7 @@ public class Pet extends DomainEntity{
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getName() {
 		return name;
 	}
@@ -81,6 +84,7 @@ public class Pet extends DomainEntity{
 	@Column(unique = true)
 	@Pattern(regexp = "[0-9]{6}-[0-9]{2}-[A-Z]{4}")
 	@NotBlank
+	@SafeHtml
 	public String getIdentifier() {
 		return identifier;
 	}

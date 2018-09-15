@@ -28,6 +28,8 @@
 			<li><a href="pet/petsWaitingAdoption.do"><spring:message code="master.page.petsWaitingAdoption" /></a></li>
 			<li><a href="pet/petsPermitAdoption.do"><spring:message code="master.page.petsPermitAdoption" /></a></li>
 			<li><a href="center/list.do"><spring:message code="master.page.centers" /></a></li>
+			<li><a href="event/list.do"><spring:message code="master.page.events" /></a></li>
+			
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
@@ -123,6 +125,7 @@
 				</ul>
 			</li>
 			<li><a href="center/boss/list.do"><spring:message code="master.page.mycenters" /></a></li>
+			<li><a href="event/boss/list.do"><spring:message code="master.page.events" /></a></li>
 			
 		</security:authorize>
 		
@@ -130,6 +133,7 @@
 			<li><a href="employee/edit.do"><spring:message code="master.page.editProfile" /></a></li>
 			<li><a href="pet/employee/list.do"><spring:message code="master.page.allPets" /></a></li>
 			<li><a href="application/employee/list.do"><spring:message code="master.page.applicationsPending" /></a></li>
+			<li><a href="notice/employee/list.do"><spring:message code="master.page.notices" /></a></li>
 			
 			<li><a href="voluntary/employee/listByStand.do"><spring:message code="master.page.voluntariesByStand" /></a></li>
 		</security:authorize>

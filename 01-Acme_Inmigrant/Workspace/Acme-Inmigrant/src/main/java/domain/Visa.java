@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -28,8 +29,10 @@ public class Visa extends DomainEntity {
 	private String description;
 	private Integer price;
 	private Boolean invalidate;
+	private CreditCard creditCard;
 
 	@NotBlank
+	@SafeHtml
 	public String getClasses() {
 		return classes;
 	}
@@ -39,6 +42,7 @@ public class Visa extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return description;
 	}
@@ -88,6 +92,15 @@ public class Visa extends DomainEntity {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+//	@Valid
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 
 }

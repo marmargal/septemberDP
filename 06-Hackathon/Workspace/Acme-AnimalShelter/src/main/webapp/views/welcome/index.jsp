@@ -16,4 +16,10 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="welcome.greeting.prefix" /></p>
+<spring:message var="lang" code="welcome.language"/>
+<jstl:if test="${lang == 'es' }">
+	<jstl:out value="${welcomeSpanishMessage }"></jstl:out>
+</jstl:if>
+<jstl:if test="${lang == 'en' }">
+	<jstl:out value="${welcomeEnglishMessage }"></jstl:out>
+</jstl:if>

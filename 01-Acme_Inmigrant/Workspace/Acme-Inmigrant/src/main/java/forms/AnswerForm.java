@@ -14,8 +14,6 @@ public class AnswerForm {
 	private int questionId;
 	private String reply;
 	
-	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public int getId() {
 		return id;
 	}

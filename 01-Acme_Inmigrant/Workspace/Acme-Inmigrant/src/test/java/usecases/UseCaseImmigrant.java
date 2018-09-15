@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
@@ -19,6 +20,7 @@ import services.AnswerService;
 import services.ApplicationService;
 import services.ContactSectionService;
 import services.EducationSectionService;
+import services.PersonalSectionService;
 import services.SocialSectionService;
 import services.WorkSectionService;
 import utilities.AbstractTest;
@@ -54,6 +56,9 @@ public class UseCaseImmigrant extends AbstractTest {
 	private SocialSectionService socialSectionService;
 	
 	@Autowired
+	private PersonalSectionService personalSectionService;
+	
+	@Autowired
 	private WorkSectionService workSectionService;
 	
 	/*
@@ -71,26 +76,25 @@ public class UseCaseImmigrant extends AbstractTest {
 	public void CreateApplicationTest() {
 		
 		final Object testingData[][] = {
-				{// Positive
-					"immigrant1", "05/07/2018", "2.0", false, null
-				}, {//Positive
-					"immigrant1", "02/02/2018", "3.0", false, null
-				}, {// Negative: wrong roll
-					"officer1", "02/02/2018", "3.0", false, IllegalArgumentException.class
+				{// Negative
+					"investigator1", 2.0, false, IllegalArgumentException.class
+				}, {//Negative
+					"officer1", 3.0, false, IllegalArgumentException.class
+				}, {//Negative
+					"officer2", 3.0, false, IllegalArgumentException.class
 				}
 			};
 
 			for (int i = 0; i < testingData.length; i++)
 				this.templateCreateApplication((String) testingData[i][0], // Username login
-					(String) testingData[i][1], // closedMoment
-					Double.parseDouble((String) testingData[i][2]), //statistics
-					(Boolean) testingData[i][3], // closed
-					(Class<?>) testingData[i][4]);
+					(Double) testingData[i][1], //statistics
+					(Boolean) testingData[i][2], // closed
+					(Class<?>) testingData[i][3]);
 		
 	}
 	
 	protected void templateCreateApplication(final String principal,
-			final String closedMoment, final Double statistics,
+			final Double statistics,
 			final Boolean closed, final Class<?> expected) {
 
 		Class<?> caught;
@@ -106,27 +110,40 @@ public class UseCaseImmigrant extends AbstractTest {
 			cc.setExpirationMonth(12);
 			cc.setExpirationYear(2019);
 			cc.setHolderName("Raul");
-			cc.setNumber("5574588374439106");
+			cc.setNumber("4111111111111111");
 
-			final DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-			final Date d1 = format.parse(closedMoment);
-			application.setClosedMoment(d1);
 			application.setCreditCard(cc);
 			application.setStatistics(statistics);
 			application.setClosed(closed);
 			
+			String birthDate = "12/12/2010";
+			final DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			final Date d1 = format.parse(birthDate);
+			
 			PersonalSection personalSection = new PersonalSection();
-			Date birthDate = new Date(System.currentTimeMillis()-1000);
-			personalSection.setBirthDate(birthDate);
+			personalSection.setBirthDate(d1);
 			personalSection.setBirthPlace("Sevilla");
 			Collection<String> names = new ArrayList<>();
 			names.add("Daniel");
 			personalSection.setNames(names);
 			personalSection.setPicture("http://www.imagen.com");
 			
+			List<SocialSection> socialSections = new ArrayList<SocialSection>();
+			SocialSection socialSection = new SocialSection();
+			socialSection.setNickName("nickname");
+			socialSection.setSocialNetwork("http://www.twitter.com");
+			socialSection.setProfileLink("http://www.twitter.com");
+			socialSections.add(socialSection);
+			
+			
+			application.setSocialSection(socialSections);
 			application.setPersonalSection(personalSection);
+			socialSection.setApplication(application);
 
+//			this.personalSectionService.save(personalSection);
+//			this.socialSectionService.save(socialSection);
 			this.applicationService.save(application);
+			
 			this.unauthenticate();
 			this.applicationService.flush();
 		} catch (final Throwable oops) {

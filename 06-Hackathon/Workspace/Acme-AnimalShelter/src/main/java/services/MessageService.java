@@ -57,7 +57,7 @@ public class MessageService {
 		
 		res.setFoldersRecipient(foldersRecipient);
 		res.setIsDelete(false);
-		res.setMoment(new Date());
+		res.setMoment(new Date(System.currentTimeMillis() - 100));
 		
 		return res;
 

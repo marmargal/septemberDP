@@ -26,3 +26,6 @@
 
 <b><spring:message code="visa.category"/>:&nbsp;</b><jstl:out value="${visa.category.name}"/>
 <br/>
+
+<b><spring:message code="visa.creditCard.number"/>:&nbsp;</b><jstl:out value="${visa.creditCard.number}"/>
+<br/>
