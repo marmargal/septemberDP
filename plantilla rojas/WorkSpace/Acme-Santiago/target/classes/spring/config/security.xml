@@ -88,10 +88,10 @@
 
 		<security:intercept-url pattern="/hike/user/**"
 			access="hasRole('USER')" />
-			
+
 		<security:intercept-url pattern="/hike/agent/**"
 			access="hasRole('AGENT')" />
-			
+
 
 		<!-- COMMENT -->
 
@@ -144,44 +144,50 @@
 
 		<security:intercept-url pattern="/inn/innkeeper/register.do"
 			access="hasRole('INNKEEPER')" />
-			
+
 		<!-- AGENT -->
-		
+
 		<security:intercept-url pattern="/agent/register.do"
 			access="permitAll" />
-			
+
 		<!-- ADVERTISEMENT -->
-		
+
 		<security:intercept-url pattern="/advertisement/agent/**"
 			access="hasRole('AGENT')" />
-		
+
 		<security:intercept-url pattern="/advertisement/administrator/**"
 			access="hasRole('ADMIN')" />
-			
+
 		<!-- COMPOSTELA -->
-		
+
 		<security:intercept-url pattern="/compostela/administrator/**"
 			access="hasRole('ADMIN')" />
-			
+
 		<security:intercept-url pattern="/compostela/user/**"
 			access="hasRole('USER')" />
-			
+
 		<!-- WALK -->
-		
+
 		<security:intercept-url pattern="/walk/user/**"
 			access="hasRole('USER')" />
 
 		<!-- AMENITY -->
-		
+
 		<security:intercept-url pattern="/amenity/list.do"
 			access="isAuthenticated()" />
-		
+
 		<security:intercept-url pattern="/amenity/display.do"
 			access="isAuthenticated()" />
-				
+
 		<security:intercept-url pattern="/amenity/innkeeper/**"
 			access="hasRole('INNKEEPER')" />
 
+
+		<!-- CAMBIO -->
+		<security:intercept-url pattern="/cambio/user/create.do"
+			access="hasRole('USER')" />
+		<security:intercept-url pattern="/cambio/user/edit.do"
+			access="hasRole('USER')" />
 		<!-- TERMS -->
 
 		<security:intercept-url pattern="/terms/list.do"

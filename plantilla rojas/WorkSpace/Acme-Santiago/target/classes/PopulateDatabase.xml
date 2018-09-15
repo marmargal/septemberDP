@@ -1283,4 +1283,22 @@
 			</list>
 		</property>
 	</bean>
+
+	<!-- CAMBIO -->
+
+	<bean id="cambio1" class="domain.Cambio">
+		<property name="identifier" value="identifier1" />
+		<property name="moment" value="10/10/2010" />
+		<property name="title" value="title1" />
+		<property name="description" value="description1" />
+		<property name="gauge" value="1" />
+	</bean>
+
+	<bean id="cambio2" class="domain.Cambio">
+		<property name="identifier" value="identifier2" />
+		<property name="moment" value="10/10/2010" />
+		<property name="title" value="title2" />
+		<property name="description" value="description2" />
+		<property name="gauge" value="2" />
+	</bean>
 </beans>
