@@ -18,8 +18,6 @@ import services.UserService;
 import controllers.AbstractController;
 import domain.Cambio;
 import domain.Route;
-import domain.User;
-import domain.Walk;
 
 @Controller
 @RequestMapping("/cambio/user")
@@ -47,9 +45,8 @@ public class CambioUserController extends AbstractController {
 		ModelAndView res;
 		Collection<Cambio> cambios = new ArrayList<>();
 
-		User user = userService.findByPrincipal();
-
 		cambios = this.userService.findByPrincipal().getCambios();
+	
 		res = new ModelAndView("cambio/user/list");
 		res.addObject("requestUri", "cambio/user/list.do");
 		res.addObject("cambios", cambios);

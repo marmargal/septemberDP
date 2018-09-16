@@ -112,4 +112,7 @@ public class CambioService {
 		this.cambioRepository.flush();
 	}
 
+	public Collection<Cambio> cambiosWithoutDecision() {
+		return this.cambioRepository.cambiosWithoutDecision();
+	}
 }

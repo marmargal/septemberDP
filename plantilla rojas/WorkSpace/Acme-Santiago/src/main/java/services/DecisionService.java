@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.DecisionRepository;
+import domain.Cambio;
 import domain.Decision;
 
 @Service
@@ -17,6 +18,12 @@ public class DecisionService {
 	// Managed repository
 	@Autowired
 	private DecisionRepository decisionRepository;
+
+	@Autowired
+	private AdministratorService administratorService;
+
+	@Autowired
+	private CambioService cambioService;
 
 	// Supporting services
 
@@ -28,9 +35,10 @@ public class DecisionService {
 	// Simple CRUD methods
 
 	public Decision create() {
-		
-		//revisar identifier
+
+		// revisar identifier
 		Decision res = new Decision();
+		res.setAdministrator(this.administratorService.findByPrincipal());
 		return res;
 	}
 
@@ -51,10 +59,11 @@ public class DecisionService {
 	public Decision save(final Decision decision) {
 		Assert.notNull(decision);
 		Decision res;
-		
-		
-		res = this.decisionRepository.save(decision);
 
+		res = this.decisionRepository.save(decision);
+		Cambio cambio = this.cambioService.findOne(res.getCambio().getId());
+		cambio.setDecision(res);
+		this.cambioService.save(cambio);
 		return res;
 	}
 

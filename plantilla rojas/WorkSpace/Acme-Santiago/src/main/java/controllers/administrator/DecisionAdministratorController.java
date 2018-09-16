@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CambioService;
 import services.DecisionService;
 import controllers.AbstractController;
+import domain.Cambio;
 import domain.Decision;
 
 @Controller
@@ -24,12 +26,21 @@ public class DecisionAdministratorController extends AbstractController {
 	@Autowired
 	private DecisionService decisionService;
 
+	@Autowired
+	private CambioService cambioService;
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam(defaultValue = "0") int cambioId) {
 		ModelAndView res;
 		Decision decision;
+		if (cambioId == 0 || this.cambioService.findOne(cambioId) == null) {
+			res = new ModelAndView("redirect:../../");
 
+		}
 		decision = this.decisionService.create();
+
+		Cambio cambio = this.cambioService.findOne(cambioId);
+		decision.setCambio(cambio);
 		res = this.createEditModelAndView(decision);
 
 		return res;
@@ -63,8 +74,15 @@ public class DecisionAdministratorController extends AbstractController {
 					.createEditModelAndView(decision, "decision.params.error");
 		else
 			try {
-				this.decisionService.save(decision);
-				res = new ModelAndView("redirect:../../");
+				if (!decision.getApprove()
+						&& (decision.getComment() == null || decision
+								.getComment().isEmpty())) {
+					res = this.createEditModelAndView(decision,
+							"decision.params.error.comment");
+				} else {
+					this.decisionService.save(decision);
+					res = new ModelAndView("redirect:../../");
+				}
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(decision,
 						"decision.commit.error");

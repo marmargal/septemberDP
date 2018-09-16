@@ -1,4 +1,3 @@
-Alfonso Soldado, [16.09.18 19:11]
 <%--
  * list.jsp
  *
@@ -23,6 +22,9 @@ Alfonso Soldado, [16.09.18 19:11]
 <display:table pagesize="5" class="cambios" keepStatus="true"
 	name="cambios" requestURI="${requestUri }" id="row">
 
+
+
+
 	<jstl:if test="${row.gauge == 1}">
 		<spring:message code="cambio.gauge1" var="gaugeNumber" />
 	</jstl:if>
@@ -32,6 +34,9 @@ Alfonso Soldado, [16.09.18 19:11]
 	<jstl:if test="${row.gauge == 3}">
 		<spring:message code="cambio.gauge3" var="gaugeNumber" />
 	</jstl:if>
+
+
+
 
 	<spring:message code="cambio.identifier" var="atributo1Header" />
 	<display:column property="identifier" title="${atributo1Header}"
@@ -56,17 +61,28 @@ Alfonso Soldado, [16.09.18 19:11]
 	<spring:message code="cambio.route" var="routeHeader" />
 	<display:column property="route.name" title="${routeHeader}"
 		sortable="true" class="${gaugeNumber}" />
+	<jstl:if test="${ (row.route == null)}">
+		<security:authorize access="hasRole('USER')">
+			<display:column sortable="true" class="${gaugeNumber}">
+				<a href="cambio/user/edit.do?cambioId=${row.id}"><spring:message
+						code="cambio.edit" /></a>
+			</display:column>
+		</security:authorize>
+	</jstl:if>
+	<display:column class="${gaugeNumber}">
 
-	<security:authorize access="hasRole('USER')">
-		<jstl:if test="${row.decision==null }">
+	</display:column>
+	<security:authorize access="hasRole('ADMIN')">
 		<display:column title="${gaugeHeader}" sortable="true"
-		class="${gaugeNumber}" >
-			<a href="cambio/user/edit.do?cambioId=${row.id}"><spring:message
-					code="cambio.edit" /></a>
+			class="${gaugeNumber}">
+			<a href="decision/administrator/create.do?cambioId=${row.id}"><spring:message
+					code="cambio.decision.create" /></a>
 		</display:column>
-		</jstl:if>
 	</security:authorize>
 
-</display:table>
 
-<acme:links code="cambio.create" url="cambio/user/create.do"></acme:links>
+</display:table>
+<security:authorize access="hasRole('USER')">
+
+	<acme:links code="cambio.create" url="cambio/user/create.do"></acme:links>
+</security:authorize>
