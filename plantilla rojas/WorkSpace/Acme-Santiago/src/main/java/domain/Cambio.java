@@ -102,6 +102,7 @@ public class Cambio extends DomainEntity {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	@ManyToOne
 	public Route getRoute() {
 		return route;

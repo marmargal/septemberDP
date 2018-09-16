@@ -193,6 +193,7 @@
 			access="hasRole('USER')" />
 		<security:intercept-url pattern="/cambio/administrator/list.do"
 			access="hasRole('ADMIN')" />
+		
 
 
 		<!-- DECISION -->

@@ -97,6 +97,7 @@ public class CambioUserController extends AbstractController {
 			final BindingResult binding) {
 		ModelAndView res;
 		try {
+			System.out.println(cambio);
 			this.cambioService.delete(cambio);
 			res = new ModelAndView("redirect:../../");
 		} catch (final Throwable oops) {

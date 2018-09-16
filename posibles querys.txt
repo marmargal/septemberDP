@@ -1,0 +1,9 @@
+//maximo
+1. select c from Administrator c where c.deniedExams.size=(select max(c.deniedExams.size) from Administrator c);
+2.select t.administrator from Report t where (select count(w) from Report w where w.administrator.id = t.administrator.id and w.rejected = true)
+>= all(select (select count(w2) from Report w2 where w2.administrator.id = t2.administrator.id and w2.rejected = true) from Report t2);
+//ratio
+3.select  count(c)*1.0/ (select count(x) from Route x) from Route c where c.exams.size >=1;
+
+
+

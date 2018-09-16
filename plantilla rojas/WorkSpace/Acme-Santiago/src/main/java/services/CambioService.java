@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -8,15 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 
 import repositories.CambioRepository;
-import security.Authority;
-import security.LoginService;
-import domain.Amenity;
 import domain.Cambio;
-import domain.Innkeeper;
-import forms.AmenityForm;
 
 @Service
 @Transactional
@@ -28,6 +21,9 @@ public class CambioService {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private DecisionService decisionService;
 
 	// Supporting services
 
@@ -104,7 +100,7 @@ public class CambioService {
 		Assert.notNull(cambio);
 		Assert.isTrue(cambio.getId() != 0);
 		Assert.isTrue(this.cambioRepository.exists(cambio.getId()));
-
+		this.decisionService.delete(cambio.getDecision());
 		this.cambioRepository.delete(cambio);
 	}
 
