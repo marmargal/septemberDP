@@ -32,6 +32,7 @@
 		<value>/views/walk/messages</value>
 		<value>/views/amenity/messages</value>
 		<value>/views/cambio/messages</value>
+		<value>/views/decision/messages</value>
 
 	</util:list>
 

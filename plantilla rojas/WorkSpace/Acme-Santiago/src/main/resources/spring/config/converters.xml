@@ -26,7 +26,7 @@
 
 		<bean class="converters.CommentToStringConverter" />
 		<bean class="converters.StringToCommentConverter" />
-		
+
 		<bean class="converters.ConfigurationToStringConverter" />
 		<bean class="converters.StringToConfigurationConverter" />
 
@@ -50,24 +50,27 @@
 
 		<bean class="converters.UserToStringConverter" />
 		<bean class="converters.StringToUserConverter" />
-		
+
 		<bean class="converters.AgentToStringConverter" />
 		<bean class="converters.StringToAgentConverter" />
-		
+
 		<bean class="converters.AdvertisementToStringConverter" />
 		<bean class="converters.StringToAdvertisementConverter" />
-		
+
 		<bean class="converters.WalkToStringConverter" />
 		<bean class="converters.StringToWalkConverter" />
-		
+
 		<bean class="converters.CompostelaToStringConverter" />
 		<bean class="converters.StringToCompostelaConverter" />
-		
+
 		<bean class="converters.AmenityToStringConverter" />
 		<bean class="converters.StringToAmenityConverter" />
-		
+
 		<bean class="converters.CambioToStringConverter" />
 		<bean class="converters.StringToCambioConverter" />
+
+		<bean class="converters.DecisionToStringConverter" />
+		<bean class="converters.StringToDecisionConverter" />
 
 	</util:list>
 

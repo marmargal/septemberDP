@@ -32,6 +32,7 @@
 		<value>/views/walk/tiles.xml</value>
 		<value>/views/amenity/tiles.xml</value>
 		<value>/views/cambio/tiles.xml</value>
+		<value>/views/decision/tiles.xml</value>
 
 	</util:list>
 

@@ -188,6 +188,12 @@
 			access="hasRole('USER')" />
 		<security:intercept-url pattern="/cambio/user/edit.do"
 			access="hasRole('USER')" />
+
+		<!-- DECISION -->
+		<security:intercept-url pattern="/decision/administrator/edit.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/decision/administrator/create.do"
+			access="hasRole('ADMIN')" />
 		<!-- TERMS -->
 
 		<security:intercept-url pattern="/terms/list.do"
