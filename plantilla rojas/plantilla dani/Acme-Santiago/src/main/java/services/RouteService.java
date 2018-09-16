@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import repositories.RouteRepository;
 import security.Authority;
 import security.LoginService;
+import domain.Cambio;
 import domain.Hike;
 import domain.Route;
 import domain.User;
@@ -28,10 +29,12 @@ public class RouteService {
 	// Suporting services
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CambioService cambioService;
 
 	@Autowired
 	private HikeService hikeService;
-
 
 	@Autowired
 	private WalkService walkService;
@@ -120,7 +123,12 @@ public class RouteService {
 		for (Walk walk : walks) {
 			this.walkService.delete(walk);
 		}
+		Collection<Cambio> cambios = this.cambioService
+				.findCambiosByRoute(route.getId());
 
+		for (Cambio cambio : cambios) {
+			this.cambioService.delete(cambio);
+		}
 		this.routeRepository.delete(route);
 	}
 

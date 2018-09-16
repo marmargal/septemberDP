@@ -73,17 +73,21 @@ public class CambioService {
 		Assert.notNull(cambio);
 		Cambio res;
 
-//		try {
-//			this.userService.checkAuthority();
-//			Assert.isTrue(cambio.getJustification() == null);
-//
-//		} catch (Exception e) {
-//			this.administratorService.checkAuthority();
-//			if(cambio.getJustification() == null || cambio.getJustification() == ""){
-//				throw new IllegalArgumentException();
-//			}
-//
-//		}
+		// try {
+		// this.userService.checkAuthority();
+		// Assert.isTrue(cambio.getJustification() == null);
+		//
+		// } catch (Exception e) {
+		// this.administratorService.checkAuthority();
+		// if(cambio.getJustification() == null || cambio.getJustification() ==
+		// ""){
+		// throw new IllegalArgumentException();
+		// }
+		//
+		// }
+
+		
+
 		res = this.cambioRepository.save(cambio);
 		return res;
 	}
@@ -114,7 +118,7 @@ public class CambioService {
 		res = this.cambioRepository.findCambiosWithoutDecision();
 		return res;
 	}
-	
+
 	public Collection<Cambio> findCambiosByUser(int id) {
 		Collection<Cambio> res;
 		res = this.cambioRepository.findCambiosByUser(id);
