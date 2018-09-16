@@ -62,6 +62,8 @@
 							code="master.page.walk" /></a>
 				<li><a href="compostela/user/list.do"><spring:message
 							code="master.page.compostela" /></a>
+							
+				<li><a href="prueba/user/list.do"><spring:message code="master.page.prueba" /></a>
 			</security:authorize>
 
 			<security:authorize access="hasRole('INNKEEPER')">

@@ -43,6 +43,12 @@
 <display:table pagesize="5" class="routes" keepStatus="true"
 	name="routes" requestURI="${requestURI }" id="row">
 
+	<security:authorize access="hasRole('ADMIN')">
+		<display:column>
+			<acme:links url="prueba/administrator/list.do?routeId=${row.id}" code="route.list.pruebas"/>
+		</display:column>
+	</security:authorize>
+
 	<acme:column property="name" code="route.title" />
 	<acme:column property="description" code="route.description" />
 

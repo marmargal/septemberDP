@@ -186,11 +186,20 @@
 
 		<security:intercept-url pattern="/terms/list.do"
 			access="permitAll" />
-
+		
 		<!-- CONFIGURATION -->
-
+		
 		<security:intercept-url pattern="/configuration/administrator/edit.do"
 			access="hasRole('ADMIN')" />
+			
+		<!-- PRUEBA -->
+		<security:intercept-url pattern="/prueba/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/prueba/user/**" access="hasRole('USER')" />	
+			
+		<!-- DECISION -->
+		<security:intercept-url pattern="/decision/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/decision/user/**" access="hasRole('USER')" />
+			
 
 		<security:intercept-url pattern="/**"
 			access="hasRole('NONE')" />

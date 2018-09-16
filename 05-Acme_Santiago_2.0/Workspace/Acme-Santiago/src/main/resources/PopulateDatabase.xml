@@ -1283,4 +1283,35 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- PRUEBA -->
+	<bean id="prueba1" class="domain.Prueba">
+		<property name="tracer" value="190101-8a5s4" />
+		<property name="moment" value="2016/11/20 14:36" />
+		<property name="title" value="Title 1" />
+		<property name="description" value="Description 1" />
+		<property name="gauge" value="1" />
+		<property name="user" ref="user1" />
+		<property name="route" ref="route1" />
+		<property name="decision" ref="decision1" />
+	</bean>
+	
+	<bean id="prueba2" class="domain.Prueba">
+		<property name="tracer" value="200202-avr57" />
+		<property name="moment" value="2017/11/20 14:36" />
+		<property name="title" value="Title 2" />
+		<property name="description" value="Description 2" />
+		<property name="gauge" value="2" />
+		<property name="user" ref="user2" />
+		<property name="route"><null/></property>
+		<property name="decision"><null/></property>
+	</bean>
+	
+	<!-- DECISION -->
+	<bean id="decision1" class="domain.Decision">
+		<property name="comment" value="Comment 1" />
+		<property name="approved" value="True" />
+		<property name="administrator" ref="admin" />
+		<property name="prueba" ref="prueba1" />
+	</bean>
 </beans>
