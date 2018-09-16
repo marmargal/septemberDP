@@ -1,25 +1,14 @@
 package usecases;
 
-import java.util.Collection;
-
-import javax.validation.ConstraintViolationException;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import services.InnService;
-import services.RouteService;
-import services.UserService;
 import utilities.AbstractTest;
-import domain.Hike;
-import domain.Inn;
-import domain.Route;
-import domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/junit.xml" })

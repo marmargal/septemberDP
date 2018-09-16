@@ -76,12 +76,13 @@ public class CambioAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Cambio cambio, final BindingResult binding) {
 		ModelAndView res;
-		System.out.println(binding.getFieldError());
-		
+		Administrator admin;
+		admin = administratorService.findByPrincipal();
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(cambio, "cambio.params.error");
 		else
 			try {
+				cambio.setAdministrator(admin);
 				this.cambioService.save(cambio);
 				res = new ModelAndView("redirect:../../");
 			} catch (final Throwable oops) {

@@ -58,14 +58,30 @@ public class CambioUserController extends AbstractController {
 
 		return res;
 	}
+	
+	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView res;
+		Collection<Cambio> cambios = new ArrayList<Cambio>();
+		
+		User user = this.userService.findByPrincipal();
+		
+		cambios = this.cambioService.findCambiosByUser(user.getId());
+		
+		res = new ModelAndView("cambio/user/listAll");
+		res.addObject("cambios", cambios);
+		res.addObject("user", user);
+		res.addObject("requestURI", "cambio/user/list.do");
+
+		return res;
+	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam(defaultValue = "0") final int routeId) {
+	public ModelAndView create() {
 		ModelAndView res;
 		Cambio cambio;
-		Route route = this.routeService.findOne(routeId);
 
-		cambio = this.cambioService.create(route);
+		cambio = this.cambioService.create();
 		res = this.createEditModelAndView(cambio);
 
 		return res;
@@ -76,24 +92,27 @@ public class CambioUserController extends AbstractController {
 			@RequestParam(defaultValue = "0") final int cambioId) {
 		ModelAndView result;
 		Cambio cambio;
+		User user = this.userService.findByPrincipal();
+		cambio = this.cambioService.findOne(cambioId);
 
 		if (cambioId == 0) {
 			result = new ModelAndView("redirect:../../");
 
 		} else if (this.cambioService.findOne(cambioId) == null) {
 			result = new ModelAndView("redirect:../../");
-		} else {
-
-			cambio = this.cambioService.findOne(cambioId);
+		} else if (user.getCambios().contains(cambio)) {
 			result = this.createEditModelAndView(cambio);
+		} else {
+			result = new ModelAndView("redirect:../../");
 		}
+		
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Cambio cambio, final BindingResult binding) {
 		ModelAndView res;
-		
+		System.out.println(cambio.getRoute());
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(cambio, "cambio.params.error");
 		else
@@ -135,10 +154,13 @@ public class CambioUserController extends AbstractController {
 	private ModelAndView createEditModelAndView(final Cambio cambio,
 			final String message) {
 		ModelAndView result;
+		Collection<Route> routes = new ArrayList<Route>();
+		routes = routeService.findAll();
 
 		result = new ModelAndView("cambio/user/edit");
 		result.addObject("cambio", cambio);
 		result.addObject("message", message);
+		result.addObject("routes", routes);
 		result.addObject("requestURI", "cambio/user/edit.do");
 
 		return result;

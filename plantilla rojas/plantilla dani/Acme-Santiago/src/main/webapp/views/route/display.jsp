@@ -39,4 +39,29 @@
 	<jstl:out value="${h.name}" />
 	<br />
 </jstl:forEach>
+<br/>
+<br/>
+<br/>
+<h3><spring:message code="route.cambio" />:</h3>
+<jstl:forEach var="c" items="${route.cambios }">
+	<jstl:if test="${c.approved == true }">
+		<br/>
+		<b><spring:message code="cambio.title" />:</b>
+		<jstl:out value="${c.title}" />
+		<br />
+		<b><spring:message code="cambio.description" />:</b>
+		<br />
+		<jstl:out value="${c.description}" />
+		<br />
+		<b><spring:message code="cambio.moment" />:</b>
+		<br />
+		<jstl:out value="${c.moment}" />
+		<br />
+		<b><spring:message code="cambio.gauge" />:</b>
+		<br />
+		<jstl:out value="${c.gauge}" />
+		<br/>
+	</jstl:if>
+</jstl:forEach>
+
 <br />

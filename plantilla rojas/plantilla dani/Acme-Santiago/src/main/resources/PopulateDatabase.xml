@@ -1314,7 +1314,7 @@
 
 	<bean id="cambio1" class="domain.Cambio">
 		<property name="identifier" value="101201-ASDF" />
-		<property name="moment" value="10/10/2010" />
+		<property name="moment" value="10/10/2010 10:10" />
 		<property name="title" value="title1" />
 		<property name="description" value="description1" />
 		<property name="gauge" value="1" />
@@ -1327,12 +1327,11 @@
 
 	<bean id="cambio2" class="domain.Cambio">
 		<property name="identifier" value="101202-ABDF" />
-		<property name="moment" value="10/10/2010" />
+		<property name="moment" value="10/10/2010 10:10" />
 		<property name="title" value="title2" />
 		<property name="description" value="description2" />
 		<property name="gauge" value="2" />
-		<property name="justification" value="justification2" />
-		<property name="approved" value="false" />
+		<property name="approved" value="" />
 		<property name="user" ref="user2" />
 		<property name="route" ref="route2" />
 		<property name="administrator" ref="admin" />

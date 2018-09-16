@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import repositories.RouteRepository;
 import security.Authority;
 import security.LoginService;
+import domain.Cambio;
 import domain.Hike;
 import domain.Route;
 import domain.User;
@@ -30,8 +31,10 @@ public class RouteService {
 	private UserService userService;
 
 	@Autowired
-	private HikeService hikeService;
+	private CambioService cambioService;
 
+	@Autowired
+	private HikeService hikeService;
 
 	@Autowired
 	private WalkService walkService;
@@ -92,7 +95,9 @@ public class RouteService {
 	}
 
 	public void delete(Route route) {
-
+	
+			
+		
 		Assert.notNull(route);
 		Assert.isTrue(route.getId() != 0);
 		Assert.isTrue(this.routeRepository.exists(route.getId()));
@@ -120,8 +125,12 @@ public class RouteService {
 		for (Walk walk : walks) {
 			this.walkService.delete(walk);
 		}
-
+		System.out.println(route.getCambios());
+		for (Cambio cambio : route.getCambios()) {
+			this.cambioService.delete(cambio);
+		}
 		this.routeRepository.delete(route);
+		
 	}
 
 	// Other business methods

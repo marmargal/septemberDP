@@ -11,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CambioRepository;
-import security.Authority;
-import security.LoginService;
 import domain.Cambio;
-import domain.Route;
 import domain.User;
 
 @Service
@@ -22,40 +19,39 @@ import domain.User;
 public class CambioService {
 
 	// Managed repository -----------------------------------------------------
-	
+
 	@Autowired
 	private CambioRepository cambioRepository;
 
 	// Supporting services ----------------------------------------------------
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private AdministratorService administratorService;
 
 	// Constructor ------------------------------------------------------------
-	
+
 	public CambioService() {
 		super();
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	public Cambio create(Route route) {
+	public Cambio create() {
 		Cambio res;
 		User user;
 		Date moment;
-		
+
 		res = new Cambio();
 		user = userService.findByPrincipal();
 		moment = new Date(System.currentTimeMillis() - 1000);
-		
+
 		res.setMoment(moment);
 		res.setIdentifier(this.generatedIdentifier());
 		res.setUser(user);
-		res.setRoute(route);
-		
+
 		return res;
 	}
 
@@ -75,20 +71,20 @@ public class CambioService {
 
 	public Cambio save(final Cambio cambio) {
 		Assert.notNull(cambio);
-		Collection<Authority> authority = LoginService.getPrincipal().getAuthorities();
-		Assert.notNull(authority);
-		Authority user = new Authority();
-		user.setAuthority("USER");
-		Authority admin = new Authority();
-		admin.setAuthority("ADMIN");
-		Assert.isTrue(authority.contains(user) || authority.contains(admin));
-		if (authority.contains(admin)) {
-			Assert.isTrue(cambio.getAdministrator().equals(this.administratorService.findByPrincipal()));
-
-		}
 		Cambio res;
-		res = this.cambioRepository.save(cambio);
 
+//		try {
+//			this.userService.checkAuthority();
+//			Assert.isTrue(cambio.getJustification() == null);
+//
+//		} catch (Exception e) {
+//			this.administratorService.checkAuthority();
+//			if(cambio.getJustification() == null || cambio.getJustification() == ""){
+//				throw new IllegalArgumentException();
+//			}
+//
+//		}
+		res = this.cambioRepository.save(cambio);
 		return res;
 	}
 
@@ -99,33 +95,40 @@ public class CambioService {
 
 		this.cambioRepository.delete(cambio);
 	}
-	
+
 	// Other business method --------------------------------------------------
 
 	public void flush() {
 		this.cambioRepository.flush();
 	}
-	
+
 	public Collection<Cambio> findCambiosByRoute(int id) {
 		Collection<Cambio> res;
 		res = this.cambioRepository.findCambiosByRoute(id);
 		return res;
 	}
-	
+
 	public Collection<Cambio> findCambiosWithoutDecision() {
+		this.administratorService.checkAuthority();
 		Collection<Cambio> res;
 		res = this.cambioRepository.findCambiosWithoutDecision();
 		return res;
 	}
 	
+	public Collection<Cambio> findCambiosByUser(int id) {
+		Collection<Cambio> res;
+		res = this.cambioRepository.findCambiosByUser(id);
+		return res;
+	}
+
 	public String generatedIdentifier() {
 		String identifier;
 		String letters;
-//		String numbers;
+		// String numbers;
 		Random r;
 
 		letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//		numbers = "0123456789";
+		// numbers = "0123456789";
 		r = new Random();
 
 		final Date date = new Date(System.currentTimeMillis() - 1);
@@ -133,9 +136,11 @@ public class CambioService {
 
 		identifier = dt.format(date).toString() + "-";
 		for (int i = 0; i < 4; i++)
-			identifier = identifier + letters.charAt(r.nextInt(letters.length()));
-//		for (int i = 0; i < 2; i++)
-//			identifier = identifier + numbers.charAt(r.nextInt(numbers.length()));
+			identifier = identifier
+					+ letters.charAt(r.nextInt(letters.length()));
+		// for (int i = 0; i < 2; i++)
+		// identifier = identifier +
+		// numbers.charAt(r.nextInt(numbers.length()));
 
 		return identifier;
 	}

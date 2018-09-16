@@ -52,10 +52,12 @@
 		<spring:message code="cambio.gauge" var="gaugeHeader" />
 		<display:column property="gauge" title="${gaugeHeader}" sortable="false" class="${gaugeNumber}"/>
 		
+		<acme:column code="cambio.approved" property="approved"/>
+		
 		
 		<security:authorize access="hasRole('USER')">
 			<display:column>
-				<jstl:if test="${user == row.user && row.approved != null}">	
+				<jstl:if test="${user == row.user && row.approved == null}">	
 					<a href="cambio/user/edit.do?cambioId=${row.id}"><spring:message code="route.edit" /></a>
 				</jstl:if>
 			</display:column>
@@ -63,10 +65,12 @@
 		
 			<security:authorize access="hasRole('ADMIN')">
 			<display:column>
-				<jstl:if test="${admin == row.administrator && row.approved == null}">
-					<a href="cambio/administrator/edit.do?cambioId=${row.id}"><spring:message code="route.edit" /></a>
-				</jstl:if>
+					<a href="cambio/administrator/edit.do?cambioId=${row.id}"><spring:message code="cambio.edit" /></a>
 			</display:column>
 		</security:authorize>
 		
 </display:table>
+
+<security:authorize access="hasRole('USER')">
+	<acme:links url="cambio/user/create.do" code="cambio.create" />
+</security:authorize>

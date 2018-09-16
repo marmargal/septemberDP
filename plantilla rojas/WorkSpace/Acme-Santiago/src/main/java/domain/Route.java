@@ -108,7 +108,7 @@ public class Route extends DomainEntity {
 		this.hikes = hikes;
 	}
 
-	@OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+	@OneToMany()
 	public Collection<Cambio> getCambios() {
 		return cambios;
 	}

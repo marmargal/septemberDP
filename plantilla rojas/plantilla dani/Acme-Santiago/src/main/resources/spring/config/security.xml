@@ -184,9 +184,7 @@
 
 
 		<!-- CAMBIO -->
-		<security:intercept-url pattern="/cambio/user/create.do" access="hasRole('USER')" />
-		<security:intercept-url pattern="/cambio/user/edit.do" access="hasRole('USER')" />
-		<security:intercept-url pattern="/cambio/user/list.do" access="hasRole('USER')" />
+		<security:intercept-url pattern="/cambio/user/**" access="hasRole('USER')" />
 		<security:intercept-url pattern="/cambio/administrator/edit.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/cambio/administrator/list.do" access="hasRole('ADMIN')" />
 			

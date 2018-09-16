@@ -305,6 +305,11 @@
 				<ref bean="comment1" />
 			</list>
 		</property>
+		<property name="cambios">
+			<list>
+				<ref bean="cambio1" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="route2" class="domain.Route">
@@ -327,6 +332,11 @@
 		<property name="comments">
 			<list>
 				<ref bean="comment2" />
+			</list>
+		</property>
+		<property name="cambios">
+			<list>
+				<ref bean="cambio2" />
 			</list>
 		</property>
 	</bean>

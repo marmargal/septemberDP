@@ -78,9 +78,6 @@
 	
 	<security:authorize access="hasRole('USER')">
 		<display:column>
-				<a href="cambio/user/create.do?routeId=${row.id}"><spring:message code="route.cambio" /></a>
-		</display:column>
-		<display:column>
 				<a href="cambio/user/list.do?routeId=${row.id}"><spring:message code="route.cambio.list" /></a>
 		</display:column>
 	</security:authorize>

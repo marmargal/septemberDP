@@ -27,13 +27,13 @@
 	<form:hidden path="moment" />
 	<form:hidden path="user" />
 	<form:hidden path="administrator" />
-	<form:hidden path="route" />
 	
 	<security:authorize access="hasRole('USER')">
 
 		<acme:textbox code="cambio.title" path="title" />
 		<acme:textbox code="cambio.description" path="description" />
 		<acme:textbox code="cambio.gauge" path="gauge" type="number" />
+		<acme:select items="${routes}" itemLabel="name" code="cambio.route" path="route"/>
 		
 	</security:authorize>
 	

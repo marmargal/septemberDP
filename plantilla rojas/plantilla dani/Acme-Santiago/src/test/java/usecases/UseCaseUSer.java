@@ -11,13 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import services.ChirpService;
-import services.CommentService;
 import services.CompostelaService;
-import services.HikeService;
 import services.InnService;
 import services.RouteService;
-import services.UserService;
 import services.WalkService;
 import utilities.AbstractTest;
 import domain.Compostela;
@@ -37,18 +33,6 @@ public class UseCaseUSer extends AbstractTest {
 
 	@Autowired
 	private CompostelaService compostelaService;
-
-	@Autowired
-	private HikeService hikeService;
-
-	@Autowired
-	private CommentService commentService;
-
-	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private ChirpService chirpService;
 
 	@Autowired
 	private WalkService walkService;

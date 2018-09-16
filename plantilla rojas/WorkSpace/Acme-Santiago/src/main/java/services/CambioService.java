@@ -97,6 +97,7 @@ public class CambioService {
 	}
 
 	public void delete(Cambio cambio) {
+		System.out.println(cambio);
 		Assert.notNull(cambio);
 		Assert.isTrue(cambio.getId() != 0);
 		Assert.isTrue(this.cambioRepository.exists(cambio.getId()));
