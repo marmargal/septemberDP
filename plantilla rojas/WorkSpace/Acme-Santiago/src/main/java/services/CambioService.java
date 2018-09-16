@@ -26,6 +26,9 @@ public class CambioService {
 	@Autowired
 	private CambioRepository cambioRepository;
 
+	@Autowired
+	private UserService userService;
+
 	// Supporting services
 
 	// Constructors
@@ -36,8 +39,8 @@ public class CambioService {
 	// Simple CRUD methods
 
 	public Cambio create() {
-		
-		//revisar identifier
+
+		// revisar identifier
 		Cambio res = new Cambio();
 		Date moment;
 		moment = new Date(System.currentTimeMillis() - 1000);
@@ -53,6 +56,8 @@ public class CambioService {
 		String identifier = year + "-" + month + "-" + day;
 
 		res.setIdentifier(identifier);
+		res.setUser(this.userService.findByPrincipal());
+
 		return res;
 	}
 
@@ -73,7 +78,9 @@ public class CambioService {
 	public Cambio save(final Cambio cambio) {
 		Assert.notNull(cambio);
 		Cambio res;
-		
+		if (cambio.getId() == 0) {
+			cambio.setUser(this.userService.findByPrincipal());
+		}
 		Date moment;
 		moment = new Date(System.currentTimeMillis() - 1000);
 		cambio.setMoment(moment);

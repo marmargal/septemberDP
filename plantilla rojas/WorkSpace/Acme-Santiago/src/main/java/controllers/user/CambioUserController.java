@@ -79,9 +79,10 @@ public class CambioUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Cambio cambio, final BindingResult binding) {
 		ModelAndView res;
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
+			System.out.println(binding.getAllErrors());
 			res = this.createEditModelAndView(cambio, "cambio.params.error");
-		else
+		} else
 			try {
 				this.cambioService.save(cambio);
 				res = new ModelAndView("redirect:../../");

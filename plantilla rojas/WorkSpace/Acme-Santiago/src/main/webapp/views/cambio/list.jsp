@@ -56,6 +56,17 @@ Alfonso Soldado, [16.09.18 19:11]
 	<spring:message code="cambio.route" var="routeHeader" />
 	<display:column property="route.name" title="${routeHeader}"
 		sortable="true" class="${gaugeNumber}" />
+
+	<security:authorize access="hasRole('USER')">
+		<jstl:if test="${row.decision==null }">
+		<display:column title="${gaugeHeader}" sortable="true"
+		class="${gaugeNumber}" >
+			<a href="cambio/user/edit.do?cambioId=${row.id}"><spring:message
+					code="cambio.edit" /></a>
+		</display:column>
+		</jstl:if>
+	</security:authorize>
+
 </display:table>
 
-<acme:links code="cambio.create" url="cambio/use/create.do"></acme:links>
+<acme:links code="cambio.create" url="cambio/user/create.do"></acme:links>

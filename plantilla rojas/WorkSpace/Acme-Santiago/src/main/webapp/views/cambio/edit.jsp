@@ -34,9 +34,9 @@
 
 
 	<acme:textbox code="cambio.title" path="title" />
-	<acme:textbox code="cambio.description" path="description" />
+	<acme:textarea code="cambio.description" path="description" />
 	<acme:textbox code="cambio.gauge" path="gauge" type="number" />
-	<acme:select items="${routes }" itemLabel="route" code="cambio.route"
+	<acme:select items="${routes}" itemLabel="name" code="cambio.route"
 		path="route" />
 
 
@@ -44,6 +44,8 @@
 
 
 	<acme:submit name="save" code="cambio.submit" />
+	<acme:delete confirmationCode="cambio.confirm.delete"
+			buttonCode="cambio.delete" id="${cambio.id}" />
 	<acme:cancel url="/" code="cambio.cancel" />
 
 </form:form>
