@@ -36,7 +36,8 @@
 	<acme:textbox code="cambio.title" path="title" />
 	<acme:textbox code="cambio.description" path="description" />
 	<acme:textbox code="cambio.gauge" path="gauge" type="number" />
-
+	<acme:select items="${routes }" itemLabel="route" code="cambio.route"
+		path="route" />
 
 
 	<!-- Buttons -->

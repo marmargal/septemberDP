@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(indexes = {@Index(columnList = "name,description,user_id") })
+@Table(indexes = { @Index(columnList = "name,description,user_id") })
 public class Route extends DomainEntity {
 
 	// Constructors
@@ -75,6 +75,7 @@ public class Route extends DomainEntity {
 	private User user;
 	private Collection<Hike> hikes;
 	private Collection<Comment> comments;
+	private Collection<Cambio> cambios;
 
 	@Valid
 	@ManyToOne
@@ -105,6 +106,15 @@ public class Route extends DomainEntity {
 
 	public void setHikes(Collection<Hike> hikes) {
 		this.hikes = hikes;
+	}
+
+	@OneToMany
+	public Collection<Cambio> getCambios() {
+		return cambios;
+	}
+
+	public void setCambios(Collection<Cambio> cambios) {
+		this.cambios = cambios;
 	}
 
 }

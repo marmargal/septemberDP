@@ -1,5 +1,8 @@
 package controllers.user;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CambioService;
-
+import services.UserService;
 import controllers.AbstractController;
 import domain.Cambio;
-import domain.Cambio;
-import domain.Cambio;
+import domain.Route;
+import domain.User;
+import domain.Walk;
 
 @Controller
 @RequestMapping("/cambio/user")
@@ -24,6 +28,9 @@ public class CambioUserController extends AbstractController {
 	@Autowired
 	private CambioService cambioService;
 
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView res;
@@ -31,6 +38,21 @@ public class CambioUserController extends AbstractController {
 
 		cambio = this.cambioService.create();
 		res = this.createEditModelAndView(cambio);
+
+		return res;
+	}
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView res;
+		Collection<Cambio> cambios = new ArrayList<>();
+
+		User user = userService.findByPrincipal();
+
+		cambios = this.userService.findByPrincipal().getCambios();
+		res = new ModelAndView("cambio/user/list");
+		res.addObject("requestUri", "cambio/user/list.do");
+		res.addObject("cambios", cambios);
 
 		return res;
 	}
@@ -100,6 +122,10 @@ public class CambioUserController extends AbstractController {
 		result = new ModelAndView("cambio/user/edit");
 		result.addObject("cambio", cambio);
 		result.addObject("message", message);
+		Collection<Route> routes = this.userService.findByPrincipal()
+				.getRoutes();
+		result.addObject("routes", routes);
+
 		result.addObject("requestUri", "cambio/user/edit.do");
 
 		return result;

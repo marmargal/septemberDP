@@ -8,14 +8,27 @@
  * 
  */
 body {
+	
+}
+
+.one {
+	background-color: red;
+}
+
+.one {
+	background-color: yellow;
+}
+
+.three {
+	background-color: blue;
 }
 
 .language {
-	margin-left:20px;
+	margin-left: 20px;
 }
 
 .logo {
-	margin-top:20px;
+	margin-top: 20px;
 	max-width: 150px;
 	max-height: 150px;
 }

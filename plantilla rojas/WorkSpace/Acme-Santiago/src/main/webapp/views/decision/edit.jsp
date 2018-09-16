@@ -26,13 +26,13 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="administrator" />
-	<form:hidden path="decision" />
+	<form:hidden path="cambio" />
 
 
 
 
 	<acme:textbox code="decision.comment" path="comment" />
-	<acme:selectBoolean code="decision.approve" path="approve"
+	<acme:selectdecision code="decision.approve" path="approve"
 		items="${aproves }" />
 
 

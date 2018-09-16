@@ -1,5 +1,8 @@
 package controllers.administrator;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,10 +99,14 @@ public class DecisionAdministratorController extends AbstractController {
 	private ModelAndView createEditModelAndView(final Decision decision,
 			final String message) {
 		ModelAndView result;
-
+		Collection<Boolean> aproves = new ArrayList<>();
+		aproves.add(true);
+		aproves.add(false);
 		result = new ModelAndView("decision/administrator/edit");
 		result.addObject("decision", decision);
 		result.addObject("message", message);
+		result.addObject("aproves", aproves);
+
 		result.addObject("requestUri", "decision/administrator/edit.do");
 
 		return result;

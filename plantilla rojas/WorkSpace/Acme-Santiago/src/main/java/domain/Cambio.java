@@ -83,6 +83,7 @@ public class Cambio extends DomainEntity {
 
 	private Decision decision;
 	private User user;
+	private Route route;
 
 	@OneToOne(optional = true)
 	public Decision getDecision() {
@@ -100,6 +101,14 @@ public class Cambio extends DomainEntity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	@ManyToOne
+	public Route getRoute() {
+		return route;
+	}
+
+	public void setRoute(Route route) {
+		this.route = route;
 	}
 
 }

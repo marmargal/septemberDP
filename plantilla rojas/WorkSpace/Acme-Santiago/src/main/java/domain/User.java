@@ -26,6 +26,7 @@ public class User extends Actor {
 	private Collection<User> following;
 	private Collection<User> followers;
 	private Collection<Compostela> compostelas;
+	private Collection<Cambio> cambios;
 
 	@Valid
 	@OneToMany(mappedBy = "user")
@@ -56,7 +57,7 @@ public class User extends Actor {
 	public void setRoutes(Collection<Route> routes) {
 		this.routes = routes;
 	}
-	
+
 	@Valid
 	@ManyToMany
 	public Collection<User> getFollowing() {
@@ -76,9 +77,9 @@ public class User extends Actor {
 	public void setFollowers(Collection<User> followers) {
 		this.followers = followers;
 	}
-	
+
 	@Valid
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy = "user")
 	public Collection<Compostela> getCompostelas() {
 		return compostelas;
 	}
@@ -86,6 +87,14 @@ public class User extends Actor {
 	public void setCompostelas(Collection<Compostela> compostelas) {
 		this.compostelas = compostelas;
 	}
-	
+
+	@OneToMany(mappedBy = "user")
+	public Collection<Cambio> getCambios() {
+		return cambios;
+	}
+
+	public void setCambios(Collection<Cambio> cambios) {
+		this.cambios = cambios;
+	}
 
 }

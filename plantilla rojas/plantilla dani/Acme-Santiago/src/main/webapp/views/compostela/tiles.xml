@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- * tiles.xml * * Copyright (C) 2017 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="compostela/administrator/list" extends="master.page">
+		<put-attribute name="title" value="List of compostelas" />
+		<put-attribute name="body" value="/views/compostela/list.jsp" />
+	</definition>
+
+	<definition name="compostela/user/list" extends="master.page">
+		<put-attribute name="title" value="List of compostelas" />
+		<put-attribute name="body" value="/views/compostela/list.jsp" />
+	</definition>
+
+	<definition name="compostela/user/edit" extends="master.page">
+		<put-attribute name="title" value="Request a compostela" />
+		<put-attribute name="body" value="/views/compostela/request.jsp" />
+	</definition>
+
+	<definition name="compostela/administrator/edit" extends="master.page">
+		<put-attribute name="title" value="Approve a compostela" />
+		<put-attribute name="body" value="/views/compostela/edit.jsp" />
+	</definition>
+
+	<definition name="compostela/display" extends="master.page">
+		<put-attribute name="title" value="Display of compostela" />
+		<put-attribute name="body" value="/views/compostela/display.jsp" />
+	</definition>
+
+</tiles-definitions>

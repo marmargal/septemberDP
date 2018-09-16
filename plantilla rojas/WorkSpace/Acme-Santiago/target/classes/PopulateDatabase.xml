@@ -110,6 +110,10 @@
 		<property name="address" value="C/Admin" />
 		<property name="postalAddress" value="1234" />
 		<property name="userAccount" ref="userAccount1" />
+		<property name="decisions">
+			<list>
+			</list>
+		</property>
 
 	</bean>
 
@@ -1292,6 +1296,8 @@
 		<property name="title" value="title1" />
 		<property name="description" value="description1" />
 		<property name="gauge" value="1" />
+		<property name="user" ref="user1" />
+		<property name="route" ref="route1" />
 	</bean>
 
 	<bean id="cambio2" class="domain.Cambio">
@@ -1300,5 +1306,8 @@
 		<property name="title" value="title2" />
 		<property name="description" value="description2" />
 		<property name="gauge" value="2" />
+		<property name="user" ref="user2" />
+		<property name="route" ref="route2" />
+
 	</bean>
 </beans>
