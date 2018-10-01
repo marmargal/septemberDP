@@ -110,10 +110,12 @@
 		<property name="address" value="C/Admin" />
 		<property name="postalAddress" value="1234" />
 		<property name="userAccount" ref="userAccount1" />
-		<property name="cambios">
+		<property name="brids">
 			<list>
-				<ref bean="cambio1" />
-				<ref bean="cambio2" />
+				<ref bean="brid1" />
+				<ref bean="brid2" />
+				<ref bean="brid3" />
+				<ref bean="brid4" />
 			</list>
 		</property>
 
@@ -191,9 +193,11 @@
 				<ref bean="compostela1" />
 			</list>
 		</property>
-		<property name="cambios">
+		<property name="brids">
 			<list>
-				<ref bean="cambio1" />
+				<ref bean="brid1" />
+				<ref bean="brid3" />
+
 			</list>
 		</property>
 	</bean>
@@ -241,9 +245,11 @@
 				<ref bean="compostela2" />
 			</list>
 		</property>
-		<property name="cambios">
+		<property name="brids">
 			<list>
-				<ref bean="cambio1" />
+				<ref bean="brid2" />
+				<ref bean="brid4" />
+
 			</list>
 		</property>
 	</bean>
@@ -317,9 +323,11 @@
 				<ref bean="comment1" />
 			</list>
 		</property>
-		<property name="cambios">
+		<property name="brids">
 			<list>
-				<ref bean="cambio1" />
+				<ref bean="brid1" />
+				<ref bean="brid3" />
+
 			</list>
 		</property>
 	</bean>
@@ -346,9 +354,11 @@
 				<ref bean="comment2" />
 			</list>
 		</property>
-		<property name="cambios">
+		<property name="brids">
 			<list>
-				<ref bean="cambio2" />
+				<ref bean="brid2" />
+				<ref bean="brid4" />
+
 			</list>
 		</property>
 	</bean>
@@ -1312,8 +1322,8 @@
 
 	<!-- CAMBIO -->
 
-	<bean id="cambio1" class="domain.Cambio">
-		<property name="identifier" value="101201-ASDF" />
+	<bean id="brid1" class="domain.Brid">
+		<property name="identifier" value="11o-101201-sa" />
 		<property name="moment" value="10/10/2010 10:10" />
 		<property name="title" value="title1" />
 		<property name="description" value="description1" />
@@ -1325,11 +1335,35 @@
 		<property name="administrator" ref="admin" />
 	</bean>
 
-	<bean id="cambio2" class="domain.Cambio">
-		<property name="identifier" value="101202-ABDF" />
+	<bean id="brid3" class="domain.Brid">
+		<property name="identifier" value="119-101011-ck" />
+		<property name="moment" value="11/10/2010 10:10" />
+		<property name="title" value="title3" />
+		<property name="description" value="description3" />
+		<property name="gauge" value="1" />
+		<property name="justification" value="justification3" />
+		<property name="approved" value="true" />
+		<property name="user" ref="user1" />
+		<property name="route" ref="route1" />
+		<property name="administrator" ref="admin" />
+	</bean>
+	<bean id="brid2" class="domain.Brid">
+		<property name="identifier" value="111-101202-q1" />
 		<property name="moment" value="10/10/2010 10:10" />
 		<property name="title" value="title2" />
 		<property name="description" value="description2" />
+		<property name="gauge" value="2" />
+		<property name="approved" value="" />
+		<property name="user" ref="user2" />
+		<property name="route" ref="route2" />
+		<property name="administrator" ref="admin" />
+	</bean>
+
+	<bean id="brid4" class="domain.Brid">
+		<property name="identifier" value="qm1-131202-w1" />
+		<property name="moment" value="10/10/2013 10:10" />
+		<property name="title" value="title4" />
+		<property name="description" value="description4" />
 		<property name="gauge" value="2" />
 		<property name="approved" value="" />
 		<property name="user" ref="user2" />

@@ -42,22 +42,22 @@
 <br/>
 <br/>
 <br/>
-<h3><spring:message code="route.cambio" />:</h3>
-<jstl:forEach var="c" items="${route.cambios }">
+<h3><spring:message code="route.brid" />:</h3>
+<jstl:forEach var="c" items="${route.brids }">
 	<jstl:if test="${c.approved == true }">
 		<br/>
-		<b><spring:message code="cambio.title" />:</b>
+		<b><spring:message code="brid.title" />:</b>
 		<jstl:out value="${c.title}" />
 		<br />
-		<b><spring:message code="cambio.description" />:</b>
+		<b><spring:message code="brid.description" />:</b>
 		<br />
 		<jstl:out value="${c.description}" />
 		<br />
-		<b><spring:message code="cambio.moment" />:</b>
+		<b><spring:message code="brid.moment" />:</b>
 		<br />
 		<jstl:out value="${c.moment}" />
 		<br />
-		<b><spring:message code="cambio.gauge" />:</b>
+		<b><spring:message code="brid.gauge" />:</b>
 		<br />
 		<jstl:out value="${c.gauge}" />
 		<br/>

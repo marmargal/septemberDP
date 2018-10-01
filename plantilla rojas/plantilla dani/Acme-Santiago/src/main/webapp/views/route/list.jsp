@@ -78,7 +78,7 @@
 	
 	<security:authorize access="hasRole('USER')">
 		<display:column>
-				<a href="cambio/user/list.do?routeId=${row.id}"><spring:message code="route.cambio.list" /></a>
+				<a href="brid/user/list.do?routeId=${row.id}"><spring:message code="route.brid.list" /></a>
 		</display:column>
 	</security:authorize>
 

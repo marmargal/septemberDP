@@ -31,7 +31,7 @@
 		<value>/views/compostela/messages</value>
 		<value>/views/walk/messages</value>
 		<value>/views/amenity/messages</value>
-		<value>/views/cambio/messages</value>
+		<value>/views/brid/messages</value>
 
 	</util:list>
 

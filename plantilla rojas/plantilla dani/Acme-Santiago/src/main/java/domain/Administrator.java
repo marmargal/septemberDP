@@ -18,15 +18,17 @@ public class Administrator extends Actor{
 		super();
 	}
 	
-	private Collection<Cambio> cambios;
+	private Collection<Brid> brids;
 	
 	@Valid
 	@OneToMany(mappedBy="administrator")
-	public Collection<Cambio> getCambios() {
-		return cambios;
+	public Collection<Brid> getBrids() {
+		return brids;
 	}
 
-	public void setCambios(Collection<Cambio> cambios) {
-		this.cambios = cambios;
+	public void setBrids(Collection<Brid> brids) {
+		this.brids = brids;
 	}
 }
+/*select t.administrator from Brid t where (select count(w) from Brid w where w.administrator.id = t.administrator.id and w.approved = false)
+>= all(select (select count(w2) from Brid w2 where w2.administrator.id = t2.administrator.id and w2.approved = false) from Brid t2)*/

@@ -75,7 +75,7 @@ public class Route extends DomainEntity {
 	private User user;
 	private Collection<Hike> hikes;
 	private Collection<Comment> comments;
-	private Collection<Cambio> cambios;
+	private Collection<Brid> brids;
 
 	@Valid
 	@ManyToOne
@@ -110,12 +110,12 @@ public class Route extends DomainEntity {
 
 	@Valid
 	@OneToMany(mappedBy = "route")
-	public Collection<Cambio> getCambios() {
-		return cambios;
+	public Collection<Brid> getBrids() {
+		return brids;
 	}
 
-	public void setCambios(Collection<Cambio> cambios) {
-		this.cambios = cambios;
+	public void setBrids(Collection<Brid> brids) {
+		this.brids = brids;
 	}
 
 }

@@ -22,10 +22,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Cambio extends DomainEntity {
+public class Brid extends DomainEntity {
 	
 	// Constructors ----------------------------------
-	public Cambio() {
+	public Brid() {
 		super();
 	}
 	
@@ -42,7 +42,7 @@ public class Cambio extends DomainEntity {
 	@Column(unique = true)
 	@NotNull
 	@NotBlank
-	@Pattern(regexp = "[0-9]{6}-[A-Z]{4}")
+	@Pattern(regexp = "^\\w{3}-\\d{6}-\\w{2}$")
 	@SafeHtml
 	public String getIdentifier() {
 		return identifier;

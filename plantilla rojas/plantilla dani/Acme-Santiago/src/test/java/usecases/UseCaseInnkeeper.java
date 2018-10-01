@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import services.AmenityService;
+import services.BridService;
 import services.HikeService;
 import services.InnService;
 import services.InnkeeperService;
@@ -50,6 +51,7 @@ public class UseCaseInnkeeper extends AbstractTest {
 	@Autowired
 	private AmenityService amenityService;
 
+
 	/*
 	 * 10. An actor who is authenticated as an innkeeper must be able to: 1.
 	 * Certify that a user has stayed in an inn that he or she manages in the
@@ -60,6 +62,7 @@ public class UseCaseInnkeeper extends AbstractTest {
 	 * para ese hike
 	 */
 
+	
 	@Test
 	public void RegistryInnkeeperTest() {
 		final Object testingData[][] = {
@@ -76,6 +79,7 @@ public class UseCaseInnkeeper extends AbstractTest {
 			this.templateRegistryInnkeeper((String) testingData[i][0],
 					(String) testingData[i][1], (String) testingData[i][2],
 					(Class<?>) testingData[i][3]);
+
 		}
 	}
 

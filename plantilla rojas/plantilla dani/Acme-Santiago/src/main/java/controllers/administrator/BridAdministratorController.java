@@ -14,102 +14,105 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
-import services.CambioService;
+import services.BridService;
 import controllers.AbstractController;
 import domain.Administrator;
-import domain.Cambio;
+import domain.Brid;
 
 @Controller
-@RequestMapping("/cambio/administrator")
-public class CambioAdministratorController extends AbstractController {
+@RequestMapping("/brid/administrator")
+public class BridAdministratorController extends AbstractController {
 
 	@Autowired
-	private CambioService cambioService;
-	
+	private BridService bridService;
+
 	@Autowired
 	private AdministratorService administratorService;
-	
+
 	// Constructors ---------------------------------------------------------
 
-	public CambioAdministratorController() {
+	public BridAdministratorController() {
 		super();
 	}
-	
+
 	// Listing ---------------------------------------------------------------
-	
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView res;
-		Collection<Cambio> cambios = new ArrayList<Cambio>();
-		
+		Collection<Brid> brids = new ArrayList<Brid>();
+
 		Administrator admin = this.administratorService.findByPrincipal();
-		
-		cambios = this.cambioService.findCambiosWithoutDecision();
-		
-		res = new ModelAndView("cambio/administrator/list");
-		res.addObject("cambios", cambios);
+
+		brids = this.bridService.findBridsWithoutDecision();
+
+		res = new ModelAndView("brid/administrator/list");
+		res.addObject("brids", brids);
 		res.addObject("admin", admin);
-		res.addObject("requestURI", "cambio/administrator/list.do");
+		res.addObject("requestURI", "brid/administrator/list.do");
 
 		return res;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(
-			@RequestParam(defaultValue = "0") final int cambioId) {
+	public ModelAndView edit(@RequestParam(defaultValue = "0") final int bridId) {
 		ModelAndView result;
-		Cambio cambio;
+		Brid brid;
 
-		if (cambioId == 0) {
+		if (bridId == 0) {
 			result = new ModelAndView("redirect:../../");
 
-		} else if (this.cambioService.findOne(cambioId) == null) {
+		} else if (this.bridService.findOne(bridId) == null) {
 			result = new ModelAndView("redirect:../../");
 		} else {
 
-			cambio = this.cambioService.findOne(cambioId);
-			result = this.createEditModelAndView(cambio);
+			brid = this.bridService.findOne(bridId);
+			result = this.createEditModelAndView(brid);
 		}
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Cambio cambio, final BindingResult binding) {
+	public ModelAndView save(@Valid Brid brid, final BindingResult binding) {
 		ModelAndView res;
 		Administrator admin;
 		admin = administratorService.findByPrincipal();
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(cambio, "cambio.params.error");
+			res = this.createEditModelAndView(brid, "brid.params.error");
 		else
 			try {
-				cambio.setAdministrator(admin);
-				this.cambioService.save(cambio);
-				res = new ModelAndView("redirect:../../");
+				if (brid.getJustification() == null
+						|| brid.getJustification().isEmpty()) {
+					res = this.createEditModelAndView(brid, "brid.commit.error.description");
+				} else {
+					brid.setAdministrator(admin);
+					this.bridService.save(brid);
+					res = new ModelAndView("redirect:../../");
+				}
 			} catch (final Throwable oops) {
-				res = this
-						.createEditModelAndView(cambio, "cambio.commit.error");
+				res = this.createEditModelAndView(brid, "brid.commit.error");
 			}
 		return res;
 	}
 
 	// Ancillary methods --------------------------------------------------
 
-	private ModelAndView createEditModelAndView(final Cambio cambio) {
+	private ModelAndView createEditModelAndView(final Brid brid) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(cambio, null);
+		result = this.createEditModelAndView(brid, null);
 
 		return result;
 	}
 
-	private ModelAndView createEditModelAndView(final Cambio cambio,
+	private ModelAndView createEditModelAndView(final Brid brid,
 			final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("cambio/administrator/edit");
-		result.addObject("cambio", cambio);
+		result = new ModelAndView("brid/administrator/edit");
+		result.addObject("brid", brid);
 		result.addObject("message", message);
-		result.addObject("requestURI", "cambio/administrator/edit.do");
+		result.addObject("requestURI", "brid/administrator/edit.do");
 
 		return result;
 	}

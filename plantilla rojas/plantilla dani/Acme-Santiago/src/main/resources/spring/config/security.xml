@@ -183,10 +183,10 @@
 			access="hasRole('INNKEEPER')" />
 
 
-		<!-- CAMBIO -->
-		<security:intercept-url pattern="/cambio/user/**" access="hasRole('USER')" />
-		<security:intercept-url pattern="/cambio/administrator/edit.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/cambio/administrator/list.do" access="hasRole('ADMIN')" />
+		<!-- BRID -->
+		<security:intercept-url pattern="/brid/user/**" access="hasRole('USER')" />
+		<security:intercept-url pattern="/brid/administrator/edit.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/brid/administrator/list.do" access="hasRole('ADMIN')" />
 			
 		<!-- TERMS -->
 

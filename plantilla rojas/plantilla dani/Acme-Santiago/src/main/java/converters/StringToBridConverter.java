@@ -6,19 +6,19 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import repositories.CambioRepository;
-import domain.Cambio;
+import repositories.BridRepository;
+import domain.Brid;
 
 @Component
 @Transactional
-public class StringToCambioConverter implements Converter<String, Cambio> {
+public class StringToBridConverter implements Converter<String, Brid> {
 
 	@Autowired
-	CambioRepository cambioRepository;
+	BridRepository bridRepository;
 
 	@Override
-	public Cambio convert(final String text) {
-		Cambio result;
+	public Brid convert(final String text) {
+		Brid result;
 		int id;
 
 		try {
@@ -26,7 +26,7 @@ public class StringToCambioConverter implements Converter<String, Cambio> {
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				result = this.cambioRepository.findOne(id);
+				result = this.bridRepository.findOne(id);
 			}
 		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);

@@ -66,8 +66,8 @@
 		<bean class="converters.AmenityToStringConverter" />
 		<bean class="converters.StringToAmenityConverter" />
 		
-		<bean class="converters.CambioToStringConverter" />
-		<bean class="converters.StringToCambioConverter" />
+		<bean class="converters.BridToStringConverter" />
+		<bean class="converters.StringToBridConverter" />
 
 	</util:list>
 

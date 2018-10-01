@@ -26,7 +26,7 @@ public class User extends Actor {
 	private Collection<User> following;
 	private Collection<User> followers;
 	private Collection<Compostela> compostelas;
-	private Collection<Cambio> cambios;
+	private Collection<Brid> brids;
 
 	@Valid
 	@OneToMany(mappedBy = "user")
@@ -90,12 +90,12 @@ public class User extends Actor {
 
 	@Valid
 	@OneToMany(mappedBy="user")
-	public Collection<Cambio> getCambios() {
-		return cambios;
+	public Collection<Brid> getBrids() {
+		return brids;
 	}
 
-	public void setCambios(Collection<Cambio> cambios) {
-		this.cambios = cambios;
+	public void setBrids(Collection<Brid> brids) {
+		this.brids = brids;
 	}
 	
 

@@ -22,55 +22,55 @@
 
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
-	name="cambios" requestURI="${requestURI}" id="row">
+	name="brids" requestURI="${requestURI}" id="row">
 	
 	<!-- Attributes -->
 	
 		<jstl:if test="${row.gauge == 1}">
-    	<spring:message code="cambio.gauge1" var="gaugeNumber" />
+    	<spring:message code="brid.gauge1" var="gaugeNumber" />
  		</jstl:if>
  		<jstl:if test="${row.gauge == 2}">
- 	  	<spring:message code="cambio.gauge2" var="gaugeNumber" />
+ 	  	<spring:message code="brid.gauge2" var="gaugeNumber" />
  		</jstl:if>
  		<jstl:if test="${row.gauge == 3}">
-   		<spring:message code="cambio.gauge3" var="gaugeNumber" />
+   		<spring:message code="brid.gauge3" var="gaugeNumber" />
  		</jstl:if>
 
-		<spring:message code="cambio.identifier" var="identifierHeader" />
+		<spring:message code="brid.identifier" var="identifierHeader" />
 		<display:column property="identifier" title="${identifierHeader}" sortable="false" class="${gaugeNumber}"/>
 		
-		<spring:message var="formatDate" code="cambio.format.date"/>
-		<spring:message code="cambio.moment" var="momentHeader" />
+		<spring:message var="formatDate" code="brid.format.date"/>
+		<spring:message code="brid.moment" var="momentHeader" />
 		<display:column property="moment" title="${momentHeader}" format="${formatDate}" sortable="true" class="${gaugeNumber }"/>
 		
-		<spring:message code="cambio.title" var="titleHeader" />
+		<spring:message code="brid.title" var="titleHeader" />
 		<display:column property="title" title="${titleHeader}" sortable="false" class="${gaugeNumber}"/>
 		
-		<spring:message code="cambio.description" var="descriptionHeader" />
+		<spring:message code="brid.description" var="descriptionHeader" />
 		<display:column property="description" title="${descriptionHeader}" sortable="false" class="${gaugeNumber}"/>
 		
-		<spring:message code="cambio.gauge" var="gaugeHeader" />
+		<spring:message code="brid.gauge" var="gaugeHeader" />
 		<display:column property="gauge" title="${gaugeHeader}" sortable="false" class="${gaugeNumber}"/>
 		
-		<acme:column code="cambio.approved" property="approved"/>
+		<acme:column code="brid.approved" property="approved"/>
 		
 		
 		<security:authorize access="hasRole('USER')">
 			<display:column>
-				<jstl:if test="${user == row.user && row.approved == null}">	
-					<a href="cambio/user/edit.do?cambioId=${row.id}"><spring:message code="route.edit" /></a>
+				<jstl:if test="${user == row.user && row.route == null}">	
+					<a href="brid/user/edit.do?bridId=${row.id}"><spring:message code="route.edit" /></a>
 				</jstl:if>
 			</display:column>
 		</security:authorize>
 		
 			<security:authorize access="hasRole('ADMIN')">
 			<display:column>
-					<a href="cambio/administrator/edit.do?cambioId=${row.id}"><spring:message code="cambio.edit" /></a>
+					<a href="brid/administrator/edit.do?bridId=${row.id}"><spring:message code="brid.edit" /></a>
 			</display:column>
 		</security:authorize>
 		
 </display:table>
 
 <security:authorize access="hasRole('USER')">
-	<acme:links url="cambio/user/create.do" code="cambio.create" />
+	<acme:links url="brid/user/create.do" code="brid.create" />
 </security:authorize>

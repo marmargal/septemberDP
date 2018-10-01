@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 import repositories.RouteRepository;
 import security.Authority;
 import security.LoginService;
-import domain.Cambio;
+import domain.Brid;
 import domain.Hike;
 import domain.Route;
 import domain.User;
@@ -31,7 +31,7 @@ public class RouteService {
 	private UserService userService;
 	
 	@Autowired
-	private CambioService cambioService;
+	private BridService bridService;
 
 	@Autowired
 	private HikeService hikeService;
@@ -123,11 +123,11 @@ public class RouteService {
 		for (Walk walk : walks) {
 			this.walkService.delete(walk);
 		}
-		Collection<Cambio> cambios = this.cambioService
-				.findCambiosByRoute(route.getId());
+		Collection<Brid> brids = this.bridService
+				.findBridsByRoute(route.getId());
 
-		for (Cambio cambio : cambios) {
-			this.cambioService.delete(cambio);
+		for (Brid brid : brids) {
+			this.bridService.delete(brid);
 		}
 		this.routeRepository.delete(route);
 	}
@@ -164,4 +164,7 @@ public class RouteService {
 		return hikes;
 	}
 
+	public Collection<Route> findByUser(User user) {
+		return this.routeRepository.findByUser(user);
+	}
 }

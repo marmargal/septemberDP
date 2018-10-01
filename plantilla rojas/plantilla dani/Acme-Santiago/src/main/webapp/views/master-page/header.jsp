@@ -44,7 +44,7 @@
 							code="master.page.advertisement" /></a>
 				<li><a href="compostela/administrator/list.do"><spring:message
 							code="master.page.compostela" /></a>
-				<li><a href="cambio/administrator/list.do"><spring:message
+				<li><a href="brid/administrator/list.do"><spring:message
 							code="master.page.cambio" /></a>
 			</security:authorize>
 
@@ -64,7 +64,7 @@
 							code="master.page.walk" /></a>
 				<li><a href="compostela/user/list.do"><spring:message
 							code="master.page.compostela" /></a>
-				<li><a href="cambio/user/listAll.do"><spring:message
+				<li><a href="brid/user/listAll.do"><spring:message
 							code="master.page.cambios.list" /></a>
 			</security:authorize>
 

@@ -25,6 +25,7 @@
 	<form:hidden path="version" />
 	<form:hidden path="comments" />
 	<form:hidden path="user" />
+	<form:hidden path="brids" />
 
 	<acme:textbox code="route.name" path="name" />
 	<acme:textbox type="number" code="route.length" path="length" />

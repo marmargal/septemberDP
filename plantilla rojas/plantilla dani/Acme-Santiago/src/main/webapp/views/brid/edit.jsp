@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${requestURI}" modelAttribute="cambio">
+<form:form action="${requestURI}" modelAttribute="brid">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -30,10 +30,10 @@
 	
 	<security:authorize access="hasRole('USER')">
 
-		<acme:textbox code="cambio.title" path="title" />
-		<acme:textbox code="cambio.description" path="description" />
-		<acme:textbox code="cambio.gauge" path="gauge" type="number" />
-		<acme:select items="${routes}" itemLabel="name" code="cambio.route" path="route"/>
+		<acme:textbox code="brid.title" path="title" />
+		<acme:textbox code="brid.description" path="description" />
+		<acme:textbox code="brid.gauge" path="gauge" type="number" />
+		<acme:select items="${routes}" itemLabel="name" code="brid.route" path="route"/>
 		
 	</security:authorize>
 	
@@ -43,23 +43,23 @@
 		<form:hidden path="description" />
 		<form:hidden path="gauge" />
 	
-		<acme:checkbox code="cambio.approved" path="approved"/>
-		<acme:textbox code="cambio.justification" path="justification" />
+		<acme:checkbox code="brid.approved" path="approved"/>
+		<acme:textbox code="brid.justification" path="justification" />
 	
 	</security:authorize>
 
 	<!-- Buttons -->
 
-	<acme:submit name="save" code="cambio.submit" />
+	<acme:submit name="save" code="brid.submit" />
 	
 		<security:authorize access="hasRole('USER')">
-		<jstl:if test="${cambio.id != 0}">
+		<jstl:if test="${brid.id != 0}">
 			<input type="submit" name="delete"
-				value="<spring:message code="cambio.delete" />"
-				onclick="return confirm('<spring:message code="cambio.confirm.delete" />')" />&nbsp;
+				value="<spring:message code="brid.delete" />"
+				onclick="return confirm('<spring:message code="brid.confirm.delete" />')" />&nbsp;
 		</jstl:if>
 </security:authorize>
 	
-	<acme:cancel url="/" code="cambio.cancel" />
+	<acme:cancel url="/" code="brid.cancel" />
 
 </form:form>
